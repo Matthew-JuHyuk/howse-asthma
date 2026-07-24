@@ -1,0 +1,30 @@
+{
+  "@@locale": "en",
+  "appTitle": "Howse Asthma",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "loginTitle": "Sign In",
+  "loginEmailLabel": "Email",
+  "loginPasswordLabel": "Password",
+  "loginButton": "Sign In",
+  "signUpButton": "Create Account",
+  "homeGreeting": "Hello",
+  "homeAirQualityTitle": "Air Quality Near You",
+  "homeWeatherTitle": "Weather Near You",
+  "asthmaRiskLow": "Low asthma risk",
+  "asthmaRiskModerate": "Moderate asthma risk",
+  "asthmaRiskHigh": "High asthma risk - take precautions",
+  "medicationLogTitle": "Medication Log",
+  "medicationLogAddButton": "Log Inhaler / Medication Use",
+  "medicationNameLabel": "Medication Name",
+  "medicationDoseLabel": "Dose",
+  "medicationTimeLabel": "Time Taken",
+  "medicationEffectivenessLabel": "Did it help?",
+  "reportTitle": "Insurance Report",
+  "reportGenerateButton": "Generate Report for Doctor / Insurance",
+  "settingsTitle": "Settings",
+  "settingsLanguageLabel": "Language",
+  "settingsLocationLabel": "Location",
+  "notificationAttackWarningTitle": "Asthma Attack Risk Alert"
+}
