@@ -51,3 +51,6 @@ app.*.map.json
 # Internal project documentation (requirements analysis, how-to-run, etc.)
 # Kept locally / referenced by Cursor rules, but not published to the repo.
 /doc/
+
+# Cursor IDE local config (rules, project state, etc.) - local-only, like .idea/.vscode
+/.cursor/
