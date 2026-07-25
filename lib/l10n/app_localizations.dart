@@ -249,6 +249,552 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Asthma Attack Risk Alert'**
   String get notificationAttackWarningTitle;
+
+  /// No description provided for @mockContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get mockContinue;
+
+  /// No description provided for @mockSignUpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get mockSignUpTitle;
+
+  /// No description provided for @mockChooseRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your role'**
+  String get mockChooseRole;
+
+  /// No description provided for @mockRolePatient.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient'**
+  String get mockRolePatient;
+
+  /// No description provided for @mockRolePatientHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Track air risk and inhaler use'**
+  String get mockRolePatientHint;
+
+  /// No description provided for @mockRoleProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider'**
+  String get mockRoleProvider;
+
+  /// No description provided for @mockRoleProviderHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Not in this design preview'**
+  String get mockRoleProviderHint;
+
+  /// No description provided for @mockProviderNotInPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider screens are not in this patient design preview.'**
+  String get mockProviderNotInPreview;
+
+  /// No description provided for @mockBiometricTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get mockBiometricTitle;
+
+  /// No description provided for @mockBiometricHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Use biometrics to unlock Howse Asthma (design preview).'**
+  String get mockBiometricHint;
+
+  /// No description provided for @mockUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get mockUnlock;
+
+  /// No description provided for @mockUsePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Use password instead'**
+  String get mockUsePassword;
+
+  /// No description provided for @mockOnboardingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient setup'**
+  String get mockOnboardingTitle;
+
+  /// No description provided for @mockHomeLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get mockHomeLocation;
+
+  /// No description provided for @mockDummyAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'123 Main St, Newark, NJ'**
+  String get mockDummyAddress;
+
+  /// No description provided for @mockEmergencyContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contact'**
+  String get mockEmergencyContact;
+
+  /// No description provided for @mockDummyContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Alex Guardian · +1 555 0100'**
+  String get mockDummyContact;
+
+  /// No description provided for @mockInviteCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider invite code'**
+  String get mockInviteCode;
+
+  /// No description provided for @mockFinishOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to home'**
+  String get mockFinishOnboarding;
+
+  /// No description provided for @mockAllScreens.
+  ///
+  /// In en, this message translates to:
+  /// **'All screens'**
+  String get mockAllScreens;
+
+  /// No description provided for @mockAllScreensHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open any Screen ID for design review'**
+  String get mockAllScreensHint;
+
+  /// No description provided for @mockStateCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'CALM'**
+  String get mockStateCalm;
+
+  /// No description provided for @mockStateWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'WARNING'**
+  String get mockStateWarning;
+
+  /// No description provided for @mockHomeCalmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Air looks manageable nearby. Log inhaler use anytime.'**
+  String get mockHomeCalmMessage;
+
+  /// No description provided for @mockHomeWarnMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Elevated risk nearby. Limit outdoor exposure and keep your inhaler ready.'**
+  String get mockHomeWarnMessage;
+
+  /// No description provided for @mockRiskScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk score'**
+  String get mockRiskScore;
+
+  /// No description provided for @mockDummyLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Near Newark, NJ'**
+  String get mockDummyLocation;
+
+  /// No description provided for @mockEnvDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment detail'**
+  String get mockEnvDetail;
+
+  /// No description provided for @mockForecast.
+  ///
+  /// In en, this message translates to:
+  /// **'Forecast'**
+  String get mockForecast;
+
+  /// No description provided for @mockForecastHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Next days air & pollen outlook'**
+  String get mockForecastHint;
+
+  /// No description provided for @mockAlertPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert landing'**
+  String get mockAlertPreview;
+
+  /// No description provided for @mockAlertPreviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview risk alert screen'**
+  String get mockAlertPreviewHint;
+
+  /// No description provided for @mockShowWarningHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview WARNING home'**
+  String get mockShowWarningHome;
+
+  /// No description provided for @mockBackToCalmHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get mockBackToCalmHome;
+
+  /// No description provided for @mockPanicCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Panic mode'**
+  String get mockPanicCta;
+
+  /// No description provided for @mockTrapAxis.
+  ///
+  /// In en, this message translates to:
+  /// **'TRAP / soot'**
+  String get mockTrapAxis;
+
+  /// No description provided for @mockFloodAxis.
+  ///
+  /// In en, this message translates to:
+  /// **'Flash flood'**
+  String get mockFloodAxis;
+
+  /// No description provided for @mockPollenAxis.
+  ///
+  /// In en, this message translates to:
+  /// **'Pollen'**
+  String get mockPollenAxis;
+
+  /// No description provided for @mockForecastDayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'AQI · TRAP · Pollen outlook'**
+  String get mockForecastDayHint;
+
+  /// No description provided for @mockActSurvey.
+  ///
+  /// In en, this message translates to:
+  /// **'ACT survey'**
+  String get mockActSurvey;
+
+  /// No description provided for @mockActHint.
+  ///
+  /// In en, this message translates to:
+  /// **'5 pictogram questions (4 weeks)'**
+  String get mockActHint;
+
+  /// No description provided for @mockPdcCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily PDC check'**
+  String get mockPdcCheck;
+
+  /// No description provided for @mockPdcHint.
+  ///
+  /// In en, this message translates to:
+  /// **'One-tap adherence'**
+  String get mockPdcHint;
+
+  /// No description provided for @mockInhalerEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler logged'**
+  String get mockInhalerEvent;
+
+  /// No description provided for @mockActIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer based on the last 4 weeks. Design preview — answers are not saved.'**
+  String get mockActIntro;
+
+  /// No description provided for @mockQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get mockQuestion;
+
+  /// No description provided for @mockSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get mockSubmit;
+
+  /// No description provided for @mockPdcPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you take your controller medicine today?'**
+  String get mockPdcPrompt;
+
+  /// No description provided for @mockTakenYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, I took it'**
+  String get mockTakenYes;
+
+  /// No description provided for @mockTakenNo.
+  ///
+  /// In en, this message translates to:
+  /// **'Not today'**
+  String get mockTakenNo;
+
+  /// No description provided for @mockEvidenceSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Your evidence summary'**
+  String get mockEvidenceSummary;
+
+  /// No description provided for @mockEvidenceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Dummy summary for PA/LMN support. Design preview only.'**
+  String get mockEvidenceBody;
+
+  /// No description provided for @mockInhalerEvents30d.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler events (30d)'**
+  String get mockInhalerEvents30d;
+
+  /// No description provided for @mockActScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest ACT'**
+  String get mockActScore;
+
+  /// No description provided for @mockPdcRate.
+  ///
+  /// In en, this message translates to:
+  /// **'PDC (30d)'**
+  String get mockPdcRate;
+
+  /// No description provided for @mockLocationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved places'**
+  String get mockLocationsTitle;
+
+  /// No description provided for @mockLocationsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Home and work monitoring'**
+  String get mockLocationsHint;
+
+  /// No description provided for @mockWorkLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get mockWorkLocation;
+
+  /// No description provided for @mockDummyWorkAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'1 Market St, Jersey City, NJ'**
+  String get mockDummyWorkAddress;
+
+  /// No description provided for @mockAddLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Add place'**
+  String get mockAddLocation;
+
+  /// No description provided for @mockRewardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards'**
+  String get mockRewardTitle;
+
+  /// No description provided for @mockDraftBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'DRAFT — points & vouchers are preview only'**
+  String get mockDraftBanner;
+
+  /// No description provided for @mockPointsBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Points balance'**
+  String get mockPointsBalance;
+
+  /// No description provided for @mockVoucherTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Food bank voucher'**
+  String get mockVoucherTitle;
+
+  /// No description provided for @mockVoucherHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange points (waitlist)'**
+  String get mockVoucherHint;
+
+  /// No description provided for @mockDonateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Donate'**
+  String get mockDonateTitle;
+
+  /// No description provided for @mockDonateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Third-party giving only'**
+  String get mockDonateHint;
+
+  /// No description provided for @mockRewardHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get mockRewardHistory;
+
+  /// No description provided for @mockRewardHistoryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Points and donations'**
+  String get mockRewardHistoryHint;
+
+  /// No description provided for @mockDummyFoodBank.
+  ///
+  /// In en, this message translates to:
+  /// **'NJ Community Food Bank (demo)'**
+  String get mockDummyFoodBank;
+
+  /// No description provided for @mockVoucherCost.
+  ///
+  /// In en, this message translates to:
+  /// **'50 points · \$10 value (draft)'**
+  String get mockVoucherCost;
+
+  /// No description provided for @mockJoinWaitlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Join waitlist'**
+  String get mockJoinWaitlist;
+
+  /// No description provided for @mockDonateTransparency.
+  ///
+  /// In en, this message translates to:
+  /// **'Donations go through a verified third-party nonprofit platform. Howse Asthma never stores card details.'**
+  String get mockDonateTransparency;
+
+  /// No description provided for @mockDonateCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Open donate (external)'**
+  String get mockDonateCta;
+
+  /// No description provided for @mockExternalOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'External donation provider is not wired in design preview.'**
+  String get mockExternalOnly;
+
+  /// No description provided for @mockSignOutPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out (preview)'**
+  String get mockSignOutPreview;
+
+  /// No description provided for @mockOpenAuthFlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Open auth flow'**
+  String get mockOpenAuthFlow;
+
+  /// No description provided for @mockAlertBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk rose near your location. Review environment details.'**
+  String get mockAlertBody;
+
+  /// No description provided for @mockDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get mockDismiss;
+
+  /// No description provided for @mockPanicTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help now?'**
+  String get mockPanicTitle;
+
+  /// No description provided for @mockPanicStep1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Step 1 — Stay with your inhaler. Continue for emergency contacts.'**
+  String get mockPanicStep1Body;
+
+  /// No description provided for @mockPanicStep2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Call for help'**
+  String get mockPanicStep2Title;
+
+  /// No description provided for @mockPanicStep2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Design preview: buttons do not place a real call. On device builds, Step 2 uses tel: links.'**
+  String get mockPanicStep2Body;
+
+  /// No description provided for @mockCall911.
+  ///
+  /// In en, this message translates to:
+  /// **'Call 911'**
+  String get mockCall911;
+
+  /// No description provided for @mockCallGuardian.
+  ///
+  /// In en, this message translates to:
+  /// **'Call emergency contact'**
+  String get mockCallGuardian;
+
+  /// No description provided for @mockFeelingBetter.
+  ///
+  /// In en, this message translates to:
+  /// **'I am feeling better'**
+  String get mockFeelingBetter;
+
+  /// No description provided for @mockTabHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get mockTabHome;
+
+  /// No description provided for @mockTabLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Log'**
+  String get mockTabLog;
+
+  /// No description provided for @mockTabReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get mockTabReport;
+
+  /// No description provided for @mockTabReward.
+  ///
+  /// In en, this message translates to:
+  /// **'Reward'**
+  String get mockTabReward;
+
+  /// No description provided for @mockTabSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get mockTabSettings;
 }
 
 class _AppLocalizationsDelegate

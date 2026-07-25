@@ -1,0 +1,20 @@
+{
+  "projectId": "258df97c79f2",
+  "exportedAt": "2026-07-25",
+  "breakpoints": [
+    {
+      "id": "f21c2be6-660f-41f8-a812-ea0164ffdd77",
+      "name": "Desktop",
+      "prefix": null,
+      "width": 1440,
+      "isDefault": true
+    },
+    {
+      "id": "bcc7ff9f-53ab-46ee-8a1f-3c61f62c6b25",
+      "name": "Mobile",
+      "prefix": "mobile:",
+      "width": 767,
+      "isDefault": false
+    }
+  ]
+}

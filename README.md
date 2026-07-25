@@ -18,6 +18,23 @@ Copy-Item .env.example .env   # then fill in your Supabase project URL/anon key
 flutter run -d windows        # or connect an Android device and run `flutter run`
 ```
 
+## Docs (committed)
+
+Shared English documentation lives under [`docs/`](docs/) (tracked in Git).  
+Start with [`docs/db-schema.md`](docs/db-schema.md) for the Supabase PostgreSQL schema.  
+When adding migrations or Edge Functions under `supabase/`, update the matching notes in `docs/` in the same change set — see [`docs/README.md`](docs/README.md).
+
+## Design preview (patient mockups)
+
+Set `DESIGN_PREVIEW=true` in `.env` (see `.env.example`), then:
+
+```powershell
+flutter run
+```
+
+Opens a nav-only patient UI (`lib/features/design_preview/`) for on-device design feedback.  
+Subframe patient React references: [`design/subframe/`](design/subframe/).
+
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).

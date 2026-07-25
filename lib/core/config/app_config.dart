@@ -20,6 +20,13 @@ class AppConfig {
       _read('SUPABASE_ANON_KEY').isNotEmpty &&
       _read('SUPABASE_ANON_KEY') != 'YOUR_SUPABASE_ANON_KEY';
 
+  /// When true, skip AuthGate and open patient design-preview mockups.
+  /// Set in `.env` for device design feedback (see `lib/features/design_preview/`).
+  static bool get designPreview {
+    final raw = _read('DESIGN_PREVIEW').trim().toLowerCase();
+    return raw == 'true' || raw == '1' || raw == 'yes';
+  }
+
   static String _read(String key) {
     if (!dotenv.isInitialized) return '';
     return dotenv.env[key] ?? '';

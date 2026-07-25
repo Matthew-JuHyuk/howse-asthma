@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'core/config/app_config.dart';
 import 'core/locale/locale_controller.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/auth_gate.dart';
-import 'features/home/presentation/home_shell.dart';
+import 'features/design_preview/patient_mock_shell.dart';
+import 'features/home/presentation/home_shell.dart'; // AppLocaleScope
 import 'l10n/app_localizations.dart';
 
 class HowseAsthmaApp extends StatefulWidget {
@@ -43,7 +45,9 @@ class _HowseAsthmaAppState extends State<HowseAsthmaApp> {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: const AuthGate(),
+            home: AppConfig.designPreview
+                ? const PatientMockShell()
+                : const AuthGate(),
           );
         },
       ),
