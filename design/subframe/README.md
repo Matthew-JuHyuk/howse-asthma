@@ -1,6 +1,11 @@
 # UI design references (Subframe)
 
-Patient-path layout references exported from Subframe, plus theme tokens used by the Flutter app.
+Patient-path layout references exported from Subframe, plus theme tokens.
+
+**Draft only — not store / production quality.** Windows feedback (2026-07-25): Subframe
+originals need a stronger visual redesign later; Flutter `design_preview` is a low-fidelity
+nav skeleton and must not be shipped. Per-screen visual work is deferred (WBS **1.0c**)
+until real feature UI (Phase 2/4/7/9).
 
 ## Layout
 
@@ -12,19 +17,13 @@ design/subframe/
 └── react-reference/       # Patient, auth, and system screens only
 ```
 
-Provider screens are designed in Subframe but not stored in this repo.
+Provider screens exist in Subframe but are not stored in this repo.
 
-## Device preview
+## Device preview (optional)
 
 ```powershell
 # In .env: DESIGN_PREVIEW=true
 flutter run
 ```
 
-Opens the patient mock UI under `lib/features/design_preview/` (navigation only). Use the screen catalog from Home or Settings to open all Screen IDs.
-
-## Updating a screen
-
-1. Edit the page in Subframe (links in `INDEX.md`).
-2. Refresh the matching folder under `react-reference/`.
-3. Mirror layout changes in the Flutter design-preview (or production) widgets.
+Opens `lib/features/design_preview/` (navigation only). Use for flow checks, not design sign-off.

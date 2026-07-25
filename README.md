@@ -21,8 +21,18 @@ flutter run -d windows        # or connect an Android device and run `flutter ru
 ## Docs (committed)
 
 Shared English documentation lives under [`docs/`](docs/) (tracked in Git).  
-Start with [`docs/db-schema.md`](docs/db-schema.md) for the Supabase PostgreSQL schema.  
-When adding migrations or Edge Functions under `supabase/`, update the matching notes in `docs/` in the same change set — see [`docs/README.md`](docs/README.md).
+- Schema / RLS: [`docs/db-schema.md`](docs/db-schema.md), [`docs/rls-policies.md`](docs/rls-policies.md)  
+- Migrations: [`docs/migrations.md`](docs/migrations.md)  
+- Edge Functions: [`docs/edge-functions.md`](docs/edge-functions.md)  
+
+When changing `supabase/migrations` or `supabase/functions`, update the matching `docs/` notes in the same change set — see [`docs/README.md`](docs/README.md).
+
+## Backend (Supabase)
+
+- Migrations applied: init schema + RLS (`supabase/migrations/`).  
+- Edge Function **deployed** (skeleton): `calculate-environment-risk` — see [`docs/edge-functions.md`](docs/edge-functions.md).  
+- Live environmental API wiring is still Phase 3; secrets are registered on the linked project.  
+- Local secret helper (gitignored): `scripts/set-edge-secrets.ps1` — do not commit.
 
 ## Design preview (patient mockups)
 
@@ -32,8 +42,8 @@ Set `DESIGN_PREVIEW=true` in `.env` (see `.env.example`), then:
 flutter run
 ```
 
-Opens a nav-only patient UI (`lib/features/design_preview/`) for on-device design feedback.  
-Subframe patient React references: [`design/subframe/`](design/subframe/).
+Opens a **low-fidelity** nav-only patient UI (`lib/features/design_preview/`) for flow checks — **not** store-ready.  
+Subframe patient React references: [`design/subframe/`](design/subframe/). For normal auth path use `DESIGN_PREVIEW=false`.
 
 ## License
 

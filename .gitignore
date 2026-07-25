@@ -47,6 +47,9 @@ app.*.map.json
 # Environment secrets (Supabase keys, etc.) - never commit real values
 .env
 !.env.example
+# Local Edge secrets helper (contains real keys) — keep example only
+/scripts/set-edge-secrets.ps1
+!/scripts/set-edge-secrets.example.ps1
 
 # Internal project documentation (requirements analysis, how-to-run, etc.)
 # Kept locally / referenced by Cursor rules, but not published to the repo.

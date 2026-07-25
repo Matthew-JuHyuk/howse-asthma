@@ -29,3 +29,6 @@ Internal Korean source of truth for product decisions remains under `doc/` (Curs
 | File | Description |
 | --- | --- |
 | [`db-schema.md`](./db-schema.md) | Supabase PostgreSQL physical schema (v1.0) |
+| [`migrations.md`](./migrations.md) | Migration file index and apply notes (WBS 1.3+) |
+| [`rls-policies.md`](./rls-policies.md) | RLS policy summary (WBS 1.4) |
+| [`edge-functions.md`](./edge-functions.md) | Edge Function skeleton / secrets notes (WBS 1.6+) |

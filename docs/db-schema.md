@@ -451,7 +451,10 @@ GROUP BY patient_id;
 
 ---
 
-## 3. RLS policy outline (concrete SQL in WBS 1.4)
+## 3. RLS policy outline
+
+> Implemented in [`supabase/migrations/20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql).  
+> Summary: [`rls-policies.md`](./rls-policies.md).
 
 Recommended helper:
 
@@ -565,10 +568,11 @@ Secrets: `AIRNOW_API_KEY`, `PURPLEAIR_READ_KEY`, `GOOGLE_MAPS_API_KEY`,
 ## 8. Rollout order (WBS)
 
 1. **1.2b** — This document finalized ← **✅ done** (2026-07-25)
-2. **1.3** — Apply DDL via `supabase/migrations` ← **next**
-3. **1.4** — Author and verify RLS policy SQL
-4. **1.6~1.7** — Edge Function skeleton + secrets
-5. Phases 2/4/7/9 — Screens/features reference this schema
+2. **1.3** — Init schema ← **✅ applied** remotely (`20260725200000_init_schema.sql`)
+3. **1.4** — RLS policies ← **✅ applied** (`20260725210000_rls_policies.sql`) — see [`rls-policies.md`](./rls-policies.md)
+4. **1.6–1.7** — Edge Function skeleton + secrets + **deploy** ← **✅** ([`edge-functions.md`](./edge-functions.md))
+5. **Phase 2** — Auth / role routing ← **next**
+6. Phases 3/4/7/9 — Live APIs and feature screens
 
 When applying migrations, update this file (and the Korean twin under `doc/`) in the same commit when practical.
 
