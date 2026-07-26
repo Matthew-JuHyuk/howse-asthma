@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/biometrics/biometric_prefs.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../home/presentation/home_shell.dart';
 import '../data/care_link_repository.dart';
 
-/// Light patient onboarding: optional provider invite code.
+/// SCR-ONB-01 — patient onboarding (basic design reference layout).
 class PatientOnboardingScreen extends StatefulWidget {
   const PatientOnboardingScreen({
     super.key,
@@ -23,14 +25,22 @@ class PatientOnboardingScreen extends StatefulWidget {
 
 class _PatientOnboardingScreenState extends State<PatientOnboardingScreen> {
   final _codeController = TextEditingController();
+  final _contactNameController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _careLinks = CareLinkRepository();
+  String _languageCode = 'en';
+  String _placeLabel = 'Home';
   bool _busy = false;
   String? _message;
   bool _isError = false;
 
+  static const _langs = ['en', 'es', 'fr', 'ko', 'ja', 'zh'];
+
   @override
   void dispose() {
     _codeController.dispose();
+    _contactNameController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
@@ -45,22 +55,27 @@ class _PatientOnboardingScreenState extends State<PatientOnboardingScreen> {
     try {
       if (redeem) {
         final code = _codeController.text.trim();
-        if (!RegExp(r'^\d{6}$').hasMatch(code)) {
-          setState(() {
-            _message = l10n.authInviteInvalidFormat;
-            _isError = true;
-          });
-          return;
-        }
-        await _careLinks.redeemInviteCode(code);
-        if (mounted) {
-          setState(() {
-            _message = l10n.authInviteRedeemedPending;
-            _isError = false;
-          });
+        if (code.isNotEmpty) {
+          if (!RegExp(r'^\d{6}$').hasMatch(code)) {
+            setState(() {
+              _message = l10n.authInviteInvalidFormat;
+              _isError = true;
+            });
+            return;
+          }
+          await _careLinks.redeemInviteCode(code);
+          if (mounted) {
+            setState(() {
+              _message = l10n.authInviteRedeemedPending;
+              _isError = false;
+            });
+          }
         }
       }
+      if (!mounted) return;
+      AppLocaleScope.of(context).setLocale(Locale(_languageCode));
       await BiometricPrefs.setPatientOnboardingDone(widget.userId, true);
+      if (!mounted) return;
       widget.onFinished();
     } catch (_) {
       if (mounted) {
@@ -79,54 +94,153 @@ class _PatientOnboardingScreenState extends State<PatientOnboardingScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.authOnboardingTitle)),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 420),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(l10n.authOnboardingBody),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _codeController,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(6),
-                  ],
-                  decoration: InputDecoration(
-                    labelText: l10n.authInviteCodeLabel,
-                    helperText: l10n.authInviteCodeHelper,
-                  ),
-                ),
-                if (_message != null) ...[
-                  const SizedBox(height: 12),
-                  Text(
-                    _message!,
-                    style: TextStyle(
-                      color: _isError
-                          ? Theme.of(context).colorScheme.error
-                          : Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ],
-                const SizedBox(height: 24),
-                FilledButton(
-                  onPressed: _busy ? null : () => _finish(redeem: true),
-                  child: Text(l10n.authInviteRedeemAndContinue),
-                ),
-                const SizedBox(height: 8),
-                TextButton(
+      backgroundColor: AppTheme.neutral0,
+      appBar: AppBar(
+        title: Text(l10n.appTitle),
+        backgroundColor: AppTheme.neutral0,
+      ),
+      body: ListView(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
+        children: [
+          Text(
+            l10n.mockChooseLanguage,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: _langs.map((code) {
+              final selected = _languageCode == code;
+              return ChoiceChip(
+                label: Text(code.toUpperCase()),
+                selected: selected,
+                onSelected: (_) => setState(() => _languageCode = code),
+              );
+            }).toList(),
+          ),
+          const Divider(height: 32),
+          Text(
+            l10n.mockYourLocation,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 8),
+          FilledButton.icon(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(l10n.mockUseCurrentLocation)),
+              );
+            },
+            icon: const Icon(Icons.my_location),
+            label: Text(l10n.mockUseCurrentLocation),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            l10n.mockLocationTrapOnly,
+            style: const TextStyle(color: AppTheme.neutral400, fontSize: 12),
+          ),
+          const Divider(height: 32),
+          Text(
+            l10n.mockLabelYourPlace,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            children: [
+              (l10n.mockHomeLocation, 'Home'),
+              (l10n.mockSchool, 'School'),
+              (l10n.mockWork, 'Work'),
+              (l10n.mockOther, 'Other'),
+            ].map((e) {
+              final selected = _placeLabel == e.$2;
+              return ChoiceChip(
+                label: Text(e.$1),
+                selected: selected,
+                onSelected: (_) => setState(() => _placeLabel = e.$2),
+              );
+            }).toList(),
+          ),
+          const Divider(height: 32),
+          Text(
+            l10n.mockEmergencyContact,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          Text(
+            l10n.mockEmergencyOnePerson,
+            style: const TextStyle(color: AppTheme.neutral500),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            controller: _contactNameController,
+            decoration: InputDecoration(
+              labelText: l10n.mockContactName,
+              border: const OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            controller: _phoneController,
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+              labelText: l10n.mockPhoneNumber,
+              border: const OutlineInputBorder(),
+            ),
+          ),
+          const Divider(height: 32),
+          Text(
+            l10n.mockProviderPairing,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          Text(
+            l10n.authInviteCodeHelper,
+            style: const TextStyle(color: AppTheme.neutral500),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            controller: _codeController,
+            keyboardType: TextInputType.number,
+            maxLength: 6,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(
+              labelText: l10n.authInviteCodeLabel,
+              border: const OutlineInputBorder(),
+            ),
+          ),
+          Text(
+            l10n.mockPairingOptional,
+            style: const TextStyle(color: AppTheme.neutral400, fontSize: 12),
+          ),
+          if (_message != null) ...[
+            const SizedBox(height: 12),
+            Text(
+              _message!,
+              style: TextStyle(
+                color: _isError
+                    ? Theme.of(context).colorScheme.error
+                    : AppTheme.success600,
+              ),
+            ),
+          ],
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
                   onPressed: _busy ? null : () => _finish(redeem: false),
                   child: Text(l10n.authOnboardingSkip),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: FilledButton(
+                  onPressed: _busy ? null : () => _finish(redeem: true),
+                  child: Text(l10n.mockNext),
+                ),
+              ),
+            ],
           ),
-        ),
+        ],
       ),
     );
   }

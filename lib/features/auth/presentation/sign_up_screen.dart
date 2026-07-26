@@ -207,7 +207,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ],
                       decoration: InputDecoration(
                         labelText: l10n.authNpiLabel,
-                        helperText: l10n.authNpiHelper,
+                        helperText: l10n.mockNpiFormatOnly,
+                        border: const OutlineInputBorder(),
                       ),
                       validator: (v) {
                         if (_role != UserRole.provider) return null;

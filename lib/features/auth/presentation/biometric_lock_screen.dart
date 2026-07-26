@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/biometrics/biometric_service.dart';
 import '../../../core/supabase/supabase_service.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// SCR-AUTH-04 — unlock an existing session with device biometrics.
@@ -56,48 +57,70 @@ class _BiometricLockScreenState extends State<BiometricLockScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      body: Center(
+      backgroundColor: AppTheme.neutral0,
+      body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 360),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.fingerprint, size: 64),
-                const SizedBox(height: 16),
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            children: [
+              const Spacer(),
+              Container(
+                width: 128,
+                height: 128,
+                decoration: const BoxDecoration(
+                  color: AppTheme.brand50,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.fingerprint,
+                  size: 64,
+                  color: AppTheme.brand600,
+                ),
+              ),
+              const SizedBox(height: 28),
+              Text(
+                l10n.authBiometricTitle,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.neutral900,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.authBiometricHint,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: AppTheme.neutral500),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.authTouchSensorHint,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: AppTheme.neutral400, fontSize: 13),
+              ),
+              if (_error != null) ...[
+                const SizedBox(height: 12),
                 Text(
-                  l10n.authBiometricTitle,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  _error!,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  l10n.authBiometricHint,
-                  textAlign: TextAlign.center,
-                ),
-                if (_error != null) ...[
-                  const SizedBox(height: 12),
-                  Text(
-                    _error!,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-                const SizedBox(height: 24),
-                FilledButton(
+              ],
+              const Spacer(),
+              TextButton(
+                onPressed: _busy ? null : _signOut,
+                child: Text(l10n.mockUsePassword),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
                   onPressed: _busy ? null : _tryUnlock,
                   child: Text(l10n.authBiometricUnlock),
                 ),
-                const SizedBox(height: 8),
-                TextButton(
-                  onPressed: _busy ? null : _signOut,
-                  child: Text(l10n.authSignOut),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

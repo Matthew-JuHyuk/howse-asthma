@@ -11,8 +11,8 @@ import '../data/profile_repository.dart';
 import '../domain/user_profile.dart';
 import 'biometric_lock_screen.dart';
 import 'complete_profile_screen.dart';
-import 'login_screen.dart';
 import 'patient_onboarding_screen.dart';
+import 'splash_screen.dart';
 
 /// Session gate: login → optional biometric → profile → role shell.
 class AuthGate extends StatefulWidget {
@@ -124,7 +124,7 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     if (!AppConfig.isSupabaseConfigured) {
-      return const LoginScreen();
+      return const SplashScreen();
     }
 
     return StreamBuilder<AuthState>(
@@ -139,7 +139,7 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
               if (mounted) setState(_resetForSignedOut);
             });
           }
-          return const LoginScreen();
+          return const SplashScreen();
         }
 
         final userId = session.user.id;

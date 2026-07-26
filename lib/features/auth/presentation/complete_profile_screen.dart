@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../../core/locale/locale_controller.dart';
 import '../../../core/supabase/supabase_service.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../home/presentation/home_shell.dart';
 import '../data/profile_repository.dart';
@@ -23,6 +24,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _npiController = TextEditingController();
+  final _specialtyController = TextEditingController();
+  final _clinicController = TextEditingController();
   final _profiles = ProfileRepository();
 
   UserRole _role = UserRole.patient;
@@ -60,6 +63,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   void dispose() {
     _nameController.dispose();
     _npiController.dispose();
+    _specialtyController.dispose();
+    _clinicController.dispose();
     super.dispose();
   }
 
@@ -98,8 +103,16 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
+    final isProvider = _role == UserRole.provider;
+
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.authCompleteProfileTitle)),
+      backgroundColor: AppTheme.neutral0,
+      appBar: AppBar(
+        title: Text(
+          isProvider ? l10n.mockProfessionalProfile : l10n.authCompleteProfileTitle,
+        ),
+        backgroundColor: AppTheme.neutral0,
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -110,7 +123,21 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(l10n.authCompleteProfileBody),
+                  if (isProvider) ...[
+                    Text(
+                      l10n.mockStep2Of4,
+                      style: const TextStyle(
+                        color: AppTheme.brand600,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.mockTellPractice,
+                      style: const TextStyle(color: AppTheme.neutral500),
+                    ),
+                  ] else
+                    Text(l10n.authCompleteProfileBody),
                   const SizedBox(height: 16),
                   SegmentedButton<UserRole>(
                     segments: [
@@ -132,17 +159,40 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   TextFormField(
                     controller: _nameController,
                     textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(labelText: l10n.authFullNameLabel),
+                    decoration: InputDecoration(
+                      labelText: l10n.authFullNameLabel,
+                      border: const OutlineInputBorder(),
+                    ),
                     validator: (v) => (v == null || v.trim().isEmpty)
                         ? l10n.authValidationNameRequired
                         : null,
                   ),
+                  if (isProvider) ...[
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: _specialtyController,
+                      decoration: InputDecoration(
+                        labelText: l10n.mockSpecialtyLabel,
+                        border: const OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: _clinicController,
+                      decoration: InputDecoration(
+                        labelText: l10n.mockClinicLabel,
+                        border: const OutlineInputBorder(),
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 12),
                   DropdownButtonFormField<String>(
                     // ignore: deprecated_member_use
                     value: _languageCode,
-                    decoration:
-                        InputDecoration(labelText: l10n.settingsLanguageLabel),
+                    decoration: InputDecoration(
+                      labelText: l10n.settingsLanguageLabel,
+                      border: const OutlineInputBorder(),
+                    ),
                     items: supportedLocales
                         .map(
                           (locale) => DropdownMenuItem(
@@ -158,7 +208,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       if (value != null) setState(() => _languageCode = value);
                     },
                   ),
-                  if (_role == UserRole.provider) ...[
+                  if (isProvider) ...[
                     const SizedBox(height: 12),
                     TextFormField(
                       controller: _npiController,
@@ -167,13 +217,25 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(10),
                       ],
-                      decoration: InputDecoration(labelText: l10n.authNpiLabel),
+                      decoration: InputDecoration(
+                        labelText: l10n.authNpiLabel,
+                        helperText: l10n.mockNpiFormatOnly,
+                        border: const OutlineInputBorder(),
+                      ),
                       validator: (v) {
                         if (v == null || !NpiValidator.isValid(v)) {
                           return l10n.authValidationInvalidNpi;
                         }
                         return null;
                       },
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.mockCredentialsSecure,
+                      style: const TextStyle(
+                        color: AppTheme.neutral500,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                   if (_errorMessage != null) ...[
@@ -194,7 +256,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                             height: 20,
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
-                        : Text(l10n.authSaveProfile),
+                        : Text(l10n.mockContinue),
                   ),
                 ],
               ),

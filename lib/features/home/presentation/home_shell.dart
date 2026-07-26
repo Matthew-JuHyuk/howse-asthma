@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/locale/locale_controller.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../medication_log/presentation/medication_log_screen.dart';
 import '../../reports/presentation/report_screen.dart';
+import '../../rewards/presentation/reward_hub_screen.dart';
 import '../../settings/presentation/settings_screen.dart';
 import 'home_screen.dart';
 
-/// Root screen shown after sign-in: a bottom-navigation shell that hosts
-/// the four main sections of the app.
+/// Root screen after sign-in: 5-tab shell matching Subframe
+/// (Home / Log / Report / Rewards / Settings) + floating 1-Tap stub.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -28,11 +30,35 @@ class _HomeShellState extends State<HomeShell> {
       const HomeScreen(),
       const MedicationLogScreen(),
       const ReportScreen(),
+      const RewardHubScreen(),
       SettingsScreen(localeController: localeController),
     ];
 
     return Scaffold(
+      backgroundColor: AppTheme.defaultBackground,
       body: IndexedStack(index: _index, children: pages),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: FloatingActionButton.large(
+          heroTag: 'prod_one_tap',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.oneTapLoggedSnack)),
+            );
+          },
+          backgroundColor: AppTheme.brand600,
+          foregroundColor: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.medication_outlined, size: 28),
+              Text(l10n.oneTapFab,
+                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+            ],
+          ),
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
         onDestinationSelected: (value) => setState(() => _index = value),
@@ -43,15 +69,19 @@ class _HomeShellState extends State<HomeShell> {
           ),
           NavigationDestination(
             icon: const Icon(Icons.medication_outlined),
-            label: l10n.medicationLogTitle,
+            label: l10n.navLog,
           ),
           NavigationDestination(
             icon: const Icon(Icons.description_outlined),
-            label: l10n.reportTitle,
+            label: l10n.navReport,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.stars_outlined),
+            label: l10n.navRewards,
           ),
           NavigationDestination(
             icon: const Icon(Icons.settings_outlined),
-            label: l10n.settingsTitle,
+            label: l10n.mockTabSettings,
           ),
         ],
       ),

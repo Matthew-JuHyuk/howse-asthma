@@ -115,7 +115,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginTitle.
   ///
   /// In en, this message translates to:
-  /// **'Sign In'**
+  /// **'Log in'**
   String get loginTitle;
 
   /// No description provided for @loginEmailLabel.
@@ -133,13 +133,13 @@ abstract class AppLocalizations {
   /// No description provided for @loginButton.
   ///
   /// In en, this message translates to:
-  /// **'Sign In'**
+  /// **'Log in'**
   String get loginButton;
 
   /// No description provided for @signUpButton.
   ///
   /// In en, this message translates to:
-  /// **'Create Account'**
+  /// **'Sign up'**
   String get signUpButton;
 
   /// Shown when Supabase env vars are missing
@@ -1003,7 +1003,7 @@ abstract class AppLocalizations {
   /// No description provided for @authBiometricHint.
   ///
   /// In en, this message translates to:
-  /// **'Use your fingerprint or face to continue.'**
+  /// **'Use biometrics to continue'**
   String get authBiometricHint;
 
   /// No description provided for @authBiometricReason.
@@ -1245,6 +1245,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Active'**
   String get providerInviteActive;
+
+  /// No description provided for @splashTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Smarter asthma prevention for every family.'**
+  String get splashTagline;
+
+  /// No description provided for @splashGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get splashGetStarted;
+
+  /// No description provided for @splashAlreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get splashAlreadyHaveAccount;
+
+  /// No description provided for @splashSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get splashSignIn;
+
+  /// No description provided for @authForgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get authForgotPassword;
+
+  /// No description provided for @authNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'No account?'**
+  String get authNoAccount;
+
+  /// No description provided for @authUseBiometricHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Face ID or fingerprint to unlock'**
+  String get authUseBiometricHint;
+
+  /// No description provided for @authTouchSensorHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Touch sensor or look at camera'**
+  String get authTouchSensorHint;
+
+  /// No description provided for @navLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Log'**
+  String get navLog;
+
+  /// No description provided for @navReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get navReport;
+
+  /// No description provided for @navRewards.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards'**
+  String get navRewards;
+
+  /// No description provided for @mockChooseLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Language'**
+  String get mockChooseLanguage;
+
+  /// No description provided for @mockYourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Location'**
+  String get mockYourLocation;
+
+  /// No description provided for @mockUseCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Current Location'**
+  String get mockUseCurrentLocation;
+
+  /// No description provided for @mockLocationTrapOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is used for TRAP air quality data only'**
+  String get mockLocationTrapOnly;
+
+  /// No description provided for @mockLabelYourPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Label Your Place'**
+  String get mockLabelYourPlace;
+
+  /// No description provided for @mockSchool.
+  ///
+  /// In en, this message translates to:
+  /// **'School'**
+  String get mockSchool;
+
+  /// No description provided for @mockWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get mockWork;
+
+  /// No description provided for @mockOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get mockOther;
+
+  /// No description provided for @mockEmergencyOnePerson.
+  ///
+  /// In en, this message translates to:
+  /// **'One person to call in an emergency'**
+  String get mockEmergencyOnePerson;
+
+  /// No description provided for @mockContactName.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Name'**
+  String get mockContactName;
+
+  /// No description provided for @mockPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get mockPhoneNumber;
+
+  /// No description provided for @mockProviderPairing.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider Pairing'**
+  String get mockProviderPairing;
+
+  /// No description provided for @mockPairingOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional — you can add this later in Settings'**
+  String get mockPairingOptional;
+
+  /// No description provided for @mockNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get mockNext;
+
+  /// No description provided for @mockProfessionalProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Profile'**
+  String get mockProfessionalProfile;
+
+  /// No description provided for @mockStep2Of4.
+  ///
+  /// In en, this message translates to:
+  /// **'Step 2 of 4'**
+  String get mockStep2Of4;
+
+  /// No description provided for @mockTellPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about your medical practice'**
+  String get mockTellPractice;
+
+  /// No description provided for @mockSpecialtyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialty'**
+  String get mockSpecialtyLabel;
+
+  /// No description provided for @mockClinicLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice / Clinic Name'**
+  String get mockClinicLabel;
+
+  /// No description provided for @mockNpiFormatOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Format check only. NPI verification occurs after submission.'**
+  String get mockNpiFormatOnly;
+
+  /// No description provided for @mockCredentialsSecure.
+  ///
+  /// In en, this message translates to:
+  /// **'Your credentials are encrypted and stored securely. We never share provider data without consent.'**
+  String get mockCredentialsSecure;
+
+  /// No description provided for @oneTapFab.
+  ///
+  /// In en, this message translates to:
+  /// **'1-Tap'**
+  String get oneTapFab;
+
+  /// No description provided for @oneTapLoggedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use logged (stub)'**
+  String get oneTapLoggedSnack;
 }
 
 class _AppLocalizationsDelegate

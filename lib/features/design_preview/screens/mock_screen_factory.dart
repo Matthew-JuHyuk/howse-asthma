@@ -20,6 +20,8 @@ class MockScreenFactory {
         return const Auth04BiometricMock();
       case MockScreenId.onb01:
         return const Onb01PatientMock();
+      case MockScreenId.onb02:
+        return const Onb02ProviderMock();
       case MockScreenId.patHome:
         return const PatHomeMock(warning: false);
       case MockScreenId.patHomeWarn:

@@ -5,6 +5,7 @@ enum MockScreenId {
   auth03('SCR-AUTH-03', 'Sign up · role'),
   auth04('SCR-AUTH-04', 'Biometric lock'),
   onb01('SCR-ONB-01', 'Patient onboarding'),
+  onb02('SCR-ONB-02', 'Provider onboarding'),
   patHome('SCR-PAT-HOME', 'Home (CALM)'),
   patHomeWarn('SCR-PAT-HOME.warn', 'Home (WARNING)'),
   patEnv('SCR-PAT-ENV', 'Environment detail'),

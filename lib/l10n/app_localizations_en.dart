@@ -12,7 +12,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Howse Asthma';
 
   @override
-  String get loginTitle => 'Sign In';
+  String get loginTitle => 'Log in';
 
   @override
   String get loginEmailLabel => 'Email';
@@ -21,10 +21,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginPasswordLabel => 'Password';
 
   @override
-  String get loginButton => 'Sign In';
+  String get loginButton => 'Log in';
 
   @override
-  String get signUpButton => 'Create Account';
+  String get signUpButton => 'Sign up';
 
   @override
   String get supabaseNotConfigured =>
@@ -474,7 +474,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authBiometricTitle => 'Unlock Howse Asthma';
 
   @override
-  String get authBiometricHint => 'Use your fingerprint or face to continue.';
+  String get authBiometricHint => 'Use biometrics to continue';
 
   @override
   String get authBiometricReason => 'Unlock Howse Asthma';
@@ -606,4 +606,110 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerInviteActive => 'Active';
+
+  @override
+  String get splashTagline => 'Smarter asthma prevention for every family.';
+
+  @override
+  String get splashGetStarted => 'Get Started';
+
+  @override
+  String get splashAlreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get splashSignIn => 'Sign in';
+
+  @override
+  String get authForgotPassword => 'Forgot password?';
+
+  @override
+  String get authNoAccount => 'No account?';
+
+  @override
+  String get authUseBiometricHint => 'Use Face ID or fingerprint to unlock';
+
+  @override
+  String get authTouchSensorHint => 'Touch sensor or look at camera';
+
+  @override
+  String get navLog => 'Log';
+
+  @override
+  String get navReport => 'Report';
+
+  @override
+  String get navRewards => 'Rewards';
+
+  @override
+  String get mockChooseLanguage => 'Choose Language';
+
+  @override
+  String get mockYourLocation => 'Your Location';
+
+  @override
+  String get mockUseCurrentLocation => 'Use Current Location';
+
+  @override
+  String get mockLocationTrapOnly =>
+      'Location is used for TRAP air quality data only';
+
+  @override
+  String get mockLabelYourPlace => 'Label Your Place';
+
+  @override
+  String get mockSchool => 'School';
+
+  @override
+  String get mockWork => 'Work';
+
+  @override
+  String get mockOther => 'Other';
+
+  @override
+  String get mockEmergencyOnePerson => 'One person to call in an emergency';
+
+  @override
+  String get mockContactName => 'Contact Name';
+
+  @override
+  String get mockPhoneNumber => 'Phone Number';
+
+  @override
+  String get mockProviderPairing => 'Provider Pairing';
+
+  @override
+  String get mockPairingOptional =>
+      'Optional — you can add this later in Settings';
+
+  @override
+  String get mockNext => 'Next';
+
+  @override
+  String get mockProfessionalProfile => 'Professional Profile';
+
+  @override
+  String get mockStep2Of4 => 'Step 2 of 4';
+
+  @override
+  String get mockTellPractice => 'Tell us about your medical practice';
+
+  @override
+  String get mockSpecialtyLabel => 'Specialty';
+
+  @override
+  String get mockClinicLabel => 'Practice / Clinic Name';
+
+  @override
+  String get mockNpiFormatOnly =>
+      'Format check only. NPI verification occurs after submission.';
+
+  @override
+  String get mockCredentialsSecure =>
+      'Your credentials are encrypted and stored securely. We never share provider data without consent.';
+
+  @override
+  String get oneTapFab => '1-Tap';
+
+  @override
+  String get oneTapLoggedSnack => 'Inhaler use logged (stub)';
 }

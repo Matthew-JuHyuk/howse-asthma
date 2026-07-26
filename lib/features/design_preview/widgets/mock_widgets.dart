@@ -61,22 +61,19 @@ class MockSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: padding,
-      decoration: BoxDecoration(
-        color: color ?? AppTheme.neutral0,
+    // Material ancestor so ListTile ink/splash paint correctly inside the card.
+    return Material(
+      color: color ?? AppTheme.neutral0,
+      elevation: 1,
+      shadowColor: AppTheme.neutral900.withValues(alpha: 0.08),
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppTheme.neutral200),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.neutral900.withValues(alpha: 0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
-          ),
-        ],
+        side: const BorderSide(color: AppTheme.neutral200),
       ),
-      child: child,
+      child: Padding(
+        padding: padding,
+        child: child,
+      ),
     );
   }
 }
@@ -229,6 +226,235 @@ class MockDraftBanner extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// 5-segment intensity bar used on HOME / ENV factor rows.
+class MockLevelBar extends StatelessWidget {
+  const MockLevelBar({
+    super.key,
+    required this.filled,
+    this.activeColor = AppTheme.brand400,
+    this.height = 6,
+  });
+
+  final int filled;
+  final Color activeColor;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: List.generate(5, (i) {
+        return Expanded(
+          child: Container(
+            height: height,
+            margin: EdgeInsets.only(right: i == 4 ? 0 : 4),
+            decoration: BoxDecoration(
+              color: i < filled ? activeColor : AppTheme.neutral200,
+              borderRadius: BorderRadius.circular(99),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class MockFactorRow extends StatelessWidget {
+  const MockFactorRow({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.level,
+    required this.detail,
+    required this.filled,
+    this.levelColor = AppTheme.brand600,
+    this.barColor = AppTheme.brand400,
+    this.iconBg = AppTheme.neutral100,
+    this.iconColor = AppTheme.neutral600,
+    this.borderColor = AppTheme.neutral200,
+    this.tip,
+    this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final String level;
+  final String detail;
+  final int filled;
+  final Color levelColor;
+  final Color barColor;
+  final Color iconBg;
+  final Color iconColor;
+  final Color borderColor;
+  final String? tip;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppTheme.neutral0,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: borderColor),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: iconBg,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, color: iconColor),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
+                        ),
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(color: levelColor, shape: BoxShape.circle),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          level,
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: levelColor),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text(detail, style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
+                    const SizedBox(height: 10),
+                    MockLevelBar(filled: filled, activeColor: barColor),
+                    if (tip != null) ...[
+                      const SizedBox(height: 10),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: levelColor.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          tip!,
+                          style: TextStyle(fontSize: 12, color: levelColor.withValues(alpha: 0.9)),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MockFilterChipRow extends StatelessWidget {
+  const MockFilterChipRow({
+    super.key,
+    required this.labels,
+    this.selectedIndex = 0,
+    this.onSelected,
+  });
+
+  final List<String> labels;
+  final int selectedIndex;
+  final ValueChanged<int>? onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          for (var i = 0; i < labels.length; i++) ...[
+            if (i > 0) const SizedBox(width: 8),
+            FilterChip(
+              label: Text(labels[i]),
+              selected: i == selectedIndex,
+              onSelected: onSelected == null ? null : (_) => onSelected!(i),
+              selectedColor: AppTheme.brand600,
+              checkmarkColor: AppTheme.neutral0,
+              labelStyle: TextStyle(
+                color: i == selectedIndex ? AppTheme.neutral0 : AppTheme.neutral600,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+              backgroundColor: AppTheme.neutral0,
+              side: BorderSide(
+                color: i == selectedIndex ? AppTheme.brand600 : AppTheme.neutral200,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class MockBrandHeader extends StatelessWidget {
+  const MockBrandHeader({
+    super.key,
+    required this.title,
+    required this.screenId,
+    this.trailing,
+    this.brandColor = AppTheme.brand600,
+    this.titleColor = AppTheme.brand700,
+  });
+
+  final String title;
+  final String screenId;
+  final Widget? trailing;
+  final Color brandColor;
+  final Color titleColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: brandColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: const Icon(Icons.air, color: Colors.white, size: 22),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: TextStyle(fontWeight: FontWeight.w700, color: titleColor)),
+              Text(screenId, style: const TextStyle(fontSize: 11, color: AppTheme.neutral400)),
+            ],
+          ),
+        ),
+        ?trailing,
+      ],
     );
   }
 }

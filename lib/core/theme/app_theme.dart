@@ -9,9 +9,12 @@ class AppTheme {
   static const Color brand100 = Color(0xFFCCFBF1);
   static const Color brand200 = Color(0xFF99F6E4);
   static const Color brand300 = Color(0xFF5EEAD4);
+  static const Color brand400 = Color(0xFF2DD4BF);
   static const Color brand500 = Color(0xFF14B8A6);
   static const Color brand600 = Color(0xFF0F766E);
   static const Color brand700 = Color(0xFF115E59);
+  static const Color brand800 = Color(0xFF134E4A);
+  static const Color brand900 = Color(0xFF042F2E);
   static const Color brandPrimary = brand600;
 
   static const Color neutral0 = Color(0xFFFFFFFF);
