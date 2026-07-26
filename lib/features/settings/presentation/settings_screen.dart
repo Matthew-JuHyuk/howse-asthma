@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart' show LocationPermission;
 
 import '../../../core/biometrics/biometric_prefs.dart';
 import '../../../core/biometrics/biometric_service.dart';
 import '../../../core/locale/locale_controller.dart';
+import '../../../core/location/location_service.dart';
+import '../../../core/phone/phone_e164.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../auth/data/care_link_repository.dart';
 import '../../locations/presentation/locations_screen.dart';
+import '../data/emergency_contact_repository.dart';
+import '../data/notification_prefs_repository.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.localeController});
@@ -22,12 +27,21 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final _biometrics = BiometricService();
   final _careLinks = CareLinkRepository();
+  final _contacts = EmergencyContactRepository();
+  final _notifPrefs = NotificationPrefsRepository();
+  final _location = const LocationService();
   final _inviteController = TextEditingController();
+  final _contactNameController = TextEditingController();
+  final _contactPhoneController = TextEditingController();
 
   bool _biometricEnabled = false;
   bool _biometricAvailable = false;
   bool _loading = true;
   bool _redeeming = false;
+  bool _savingContact = false;
+  bool _pushRiskGe3 = true;
+  bool _pushHome = true;
+  String? _locationStatus;
 
   @override
   void initState() {
@@ -38,6 +52,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void dispose() {
     _inviteController.dispose();
+    _contactNameController.dispose();
+    _contactPhoneController.dispose();
     super.dispose();
   }
 
@@ -45,10 +61,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final userId = SupabaseService.currentUser?.id ?? '';
     final enabled = await BiometricPrefs.isUnlockEnabled(userId);
     final available = await _biometrics.canCheckBiometrics();
+    Map<String, dynamic>? contact;
+    Map<String, dynamic>? prefs;
+    try {
+      contact = await _contacts.get();
+      prefs = await _notifPrefs.getOrCreate();
+    } catch (_) {}
+
+    final perm = await _location.checkPermission();
+    final serviceOn = await _location.isServiceEnabled();
+
     if (!mounted) return;
     setState(() {
       _biometricEnabled = enabled;
       _biometricAvailable = available;
+      if (contact != null) {
+        _contactNameController.text =
+            (contact['display_name'] as String?) ?? '';
+        _contactPhoneController.text =
+            (contact['phone_e164'] as String?) ?? '';
+      }
+      if (prefs != null) {
+        _pushRiskGe3 = prefs['push_risk_ge3'] != false;
+        _pushHome = prefs['push_saved_location_change'] != false;
+      }
+      _locationStatus = !serviceOn
+          ? 'serviceDisabled'
+          : perm == LocationPermission.deniedForever
+              ? 'deniedForever'
+              : perm == LocationPermission.denied
+                  ? 'denied'
+                  : 'granted';
       _loading = false;
     });
   }
@@ -66,6 +109,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await BiometricPrefs.setUnlockEnabled(userId, value);
     if (!mounted) return;
     setState(() => _biometricEnabled = value);
+  }
+
+  Future<void> _saveContact() async {
+    final l10n = AppLocalizations.of(context)!;
+    final name = _contactNameController.text.trim();
+    final phone = PhoneE164.normalize(_contactPhoneController.text);
+    if (name.isEmpty || phone == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.emergencyContactInvalidPhone)),
+      );
+      return;
+    }
+    setState(() => _savingContact = true);
+    try {
+      await _contacts.upsert(displayName: name, phoneE164: phone);
+      _contactPhoneController.text = phone;
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.emergencyContactSaved)),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.authErrorGeneric)),
+      );
+    } finally {
+      if (mounted) setState(() => _savingContact = false);
+    }
   }
 
   Future<void> _redeemInvite() async {
@@ -95,6 +166,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  Future<void> _requestLocation() async {
+    await _location.getCurrentPosition();
+    await _load();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -106,77 +182,102 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     }
 
+    String locationLabel;
+    switch (_locationStatus) {
+      case 'granted':
+        locationLabel = l10n.locationStatusGranted;
+      case 'deniedForever':
+        locationLabel = l10n.locationPermissionDeniedForever;
+      case 'serviceDisabled':
+        locationLabel = l10n.locationServiceDisabled;
+      default:
+        locationLabel = l10n.locationPermissionDenied;
+    }
+
     return Scaffold(
       backgroundColor: AppTheme.defaultBackground,
       body: SafeArea(
-        child: ValueListenableBuilder<Locale?>(
+        child: ValueListenableBuilder<Locale>(
           valueListenable: widget.localeController,
           builder: (context, currentLocale, _) {
             return ListView(
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
               children: [
-                Text(l10n.settingsTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-                const Text('SCR-PAT-SETTINGS', style: TextStyle(color: AppTheme.neutral400, fontSize: 12)),
+                Text(
+                  l10n.settingsTitle,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const Text(
+                  'SCR-PAT-SETTINGS',
+                  style: TextStyle(color: AppTheme.neutral400, fontSize: 12),
+                ),
                 const SizedBox(height: 16),
                 _section(
                   title: l10n.settingsLanguageLabel,
-                  child: Column(
-                    children: [
-                      Text(
-                        currentLocale == null
-                            ? l10n.settingsSystemDefault
-                            : localeDisplayNames[currentLocale.languageCode] ??
-                                currentLocale.languageCode,
-                        style: const TextStyle(color: AppTheme.subtext, fontSize: 13),
-                      ),
-                      const SizedBox(height: 8),
-                      RadioGroup<Locale>(
-                        groupValue: currentLocale,
-                        onChanged: (value) => widget.localeController.setLocale(value),
-                        child: Column(
-                          children: supportedLocales
-                              .map(
-                                (locale) => RadioListTile<Locale>(
-                                  contentPadding: EdgeInsets.zero,
-                                  dense: true,
-                                  title: Text(
-                                    localeDisplayNames[locale.languageCode] ??
-                                        locale.languageCode,
-                                  ),
-                                  value: locale,
-                                ),
-                              )
-                              .toList(),
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: supportedLocales.map((locale) {
+                      final selected =
+                          currentLocale.languageCode == locale.languageCode;
+                      return FilterChip(
+                        label: Text(
+                          localeDisplayNames[locale.languageCode] ??
+                              locale.languageCode,
                         ),
-                      ),
-                    ],
+                        selected: selected,
+                        onSelected: (_) =>
+                            widget.localeController.setLocale(locale),
+                      );
+                    }).toList(),
                   ),
                 ),
                 const SizedBox(height: 12),
                 _section(
-                  title: 'Alert Preferences',
+                  title: l10n.settingsAlertsTitle,
                   child: Column(
                     children: [
                       SwitchListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text('Risk Alerts'),
-                        subtitle: const Text('Score changes and warnings'),
-                        value: true,
-                        onChanged: (_) {},
+                        title: Text(l10n.settingsAlertRisk),
+                        subtitle: Text(l10n.settingsAlertRiskHint),
+                        value: _pushRiskGe3,
+                        onChanged: (v) async {
+                          final previous = _pushRiskGe3;
+                          setState(() => _pushRiskGe3 = v);
+                          try {
+                            await _notifPrefs.update(pushRiskGe3: v);
+                          } catch (_) {
+                            if (mounted) setState(() => _pushRiskGe3 = previous);
+                          }
+                        },
                       ),
                       SwitchListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text('Home Alerts'),
-                        subtitle: const Text('TRAP and pollen at home location'),
-                        value: true,
-                        onChanged: (_) {},
+                        title: Text(l10n.settingsAlertHome),
+                        subtitle: Text(l10n.settingsAlertHomeHint),
+                        value: _pushHome,
+                        onChanged: (v) async {
+                          final previous = _pushHome;
+                          setState(() => _pushHome = v);
+                          try {
+                            await _notifPrefs.update(
+                              pushSavedLocationChange: v,
+                            );
+                          } catch (_) {
+                            if (mounted) setState(() => _pushHome = previous);
+                          }
+                        },
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 12),
                 _section(
-                  title: 'Security',
+                  title: l10n.settingsSecurityTitle,
                   child: SwitchListTile(
                     contentPadding: EdgeInsets.zero,
                     title: Text(l10n.authBiometricToggle),
@@ -192,49 +293,88 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 const SizedBox(height: 12),
                 _section(
                   title: l10n.settingsLocationLabel,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: const Icon(Icons.place_outlined, color: AppTheme.brand600),
-                    title: Text(l10n.mockLocationsTitle),
-                    subtitle: Text(l10n.settingsLocationTodo),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const LocationsScreen()),
-                      );
-                    },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(locationLabel),
+                      const SizedBox(height: 8),
+                      OutlinedButton(
+                        onPressed: _requestLocation,
+                        child: Text(l10n.mockUseCurrentLocation),
+                      ),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: const Icon(Icons.place_outlined,
+                            color: AppTheme.brand600),
+                        title: Text(l10n.mockLocationsTitle),
+                        subtitle: Text(l10n.mockLocationsHint),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const LocationsScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 12),
                 _section(
-                  title: 'Provider Pairing',
+                  title: l10n.mockEmergencyContact,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(l10n.authInviteCodeHelper, style: const TextStyle(fontSize: 13, color: AppTheme.subtext)),
-                      const SizedBox(height: 12),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: _inviteController,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                                LengthLimitingTextInputFormatter(6),
-                              ],
-                              decoration: InputDecoration(
-                                labelText: l10n.authInviteCodeLabel,
-                              ),
-                            ),
+                      TextField(
+                        controller: _contactNameController,
+                        decoration: InputDecoration(
+                          labelText: l10n.mockContactName,
+                          border: const OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _contactPhoneController,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          labelText: l10n.mockPhoneNumber,
+                          helperText: l10n.emergencyContactPhoneHint,
+                          border: const OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: FilledButton(
+                          onPressed: _savingContact ? null : _saveContact,
+                          child: Text(l10n.emergencyContactSave),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                _section(
+                  title: l10n.mockInviteCode,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _inviteController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(6),
+                          ],
+                          decoration: InputDecoration(
+                            labelText: l10n.authInviteCodeLabel,
                           ),
-                          const SizedBox(width: 8),
-                          FilledButton(
-                            onPressed: _redeeming ? null : _redeemInvite,
-                            child: Text(l10n.authInviteRedeem),
-                          ),
-                        ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      FilledButton(
+                        onPressed: _redeeming ? null : _redeemInvite,
+                        child: Text(l10n.authInviteRedeem),
                       ),
                     ],
                   ),
@@ -242,7 +382,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 const SizedBox(height: 12),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.logout, color: AppTheme.error600),
+                  leading:
+                      const Icon(Icons.logout, color: AppTheme.error600),
                   title: Text(l10n.authSignOut),
                   onTap: () => SupabaseService.client.auth.signOut(),
                 ),

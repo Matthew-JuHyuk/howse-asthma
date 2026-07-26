@@ -1449,6 +1449,438 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Inhaler use logged (stub)'**
   String get oneTapLoggedSnack;
+
+  /// No description provided for @oneTapLoggedOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use logged'**
+  String get oneTapLoggedOk;
+
+  /// No description provided for @oneTapLoggedFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not log inhaler use. Try again.'**
+  String get oneTapLoggedFailed;
+
+  /// No description provided for @homeDailySummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Here is your daily summary'**
+  String get homeDailySummary;
+
+  /// No description provided for @homeWarningBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Elevated risk nearby. Limit outdoor exposure and keep your inhaler ready.'**
+  String get homeWarningBanner;
+
+  /// No description provided for @homeEnvFactors.
+  ///
+  /// In en, this message translates to:
+  /// **'Environmental Factors'**
+  String get homeEnvFactors;
+
+  /// No description provided for @homeViewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View details'**
+  String get homeViewDetails;
+
+  /// No description provided for @homeFloodActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active warning'**
+  String get homeFloodActive;
+
+  /// No description provided for @homeFloodNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get homeFloodNone;
+
+  /// No description provided for @homeLastInhalerNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No inhaler use logged yet'**
+  String get homeLastInhalerNone;
+
+  /// No description provided for @homeLastInhalerToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Last inhaler use: today'**
+  String get homeLastInhalerToday;
+
+  /// No description provided for @homeLastInhalerDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Last inhaler use: {days} days ago'**
+  String homeLastInhalerDays(int days);
+
+  /// No description provided for @locationServiceDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on location services to see nearby asthma risk.'**
+  String get locationServiceDisabled;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is needed for air quality near you.'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @locationPermissionDeniedForever.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is blocked. Open settings to allow it.'**
+  String get locationPermissionDeniedForever;
+
+  /// No description provided for @locationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not get your location. Pull to refresh or try again.'**
+  String get locationUnavailable;
+
+  /// No description provided for @locationOutOfServiceArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Howse Asthma currently supports locations in the United States.'**
+  String get locationOutOfServiceArea;
+
+  /// No description provided for @locationOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get locationOpenSettings;
+
+  /// No description provided for @locationStatusGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'Location access is on'**
+  String get locationStatusGranted;
+
+  /// No description provided for @njOnlyDataNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'NJ-only data: freight AADT weighting applies in New Jersey only. TRAP still uses air-quality sensors nationwide.'**
+  String get njOnlyDataNotice;
+
+  /// No description provided for @homeDegradedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Some air-quality sources are unavailable. Risk may be incomplete — treat with caution.'**
+  String get homeDegradedNotice;
+
+  /// No description provided for @logWeekSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} inhaler events in the last 7 days'**
+  String logWeekSummary(int count);
+
+  /// No description provided for @logFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get logFilterAll;
+
+  /// No description provided for @logFilterRescue.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescue'**
+  String get logFilterRescue;
+
+  /// No description provided for @logFilterPanic.
+  ///
+  /// In en, this message translates to:
+  /// **'Panic'**
+  String get logFilterPanic;
+
+  /// No description provided for @logEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No inhaler events yet. Use 1-Tap on Home.'**
+  String get logEmpty;
+
+  /// No description provided for @logEventRescue.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use'**
+  String get logEventRescue;
+
+  /// No description provided for @logEventPanic.
+  ///
+  /// In en, this message translates to:
+  /// **'Panic inhaler use'**
+  String get logEventPanic;
+
+  /// No description provided for @actTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Asthma Check'**
+  String get actTitle;
+
+  /// No description provided for @actPast4Weeks.
+  ///
+  /// In en, this message translates to:
+  /// **'In the past 4 weeks'**
+  String get actPast4Weeks;
+
+  /// No description provided for @actQ1.
+  ///
+  /// In en, this message translates to:
+  /// **'How much of the time did your asthma keep you from getting as much done at work, school or home?'**
+  String get actQ1;
+
+  /// No description provided for @actQ2.
+  ///
+  /// In en, this message translates to:
+  /// **'How often have you had shortness of breath?'**
+  String get actQ2;
+
+  /// No description provided for @actQ3.
+  ///
+  /// In en, this message translates to:
+  /// **'How often did your asthma symptoms wake you up at night or earlier than usual?'**
+  String get actQ3;
+
+  /// No description provided for @actQ4.
+  ///
+  /// In en, this message translates to:
+  /// **'How often have you used your rescue inhaler or nebulizer medication?'**
+  String get actQ4;
+
+  /// No description provided for @actQ5.
+  ///
+  /// In en, this message translates to:
+  /// **'How would you rate your asthma control?'**
+  String get actQ5;
+
+  /// No description provided for @actOpt1.
+  ///
+  /// In en, this message translates to:
+  /// **'All of the time'**
+  String get actOpt1;
+
+  /// No description provided for @actOpt2.
+  ///
+  /// In en, this message translates to:
+  /// **'Most of the time'**
+  String get actOpt2;
+
+  /// No description provided for @actOpt3.
+  ///
+  /// In en, this message translates to:
+  /// **'Some of the time'**
+  String get actOpt3;
+
+  /// No description provided for @actOpt4.
+  ///
+  /// In en, this message translates to:
+  /// **'A little of the time'**
+  String get actOpt4;
+
+  /// No description provided for @actOpt5.
+  ///
+  /// In en, this message translates to:
+  /// **'None of the time'**
+  String get actOpt5;
+
+  /// No description provided for @actQ5Opt1.
+  ///
+  /// In en, this message translates to:
+  /// **'Not controlled at all'**
+  String get actQ5Opt1;
+
+  /// No description provided for @actQ5Opt2.
+  ///
+  /// In en, this message translates to:
+  /// **'Poorly controlled'**
+  String get actQ5Opt2;
+
+  /// No description provided for @actQ5Opt3.
+  ///
+  /// In en, this message translates to:
+  /// **'Somewhat controlled'**
+  String get actQ5Opt3;
+
+  /// No description provided for @actQ5Opt4.
+  ///
+  /// In en, this message translates to:
+  /// **'Well controlled'**
+  String get actQ5Opt4;
+
+  /// No description provided for @actQ5Opt5.
+  ///
+  /// In en, this message translates to:
+  /// **'Completely controlled'**
+  String get actQ5Opt5;
+
+  /// No description provided for @actSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'ACT saved. Score: {score}'**
+  String actSaved(int score);
+
+  /// No description provided for @pdcTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily medicine check'**
+  String get pdcTitle;
+
+  /// No description provided for @pdcSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily check saved'**
+  String get pdcSaved;
+
+  /// No description provided for @pdcAlreadyYes.
+  ///
+  /// In en, this message translates to:
+  /// **'You already marked today as taken. You can update it.'**
+  String get pdcAlreadyYes;
+
+  /// No description provided for @pdcAlreadyNo.
+  ///
+  /// In en, this message translates to:
+  /// **'You already marked today as not taken. You can update it.'**
+  String get pdcAlreadyNo;
+
+  /// No description provided for @pdcStreakHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 30 days: {taken} of {total} days taken ({rate})'**
+  String pdcStreakHint(int taken, int total, String rate);
+
+  /// No description provided for @panicEmergencyBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'EMERGENCY'**
+  String get panicEmergencyBadge;
+
+  /// No description provided for @panicBreatheTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe & Use Inhaler'**
+  String get panicBreatheTitle;
+
+  /// No description provided for @panicTakeInhalerNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Take Inhaler Now'**
+  String get panicTakeInhalerNow;
+
+  /// No description provided for @panicNeedHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'I need more help'**
+  String get panicNeedHelp;
+
+  /// No description provided for @panicNoAutoDial.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttons open the phone dialer. Calls are never placed automatically.'**
+  String get panicNoAutoDial;
+
+  /// No description provided for @panicCallNamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Call {name}'**
+  String panicCallNamed(String name);
+
+  /// No description provided for @panicDialFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the phone dialer on this device.'**
+  String get panicDialFailed;
+
+  /// No description provided for @alertTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk alert'**
+  String get alertTitle;
+
+  /// No description provided for @alertFcmPendingNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Push delivery needs Firebase setup (coming next). This screen is the in-app alert.'**
+  String get alertFcmPendingNote;
+
+  /// No description provided for @reportEvidenceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary of inhaler use, ACT, and PDC for clinician or insurance review.'**
+  String get reportEvidenceBody;
+
+  /// No description provided for @reportShareTodo.
+  ///
+  /// In en, this message translates to:
+  /// **'Share / export will arrive with provider PA/LMN flow.'**
+  String get reportShareTodo;
+
+  /// No description provided for @settingsAlertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert Preferences'**
+  String get settingsAlertsTitle;
+
+  /// No description provided for @settingsAlertRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk Alerts'**
+  String get settingsAlertRisk;
+
+  /// No description provided for @settingsAlertRiskHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When your composite risk score reaches 3 or higher'**
+  String get settingsAlertRiskHint;
+
+  /// No description provided for @settingsAlertHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Alerts'**
+  String get settingsAlertHome;
+
+  /// No description provided for @settingsAlertHomeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When air quality changes at saved places (Phase 5)'**
+  String get settingsAlertHomeHint;
+
+  /// No description provided for @settingsSecurityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get settingsSecurityTitle;
+
+  /// No description provided for @emergencyContactRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a contact name and phone number'**
+  String get emergencyContactRequired;
+
+  /// No description provided for @emergencyContactInvalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone with country code (E.164), e.g. +15551234567'**
+  String get emergencyContactInvalidPhone;
+
+  /// No description provided for @emergencyContactSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contact saved'**
+  String get emergencyContactSaved;
+
+  /// No description provided for @emergencyContactSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save contact'**
+  String get emergencyContactSave;
+
+  /// No description provided for @emergencyContactPhoneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Include country code (E.164), e.g. +15551234567'**
+  String get emergencyContactPhoneHint;
 }
 
 class _AppLocalizationsDelegate

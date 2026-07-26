@@ -15,7 +15,8 @@ export function aggregateRiskScores(input: {
   trapLevel?: TrapLevel | null;
   pollenUpi?: number | null;
 }): Pick<EnvironmentSnapshot, "risk_score" | "ui_state" | "triggers"> {
-  const aqi = input.aqi ?? 0;
+  // Do not treat missing AQI as 0 (would understate risk as CALM).
+  const aqi = input.aqi;
   const trap = input.trapLevel ?? "LOW";
   const pollen = input.pollenUpi ?? 0;
 
@@ -23,11 +24,14 @@ export function aggregateRiskScores(input: {
 
   if (input.flashFloodActive) {
     score = 4;
-  } else if (aqi > 150 || trap === "CRITICAL") {
+  } else if ((aqi != null && aqi > 150) || trap === "CRITICAL") {
     score = 4;
-  } else if (aqi > 100 || trap === "HIGH" || pollen >= 3) {
+  } else if ((aqi != null && aqi > 100) || trap === "HIGH" || pollen >= 3) {
     score = 3;
-  } else if (aqi > 50 || trap === "MODERATE") {
+  } else if ((aqi != null && aqi > 50) || trap === "MODERATE") {
+    score = 2;
+  } else if (aqi == null && trap === "LOW" && pollen < 3 && !input.flashFloodActive) {
+    // No AQI and no other elevated axes → CAUTION (not CALM) so UI shows degraded.
     score = 2;
   }
 
@@ -38,7 +42,7 @@ export function aggregateRiskScores(input: {
 
   const triggers: EnvironmentTriggers = {
     flash_flood: input.flashFloodActive,
-    air_quality: aqi > 50,
+    air_quality: aqi != null && aqi > 50,
     pollen: pollen >= 3,
     smoke_trap: trap === "HIGH" || trap === "CRITICAL",
   };

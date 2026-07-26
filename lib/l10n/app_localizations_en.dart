@@ -712,4 +712,253 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get oneTapLoggedSnack => 'Inhaler use logged (stub)';
+
+  @override
+  String get oneTapLoggedOk => 'Inhaler use logged';
+
+  @override
+  String get oneTapLoggedFailed => 'Could not log inhaler use. Try again.';
+
+  @override
+  String get homeDailySummary => 'Here is your daily summary';
+
+  @override
+  String get homeWarningBanner =>
+      'Elevated risk nearby. Limit outdoor exposure and keep your inhaler ready.';
+
+  @override
+  String get homeEnvFactors => 'Environmental Factors';
+
+  @override
+  String get homeViewDetails => 'View details';
+
+  @override
+  String get homeFloodActive => 'Active warning';
+
+  @override
+  String get homeFloodNone => 'None';
+
+  @override
+  String get homeLastInhalerNone => 'No inhaler use logged yet';
+
+  @override
+  String get homeLastInhalerToday => 'Last inhaler use: today';
+
+  @override
+  String homeLastInhalerDays(int days) {
+    return 'Last inhaler use: $days days ago';
+  }
+
+  @override
+  String get locationServiceDisabled =>
+      'Turn on location services to see nearby asthma risk.';
+
+  @override
+  String get locationPermissionDenied =>
+      'Location permission is needed for air quality near you.';
+
+  @override
+  String get locationPermissionDeniedForever =>
+      'Location permission is blocked. Open settings to allow it.';
+
+  @override
+  String get locationUnavailable =>
+      'Could not get your location. Pull to refresh or try again.';
+
+  @override
+  String get locationOutOfServiceArea =>
+      'Howse Asthma currently supports locations in the United States.';
+
+  @override
+  String get locationOpenSettings => 'Open settings';
+
+  @override
+  String get locationStatusGranted => 'Location access is on';
+
+  @override
+  String get njOnlyDataNotice =>
+      'NJ-only data: freight AADT weighting applies in New Jersey only. TRAP still uses air-quality sensors nationwide.';
+
+  @override
+  String get homeDegradedNotice =>
+      'Some air-quality sources are unavailable. Risk may be incomplete — treat with caution.';
+
+  @override
+  String logWeekSummary(int count) {
+    return '$count inhaler events in the last 7 days';
+  }
+
+  @override
+  String get logFilterAll => 'All';
+
+  @override
+  String get logFilterRescue => 'Rescue';
+
+  @override
+  String get logFilterPanic => 'Panic';
+
+  @override
+  String get logEmpty => 'No inhaler events yet. Use 1-Tap on Home.';
+
+  @override
+  String get logEventRescue => 'Inhaler use';
+
+  @override
+  String get logEventPanic => 'Panic inhaler use';
+
+  @override
+  String get actTitle => 'Asthma Check';
+
+  @override
+  String get actPast4Weeks => 'In the past 4 weeks';
+
+  @override
+  String get actQ1 =>
+      'How much of the time did your asthma keep you from getting as much done at work, school or home?';
+
+  @override
+  String get actQ2 => 'How often have you had shortness of breath?';
+
+  @override
+  String get actQ3 =>
+      'How often did your asthma symptoms wake you up at night or earlier than usual?';
+
+  @override
+  String get actQ4 =>
+      'How often have you used your rescue inhaler or nebulizer medication?';
+
+  @override
+  String get actQ5 => 'How would you rate your asthma control?';
+
+  @override
+  String get actOpt1 => 'All of the time';
+
+  @override
+  String get actOpt2 => 'Most of the time';
+
+  @override
+  String get actOpt3 => 'Some of the time';
+
+  @override
+  String get actOpt4 => 'A little of the time';
+
+  @override
+  String get actOpt5 => 'None of the time';
+
+  @override
+  String get actQ5Opt1 => 'Not controlled at all';
+
+  @override
+  String get actQ5Opt2 => 'Poorly controlled';
+
+  @override
+  String get actQ5Opt3 => 'Somewhat controlled';
+
+  @override
+  String get actQ5Opt4 => 'Well controlled';
+
+  @override
+  String get actQ5Opt5 => 'Completely controlled';
+
+  @override
+  String actSaved(int score) {
+    return 'ACT saved. Score: $score';
+  }
+
+  @override
+  String get pdcTitle => 'Daily medicine check';
+
+  @override
+  String get pdcSaved => 'Daily check saved';
+
+  @override
+  String get pdcAlreadyYes =>
+      'You already marked today as taken. You can update it.';
+
+  @override
+  String get pdcAlreadyNo =>
+      'You already marked today as not taken. You can update it.';
+
+  @override
+  String pdcStreakHint(int taken, int total, String rate) {
+    return 'Last 30 days: $taken of $total days taken ($rate)';
+  }
+
+  @override
+  String get panicEmergencyBadge => 'EMERGENCY';
+
+  @override
+  String get panicBreatheTitle => 'Breathe & Use Inhaler';
+
+  @override
+  String get panicTakeInhalerNow => 'Take Inhaler Now';
+
+  @override
+  String get panicNeedHelp => 'I need more help';
+
+  @override
+  String get panicNoAutoDial =>
+      'Buttons open the phone dialer. Calls are never placed automatically.';
+
+  @override
+  String panicCallNamed(String name) {
+    return 'Call $name';
+  }
+
+  @override
+  String get panicDialFailed =>
+      'Could not open the phone dialer on this device.';
+
+  @override
+  String get alertTitle => 'Risk alert';
+
+  @override
+  String get alertFcmPendingNote =>
+      'Push delivery needs Firebase setup (coming next). This screen is the in-app alert.';
+
+  @override
+  String get reportEvidenceBody =>
+      'Summary of inhaler use, ACT, and PDC for clinician or insurance review.';
+
+  @override
+  String get reportShareTodo =>
+      'Share / export will arrive with provider PA/LMN flow.';
+
+  @override
+  String get settingsAlertsTitle => 'Alert Preferences';
+
+  @override
+  String get settingsAlertRisk => 'Risk Alerts';
+
+  @override
+  String get settingsAlertRiskHint =>
+      'When your composite risk score reaches 3 or higher';
+
+  @override
+  String get settingsAlertHome => 'Home Alerts';
+
+  @override
+  String get settingsAlertHomeHint =>
+      'When air quality changes at saved places (Phase 5)';
+
+  @override
+  String get settingsSecurityTitle => 'Security';
+
+  @override
+  String get emergencyContactRequired =>
+      'Enter a contact name and phone number';
+
+  @override
+  String get emergencyContactInvalidPhone =>
+      'Enter a valid phone with country code (E.164), e.g. +15551234567';
+
+  @override
+  String get emergencyContactSaved => 'Emergency contact saved';
+
+  @override
+  String get emergencyContactSave => 'Save contact';
+
+  @override
+  String get emergencyContactPhoneHint =>
+      'Include country code (E.164), e.g. +15551234567';
 }

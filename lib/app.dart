@@ -20,6 +20,12 @@ class _HowseAsthmaAppState extends State<HowseAsthmaApp> {
   final _localeController = LocaleController();
 
   @override
+  void initState() {
+    super.initState();
+    _localeController.load();
+  }
+
+  @override
   void dispose() {
     _localeController.dispose();
     super.dispose();
@@ -29,7 +35,7 @@ class _HowseAsthmaAppState extends State<HowseAsthmaApp> {
   Widget build(BuildContext context) {
     return AppLocaleScope(
       controller: _localeController,
-      child: ValueListenableBuilder<Locale?>(
+      child: ValueListenableBuilder<Locale>(
         valueListenable: _localeController,
         builder: (context, locale, _) {
           return MaterialApp(

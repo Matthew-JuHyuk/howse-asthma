@@ -10,7 +10,7 @@ import {
 import { isCircuitOpen, tripCircuit } from "../_shared/circuit_breaker.ts";
 import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
 import { encodeGeohash } from "../_shared/geohash.ts";
-import { isInServiceArea } from "../_shared/geo_bounds.ts";
+import { isInNewJersey, isInServiceArea } from "../_shared/geo_bounds.ts";
 import { checkAndRecordEnvRiskRate } from "../_shared/rate_limit.ts";
 import { isCircuitTripError } from "../_shared/source_errors.ts";
 import type {
@@ -128,6 +128,7 @@ Deno.serve(async (req) => {
 
   const recentPollen = await readRecentPollen(admin, query);
   const skipPollenApi = recentPollen != null;
+  const inNewJersey = isInNewJersey(query.latitude, query.longitude);
 
   const settled = await Promise.allSettled([
     guardedSource(admin, "nws", () => fetchNwsAlerts(query)),
@@ -150,7 +151,16 @@ Deno.serve(async (req) => {
       }>)
       : guardedSource(admin, "google_pollen", () => fetchGooglePollen(query)),
     guardedSource(admin, "usgs", () => fetchUsgs(query)),
-    guardedSource(admin, "njdot", () => queryNjdotNearbyAadt(query)),
+    inNewJersey
+      ? guardedSource(admin, "njdot", () => queryNjdotNearbyAadt(query))
+      : Promise.resolve({
+        source: "njdot",
+        ok: true,
+        data: { near_freight: false, skipped_outside_nj: true },
+      } satisfies SourceResult<{
+        near_freight?: boolean;
+        skipped_outside_nj?: boolean;
+      }>),
   ]);
 
   const summary: Record<string, string> = {};
@@ -222,8 +232,13 @@ Deno.serve(async (req) => {
       if (d.stream_rate_ft_hr != null) streamRate = d.stream_rate_ft_hr;
     }
     if (src.source === "njdot") {
-      const d = src.data as { near_freight?: boolean };
-      nearFreight = Boolean(d.near_freight);
+      const d = src.data as {
+        near_freight?: boolean;
+        skipped_outside_nj?: boolean;
+      };
+      if (!d.skipped_outside_nj) {
+        nearFreight = Boolean(d.near_freight);
+      }
     }
   }
 
@@ -277,6 +292,7 @@ Deno.serve(async (req) => {
 
   const degraded = isDegraded(summary, aqi);
 
+  const njdotApplied = inNewJersey && nearFreight;
   const snapshot: EnvironmentSnapshot = {
     ...aggregated,
     geohash,
@@ -292,15 +308,29 @@ Deno.serve(async (req) => {
     flood_alert_headline: floodHeadline,
     usgs_stream_rate_ft_hr: streamRate,
     data_source_summary: summary,
+    source_coverage: {
+      njdot: {
+        scope: "NJ_ONLY",
+        applied: njdotApplied,
+        reason: !inNewJersey
+          ? "outside_nj"
+          : nearFreight
+          ? "freight_aadt_weight"
+          : "no_nearby_freight_count",
+      },
+    },
     from_cache: false,
     from_stale_cache: false,
     degraded,
     pollen_fetched_at: pollenFetchedAt,
   };
 
-  await writeForecastCache(admin, query, snapshot);
+  const forecastId = await writeForecastCache(admin, query, snapshot);
 
-  return jsonResponse(snapshot);
+  return jsonResponse({
+    ...snapshot,
+    forecast_id: forecastId ?? undefined,
+  });
 });
 
 /* Deploy / invoke:

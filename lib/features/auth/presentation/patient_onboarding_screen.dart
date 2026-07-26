@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/biometrics/biometric_prefs.dart';
+import '../../../core/location/location_service.dart';
+import '../../../core/phone/phone_e164.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../home/presentation/home_shell.dart';
+import '../../settings/data/emergency_contact_repository.dart';
 import '../data/care_link_repository.dart';
 
 /// SCR-ONB-01 — patient onboarding (basic design reference layout).
@@ -28,11 +31,14 @@ class _PatientOnboardingScreenState extends State<PatientOnboardingScreen> {
   final _contactNameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _careLinks = CareLinkRepository();
+  final _contacts = EmergencyContactRepository();
+  final _location = const LocationService();
   String _languageCode = 'en';
   String _placeLabel = 'Home';
   bool _busy = false;
   String? _message;
   bool _isError = false;
+  String? _locationHint;
 
   static const _langs = ['en', 'es', 'fr', 'ko', 'ja', 'zh'];
 
@@ -72,8 +78,13 @@ class _PatientOnboardingScreenState extends State<PatientOnboardingScreen> {
           }
         }
       }
+      final name = _contactNameController.text.trim();
+      final phone = PhoneE164.normalize(_phoneController.text);
+      if (name.isNotEmpty && phone != null) {
+        await _contacts.upsert(displayName: name, phoneE164: phone);
+      }
       if (!mounted) return;
-      AppLocaleScope.of(context).setLocale(Locale(_languageCode));
+      await AppLocaleScope.of(context).setLocale(Locale(_languageCode));
       await BiometricPrefs.setPatientOnboardingDone(widget.userId, true);
       if (!mounted) return;
       widget.onFinished();
@@ -126,14 +137,31 @@ class _PatientOnboardingScreenState extends State<PatientOnboardingScreen> {
           ),
           const SizedBox(height: 8),
           FilledButton.icon(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.mockUseCurrentLocation)),
-              );
-            },
+            onPressed: _busy
+                ? null
+                : () async {
+                    final result = await _location.getCurrentPosition();
+                    if (!mounted) return;
+                    setState(() {
+                      if (result.isOk) {
+                        _locationHint =
+                            '${result.position!.latitude.toStringAsFixed(4)}, '
+                            '${result.position!.longitude.toStringAsFixed(4)}';
+                      } else {
+                        _locationHint = result.failure?.name;
+                      }
+                    });
+                  },
             icon: const Icon(Icons.my_location),
             label: Text(l10n.mockUseCurrentLocation),
           ),
+          if (_locationHint != null) ...[
+            const SizedBox(height: 4),
+            Text(
+              _locationHint!,
+              style: const TextStyle(color: AppTheme.brand700, fontSize: 12),
+            ),
+          ],
           const SizedBox(height: 4),
           Text(
             l10n.mockLocationTrapOnly,

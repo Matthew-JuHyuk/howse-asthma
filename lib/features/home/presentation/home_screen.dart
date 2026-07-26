@@ -1,269 +1,508 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/location/location_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../alerts/presentation/alert_screen.dart';
+import '../../environment/data/environment_risk_repository.dart';
+import '../../environment/data/environment_snapshot.dart';
 import '../../environment/presentation/env_screen.dart';
+import '../../medication_log/data/inhaler_event_repository.dart';
 import '../../panic/presentation/panic_screen.dart';
 
-/// SCR-PAT-HOME calm layout: brand header, risk card, Environmental Factors
-/// (3 rows), last inhaler. 1-Tap FAB lives on [HomeShell].
-class HomeScreen extends StatelessWidget {
+/// SCR-PAT-HOME — binds Edge risk + location (WBS 4.1–4.2a).
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-    return Scaffold(
-      backgroundColor: AppTheme.defaultBackground,
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 120),
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppTheme.brand600,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(Icons.air, color: Colors.white, size: 22),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.appTitle,
-                        style: const TextStyle(fontWeight: FontWeight.w700, color: AppTheme.brand700),
-                      ),
-                      const Text(
-                        'SCR-PAT-HOME',
-                        style: TextStyle(fontSize: 11, color: AppTheme.neutral400),
-                      ),
-                    ],
-                  ),
-                ),
-                CircleAvatar(
-                  backgroundColor: AppTheme.neutral100,
-                  child: IconButton(
-                    icon: const Icon(Icons.notifications_outlined, color: AppTheme.neutral500),
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Text(
-              l10n.homeGreeting,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-            ),
-            const Text(
-              'Here is your daily summary',
-              style: TextStyle(color: AppTheme.subtext),
-            ),
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const EnvScreen()),
-                );
-              },
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  color: AppTheme.brand50,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppTheme.brand200),
-                ),
-                child: Row(
-                  children: [
-                    const CircleAvatar(
-                      backgroundColor: AppTheme.brand100,
-                      child: Icon(Icons.show_chart, color: AppTheme.brand600),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                l10n.mockStateCalm,
-                                style: const TextStyle(fontWeight: FontWeight.w700, color: AppTheme.brand700),
-                              ),
-                              const SizedBox(width: 8),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: AppTheme.brand600,
-                                  borderRadius: BorderRadius.circular(99),
-                                ),
-                                child: const Text(
-                                  'Score 1',
-                                  style: TextStyle(color: Colors.white, fontSize: 11),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            l10n.asthmaRiskLow,
-                            style: const TextStyle(fontSize: 12, color: AppTheme.brand700),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Icon(Icons.chevron_right, color: AppTheme.brand400),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Environmental Factors',
-              style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.neutral700),
-            ),
-            const SizedBox(height: 12),
-            _factor(
-              context,
-              icon: Icons.apartment_outlined,
-              title: 'TRAP',
-              level: 'Low',
-              detail: 'Air-quality proxy — not truck counts',
-              filled: 1,
-              color: AppTheme.brand600,
-            ),
-            const SizedBox(height: 10),
-            _factor(
-              context,
-              icon: Icons.flood_outlined,
-              title: 'Flood',
-              level: 'None',
-              detail: 'No flood advisory in your area',
-              filled: 1,
-              color: AppTheme.brand600,
-            ),
-            const SizedBox(height: 10),
-            _factor(
-              context,
-              icon: Icons.grass_outlined,
-              title: 'Pollen',
-              level: 'Moderate',
-              detail: 'Tree pollen is elevated today',
-              filled: 3,
-              color: AppTheme.warning600,
-            ),
-            const SizedBox(height: 16),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.schedule, size: 16, color: AppTheme.neutral400),
-                SizedBox(width: 6),
-                Text(
-                  'Last inhaler use: 2 days ago',
-                  style: TextStyle(fontSize: 12, color: AppTheme.neutral400),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            OutlinedButton.icon(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const PanicScreen()),
-                );
-              },
-              icon: const Icon(Icons.emergency_outlined, color: AppTheme.error500),
-              label: Text(l10n.mockPanicCta, style: const TextStyle(color: AppTheme.error600)),
-            ),
-          ],
-        ),
+class _HomeScreenState extends State<HomeScreen> {
+  final _location = const LocationService();
+  final _riskRepo = EnvironmentRiskRepository();
+  final _inhalerRepo = InhalerEventRepository();
+
+  bool _loading = true;
+  String? _errorCode;
+  EnvironmentSnapshot? _snapshot;
+  DateTime? _lastInhalerAt;
+  bool _alertOffered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  bool _refreshing = false;
+
+  Future<void> _refresh() async {
+    if (_refreshing) return;
+    _refreshing = true;
+    setState(() {
+      _loading = true;
+      _errorCode = null;
+    });
+
+    try {
+      final loc = await _location.getCurrentPosition();
+      if (!mounted) return;
+
+      if (!loc.isOk) {
+        setState(() {
+          _loading = false;
+          _errorCode = loc.failure?.name ?? 'unavailable';
+          _snapshot = null;
+        });
+        return;
+      }
+
+      try {
+        final snap = await _riskRepo.fetchRisk(
+          latitude: loc.position!.latitude,
+          longitude: loc.position!.longitude,
+        );
+        final last = await _inhalerRepo.latestRecordedAt();
+        if (!mounted) return;
+        setState(() {
+          _snapshot = snap;
+          _lastInhalerAt = last;
+          _loading = false;
+        });
+        await _maybeNotifyAndOfferAlert(
+          snap,
+          loc.position!.latitude,
+          loc.position!.longitude,
+        );
+      } on EnvironmentRiskException catch (e) {
+        if (!mounted) return;
+        setState(() {
+          _loading = false;
+          _errorCode = e.code;
+        });
+      } catch (_) {
+        if (!mounted) return;
+        setState(() {
+          _loading = false;
+          _errorCode = 'server_error';
+        });
+      }
+    } finally {
+      _refreshing = false;
+    }
+  }
+
+  Future<void> _maybeNotifyAndOfferAlert(
+    EnvironmentSnapshot snap,
+    double lat,
+    double lon,
+  ) async {
+    if (!snap.isWarningOrAbove) {
+      _alertOffered = false;
+      return;
+    }
+    if (_alertOffered) return;
+    _alertOffered = true;
+    try {
+      // Server recomputes risk from cache; client scores are not trusted.
+      await _riskRepo.notifyRiskThreshold(
+        latitude: lat,
+        longitude: lon,
+      );
+    } catch (_) {
+      // Cooldown / no forecast — still show in-app landing when UI is elevated.
+    }
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => AlertScreen(snapshot: snap),
       ),
     );
   }
 
-  Widget _factor(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required String level,
-    required String detail,
-    required int filled,
-    required Color color,
-  }) {
-    return Material(
-      color: AppTheme.neutral0,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const EnvScreen()),
-          );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppTheme.neutral200),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+  String _riskCaption(AppLocalizations l10n, int score) {
+    if (score <= 1) return l10n.asthmaRiskLow;
+    if (score == 2) return l10n.asthmaRiskModerate;
+    return l10n.asthmaRiskHigh;
+  }
+
+  String _axisLevel(String? level, bool flood) {
+    if (flood) return 'Active';
+    return level ?? '—';
+  }
+
+  String _lastInhalerLabel(AppLocalizations l10n) {
+    final at = _lastInhalerAt?.toLocal();
+    if (at == null) return l10n.homeLastInhalerNone;
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final day = DateTime(at.year, at.month, at.day);
+    final days = today.difference(day).inDays;
+    if (days <= 0) return l10n.homeLastInhalerToday;
+    return l10n.homeLastInhalerDays(days);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final snap = _snapshot;
+    final warning = snap?.isWarningOrAbove ?? false;
+    final stateLabel = snap?.uiState ?? 'CALM';
+
+    return Scaffold(
+      backgroundColor: AppTheme.defaultBackground,
+      body: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: _refresh,
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 120),
             children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(icon, color: color),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
+              Row(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppTheme.brand600,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.air, color: Colors.white, size: 22),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
+                        Text(
+                          l10n.appTitle,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.brand700,
+                          ),
                         ),
-                        Container(
-                          width: 8,
-                          height: 8,
-                          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                        Text(
+                          'SCR-PAT-HOME',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: AppTheme.neutral400,
+                          ),
                         ),
-                        const SizedBox(width: 6),
-                        Text(level, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: color)),
                       ],
                     ),
-                    const SizedBox(height: 4),
-                    Text(detail, style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: List.generate(5, (i) {
-                        return Expanded(
-                          child: Container(
-                            height: 6,
-                            margin: EdgeInsets.only(right: i == 4 ? 0 : 4),
-                            decoration: BoxDecoration(
-                              color: i < filled ? color : AppTheme.neutral200,
-                              borderRadius: BorderRadius.circular(99),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.refresh),
+                    onPressed: _loading ? null : _refresh,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Text(
+                l10n.homeGreeting,
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+              ),
+              Text(
+                l10n.homeDailySummary,
+                style: const TextStyle(color: AppTheme.subtext),
+              ),
+              if (warning) ...[
+                const SizedBox(height: 12),
+                Material(
+                  color: const Color(0xFFFFF7ED),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.warning_amber_rounded,
+                            color: AppTheme.warning600),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            l10n.homeWarningBanner,
+                            style: const TextStyle(
+                              color: AppTheme.neutral800,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                        );
-                      }),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
+              const SizedBox(height: 16),
+              if (_loading)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 40),
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              else if (_errorCode != null)
+                _LocationErrorCard(
+                  code: _errorCode!,
+                  onRetry: _refresh,
+                  onOpenSettings: () => _location.openAppSettings(),
+                )
+              else if (snap != null) ...[
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const EnvScreen()),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                    decoration: BoxDecoration(
+                      color: warning
+                          ? const Color(0xFFFFF7ED)
+                          : AppTheme.brand50,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: warning
+                            ? const Color(0xFFFDBA74)
+                            : AppTheme.brand200,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: warning
+                              ? const Color(0xFFFED7AA)
+                              : AppTheme.brand100,
+                          child: Icon(
+                            warning
+                                ? Icons.warning_amber_rounded
+                                : Icons.show_chart,
+                            color: warning
+                                ? AppTheme.warning600
+                                : AppTheme.brand600,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    stateLabel,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: warning
+                                          ? AppTheme.warning600
+                                          : AppTheme.brand700,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    '${l10n.mockRiskScore} ${snap.riskScore}',
+                                    style: const TextStyle(
+                                      color: AppTheme.subtext,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                _riskCaption(l10n, snap.riskScore),
+                                style: const TextStyle(
+                                  color: AppTheme.neutral700,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.chevron_right,
+                            color: AppTheme.neutral400),
+                      ],
+                    ),
+                  ),
+                ),
+                if (snap.degraded) ...[
+                  const SizedBox(height: 10),
+                  Text(
+                    l10n.homeDegradedNotice,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppTheme.warning600,
+                    ),
+                  ),
+                ],
+                if (snap.showNjOnlyFreightNotice) ...[
+                  const SizedBox(height: 10),
+                  Text(
+                    l10n.njOnlyDataNotice,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppTheme.neutral500,
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 20),
+                Text(
+                  l10n.homeEnvFactors,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                _FactorRow(
+                  icon: Icons.local_shipping_outlined,
+                  title: l10n.mockTrapAxis,
+                  value: _axisLevel(snap.trapLevel, false),
+                ),
+                _FactorRow(
+                  icon: Icons.flood_outlined,
+                  title: l10n.mockFloodAxis,
+                  value: snap.hasFlashFloodWarning
+                      ? l10n.homeFloodActive
+                      : l10n.homeFloodNone,
+                ),
+                _FactorRow(
+                  icon: Icons.grass_outlined,
+                  title: l10n.mockPollenAxis,
+                  value: snap.pollenUpi != null
+                      ? 'UPI ${snap.pollenUpi}'
+                      : '—',
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _lastInhalerLabel(l10n),
+                  style: const TextStyle(color: AppTheme.subtext, fontSize: 13),
+                ),
+                if (warning) ...[
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const EnvScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(l10n.homeViewDetails),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: FilledButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: AppTheme.error600,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const PanicScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(l10n.mockPanicCta),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ],
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FactorRow extends StatelessWidget {
+  const _FactorRow({
+    required this.icon,
+    required this.title,
+    required this.value,
+  });
+
+  final IconData icon;
+  final String title;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: Icon(icon, color: AppTheme.brand600),
+      title: Text(title),
+      trailing: Text(
+        value,
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+}
+
+class _LocationErrorCard extends StatelessWidget {
+  const _LocationErrorCard({
+    required this.code,
+    required this.onRetry,
+    required this.onOpenSettings,
+  });
+
+  final String code;
+  final VoidCallback onRetry;
+  final VoidCallback onOpenSettings;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    String message;
+    switch (code) {
+      case 'serviceDisabled':
+        message = l10n.locationServiceDisabled;
+      case 'permissionDenied':
+        message = l10n.locationPermissionDenied;
+      case 'permissionDeniedForever':
+        message = l10n.locationPermissionDeniedForever;
+      case 'out_of_service_area':
+        message = l10n.locationOutOfServiceArea;
+      default:
+        message = l10n.locationUnavailable;
+    }
+
+    return Material(
+      color: AppTheme.neutral0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: AppTheme.neutral200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(message),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 8,
+              children: [
+                FilledButton(onPressed: onRetry, child: Text(l10n.authRetry)),
+                if (code == 'permissionDeniedForever' ||
+                    code == 'serviceDisabled')
+                  OutlinedButton(
+                    onPressed: onOpenSettings,
+                    child: Text(l10n.locationOpenSettings),
+                  ),
+              ],
+            ),
+          ],
         ),
       ),
     );

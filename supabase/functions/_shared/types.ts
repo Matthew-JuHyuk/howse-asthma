@@ -16,6 +16,13 @@ export type EnvironmentTriggers = {
   smoke_trap: boolean;
 };
 
+export type SourceCoverageEntry = {
+  /** e.g. NJ_ONLY — UI must show state-limited notice when not applied. */
+  scope: "NJ_ONLY" | "US" | "GLOBAL";
+  applied: boolean;
+  reason?: string;
+};
+
 export type EnvironmentSnapshot = {
   risk_score: 1 | 2 | 3 | 4;
   ui_state: UiState;
@@ -33,6 +40,10 @@ export type EnvironmentSnapshot = {
   flood_alert_headline?: string | null;
   usgs_stream_rate_ft_hr?: number | null;
   data_source_summary?: Record<string, string>;
+  /** Per-source coverage meta for UI badges (PAT-01 / 4.2a). */
+  source_coverage?: Record<string, SourceCoverageEntry>;
+  /** Row id in environment_forecasts when available. */
+  forecast_id?: string;
   /** True when served from environment_forecasts cache. */
   from_cache?: boolean;
   /** True when served past TTL (soft stale) after upstream failures / rate limits. */

@@ -18,6 +18,7 @@ function rowToSnapshot(
   } | null)?.triggers;
   const raw = row.raw_response as {
     data_source_summary?: Record<string, string>;
+    source_coverage?: EnvironmentSnapshot["source_coverage"];
     pollen_fetched_at?: string;
     degraded?: boolean;
   } | null;
@@ -31,6 +32,7 @@ function rowToSnapshot(
       pollen: Number(row.pollen_upi ?? 0) >= 3,
       smoke_trap: row.trap_level === "HIGH" || row.trap_level === "CRITICAL",
     },
+    forecast_id: row.id as string | undefined,
     geohash: row.geohash as string,
     aqi_epa: row.aqi_epa as number | null,
     aqi_source: row.aqi_source as string | null,
@@ -46,6 +48,7 @@ function rowToSnapshot(
       ? Number(row.usgs_stream_rate_ft_hr)
       : null,
     data_source_summary: raw?.data_source_summary,
+    source_coverage: raw?.source_coverage,
     from_cache: true,
     from_stale_cache: opts?.from_stale_cache ?? false,
     degraded: Boolean(raw?.degraded) || Boolean(opts?.from_stale_cache),
@@ -152,14 +155,14 @@ export async function writeForecastCache(
   admin: Admin,
   query: LocationQuery,
   snapshot: EnvironmentSnapshot,
-): Promise<void> {
+): Promise<string | null> {
   const geohash = encodeGeohash(query.latitude, query.longitude, 5);
   const ttlMin = snapshot.has_flash_flood_warning
     ? CACHE_TTL.flashFloodMinutes
     : CACHE_TTL.defaultMinutes;
   const expiresAt = new Date(Date.now() + ttlMin * 60_000).toISOString();
 
-  const { error } = await admin.from("environment_forecasts").insert({
+  const { data, error } = await admin.from("environment_forecasts").insert({
     geohash,
     latitude: query.latitude,
     longitude: query.longitude,
@@ -181,12 +184,15 @@ export async function writeForecastCache(
     raw_response: {
       triggers: snapshot.triggers,
       data_source_summary: snapshot.data_source_summary,
+      source_coverage: snapshot.source_coverage,
       pollen_fetched_at: snapshot.pollen_fetched_at,
       degraded: snapshot.degraded ?? false,
     },
-  });
+  }).select("id").single();
 
   if (error) {
     console.error("[cache] write error", error.message);
+    return null;
   }
+  return (data?.id as string | undefined) ?? null;
 }

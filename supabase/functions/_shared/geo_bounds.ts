@@ -48,3 +48,15 @@ export function isInServiceArea(latitude: number, longitude: number): boolean {
   }
   return false;
 }
+
+/** Approximate NJ state bbox for NJDOT AADT (NJ-only freight weight). */
+export const NJ_BOUNDS: LatLonBox = {
+  minLat: 38.85,
+  maxLat: 41.45,
+  minLon: -75.6,
+  maxLon: -73.85,
+};
+
+export function isInNewJersey(latitude: number, longitude: number): boolean {
+  return inBox(latitude, longitude, NJ_BOUNDS);
+}

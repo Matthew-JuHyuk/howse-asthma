@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
+import '../data/act_repository.dart';
 
-/// SCR-PAT-ACT — Asthma Control Test (pictogram / 5 questions). Stub UI.
+/// SCR-PAT-ACT — 5-question Asthma Control Test → `act_assessments`.
 class ActScreen extends StatefulWidget {
   const ActScreen({super.key});
 
@@ -12,26 +13,83 @@ class ActScreen extends StatefulWidget {
 }
 
 class _ActScreenState extends State<ActScreen> {
-  int? _selected;
+  final _repo = ActRepository();
+  int _index = 0;
+  final List<int?> _answers = List<int?>.filled(5, null);
+  bool _saving = false;
 
-  static const _options = [
-    ('All the time', '1 point'),
-    ('Most of the time', '2 points'),
-    ('Some of the time', '3 points'),
-    ('A little of the time', '4 points'),
-    ('Not at all', '5 points'),
-  ];
+  List<String> _questions(AppLocalizations l10n) => [
+        l10n.actQ1,
+        l10n.actQ2,
+        l10n.actQ3,
+        l10n.actQ4,
+        l10n.actQ5,
+      ];
+
+  /// Q1–Q4: frequency; Q5: control rating (still scored 1–5).
+  List<String> _optionsForQuestion(AppLocalizations l10n, int questionIndex) {
+    if (questionIndex == 4) {
+      return [
+        l10n.actQ5Opt1,
+        l10n.actQ5Opt2,
+        l10n.actQ5Opt3,
+        l10n.actQ5Opt4,
+        l10n.actQ5Opt5,
+      ];
+    }
+    return [
+      l10n.actOpt1,
+      l10n.actOpt2,
+      l10n.actOpt3,
+      l10n.actOpt4,
+      l10n.actOpt5,
+    ];
+  }
+
+  Future<void> _submit() async {
+    final l10n = AppLocalizations.of(context)!;
+    if (_answers.any((a) => a == null)) return;
+    setState(() => _saving = true);
+    try {
+      final lang = Localizations.localeOf(context).languageCode;
+      final row = await _repo.submit(
+        answers: _answers.cast<int>(),
+        languageUsed: lang,
+      );
+      if (!mounted) return;
+      final total = row['total_score'];
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.actSaved(total as int))),
+      );
+      Navigator.of(context).pop(true);
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.authErrorGeneric)),
+      );
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final questions = _questions(l10n);
+    final options = _optionsForQuestion(l10n, _index);
+    final selected = _answers[_index];
+
     return Scaffold(
       backgroundColor: AppTheme.defaultBackground,
       appBar: AppBar(
-        title: const Column(
+        title: Column(
           children: [
-            Text('Asthma Check', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            Text('SCR-PAT-ACT', style: TextStyle(fontSize: 11, color: AppTheme.neutral400)),
+            Text(l10n.actTitle,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            const Text(
+              'SCR-PAT-ACT',
+              style: TextStyle(fontSize: 11, color: AppTheme.neutral400),
+            ),
           ],
         ),
       ),
@@ -39,65 +97,76 @@ class _ActScreenState extends State<ActScreen> {
         padding: const EdgeInsets.all(20),
         children: [
           Text(
-            '${l10n.mockQuestion} 1 of 5',
+            '${l10n.mockQuestion} ${_index + 1} of 5',
             style: const TextStyle(fontSize: 12, color: AppTheme.brand600),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'How much did asthma limit your activities?',
+          Text(
+            questions[_index],
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'In the past 4 weeks',
+          Text(
+            l10n.actPast4Weeks,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppTheme.subtext),
+            style: const TextStyle(color: AppTheme.subtext),
           ),
           const SizedBox(height: 20),
-          for (var i = 0; i < _options.length; i++)
+          for (var i = 0; i < options.length; i++)
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Material(
-                color: _selected == i ? AppTheme.brand50 : AppTheme.neutral0,
+                color: selected == (i + 1) ? AppTheme.brand50 : AppTheme.neutral0,
                 borderRadius: BorderRadius.circular(12),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
-                  onTap: () => setState(() => _selected = i),
+                  onTap: () => setState(() => _answers[_index] = i + 1),
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: _selected == i ? AppTheme.brand600 : AppTheme.neutral200,
-                        width: _selected == i ? 2 : 1,
+                        color: selected == (i + 1)
+                            ? AppTheme.brand600
+                            : AppTheme.neutral200,
+                        width: selected == (i + 1) ? 2 : 1,
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(_options[i].$1, style: const TextStyle(fontWeight: FontWeight.w700)),
-                              Text(_options[i].$2, style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
-                            ],
-                          ),
-                        ),
-                        Icon(
-                          _selected == i ? Icons.check_circle : Icons.circle_outlined,
-                          color: _selected == i ? AppTheme.brand600 : AppTheme.neutral300,
-                        ),
-                      ],
+                    child: Text(
+                      options[i],
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
               ),
             ),
-          const SizedBox(height: 8),
-          FilledButton(
-            onPressed: _selected == null ? null : () => Navigator.pop(context),
-            child: const Text('Next'),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              if (_index > 0)
+                OutlinedButton(
+                  onPressed: _saving
+                      ? null
+                      : () => setState(() => _index -= 1),
+                  child: Text(l10n.mockBackToCalmHome),
+                ),
+              const Spacer(),
+              FilledButton(
+                onPressed: _saving || selected == null
+                    ? null
+                    : () {
+                        if (_index < 4) {
+                          setState(() => _index += 1);
+                        } else {
+                          _submit();
+                        }
+                      },
+                child: Text(
+                  _index < 4 ? l10n.mockNext : l10n.mockSubmit,
+                ),
+              ),
+            ],
           ),
         ],
       ),

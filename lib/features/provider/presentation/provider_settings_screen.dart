@@ -62,7 +62,7 @@ class _ProviderSettingsScreenState extends State<ProviderSettingsScreen> {
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : ValueListenableBuilder<Locale?>(
+          : ValueListenableBuilder<Locale>(
               valueListenable: widget.localeController,
               builder: (context, currentLocale, _) {
                 return ListView(
@@ -70,28 +70,23 @@ class _ProviderSettingsScreenState extends State<ProviderSettingsScreen> {
                     ListTile(
                       title: Text(l10n.settingsLanguageLabel),
                       subtitle: Text(
-                        currentLocale == null
-                            ? l10n.settingsSystemDefault
-                            : localeDisplayNames[currentLocale.languageCode] ??
-                                currentLocale.languageCode,
+                        localeDisplayNames[currentLocale.languageCode] ??
+                            currentLocale.languageCode,
                       ),
                     ),
-                    RadioGroup<Locale>(
-                      groupValue: currentLocale,
-                      onChanged: (value) =>
-                          widget.localeController.setLocale(value),
-                      child: Column(
-                        children: supportedLocales
-                            .map(
-                              (locale) => RadioListTile<Locale>(
-                                title: Text(
-                                  localeDisplayNames[locale.languageCode] ??
-                                      locale.languageCode,
-                                ),
-                                value: locale,
-                              ),
-                            )
-                            .toList(),
+                    ...supportedLocales.map(
+                      (locale) => RadioListTile<Locale>(
+                        title: Text(
+                          localeDisplayNames[locale.languageCode] ??
+                              locale.languageCode,
+                        ),
+                        value: locale,
+                        groupValue: currentLocale,
+                        onChanged: (value) {
+                          if (value != null) {
+                            widget.localeController.setLocale(value);
+                          }
+                        },
                       ),
                     ),
                     const Divider(),
