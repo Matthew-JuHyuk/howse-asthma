@@ -17,8 +17,8 @@ class InhalerEventRepository {
       final response = await SupabaseService.client.functions.invoke(
         'log-inhaler-event',
         body: {
-          if (latitude != null) 'latitude': latitude,
-          if (longitude != null) 'longitude': longitude,
+          'latitude': ?latitude,
+          'longitude': ?longitude,
           'is_panic': isPanic,
           'input_means': isPanic ? 'panic' : inputMeans,
         },

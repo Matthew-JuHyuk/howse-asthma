@@ -128,7 +128,7 @@ CREATE TABLE public.patient_details (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT TIMEZONE('utc', NOW())
 );
 
--- UX-Q5: 6-digit invite code, TTL 24h
+-- UX-Q5: 8-char alphanumeric invite code, TTL 24h
 CREATE TABLE public.invite_codes (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     provider_id UUID NOT NULL REFERENCES public.profiles (id) ON DELETE CASCADE,

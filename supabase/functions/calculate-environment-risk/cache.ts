@@ -49,6 +49,9 @@ function rowToSnapshot(
       : null,
     data_source_summary: raw?.data_source_summary,
     source_coverage: raw?.source_coverage,
+    forecast_points: (row.forecast_points as EnvironmentSnapshot["forecast_points"]) ??
+      (raw as { forecast_points?: EnvironmentSnapshot["forecast_points"] } | null)
+        ?.forecast_points,
     from_cache: true,
     from_stale_cache: opts?.from_stale_cache ?? false,
     degraded: Boolean(raw?.degraded) || Boolean(opts?.from_stale_cache),
@@ -180,11 +183,13 @@ export async function writeForecastCache(
     pollen_upi: snapshot.pollen_upi ?? null,
     dominant_pollen_type: snapshot.dominant_pollen_type ?? null,
     pollen_forecast_days: 2,
+    forecast_points: snapshot.forecast_points ?? null,
     expires_at: expiresAt,
     raw_response: {
       triggers: snapshot.triggers,
       data_source_summary: snapshot.data_source_summary,
       source_coverage: snapshot.source_coverage,
+      forecast_points: snapshot.forecast_points,
       pollen_fetched_at: snapshot.pollen_fetched_at,
       degraded: snapshot.degraded ?? false,
     },

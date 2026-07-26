@@ -18,7 +18,7 @@ class CareLinkRepository {
     try {
       final response = await SupabaseService.client.functions.invoke(
         'redeem-invite-code',
-        body: {'code': code.trim()},
+        body: {'code': code.trim().toUpperCase()},
       );
       return _asMap(response.data);
     } on FunctionException catch (e) {

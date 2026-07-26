@@ -1,18 +1,11 @@
 {
-  "@@locale": "fr",
   "appTitle": "Howse Asthma",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
   "loginTitle": "Connexion",
   "loginEmailLabel": "E-mail",
   "loginPasswordLabel": "Mot de passe",
   "loginButton": "Se connecter",
   "signUpButton": "Créer un compte",
   "supabaseNotConfigured": "Supabase n’est pas encore configuré.\nAjoutez SUPABASE_URL et SUPABASE_ANON_KEY dans votre fichier .env.",
-  "@supabaseNotConfigured": {
-    "description": "Shown when Supabase env vars are missing"
-  },
   "homeGreeting": "Bonjour",
   "homeAirQualityTitle": "Qualité de l’air près de vous",
   "homeWeatherTitle": "Météo près de vous",
@@ -137,13 +130,6 @@
   "authContinueApple": "Continuer avec Apple",
   "authCheckEmailTitle": "Vérifiez votre e-mail",
   "authCheckEmailBody": "Nous avons envoyé un lien de confirmation à {email}. Ouvrez-le, puis connectez-vous.",
-  "@authCheckEmailBody": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "authBackToSignIn": "Retour à la connexion",
   "authCompleteProfileTitle": "Complétez votre profil",
   "authCompleteProfileBody": "Indiquez qui vous êtes pour ouvrir le bon écran d’accueil.",
@@ -189,13 +175,6 @@
   "providerLinkTab": "Lien",
   "providerHomeTitle": "Accueil professionnel",
   "providerHomeWelcome": "Connecté en tant que {email}",
-  "@providerHomeWelcome": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "providerHomePlaceholder": "Les tableaux de bord cliniques patients arriveront dans une version ultérieure. Commencez par lier des patients.",
   "providerLinkPatientsCta": "Lier des patients",
   "providerLinkTitle": "Lier des patients",
@@ -206,13 +185,6 @@
   "providerPendingLinks": "Liens en attente",
   "providerNoPendingLinks": "Aucun lien en attente",
   "providerPendingPatient": "Patient {idPrefix}…",
-  "@providerPendingPatient": {
-    "placeholders": {
-      "idPrefix": {
-        "type": "String"
-      }
-    }
-  },
   "providerRecentInvites": "Codes d’invitation récents",
   "providerNoInvites": "Aucun code d’invitation pour l’instant",
   "providerInviteConsumed": "Utilisé",
@@ -262,13 +234,6 @@
   "homeLastInhalerNone": "Aucune utilisation d’inhalateur enregistrée",
   "homeLastInhalerToday": "Dernière utilisation d’inhalateur : aujourd’hui",
   "homeLastInhalerDays": "Dernière utilisation d’inhalateur : il y a {days} jours",
-  "@homeLastInhalerDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
   "locationServiceDisabled": "Activez les services de localisation pour voir le risque d’asthme à proximité.",
   "locationPermissionDenied": "L’autorisation de localisation est nécessaire pour la qualité de l’air près de vous.",
   "locationPermissionDeniedForever": "L’autorisation de localisation est bloquée. Ouvrez les paramètres pour l’autoriser.",
@@ -279,13 +244,6 @@
   "njOnlyDataNotice": "Données NJ uniquement : la pondération AADT fret s’applique seulement au New Jersey. TRAP utilise toujours les capteurs de qualité de l’air à l’échelle nationale.",
   "homeDegradedNotice": "Certaines sources de qualité de l’air sont indisponibles. Le risque peut être incomplet — à traiter avec prudence.",
   "logWeekSummary": "{count} événements inhalateur sur les 7 derniers jours",
-  "@logWeekSummary": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "logFilterAll": "Tous",
   "logFilterRescue": "Secours",
   "logFilterPanic": "Panique",
@@ -310,44 +268,17 @@
   "actQ5Opt4": "Bien contrôlé",
   "actQ5Opt5": "Parfaitement contrôlé",
   "actSaved": "ACT enregistré. Score : {score}",
-  "@actSaved": {
-    "placeholders": {
-      "score": {
-        "type": "int"
-      }
-    }
-  },
   "pdcTitle": "Contrôle quotidien du médicament",
   "pdcSaved": "Contrôle quotidien enregistré",
   "pdcAlreadyYes": "Vous avez déjà marqué aujourd’hui comme pris. Vous pouvez le modifier.",
   "pdcAlreadyNo": "Vous avez déjà marqué aujourd’hui comme non pris. Vous pouvez le modifier.",
   "pdcStreakHint": "30 derniers jours : {taken} sur {total} jours pris ({rate})",
-  "@pdcStreakHint": {
-    "placeholders": {
-      "taken": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      },
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "panicEmergencyBadge": "URGENCE",
   "panicBreatheTitle": "Respirez et utilisez l’inhalateur",
   "panicTakeInhalerNow": "Prendre l’inhalateur maintenant",
   "panicNeedHelp": "J’ai besoin de plus d’aide",
   "panicNoAutoDial": "Les boutons ouvrent le composeur. Les appels ne sont jamais passés automatiquement.",
   "panicCallNamed": "Appeler {name}",
-  "@panicCallNamed": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "panicDialFailed": "Impossible d’ouvrir le composeur sur cet appareil.",
   "alertTitle": "Alerte de risque",
   "alertFcmPendingNote": "La livraison push nécessite la configuration Firebase (bientôt). Cet écran est l’alerte in-app.",
@@ -378,45 +309,14 @@
   "envPollenDetail": "Prévisions pollen Google",
   "envPollenTip": "Gardez les fenêtres fermées et rincez-vous après l’extérieur lorsque l’UPI est élevé.",
   "envUsgsRate": "Variation de débit USGS : {rate} ft/h",
-  "@envUsgsRate": {
-    "placeholders": {
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "envUpdatedAt": "Mis à jour : {when}",
-  "@envUpdatedAt": {
-    "placeholders": {
-      "when": {
-        "type": "String"
-      }
-    }
-  },
   "envSourcesLabel": "Sources de données",
   "envOverallCalm": "Les conditions semblent gérables. Gardez votre inhalateur à proximité.",
   "forecastIntro": "Perspectives pour les prochaines périodes via les prévisions air et pollen.",
   "forecastEmpty": "La série de prévisions n’est pas encore disponible. Tirez pour actualiser.",
   "forecastPollenNote": "Le pollen utilise l’API Google Pollen (pas Open-Meteo). Les cartes de chaleur ne sont pas utilisées dans le MVP.",
   "forecastDayPollen": "Pollen UPI {upi} · {type}",
-  "@forecastDayPollen": {
-    "placeholders": {
-      "upi": {
-        "type": "int"
-      },
-      "type": {
-        "type": "String"
-      }
-    }
-  },
   "forecastDayAqi": "AQI US max {aqi}",
-  "@forecastDayAqi": {
-    "placeholders": {
-      "aqi": {
-        "type": "int"
-      }
-    }
-  },
   "forecastMorning": "Matin",
   "forecastAfternoon": "Après-midi",
   "forecastEvening": "Soir",
@@ -427,31 +327,14 @@
   "locationsNameLabel": "Étiquette",
   "locationsAddCurrent": "Ajouter la position actuelle",
   "locationsSaveFailed": "Impossible de mettre à jour les lieux. Réessayez.",
-  "locationsCapReached": "Vous pouvez enregistrer jusqu’à 10 lieux. Supprimez-en un pour en ajouter un autre.",
   "locationsDeleteTitle": "Retirer le lieu ?",
   "locationsDeleteBody": "Retirer « {name} » de la surveillance ?",
-  "@locationsDeleteBody": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "locationsCoords": "{lat}, {lon}",
-  "@locationsCoords": {
-    "placeholders": {
-      "lat": {
-        "type": "String"
-      },
-      "lon": {
-        "type": "String"
-      }
-    }
-  },
   "locationsPrimaryBadge": "Principal",
   "stateOnlyNjApplied": "NJ uniquement : poids AADT fret appliqué",
   "stateOnlyNjNotApplied": "NJ uniquement : poids AADT fret non appliqué",
   "stateOnlyNjAppliedHint": "Les comptages trafic NJDOT proches ont augmenté le poids TRAP. Les capteurs de qualité de l’air s’appliquent toujours à l’échelle nationale.",
   "stateOnlyNjOutsideHint": "Vous êtes hors du New Jersey. La pondération AADT fret est NJ uniquement ; TRAP utilise toujours les capteurs d’air.",
-  "stateOnlyNjNoCountHint": "Aucun comptage fret NJDOT à proximité. TRAP utilise les capteurs de qualité de l’air sans le poids fret NJ."
+  "stateOnlyNjNoCountHint": "Aucun comptage fret NJDOT à proximité. TRAP utilise les capteurs de qualité de l’air sans le poids fret NJ.",
+  "locationsCapReached": "Vous pouvez enregistrer jusqu’à 10 lieux. Supprimez-en un pour en ajouter un autre."
 }

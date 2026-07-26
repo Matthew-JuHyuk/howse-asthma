@@ -2,9 +2,11 @@
 
 | Function | Path | Status |
 | --- | --- | --- |
-| `calculate-environment-risk` | [`supabase/functions/calculate-environment-risk/`](../supabase/functions/calculate-environment-risk/) | Live sources + Geohash cache |
-| `issue-invite-code` | [`supabase/functions/issue-invite-code/`](../supabase/functions/issue-invite-code/) | Deployed — provider invite (TTL 24h) |
-| `redeem-invite-code` | [`supabase/functions/redeem-invite-code/`](../supabase/functions/redeem-invite-code/) | Deployed — atomic redeem RPC |
+| `calculate-environment-risk` | [`supabase/functions/calculate-environment-risk/`](../supabase/functions/calculate-environment-risk/) | Live sources + Geohash cache + `forecast_points` |
+| `notify-environment-risk` | [`supabase/functions/notify-environment-risk/`](../supabase/functions/notify-environment-risk/) | PATIENT-only; atomic cooldown claim; FCM pending 4.6a |
+| `log-inhaler-event` | [`supabase/functions/log-inhaler-event/`](../supabase/functions/log-inhaler-event/) | PATIENT-only Edge insert (client INSERT revoked) + 60/hr |
+| `issue-invite-code` | [`supabase/functions/issue-invite-code/`](../supabase/functions/issue-invite-code/) | 8-char alphanumeric invite (TTL 24h) |
+| `redeem-invite-code` | [`supabase/functions/redeem-invite-code/`](../supabase/functions/redeem-invite-code/) | Atomic redeem RPC (8-char) |
 | `confirm-care-link` | [`supabase/functions/confirm-care-link/`](../supabase/functions/confirm-care-link/) | Deployed — dual confirm RPC |
 
 Project: `jnzdovjjahvtxbhacjuv`  
@@ -64,6 +66,24 @@ AQI fallback chain: **AirNow → Open-Meteo `us_aqi` → PurpleAir approx**.
 | Soft stale | 360 minutes after expiry (blocked / rate-limited paths) |
 
 Warm (cache hit) responses include `"from_cache": true`. Soft-stale adds `"from_stale_cache": true`.
+
+Responses may include `forecast_points` (up to 2 days): Open-Meteo morning/afternoon/evening `us_aqi` plus Google Pollen daily UPI for `SCR-PAT-FORECAST`.
+
+## notify-environment-risk
+
+`POST …/notify-environment-risk` with user JWT.
+
+```json
+{
+  "latitude": 40.7357,
+  "longitude": -74.1724,
+  "trigger_reason": "LOCATION_ENTRY"
+}
+```
+
+`trigger_reason`: `RISK_THRESHOLD` | `LOCATION_ENTRY` | `SAVED_LOCATION_CHANGE` | `MANUAL`.
+
+Respects `notification_preferences`, requires risk ≥ 3 from cached `environment_forecasts`, cooldown key `COMPOSITE:{reason}:{geohash}` (60 min), max 3 alerts/hour/patient. Writes `environment_alerts_sent`; `fcm_sent` stays false until Firebase (WBS 4.6a).
 
 ### Latency smoke (2026-07-26, Newark NJ sample)
 

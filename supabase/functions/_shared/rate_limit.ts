@@ -27,8 +27,10 @@ export async function checkAndRecordEnvRiskRate(
 
   if (cErr) {
     console.error("[rate] count failed", cErr.message);
-    // Fail open lightly — still record
-  } else if ((reqCount ?? 0) >= MAX_REQUESTS) {
+    // Fail closed — avoid burning paid upstream quotas when metering is broken.
+    return { allowed: false, reason: "rate_limited" };
+  }
+  if ((reqCount ?? 0) >= MAX_REQUESTS) {
     return { allowed: false, reason: "rate_limited" };
   }
 
@@ -38,7 +40,11 @@ export async function checkAndRecordEnvRiskRate(
     .eq("user_id", userId)
     .gte("created_at", since);
 
-  if (!hErr && hashes) {
+  if (hErr) {
+    console.error("[rate] geohash select failed", hErr.message);
+    return { allowed: false, reason: "geohash_budget" };
+  }
+  if (hashes) {
     const unique = new Set(hashes.map((r) => r.geohash as string));
     if (!unique.has(geohash) && unique.size >= MAX_UNIQUE_GEOHASH) {
       return { allowed: false, reason: "geohash_budget" };
@@ -51,6 +57,7 @@ export async function checkAndRecordEnvRiskRate(
   });
   if (iErr) {
     console.error("[rate] insert failed", iErr.message);
+    return { allowed: false, reason: "rate_limited" };
   }
 
   return { allowed: true };

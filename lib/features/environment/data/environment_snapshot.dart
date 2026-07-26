@@ -18,6 +18,7 @@ class EnvironmentSnapshot {
     this.usgsStreamRateFtHr,
     this.dataSourceSummary,
     this.sourceCoverage,
+    this.forecastPoints = const [],
     this.fromCache = false,
     this.fromStaleCache = false,
     this.degraded = false,
@@ -42,6 +43,7 @@ class EnvironmentSnapshot {
   final double? usgsStreamRateFtHr;
   final Map<String, String>? dataSourceSummary;
   final Map<String, SourceCoverage>? sourceCoverage;
+  final List<ForecastDayPoint> forecastPoints;
   final bool fromCache;
   final bool fromStaleCache;
   final bool degraded;
@@ -53,10 +55,9 @@ class EnvironmentSnapshot {
       uiState == 'EMERGENCY' ||
       riskScore >= 3;
 
-  /// True when NJDOT freight weight was not applied (out of NJ or no count).
   bool get showNjOnlyFreightNotice {
     final njdot = sourceCoverage?['njdot'];
-    if (njdot == null) return !trapNearFreightWeight;
+    if (njdot == null) return false;
     return njdot.scope == 'NJ_ONLY' && !njdot.applied;
   }
 
@@ -90,6 +91,16 @@ class EnvironmentSnapshot {
       }
     }
 
+    final pointsRaw = json['forecast_points'];
+    final points = <ForecastDayPoint>[];
+    if (pointsRaw is List) {
+      for (final p in pointsRaw) {
+        if (p is Map) {
+          points.add(ForecastDayPoint.fromJson(Map<String, dynamic>.from(p)));
+        }
+      }
+    }
+
     return EnvironmentSnapshot(
       riskScore: (json['risk_score'] as num?)?.toInt() ?? 1,
       uiState: json['ui_state'] as String? ?? 'CALM',
@@ -108,11 +119,78 @@ class EnvironmentSnapshot {
       usgsStreamRateFtHr: (json['usgs_stream_rate_ft_hr'] as num?)?.toDouble(),
       dataSourceSummary: summary,
       sourceCoverage: coverage,
+      forecastPoints: points,
       fromCache: json['from_cache'] == true,
       fromStaleCache: json['from_stale_cache'] == true,
       degraded: json['degraded'] == true,
       pollenFetchedAt: json['pollen_fetched_at'] as String?,
       forecastId: json['forecast_id'] as String? ?? json['id'] as String?,
+    );
+  }
+}
+
+class ForecastDayPoint {
+  const ForecastDayPoint({
+    required this.date,
+    required this.periods,
+    this.pollenUpi,
+    this.dominantPollenType,
+    this.usAqiMax,
+    this.compositeScore,
+  });
+
+  final String date;
+  final List<ForecastPeriodPoint> periods;
+  final int? pollenUpi;
+  final String? dominantPollenType;
+  final int? usAqiMax;
+  final int? compositeScore;
+
+  factory ForecastDayPoint.fromJson(Map<String, dynamic> json) {
+    final periodsRaw = json['periods'];
+    final periods = <ForecastPeriodPoint>[];
+    if (periodsRaw is List) {
+      for (final p in periodsRaw) {
+        if (p is Map) {
+          periods.add(
+            ForecastPeriodPoint.fromJson(Map<String, dynamic>.from(p)),
+          );
+        }
+      }
+    }
+    return ForecastDayPoint(
+      date: json['date'] as String? ?? '',
+      periods: periods,
+      pollenUpi: (json['pollen_upi'] as num?)?.toInt(),
+      dominantPollenType: json['dominant_pollen_type'] as String?,
+      usAqiMax: (json['us_aqi_max'] as num?)?.toInt(),
+      compositeScore: (json['composite_score'] as num?)?.toInt(),
+    );
+  }
+}
+
+class ForecastPeriodPoint {
+  const ForecastPeriodPoint({
+    required this.period,
+    this.usAqi,
+    this.pollenUpi,
+    this.trapLevel,
+    this.floodActive = false,
+  });
+
+  final String period;
+  final int? usAqi;
+  final int? pollenUpi;
+  final String? trapLevel;
+  final bool floodActive;
+
+  factory ForecastPeriodPoint.fromJson(Map<String, dynamic> json) {
+    return ForecastPeriodPoint(
+      period: json['period'] as String? ?? 'morning',
+      usAqi: (json['us_aqi'] as num?)?.toInt(),
+      pollenUpi: (json['pollen_upi'] as num?)?.toInt(),
+      trapLevel: json['trap_level'] as String?,
+      floodActive: json['flood_active'] == true,
     );
   }
 }

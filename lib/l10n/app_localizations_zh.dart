@@ -15,7 +15,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loginTitle => '登录';
 
   @override
-  String get loginEmailLabel => '电子邮箱';
+  String get loginEmailLabel => '电子邮件';
 
   @override
   String get loginPasswordLabel => '密码';
@@ -24,35 +24,35 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loginButton => '登录';
 
   @override
-  String get signUpButton => '创建账户';
+  String get signUpButton => '注册';
 
   @override
   String get supabaseNotConfigured =>
-      '尚未配置 Supabase。\n请在 .env 文件中设置 SUPABASE_URL 和 SUPABASE_ANON_KEY。';
+      '尚未配置 Supabase。\n请在 .env 文件中添加 SUPABASE_URL 和 SUPABASE_ANON_KEY。';
 
   @override
   String get homeGreeting => '你好';
 
   @override
-  String get homeAirQualityTitle => '您所在地的空气质量';
+  String get homeAirQualityTitle => '附近空气质量';
 
   @override
-  String get homeWeatherTitle => '您所在地的天气';
+  String get homeWeatherTitle => '附近天气';
 
   @override
-  String get asthmaRiskLow => '哮喘风险：低';
+  String get asthmaRiskLow => '哮喘风险较低';
 
   @override
-  String get asthmaRiskModerate => '哮喘风险：中等';
+  String get asthmaRiskModerate => '哮喘风险中等';
 
   @override
-  String get asthmaRiskHigh => '哮喘风险：高 - 请注意防范';
+  String get asthmaRiskHigh => '哮喘风险较高 — 请采取防护措施';
 
   @override
   String get medicationLogTitle => '用药记录';
 
   @override
-  String get medicationLogAddButton => '记录吸入器/药物使用情况';
+  String get medicationLogAddButton => '记录吸入器 / 用药';
 
   @override
   String get medicationNameLabel => '药物名称';
@@ -67,10 +67,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get medicationEffectivenessLabel => '是否有效？';
 
   @override
-  String get reportTitle => '保险提交报告';
+  String get reportTitle => '保险报告';
 
   @override
-  String get reportGenerateButton => '生成医生/保险公司提交报告';
+  String get reportGenerateButton => '生成医生 / 保险报告';
 
   @override
   String get settingsTitle => '设置';
@@ -82,72 +82,70 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLocationLabel => '位置';
 
   @override
-  String get notificationAttackWarningTitle => '哮喘发作风险提醒';
+  String get notificationAttackWarningTitle => '哮喘发作风险警报';
 
   @override
-  String get mockContinue => 'Continue';
+  String get mockContinue => '继续';
 
   @override
-  String get mockSignUpTitle => 'Create account';
+  String get mockSignUpTitle => '创建账户';
 
   @override
-  String get mockChooseRole => 'Choose your role';
+  String get mockChooseRole => '选择你的角色';
 
   @override
-  String get mockRolePatient => 'Patient';
+  String get mockRolePatient => '患者';
 
   @override
-  String get mockRolePatientHint => 'Track air risk and inhaler use';
+  String get mockRolePatientHint => '追踪空气风险与吸入器使用';
 
   @override
-  String get mockRoleProvider => 'Provider';
+  String get mockRoleProvider => '医护人员';
 
   @override
-  String get mockRoleProviderHint => 'Not in this design preview';
+  String get mockRoleProviderHint => '不在此设计预览中';
 
   @override
-  String get mockProviderNotInPreview =>
-      'Provider screens are not in this patient design preview.';
+  String get mockProviderNotInPreview => '医护人员界面不在此患者设计预览中。';
 
   @override
-  String get mockBiometricTitle => 'Unlock';
+  String get mockBiometricTitle => '解锁';
 
   @override
-  String get mockBiometricHint =>
-      'Use biometrics to unlock Howse Asthma (design preview).';
+  String get mockBiometricHint => '使用生物识别解锁 Howse Asthma（设计预览）。';
 
   @override
-  String get mockUnlock => 'Unlock';
+  String get mockUnlock => '解锁';
 
   @override
-  String get mockUsePassword => 'Use password instead';
+  String get mockUsePassword => '改用密码';
 
   @override
-  String get mockOnboardingTitle => 'Patient setup';
+  String get mockOnboardingTitle => '患者设置';
 
   @override
-  String get mockHomeLocation => 'Home';
+  String get mockHomeLocation => '家';
 
   @override
   String get mockDummyAddress => '123 Main St, Newark, NJ';
 
   @override
-  String get mockEmergencyContact => 'Emergency contact';
+  String get mockEmergencyContact => '紧急联系人';
 
   @override
   String get mockDummyContact => 'Alex Guardian · +1 555 0100';
 
   @override
-  String get mockInviteCode => 'Provider invite code';
+  String get mockInviteCode => '医护邀请码';
 
   @override
-  String get mockFinishOnboarding => 'Go to home';
+  String get mockFinishOnboarding => '前往首页';
 
   @override
-  String get mockAllScreens => 'All screens';
+  String get mockAllScreens => '全部屏幕';
 
   @override
-  String get mockAllScreensHint => 'Open any Screen ID for design review';
+  String get mockAllScreensHint => '打开任意 Screen ID 进行设计审阅';
 
   @override
   String get mockStateCalm => 'CALM';
@@ -156,217 +154,209 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mockStateWarning => 'WARNING';
 
   @override
-  String get mockHomeCalmMessage =>
-      'Air looks manageable nearby. Log inhaler use anytime.';
+  String get mockHomeCalmMessage => '附近空气尚可。可随时记录吸入器使用。';
 
   @override
-  String get mockHomeWarnMessage =>
-      'Elevated risk nearby. Limit outdoor exposure and keep your inhaler ready.';
+  String get mockHomeWarnMessage => '附近风险升高。减少户外暴露，并准备好吸入器。';
 
   @override
-  String get mockRiskScore => 'Risk score';
+  String get mockRiskScore => '风险评分';
 
   @override
-  String get mockDummyLocation => 'Near Newark, NJ';
+  String get mockDummyLocation => '新泽西州纽瓦克附近';
 
   @override
-  String get mockEnvDetail => 'Environment detail';
+  String get mockEnvDetail => '环境详情';
 
   @override
-  String get mockForecast => 'Forecast';
+  String get mockForecast => '预报';
 
   @override
-  String get mockForecastHint => 'Next days air & pollen outlook';
+  String get mockForecastHint => '未来几天空气与花粉展望';
 
   @override
-  String get mockAlertPreview => 'Alert landing';
+  String get mockAlertPreview => '警报页面';
 
   @override
-  String get mockAlertPreviewHint => 'Preview risk alert screen';
+  String get mockAlertPreviewHint => '预览风险警报屏幕';
 
   @override
-  String get mockShowWarningHome => 'Preview WARNING home';
+  String get mockShowWarningHome => '预览 WARNING 首页';
 
   @override
-  String get mockBackToCalmHome => 'Back';
+  String get mockBackToCalmHome => '返回';
 
   @override
-  String get mockPanicCta => 'Panic mode';
+  String get mockPanicCta => '紧急模式';
 
   @override
-  String get mockTrapAxis => 'TRAP / soot';
+  String get mockTrapAxis => 'TRAP / 烟尘';
 
   @override
-  String get mockFloodAxis => 'Flash flood';
+  String get mockFloodAxis => '山洪';
 
   @override
-  String get mockPollenAxis => 'Pollen';
+  String get mockPollenAxis => '花粉';
 
   @override
-  String get mockForecastDayHint => 'AQI · TRAP · Pollen outlook';
+  String get mockForecastDayHint => 'AQI · TRAP · 花粉展望';
 
   @override
-  String get mockActSurvey => 'ACT survey';
+  String get mockActSurvey => 'ACT 问卷';
 
   @override
-  String get mockActHint => '5 pictogram questions (4 weeks)';
+  String get mockActHint => '5 道图示题（4 周）';
 
   @override
-  String get mockPdcCheck => 'Daily PDC check';
+  String get mockPdcCheck => '每日 PDC 检查';
 
   @override
-  String get mockPdcHint => 'One-tap adherence';
+  String get mockPdcHint => '一键依从性确认';
 
   @override
-  String get mockInhalerEvent => 'Inhaler logged';
+  String get mockInhalerEvent => '已记录吸入器';
 
   @override
-  String get mockActIntro =>
-      'Answer based on the last 4 weeks. Design preview — answers are not saved.';
+  String get mockActIntro => '请根据过去 4 周作答。设计预览 — 答案不会保存。';
 
   @override
-  String get mockQuestion => 'Question';
+  String get mockQuestion => '问题';
 
   @override
-  String get mockSubmit => 'Submit';
+  String get mockSubmit => '提交';
 
   @override
-  String get mockPdcPrompt => 'Did you take your controller medicine today?';
+  String get mockPdcPrompt => '今天是否服用了控制药物？';
 
   @override
-  String get mockTakenYes => 'Yes, I took it';
+  String get mockTakenYes => '是的，已服用';
 
   @override
-  String get mockTakenNo => 'Not today';
+  String get mockTakenNo => '今天没有';
 
   @override
-  String get mockEvidenceSummary => 'Your evidence summary';
+  String get mockEvidenceSummary => '你的证据摘要';
 
   @override
-  String get mockEvidenceBody =>
-      'Dummy summary for PA/LMN support. Design preview only.';
+  String get mockEvidenceBody => '用于 PA/LMN 支持的示例摘要。仅设计预览。';
 
   @override
-  String get mockInhalerEvents30d => 'Inhaler events (30d)';
+  String get mockInhalerEvents30d => '吸入器事件（30 天）';
 
   @override
-  String get mockActScore => 'Latest ACT';
+  String get mockActScore => '最近 ACT';
 
   @override
-  String get mockPdcRate => 'PDC (30d)';
+  String get mockPdcRate => 'PDC（30 天）';
 
   @override
-  String get mockLocationsTitle => 'Saved places';
+  String get mockLocationsTitle => '已保存地点';
 
   @override
-  String get mockLocationsHint => 'Home and work monitoring';
+  String get mockLocationsHint => '家庭与工作监测';
 
   @override
-  String get mockWorkLocation => 'Work';
+  String get mockWorkLocation => '工作';
 
   @override
   String get mockDummyWorkAddress => '1 Market St, Jersey City, NJ';
 
   @override
-  String get mockAddLocation => 'Add place';
+  String get mockAddLocation => '添加地点';
 
   @override
-  String get mockRewardTitle => 'Rewards';
+  String get mockRewardTitle => '奖励';
 
   @override
-  String get mockDraftBanner => 'DRAFT — points & vouchers are preview only';
+  String get mockDraftBanner => '草稿 — 积分与代金券仅供预览';
 
   @override
-  String get mockPointsBalance => 'Points balance';
+  String get mockPointsBalance => '积分余额';
 
   @override
-  String get mockVoucherTitle => 'Food bank voucher';
+  String get mockVoucherTitle => '食品银行代金券';
 
   @override
-  String get mockVoucherHint => 'Exchange points (waitlist)';
+  String get mockVoucherHint => '兑换积分（候补名单）';
 
   @override
-  String get mockDonateTitle => 'Donate';
+  String get mockDonateTitle => '捐赠';
 
   @override
-  String get mockDonateHint => 'Third-party giving only';
+  String get mockDonateHint => '仅限第三方捐赠';
 
   @override
-  String get mockRewardHistory => 'History';
+  String get mockRewardHistory => '历史';
 
   @override
-  String get mockRewardHistoryHint => 'Points and donations';
+  String get mockRewardHistoryHint => '积分与捐赠';
 
   @override
-  String get mockDummyFoodBank => 'NJ Community Food Bank (demo)';
+  String get mockDummyFoodBank => 'NJ Community Food Bank（演示）';
 
   @override
-  String get mockVoucherCost => '50 points · \$10 value (draft)';
+  String get mockVoucherCost => '50 积分 · \$10 价值（草稿）';
 
   @override
-  String get mockJoinWaitlist => 'Join waitlist';
+  String get mockJoinWaitlist => '加入候补名单';
 
   @override
   String get mockDonateTransparency =>
-      'Donations go through a verified third-party nonprofit platform. Howse Asthma never stores card details.';
+      '捐赠通过经核实的第三方非营利平台进行。Howse Asthma 从不存储银行卡信息。';
 
   @override
-  String get mockDonateCta => 'Open donate (external)';
+  String get mockDonateCta => '打开捐赠（外部）';
 
   @override
-  String get mockExternalOnly =>
-      'External donation provider is not wired in design preview.';
+  String get mockExternalOnly => '外部捐赠提供方未在设计预览中接入。';
 
   @override
-  String get mockSignOutPreview => 'Sign out (preview)';
+  String get mockSignOutPreview => '退出登录（预览）';
 
   @override
-  String get mockOpenAuthFlow => 'Open auth flow';
+  String get mockOpenAuthFlow => '打开认证流程';
 
   @override
-  String get mockAlertBody =>
-      'Risk rose near your location. Review environment details.';
+  String get mockAlertBody => '你附近的风险升高。请查看环境详情。';
 
   @override
-  String get mockDismiss => 'Dismiss';
+  String get mockDismiss => '关闭';
 
   @override
-  String get mockPanicTitle => 'Need help now?';
+  String get mockPanicTitle => '现在需要帮助吗？';
 
   @override
-  String get mockPanicStep1Body =>
-      'Step 1 — Stay with your inhaler. Continue for emergency contacts.';
+  String get mockPanicStep1Body => '步骤 1 — 随身带着吸入器。继续查看紧急联系人。';
 
   @override
-  String get mockPanicStep2Title => 'Call for help';
+  String get mockPanicStep2Title => '呼叫帮助';
 
   @override
-  String get mockPanicStep2Body =>
-      'Design preview: buttons do not place a real call. On device builds, Step 2 uses tel: links.';
+  String get mockPanicStep2Body => '设计预览：按钮不会真正拨号。真机版本中，步骤 2 使用 tel: 链接。';
 
   @override
-  String get mockCall911 => 'Call 911';
+  String get mockCall911 => '拨打 911';
 
   @override
-  String get mockCallGuardian => 'Call emergency contact';
+  String get mockCallGuardian => '呼叫紧急联系人';
 
   @override
-  String get mockFeelingBetter => 'I am feeling better';
+  String get mockFeelingBetter => '我感觉好些了';
 
   @override
-  String get mockTabHome => 'Home';
+  String get mockTabHome => '首页';
 
   @override
-  String get mockTabLog => 'Log';
+  String get mockTabLog => '记录';
 
   @override
-  String get mockTabReport => 'Report';
+  String get mockTabReport => '报告';
 
   @override
-  String get mockTabReward => 'Reward';
+  String get mockTabReward => '奖励';
 
   @override
-  String get mockTabSettings => 'Settings';
+  String get mockTabSettings => '设置';
 
   @override
   String get navHome => '首页';
@@ -375,13 +365,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signUpTitle => '创建账户';
 
   @override
-  String get authChooseRole => '选择您的角色';
+  String get authChooseRole => '选择你的角色';
 
   @override
   String get authRolePatient => '患者';
 
   @override
-  String get authRolePatientHint => '跟踪空气风险与吸入器使用';
+  String get authRolePatientHint => '追踪空气质量风险与吸入器使用';
 
   @override
   String get authRoleProvider => '医护人员';
@@ -390,16 +380,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authRoleProviderHint => '关联患者并查看临床证据';
 
   @override
-  String get authFullNameLabel => '姓名';
+  String get authFullNameLabel => '全名';
 
   @override
-  String get authNpiLabel => 'NPI 号码';
+  String get authNpiLabel => 'NPI 编号';
 
   @override
-  String get authNpiHelper => '10 位国家提供者识别号';
+  String get authNpiHelper => '10 位国家医疗服务提供者识别号';
 
   @override
-  String get authOrContinueWith => '或通过以下方式继续';
+  String get authOrContinueWith => '或使用以下方式继续';
 
   @override
   String get authContinueGoogle => '使用 Google 继续';
@@ -422,7 +412,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authCompleteProfileTitle => '完善个人资料';
 
   @override
-  String get authCompleteProfileBody => '告诉我们您的身份，以便打开正确的主页。';
+  String get authCompleteProfileBody => '告诉我们你的身份，以便打开正确的首页。';
 
   @override
   String get authSaveProfile => '保存资料';
@@ -437,10 +427,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authWorking => '处理中…';
 
   @override
-  String get authValidationInvalidEmail => '请输入有效邮箱';
+  String get authValidationInvalidEmail => '请输入有效的电子邮件';
 
   @override
-  String get authValidationPasswordMin => '密码至少 8 个字符';
+  String get authValidationPasswordMin => '密码至少需要 8 个字符';
 
   @override
   String get authValidationNameRequired => '姓名为必填项';
@@ -449,28 +439,28 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authValidationInvalidNpi => '请输入有效的 10 位 NPI';
 
   @override
-  String get authErrorGeneric => '出错了，请重试。';
+  String get authErrorGeneric => '出了点问题。请重试。';
 
   @override
-  String get authErrorInvalidCredentials => '邮箱或密码无效';
+  String get authErrorInvalidCredentials => '电子邮件或密码无效';
 
   @override
-  String get authErrorEmailTaken => '该邮箱已注册账户';
+  String get authErrorEmailTaken => '该电子邮件已有账户';
 
   @override
-  String get authErrorEmailNotConfirmed => '登录前请先确认邮箱';
+  String get authErrorEmailNotConfirmed => '登录前请先确认电子邮件';
 
   @override
-  String get authErrorWeakPassword => '密码过于简单';
+  String get authErrorWeakPassword => '密码太弱';
 
   @override
-  String get authErrorRateLimited => '尝试次数过多，请稍后再试。';
+  String get authErrorRateLimited => '尝试次数过多。请稍后再试。';
 
   @override
   String get authBiometricTitle => '解锁 Howse Asthma';
 
   @override
-  String get authBiometricHint => '使用指纹或面容继续。';
+  String get authBiometricHint => '使用生物识别继续';
 
   @override
   String get authBiometricReason => '解锁 Howse Asthma';
@@ -479,13 +469,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authBiometricUnlock => '解锁';
 
   @override
-  String get authBiometricFailed => '生物识别解锁失败，请重试。';
+  String get authBiometricFailed => '生物识别解锁失败。请重试。';
 
   @override
   String get authBiometricToggle => '生物识别解锁';
 
   @override
-  String get authBiometricToggleHint => '打开应用时要求生物识别';
+  String get authBiometricToggleHint => '打开应用时要求生物识别解锁';
 
   @override
   String get authBiometricUnavailable => '此设备不支持生物识别';
@@ -494,7 +484,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authOnboardingTitle => '患者设置';
 
   @override
-  String get authOnboardingBody => '如医护人员分享了 6 位邀请码，请现在输入。也可稍后在设置中完成。';
+  String get authOnboardingBody => '如果医护人员分享了 8 位邀请码，请现在输入。也可以稍后在设置中完成。';
 
   @override
   String get authOnboardingSkip => '暂时跳过';
@@ -503,7 +493,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authInviteCodeLabel => '医护邀请码';
 
   @override
-  String get authInviteCodeHelper => '6 位数字，24 小时后过期';
+  String get authInviteCodeHelper => '8 位字母/数字，24 小时后过期';
 
   @override
   String get authInviteRedeem => '兑换';
@@ -512,10 +502,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authInviteRedeemAndContinue => '兑换并继续';
 
   @override
-  String get authInviteInvalidFormat => '邀请码必须为 6 位数字';
+  String get authInviteInvalidFormat => '邀请码必须为 8 位字母或数字';
 
   @override
-  String get authInviteRedeemedPending => '邀请已兑换，等待医护确认。';
+  String get authInviteRedeemedPending => '邀请已兑换。等待医护人员确认。';
 
   @override
   String get authInviteRedeemFailed => '无法兑换邀请码';
@@ -549,11 +539,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String providerHomeWelcome(String email) {
-    return '已登录为 $email';
+    return '已以 $email 登录';
   }
 
   @override
-  String get providerHomePlaceholder => '临床看板将在后续版本提供。请先关联患者。';
+  String get providerHomePlaceholder => '患者临床看板将在后续版本提供。请先关联患者。';
 
   @override
   String get providerLinkPatientsCta => '关联患者';
@@ -562,7 +552,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerLinkTitle => '关联患者';
 
   @override
-  String get providerLinkIntro => '发放 6 位邀请码（24 小时有效）。患者输入后双方确认。';
+  String get providerLinkIntro => '发放 8 位邀请码（24 小时有效）。患者输入后双方确认。';
 
   @override
   String get providerIssueInviteCta => '发放邀请码';
@@ -577,7 +567,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerPendingLinks => '待处理关联';
 
   @override
-  String get providerNoPendingLinks => '暂无待处理关联';
+  String get providerNoPendingLinks => '没有待处理关联';
 
   @override
   String providerPendingPatient(String idPrefix) {
@@ -597,357 +587,474 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerInviteActive => '有效';
 
   @override
-  String get splashTagline => 'Smarter asthma prevention for every family.';
+  String get splashTagline => '为每个家庭提供更智能的哮喘预防。';
 
   @override
-  String get splashGetStarted => 'Get Started';
+  String get splashGetStarted => '开始使用';
 
   @override
-  String get splashAlreadyHaveAccount => 'Already have an account?';
+  String get splashAlreadyHaveAccount => '已有账户？';
 
   @override
-  String get splashSignIn => 'Sign in';
+  String get splashSignIn => '登录';
 
   @override
-  String get authForgotPassword => 'Forgot password?';
+  String get authForgotPassword => '忘记密码？';
 
   @override
-  String get authNoAccount => 'No account?';
+  String get authNoAccount => '没有账户？';
 
   @override
-  String get authUseBiometricHint => 'Use Face ID or fingerprint to unlock';
+  String get authUseBiometricHint => '使用 Face ID 或指纹解锁';
 
   @override
-  String get authTouchSensorHint => 'Touch sensor or look at camera';
+  String get authTouchSensorHint => '触摸传感器或看向摄像头';
 
   @override
-  String get navLog => 'Log';
+  String get navLog => '记录';
 
   @override
-  String get navReport => 'Report';
+  String get navReport => '报告';
 
   @override
-  String get navRewards => 'Rewards';
+  String get navRewards => '奖励';
 
   @override
-  String get mockChooseLanguage => 'Choose Language';
+  String get mockChooseLanguage => '选择语言';
 
   @override
-  String get mockYourLocation => 'Your Location';
+  String get mockYourLocation => '你的位置';
 
   @override
-  String get mockUseCurrentLocation => 'Use Current Location';
+  String get mockUseCurrentLocation => '使用当前位置';
 
   @override
-  String get mockLocationTrapOnly =>
-      'Location is used for TRAP air quality data only';
+  String get mockLocationTrapOnly => '位置仅用于 TRAP 空气质量数据';
 
   @override
-  String get mockLabelYourPlace => 'Label Your Place';
+  String get mockLabelYourPlace => '为地点命名';
 
   @override
-  String get mockSchool => 'School';
+  String get mockSchool => '学校';
 
   @override
-  String get mockWork => 'Work';
+  String get mockWork => '工作';
 
   @override
-  String get mockOther => 'Other';
+  String get mockOther => '其他';
 
   @override
-  String get mockEmergencyOnePerson => 'One person to call in an emergency';
+  String get mockEmergencyOnePerson => '紧急情况下可呼叫的一个人';
 
   @override
-  String get mockContactName => 'Contact Name';
+  String get mockContactName => '联系人姓名';
 
   @override
-  String get mockPhoneNumber => 'Phone Number';
+  String get mockPhoneNumber => '电话号码';
 
   @override
-  String get mockProviderPairing => 'Provider Pairing';
+  String get mockProviderPairing => '医护配对';
 
   @override
-  String get mockPairingOptional =>
-      'Optional — you can add this later in Settings';
+  String get mockPairingOptional => '可选 — 可稍后在设置中添加';
 
   @override
-  String get mockNext => 'Next';
+  String get mockNext => '下一步';
 
   @override
-  String get mockProfessionalProfile => 'Professional Profile';
+  String get mockProfessionalProfile => '专业资料';
 
   @override
-  String get mockStep2Of4 => 'Step 2 of 4';
+  String get mockStep2Of4 => '第 2 步，共 4 步';
 
   @override
-  String get mockTellPractice => 'Tell us about your medical practice';
+  String get mockTellPractice => '告诉我们你的医疗机构信息';
 
   @override
-  String get mockSpecialtyLabel => 'Specialty';
+  String get mockSpecialtyLabel => '专科';
 
   @override
-  String get mockClinicLabel => 'Practice / Clinic Name';
+  String get mockClinicLabel => '诊所 / 医疗机构名称';
 
   @override
-  String get mockNpiFormatOnly =>
-      'Format check only. NPI verification occurs after submission.';
+  String get mockNpiFormatOnly => '仅校验格式。NPI 验证在提交后进行。';
 
   @override
-  String get mockCredentialsSecure =>
-      'Your credentials are encrypted and stored securely. We never share provider data without consent.';
+  String get mockCredentialsSecure => '你的资质信息经加密安全存储。未经同意我们绝不共享医护数据。';
 
   @override
   String get oneTapFab => '1-Tap';
 
   @override
-  String get oneTapLoggedSnack => 'Inhaler use logged (stub)';
+  String get oneTapLoggedSnack => '已记录吸入器使用（stub）';
 
   @override
-  String get oneTapLoggedOk => 'Inhaler use logged';
+  String get oneTapLoggedOk => '已记录吸入器使用';
 
   @override
-  String get oneTapLoggedFailed => 'Could not log inhaler use. Try again.';
+  String get oneTapLoggedFailed => '无法记录吸入器使用。请重试。';
 
   @override
-  String get homeDailySummary => 'Here is your daily summary';
+  String get homeDailySummary => '这是你的每日摘要';
 
   @override
-  String get homeWarningBanner =>
-      'Elevated risk nearby. Limit outdoor exposure and keep your inhaler ready.';
+  String get homeWarningBanner => '附近风险升高。减少户外暴露，并准备好吸入器。';
 
   @override
-  String get homeEnvFactors => 'Environmental Factors';
+  String get homeEnvFactors => '环境因素';
 
   @override
-  String get homeViewDetails => 'View details';
+  String get homeViewDetails => '查看详情';
 
   @override
-  String get homeFloodActive => 'Active warning';
+  String get homeFloodActive => '有效警报';
 
   @override
-  String get homeFloodNone => 'None';
+  String get homeFloodNone => '无';
 
   @override
-  String get homeLastInhalerNone => 'No inhaler use logged yet';
+  String get homeLastInhalerNone => '尚未记录吸入器使用';
 
   @override
-  String get homeLastInhalerToday => 'Last inhaler use: today';
+  String get homeLastInhalerToday => '上次吸入器使用：今天';
 
   @override
   String homeLastInhalerDays(int days) {
-    return 'Last inhaler use: $days days ago';
+    return '上次吸入器使用：$days 天前';
   }
 
   @override
-  String get locationServiceDisabled =>
-      'Turn on location services to see nearby asthma risk.';
+  String get locationServiceDisabled => '请开启定位服务以查看附近哮喘风险。';
 
   @override
-  String get locationPermissionDenied =>
-      'Location permission is needed for air quality near you.';
+  String get locationPermissionDenied => '查看附近空气质量需要位置权限。';
 
   @override
-  String get locationPermissionDeniedForever =>
-      'Location permission is blocked. Open settings to allow it.';
+  String get locationPermissionDeniedForever => '位置权限已被阻止。请打开设置以允许。';
 
   @override
-  String get locationUnavailable =>
-      'Could not get your location. Pull to refresh or try again.';
+  String get locationUnavailable => '无法获取位置。下拉刷新或重试。';
 
   @override
-  String get locationOutOfServiceArea =>
-      'Howse Asthma currently supports locations in the United States.';
+  String get locationOutOfServiceArea => 'Howse Asthma 目前支持美国境内的位置。';
 
   @override
-  String get locationOpenSettings => 'Open settings';
+  String get locationOpenSettings => '打开设置';
 
   @override
-  String get locationStatusGranted => 'Location access is on';
+  String get locationStatusGranted => '位置访问已开启';
 
   @override
   String get njOnlyDataNotice =>
-      'NJ-only data: freight AADT weighting applies in New Jersey only. TRAP still uses air-quality sensors nationwide.';
+      '仅限 NJ 的数据：货运 AADT 加权仅适用于新泽西。TRAP 仍使用全国空气质量传感器。';
 
   @override
-  String get homeDegradedNotice =>
-      'Some air-quality sources are unavailable. Risk may be incomplete — treat with caution.';
+  String get homeDegradedNotice => '部分空气质量来源不可用。风险可能不完整 — 请谨慎对待。';
 
   @override
   String logWeekSummary(int count) {
-    return '$count inhaler events in the last 7 days';
+    return '过去 7 天有 $count 次吸入器事件';
   }
 
   @override
-  String get logFilterAll => 'All';
+  String get logFilterAll => '全部';
 
   @override
-  String get logFilterRescue => 'Rescue';
+  String get logFilterRescue => '急救';
 
   @override
-  String get logFilterPanic => 'Panic';
+  String get logFilterPanic => '紧急';
 
   @override
-  String get logEmpty => 'No inhaler events yet. Use 1-Tap on Home.';
+  String get logEmpty => '尚无吸入器事件。请在首页使用 1-Tap。';
 
   @override
-  String get logEventRescue => 'Inhaler use';
+  String get logEventRescue => '吸入器使用';
 
   @override
-  String get logEventPanic => 'Panic inhaler use';
+  String get logEventPanic => '紧急吸入器使用';
 
   @override
-  String get actTitle => 'Asthma Check';
+  String get actTitle => '哮喘检查';
 
   @override
-  String get actPast4Weeks => 'In the past 4 weeks';
+  String get actPast4Weeks => '在过去 4 周内';
 
   @override
-  String get actQ1 =>
-      'How much of the time did your asthma keep you from getting as much done at work, school or home?';
+  String get actQ1 => '哮喘在多大程度上妨碍你在工作、学校或家中完成应有事项？';
 
   @override
-  String get actQ2 => 'How often have you had shortness of breath?';
+  String get actQ2 => '你出现气短的频率如何？';
 
   @override
-  String get actQ3 =>
-      'How often did your asthma symptoms wake you up at night or earlier than usual?';
+  String get actQ3 => '哮喘症状让你夜间醒来或比平时更早醒来的频率如何？';
 
   @override
-  String get actQ4 =>
-      'How often have you used your rescue inhaler or nebulizer medication?';
+  String get actQ4 => '你使用急救吸入器或雾化器的频率如何？';
 
   @override
-  String get actQ5 => 'How would you rate your asthma control?';
+  String get actQ5 => '你如何评价哮喘控制情况？';
 
   @override
-  String get actOpt1 => 'All of the time';
+  String get actOpt1 => '一直如此';
 
   @override
-  String get actOpt2 => 'Most of the time';
+  String get actOpt2 => '大部分时间';
 
   @override
-  String get actOpt3 => 'Some of the time';
+  String get actOpt3 => '有时';
 
   @override
-  String get actOpt4 => 'A little of the time';
+  String get actOpt4 => '很少';
 
   @override
-  String get actOpt5 => 'None of the time';
+  String get actOpt5 => '从未';
 
   @override
-  String get actQ5Opt1 => 'Not controlled at all';
+  String get actQ5Opt1 => '完全未控制';
 
   @override
-  String get actQ5Opt2 => 'Poorly controlled';
+  String get actQ5Opt2 => '控制不佳';
 
   @override
-  String get actQ5Opt3 => 'Somewhat controlled';
+  String get actQ5Opt3 => '有一定控制';
 
   @override
-  String get actQ5Opt4 => 'Well controlled';
+  String get actQ5Opt4 => '控制良好';
 
   @override
-  String get actQ5Opt5 => 'Completely controlled';
+  String get actQ5Opt5 => '完全控制';
 
   @override
   String actSaved(int score) {
-    return 'ACT saved. Score: $score';
+    return 'ACT 已保存。得分：$score';
   }
 
   @override
-  String get pdcTitle => 'Daily medicine check';
+  String get pdcTitle => '每日用药检查';
 
   @override
-  String get pdcSaved => 'Daily check saved';
+  String get pdcSaved => '每日检查已保存';
 
   @override
-  String get pdcAlreadyYes =>
-      'You already marked today as taken. You can update it.';
+  String get pdcAlreadyYes => '你已将今天标记为已服用。可以更新。';
 
   @override
-  String get pdcAlreadyNo =>
-      'You already marked today as not taken. You can update it.';
+  String get pdcAlreadyNo => '你已将今天标记为未服用。可以更新。';
 
   @override
   String pdcStreakHint(int taken, int total, String rate) {
-    return 'Last 30 days: $taken of $total days taken ($rate)';
+    return '过去 30 天：$total 天中有 $taken 天已服用（$rate）';
   }
 
   @override
-  String get panicEmergencyBadge => 'EMERGENCY';
+  String get panicEmergencyBadge => '紧急';
 
   @override
-  String get panicBreatheTitle => 'Breathe & Use Inhaler';
+  String get panicBreatheTitle => '呼吸并使用吸入器';
 
   @override
-  String get panicTakeInhalerNow => 'Take Inhaler Now';
+  String get panicTakeInhalerNow => '立即使用吸入器';
 
   @override
-  String get panicNeedHelp => 'I need more help';
+  String get panicNeedHelp => '我需要更多帮助';
 
   @override
-  String get panicNoAutoDial =>
-      'Buttons open the phone dialer. Calls are never placed automatically.';
+  String get panicNoAutoDial => '按钮会打开电话拨号盘。绝不会自动拨号。';
 
   @override
   String panicCallNamed(String name) {
-    return 'Call $name';
+    return '呼叫 $name';
   }
 
   @override
-  String get panicDialFailed =>
-      'Could not open the phone dialer on this device.';
+  String get panicDialFailed => '无法在此设备上打开电话拨号盘。';
 
   @override
-  String get alertTitle => 'Risk alert';
+  String get alertTitle => '风险警报';
 
   @override
-  String get alertFcmPendingNote =>
-      'Push delivery needs Firebase setup (coming next). This screen is the in-app alert.';
+  String get alertFcmPendingNote => '推送投递需要配置 Firebase（即将推出）。此屏幕为应用内警报。';
 
   @override
-  String get reportEvidenceBody =>
-      'Summary of inhaler use, ACT, and PDC for clinician or insurance review.';
+  String get reportEvidenceBody => '供临床或保险审阅的吸入器使用、ACT 与 PDC 摘要。';
 
   @override
-  String get reportShareTodo =>
-      'Share / export will arrive with provider PA/LMN flow.';
+  String get reportShareTodo => '分享 / 导出会随医护人员 PA/LMN 流程一并提供。';
 
   @override
-  String get settingsAlertsTitle => 'Alert Preferences';
+  String get settingsAlertsTitle => '警报偏好';
 
   @override
-  String get settingsAlertRisk => 'Risk Alerts';
+  String get settingsAlertRisk => '风险警报';
 
   @override
-  String get settingsAlertRiskHint =>
-      'When your composite risk score reaches 3 or higher';
+  String get settingsAlertRiskHint => '当综合风险评分达到 3 或更高时';
 
   @override
-  String get settingsAlertHome => 'Home Alerts';
+  String get settingsAlertHome => '已保存地点警报';
 
   @override
-  String get settingsAlertHomeHint =>
-      'When air quality changes at saved places (Phase 5)';
+  String get settingsAlertHomeHint => '当你保存的地点（家、学校、工作）风险升高时';
 
   @override
-  String get settingsSecurityTitle => 'Security';
+  String get settingsAlertLocationEntry => '进入区域警报';
 
   @override
-  String get emergencyContactRequired =>
-      'Enter a contact name and phone number';
+  String get settingsAlertLocationEntryHint => '当应用打开时你进入更高风险区域时';
+
+  @override
+  String get settingsSecurityTitle => '安全';
+
+  @override
+  String get emergencyContactRequired => '请输入联系人姓名和电话号码';
 
   @override
   String get emergencyContactInvalidPhone =>
-      'Enter a valid phone with country code (E.164), e.g. +15551234567';
+      '请输入带国家代码的有效电话（E.164），例如 +15551234567';
 
   @override
-  String get emergencyContactSaved => 'Emergency contact saved';
+  String get emergencyContactSaved => '紧急联系人已保存';
 
   @override
-  String get emergencyContactSave => 'Save contact';
+  String get emergencyContactSave => '保存联系人';
 
   @override
-  String get emergencyContactPhoneHint =>
-      'Include country code (E.164), e.g. +15551234567';
+  String get emergencyContactPhoneHint => '请包含国家代码（E.164），例如 +15551234567';
+
+  @override
+  String get commonCancel => '取消';
+
+  @override
+  String get commonSave => '保存';
+
+  @override
+  String get commonDelete => '删除';
+
+  @override
+  String get envTitle => '环境';
+
+  @override
+  String get envThreeAxis => '三大风险轴';
+
+  @override
+  String get envTrapDetail => '交通相关空气污染代理指标（传感器 + 可选 NJ 货运权重）';
+
+  @override
+  String get envTrapTip => '当 TRAP 为高或危急时，请减少户外剧烈活动。';
+
+  @override
+  String get envFloodDetail => '附近的 NWS 山洪 / 溪流警报';
+
+  @override
+  String get envFloodTipClear => '该区域没有有效的山洪警报。';
+
+  @override
+  String get envPollenDetail => 'Google 花粉预报';
+
+  @override
+  String get envPollenTip => 'UPI 较高时请关闭窗户，户外活动后冲洗。';
+
+  @override
+  String envUsgsRate(String rate) {
+    return 'USGS 溪流变化：$rate ft/hr';
+  }
+
+  @override
+  String envUpdatedAt(String when) {
+    return '更新时间：$when';
+  }
+
+  @override
+  String get envSourcesLabel => '数据来源';
+
+  @override
+  String get envOverallCalm => '情况尚可应对。请将吸入器放在附近。';
+
+  @override
+  String get forecastIntro => '基于空气质量与花粉预报的下一时段展望。';
+
+  @override
+  String get forecastEmpty => '预报序列尚不可用。请下拉刷新。';
+
+  @override
+  String get forecastPollenNote =>
+      '花粉使用 Google Pollen API（非 Open-Meteo）。MVP 不使用热图。';
+
+  @override
+  String forecastDayPollen(int upi, String type) {
+    return '花粉 UPI $upi · $type';
+  }
+
+  @override
+  String forecastDayAqi(int aqi) {
+    return '最高美国 AQI $aqi';
+  }
+
+  @override
+  String get forecastMorning => '上午';
+
+  @override
+  String get forecastAfternoon => '下午';
+
+  @override
+  String get forecastEvening => '晚上';
+
+  @override
+  String get locationsTitle => '我的位置';
+
+  @override
+  String get locationsIntro => '应用打开时会检查已保存地点的风险变化。后台系统推送需要 Firebase（下一步）。';
+
+  @override
+  String get locationsEmpty => '尚无已保存地点。请添加当前位置。';
+
+  @override
+  String get locationsAddTitle => '保存此地';
+
+  @override
+  String get locationsNameLabel => '标签';
+
+  @override
+  String get locationsAddCurrent => '添加当前位置';
+
+  @override
+  String get locationsSaveFailed => '无法更新已保存位置。请重试。';
+
+  @override
+  String get locationsCapReached => '最多可保存 10 个地点。请先删除一个再添加。';
+
+  @override
+  String get locationsDeleteTitle => '移除地点？';
+
+  @override
+  String locationsDeleteBody(String name) {
+    return '将“$name”从监测中移除？';
+  }
+
+  @override
+  String locationsCoords(String lat, String lon) {
+    return '$lat, $lon';
+  }
+
+  @override
+  String get locationsPrimaryBadge => '主要';
+
+  @override
+  String get stateOnlyNjApplied => '仅限 NJ：已应用货运 AADT 权重';
+
+  @override
+  String get stateOnlyNjNotApplied => '仅限 NJ：未应用货运 AADT 权重';
+
+  @override
+  String get stateOnlyNjAppliedHint =>
+      '附近的 NJDOT 交通计数提高了 TRAP 权重。空气质量传感器仍在全国适用。';
+
+  @override
+  String get stateOnlyNjOutsideHint =>
+      '你在新泽西州以外。货运 AADT 加权仅限 NJ；TRAP 仍使用空气传感器。';
+
+  @override
+  String get stateOnlyNjNoCountHint =>
+      '附近没有 NJDOT 货运计数。TRAP 在无 NJ 货运权重的情况下使用空气质量传感器。';
 }

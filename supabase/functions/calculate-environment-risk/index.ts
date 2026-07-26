@@ -15,11 +15,12 @@ import { checkAndRecordEnvRiskRate } from "../_shared/rate_limit.ts";
 import { isCircuitTripError } from "../_shared/source_errors.ts";
 import type {
   EnvironmentSnapshot,
+  ForecastDayPoint,
   LocationQuery,
   SourceResult,
   TrapLevel,
 } from "../_shared/types.ts";
-import { requireUser } from "../_shared/user_client.ts";
+import { requireRole, requireUser } from "../_shared/user_client.ts";
 import { fetchAirNow } from "./sources/airnow.ts";
 import { fetchGooglePollen } from "./sources/google_pollen.ts";
 import { fetchNwsAlerts } from "./sources/nws.ts";
@@ -88,6 +89,11 @@ Deno.serve(async (req) => {
   const authed = await requireUser(req);
   if (authed instanceof Response) return authed;
   const { user, admin } = authed;
+
+  const isPatient = await requireRole(admin, user.id, "PATIENT");
+  if (!isPatient) {
+    return jsonResponse({ error: "forbidden" }, 403);
+  }
 
   let body: unknown;
   try {
@@ -177,6 +183,16 @@ Deno.serve(async (req) => {
   let localPm25: number | null = null;
   let nearFreight = false;
   let streamRate: number | null = null;
+  let openMeteoDaily: Array<{
+    date: string;
+    periods: Array<{ period: "morning" | "afternoon" | "evening"; us_aqi?: number }>;
+    us_aqi_max?: number;
+  }> = [];
+  let pollenDaily: Array<{
+    date?: string;
+    pollen_upi?: number;
+    dominant?: string;
+  }> = [];
 
   for (const result of settled) {
     if (result.status !== "fulfilled") {
@@ -198,9 +214,14 @@ Deno.serve(async (req) => {
       if (d.pm25 != null) pm25 = d.pm25;
     }
     if (src.source === "openmeteo") {
-      const d = src.data as { us_aqi?: number; pm25?: number };
+      const d = src.data as {
+        us_aqi?: number;
+        pm25?: number;
+        daily?: typeof openMeteoDaily;
+      };
       if (d.us_aqi != null) openMeteoAqi = d.us_aqi;
       if (d.pm25 != null && pm25 == null) pm25 = d.pm25;
+      if (d.daily?.length) openMeteoDaily = d.daily;
     }
     if (src.source === "purpleair") {
       const d = src.data as {
@@ -216,10 +237,12 @@ Deno.serve(async (req) => {
       const d = src.data as {
         pollen_upi?: number;
         dominant?: string;
+        daily?: typeof pollenDaily;
         from_pollen_cache?: boolean;
       };
       if (d.pollen_upi != null) pollenUpi = d.pollen_upi;
       if (d.dominant) dominantPollen = d.dominant;
+      if (d.daily?.length) pollenDaily = d.daily;
       if (d.from_pollen_cache && recentPollen) {
         summary.google_pollen = "pollen_cache_6h";
         pollenFetchedAt = recentPollen.fetched_at;
@@ -293,6 +316,50 @@ Deno.serve(async (req) => {
   const degraded = isDegraded(summary, aqi);
 
   const njdotApplied = inNewJersey && nearFreight;
+
+  // Build SCR-PAT-FORECAST series (OM periods + Google pollen days).
+  const forecastPoints: ForecastDayPoint[] = [];
+  const dates = new Set<string>();
+  for (const d of openMeteoDaily) dates.add(d.date);
+  for (const d of pollenDaily) if (d.date) dates.add(d.date);
+  const today = new Date().toISOString().slice(0, 10);
+  if (dates.size === 0) {
+    dates.add(today);
+  }
+  const floodAnchorDate = openMeteoDaily[0]?.date ?? today;
+  for (const date of [...dates].sort()) {
+    const om = openMeteoDaily.find((d) => d.date === date);
+    const pol = pollenDaily.find((d) => d.date === date);
+    const dayPollen = pol?.pollen_upi ??
+      (date === today || date === pollenDaily[0]?.date ? pollenUpi : null);
+    const dayFlood = Boolean(flashFloodActive && date === floodAnchorDate);
+    const periods = (om?.periods ?? [
+      { period: "morning" as const },
+      { period: "afternoon" as const },
+      { period: "evening" as const },
+    ]).map((p) => ({
+      period: p.period,
+      us_aqi: p.us_aqi ?? null,
+      pollen_upi: dayPollen ?? null,
+      trap_level: trapLevel,
+      flood_active: dayFlood,
+    }));
+    const dayScore = aggregateRiskScores({
+      flashFloodActive: dayFlood,
+      aqi: om?.us_aqi_max ?? aqi,
+      trapLevel,
+      pollenUpi: dayPollen,
+    });
+    forecastPoints.push({
+      date,
+      periods,
+      pollen_upi: dayPollen ?? null,
+      dominant_pollen_type: pol?.dominant ?? dominantPollen,
+      us_aqi_max: om?.us_aqi_max ?? null,
+      composite_score: dayScore.risk_score,
+    });
+  }
+
   const snapshot: EnvironmentSnapshot = {
     ...aggregated,
     geohash,
@@ -307,6 +374,7 @@ Deno.serve(async (req) => {
     has_flash_flood_warning: flashFloodActive,
     flood_alert_headline: floodHeadline,
     usgs_stream_rate_ft_hr: streamRate,
+    forecast_points: forecastPoints.slice(0, 2),
     data_source_summary: summary,
     source_coverage: {
       njdot: {

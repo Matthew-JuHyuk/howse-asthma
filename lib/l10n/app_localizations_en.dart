@@ -501,7 +501,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authOnboardingBody =>
-      'If your clinician shared a 6-digit invite code, enter it now. You can also do this later in Settings.';
+      'If your clinician shared an 8-character invite code, enter it now. You can also do this later in Settings.';
 
   @override
   String get authOnboardingSkip => 'Skip for now';
@@ -510,7 +510,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authInviteCodeLabel => 'Provider invite code';
 
   @override
-  String get authInviteCodeHelper => '6 digits, expires in 24 hours';
+  String get authInviteCodeHelper => '8 letters/numbers, expires in 24 hours';
 
   @override
   String get authInviteRedeem => 'Redeem';
@@ -519,7 +519,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authInviteRedeemAndContinue => 'Redeem and continue';
 
   @override
-  String get authInviteInvalidFormat => 'Invite code must be 6 digits';
+  String get authInviteInvalidFormat =>
+      'Invite code must be 8 letters or numbers';
 
   @override
   String get authInviteRedeemedPending =>
@@ -573,7 +574,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerLinkIntro =>
-      'Issue a 6-digit code (valid 24 hours). The patient enters it, then both sides confirm.';
+      'Issue an 8-character code (valid 24 hours). The patient enters it, then both sides confirm.';
 
   @override
   String get providerIssueInviteCta => 'Issue invite code';
@@ -935,11 +936,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'When your composite risk score reaches 3 or higher';
 
   @override
-  String get settingsAlertHome => 'Home Alerts';
+  String get settingsAlertHome => 'Saved place alerts';
 
   @override
   String get settingsAlertHomeHint =>
-      'When air quality changes at saved places (Phase 5)';
+      'When risk rises at places you saved (home, school, work)';
+
+  @override
+  String get settingsAlertLocationEntry => 'Location entry alerts';
+
+  @override
+  String get settingsAlertLocationEntryHint =>
+      'When you move into a higher-risk area while the app is open';
 
   @override
   String get settingsSecurityTitle => 'Security';
@@ -961,4 +969,151 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get emergencyContactPhoneHint =>
       'Include country code (E.164), e.g. +15551234567';
+
+  @override
+  String get commonCancel => 'Cancel';
+
+  @override
+  String get commonSave => 'Save';
+
+  @override
+  String get commonDelete => 'Delete';
+
+  @override
+  String get envTitle => 'Environment';
+
+  @override
+  String get envThreeAxis => 'Three risk axes';
+
+  @override
+  String get envTrapDetail =>
+      'Traffic-related air pollution proxy (sensors + optional NJ freight weight)';
+
+  @override
+  String get envTrapTip =>
+      'Limit outdoor exertion when TRAP is HIGH or CRITICAL.';
+
+  @override
+  String get envFloodDetail => 'NWS flash-flood / stream warnings near you';
+
+  @override
+  String get envFloodTipClear => 'No active flash-flood warning for this area.';
+
+  @override
+  String get envPollenDetail => 'Google Pollen forecast';
+
+  @override
+  String get envPollenTip =>
+      'Keep windows closed and rinse after outdoor time when UPI is high.';
+
+  @override
+  String envUsgsRate(String rate) {
+    return 'USGS stream change: $rate ft/hr';
+  }
+
+  @override
+  String envUpdatedAt(String when) {
+    return 'Updated: $when';
+  }
+
+  @override
+  String get envSourcesLabel => 'Data sources';
+
+  @override
+  String get envOverallCalm =>
+      'Conditions look manageable. Keep your inhaler nearby.';
+
+  @override
+  String get forecastIntro =>
+      'Outlook for the next periods using air quality and pollen forecasts.';
+
+  @override
+  String get forecastEmpty =>
+      'Forecast series is not available yet. Pull to refresh.';
+
+  @override
+  String get forecastPollenNote =>
+      'Pollen uses Google Pollen API (not Open-Meteo). Heatmaps are not used in MVP.';
+
+  @override
+  String forecastDayPollen(int upi, String type) {
+    return 'Pollen UPI $upi · $type';
+  }
+
+  @override
+  String forecastDayAqi(int aqi) {
+    return 'Max US AQI $aqi';
+  }
+
+  @override
+  String get forecastMorning => 'Morning';
+
+  @override
+  String get forecastAfternoon => 'Afternoon';
+
+  @override
+  String get forecastEvening => 'Evening';
+
+  @override
+  String get locationsTitle => 'My Locations';
+
+  @override
+  String get locationsIntro =>
+      'Saved places are checked for risk changes while the app is open. Background OS push needs Firebase (next).';
+
+  @override
+  String get locationsEmpty =>
+      'No saved places yet. Add your current location.';
+
+  @override
+  String get locationsAddTitle => 'Save this place';
+
+  @override
+  String get locationsNameLabel => 'Label';
+
+  @override
+  String get locationsAddCurrent => 'Add current location';
+
+  @override
+  String get locationsSaveFailed =>
+      'Could not update saved locations. Try again.';
+
+  @override
+  String get locationsCapReached =>
+      'You can save up to 10 places. Remove one to add another.';
+
+  @override
+  String get locationsDeleteTitle => 'Remove place?';
+
+  @override
+  String locationsDeleteBody(String name) {
+    return 'Remove “$name” from monitoring?';
+  }
+
+  @override
+  String locationsCoords(String lat, String lon) {
+    return '$lat, $lon';
+  }
+
+  @override
+  String get locationsPrimaryBadge => 'Primary';
+
+  @override
+  String get stateOnlyNjApplied => 'NJ-only: freight AADT weight applied';
+
+  @override
+  String get stateOnlyNjNotApplied =>
+      'NJ-only: freight AADT weight not applied';
+
+  @override
+  String get stateOnlyNjAppliedHint =>
+      'Nearby NJDOT traffic counts raised the TRAP weight. Air quality sensors still apply nationwide.';
+
+  @override
+  String get stateOnlyNjOutsideHint =>
+      'You are outside New Jersey. Freight AADT weighting is NJ-only; TRAP still uses air sensors.';
+
+  @override
+  String get stateOnlyNjNoCountHint =>
+      'No nearby NJDOT freight count. TRAP uses air-quality sensors without the NJ freight weight.';
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../core/locale/locale_controller.dart';
+import '../../../core/location/environment_monitor.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
@@ -31,10 +32,22 @@ class _HomeShellState extends State<HomeShell> {
   final _inhalerRepo = InhalerEventRepository();
   Timer? _panicTimer;
   bool _panicTriggered = false;
+  EnvironmentMonitor? _envMonitor;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _envMonitor = EnvironmentMonitor.maybeOf(context);
+      _envMonitor?.start();
+    });
+  }
 
   @override
   void dispose() {
     _panicTimer?.cancel();
+    _envMonitor?.stop();
     super.dispose();
   }
 

@@ -11,7 +11,7 @@ class PanicRepository {
         .from('panic_episodes')
         .insert({
           'patient_id': userId,
-          if (inhalerEventId != null) 'inhaler_event_id': inhalerEventId,
+          'inhaler_event_id': ?inhalerEventId,
         })
         .select()
         .single();

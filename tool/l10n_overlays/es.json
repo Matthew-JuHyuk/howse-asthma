@@ -1,18 +1,11 @@
 {
-  "@@locale": "es",
   "appTitle": "Howse Asthma",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
   "loginTitle": "Iniciar sesión",
   "loginEmailLabel": "Correo electrónico",
   "loginPasswordLabel": "Contraseña",
   "loginButton": "Iniciar sesión",
   "signUpButton": "Crear cuenta",
   "supabaseNotConfigured": "Supabase aún no está configurado.\nAñade SUPABASE_URL y SUPABASE_ANON_KEY a tu archivo .env.",
-  "@supabaseNotConfigured": {
-    "description": "Shown when Supabase env vars are missing"
-  },
   "homeGreeting": "Hola",
   "homeAirQualityTitle": "Calidad del aire cerca de ti",
   "homeWeatherTitle": "Clima cerca de ti",
@@ -137,13 +130,6 @@
   "authContinueApple": "Continuar con Apple",
   "authCheckEmailTitle": "Revisa tu correo",
   "authCheckEmailBody": "Enviamos un enlace de confirmación a {email}. Ábrelo y luego inicia sesión.",
-  "@authCheckEmailBody": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "authBackToSignIn": "Volver a iniciar sesión",
   "authCompleteProfileTitle": "Completa tu perfil",
   "authCompleteProfileBody": "Indícanos quién eres para abrir la pantalla correcta.",
@@ -189,13 +175,6 @@
   "providerLinkTab": "Vínculo",
   "providerHomeTitle": "Inicio del profesional",
   "providerHomeWelcome": "Sesión iniciada como {email}",
-  "@providerHomeWelcome": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "providerHomePlaceholder": "Los paneles clínicos de pacientes llegarán en una versión posterior. Empieza vinculando pacientes.",
   "providerLinkPatientsCta": "Vincular pacientes",
   "providerLinkTitle": "Vincular pacientes",
@@ -206,13 +185,6 @@
   "providerPendingLinks": "Vínculos pendientes",
   "providerNoPendingLinks": "No hay vínculos pendientes",
   "providerPendingPatient": "Paciente {idPrefix}…",
-  "@providerPendingPatient": {
-    "placeholders": {
-      "idPrefix": {
-        "type": "String"
-      }
-    }
-  },
   "providerRecentInvites": "Códigos de invitación recientes",
   "providerNoInvites": "Aún no hay códigos de invitación",
   "providerInviteConsumed": "Usado",
@@ -262,13 +234,6 @@
   "homeLastInhalerNone": "Aún no hay uso de inhalador registrado",
   "homeLastInhalerToday": "Último uso de inhalador: hoy",
   "homeLastInhalerDays": "Último uso de inhalador: hace {days} días",
-  "@homeLastInhalerDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
   "locationServiceDisabled": "Activa los servicios de ubicación para ver el riesgo de asma cercano.",
   "locationPermissionDenied": "Se necesita permiso de ubicación para la calidad del aire cerca de ti.",
   "locationPermissionDeniedForever": "El permiso de ubicación está bloqueado. Abre la configuración para permitirlo.",
@@ -279,13 +244,6 @@
   "njOnlyDataNotice": "Datos solo NJ: la ponderación de AADT de carga pesada aplica solo en Nueva Jersey. TRAP sigue usando sensores de calidad del aire a nivel nacional.",
   "homeDegradedNotice": "Algunas fuentes de calidad del aire no están disponibles. El riesgo puede estar incompleto: úsalo con precaución.",
   "logWeekSummary": "{count} eventos de inhalador en los últimos 7 días",
-  "@logWeekSummary": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "logFilterAll": "Todos",
   "logFilterRescue": "Rescate",
   "logFilterPanic": "Pánico",
@@ -310,44 +268,17 @@
   "actQ5Opt4": "Bien controlado",
   "actQ5Opt5": "Completamente controlado",
   "actSaved": "ACT guardado. Puntuación: {score}",
-  "@actSaved": {
-    "placeholders": {
-      "score": {
-        "type": "int"
-      }
-    }
-  },
   "pdcTitle": "Control diario de medicamento",
   "pdcSaved": "Control diario guardado",
   "pdcAlreadyYes": "Ya marcaste hoy como tomado. Puedes actualizarlo.",
   "pdcAlreadyNo": "Ya marcaste hoy como no tomado. Puedes actualizarlo.",
   "pdcStreakHint": "Últimos 30 días: {taken} de {total} días tomados ({rate})",
-  "@pdcStreakHint": {
-    "placeholders": {
-      "taken": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      },
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "panicEmergencyBadge": "EMERGENCIA",
   "panicBreatheTitle": "Respira y usa el inhalador",
   "panicTakeInhalerNow": "Usa el inhalador ahora",
   "panicNeedHelp": "Necesito más ayuda",
   "panicNoAutoDial": "Los botones abren el marcador. Las llamadas nunca se hacen automáticamente.",
   "panicCallNamed": "Llamar a {name}",
-  "@panicCallNamed": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "panicDialFailed": "No se pudo abrir el marcador en este dispositivo.",
   "alertTitle": "Alerta de riesgo",
   "alertFcmPendingNote": "La entrega push necesita configuración de Firebase (próximamente). Esta pantalla es la alerta en la app.",
@@ -378,45 +309,14 @@
   "envPollenDetail": "Pronóstico de polen de Google",
   "envPollenTip": "Mantén las ventanas cerradas y enjuágate tras estar afuera cuando el UPI sea alto.",
   "envUsgsRate": "Cambio de caudal USGS: {rate} ft/h",
-  "@envUsgsRate": {
-    "placeholders": {
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "envUpdatedAt": "Actualizado: {when}",
-  "@envUpdatedAt": {
-    "placeholders": {
-      "when": {
-        "type": "String"
-      }
-    }
-  },
   "envSourcesLabel": "Fuentes de datos",
   "envOverallCalm": "Las condiciones se ven manejables. Mantén el inhalador cerca.",
   "forecastIntro": "Perspectiva para los próximos periodos con pronósticos de aire y polen.",
   "forecastEmpty": "La serie de pronóstico aún no está disponible. Desliza para actualizar.",
   "forecastPollenNote": "El polen usa la API Google Pollen (no Open-Meteo). Los mapas de calor no se usan en el MVP.",
   "forecastDayPollen": "Polen UPI {upi} · {type}",
-  "@forecastDayPollen": {
-    "placeholders": {
-      "upi": {
-        "type": "int"
-      },
-      "type": {
-        "type": "String"
-      }
-    }
-  },
   "forecastDayAqi": "AQI US máx. {aqi}",
-  "@forecastDayAqi": {
-    "placeholders": {
-      "aqi": {
-        "type": "int"
-      }
-    }
-  },
   "forecastMorning": "Mañana",
   "forecastAfternoon": "Tarde",
   "forecastEvening": "Noche",
@@ -427,31 +327,14 @@
   "locationsNameLabel": "Etiqueta",
   "locationsAddCurrent": "Agregar ubicación actual",
   "locationsSaveFailed": "No se pudieron actualizar los lugares guardados. Inténtalo de nuevo.",
-  "locationsCapReached": "Puedes guardar hasta 10 lugares. Elimina uno para agregar otro.",
   "locationsDeleteTitle": "¿Quitar lugar?",
   "locationsDeleteBody": "¿Quitar “{name}” del monitoreo?",
-  "@locationsDeleteBody": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "locationsCoords": "{lat}, {lon}",
-  "@locationsCoords": {
-    "placeholders": {
-      "lat": {
-        "type": "String"
-      },
-      "lon": {
-        "type": "String"
-      }
-    }
-  },
   "locationsPrimaryBadge": "Principal",
   "stateOnlyNjApplied": "Solo NJ: peso AADT de carga aplicado",
   "stateOnlyNjNotApplied": "Solo NJ: peso AADT de carga no aplicado",
   "stateOnlyNjAppliedHint": "Los conteos de tráfico NJDOT cercanos aumentaron el peso de TRAP. Los sensores de calidad del aire siguen aplicando a nivel nacional.",
   "stateOnlyNjOutsideHint": "Estás fuera de Nueva Jersey. La ponderación AADT de carga es solo NJ; TRAP sigue usando sensores de aire.",
-  "stateOnlyNjNoCountHint": "No hay conteo de carga NJDOT cercano. TRAP usa sensores de calidad del aire sin el peso de carga NJ."
+  "stateOnlyNjNoCountHint": "No hay conteo de carga NJDOT cercano. TRAP usa sensores de calidad del aire sin el peso de carga NJ.",
+  "locationsCapReached": "Puedes guardar hasta 10 lugares. Elimina uno para agregar otro."
 }

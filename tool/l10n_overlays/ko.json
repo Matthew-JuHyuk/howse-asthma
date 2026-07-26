@@ -1,18 +1,11 @@
 {
-  "@@locale": "ko",
   "appTitle": "Howse Asthma",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
   "loginTitle": "로그인",
   "loginEmailLabel": "이메일",
   "loginPasswordLabel": "비밀번호",
   "loginButton": "로그인",
   "signUpButton": "회원가입",
   "supabaseNotConfigured": "Supabase가 아직 구성되지 않았습니다.\n.env 파일에 SUPABASE_URL과 SUPABASE_ANON_KEY를 추가하세요.",
-  "@supabaseNotConfigured": {
-    "description": "Shown when Supabase env vars are missing"
-  },
   "homeGreeting": "안녕하세요",
   "homeAirQualityTitle": "내 주변 대기질",
   "homeWeatherTitle": "내 주변 날씨",
@@ -137,13 +130,6 @@
   "authContinueApple": "Apple로 계속",
   "authCheckEmailTitle": "이메일을 확인하세요",
   "authCheckEmailBody": "{email}로 확인 링크를 보냈습니다. 연 다음 로그인하세요.",
-  "@authCheckEmailBody": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "authBackToSignIn": "로그인으로 돌아가기",
   "authCompleteProfileTitle": "프로필 완성",
   "authCompleteProfileBody": "올바른 홈 화면을 열 수 있도록 역할을 알려 주세요.",
@@ -189,13 +175,6 @@
   "providerLinkTab": "연결",
   "providerHomeTitle": "의료진 홈",
   "providerHomeWelcome": "{email}로 로그인됨",
-  "@providerHomeWelcome": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "providerHomePlaceholder": "환자 임상 대시보드는 이후 버전에 제공됩니다. 먼저 환자를 연결하세요.",
   "providerLinkPatientsCta": "환자 연결",
   "providerLinkTitle": "환자 연결",
@@ -206,13 +185,6 @@
   "providerPendingLinks": "대기 중인 연결",
   "providerNoPendingLinks": "대기 중인 연결 없음",
   "providerPendingPatient": "환자 {idPrefix}…",
-  "@providerPendingPatient": {
-    "placeholders": {
-      "idPrefix": {
-        "type": "String"
-      }
-    }
-  },
   "providerRecentInvites": "최근 초대 코드",
   "providerNoInvites": "아직 초대 코드 없음",
   "providerInviteConsumed": "사용됨",
@@ -262,13 +234,6 @@
   "homeLastInhalerNone": "아직 기록된 흡입기 사용이 없습니다",
   "homeLastInhalerToday": "마지막 흡입기 사용: 오늘",
   "homeLastInhalerDays": "마지막 흡입기 사용: {days}일 전",
-  "@homeLastInhalerDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
   "locationServiceDisabled": "주변 천식 위험을 보려면 위치 서비스를 켜세요.",
   "locationPermissionDenied": "주변 대기질을 보려면 위치 권한이 필요합니다.",
   "locationPermissionDeniedForever": "위치 권한이 차단되었습니다. 설정에서 허용하세요.",
@@ -279,13 +244,6 @@
   "njOnlyDataNotice": "NJ 전용 데이터: 화물 AADT 가중치는 뉴저지에서만 적용됩니다. TRAP는 전국 대기질 센서를 계속 사용합니다.",
   "homeDegradedNotice": "일부 대기질 소스를 사용할 수 없습니다. 위험이 불완전할 수 있으니 주의하세요.",
   "logWeekSummary": "최근 7일 흡입기 이벤트 {count}건",
-  "@logWeekSummary": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "logFilterAll": "전체",
   "logFilterRescue": "응급",
   "logFilterPanic": "패닉",
@@ -310,44 +268,17 @@
   "actQ5Opt4": "잘 조절됨",
   "actQ5Opt5": "완전히 조절됨",
   "actSaved": "ACT가 저장되었습니다. 점수: {score}",
-  "@actSaved": {
-    "placeholders": {
-      "score": {
-        "type": "int"
-      }
-    }
-  },
   "pdcTitle": "일일 복약 확인",
   "pdcSaved": "일일 확인이 저장되었습니다",
   "pdcAlreadyYes": "오늘은 이미 복용으로 표시했습니다. 수정할 수 있습니다.",
   "pdcAlreadyNo": "오늘은 이미 미복용으로 표시했습니다. 수정할 수 있습니다.",
   "pdcStreakHint": "최근 30일: {total}일 중 {taken}일 복용 ({rate})",
-  "@pdcStreakHint": {
-    "placeholders": {
-      "taken": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      },
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "panicEmergencyBadge": "응급",
   "panicBreatheTitle": "숨 고르기 & 흡입기 사용",
   "panicTakeInhalerNow": "지금 흡입기 사용",
   "panicNeedHelp": "도움이 더 필요해요",
   "panicNoAutoDial": "버튼은 전화 다이얼러를 엽니다. 통화는 자동으로 연결되지 않습니다.",
   "panicCallNamed": "{name}에게 전화",
-  "@panicCallNamed": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "panicDialFailed": "이 기기에서 전화 다이얼러를 열 수 없습니다.",
   "alertTitle": "위험 알림",
   "alertFcmPendingNote": "푸시 전송에는 Firebase 설정이 필요합니다(곧 제공). 이 화면은 앱 내 알림입니다.",
@@ -378,45 +309,14 @@
   "envPollenDetail": "Google 꽃가루 예보",
   "envPollenTip": "UPI가 높을 때는 창문을 닫고 야외 활동 후 헹구세요.",
   "envUsgsRate": "USGS 하천 변화: {rate} ft/hr",
-  "@envUsgsRate": {
-    "placeholders": {
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "envUpdatedAt": "업데이트: {when}",
-  "@envUpdatedAt": {
-    "placeholders": {
-      "when": {
-        "type": "String"
-      }
-    }
-  },
   "envSourcesLabel": "데이터 소스",
   "envOverallCalm": "상황은 관리 가능해 보입니다. 흡입기를 가까이 두세요.",
   "forecastIntro": "대기질과 꽃가루 예보를 이용한 향후 전망입니다.",
   "forecastEmpty": "예보 시리즈를 아직 사용할 수 없습니다. 당겨서 새로고침하세요.",
   "forecastPollenNote": "꽃가루는 Google Pollen API를 사용합니다(Open-Meteo 아님). MVP에서는 히트맵을 사용하지 않습니다.",
   "forecastDayPollen": "꽃가루 UPI {upi} · {type}",
-  "@forecastDayPollen": {
-    "placeholders": {
-      "upi": {
-        "type": "int"
-      },
-      "type": {
-        "type": "String"
-      }
-    }
-  },
   "forecastDayAqi": "최대 US AQI {aqi}",
-  "@forecastDayAqi": {
-    "placeholders": {
-      "aqi": {
-        "type": "int"
-      }
-    }
-  },
   "forecastMorning": "오전",
   "forecastAfternoon": "오후",
   "forecastEvening": "저녁",
@@ -427,31 +327,14 @@
   "locationsNameLabel": "이름",
   "locationsAddCurrent": "현재 위치 추가",
   "locationsSaveFailed": "저장한 위치를 업데이트할 수 없습니다. 다시 시도하세요.",
-  "locationsCapReached": "장소는 최대 10개까지 저장할 수 있습니다. 하나 삭제한 뒤 추가하세요.",
   "locationsDeleteTitle": "장소를 제거할까요?",
   "locationsDeleteBody": "모니터링에서 “{name}”을(를) 제거할까요?",
-  "@locationsDeleteBody": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "locationsCoords": "{lat}, {lon}",
-  "@locationsCoords": {
-    "placeholders": {
-      "lat": {
-        "type": "String"
-      },
-      "lon": {
-        "type": "String"
-      }
-    }
-  },
   "locationsPrimaryBadge": "기본",
   "stateOnlyNjApplied": "NJ 전용: 화물 AADT 가중치 적용됨",
   "stateOnlyNjNotApplied": "NJ 전용: 화물 AADT 가중치 미적용",
   "stateOnlyNjAppliedHint": "주변 NJDOT 교통량이 TRAP 가중치를 높였습니다. 대기질 센서는 전국에서 계속 적용됩니다.",
   "stateOnlyNjOutsideHint": "뉴저지 밖입니다. 화물 AADT 가중치는 NJ 전용이며, TRAP는 공기 센서를 계속 사용합니다.",
-  "stateOnlyNjNoCountHint": "주변 NJDOT 화물 교통량이 없습니다. TRAP는 NJ 화물 가중치 없이 대기질 센서를 사용합니다."
+  "stateOnlyNjNoCountHint": "주변 NJDOT 화물 교통량이 없습니다. TRAP는 NJ 화물 가중치 없이 대기질 센서를 사용합니다.",
+  "locationsCapReached": "장소는 최대 10개까지 저장할 수 있습니다. 하나 삭제한 뒤 추가하세요."
 }

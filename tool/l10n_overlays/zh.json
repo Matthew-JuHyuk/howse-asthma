@@ -1,18 +1,11 @@
 {
-  "@@locale": "zh",
   "appTitle": "Howse Asthma",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
   "loginTitle": "登录",
   "loginEmailLabel": "电子邮件",
   "loginPasswordLabel": "密码",
   "loginButton": "登录",
   "signUpButton": "注册",
   "supabaseNotConfigured": "尚未配置 Supabase。\n请在 .env 文件中添加 SUPABASE_URL 和 SUPABASE_ANON_KEY。",
-  "@supabaseNotConfigured": {
-    "description": "Shown when Supabase env vars are missing"
-  },
   "homeGreeting": "你好",
   "homeAirQualityTitle": "附近空气质量",
   "homeWeatherTitle": "附近天气",
@@ -137,13 +130,6 @@
   "authContinueApple": "使用 Apple 继续",
   "authCheckEmailTitle": "请查收邮件",
   "authCheckEmailBody": "我们已向 {email} 发送确认链接。打开后即可登录。",
-  "@authCheckEmailBody": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "authBackToSignIn": "返回登录",
   "authCompleteProfileTitle": "完善个人资料",
   "authCompleteProfileBody": "告诉我们你的身份，以便打开正确的首页。",
@@ -189,13 +175,6 @@
   "providerLinkTab": "关联",
   "providerHomeTitle": "医护首页",
   "providerHomeWelcome": "已以 {email} 登录",
-  "@providerHomeWelcome": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "providerHomePlaceholder": "患者临床看板将在后续版本提供。请先关联患者。",
   "providerLinkPatientsCta": "关联患者",
   "providerLinkTitle": "关联患者",
@@ -206,13 +185,6 @@
   "providerPendingLinks": "待处理关联",
   "providerNoPendingLinks": "没有待处理关联",
   "providerPendingPatient": "患者 {idPrefix}…",
-  "@providerPendingPatient": {
-    "placeholders": {
-      "idPrefix": {
-        "type": "String"
-      }
-    }
-  },
   "providerRecentInvites": "最近的邀请码",
   "providerNoInvites": "尚无邀请码",
   "providerInviteConsumed": "已使用",
@@ -262,13 +234,6 @@
   "homeLastInhalerNone": "尚未记录吸入器使用",
   "homeLastInhalerToday": "上次吸入器使用：今天",
   "homeLastInhalerDays": "上次吸入器使用：{days} 天前",
-  "@homeLastInhalerDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
   "locationServiceDisabled": "请开启定位服务以查看附近哮喘风险。",
   "locationPermissionDenied": "查看附近空气质量需要位置权限。",
   "locationPermissionDeniedForever": "位置权限已被阻止。请打开设置以允许。",
@@ -279,13 +244,6 @@
   "njOnlyDataNotice": "仅限 NJ 的数据：货运 AADT 加权仅适用于新泽西。TRAP 仍使用全国空气质量传感器。",
   "homeDegradedNotice": "部分空气质量来源不可用。风险可能不完整 — 请谨慎对待。",
   "logWeekSummary": "过去 7 天有 {count} 次吸入器事件",
-  "@logWeekSummary": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "logFilterAll": "全部",
   "logFilterRescue": "急救",
   "logFilterPanic": "紧急",
@@ -310,44 +268,17 @@
   "actQ5Opt4": "控制良好",
   "actQ5Opt5": "完全控制",
   "actSaved": "ACT 已保存。得分：{score}",
-  "@actSaved": {
-    "placeholders": {
-      "score": {
-        "type": "int"
-      }
-    }
-  },
   "pdcTitle": "每日用药检查",
   "pdcSaved": "每日检查已保存",
   "pdcAlreadyYes": "你已将今天标记为已服用。可以更新。",
   "pdcAlreadyNo": "你已将今天标记为未服用。可以更新。",
   "pdcStreakHint": "过去 30 天：{total} 天中有 {taken} 天已服用（{rate}）",
-  "@pdcStreakHint": {
-    "placeholders": {
-      "taken": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      },
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "panicEmergencyBadge": "紧急",
   "panicBreatheTitle": "呼吸并使用吸入器",
   "panicTakeInhalerNow": "立即使用吸入器",
   "panicNeedHelp": "我需要更多帮助",
   "panicNoAutoDial": "按钮会打开电话拨号盘。绝不会自动拨号。",
   "panicCallNamed": "呼叫 {name}",
-  "@panicCallNamed": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "panicDialFailed": "无法在此设备上打开电话拨号盘。",
   "alertTitle": "风险警报",
   "alertFcmPendingNote": "推送投递需要配置 Firebase（即将推出）。此屏幕为应用内警报。",
@@ -378,45 +309,14 @@
   "envPollenDetail": "Google 花粉预报",
   "envPollenTip": "UPI 较高时请关闭窗户，户外活动后冲洗。",
   "envUsgsRate": "USGS 溪流变化：{rate} ft/hr",
-  "@envUsgsRate": {
-    "placeholders": {
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "envUpdatedAt": "更新时间：{when}",
-  "@envUpdatedAt": {
-    "placeholders": {
-      "when": {
-        "type": "String"
-      }
-    }
-  },
   "envSourcesLabel": "数据来源",
   "envOverallCalm": "情况尚可应对。请将吸入器放在附近。",
   "forecastIntro": "基于空气质量与花粉预报的下一时段展望。",
   "forecastEmpty": "预报序列尚不可用。请下拉刷新。",
   "forecastPollenNote": "花粉使用 Google Pollen API（非 Open-Meteo）。MVP 不使用热图。",
   "forecastDayPollen": "花粉 UPI {upi} · {type}",
-  "@forecastDayPollen": {
-    "placeholders": {
-      "upi": {
-        "type": "int"
-      },
-      "type": {
-        "type": "String"
-      }
-    }
-  },
   "forecastDayAqi": "最高美国 AQI {aqi}",
-  "@forecastDayAqi": {
-    "placeholders": {
-      "aqi": {
-        "type": "int"
-      }
-    }
-  },
   "forecastMorning": "上午",
   "forecastAfternoon": "下午",
   "forecastEvening": "晚上",
@@ -427,31 +327,14 @@
   "locationsNameLabel": "标签",
   "locationsAddCurrent": "添加当前位置",
   "locationsSaveFailed": "无法更新已保存位置。请重试。",
-  "locationsCapReached": "最多可保存 10 个地点。请先删除一个再添加。",
   "locationsDeleteTitle": "移除地点？",
   "locationsDeleteBody": "将“{name}”从监测中移除？",
-  "@locationsDeleteBody": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "locationsCoords": "{lat}, {lon}",
-  "@locationsCoords": {
-    "placeholders": {
-      "lat": {
-        "type": "String"
-      },
-      "lon": {
-        "type": "String"
-      }
-    }
-  },
   "locationsPrimaryBadge": "主要",
   "stateOnlyNjApplied": "仅限 NJ：已应用货运 AADT 权重",
   "stateOnlyNjNotApplied": "仅限 NJ：未应用货运 AADT 权重",
   "stateOnlyNjAppliedHint": "附近的 NJDOT 交通计数提高了 TRAP 权重。空气质量传感器仍在全国适用。",
   "stateOnlyNjOutsideHint": "你在新泽西州以外。货运 AADT 加权仅限 NJ；TRAP 仍使用空气传感器。",
-  "stateOnlyNjNoCountHint": "附近没有 NJDOT 货运计数。TRAP 在无 NJ 货运权重的情况下使用空气质量传感器。"
+  "stateOnlyNjNoCountHint": "附近没有 NJDOT 货运计数。TRAP 在无 NJ 货运权重的情况下使用空气质量传感器。",
+  "locationsCapReached": "最多可保存 10 个地点。请先删除一个再添加。"
 }

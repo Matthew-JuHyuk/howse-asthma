@@ -1,21 +1,20 @@
-// Issue a 6-digit invite code (TTL 24h) for the signed-in provider.
+// Issue an 8-char alphanumeric invite code (TTL 24h) for the signed-in provider.
 
 import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
 import { requireRole, requireUser } from "../_shared/user_client.ts";
 
 const MAX_ACTIVE_INVITES = 5;
+const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O/1/I
 
-/** Unbiased 6-digit code via rejection sampling. */
-function randomSixDigit(): string {
-  const max = 1_000_000;
-  const limit = Math.floor(0x100000000 / max) * max;
-  const buf = new Uint32Array(1);
-  let n = 0;
-  do {
-    crypto.getRandomValues(buf);
-    n = buf[0]!;
-  } while (n >= limit);
-  return (n % max).toString().padStart(6, "0");
+/** Unbiased 8-char code (Crockford-ish alphabet). */
+function randomInviteCode(): string {
+  const bytes = new Uint8Array(8);
+  crypto.getRandomValues(bytes);
+  let out = "";
+  for (let i = 0; i < 8; i++) {
+    out += CODE_ALPHABET[bytes[i]! % CODE_ALPHABET.length]!;
+  }
+  return out;
 }
 
 Deno.serve(async (req) => {
@@ -54,7 +53,7 @@ Deno.serve(async (req) => {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
   for (let attempt = 0; attempt < 8; attempt++) {
-    const code = randomSixDigit();
+    const code = randomInviteCode();
     const { data, error } = await admin
       .from("invite_codes")
       .insert({

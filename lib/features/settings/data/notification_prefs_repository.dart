@@ -34,10 +34,9 @@ class NotificationPrefsRepository {
 
     final patch = <String, dynamic>{
       'updated_at': DateTime.now().toUtc().toIso8601String(),
-      if (pushRiskGe3 != null) 'push_risk_ge3': pushRiskGe3,
-      if (pushLocationEntry != null) 'push_location_entry': pushLocationEntry,
-      if (pushSavedLocationChange != null)
-        'push_saved_location_change': pushSavedLocationChange,
+      'push_risk_ge3': ?pushRiskGe3,
+      'push_location_entry': ?pushLocationEntry,
+      'push_saved_location_change': ?pushSavedLocationChange,
     };
 
     await SupabaseService.client

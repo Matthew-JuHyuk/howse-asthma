@@ -43,6 +43,7 @@ class EnvironmentRiskRepository {
   Future<Map<String, dynamic>> notifyRiskThreshold({
     required double latitude,
     required double longitude,
+    String triggerReason = 'RISK_THRESHOLD',
   }) async {
     try {
       final response = await SupabaseService.client.functions.invoke(
@@ -50,6 +51,7 @@ class EnvironmentRiskRepository {
         body: {
           'latitude': latitude,
           'longitude': longitude,
+          'trigger_reason': triggerReason,
         },
       );
       return _asMap(response.data);

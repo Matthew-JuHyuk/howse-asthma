@@ -23,11 +23,30 @@ export type SourceCoverageEntry = {
   reason?: string;
 };
 
+export type ForecastPeriodPoint = {
+  period: "morning" | "afternoon" | "evening";
+  us_aqi?: number | null;
+  pollen_upi?: number | null;
+  trap_level?: TrapLevel | null;
+  flood_active?: boolean;
+};
+
+export type ForecastDayPoint = {
+  date: string;
+  periods: ForecastPeriodPoint[];
+  pollen_upi?: number | null;
+  dominant_pollen_type?: string | null;
+  us_aqi_max?: number | null;
+  composite_score?: 1 | 2 | 3 | 4;
+};
+
 export type EnvironmentSnapshot = {
   risk_score: 1 | 2 | 3 | 4;
   ui_state: UiState;
   triggers: EnvironmentTriggers;
   geohash?: string;
+  /** Multi-day outlook for SCR-PAT-FORECAST (Open-Meteo periods + Google pollen). */
+  forecast_points?: ForecastDayPoint[];
   aqi_epa?: number | null;
   aqi_source?: string | null;
   pm25?: number | null;

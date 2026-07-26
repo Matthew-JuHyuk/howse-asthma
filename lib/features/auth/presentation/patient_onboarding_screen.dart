@@ -62,7 +62,7 @@ class _PatientOnboardingScreenState extends State<PatientOnboardingScreen> {
       if (redeem) {
         final code = _codeController.text.trim();
         if (code.isNotEmpty) {
-          if (!RegExp(r'^\d{6}$').hasMatch(code)) {
+          if (!RegExp(r'^[A-Za-z0-9]{8}$').hasMatch(code)) {
             setState(() {
               _message = l10n.authInviteInvalidFormat;
               _isError = true;

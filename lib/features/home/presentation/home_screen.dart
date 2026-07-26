@@ -7,6 +7,7 @@ import '../../alerts/presentation/alert_screen.dart';
 import '../../environment/data/environment_risk_repository.dart';
 import '../../environment/data/environment_snapshot.dart';
 import '../../environment/presentation/env_screen.dart';
+import '../../environment/presentation/widgets/state_only_source_badge.dart';
 import '../../medication_log/data/inhaler_event_repository.dart';
 import '../../panic/presentation/panic_screen.dart';
 
@@ -104,16 +105,21 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     if (_alertOffered) return;
     _alertOffered = true;
+    String? status;
     try {
       // Server recomputes risk from cache; client scores are not trusted.
-      await _riskRepo.notifyRiskThreshold(
+      final result = await _riskRepo.notifyRiskThreshold(
         latitude: lat,
         longitude: lon,
       );
+      status = result['status'] as String?;
     } catch (_) {
-      // Cooldown / no forecast — still show in-app landing when UI is elevated.
+      // Cooldown / offline — do not force a duplicate alert UI.
+      return;
     }
     if (!mounted) return;
+    // Align with EnvironmentMonitor: only land in-app when Edge recorded.
+    if (status != 'recorded') return;
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => AlertScreen(snapshot: snap),
@@ -337,16 +343,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ],
-                if (snap.showNjOnlyFreightNotice) ...[
-                  const SizedBox(height: 10),
-                  Text(
-                    l10n.njOnlyDataNotice,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppTheme.neutral500,
-                    ),
-                  ),
-                ],
+                const SizedBox(height: 10),
+                StateOnlySourceBadge.njdot(snap, compact: true),
                 const SizedBox(height: 20),
                 Text(
                   l10n.homeEnvFactors,

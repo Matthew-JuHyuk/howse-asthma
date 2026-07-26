@@ -169,13 +169,13 @@
   "authBiometricToggleHint": "Require biometric unlock when opening the app",
   "authBiometricUnavailable": "Biometrics are not available on this device",
   "authOnboardingTitle": "Patient setup",
-  "authOnboardingBody": "If your clinician shared a 6-digit invite code, enter it now. You can also do this later in Settings.",
+  "authOnboardingBody": "If your clinician shared an 8-character invite code, enter it now. You can also do this later in Settings.",
   "authOnboardingSkip": "Skip for now",
   "authInviteCodeLabel": "Provider invite code",
-  "authInviteCodeHelper": "6 digits, expires in 24 hours",
+  "authInviteCodeHelper": "8 letters/numbers, expires in 24 hours",
   "authInviteRedeem": "Redeem",
   "authInviteRedeemAndContinue": "Redeem and continue",
-  "authInviteInvalidFormat": "Invite code must be 6 digits",
+  "authInviteInvalidFormat": "Invite code must be 8 letters or numbers",
   "authInviteRedeemedPending": "Invite redeemed. Waiting for provider confirmation.",
   "authInviteRedeemFailed": "Could not redeem invite code",
   "authInviteIssueFailed": "Could not issue invite code",
@@ -196,7 +196,7 @@
   "providerHomePlaceholder": "Patient clinical dashboards arrive in a later release. Start by linking patients.",
   "providerLinkPatientsCta": "Link patients",
   "providerLinkTitle": "Link patients",
-  "providerLinkIntro": "Issue a 6-digit code (valid 24 hours). The patient enters it, then both sides confirm.",
+  "providerLinkIntro": "Issue an 8-character code (valid 24 hours). The patient enters it, then both sides confirm.",
   "providerIssueInviteCta": "Issue invite code",
   "providerInviteTtlHint": "Valid for 24 hours",
   "providerInviteCopied": "Invite code copied",
@@ -337,12 +337,86 @@
   "settingsAlertsTitle": "Alert Preferences",
   "settingsAlertRisk": "Risk Alerts",
   "settingsAlertRiskHint": "When your composite risk score reaches 3 or higher",
-  "settingsAlertHome": "Home Alerts",
-  "settingsAlertHomeHint": "When air quality changes at saved places (Phase 5)",
+  "settingsAlertHome": "Saved place alerts",
+  "settingsAlertHomeHint": "When risk rises at places you saved (home, school, work)",
+  "settingsAlertLocationEntry": "Location entry alerts",
+  "settingsAlertLocationEntryHint": "When you move into a higher-risk area while the app is open",
   "settingsSecurityTitle": "Security",
   "emergencyContactRequired": "Enter a contact name and phone number",
   "emergencyContactInvalidPhone": "Enter a valid phone with country code (E.164), e.g. +15551234567",
   "emergencyContactSaved": "Emergency contact saved",
   "emergencyContactSave": "Save contact",
-  "emergencyContactPhoneHint": "Include country code (E.164), e.g. +15551234567"
+  "emergencyContactPhoneHint": "Include country code (E.164), e.g. +15551234567",
+  "commonCancel": "Cancel",
+  "commonSave": "Save",
+  "commonDelete": "Delete",
+  "envTitle": "Environment",
+  "envThreeAxis": "Three risk axes",
+  "envTrapDetail": "Traffic-related air pollution proxy (sensors + optional NJ freight weight)",
+  "envTrapTip": "Limit outdoor exertion when TRAP is HIGH or CRITICAL.",
+  "envFloodDetail": "NWS flash-flood / stream warnings near you",
+  "envFloodTipClear": "No active flash-flood warning for this area.",
+  "envPollenDetail": "Google Pollen forecast",
+  "envPollenTip": "Keep windows closed and rinse after outdoor time when UPI is high.",
+  "envUsgsRate": "USGS stream change: {rate} ft/hr",
+  "@envUsgsRate": {
+    "placeholders": {
+      "rate": {"type": "String"}
+    }
+  },
+  "envUpdatedAt": "Updated: {when}",
+  "@envUpdatedAt": {
+    "placeholders": {
+      "when": {"type": "String"}
+    }
+  },
+  "envSourcesLabel": "Data sources",
+  "envOverallCalm": "Conditions look manageable. Keep your inhaler nearby.",
+  "forecastIntro": "Outlook for the next periods using air quality and pollen forecasts.",
+  "forecastEmpty": "Forecast series is not available yet. Pull to refresh.",
+  "forecastPollenNote": "Pollen uses Google Pollen API (not Open-Meteo). Heatmaps are not used in MVP.",
+  "forecastDayPollen": "Pollen UPI {upi} · {type}",
+  "@forecastDayPollen": {
+    "placeholders": {
+      "upi": {"type": "int"},
+      "type": {"type": "String"}
+    }
+  },
+  "forecastDayAqi": "Max US AQI {aqi}",
+  "@forecastDayAqi": {
+    "placeholders": {
+      "aqi": {"type": "int"}
+    }
+  },
+  "forecastMorning": "Morning",
+  "forecastAfternoon": "Afternoon",
+  "forecastEvening": "Evening",
+  "locationsTitle": "My Locations",
+  "locationsIntro": "Saved places are checked for risk changes while the app is open. Background OS push needs Firebase (next).",
+  "locationsEmpty": "No saved places yet. Add your current location.",
+  "locationsAddTitle": "Save this place",
+  "locationsNameLabel": "Label",
+  "locationsAddCurrent": "Add current location",
+  "locationsSaveFailed": "Could not update saved locations. Try again.",
+  "locationsCapReached": "You can save up to 10 places. Remove one to add another.",
+  "locationsDeleteTitle": "Remove place?",
+  "locationsDeleteBody": "Remove “{name}” from monitoring?",
+  "@locationsDeleteBody": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "locationsCoords": "{lat}, {lon}",
+  "@locationsCoords": {
+    "placeholders": {
+      "lat": {"type": "String"},
+      "lon": {"type": "String"}
+    }
+  },
+  "locationsPrimaryBadge": "Primary",
+  "stateOnlyNjApplied": "NJ-only: freight AADT weight applied",
+  "stateOnlyNjNotApplied": "NJ-only: freight AADT weight not applied",
+  "stateOnlyNjAppliedHint": "Nearby NJDOT traffic counts raised the TRAP weight. Air quality sensors still apply nationwide.",
+  "stateOnlyNjOutsideHint": "You are outside New Jersey. Freight AADT weighting is NJ-only; TRAP still uses air sensors.",
+  "stateOnlyNjNoCountHint": "No nearby NJDOT freight count. TRAP uses air-quality sensors without the NJ freight weight."
 }

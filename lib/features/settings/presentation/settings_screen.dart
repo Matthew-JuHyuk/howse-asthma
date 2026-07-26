@@ -40,6 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _redeeming = false;
   bool _savingContact = false;
   bool _pushRiskGe3 = true;
+  bool _pushLocationEntry = true;
   bool _pushHome = true;
   String? _locationStatus;
 
@@ -65,6 +66,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Map<String, dynamic>? prefs;
     try {
       contact = await _contacts.get();
+    } catch (_) {}
+    try {
       prefs = await _notifPrefs.getOrCreate();
     } catch (_) {}
 
@@ -83,6 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
       if (prefs != null) {
         _pushRiskGe3 = prefs['push_risk_ge3'] != false;
+        _pushLocationEntry = prefs['push_location_entry'] != false;
         _pushHome = prefs['push_saved_location_change'] != false;
       }
       _locationStatus = !serviceOn
@@ -142,7 +146,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _redeemInvite() async {
     final l10n = AppLocalizations.of(context)!;
     final code = _inviteController.text.trim();
-    if (!RegExp(r'^\d{6}$').hasMatch(code)) {
+    if (!RegExp(r'^[A-Za-z0-9]{8}$').hasMatch(code)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l10n.authInviteInvalidFormat)),
       );
@@ -252,6 +256,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             await _notifPrefs.update(pushRiskGe3: v);
                           } catch (_) {
                             if (mounted) setState(() => _pushRiskGe3 = previous);
+                          }
+                        },
+                      ),
+                      SwitchListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(l10n.settingsAlertLocationEntry),
+                        subtitle: Text(l10n.settingsAlertLocationEntryHint),
+                        value: _pushLocationEntry,
+                        onChanged: (v) async {
+                          final previous = _pushLocationEntry;
+                          setState(() => _pushLocationEntry = v);
+                          try {
+                            await _notifPrefs.update(pushLocationEntry: v);
+                          } catch (_) {
+                            if (mounted) {
+                              setState(() => _pushLocationEntry = previous);
+                            }
                           }
                         },
                       ),

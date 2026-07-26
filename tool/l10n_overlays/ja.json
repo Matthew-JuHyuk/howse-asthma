@@ -1,18 +1,11 @@
 {
-  "@@locale": "ja",
   "appTitle": "Howse Asthma",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
   "loginTitle": "ログイン",
   "loginEmailLabel": "メール",
   "loginPasswordLabel": "パスワード",
   "loginButton": "ログイン",
   "signUpButton": "新規登録",
   "supabaseNotConfigured": "Supabase がまだ設定されていません。\n.env ファイルに SUPABASE_URL と SUPABASE_ANON_KEY を追加してください。",
-  "@supabaseNotConfigured": {
-    "description": "Shown when Supabase env vars are missing"
-  },
   "homeGreeting": "こんにちは",
   "homeAirQualityTitle": "近くの大気質",
   "homeWeatherTitle": "近くの天気",
@@ -137,13 +130,6 @@
   "authContinueApple": "Apple で続行",
   "authCheckEmailTitle": "メールを確認",
   "authCheckEmailBody": "{email} に確認リンクを送りました。開いてからサインインしてください。",
-  "@authCheckEmailBody": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "authBackToSignIn": "サインインに戻る",
   "authCompleteProfileTitle": "プロフィールを完成",
   "authCompleteProfileBody": "正しいホーム画面を開くため、あなたについて教えてください。",
@@ -189,13 +175,6 @@
   "providerLinkTab": "連携",
   "providerHomeTitle": "医療者ホーム",
   "providerHomeWelcome": "{email} としてサインイン中",
-  "@providerHomeWelcome": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
   "providerHomePlaceholder": "患者の臨床ダッシュボードは今後のリリースで提供されます。まず患者を連携してください。",
   "providerLinkPatientsCta": "患者を連携",
   "providerLinkTitle": "患者を連携",
@@ -206,13 +185,6 @@
   "providerPendingLinks": "保留中の連携",
   "providerNoPendingLinks": "保留中の連携はありません",
   "providerPendingPatient": "患者 {idPrefix}…",
-  "@providerPendingPatient": {
-    "placeholders": {
-      "idPrefix": {
-        "type": "String"
-      }
-    }
-  },
   "providerRecentInvites": "最近の招待コード",
   "providerNoInvites": "まだ招待コードはありません",
   "providerInviteConsumed": "使用済み",
@@ -262,13 +234,6 @@
   "homeLastInhalerNone": "まだ吸入器の使用記録がありません",
   "homeLastInhalerToday": "最後の吸入器使用：今日",
   "homeLastInhalerDays": "最後の吸入器使用：{days} 日前",
-  "@homeLastInhalerDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
   "locationServiceDisabled": "近くの喘息リスクを表示するには位置情報サービスをオンにしてください。",
   "locationPermissionDenied": "近くの大気質には位置情報の許可が必要です。",
   "locationPermissionDeniedForever": "位置情報の許可がブロックされています。設定で許可してください。",
@@ -279,13 +244,6 @@
   "njOnlyDataNotice": "NJ 専用データ：貨物 AADT の重み付けはニュージャージーのみ適用。TRAP は全国の大気質センサーを引き続き使用します。",
   "homeDegradedNotice": "一部の大気質ソースが利用できません。リスクが不完全な場合があるため注意してください。",
   "logWeekSummary": "過去 7 日間の吸入器イベント {count} 件",
-  "@logWeekSummary": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "logFilterAll": "すべて",
   "logFilterRescue": "救援",
   "logFilterPanic": "パニック",
@@ -310,44 +268,17 @@
   "actQ5Opt4": "よくコントロールできている",
   "actQ5Opt5": "完全にコントロールできている",
   "actSaved": "ACT を保存しました。スコア：{score}",
-  "@actSaved": {
-    "placeholders": {
-      "score": {
-        "type": "int"
-      }
-    }
-  },
   "pdcTitle": "毎日の服薬確認",
   "pdcSaved": "毎日の確認を保存しました",
   "pdcAlreadyYes": "今日はすでに服用済みと記録しています。更新できます。",
   "pdcAlreadyNo": "今日はすでに未服用と記録しています。更新できます。",
   "pdcStreakHint": "過去 30 日：{total} 日中 {taken} 日服用（{rate}）",
-  "@pdcStreakHint": {
-    "placeholders": {
-      "taken": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      },
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "panicEmergencyBadge": "緊急",
   "panicBreatheTitle": "呼吸して吸入器を使う",
   "panicTakeInhalerNow": "今すぐ吸入器を使う",
   "panicNeedHelp": "もっと助けが必要です",
   "panicNoAutoDial": "ボタンは電話ダイヤラーを開きます。通話は自動では発信されません。",
   "panicCallNamed": "{name} に電話",
-  "@panicCallNamed": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "panicDialFailed": "この端末で電話ダイヤラーを開けませんでした。",
   "alertTitle": "リスクアラート",
   "alertFcmPendingNote": "プッシュ配信には Firebase 設定が必要です（近日）。この画面はアプリ内アラートです。",
@@ -378,45 +309,14 @@
   "envPollenDetail": "Google 花粉予報",
   "envPollenTip": "UPI が高いときは窓を閉め、屋外の後は洗い流してください。",
   "envUsgsRate": "USGS 河川変化：{rate} ft/hr",
-  "@envUsgsRate": {
-    "placeholders": {
-      "rate": {
-        "type": "String"
-      }
-    }
-  },
   "envUpdatedAt": "更新：{when}",
-  "@envUpdatedAt": {
-    "placeholders": {
-      "when": {
-        "type": "String"
-      }
-    }
-  },
   "envSourcesLabel": "データソース",
   "envOverallCalm": "状況は管理できそうです。吸入器を近くに置いてください。",
   "forecastIntro": "大気質と花粉予報に基づく今後の見通しです。",
   "forecastEmpty": "予報シリーズはまだ利用できません。引っ張って更新してください。",
   "forecastPollenNote": "花粉は Google Pollen API を使用します（Open-Meteo ではありません）。MVP ではヒートマップは使いません。",
   "forecastDayPollen": "花粉 UPI {upi} · {type}",
-  "@forecastDayPollen": {
-    "placeholders": {
-      "upi": {
-        "type": "int"
-      },
-      "type": {
-        "type": "String"
-      }
-    }
-  },
   "forecastDayAqi": "最大 US AQI {aqi}",
-  "@forecastDayAqi": {
-    "placeholders": {
-      "aqi": {
-        "type": "int"
-      }
-    }
-  },
   "forecastMorning": "朝",
   "forecastAfternoon": "昼",
   "forecastEvening": "夜",
@@ -427,31 +327,14 @@
   "locationsNameLabel": "ラベル",
   "locationsAddCurrent": "現在地を追加",
   "locationsSaveFailed": "保存した場所を更新できませんでした。再試行してください。",
-  "locationsCapReached": "保存できる場所は最大 10 件です。追加するには 1 件削除してください。",
   "locationsDeleteTitle": "場所を削除しますか？",
   "locationsDeleteBody": "モニタリングから「{name}」を削除しますか？",
-  "@locationsDeleteBody": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "locationsCoords": "{lat}, {lon}",
-  "@locationsCoords": {
-    "placeholders": {
-      "lat": {
-        "type": "String"
-      },
-      "lon": {
-        "type": "String"
-      }
-    }
-  },
   "locationsPrimaryBadge": "メイン",
   "stateOnlyNjApplied": "NJ 専用：貨物 AADT 重みを適用",
   "stateOnlyNjNotApplied": "NJ 専用：貨物 AADT 重み未適用",
   "stateOnlyNjAppliedHint": "近くの NJDOT 交通量が TRAP の重みを上げました。大気質センサーは全国で引き続き適用されます。",
   "stateOnlyNjOutsideHint": "ニュージャージー外です。貨物 AADT の重み付けは NJ 専用で、TRAP は空気センサーを引き続き使います。",
-  "stateOnlyNjNoCountHint": "近くに NJDOT 貨物カウントがありません。TRAP は NJ 貨物重みなしで大気質センサーを使います。"
+  "stateOnlyNjNoCountHint": "近くに NJDOT 貨物カウントがありません。TRAP は NJ 貨物重みなしで大気質センサーを使います。",
+  "locationsCapReached": "保存できる場所は最大 10 件です。追加するには 1 件削除してください。"
 }

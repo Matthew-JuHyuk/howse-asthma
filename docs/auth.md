@@ -46,7 +46,7 @@ All writes go through Edge Functions using `service_role` + atomic SQL RPCs.
 
 | Edge Function | Who | Effect |
 | --- | --- | --- |
-| `issue-invite-code` | Provider | Inserts 6-digit code, TTL 24h (max 5 active per provider) |
+| `issue-invite-code` | Provider | Inserts 8-char alphanumeric code, TTL 24h (max 5 active per provider) |
 | `redeem-invite-code` | Patient | Atomic consume + pending link (`redeem_invite_code_as`); rate-limited |
 | `confirm-care-link` | Either side | Atomic confirm/reject while `pending` (`confirm_care_link_as`) |
 

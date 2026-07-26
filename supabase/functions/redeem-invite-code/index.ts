@@ -1,4 +1,4 @@
-// Patient redeems a 6-digit invite via atomic SECURITY DEFINER RPC.
+// Patient redeems an 8-character invite via atomic SECURITY DEFINER RPC.
 
 import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
 import { requireRole, requireUser } from "../_shared/user_client.ts";
@@ -42,8 +42,8 @@ Deno.serve(async (req) => {
     return jsonResponse({ error: "invalid_body" }, 400);
   }
 
-  const code = (body.code ?? "").trim();
-  if (!/^\d{6}$/.test(code)) {
+  const code = (body.code ?? "").trim().toUpperCase();
+  if (!/^[A-Z0-9]{8}$/.test(code)) {
     return jsonResponse({ error: "invite_invalid" }, 400);
   }
 

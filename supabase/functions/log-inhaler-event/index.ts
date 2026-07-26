@@ -5,9 +5,10 @@
 import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
 import { encodeGeohash } from "../_shared/geohash.ts";
 import { isInServiceArea } from "../_shared/geo_bounds.ts";
-import { requireUser } from "../_shared/user_client.ts";
+import { requireRole, requireUser } from "../_shared/user_client.ts";
 
 const INPUT_MEANS = new Set(["tap", "panic", "voice"]);
+const MAX_INHALER_LOGS_PER_HOUR = 60;
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -20,6 +21,24 @@ Deno.serve(async (req) => {
   const authed = await requireUser(req);
   if (authed instanceof Response) return authed;
   const { user, admin } = authed;
+
+  const isPatient = await requireRole(admin, user.id, "PATIENT");
+  if (!isPatient) {
+    return jsonResponse({ error: "forbidden" }, 403);
+  }
+
+  const hourAgo = new Date(Date.now() - 60 * 60_000).toISOString();
+  const { count: recentLogs, error: rateErr } = await admin
+    .from("inhaler_events")
+    .select("id", { count: "exact", head: true })
+    .eq("patient_id", user.id)
+    .gte("recorded_at", hourAgo);
+  if (rateErr) {
+    return jsonResponse({ error: "rate_check_failed" }, 503);
+  }
+  if ((recentLogs ?? 0) >= MAX_INHALER_LOGS_PER_HOUR) {
+    return jsonResponse({ error: "rate_limited" }, 429);
+  }
 
   let body: Record<string, unknown>;
   try {

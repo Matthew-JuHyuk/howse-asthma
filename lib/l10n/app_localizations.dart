@@ -1051,7 +1051,7 @@ abstract class AppLocalizations {
   /// No description provided for @authOnboardingBody.
   ///
   /// In en, this message translates to:
-  /// **'If your clinician shared a 6-digit invite code, enter it now. You can also do this later in Settings.'**
+  /// **'If your clinician shared an 8-character invite code, enter it now. You can also do this later in Settings.'**
   String get authOnboardingBody;
 
   /// No description provided for @authOnboardingSkip.
@@ -1069,7 +1069,7 @@ abstract class AppLocalizations {
   /// No description provided for @authInviteCodeHelper.
   ///
   /// In en, this message translates to:
-  /// **'6 digits, expires in 24 hours'**
+  /// **'8 letters/numbers, expires in 24 hours'**
   String get authInviteCodeHelper;
 
   /// No description provided for @authInviteRedeem.
@@ -1087,7 +1087,7 @@ abstract class AppLocalizations {
   /// No description provided for @authInviteInvalidFormat.
   ///
   /// In en, this message translates to:
-  /// **'Invite code must be 6 digits'**
+  /// **'Invite code must be 8 letters or numbers'**
   String get authInviteInvalidFormat;
 
   /// No description provided for @authInviteRedeemedPending.
@@ -1183,7 +1183,7 @@ abstract class AppLocalizations {
   /// No description provided for @providerLinkIntro.
   ///
   /// In en, this message translates to:
-  /// **'Issue a 6-digit code (valid 24 hours). The patient enters it, then both sides confirm.'**
+  /// **'Issue an 8-character code (valid 24 hours). The patient enters it, then both sides confirm.'**
   String get providerLinkIntro;
 
   /// No description provided for @providerIssueInviteCta.
@@ -1837,14 +1837,26 @@ abstract class AppLocalizations {
   /// No description provided for @settingsAlertHome.
   ///
   /// In en, this message translates to:
-  /// **'Home Alerts'**
+  /// **'Saved place alerts'**
   String get settingsAlertHome;
 
   /// No description provided for @settingsAlertHomeHint.
   ///
   /// In en, this message translates to:
-  /// **'When air quality changes at saved places (Phase 5)'**
+  /// **'When risk rises at places you saved (home, school, work)'**
   String get settingsAlertHomeHint;
+
+  /// No description provided for @settingsAlertLocationEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Location entry alerts'**
+  String get settingsAlertLocationEntry;
+
+  /// No description provided for @settingsAlertLocationEntryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When you move into a higher-risk area while the app is open'**
+  String get settingsAlertLocationEntryHint;
 
   /// No description provided for @settingsSecurityTitle.
   ///
@@ -1881,6 +1893,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Include country code (E.164), e.g. +15551234567'**
   String get emergencyContactPhoneHint;
+
+  /// No description provided for @commonCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get commonCancel;
+
+  /// No description provided for @commonSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get commonSave;
+
+  /// No description provided for @commonDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get commonDelete;
+
+  /// No description provided for @envTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get envTitle;
+
+  /// No description provided for @envThreeAxis.
+  ///
+  /// In en, this message translates to:
+  /// **'Three risk axes'**
+  String get envThreeAxis;
+
+  /// No description provided for @envTrapDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Traffic-related air pollution proxy (sensors + optional NJ freight weight)'**
+  String get envTrapDetail;
+
+  /// No description provided for @envTrapTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Limit outdoor exertion when TRAP is HIGH or CRITICAL.'**
+  String get envTrapTip;
+
+  /// No description provided for @envFloodDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'NWS flash-flood / stream warnings near you'**
+  String get envFloodDetail;
+
+  /// No description provided for @envFloodTipClear.
+  ///
+  /// In en, this message translates to:
+  /// **'No active flash-flood warning for this area.'**
+  String get envFloodTipClear;
+
+  /// No description provided for @envPollenDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Google Pollen forecast'**
+  String get envPollenDetail;
+
+  /// No description provided for @envPollenTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep windows closed and rinse after outdoor time when UPI is high.'**
+  String get envPollenTip;
+
+  /// No description provided for @envUsgsRate.
+  ///
+  /// In en, this message translates to:
+  /// **'USGS stream change: {rate} ft/hr'**
+  String envUsgsRate(String rate);
+
+  /// No description provided for @envUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated: {when}'**
+  String envUpdatedAt(String when);
+
+  /// No description provided for @envSourcesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Data sources'**
+  String get envSourcesLabel;
+
+  /// No description provided for @envOverallCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'Conditions look manageable. Keep your inhaler nearby.'**
+  String get envOverallCalm;
+
+  /// No description provided for @forecastIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Outlook for the next periods using air quality and pollen forecasts.'**
+  String get forecastIntro;
+
+  /// No description provided for @forecastEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Forecast series is not available yet. Pull to refresh.'**
+  String get forecastEmpty;
+
+  /// No description provided for @forecastPollenNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Pollen uses Google Pollen API (not Open-Meteo). Heatmaps are not used in MVP.'**
+  String get forecastPollenNote;
+
+  /// No description provided for @forecastDayPollen.
+  ///
+  /// In en, this message translates to:
+  /// **'Pollen UPI {upi} · {type}'**
+  String forecastDayPollen(int upi, String type);
+
+  /// No description provided for @forecastDayAqi.
+  ///
+  /// In en, this message translates to:
+  /// **'Max US AQI {aqi}'**
+  String forecastDayAqi(int aqi);
+
+  /// No description provided for @forecastMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get forecastMorning;
+
+  /// No description provided for @forecastAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get forecastAfternoon;
+
+  /// No description provided for @forecastEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get forecastEvening;
+
+  /// No description provided for @locationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Locations'**
+  String get locationsTitle;
+
+  /// No description provided for @locationsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved places are checked for risk changes while the app is open. Background OS push needs Firebase (next).'**
+  String get locationsIntro;
+
+  /// No description provided for @locationsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved places yet. Add your current location.'**
+  String get locationsEmpty;
+
+  /// No description provided for @locationsAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save this place'**
+  String get locationsAddTitle;
+
+  /// No description provided for @locationsNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get locationsNameLabel;
+
+  /// No description provided for @locationsAddCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Add current location'**
+  String get locationsAddCurrent;
+
+  /// No description provided for @locationsSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update saved locations. Try again.'**
+  String get locationsSaveFailed;
+
+  /// No description provided for @locationsCapReached.
+  ///
+  /// In en, this message translates to:
+  /// **'You can save up to 10 places. Remove one to add another.'**
+  String get locationsCapReached;
+
+  /// No description provided for @locationsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove place?'**
+  String get locationsDeleteTitle;
+
+  /// No description provided for @locationsDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove “{name}” from monitoring?'**
+  String locationsDeleteBody(String name);
+
+  /// No description provided for @locationsCoords.
+  ///
+  /// In en, this message translates to:
+  /// **'{lat}, {lon}'**
+  String locationsCoords(String lat, String lon);
+
+  /// No description provided for @locationsPrimaryBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary'**
+  String get locationsPrimaryBadge;
+
+  /// No description provided for @stateOnlyNjApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'NJ-only: freight AADT weight applied'**
+  String get stateOnlyNjApplied;
+
+  /// No description provided for @stateOnlyNjNotApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'NJ-only: freight AADT weight not applied'**
+  String get stateOnlyNjNotApplied;
+
+  /// No description provided for @stateOnlyNjAppliedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearby NJDOT traffic counts raised the TRAP weight. Air quality sensors still apply nationwide.'**
+  String get stateOnlyNjAppliedHint;
+
+  /// No description provided for @stateOnlyNjOutsideHint.
+  ///
+  /// In en, this message translates to:
+  /// **'You are outside New Jersey. Freight AADT weighting is NJ-only; TRAP still uses air sensors.'**
+  String get stateOnlyNjOutsideHint;
+
+  /// No description provided for @stateOnlyNjNoCountHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No nearby NJDOT freight count. TRAP uses air-quality sensors without the NJ freight weight.'**
+  String get stateOnlyNjNoCountHint;
 }
 
 class _AppLocalizationsDelegate

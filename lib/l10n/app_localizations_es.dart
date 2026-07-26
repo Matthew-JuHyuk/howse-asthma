@@ -46,7 +46,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get asthmaRiskModerate => 'Riesgo moderado de asma';
 
   @override
-  String get asthmaRiskHigh => 'Riesgo alto de asma - tome precauciones';
+  String get asthmaRiskHigh => 'Riesgo alto de asma: toma precauciones';
 
   @override
   String get medicationLogTitle => 'Registro de medicamentos';
@@ -87,69 +87,71 @@ class AppLocalizationsEs extends AppLocalizations {
       'Alerta de riesgo de ataque de asma';
 
   @override
-  String get mockContinue => 'Continue';
+  String get mockContinue => 'Continuar';
 
   @override
-  String get mockSignUpTitle => 'Create account';
+  String get mockSignUpTitle => 'Crear cuenta';
 
   @override
-  String get mockChooseRole => 'Choose your role';
+  String get mockChooseRole => 'Elige tu rol';
 
   @override
-  String get mockRolePatient => 'Patient';
+  String get mockRolePatient => 'Paciente';
 
   @override
-  String get mockRolePatientHint => 'Track air risk and inhaler use';
+  String get mockRolePatientHint =>
+      'Sigue el riesgo del aire y el uso del inhalador';
 
   @override
-  String get mockRoleProvider => 'Provider';
+  String get mockRoleProvider => 'Profesional';
 
   @override
-  String get mockRoleProviderHint => 'Not in this design preview';
+  String get mockRoleProviderHint => 'No está en esta vista previa de diseño';
 
   @override
   String get mockProviderNotInPreview =>
-      'Provider screens are not in this patient design preview.';
+      'Las pantallas del profesional no están en esta vista previa de paciente.';
 
   @override
-  String get mockBiometricTitle => 'Unlock';
+  String get mockBiometricTitle => 'Desbloquear';
 
   @override
   String get mockBiometricHint =>
-      'Use biometrics to unlock Howse Asthma (design preview).';
+      'Usa biometría para desbloquear Howse Asthma (vista previa de diseño).';
 
   @override
-  String get mockUnlock => 'Unlock';
+  String get mockUnlock => 'Desbloquear';
 
   @override
-  String get mockUsePassword => 'Use password instead';
+  String get mockUsePassword => 'Usar contraseña en su lugar';
 
   @override
-  String get mockOnboardingTitle => 'Patient setup';
+  String get mockOnboardingTitle => 'Configuración del paciente';
 
   @override
-  String get mockHomeLocation => 'Home';
+  String get mockHomeLocation => 'Casa';
 
   @override
   String get mockDummyAddress => '123 Main St, Newark, NJ';
 
   @override
-  String get mockEmergencyContact => 'Emergency contact';
+  String get mockEmergencyContact => 'Contacto de emergencia';
 
   @override
   String get mockDummyContact => 'Alex Guardian · +1 555 0100';
 
   @override
-  String get mockInviteCode => 'Provider invite code';
+  String get mockInviteCode => 'Código de invitación del profesional';
 
   @override
-  String get mockFinishOnboarding => 'Go to home';
+  String get mockFinishOnboarding => 'Ir al inicio';
 
   @override
-  String get mockAllScreens => 'All screens';
+  String get mockAllScreens => 'Todas las pantallas';
 
   @override
-  String get mockAllScreensHint => 'Open any Screen ID for design review';
+  String get mockAllScreensHint =>
+      'Abre cualquier Screen ID para revisión de diseño';
 
   @override
   String get mockStateCalm => 'CALM';
@@ -159,216 +161,218 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mockHomeCalmMessage =>
-      'Air looks manageable nearby. Log inhaler use anytime.';
+      'El aire se ve manejable cerca. Registra el inhalador cuando quieras.';
 
   @override
   String get mockHomeWarnMessage =>
-      'Elevated risk nearby. Limit outdoor exposure and keep your inhaler ready.';
+      'Riesgo elevado cerca. Limita la exposición al exterior y ten el inhalador a mano.';
 
   @override
-  String get mockRiskScore => 'Risk score';
+  String get mockRiskScore => 'Puntuación de riesgo';
 
   @override
-  String get mockDummyLocation => 'Near Newark, NJ';
+  String get mockDummyLocation => 'Cerca de Newark, NJ';
 
   @override
-  String get mockEnvDetail => 'Environment detail';
+  String get mockEnvDetail => 'Detalle del entorno';
 
   @override
-  String get mockForecast => 'Forecast';
+  String get mockForecast => 'Pronóstico';
 
   @override
-  String get mockForecastHint => 'Next days air & pollen outlook';
+  String get mockForecastHint =>
+      'Perspectiva de aire y polen para los próximos días';
 
   @override
-  String get mockAlertPreview => 'Alert landing';
+  String get mockAlertPreview => 'Pantalla de alerta';
 
   @override
-  String get mockAlertPreviewHint => 'Preview risk alert screen';
+  String get mockAlertPreviewHint => 'Vista previa de la alerta de riesgo';
 
   @override
-  String get mockShowWarningHome => 'Preview WARNING home';
+  String get mockShowWarningHome => 'Vista previa de inicio WARNING';
 
   @override
-  String get mockBackToCalmHome => 'Back';
+  String get mockBackToCalmHome => 'Volver';
 
   @override
-  String get mockPanicCta => 'Panic mode';
+  String get mockPanicCta => 'Modo pánico';
 
   @override
-  String get mockTrapAxis => 'TRAP / soot';
+  String get mockTrapAxis => 'TRAP / hollín';
 
   @override
-  String get mockFloodAxis => 'Flash flood';
+  String get mockFloodAxis => 'Inundación súbita';
 
   @override
-  String get mockPollenAxis => 'Pollen';
+  String get mockPollenAxis => 'Polen';
 
   @override
-  String get mockForecastDayHint => 'AQI · TRAP · Pollen outlook';
+  String get mockForecastDayHint => 'Perspectiva AQI · TRAP · Polen';
 
   @override
-  String get mockActSurvey => 'ACT survey';
+  String get mockActSurvey => 'Encuesta ACT';
 
   @override
-  String get mockActHint => '5 pictogram questions (4 weeks)';
+  String get mockActHint => '5 preguntas con pictogramas (4 semanas)';
 
   @override
-  String get mockPdcCheck => 'Daily PDC check';
+  String get mockPdcCheck => 'Control diario PDC';
 
   @override
-  String get mockPdcHint => 'One-tap adherence';
+  String get mockPdcHint => 'Adherencia con un toque';
 
   @override
-  String get mockInhalerEvent => 'Inhaler logged';
+  String get mockInhalerEvent => 'Inhalador registrado';
 
   @override
   String get mockActIntro =>
-      'Answer based on the last 4 weeks. Design preview — answers are not saved.';
+      'Responde según las últimas 4 semanas. Vista previa de diseño: las respuestas no se guardan.';
 
   @override
-  String get mockQuestion => 'Question';
+  String get mockQuestion => 'Pregunta';
 
   @override
-  String get mockSubmit => 'Submit';
+  String get mockSubmit => 'Enviar';
 
   @override
-  String get mockPdcPrompt => 'Did you take your controller medicine today?';
+  String get mockPdcPrompt => '¿Tomaste hoy tu medicamento de control?';
 
   @override
-  String get mockTakenYes => 'Yes, I took it';
+  String get mockTakenYes => 'Sí, lo tomé';
 
   @override
-  String get mockTakenNo => 'Not today';
+  String get mockTakenNo => 'Hoy no';
 
   @override
-  String get mockEvidenceSummary => 'Your evidence summary';
+  String get mockEvidenceSummary => 'Tu resumen de evidencia';
 
   @override
   String get mockEvidenceBody =>
-      'Dummy summary for PA/LMN support. Design preview only.';
+      'Resumen de ejemplo para apoyo PA/LMN. Solo vista previa de diseño.';
 
   @override
-  String get mockInhalerEvents30d => 'Inhaler events (30d)';
+  String get mockInhalerEvents30d => 'Eventos de inhalador (30 d)';
 
   @override
-  String get mockActScore => 'Latest ACT';
+  String get mockActScore => 'Último ACT';
 
   @override
-  String get mockPdcRate => 'PDC (30d)';
+  String get mockPdcRate => 'PDC (30 d)';
 
   @override
-  String get mockLocationsTitle => 'Saved places';
+  String get mockLocationsTitle => 'Lugares guardados';
 
   @override
-  String get mockLocationsHint => 'Home and work monitoring';
+  String get mockLocationsHint => 'Monitoreo de casa y trabajo';
 
   @override
-  String get mockWorkLocation => 'Work';
+  String get mockWorkLocation => 'Trabajo';
 
   @override
   String get mockDummyWorkAddress => '1 Market St, Jersey City, NJ';
 
   @override
-  String get mockAddLocation => 'Add place';
+  String get mockAddLocation => 'Agregar lugar';
 
   @override
-  String get mockRewardTitle => 'Rewards';
+  String get mockRewardTitle => 'Recompensas';
 
   @override
-  String get mockDraftBanner => 'DRAFT — points & vouchers are preview only';
+  String get mockDraftBanner =>
+      'BORRADOR — puntos y vales solo en vista previa';
 
   @override
-  String get mockPointsBalance => 'Points balance';
+  String get mockPointsBalance => 'Saldo de puntos';
 
   @override
-  String get mockVoucherTitle => 'Food bank voucher';
+  String get mockVoucherTitle => 'Vale de banco de alimentos';
 
   @override
-  String get mockVoucherHint => 'Exchange points (waitlist)';
+  String get mockVoucherHint => 'Canjear puntos (lista de espera)';
 
   @override
-  String get mockDonateTitle => 'Donate';
+  String get mockDonateTitle => 'Donar';
 
   @override
-  String get mockDonateHint => 'Third-party giving only';
+  String get mockDonateHint => 'Solo donaciones de terceros';
 
   @override
-  String get mockRewardHistory => 'History';
+  String get mockRewardHistory => 'Historial';
 
   @override
-  String get mockRewardHistoryHint => 'Points and donations';
+  String get mockRewardHistoryHint => 'Puntos y donaciones';
 
   @override
   String get mockDummyFoodBank => 'NJ Community Food Bank (demo)';
 
   @override
-  String get mockVoucherCost => '50 points · \$10 value (draft)';
+  String get mockVoucherCost => '50 puntos · valor de \$10 (borrador)';
 
   @override
-  String get mockJoinWaitlist => 'Join waitlist';
+  String get mockJoinWaitlist => 'Unirse a la lista de espera';
 
   @override
   String get mockDonateTransparency =>
-      'Donations go through a verified third-party nonprofit platform. Howse Asthma never stores card details.';
+      'Las donaciones pasan por una plataforma sin fines de lucro verificada. Howse Asthma nunca guarda datos de tarjeta.';
 
   @override
-  String get mockDonateCta => 'Open donate (external)';
+  String get mockDonateCta => 'Abrir donación (externo)';
 
   @override
   String get mockExternalOnly =>
-      'External donation provider is not wired in design preview.';
+      'El proveedor de donaciones externo no está conectado en la vista previa.';
 
   @override
-  String get mockSignOutPreview => 'Sign out (preview)';
+  String get mockSignOutPreview => 'Cerrar sesión (vista previa)';
 
   @override
-  String get mockOpenAuthFlow => 'Open auth flow';
+  String get mockOpenAuthFlow => 'Abrir flujo de autenticación';
 
   @override
   String get mockAlertBody =>
-      'Risk rose near your location. Review environment details.';
+      'El riesgo aumentó cerca de tu ubicación. Revisa los detalles del entorno.';
 
   @override
-  String get mockDismiss => 'Dismiss';
+  String get mockDismiss => 'Descartar';
 
   @override
-  String get mockPanicTitle => 'Need help now?';
+  String get mockPanicTitle => '¿Necesitas ayuda ahora?';
 
   @override
   String get mockPanicStep1Body =>
-      'Step 1 — Stay with your inhaler. Continue for emergency contacts.';
+      'Paso 1 — Quédate con tu inhalador. Continúa para contactos de emergencia.';
 
   @override
-  String get mockPanicStep2Title => 'Call for help';
+  String get mockPanicStep2Title => 'Pedir ayuda';
 
   @override
   String get mockPanicStep2Body =>
-      'Design preview: buttons do not place a real call. On device builds, Step 2 uses tel: links.';
+      'Vista previa de diseño: los botones no hacen una llamada real. En el dispositivo, el paso 2 usa enlaces tel:.';
 
   @override
-  String get mockCall911 => 'Call 911';
+  String get mockCall911 => 'Llamar al 911';
 
   @override
-  String get mockCallGuardian => 'Call emergency contact';
+  String get mockCallGuardian => 'Llamar al contacto de emergencia';
 
   @override
-  String get mockFeelingBetter => 'I am feeling better';
+  String get mockFeelingBetter => 'Me siento mejor';
 
   @override
-  String get mockTabHome => 'Home';
+  String get mockTabHome => 'Inicio';
 
   @override
-  String get mockTabLog => 'Log';
+  String get mockTabLog => 'Registro';
 
   @override
-  String get mockTabReport => 'Report';
+  String get mockTabReport => 'Informe';
 
   @override
-  String get mockTabReward => 'Reward';
+  String get mockTabReward => 'Recompensas';
 
   @override
-  String get mockTabSettings => 'Settings';
+  String get mockTabSettings => 'Ajustes';
 
   @override
   String get navHome => 'Inicio';
@@ -384,7 +388,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get authRolePatientHint =>
-      'Sigue el riesgo del aire y el uso del inhalador';
+      'Sigue el riesgo de calidad del aire y el uso del inhalador';
 
   @override
   String get authRoleProvider => 'Profesional';
@@ -400,7 +404,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get authNpiLabel => 'Número NPI';
 
   @override
-  String get authNpiHelper => 'Identificador nacional de 10 dígitos';
+  String get authNpiHelper =>
+      'Identificador nacional de proveedor de 10 dígitos';
 
   @override
   String get authOrContinueWith => 'o continuar con';
@@ -478,7 +483,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get authBiometricTitle => 'Desbloquear Howse Asthma';
 
   @override
-  String get authBiometricHint => 'Usa tu huella o rostro para continuar.';
+  String get authBiometricHint => 'Usa biometría para continuar';
 
   @override
   String get authBiometricReason => 'Desbloquear Howse Asthma';
@@ -505,16 +510,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get authOnboardingBody =>
-      'Si tu clínico compartió un código de 6 dígitos, introdúcelo ahora. También puedes hacerlo luego en Ajustes.';
+      'Si tu clínico compartió un código de invitación de 8 caracteres, introdúcelo ahora. También puedes hacerlo luego en Configuración.';
 
   @override
   String get authOnboardingSkip => 'Omitir por ahora';
 
   @override
-  String get authInviteCodeLabel => 'Código de invitación';
+  String get authInviteCodeLabel => 'Código de invitación del profesional';
 
   @override
-  String get authInviteCodeHelper => '6 dígitos, caduca en 24 horas';
+  String get authInviteCodeHelper => '8 letras/números, caduca en 24 horas';
 
   @override
   String get authInviteRedeem => 'Canjear';
@@ -523,17 +528,20 @@ class AppLocalizationsEs extends AppLocalizations {
   String get authInviteRedeemAndContinue => 'Canjear y continuar';
 
   @override
-  String get authInviteInvalidFormat => 'El código debe tener 6 dígitos';
+  String get authInviteInvalidFormat =>
+      'El código de invitación debe tener 8 letras o números';
 
   @override
   String get authInviteRedeemedPending =>
-      'Código canjeado. Esperando confirmación del profesional.';
+      'Invitación canjeada. Esperando confirmación del profesional.';
 
   @override
-  String get authInviteRedeemFailed => 'No se pudo canjear el código';
+  String get authInviteRedeemFailed =>
+      'No se pudo canjear el código de invitación';
 
   @override
-  String get authInviteIssueFailed => 'No se pudo emitir el código';
+  String get authInviteIssueFailed =>
+      'No se pudo emitir el código de invitación';
 
   @override
   String get authConfirmLink => 'Confirmar';
@@ -567,7 +575,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get providerHomePlaceholder =>
-      'Los paneles clínicos llegarán más adelante. Empieza vinculando pacientes.';
+      'Los paneles clínicos de pacientes llegarán en una versión posterior. Empieza vinculando pacientes.';
 
   @override
   String get providerLinkPatientsCta => 'Vincular pacientes';
@@ -577,16 +585,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get providerLinkIntro =>
-      'Emite un código de 6 dígitos (válido 24 horas). El paciente lo introduce y ambos confirman.';
+      'Emite un código de 8 caracteres (válido 24 horas). El paciente lo introduce y ambos confirman.';
 
   @override
-  String get providerIssueInviteCta => 'Emitir código';
+  String get providerIssueInviteCta => 'Emitir código de invitación';
 
   @override
   String get providerInviteTtlHint => 'Válido durante 24 horas';
 
   @override
-  String get providerInviteCopied => 'Código copiado';
+  String get providerInviteCopied => 'Código de invitación copiado';
 
   @override
   String get providerPendingLinks => 'Vínculos pendientes';
@@ -600,10 +608,10 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get providerRecentInvites => 'Códigos recientes';
+  String get providerRecentInvites => 'Códigos de invitación recientes';
 
   @override
-  String get providerNoInvites => 'Aún no hay códigos';
+  String get providerNoInvites => 'Aún no hay códigos de invitación';
 
   @override
   String get providerInviteConsumed => 'Usado';
@@ -612,357 +620,516 @@ class AppLocalizationsEs extends AppLocalizations {
   String get providerInviteActive => 'Activo';
 
   @override
-  String get splashTagline => 'Smarter asthma prevention for every family.';
+  String get splashTagline =>
+      'Prevención del asma más inteligente para cada familia.';
 
   @override
-  String get splashGetStarted => 'Get Started';
+  String get splashGetStarted => 'Comenzar';
 
   @override
-  String get splashAlreadyHaveAccount => 'Already have an account?';
+  String get splashAlreadyHaveAccount => '¿Ya tienes una cuenta?';
 
   @override
-  String get splashSignIn => 'Sign in';
+  String get splashSignIn => 'Iniciar sesión';
 
   @override
-  String get authForgotPassword => 'Forgot password?';
+  String get authForgotPassword => '¿Olvidaste tu contraseña?';
 
   @override
-  String get authNoAccount => 'No account?';
+  String get authNoAccount => '¿No tienes cuenta?';
 
   @override
-  String get authUseBiometricHint => 'Use Face ID or fingerprint to unlock';
+  String get authUseBiometricHint => 'Usa Face ID o huella para desbloquear';
 
   @override
-  String get authTouchSensorHint => 'Touch sensor or look at camera';
+  String get authTouchSensorHint => 'Toca el sensor o mira a la cámara';
 
   @override
-  String get navLog => 'Log';
+  String get navLog => 'Registro';
 
   @override
-  String get navReport => 'Report';
+  String get navReport => 'Informe';
 
   @override
-  String get navRewards => 'Rewards';
+  String get navRewards => 'Recompensas';
 
   @override
-  String get mockChooseLanguage => 'Choose Language';
+  String get mockChooseLanguage => 'Elegir idioma';
 
   @override
-  String get mockYourLocation => 'Your Location';
+  String get mockYourLocation => 'Tu ubicación';
 
   @override
-  String get mockUseCurrentLocation => 'Use Current Location';
+  String get mockUseCurrentLocation => 'Usar ubicación actual';
 
   @override
   String get mockLocationTrapOnly =>
-      'Location is used for TRAP air quality data only';
+      'La ubicación se usa solo para datos de calidad del aire TRAP';
 
   @override
-  String get mockLabelYourPlace => 'Label Your Place';
+  String get mockLabelYourPlace => 'Etiqueta tu lugar';
 
   @override
-  String get mockSchool => 'School';
+  String get mockSchool => 'Escuela';
 
   @override
-  String get mockWork => 'Work';
+  String get mockWork => 'Trabajo';
 
   @override
-  String get mockOther => 'Other';
+  String get mockOther => 'Otro';
 
   @override
-  String get mockEmergencyOnePerson => 'One person to call in an emergency';
+  String get mockEmergencyOnePerson =>
+      'Una persona a quien llamar en una emergencia';
 
   @override
-  String get mockContactName => 'Contact Name';
+  String get mockContactName => 'Nombre del contacto';
 
   @override
-  String get mockPhoneNumber => 'Phone Number';
+  String get mockPhoneNumber => 'Número de teléfono';
 
   @override
-  String get mockProviderPairing => 'Provider Pairing';
+  String get mockProviderPairing => 'Emparejamiento con profesional';
 
   @override
   String get mockPairingOptional =>
-      'Optional — you can add this later in Settings';
+      'Opcional: puedes agregarlo después en Configuración';
 
   @override
-  String get mockNext => 'Next';
+  String get mockNext => 'Siguiente';
 
   @override
-  String get mockProfessionalProfile => 'Professional Profile';
+  String get mockProfessionalProfile => 'Perfil profesional';
 
   @override
-  String get mockStep2Of4 => 'Step 2 of 4';
+  String get mockStep2Of4 => 'Paso 2 de 4';
 
   @override
-  String get mockTellPractice => 'Tell us about your medical practice';
+  String get mockTellPractice => 'Cuéntanos sobre tu consultorio médico';
 
   @override
-  String get mockSpecialtyLabel => 'Specialty';
+  String get mockSpecialtyLabel => 'Especialidad';
 
   @override
-  String get mockClinicLabel => 'Practice / Clinic Name';
+  String get mockClinicLabel => 'Nombre del consultorio / clínica';
 
   @override
   String get mockNpiFormatOnly =>
-      'Format check only. NPI verification occurs after submission.';
+      'Solo verificación de formato. La verificación NPI ocurre tras el envío.';
 
   @override
   String get mockCredentialsSecure =>
-      'Your credentials are encrypted and stored securely. We never share provider data without consent.';
+      'Tus credenciales se cifran y almacenan de forma segura. Nunca compartimos datos del profesional sin consentimiento.';
 
   @override
   String get oneTapFab => '1-Tap';
 
   @override
-  String get oneTapLoggedSnack => 'Inhaler use logged (stub)';
+  String get oneTapLoggedSnack => 'Uso de inhalador registrado (stub)';
 
   @override
-  String get oneTapLoggedOk => 'Inhaler use logged';
+  String get oneTapLoggedOk => 'Uso de inhalador registrado';
 
   @override
-  String get oneTapLoggedFailed => 'Could not log inhaler use. Try again.';
+  String get oneTapLoggedFailed =>
+      'No se pudo registrar el uso del inhalador. Inténtalo de nuevo.';
 
   @override
-  String get homeDailySummary => 'Here is your daily summary';
+  String get homeDailySummary => 'Aquí está tu resumen diario';
 
   @override
   String get homeWarningBanner =>
-      'Elevated risk nearby. Limit outdoor exposure and keep your inhaler ready.';
+      'Riesgo elevado cerca. Limita la exposición al exterior y ten el inhalador a mano.';
 
   @override
-  String get homeEnvFactors => 'Environmental Factors';
+  String get homeEnvFactors => 'Factores ambientales';
 
   @override
-  String get homeViewDetails => 'View details';
+  String get homeViewDetails => 'Ver detalles';
 
   @override
-  String get homeFloodActive => 'Active warning';
+  String get homeFloodActive => 'Advertencia activa';
 
   @override
-  String get homeFloodNone => 'None';
+  String get homeFloodNone => 'Ninguna';
 
   @override
-  String get homeLastInhalerNone => 'No inhaler use logged yet';
+  String get homeLastInhalerNone => 'Aún no hay uso de inhalador registrado';
 
   @override
-  String get homeLastInhalerToday => 'Last inhaler use: today';
+  String get homeLastInhalerToday => 'Último uso de inhalador: hoy';
 
   @override
   String homeLastInhalerDays(int days) {
-    return 'Last inhaler use: $days days ago';
+    return 'Último uso de inhalador: hace $days días';
   }
 
   @override
   String get locationServiceDisabled =>
-      'Turn on location services to see nearby asthma risk.';
+      'Activa los servicios de ubicación para ver el riesgo de asma cercano.';
 
   @override
   String get locationPermissionDenied =>
-      'Location permission is needed for air quality near you.';
+      'Se necesita permiso de ubicación para la calidad del aire cerca de ti.';
 
   @override
   String get locationPermissionDeniedForever =>
-      'Location permission is blocked. Open settings to allow it.';
+      'El permiso de ubicación está bloqueado. Abre la configuración para permitirlo.';
 
   @override
   String get locationUnavailable =>
-      'Could not get your location. Pull to refresh or try again.';
+      'No se pudo obtener tu ubicación. Desliza para actualizar o inténtalo de nuevo.';
 
   @override
   String get locationOutOfServiceArea =>
-      'Howse Asthma currently supports locations in the United States.';
+      'Howse Asthma actualmente admite ubicaciones en Estados Unidos.';
 
   @override
-  String get locationOpenSettings => 'Open settings';
+  String get locationOpenSettings => 'Abrir configuración';
 
   @override
-  String get locationStatusGranted => 'Location access is on';
+  String get locationStatusGranted => 'El acceso a la ubicación está activado';
 
   @override
   String get njOnlyDataNotice =>
-      'NJ-only data: freight AADT weighting applies in New Jersey only. TRAP still uses air-quality sensors nationwide.';
+      'Datos solo NJ: la ponderación de AADT de carga pesada aplica solo en Nueva Jersey. TRAP sigue usando sensores de calidad del aire a nivel nacional.';
 
   @override
   String get homeDegradedNotice =>
-      'Some air-quality sources are unavailable. Risk may be incomplete — treat with caution.';
+      'Algunas fuentes de calidad del aire no están disponibles. El riesgo puede estar incompleto: úsalo con precaución.';
 
   @override
   String logWeekSummary(int count) {
-    return '$count inhaler events in the last 7 days';
+    return '$count eventos de inhalador en los últimos 7 días';
   }
 
   @override
-  String get logFilterAll => 'All';
+  String get logFilterAll => 'Todos';
 
   @override
-  String get logFilterRescue => 'Rescue';
+  String get logFilterRescue => 'Rescate';
 
   @override
-  String get logFilterPanic => 'Panic';
+  String get logFilterPanic => 'Pánico';
 
   @override
-  String get logEmpty => 'No inhaler events yet. Use 1-Tap on Home.';
+  String get logEmpty =>
+      'Aún no hay eventos de inhalador. Usa 1-Tap en Inicio.';
 
   @override
-  String get logEventRescue => 'Inhaler use';
+  String get logEventRescue => 'Uso de inhalador';
 
   @override
-  String get logEventPanic => 'Panic inhaler use';
+  String get logEventPanic => 'Uso de inhalador en pánico';
 
   @override
-  String get actTitle => 'Asthma Check';
+  String get actTitle => 'Control del asma';
 
   @override
-  String get actPast4Weeks => 'In the past 4 weeks';
+  String get actPast4Weeks => 'En las últimas 4 semanas';
 
   @override
   String get actQ1 =>
-      'How much of the time did your asthma keep you from getting as much done at work, school or home?';
+      '¿Cuánto tiempo te impidió el asma hacer tanto como querías en el trabajo, la escuela o en casa?';
 
   @override
-  String get actQ2 => 'How often have you had shortness of breath?';
+  String get actQ2 => '¿Con qué frecuencia tuviste falta de aire?';
 
   @override
   String get actQ3 =>
-      'How often did your asthma symptoms wake you up at night or earlier than usual?';
+      '¿Con qué frecuencia los síntomas del asma te despertaron por la noche o antes de lo habitual?';
 
   @override
   String get actQ4 =>
-      'How often have you used your rescue inhaler or nebulizer medication?';
+      '¿Con qué frecuencia usaste tu inhalador de rescate o nebulizador?';
 
   @override
-  String get actQ5 => 'How would you rate your asthma control?';
+  String get actQ5 => '¿Cómo calificarías el control de tu asma?';
 
   @override
-  String get actOpt1 => 'All of the time';
+  String get actOpt1 => 'Todo el tiempo';
 
   @override
-  String get actOpt2 => 'Most of the time';
+  String get actOpt2 => 'La mayor parte del tiempo';
 
   @override
-  String get actOpt3 => 'Some of the time';
+  String get actOpt3 => 'Parte del tiempo';
 
   @override
-  String get actOpt4 => 'A little of the time';
+  String get actOpt4 => 'Poco del tiempo';
 
   @override
-  String get actOpt5 => 'None of the time';
+  String get actOpt5 => 'Nunca';
 
   @override
-  String get actQ5Opt1 => 'Not controlled at all';
+  String get actQ5Opt1 => 'Sin control en absoluto';
 
   @override
-  String get actQ5Opt2 => 'Poorly controlled';
+  String get actQ5Opt2 => 'Mal controlado';
 
   @override
-  String get actQ5Opt3 => 'Somewhat controlled';
+  String get actQ5Opt3 => 'Algo controlado';
 
   @override
-  String get actQ5Opt4 => 'Well controlled';
+  String get actQ5Opt4 => 'Bien controlado';
 
   @override
-  String get actQ5Opt5 => 'Completely controlled';
+  String get actQ5Opt5 => 'Completamente controlado';
 
   @override
   String actSaved(int score) {
-    return 'ACT saved. Score: $score';
+    return 'ACT guardado. Puntuación: $score';
   }
 
   @override
-  String get pdcTitle => 'Daily medicine check';
+  String get pdcTitle => 'Control diario de medicamento';
 
   @override
-  String get pdcSaved => 'Daily check saved';
+  String get pdcSaved => 'Control diario guardado';
 
   @override
   String get pdcAlreadyYes =>
-      'You already marked today as taken. You can update it.';
+      'Ya marcaste hoy como tomado. Puedes actualizarlo.';
 
   @override
   String get pdcAlreadyNo =>
-      'You already marked today as not taken. You can update it.';
+      'Ya marcaste hoy como no tomado. Puedes actualizarlo.';
 
   @override
   String pdcStreakHint(int taken, int total, String rate) {
-    return 'Last 30 days: $taken of $total days taken ($rate)';
+    return 'Últimos 30 días: $taken de $total días tomados ($rate)';
   }
 
   @override
-  String get panicEmergencyBadge => 'EMERGENCY';
+  String get panicEmergencyBadge => 'EMERGENCIA';
 
   @override
-  String get panicBreatheTitle => 'Breathe & Use Inhaler';
+  String get panicBreatheTitle => 'Respira y usa el inhalador';
 
   @override
-  String get panicTakeInhalerNow => 'Take Inhaler Now';
+  String get panicTakeInhalerNow => 'Usa el inhalador ahora';
 
   @override
-  String get panicNeedHelp => 'I need more help';
+  String get panicNeedHelp => 'Necesito más ayuda';
 
   @override
   String get panicNoAutoDial =>
-      'Buttons open the phone dialer. Calls are never placed automatically.';
+      'Los botones abren el marcador. Las llamadas nunca se hacen automáticamente.';
 
   @override
   String panicCallNamed(String name) {
-    return 'Call $name';
+    return 'Llamar a $name';
   }
 
   @override
   String get panicDialFailed =>
-      'Could not open the phone dialer on this device.';
+      'No se pudo abrir el marcador en este dispositivo.';
 
   @override
-  String get alertTitle => 'Risk alert';
+  String get alertTitle => 'Alerta de riesgo';
 
   @override
   String get alertFcmPendingNote =>
-      'Push delivery needs Firebase setup (coming next). This screen is the in-app alert.';
+      'La entrega push necesita configuración de Firebase (próximamente). Esta pantalla es la alerta en la app.';
 
   @override
   String get reportEvidenceBody =>
-      'Summary of inhaler use, ACT, and PDC for clinician or insurance review.';
+      'Resumen del uso del inhalador, ACT y PDC para revisión clínica o del seguro.';
 
   @override
   String get reportShareTodo =>
-      'Share / export will arrive with provider PA/LMN flow.';
+      'Compartir / exportar llegará con el flujo PA/LMN del profesional.';
 
   @override
-  String get settingsAlertsTitle => 'Alert Preferences';
+  String get settingsAlertsTitle => 'Preferencias de alertas';
 
   @override
-  String get settingsAlertRisk => 'Risk Alerts';
+  String get settingsAlertRisk => 'Alertas de riesgo';
 
   @override
   String get settingsAlertRiskHint =>
-      'When your composite risk score reaches 3 or higher';
+      'Cuando tu puntuación de riesgo compuesto llega a 3 o más';
 
   @override
-  String get settingsAlertHome => 'Home Alerts';
+  String get settingsAlertHome => 'Alertas de lugares guardados';
 
   @override
   String get settingsAlertHomeHint =>
-      'When air quality changes at saved places (Phase 5)';
+      'Cuando el riesgo sube en lugares que guardaste (casa, escuela, trabajo)';
 
   @override
-  String get settingsSecurityTitle => 'Security';
+  String get settingsAlertLocationEntry => 'Alertas al entrar en una zona';
+
+  @override
+  String get settingsAlertLocationEntryHint =>
+      'Cuando entras en un área de mayor riesgo mientras la app está abierta';
+
+  @override
+  String get settingsSecurityTitle => 'Seguridad';
 
   @override
   String get emergencyContactRequired =>
-      'Enter a contact name and phone number';
+      'Introduce un nombre de contacto y un teléfono';
 
   @override
   String get emergencyContactInvalidPhone =>
-      'Enter a valid phone with country code (E.164), e.g. +15551234567';
+      'Introduce un teléfono válido con código de país (E.164), p. ej. +15551234567';
 
   @override
-  String get emergencyContactSaved => 'Emergency contact saved';
+  String get emergencyContactSaved => 'Contacto de emergencia guardado';
 
   @override
-  String get emergencyContactSave => 'Save contact';
+  String get emergencyContactSave => 'Guardar contacto';
 
   @override
   String get emergencyContactPhoneHint =>
-      'Include country code (E.164), e.g. +15551234567';
+      'Incluye el código de país (E.164), p. ej. +15551234567';
+
+  @override
+  String get commonCancel => 'Cancelar';
+
+  @override
+  String get commonSave => 'Guardar';
+
+  @override
+  String get commonDelete => 'Eliminar';
+
+  @override
+  String get envTitle => 'Entorno';
+
+  @override
+  String get envThreeAxis => 'Tres ejes de riesgo';
+
+  @override
+  String get envTrapDetail =>
+      'Indicador de contaminación del aire relacionada con el tráfico (sensores + peso opcional de carga NJ)';
+
+  @override
+  String get envTrapTip =>
+      'Limita el esfuerzo al aire libre cuando TRAP esté ALTO o CRÍTICO.';
+
+  @override
+  String get envFloodDetail =>
+      'Advertencias NWS de inundación súbita / caudales cerca de ti';
+
+  @override
+  String get envFloodTipClear =>
+      'No hay advertencia activa de inundación súbita en esta zona.';
+
+  @override
+  String get envPollenDetail => 'Pronóstico de polen de Google';
+
+  @override
+  String get envPollenTip =>
+      'Mantén las ventanas cerradas y enjuágate tras estar afuera cuando el UPI sea alto.';
+
+  @override
+  String envUsgsRate(String rate) {
+    return 'Cambio de caudal USGS: $rate ft/h';
+  }
+
+  @override
+  String envUpdatedAt(String when) {
+    return 'Actualizado: $when';
+  }
+
+  @override
+  String get envSourcesLabel => 'Fuentes de datos';
+
+  @override
+  String get envOverallCalm =>
+      'Las condiciones se ven manejables. Mantén el inhalador cerca.';
+
+  @override
+  String get forecastIntro =>
+      'Perspectiva para los próximos periodos con pronósticos de aire y polen.';
+
+  @override
+  String get forecastEmpty =>
+      'La serie de pronóstico aún no está disponible. Desliza para actualizar.';
+
+  @override
+  String get forecastPollenNote =>
+      'El polen usa la API Google Pollen (no Open-Meteo). Los mapas de calor no se usan en el MVP.';
+
+  @override
+  String forecastDayPollen(int upi, String type) {
+    return 'Polen UPI $upi · $type';
+  }
+
+  @override
+  String forecastDayAqi(int aqi) {
+    return 'AQI US máx. $aqi';
+  }
+
+  @override
+  String get forecastMorning => 'Mañana';
+
+  @override
+  String get forecastAfternoon => 'Tarde';
+
+  @override
+  String get forecastEvening => 'Noche';
+
+  @override
+  String get locationsTitle => 'Mis ubicaciones';
+
+  @override
+  String get locationsIntro =>
+      'Los lugares guardados se revisan por cambios de riesgo mientras la app está abierta. El push en segundo plano del SO necesita Firebase (próximamente).';
+
+  @override
+  String get locationsEmpty =>
+      'Aún no hay lugares guardados. Agrega tu ubicación actual.';
+
+  @override
+  String get locationsAddTitle => 'Guardar este lugar';
+
+  @override
+  String get locationsNameLabel => 'Etiqueta';
+
+  @override
+  String get locationsAddCurrent => 'Agregar ubicación actual';
+
+  @override
+  String get locationsSaveFailed =>
+      'No se pudieron actualizar los lugares guardados. Inténtalo de nuevo.';
+
+  @override
+  String get locationsCapReached =>
+      'Puedes guardar hasta 10 lugares. Elimina uno para agregar otro.';
+
+  @override
+  String get locationsDeleteTitle => '¿Quitar lugar?';
+
+  @override
+  String locationsDeleteBody(String name) {
+    return '¿Quitar “$name” del monitoreo?';
+  }
+
+  @override
+  String locationsCoords(String lat, String lon) {
+    return '$lat, $lon';
+  }
+
+  @override
+  String get locationsPrimaryBadge => 'Principal';
+
+  @override
+  String get stateOnlyNjApplied => 'Solo NJ: peso AADT de carga aplicado';
+
+  @override
+  String get stateOnlyNjNotApplied => 'Solo NJ: peso AADT de carga no aplicado';
+
+  @override
+  String get stateOnlyNjAppliedHint =>
+      'Los conteos de tráfico NJDOT cercanos aumentaron el peso de TRAP. Los sensores de calidad del aire siguen aplicando a nivel nacional.';
+
+  @override
+  String get stateOnlyNjOutsideHint =>
+      'Estás fuera de Nueva Jersey. La ponderación AADT de carga es solo NJ; TRAP sigue usando sensores de aire.';
+
+  @override
+  String get stateOnlyNjNoCountHint =>
+      'No hay conteo de carga NJDOT cercano. TRAP usa sensores de calidad del aire sin el peso de carga NJ.';
 }

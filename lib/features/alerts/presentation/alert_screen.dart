@@ -4,6 +4,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../environment/data/environment_snapshot.dart';
 import '../../environment/presentation/env_screen.dart';
+import '../../environment/presentation/widgets/state_only_source_badge.dart';
 
 /// SCR-SYS-ALERT — in-app landing when risk ≥ 3 (FCM deep-link later).
 class AlertScreen extends StatelessWidget {
@@ -14,8 +15,9 @@ class AlertScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final score = snapshot?.riskScore ?? 3;
-    final state = snapshot?.uiState ?? 'WARNING';
+    final snap = snapshot;
+    final score = snap?.riskScore ?? 3;
+    final state = snap?.uiState ?? 'WARNING';
 
     return Scaffold(
       backgroundColor: AppTheme.defaultBackground,
@@ -55,15 +57,9 @@ class AlertScreen extends StatelessWidget {
                     Text('${l10n.mockRiskScore} $score'),
                     const SizedBox(height: 8),
                     Text(l10n.mockAlertBody),
-                    if (snapshot?.showNjOnlyFreightNotice == true) ...[
+                    if (snap != null) ...[
                       const SizedBox(height: 8),
-                      Text(
-                        l10n.njOnlyDataNotice,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: AppTheme.neutral500,
-                        ),
-                      ),
+                      StateOnlySourceBadge.njdot(snap, compact: true),
                     ],
                   ],
                 ),

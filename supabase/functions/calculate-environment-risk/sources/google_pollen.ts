@@ -6,6 +6,12 @@ import {
 } from "../../_shared/source_errors.ts";
 import type { LocationQuery, SourceResult } from "../../_shared/types.ts";
 
+export type PollenDay = {
+  date?: string;
+  pollen_upi?: number;
+  dominant?: string;
+};
+
 function toUpi(day: Record<string, unknown>): number | undefined {
   const upi = day.upi as { value?: number } | undefined;
   if (upi?.value != null && Number.isFinite(upi.value)) {
@@ -41,11 +47,24 @@ function dominantType(day: Record<string, unknown>): string | undefined {
   return best?.name;
 }
 
+function dayDate(day: Record<string, unknown>): string | undefined {
+  const d = day.date as { year?: number; month?: number; day?: number } | undefined;
+  if (!d?.year || !d?.month || !d?.day) return undefined;
+  return `${d.year}-${String(d.month).padStart(2, "0")}-${
+    String(d.day).padStart(2, "0")
+  }`;
+}
+
 /** Google Pollen forecast:lookup — Forecast only, no Heatmap. */
 export async function fetchGooglePollen(
   query: LocationQuery,
 ): Promise<
-  SourceResult<{ pollen_upi?: number; dominant?: string; httpStatus?: number }>
+  SourceResult<{
+    pollen_upi?: number;
+    dominant?: string;
+    daily?: PollenDay[];
+    httpStatus?: number;
+  }>
 > {
   const key = optionalEnv("GOOGLE_MAPS_API_KEY");
   if (!key) {
@@ -73,16 +92,19 @@ export async function fetchGooglePollen(
     const json = await res.json() as {
       dailyInfo?: Array<Record<string, unknown>>;
     };
-    const today = json.dailyInfo?.[0];
-    if (!today) {
-      return { source: "google_pollen", ok: true, data: {} };
-    }
+    const days = (json.dailyInfo ?? []).map((day) => ({
+      date: dayDate(day),
+      pollen_upi: toUpi(day),
+      dominant: dominantType(day),
+    }));
+    const today = days[0];
     return {
       source: "google_pollen",
       ok: true,
       data: {
-        pollen_upi: toUpi(today),
-        dominant: dominantType(today),
+        pollen_upi: today?.pollen_upi,
+        dominant: today?.dominant,
+        daily: days,
       },
     };
   } catch (e) {
