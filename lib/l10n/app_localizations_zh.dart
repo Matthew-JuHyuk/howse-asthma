@@ -27,6 +27,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signUpButton => '创建账户';
 
   @override
+  String get supabaseNotConfigured =>
+      '尚未配置 Supabase。\n请在 .env 文件中设置 SUPABASE_URL 和 SUPABASE_ANON_KEY。';
+
+  @override
   String get homeGreeting => '你好';
 
   @override
@@ -363,4 +367,232 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mockTabSettings => 'Settings';
+
+  @override
+  String get navHome => '首页';
+
+  @override
+  String get signUpTitle => '创建账户';
+
+  @override
+  String get authChooseRole => '选择您的角色';
+
+  @override
+  String get authRolePatient => '患者';
+
+  @override
+  String get authRolePatientHint => '跟踪空气风险与吸入器使用';
+
+  @override
+  String get authRoleProvider => '医护人员';
+
+  @override
+  String get authRoleProviderHint => '关联患者并查看临床证据';
+
+  @override
+  String get authFullNameLabel => '姓名';
+
+  @override
+  String get authNpiLabel => 'NPI 号码';
+
+  @override
+  String get authNpiHelper => '10 位国家提供者识别号';
+
+  @override
+  String get authOrContinueWith => '或通过以下方式继续';
+
+  @override
+  String get authContinueGoogle => '使用 Google 继续';
+
+  @override
+  String get authContinueApple => '使用 Apple 继续';
+
+  @override
+  String get authCheckEmailTitle => '请查收邮件';
+
+  @override
+  String authCheckEmailBody(String email) {
+    return '我们已向 $email 发送确认链接。打开后即可登录。';
+  }
+
+  @override
+  String get authBackToSignIn => '返回登录';
+
+  @override
+  String get authCompleteProfileTitle => '完善个人资料';
+
+  @override
+  String get authCompleteProfileBody => '告诉我们您的身份，以便打开正确的主页。';
+
+  @override
+  String get authSaveProfile => '保存资料';
+
+  @override
+  String get authSignOut => '退出登录';
+
+  @override
+  String get authRetry => '重试';
+
+  @override
+  String get authWorking => '处理中…';
+
+  @override
+  String get authValidationInvalidEmail => '请输入有效邮箱';
+
+  @override
+  String get authValidationPasswordMin => '密码至少 8 个字符';
+
+  @override
+  String get authValidationNameRequired => '姓名为必填项';
+
+  @override
+  String get authValidationInvalidNpi => '请输入有效的 10 位 NPI';
+
+  @override
+  String get authErrorGeneric => '出错了，请重试。';
+
+  @override
+  String get authErrorInvalidCredentials => '邮箱或密码无效';
+
+  @override
+  String get authErrorEmailTaken => '该邮箱已注册账户';
+
+  @override
+  String get authErrorEmailNotConfirmed => '登录前请先确认邮箱';
+
+  @override
+  String get authErrorWeakPassword => '密码过于简单';
+
+  @override
+  String get authErrorRateLimited => '尝试次数过多，请稍后再试。';
+
+  @override
+  String get authBiometricTitle => '解锁 Howse Asthma';
+
+  @override
+  String get authBiometricHint => '使用指纹或面容继续。';
+
+  @override
+  String get authBiometricReason => '解锁 Howse Asthma';
+
+  @override
+  String get authBiometricUnlock => '解锁';
+
+  @override
+  String get authBiometricFailed => '生物识别解锁失败，请重试。';
+
+  @override
+  String get authBiometricToggle => '生物识别解锁';
+
+  @override
+  String get authBiometricToggleHint => '打开应用时要求生物识别';
+
+  @override
+  String get authBiometricUnavailable => '此设备不支持生物识别';
+
+  @override
+  String get authOnboardingTitle => '患者设置';
+
+  @override
+  String get authOnboardingBody => '如医护人员分享了 6 位邀请码，请现在输入。也可稍后在设置中完成。';
+
+  @override
+  String get authOnboardingSkip => '暂时跳过';
+
+  @override
+  String get authInviteCodeLabel => '医护邀请码';
+
+  @override
+  String get authInviteCodeHelper => '6 位数字，24 小时后过期';
+
+  @override
+  String get authInviteRedeem => '兑换';
+
+  @override
+  String get authInviteRedeemAndContinue => '兑换并继续';
+
+  @override
+  String get authInviteInvalidFormat => '邀请码必须为 6 位数字';
+
+  @override
+  String get authInviteRedeemedPending => '邀请已兑换，等待医护确认。';
+
+  @override
+  String get authInviteRedeemFailed => '无法兑换邀请码';
+
+  @override
+  String get authInviteIssueFailed => '无法发放邀请码';
+
+  @override
+  String get authConfirmLink => '确认';
+
+  @override
+  String get authRejectLink => '拒绝';
+
+  @override
+  String get authLinkStatusPending => '待确认';
+
+  @override
+  String get settingsSystemDefault => '系统默认';
+
+  @override
+  String get settingsLocationTodo => '位置权限将在后续更新中请求';
+
+  @override
+  String get providerHomeTab => '首页';
+
+  @override
+  String get providerLinkTab => '关联';
+
+  @override
+  String get providerHomeTitle => '医护首页';
+
+  @override
+  String providerHomeWelcome(String email) {
+    return '已登录为 $email';
+  }
+
+  @override
+  String get providerHomePlaceholder => '临床看板将在后续版本提供。请先关联患者。';
+
+  @override
+  String get providerLinkPatientsCta => '关联患者';
+
+  @override
+  String get providerLinkTitle => '关联患者';
+
+  @override
+  String get providerLinkIntro => '发放 6 位邀请码（24 小时有效）。患者输入后双方确认。';
+
+  @override
+  String get providerIssueInviteCta => '发放邀请码';
+
+  @override
+  String get providerInviteTtlHint => '24 小时有效';
+
+  @override
+  String get providerInviteCopied => '邀请码已复制';
+
+  @override
+  String get providerPendingLinks => '待处理关联';
+
+  @override
+  String get providerNoPendingLinks => '暂无待处理关联';
+
+  @override
+  String providerPendingPatient(String idPrefix) {
+    return '患者 $idPrefix…';
+  }
+
+  @override
+  String get providerRecentInvites => '最近的邀请码';
+
+  @override
+  String get providerNoInvites => '尚无邀请码';
+
+  @override
+  String get providerInviteConsumed => '已使用';
+
+  @override
+  String get providerInviteActive => '有效';
 }

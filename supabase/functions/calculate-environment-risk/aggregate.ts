@@ -6,8 +6,8 @@ import type {
 } from "../_shared/types.ts";
 
 /**
- * Risk aggregation (env-api-integration.md §4.2 draft).
- * Refined when live sources land in Phase 3.
+ * Risk aggregation (env-api-integration §4.2).
+ * TRAP levels use MODERATE (schema) for the medium band.
  */
 export function aggregateRiskScores(input: {
   flashFloodActive: boolean;
@@ -29,6 +29,11 @@ export function aggregateRiskScores(input: {
     score = 3;
   } else if (aqi > 50 || trap === "MODERATE") {
     score = 2;
+  }
+
+  // Doc draft maps UPI 4–5 toward higher risk when flood/AQI not already maxed.
+  if (!input.flashFloodActive && pollen >= 4 && score < 4) {
+    score = 4;
   }
 
   const triggers: EnvironmentTriggers = {
@@ -56,4 +61,15 @@ export function scoreToUiState(score: 1 | 2 | 3 | 4): UiState {
     case 4:
       return "EMERGENCY";
   }
+}
+
+/** Soft freight weight: bump LOW→MODERATE when near high AADT. */
+export function applyFreightWeight(
+  trap: TrapLevel | null,
+  nearFreight: boolean,
+): TrapLevel {
+  const base = trap ?? "LOW";
+  if (!nearFreight) return base;
+  if (base === "LOW") return "MODERATE";
+  return base;
 }

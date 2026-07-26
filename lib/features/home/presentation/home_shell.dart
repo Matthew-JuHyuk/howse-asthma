@@ -37,7 +37,10 @@ class _HomeShellState extends State<HomeShell> {
         selectedIndex: _index,
         onDestinationSelected: (value) => setState(() => _index = value),
         destinations: [
-          const NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Home'),
+          NavigationDestination(
+            icon: const Icon(Icons.home_outlined),
+            label: l10n.navHome,
+          ),
           NavigationDestination(
             icon: const Icon(Icons.medication_outlined),
             label: l10n.medicationLogTitle,

@@ -1,0 +1,83 @@
+// Issue a 6-digit invite code (TTL 24h) for the signed-in provider.
+
+import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
+import { requireRole, requireUser } from "../_shared/user_client.ts";
+
+const MAX_ACTIVE_INVITES = 5;
+
+/** Unbiased 6-digit code via rejection sampling. */
+function randomSixDigit(): string {
+  const max = 1_000_000;
+  const limit = Math.floor(0x100000000 / max) * max;
+  const buf = new Uint32Array(1);
+  let n = 0;
+  do {
+    crypto.getRandomValues(buf);
+    n = buf[0]!;
+  } while (n >= limit);
+  return (n % max).toString().padStart(6, "0");
+}
+
+Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+  if (req.method !== "POST") {
+    return jsonResponse({ error: "method_not_allowed" }, 405);
+  }
+
+  const authed = await requireUser(req);
+  if (authed instanceof Response) return authed;
+  const { user, admin } = authed;
+
+  const isProvider = await requireRole(admin, user.id, "PROVIDER");
+  if (!isProvider) {
+    return jsonResponse({ error: "forbidden" }, 403);
+  }
+
+  const nowIso = new Date().toISOString();
+  const { count, error: countError } = await admin
+    .from("invite_codes")
+    .select("id", { count: "exact", head: true })
+    .eq("provider_id", user.id)
+    .is("consumed_at", null)
+    .gt("expires_at", nowIso);
+
+  if (countError) {
+    console.error("issue-invite-code count failed", countError);
+    return jsonResponse({ error: "server_error" }, 500);
+  }
+  if ((count ?? 0) >= MAX_ACTIVE_INVITES) {
+    return jsonResponse({ error: "invite_limit" }, 429);
+  }
+
+  const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const code = randomSixDigit();
+    const { data, error } = await admin
+      .from("invite_codes")
+      .insert({
+        provider_id: user.id,
+        code,
+        expires_at: expiresAt,
+      })
+      .select("id, code, expires_at")
+      .single();
+
+    if (!error && data) {
+      return jsonResponse({
+        id: data.id,
+        code: data.code,
+        expires_at: data.expires_at,
+      });
+    }
+
+    if (error?.code !== "23505") {
+      console.error("issue-invite-code insert failed", error);
+      return jsonResponse({ error: "server_error" }, 500);
+    }
+  }
+
+  return jsonResponse({ error: "server_error" }, 500);
+});

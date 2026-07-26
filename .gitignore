@@ -44,22 +44,11 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Environment secrets (Supabase keys, etc.) - never commit real values
+# Environment secrets — never commit real values
 .env
 !.env.example
-# Local Edge secrets helper (contains real keys) — keep example only
 /scripts/set-edge-secrets.ps1
 !/scripts/set-edge-secrets.example.ps1
 
-# Internal project documentation (requirements analysis, how-to-run, etc.)
-# Kept locally / referenced by Cursor rules, but not published to the repo.
 /doc/
-
-# Shared English docs under /docs/ ARE tracked and committed (Supabase schema notes,
-# etc.). Do not add /docs/ here. See docs/README.md.
-
-# Cursor IDE local config (rules, project state, etc.) - local-only, like .idea/.vscode
 /.cursor/
-
-# UI design references from Subframe (screenshots, React exports) ARE tracked under
-# /design/subframe/ — do not ignore that path. See design/subframe/README.md.

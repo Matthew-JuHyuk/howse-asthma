@@ -27,6 +27,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get signUpButton => 'アカウント作成';
 
   @override
+  String get supabaseNotConfigured =>
+      'Supabase がまだ設定されていません。\n.env ファイルに SUPABASE_URL と SUPABASE_ANON_KEY を設定してください。';
+
+  @override
   String get homeGreeting => 'こんにちは';
 
   @override
@@ -363,4 +367,232 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get mockTabSettings => 'Settings';
+
+  @override
+  String get navHome => 'ホーム';
+
+  @override
+  String get signUpTitle => 'アカウント作成';
+
+  @override
+  String get authChooseRole => '役割を選択';
+
+  @override
+  String get authRolePatient => '患者';
+
+  @override
+  String get authRolePatientHint => '大気リスクと吸入器の使用を記録します';
+
+  @override
+  String get authRoleProvider => '医療者';
+
+  @override
+  String get authRoleProviderHint => '患者を連携し臨床エビデンスを確認します';
+
+  @override
+  String get authFullNameLabel => '氏名';
+
+  @override
+  String get authNpiLabel => 'NPI番号';
+
+  @override
+  String get authNpiHelper => '10桁の国家プロバイダ識別子';
+
+  @override
+  String get authOrContinueWith => 'または次で続行';
+
+  @override
+  String get authContinueGoogle => 'Googleで続行';
+
+  @override
+  String get authContinueApple => 'Appleで続行';
+
+  @override
+  String get authCheckEmailTitle => 'メールを確認';
+
+  @override
+  String authCheckEmailBody(String email) {
+    return '$email に確認リンクを送信しました。開いてからサインインしてください。';
+  }
+
+  @override
+  String get authBackToSignIn => 'サインインに戻る';
+
+  @override
+  String get authCompleteProfileTitle => 'プロフィールを完成';
+
+  @override
+  String get authCompleteProfileBody => '正しいホーム画面を開くため、役割を教えてください。';
+
+  @override
+  String get authSaveProfile => 'プロフィールを保存';
+
+  @override
+  String get authSignOut => 'サインアウト';
+
+  @override
+  String get authRetry => '再試行';
+
+  @override
+  String get authWorking => '処理中…';
+
+  @override
+  String get authValidationInvalidEmail => '有効なメールを入力してください';
+
+  @override
+  String get authValidationPasswordMin => 'パスワードは8文字以上必要です';
+
+  @override
+  String get authValidationNameRequired => '氏名は必須です';
+
+  @override
+  String get authValidationInvalidNpi => '有効な10桁のNPIを入力してください';
+
+  @override
+  String get authErrorGeneric => '問題が発生しました。もう一度お試しください。';
+
+  @override
+  String get authErrorInvalidCredentials => 'メールまたはパスワードが正しくありません';
+
+  @override
+  String get authErrorEmailTaken => 'このメールのアカウントは既に存在します';
+
+  @override
+  String get authErrorEmailNotConfirmed => 'サインイン前にメールを確認してください';
+
+  @override
+  String get authErrorWeakPassword => 'パスワードが弱すぎます';
+
+  @override
+  String get authErrorRateLimited => '試行が多すぎます。後でもう一度お試しください。';
+
+  @override
+  String get authBiometricTitle => 'Howse Asthma のロック解除';
+
+  @override
+  String get authBiometricHint => '指紋または顔で続行します。';
+
+  @override
+  String get authBiometricReason => 'Howse Asthma のロック解除';
+
+  @override
+  String get authBiometricUnlock => 'ロック解除';
+
+  @override
+  String get authBiometricFailed => '生体認証に失敗しました。再試行してください。';
+
+  @override
+  String get authBiometricToggle => '生体認証ロック解除';
+
+  @override
+  String get authBiometricToggleHint => 'アプリ起動時に生体認証を要求';
+
+  @override
+  String get authBiometricUnavailable => 'この端末では生体認証を利用できません';
+
+  @override
+  String get authOnboardingTitle => '患者セットアップ';
+
+  @override
+  String get authOnboardingBody => '臨床医から共有された6桁コードがあれば今入力できます。後で設定からも可能です。';
+
+  @override
+  String get authOnboardingSkip => '今はスキップ';
+
+  @override
+  String get authInviteCodeLabel => '招待コード';
+
+  @override
+  String get authInviteCodeHelper => '6桁、24時間で期限切れ';
+
+  @override
+  String get authInviteRedeem => '登録';
+
+  @override
+  String get authInviteRedeemAndContinue => '登録して続行';
+
+  @override
+  String get authInviteInvalidFormat => '招待コードは6桁です';
+
+  @override
+  String get authInviteRedeemedPending => '招待を登録しました。医療者の確認待ちです。';
+
+  @override
+  String get authInviteRedeemFailed => '招待コードを登録できませんでした';
+
+  @override
+  String get authInviteIssueFailed => '招待コードを発行できませんでした';
+
+  @override
+  String get authConfirmLink => '確認';
+
+  @override
+  String get authRejectLink => '拒否';
+
+  @override
+  String get authLinkStatusPending => '確認待ち';
+
+  @override
+  String get settingsSystemDefault => 'システム既定';
+
+  @override
+  String get settingsLocationTodo => '位置情報の許可は今後の更新で要求します';
+
+  @override
+  String get providerHomeTab => 'ホーム';
+
+  @override
+  String get providerLinkTab => '連携';
+
+  @override
+  String get providerHomeTitle => '医療者ホーム';
+
+  @override
+  String providerHomeWelcome(String email) {
+    return '$email でサインイン中';
+  }
+
+  @override
+  String get providerHomePlaceholder => '臨床ダッシュボードは今後追加されます。まず患者を連携してください。';
+
+  @override
+  String get providerLinkPatientsCta => '患者を連携';
+
+  @override
+  String get providerLinkTitle => '患者連携';
+
+  @override
+  String get providerLinkIntro => '6桁コードを発行（24時間有効）。患者が入力し、双方が確認します。';
+
+  @override
+  String get providerIssueInviteCta => '招待コードを発行';
+
+  @override
+  String get providerInviteTtlHint => '24時間有効';
+
+  @override
+  String get providerInviteCopied => '招待コードをコピーしました';
+
+  @override
+  String get providerPendingLinks => '保留中の連携';
+
+  @override
+  String get providerNoPendingLinks => '保留中の連携はありません';
+
+  @override
+  String providerPendingPatient(String idPrefix) {
+    return '患者 $idPrefix…';
+  }
+
+  @override
+  String get providerRecentInvites => '最近の招待コード';
+
+  @override
+  String get providerNoInvites => 'まだ招待コードがありません';
+
+  @override
+  String get providerInviteConsumed => '使用済み';
+
+  @override
+  String get providerInviteActive => '有効';
 }

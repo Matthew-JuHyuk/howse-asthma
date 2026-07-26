@@ -1,11 +1,11 @@
 # Howse Asthma
 
-Flutter app for asthma patients: predicts attack risk from local weather/air-quality data and sends early warnings, while logging inhaler/medication use as evidence for insurance step-therapy approval. Multilingual (EN/ES/FR/KO/JA/ZH) to lower barriers for underserved, non-native-English patients & families. Android/iOS, Supabase backend.
+Flutter app for asthma patients: predicts attack risk from local weather and air-quality data and sends early warnings, while logging inhaler and medication use as evidence for insurance step-therapy approval. Multilingual (EN/ES/FR/KO/JA/ZH) to lower barriers for underserved, non-native-English patients and families. Android, iOS, and Supabase backend.
 
 ## Tech stack
 
 - [Flutter](https://flutter.dev/) (stable channel) — Android, iOS, and Windows (for early PC-based development)
-- [Supabase](https://supabase.com/) — authentication and database
+- [Supabase](https://supabase.com/) — authentication, database, and Edge Functions
 - `flutter_localizations` + ARB files for multilingual support (English, Spanish, French, Korean, Japanese, Chinese)
 
 ## Getting started
@@ -18,32 +18,27 @@ Copy-Item .env.example .env   # then fill in your Supabase project URL/anon key
 flutter run -d windows        # or connect an Android device and run `flutter run`
 ```
 
-## Docs (committed)
+## Documentation
 
-Shared English documentation lives under [`docs/`](docs/) (tracked in Git).  
-- Schema / RLS: [`docs/db-schema.md`](docs/db-schema.md), [`docs/rls-policies.md`](docs/rls-policies.md)  
-- Migrations: [`docs/migrations.md`](docs/migrations.md)  
-- Edge Functions: [`docs/edge-functions.md`](docs/edge-functions.md)  
+Project documentation is under [`docs/`](docs/):
 
-When changing `supabase/migrations` or `supabase/functions`, update the matching `docs/` notes in the same change set — see [`docs/README.md`](docs/README.md).
+- Schema and RLS: [`docs/db-schema.md`](docs/db-schema.md), [`docs/rls-policies.md`](docs/rls-policies.md)
+- Migrations: [`docs/migrations.md`](docs/migrations.md)
+- Auth / OAuth / pairing: [`docs/auth.md`](docs/auth.md)
+- Edge Functions: [`docs/edge-functions.md`](docs/edge-functions.md)
 
-## Backend (Supabase)
+When you change `supabase/migrations` or `supabase/functions`, update the matching notes under `docs/` in the same change set. See [`docs/README.md`](docs/README.md).
 
-- Migrations applied: init schema + RLS (`supabase/migrations/`).  
-- Edge Function **deployed** (skeleton): `calculate-environment-risk` — see [`docs/edge-functions.md`](docs/edge-functions.md).  
-- Live environmental API wiring is still Phase 3; secrets are registered on the linked project.  
-- Local secret helper (gitignored): `scripts/set-edge-secrets.ps1` — do not commit.
+## Backend
 
-## Design preview (patient mockups)
+- SQL migrations live in `supabase/migrations/` (schema and RLS).
+- Edge Function `calculate-environment-risk` is deployed; environmental data source clients are still being completed.
+- Use `.env` / Edge secrets for API keys — never commit secrets. Template: `scripts/set-edge-secrets.example.ps1`.
 
-Set `DESIGN_PREVIEW=true` in `.env` (see `.env.example`), then:
+## Design references
 
-```powershell
-flutter run
-```
-
-Opens a **low-fidelity** nav-only patient UI (`lib/features/design_preview/`) for flow checks — **not** store-ready.  
-Subframe patient React references: [`design/subframe/`](design/subframe/). For normal auth path use `DESIGN_PREVIEW=false`.
+Patient UI layout references from Subframe are under [`design/subframe/`](design/subframe/).  
+Optional preview mode: set `DESIGN_PREVIEW=true` in `.env`, then `flutter run` to open the patient navigation mock under `lib/features/design_preview/`. Set `DESIGN_PREVIEW=false` for the normal auth entry path.
 
 ## License
 

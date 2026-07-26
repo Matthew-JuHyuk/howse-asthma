@@ -1,6 +1,6 @@
 /**
  * Read Edge Function secrets. Never hardcode API keys in source.
- * Register via WBS 1.7: `supabase secrets set KEY=value`
+ * Register with: `supabase secrets set KEY=value`
  */
 
 export function requireEnv(name: string): string {
@@ -17,7 +17,7 @@ export function optionalEnv(name: string): string | undefined {
   return value;
 }
 
-/** Secrets expected for calculate-environment-risk (Phase 3). */
+/** Secrets expected for calculate-environment-risk. */
 export const ENV_KEYS = {
   AIRNOW_API_KEY: "AIRNOW_API_KEY",
   PURPLEAIR_READ_KEY: "PURPLEAIR_READ_KEY",

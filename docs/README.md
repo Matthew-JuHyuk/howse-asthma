@@ -1,34 +1,28 @@
-# Howse Asthma — Public / Shared Docs (Git-tracked)
+# Documentation
 
-This folder holds **English documentation that is committed to the repository**.
+English documentation for the Howse Asthma repository.
 
-| Path | Role |
+| Path | Contents |
 | --- | --- |
-| [`doc/`](../doc/) (Korean, local) | Internal specs — **gitignored** (`/doc/` in `.gitignore`) |
-| [`docs/`](./) (this folder) | Shared docs for collaborators & review — **committed** |
-| [`supabase/`](../supabase/) | Applied migrations, config, Edge Functions |
+| [`docs/`](./) | Schema, migrations, RLS, Edge Functions |
+| [`supabase/`](../supabase/) | Migrations, config, Edge Functions |
 
 ## Convention
 
-Whenever we create or change something under `supabase/` (migrations, RLS SQL, Edge Function contracts, seeds), **also add or update the matching English note here** and commit both.
+When you add or change something under `supabase/` (migrations, RLS SQL, Edge Function contracts), update the matching document here in the same change set.
 
-| Supabase change | Document here |
+| Change | Document |
 | --- | --- |
 | Tables / views / indexes | [`db-schema.md`](./db-schema.md) |
-| RLS policies | `db-schema.md` §3 (and a dedicated RLS note when SQL lands) |
-| Edge Function I/O & secrets boundary | `db-schema.md` §4 (expand as functions ship) |
-
-Internal Korean source of truth for product decisions remains under `doc/` (Cursor rules).  
-**Physical schema DDL for implementation** should stay aligned between:
-
-1. `doc/db-schema.md` (Korean, local)
-2. `docs/db-schema.md` (English, committed) ← keep in sync when schema changes
+| RLS policies | [`db-schema.md`](./db-schema.md) §3, [`rls-policies.md`](./rls-policies.md) |
+| Edge Function I/O and secrets boundary | [`db-schema.md`](./db-schema.md) §4, [`edge-functions.md`](./edge-functions.md) |
 
 ## Contents
 
 | File | Description |
 | --- | --- |
-| [`db-schema.md`](./db-schema.md) | Supabase PostgreSQL physical schema (v1.0) |
-| [`migrations.md`](./migrations.md) | Migration file index and apply notes (WBS 1.3+) |
-| [`rls-policies.md`](./rls-policies.md) | RLS policy summary (WBS 1.4) |
-| [`edge-functions.md`](./edge-functions.md) | Edge Function skeleton / secrets notes (WBS 1.6+) |
+| [`db-schema.md`](./db-schema.md) | Supabase PostgreSQL physical schema |
+| [`migrations.md`](./migrations.md) | Migration index and apply notes |
+| [`rls-policies.md`](./rls-policies.md) | RLS policy summary |
+| [`edge-functions.md`](./edge-functions.md) | Edge Function overview |
+| [`auth.md`](./auth.md) | Auth, OAuth setup, biometric unlock, care-link pairing |

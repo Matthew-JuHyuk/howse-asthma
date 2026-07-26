@@ -1,10 +1,8 @@
-/** Shared types for environment Edge Functions (env-api-integration.md §4.2). */
+/** Shared types for environment Edge Functions. */
 
 export type LocationQuery = {
   latitude: number;
   longitude: number;
-  /** Optional patient id for alert cooldown / personalization (Phase 5). */
-  patient_id?: string;
 };
 
 export type TrapLevel = "LOW" | "MODERATE" | "HIGH" | "CRITICAL";
@@ -24,14 +22,25 @@ export type EnvironmentSnapshot = {
   triggers: EnvironmentTriggers;
   geohash?: string;
   aqi_epa?: number | null;
+  aqi_source?: string | null;
   pm25?: number | null;
   local_pm25?: number | null;
   trap_level?: TrapLevel | null;
+  trap_near_freight_weight?: boolean;
   pollen_upi?: number | null;
+  dominant_pollen_type?: string | null;
   has_flash_flood_warning?: boolean;
+  flood_alert_headline?: string | null;
+  usgs_stream_rate_ft_hr?: number | null;
   data_source_summary?: Record<string, string>;
   /** True when served from environment_forecasts cache. */
   from_cache?: boolean;
+  /** True when served past TTL (soft stale) after upstream failures / rate limits. */
+  from_stale_cache?: boolean;
+  /** True when one or more live sources were skipped or failed (partial snapshot). */
+  degraded?: boolean;
+  /** ISO timestamp when pollen fields were last refreshed from Google. */
+  pollen_fetched_at?: string | null;
 };
 
 export type SourceResult<T> = {
@@ -40,3 +49,11 @@ export type SourceResult<T> = {
   data?: T;
   error?: string;
 };
+
+export const CACHE_TTL = {
+  defaultMinutes: 60,
+  flashFloodMinutes: 5,
+  pollenMinutes: 360,
+  /** Serve expired rows up to this age when live APIs are blocked / rate-limited. */
+  softStaleMinutes: 360,
+} as const;

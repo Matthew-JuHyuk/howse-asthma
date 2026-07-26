@@ -1,4 +1,4 @@
--- Howse Asthma — RLS policies (WBS 1.4)
+-- Howse Asthma — RLS policies
 -- Source: docs/db-schema.md §3
 -- Prerequisite: 20260725200000_init_schema.sql (tables + RLS enabled)
 

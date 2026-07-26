@@ -1,6 +1,6 @@
--- Howse Asthma — initial public schema (WBS 1.3)
--- Source of truth: docs/db-schema.md (and local doc/db-schema.md)
--- RLS policies: deferred to WBS 1.4 (RLS enabled here = deny-by-default)
+-- Howse Asthma — initial public schema
+-- Source of truth: docs/db-schema.md
+-- RLS enabled here (deny-by-default); policies in a follow-up migration
 
 -- Extensions
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
@@ -337,7 +337,7 @@ FROM public.point_transactions
 GROUP BY patient_id;
 
 -- ---------------------------------------------------------------------------
--- RLS on (policies in WBS 1.4). Deny-by-default until policies exist.
+-- RLS on. Deny-by-default until policies exist.
 -- service_role bypasses RLS for Edge Functions.
 -- ---------------------------------------------------------------------------
 

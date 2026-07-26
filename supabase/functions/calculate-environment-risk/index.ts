@@ -1,15 +1,25 @@
-// Howse Asthma — calculate-environment-risk (WBS 1.6 skeleton)
-// Spec: doc/env-api-integration.md §4.2, .cursor/rules/env-api-config.json
-// Live API wiring: Phase 3. Secrets: WBS 1.7.
+// Howse Asthma — calculate-environment-risk (hardened live sources + Geohash cache)
 
-import "@supabase/functions-js/edge-runtime.d.ts";
-import { withSupabase } from "@supabase/server";
-
-import { aggregateRiskScores } from "./aggregate.ts";
-import { readForecastCache, writeForecastCache } from "./cache.ts";
+import { aggregateRiskScores, applyFreightWeight } from "./aggregate.ts";
+import {
+  readForecastCache,
+  readRecentPollen,
+  readSoftStaleForecastCache,
+  writeForecastCache,
+} from "./cache.ts";
+import { isCircuitOpen, tripCircuit } from "../_shared/circuit_breaker.ts";
 import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
-import { coarseCacheKey } from "../_shared/geohash.ts";
-import type { LocationQuery, EnvironmentSnapshot } from "../_shared/types.ts";
+import { encodeGeohash } from "../_shared/geohash.ts";
+import { isInServiceArea } from "../_shared/geo_bounds.ts";
+import { checkAndRecordEnvRiskRate } from "../_shared/rate_limit.ts";
+import { isCircuitTripError } from "../_shared/source_errors.ts";
+import type {
+  EnvironmentSnapshot,
+  LocationQuery,
+  SourceResult,
+  TrapLevel,
+} from "../_shared/types.ts";
+import { requireUser } from "../_shared/user_client.ts";
 import { fetchAirNow } from "./sources/airnow.ts";
 import { fetchGooglePollen } from "./sources/google_pollen.ts";
 import { fetchNwsAlerts } from "./sources/nws.ts";
@@ -17,6 +27,9 @@ import { queryNjdotNearbyAadt } from "./sources/njdot.ts";
 import { fetchOpenMeteo } from "./sources/openmeteo.ts";
 import { fetchPurpleAir } from "./sources/purpleair.ts";
 import { fetchUsgs } from "./sources/usgs.ts";
+
+// deno-lint-ignore no-explicit-any
+type Admin = any;
 
 function parseLocation(body: unknown): LocationQuery | null {
   if (!body || typeof body !== "object") return null;
@@ -27,134 +40,272 @@ function parseLocation(body: unknown): LocationQuery | null {
   if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
     return null;
   }
-  const patient_id = typeof b.patient_id === "string" ? b.patient_id : undefined;
-  return { latitude, longitude, patient_id };
+  // Ignore patient_id / other client fields — no IDOR surface.
+  return { latitude, longitude };
 }
 
-export default {
-  fetch: withSupabase({ auth: ["publishable", "secret"] }, async (req, ctx) => {
-    if (req.method === "OPTIONS") {
-      return new Response("ok", { headers: corsHeaders });
-    }
+async function guardedSource<T>(
+  admin: Admin,
+  source: string,
+  fn: () => Promise<SourceResult<T>>,
+): Promise<SourceResult<T>> {
+  if (await isCircuitOpen(admin, source)) {
+    return { source, ok: false, error: "circuit_open" };
+  }
+  const result = await fn();
+  if (!result.ok && isCircuitTripError(result.error)) {
+    const status = (result.data as { httpStatus?: number } | undefined)
+      ?.httpStatus;
+    await tripCircuit(admin, source, status);
+  }
+  return result;
+}
 
-    if (req.method !== "POST") {
-      return jsonResponse({ error: "Method not allowed" }, 405);
+function isDegraded(summary: Record<string, string>, aqi: number | null): boolean {
+  if (aqi == null) return true;
+  for (const code of Object.values(summary)) {
+    if (
+      code === "http_429" ||
+      code === "http_403" ||
+      code === "http_blocked" ||
+      code === "circuit_open" ||
+      code === "timeout"
+    ) {
+      return true;
     }
+  }
+  return false;
+}
 
-    let body: unknown;
-    try {
-      body = await req.json();
-    } catch {
-      return jsonResponse({ error: "Invalid JSON body" }, 400);
-    }
+Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+  if (req.method !== "POST") {
+    return jsonResponse({ error: "method_not_allowed" }, 405);
+  }
 
-    const query = parseLocation(body);
-    if (!query) {
-      return jsonResponse(
-        {
-          error: "Expected { latitude, longitude }",
-          skeleton: true,
+  const authed = await requireUser(req);
+  if (authed instanceof Response) return authed;
+  const { user, admin } = authed;
+
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return jsonResponse({ error: "invalid_body" }, 400);
+  }
+
+  const query = parseLocation(body);
+  if (!query) {
+    return jsonResponse({ error: "expected_latitude_longitude" }, 400);
+  }
+  if (!isInServiceArea(query.latitude, query.longitude)) {
+    return jsonResponse({ error: "out_of_service_area" }, 400);
+  }
+
+  const geohash = encodeGeohash(query.latitude, query.longitude, 5);
+
+  const cached = await readForecastCache(admin, query);
+  if (cached) {
+    return jsonResponse(cached);
+  }
+
+  const rate = await checkAndRecordEnvRiskRate(admin, user.id, geohash);
+  if (!rate.allowed) {
+    const stale = await readSoftStaleForecastCache(admin, query);
+    if (stale) {
+      return jsonResponse({
+        ...stale,
+        data_source_summary: {
+          ...(stale.data_source_summary ?? {}),
+          rate_limit: rate.reason,
         },
-        400,
-      );
+      });
     }
+    return jsonResponse({ error: rate.reason }, 429);
+  }
 
-    // Cache (service role client available as ctx.supabaseAdmin when auth=secret)
-    const admin = ctx.supabaseAdmin ?? ctx.supabase;
-    const cached = await readForecastCache(admin, query);
-    if (cached) {
-      return jsonResponse(cached);
+  const recentPollen = await readRecentPollen(admin, query);
+  const skipPollenApi = recentPollen != null;
+
+  const settled = await Promise.allSettled([
+    guardedSource(admin, "nws", () => fetchNwsAlerts(query)),
+    guardedSource(admin, "airnow", () => fetchAirNow(query)),
+    guardedSource(admin, "purpleair", () => fetchPurpleAir(query)),
+    guardedSource(admin, "openmeteo", () => fetchOpenMeteo(query)),
+    skipPollenApi
+      ? Promise.resolve({
+        source: "google_pollen",
+        ok: true,
+        data: {
+          pollen_upi: recentPollen!.pollen_upi ?? undefined,
+          dominant: recentPollen!.dominant ?? undefined,
+          from_pollen_cache: true,
+        },
+      } satisfies SourceResult<{
+        pollen_upi?: number;
+        dominant?: string;
+        from_pollen_cache?: boolean;
+      }>)
+      : guardedSource(admin, "google_pollen", () => fetchGooglePollen(query)),
+    guardedSource(admin, "usgs", () => fetchUsgs(query)),
+    guardedSource(admin, "njdot", () => queryNjdotNearbyAadt(query)),
+  ]);
+
+  const summary: Record<string, string> = {};
+  let flashFloodActive = false;
+  let floodHeadline: string | null = null;
+  let airnowAqi: number | null = null;
+  let openMeteoAqi: number | null = null;
+  let purpleApproxAqi: number | null = null;
+  let trapLevel: TrapLevel | null = "LOW";
+  let pollenUpi: number | null = null;
+  let dominantPollen: string | null = null;
+  let pollenFetchedAt: string | null = null;
+  let pm25: number | null = null;
+  let localPm25: number | null = null;
+  let nearFreight = false;
+  let streamRate: number | null = null;
+
+  for (const result of settled) {
+    if (result.status !== "fulfilled") {
+      summary.rejected = "unavailable";
+      continue;
     }
+    const src = result.value;
+    summary[src.source] = src.ok ? "ok" : (src.error ?? "unavailable");
+    if (!src.ok || !src.data) continue;
 
-    // Parallel source fetch — stubs until Phase 3
-    const settled = await Promise.allSettled([
-      fetchNwsAlerts(query),
-      fetchAirNow(query),
-      fetchPurpleAir(query),
-      fetchOpenMeteo(query),
-      fetchGooglePollen(query),
-      fetchUsgs(query),
-      queryNjdotNearbyAadt(query),
-    ]);
-
-    const summary: Record<string, string> = {};
-    let flashFloodActive = false;
-    let aqi: number | null = null;
-    let trapLevel: "LOW" | "MODERATE" | "HIGH" | "CRITICAL" | null = "LOW";
-    let pollenUpi: number | null = null;
-    let pm25: number | null = null;
-    let localPm25: number | null = null;
-
-    for (const result of settled) {
-      if (result.status !== "fulfilled") {
-        summary.rejected = "promise_rejected";
-        continue;
-      }
-      const src = result.value;
-      summary[src.source] = src.ok ? "ok" : (src.error ?? "failed");
-      if (!src.ok || !src.data) continue;
-
-      if (src.source === "nws" && "flashFloodActive" in src.data) {
-        flashFloodActive = Boolean(
-          (src.data as { flashFloodActive: boolean }).flashFloodActive,
-        );
-      }
-      if (src.source === "airnow") {
-        const d = src.data as { aqi?: number; pm25?: number };
-        if (d.aqi != null) aqi = d.aqi;
-        if (d.pm25 != null) pm25 = d.pm25;
-      }
-      if (src.source === "openmeteo" && aqi == null) {
-        const d = src.data as { us_aqi?: number; pm25?: number };
-        if (d.us_aqi != null) aqi = d.us_aqi;
-        if (d.pm25 != null && pm25 == null) pm25 = d.pm25;
-      }
-      if (src.source === "purpleair") {
-        const d = src.data as {
-          local_pm25?: number;
-          trap_level?: "LOW" | "MODERATE" | "HIGH" | "CRITICAL";
-        };
-        if (d.local_pm25 != null) localPm25 = d.local_pm25;
-        if (d.trap_level) trapLevel = d.trap_level;
-      }
-      if (src.source === "google_pollen") {
-        const d = src.data as { pollen_upi?: number };
-        if (d.pollen_upi != null) pollenUpi = d.pollen_upi;
+    if (src.source === "nws") {
+      const d = src.data as { flashFloodActive: boolean; headline?: string };
+      flashFloodActive = Boolean(d.flashFloodActive);
+      floodHeadline = d.headline ?? null;
+    }
+    if (src.source === "airnow") {
+      const d = src.data as { aqi?: number; pm25?: number };
+      if (d.aqi != null) airnowAqi = d.aqi;
+      if (d.pm25 != null) pm25 = d.pm25;
+    }
+    if (src.source === "openmeteo") {
+      const d = src.data as { us_aqi?: number; pm25?: number };
+      if (d.us_aqi != null) openMeteoAqi = d.us_aqi;
+      if (d.pm25 != null && pm25 == null) pm25 = d.pm25;
+    }
+    if (src.source === "purpleair") {
+      const d = src.data as {
+        local_pm25?: number;
+        trap_level?: TrapLevel;
+        approx_aqi?: number;
+      };
+      if (d.local_pm25 != null) localPm25 = d.local_pm25;
+      if (d.trap_level) trapLevel = d.trap_level;
+      if (d.approx_aqi != null) purpleApproxAqi = d.approx_aqi;
+    }
+    if (src.source === "google_pollen") {
+      const d = src.data as {
+        pollen_upi?: number;
+        dominant?: string;
+        from_pollen_cache?: boolean;
+      };
+      if (d.pollen_upi != null) pollenUpi = d.pollen_upi;
+      if (d.dominant) dominantPollen = d.dominant;
+      if (d.from_pollen_cache && recentPollen) {
+        summary.google_pollen = "pollen_cache_6h";
+        pollenFetchedAt = recentPollen.fetched_at;
+      } else if (d.pollen_upi != null) {
+        pollenFetchedAt = new Date().toISOString();
       }
     }
+    if (src.source === "usgs") {
+      const d = src.data as { stream_rate_ft_hr?: number };
+      if (d.stream_rate_ft_hr != null) streamRate = d.stream_rate_ft_hr;
+    }
+    if (src.source === "njdot") {
+      const d = src.data as { near_freight?: boolean };
+      nearFreight = Boolean(d.near_freight);
+    }
+  }
 
-    const aggregated = aggregateRiskScores({
-      flashFloodActive,
-      aqi,
-      trapLevel,
-      pollenUpi,
-    });
+  // AQI fallback: AirNow → Open-Meteo us_aqi → PurpleAir approx
+  let aqi: number | null = null;
+  let aqiSource: string | null = null;
+  if (airnowAqi != null) {
+    aqi = airnowAqi;
+    aqiSource = "airnow";
+  } else if (openMeteoAqi != null) {
+    aqi = openMeteoAqi;
+    aqiSource = "openmeteo";
+  } else if (purpleApproxAqi != null) {
+    aqi = purpleApproxAqi;
+    aqiSource = "purpleair";
+  }
 
-    const snapshot: EnvironmentSnapshot = {
-      ...aggregated,
-      geohash: coarseCacheKey(query.latitude, query.longitude),
-      aqi_epa: aqi,
-      pm25,
-      local_pm25: localPm25,
-      trap_level: trapLevel,
-      pollen_upi: pollenUpi,
-      has_flash_flood_warning: flashFloodActive,
-      data_source_summary: summary,
-      from_cache: false,
-    };
+  // No usable AQI and hard blocks on paid sources → prefer soft stale over empty risk.
+  const blockedHeavy =
+    (summary.airnow === "http_429" ||
+      summary.airnow === "http_403" ||
+      summary.airnow === "circuit_open") &&
+    (summary.purpleair === "http_429" ||
+      summary.purpleair === "http_403" ||
+      summary.purpleair === "circuit_open" ||
+      summary.purpleair === "unconfigured") &&
+    aqi == null;
 
-    await writeForecastCache(admin, query, snapshot);
+  if (blockedHeavy) {
+    const stale = await readSoftStaleForecastCache(admin, query);
+    if (stale) {
+      return jsonResponse({
+        ...stale,
+        data_source_summary: {
+          ...(stale.data_source_summary ?? {}),
+          ...summary,
+          soft_stale: "upstream_blocked",
+        },
+      });
+    }
+  }
 
-    return jsonResponse({
-      ...snapshot,
-      skeleton: true,
-      note: "WBS 1.6 skeleton — live API + DB cache in Phase 3; set secrets in WBS 1.7",
-    });
-  }),
-};
+  trapLevel = applyFreightWeight(trapLevel, nearFreight);
 
-/* Deploy / invoke (after 1.7 secrets):
+  const aggregated = aggregateRiskScores({
+    flashFloodActive,
+    aqi,
+    trapLevel,
+    pollenUpi,
+  });
+
+  const degraded = isDegraded(summary, aqi);
+
+  const snapshot: EnvironmentSnapshot = {
+    ...aggregated,
+    geohash,
+    aqi_epa: aqi,
+    aqi_source: aqiSource,
+    pm25,
+    local_pm25: localPm25,
+    trap_level: trapLevel,
+    trap_near_freight_weight: nearFreight,
+    pollen_upi: pollenUpi,
+    dominant_pollen_type: dominantPollen,
+    has_flash_flood_warning: flashFloodActive,
+    flood_alert_headline: floodHeadline,
+    usgs_stream_rate_ft_hr: streamRate,
+    data_source_summary: summary,
+    from_cache: false,
+    from_stale_cache: false,
+    degraded,
+    pollen_fetched_at: pollenFetchedAt,
+  };
+
+  await writeForecastCache(admin, query, snapshot);
+
+  return jsonResponse(snapshot);
+});
+
+/* Deploy / invoke:
    supabase functions deploy calculate-environment-risk
    POST /functions/v1/calculate-environment-risk
+   Authorization: Bearer <user JWT>  (anon key alone → 401)
    Body: { "latitude": 40.7357, "longitude": -74.1724 }
 */

@@ -27,6 +27,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get signUpButton => 'Créer un compte';
 
   @override
+  String get supabaseNotConfigured =>
+      'Supabase n\'est pas encore configuré.\nAjoutez SUPABASE_URL et SUPABASE_ANON_KEY dans votre fichier .env.';
+
+  @override
   String get homeGreeting => 'Bonjour';
 
   @override
@@ -367,4 +371,247 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mockTabSettings => 'Settings';
+
+  @override
+  String get navHome => 'Accueil';
+
+  @override
+  String get signUpTitle => 'Créer un compte';
+
+  @override
+  String get authChooseRole => 'Choisissez votre rôle';
+
+  @override
+  String get authRolePatient => 'Patient';
+
+  @override
+  String get authRolePatientHint =>
+      'Suivre le risque air et l\'usage de l\'inhalateur';
+
+  @override
+  String get authRoleProvider => 'Professionnel';
+
+  @override
+  String get authRoleProviderHint =>
+      'Lier des patients et revoir les preuves cliniques';
+
+  @override
+  String get authFullNameLabel => 'Nom complet';
+
+  @override
+  String get authNpiLabel => 'Numéro NPI';
+
+  @override
+  String get authNpiHelper => 'Identifiant national à 10 chiffres';
+
+  @override
+  String get authOrContinueWith => 'ou continuer avec';
+
+  @override
+  String get authContinueGoogle => 'Continuer avec Google';
+
+  @override
+  String get authContinueApple => 'Continuer avec Apple';
+
+  @override
+  String get authCheckEmailTitle => 'Vérifiez votre e-mail';
+
+  @override
+  String authCheckEmailBody(String email) {
+    return 'Nous avons envoyé un lien de confirmation à $email. Ouvrez-le, puis connectez-vous.';
+  }
+
+  @override
+  String get authBackToSignIn => 'Retour à la connexion';
+
+  @override
+  String get authCompleteProfileTitle => 'Complétez votre profil';
+
+  @override
+  String get authCompleteProfileBody =>
+      'Indiquez qui vous êtes pour ouvrir le bon écran d\'accueil.';
+
+  @override
+  String get authSaveProfile => 'Enregistrer le profil';
+
+  @override
+  String get authSignOut => 'Se déconnecter';
+
+  @override
+  String get authRetry => 'Réessayer';
+
+  @override
+  String get authWorking => 'Traitement…';
+
+  @override
+  String get authValidationInvalidEmail => 'Saisissez un e-mail valide';
+
+  @override
+  String get authValidationPasswordMin =>
+      'Le mot de passe doit contenir au moins 8 caractères';
+
+  @override
+  String get authValidationNameRequired => 'Le nom est obligatoire';
+
+  @override
+  String get authValidationInvalidNpi =>
+      'Saisissez un NPI valide à 10 chiffres';
+
+  @override
+  String get authErrorGeneric => 'Une erreur s\'est produite. Réessayez.';
+
+  @override
+  String get authErrorInvalidCredentials => 'E-mail ou mot de passe incorrect';
+
+  @override
+  String get authErrorEmailTaken => 'Un compte existe déjà avec cet e-mail';
+
+  @override
+  String get authErrorEmailNotConfirmed =>
+      'Confirmez votre e-mail avant de vous connecter';
+
+  @override
+  String get authErrorWeakPassword => 'Mot de passe trop faible';
+
+  @override
+  String get authErrorRateLimited => 'Trop de tentatives. Réessayez plus tard.';
+
+  @override
+  String get authBiometricTitle => 'Déverrouiller Howse Asthma';
+
+  @override
+  String get authBiometricHint =>
+      'Utilisez votre empreinte ou votre visage pour continuer.';
+
+  @override
+  String get authBiometricReason => 'Déverrouiller Howse Asthma';
+
+  @override
+  String get authBiometricUnlock => 'Déverrouiller';
+
+  @override
+  String get authBiometricFailed =>
+      'Échec du déverrouillage biométrique. Réessayez.';
+
+  @override
+  String get authBiometricToggle => 'Déverrouillage biométrique';
+
+  @override
+  String get authBiometricToggleHint =>
+      'Exiger la biométrie à l\'ouverture de l\'application';
+
+  @override
+  String get authBiometricUnavailable =>
+      'La biométrie n\'est pas disponible sur cet appareil';
+
+  @override
+  String get authOnboardingTitle => 'Configuration patient';
+
+  @override
+  String get authOnboardingBody =>
+      'Si votre clinicien a partagé un code à 6 chiffres, saisissez-le maintenant. Vous pourrez aussi le faire plus tard dans Réglages.';
+
+  @override
+  String get authOnboardingSkip => 'Passer pour l\'instant';
+
+  @override
+  String get authInviteCodeLabel => 'Code d\'invitation';
+
+  @override
+  String get authInviteCodeHelper => '6 chiffres, expire en 24 heures';
+
+  @override
+  String get authInviteRedeem => 'Utiliser';
+
+  @override
+  String get authInviteRedeemAndContinue => 'Utiliser et continuer';
+
+  @override
+  String get authInviteInvalidFormat => 'Le code doit comporter 6 chiffres';
+
+  @override
+  String get authInviteRedeemedPending =>
+      'Code utilisé. En attente de confirmation du professionnel.';
+
+  @override
+  String get authInviteRedeemFailed => 'Impossible d\'utiliser le code';
+
+  @override
+  String get authInviteIssueFailed => 'Impossible d\'émettre le code';
+
+  @override
+  String get authConfirmLink => 'Confirmer';
+
+  @override
+  String get authRejectLink => 'Refuser';
+
+  @override
+  String get authLinkStatusPending => 'En attente de confirmation';
+
+  @override
+  String get settingsSystemDefault => 'Par défaut du système';
+
+  @override
+  String get settingsLocationTodo =>
+      'L\'autorisation de localisation sera demandée plus tard';
+
+  @override
+  String get providerHomeTab => 'Accueil';
+
+  @override
+  String get providerLinkTab => 'Lien';
+
+  @override
+  String get providerHomeTitle => 'Accueil professionnel';
+
+  @override
+  String providerHomeWelcome(String email) {
+    return 'Connecté en tant que $email';
+  }
+
+  @override
+  String get providerHomePlaceholder =>
+      'Les tableaux de bord cliniques arriveront plus tard. Commencez par lier des patients.';
+
+  @override
+  String get providerLinkPatientsCta => 'Lier des patients';
+
+  @override
+  String get providerLinkTitle => 'Lier des patients';
+
+  @override
+  String get providerLinkIntro =>
+      'Émettez un code à 6 chiffres (valide 24 h). Le patient le saisit, puis les deux confirment.';
+
+  @override
+  String get providerIssueInviteCta => 'Émettre un code';
+
+  @override
+  String get providerInviteTtlHint => 'Valable 24 heures';
+
+  @override
+  String get providerInviteCopied => 'Code copié';
+
+  @override
+  String get providerPendingLinks => 'Liens en attente';
+
+  @override
+  String get providerNoPendingLinks => 'Aucun lien en attente';
+
+  @override
+  String providerPendingPatient(String idPrefix) {
+    return 'Patient $idPrefix…';
+  }
+
+  @override
+  String get providerRecentInvites => 'Codes récents';
+
+  @override
+  String get providerNoInvites => 'Aucun code pour l\'instant';
+
+  @override
+  String get providerInviteConsumed => 'Utilisé';
+
+  @override
+  String get providerInviteActive => 'Actif';
 }

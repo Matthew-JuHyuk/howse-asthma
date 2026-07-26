@@ -1,26 +1,14 @@
 # Howse Asthma — Database Schema (Supabase PostgreSQL)
 
-> **Purpose**: Single source of truth for the **physical DB schema**, derived from
-> screen definitions, UX decisions, and feature/requirements specs. Prefer this
-> document when designing migrations, RLS, and Edge Functions.
+> **Purpose**: Single source of truth for the **physical DB schema**. Prefer this
+> document when designing migrations, RLS, and Edge Functions. Keep it aligned with
+> product screen definitions and the UI inventory under `design/subframe/`.
 >
-> **Inputs (priority order)**  
-> 1. `doc/screen-definition.md` §4 logical entities (local Korean docs)  
-> 2. `doc/screen-ux-decisions.md` UX-Q1~Q6  
-> 3. `doc/feature-spec.md` feature IDs & non-functional requirements  
-> 4. `doc/requirements.md` privacy & open questions  
-> 5. `doc/donation-funding-research.md` RWD/DON fund separation  
-> 6. `doc/env-api-integration.md` environment cache fields  
-> 7. `design/subframe/` screen inventory (29) — field consistency check
->
-> **History**: Draft DDL formerly lived in `feature-spec.md` §4; it was **removed
-> and rewritten** against logical entities. See §7 for differences from the old draft.
->
-> **Korean twin (local, gitignored)**: `doc/db-schema.md` — keep both in sync when
-> the schema changes. See [`docs/README.md`](./README.md).
+> **History**: Early draft DDL lived in the feature specification; it was rewritten
+> against logical entities. See §7 for differences from that draft.
 
 Created: 2026-07-25  
-Status: **v1.0** (WBS Phase 1.2b)
+Status: **v1.0**
 
 ---
 
@@ -38,7 +26,7 @@ Status: **v1.0** (WBS Phase 1.2b)
 
 ### 0.1 Logical entity → physical table
 
-| Logical entity (`screen-definition` §4) | Physical table / view |
+| Logical entity | Physical table / view |
 | --- | --- |
 | UserAccount | `auth.users` (+ app session / biometrics on client) |
 | UserProfile | `profiles` |
@@ -102,7 +90,7 @@ food_bank_vouchers             (catalog; draft/dummy allowed)
 ## 2. DDL (PostgreSQL)
 
 > Apply order: extensions → profiles → dependent tables → indexes → views → RLS.  
-> Runtime apply via `supabase/migrations` (WBS 1.3).
+> Runtime apply via `supabase/migrations`.
 
 ```sql
 -- Extensions
@@ -481,12 +469,14 @@ $$;
 | `profiles` | Own R/W | Linked patient profile R | — |
 | `provider_credentials` | — | Own R/W | — |
 | `patient_details` | Own R/W | Linked R | — |
-| `invite_codes` | — | Own issued R/W | Patient redeem via Edge RPC |
-| `patient_care_links` | Own links R + confirm update | Own links R + confirm | Create via Edge preferred |
+| `invite_codes` | — | Own issued **SELECT** only | Issue/consume via Edge + `service_role` |
+| `patient_care_links` | Participant **SELECT** only | Participant **SELECT** only | Create/confirm via Edge RPCs (`redeem_invite_code_as` / `confirm_care_link_as`) |
+| `profiles.role` | Immutable after INSERT (trigger) | Immutable after INSERT | — |
+| `patient_details.primary_provider_id` | Not client-updatable (trigger) | — | Set on dual-confirm activate |
 | `emergency_contacts` ~ `panic_episodes` | Own | Linked R (writes restricted) | — |
 | `inhaler_events`, ACT/PDC | Own R/W | Linked R | — |
 | `pa_documents` family | Own R | Authoring provider R/W | Send via Edge |
-| `environment_forecasts` | Auth user **SELECT** | Same | INSERT/UPDATE = `service_role` |
+| `environment_forecasts` | **No client SELECT** (Edge cache) | — | INSERT/UPDATE = `service_role` |
 | `food_bank_vouchers` | Auth **SELECT** | Same | Writes = admin/service |
 | `point_transactions` ledger | Own **SELECT** | — | **INSERT = Edge only** |
 | `donation_transactions` | Own SELECT | — | INSERT = Edge (webhook/callback) |
@@ -565,16 +555,16 @@ Secrets: `AIRNOW_API_KEY`, `PURPLEAIR_READ_KEY`, `GOOGLE_MAPS_API_KEY`,
 
 ---
 
-## 8. Rollout order (WBS)
+## 8. Rollout status
 
-1. **1.2b** — This document finalized ← **✅ done** (2026-07-25)
-2. **1.3** — Init schema ← **✅ applied** remotely (`20260725200000_init_schema.sql`)
-3. **1.4** — RLS policies ← **✅ applied** (`20260725210000_rls_policies.sql`) — see [`rls-policies.md`](./rls-policies.md)
-4. **1.6–1.7** — Edge Function skeleton + secrets + **deploy** ← **✅** ([`edge-functions.md`](./edge-functions.md))
-5. **Phase 2** — Auth / role routing ← **next**
-6. Phases 3/4/7/9 — Live APIs and feature screens
+1. Schema document finalized (2026-07-25)
+2. Init schema applied (`20260725200000_init_schema.sql`)
+3. RLS policies applied (`20260725210000_rls_policies.sql`) — see [`rls-policies.md`](./rls-policies.md)
+4. Auth security hardening (`20260725230000_auth_security_hardening.sql`)
+5. Edge Functions deployed — see [`edge-functions.md`](./edge-functions.md)
+6. Next product work: live environmental API clients
 
-When applying migrations, update this file (and the Korean twin under `doc/`) in the same commit when practical.
+When the schema changes, update this file and the matching migration in the same change set.
 
 ---
 
@@ -582,13 +572,9 @@ When applying migrations, update this file (and the Korean twin under `doc/`) in
 
 | Document | Relation |
 | --- | --- |
-| [`README.md`](./README.md) | `docs/` commit convention |
-| `doc/screen-definition.md` §4 | Logical entity input (local) |
-| `doc/screen-ux-decisions.md` | UX → schema decisions (local) |
-| `doc/feature-spec.md` | Feature IDs & NFRs (local; physical DDL is this doc) |
-| `doc/requirements.md` | Open questions · HIPAA-oriented (local) |
-| `doc/env-api-integration.md` | Environment cache TTL · fields (local) |
-| `doc/donation-funding-research.md` | RWD/DON separation (local) |
-| `doc/wbs.md` | Phase 1.2b~1.4 (local) |
-| `design/subframe/` | UI field consistency (tracked) |
-| `supabase/` | Applied migrations & functions (tracked) |
+| [`README.md`](./README.md) | Documentation index |
+| [`migrations.md`](./migrations.md) | Migration apply notes |
+| [`rls-policies.md`](./rls-policies.md) | RLS summary |
+| [`edge-functions.md`](./edge-functions.md) | Edge Function overview |
+| `design/subframe/` | UI screen inventory |
+| `supabase/` | Applied migrations and functions |

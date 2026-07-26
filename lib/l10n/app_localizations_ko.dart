@@ -27,6 +27,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get signUpButton => '회원가입';
 
   @override
+  String get supabaseNotConfigured =>
+      'Supabase가 아직 설정되지 않았습니다.\n.env 파일에 SUPABASE_URL과 SUPABASE_ANON_KEY를 입력하세요.';
+
+  @override
   String get homeGreeting => '안녕하세요';
 
   @override
@@ -363,4 +367,234 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mockTabSettings => 'Settings';
+
+  @override
+  String get navHome => '홈';
+
+  @override
+  String get signUpTitle => '계정 만들기';
+
+  @override
+  String get authChooseRole => '역할을 선택하세요';
+
+  @override
+  String get authRolePatient => '환자';
+
+  @override
+  String get authRolePatientHint => '대기 위험과 흡입기 사용을 기록합니다';
+
+  @override
+  String get authRoleProvider => '의료진';
+
+  @override
+  String get authRoleProviderHint => '환자를 연결하고 임상 근거를 확인합니다';
+
+  @override
+  String get authFullNameLabel => '이름';
+
+  @override
+  String get authNpiLabel => 'NPI 번호';
+
+  @override
+  String get authNpiHelper => '10자리 의료인 식별번호';
+
+  @override
+  String get authOrContinueWith => '또는 다음으로 계속';
+
+  @override
+  String get authContinueGoogle => 'Google로 계속';
+
+  @override
+  String get authContinueApple => 'Apple로 계속';
+
+  @override
+  String get authCheckEmailTitle => '이메일을 확인하세요';
+
+  @override
+  String authCheckEmailBody(String email) {
+    return '$email로 확인 링크를 보냈습니다. 연 다음 로그인하세요.';
+  }
+
+  @override
+  String get authBackToSignIn => '로그인으로 돌아가기';
+
+  @override
+  String get authCompleteProfileTitle => '프로필 완성';
+
+  @override
+  String get authCompleteProfileBody => '올바른 홈 화면을 위해 역할을 알려주세요.';
+
+  @override
+  String get authSaveProfile => '프로필 저장';
+
+  @override
+  String get authSignOut => '로그아웃';
+
+  @override
+  String get authRetry => '다시 시도';
+
+  @override
+  String get authWorking => '처리 중…';
+
+  @override
+  String get authValidationInvalidEmail => '올바른 이메일을 입력하세요';
+
+  @override
+  String get authValidationPasswordMin => '비밀번호는 8자 이상이어야 합니다';
+
+  @override
+  String get authValidationNameRequired => '이름을 입력하세요';
+
+  @override
+  String get authValidationInvalidNpi => '올바른 10자리 NPI를 입력하세요';
+
+  @override
+  String get authErrorGeneric => '문제가 발생했습니다. 다시 시도하세요.';
+
+  @override
+  String get authErrorInvalidCredentials => '이메일 또는 비밀번호가 올바르지 않습니다';
+
+  @override
+  String get authErrorEmailTaken => '이미 등록된 이메일입니다';
+
+  @override
+  String get authErrorEmailNotConfirmed => '로그인 전에 이메일을 확인하세요';
+
+  @override
+  String get authErrorWeakPassword => '비밀번호가 너무 약합니다';
+
+  @override
+  String get authErrorRateLimited => '시도가 너무 많습니다. 나중에 다시 시도하세요.';
+
+  @override
+  String get authBiometricTitle => 'Howse Asthma 잠금 해제';
+
+  @override
+  String get authBiometricHint => '지문 또는 얼굴로 계속하세요.';
+
+  @override
+  String get authBiometricReason => 'Howse Asthma 잠금 해제';
+
+  @override
+  String get authBiometricUnlock => '잠금 해제';
+
+  @override
+  String get authBiometricFailed => '생체 인증에 실패했습니다. 다시 시도하세요.';
+
+  @override
+  String get authBiometricToggle => '생체 인증 잠금 해제';
+
+  @override
+  String get authBiometricToggleHint => '앱을 열 때 생체 인증 요구';
+
+  @override
+  String get authBiometricUnavailable => '이 기기에서는 생체 인증을 사용할 수 없습니다';
+
+  @override
+  String get authOnboardingTitle => '환자 설정';
+
+  @override
+  String get authOnboardingBody =>
+      '의료진이 공유한 6자리 초대 코드가 있으면 지금 입력하세요. 나중에 설정에서도 할 수 있습니다.';
+
+  @override
+  String get authOnboardingSkip => '나중에 하기';
+
+  @override
+  String get authInviteCodeLabel => '의료진 초대 코드';
+
+  @override
+  String get authInviteCodeHelper => '6자리, 24시간 후 만료';
+
+  @override
+  String get authInviteRedeem => '등록';
+
+  @override
+  String get authInviteRedeemAndContinue => '등록하고 계속';
+
+  @override
+  String get authInviteInvalidFormat => '초대 코드는 6자리여야 합니다';
+
+  @override
+  String get authInviteRedeemedPending => '초대가 등록되었습니다. 의료진 확인을 기다리는 중입니다.';
+
+  @override
+  String get authInviteRedeemFailed => '초대 코드를 등록할 수 없습니다';
+
+  @override
+  String get authInviteIssueFailed => '초대 코드를 발급할 수 없습니다';
+
+  @override
+  String get authConfirmLink => '확인';
+
+  @override
+  String get authRejectLink => '거절';
+
+  @override
+  String get authLinkStatusPending => '확인 대기 중';
+
+  @override
+  String get settingsSystemDefault => '시스템 기본값';
+
+  @override
+  String get settingsLocationTodo => '위치 권한은 이후 업데이트에서 요청됩니다';
+
+  @override
+  String get providerHomeTab => '홈';
+
+  @override
+  String get providerLinkTab => '연결';
+
+  @override
+  String get providerHomeTitle => '의료진 홈';
+
+  @override
+  String providerHomeWelcome(String email) {
+    return '$email으로 로그인됨';
+  }
+
+  @override
+  String get providerHomePlaceholder => '임상 대시보드는 이후 버전에서 제공됩니다. 먼저 환자를 연결하세요.';
+
+  @override
+  String get providerLinkPatientsCta => '환자 연결';
+
+  @override
+  String get providerLinkTitle => '환자 연결';
+
+  @override
+  String get providerLinkIntro =>
+      '6자리 코드를 발급하세요(24시간 유효). 환자가 입력한 뒤 양쪽이 확인합니다.';
+
+  @override
+  String get providerIssueInviteCta => '초대 코드 발급';
+
+  @override
+  String get providerInviteTtlHint => '24시간 유효';
+
+  @override
+  String get providerInviteCopied => '초대 코드가 복사되었습니다';
+
+  @override
+  String get providerPendingLinks => '대기 중인 연결';
+
+  @override
+  String get providerNoPendingLinks => '대기 중인 연결 없음';
+
+  @override
+  String providerPendingPatient(String idPrefix) {
+    return '환자 $idPrefix…';
+  }
+
+  @override
+  String get providerRecentInvites => '최근 초대 코드';
+
+  @override
+  String get providerNoInvites => '아직 초대 코드가 없습니다';
+
+  @override
+  String get providerInviteConsumed => '사용됨';
+
+  @override
+  String get providerInviteActive => '유효';
 }

@@ -415,6 +415,7 @@ enabled = true
 
 [functions.calculate-environment-risk]
 enabled = true
+# Gateway JWT check off; handler uses requireUser() (real user JWT, not anon alone).
 verify_jwt = false
 import_map = "./functions/calculate-environment-risk/deno.json"
 # Uncomment to specify a custom file path to the entrypoint.

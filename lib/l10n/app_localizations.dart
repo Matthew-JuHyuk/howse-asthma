@@ -142,6 +142,12 @@ abstract class AppLocalizations {
   /// **'Create Account'**
   String get signUpButton;
 
+  /// Shown when Supabase env vars are missing
+  ///
+  /// In en, this message translates to:
+  /// **'Supabase is not configured yet.\nAdd SUPABASE_URL and SUPABASE_ANON_KEY to your .env file.'**
+  String get supabaseNotConfigured;
+
   /// No description provided for @homeGreeting.
   ///
   /// In en, this message translates to:
@@ -795,6 +801,450 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get mockTabSettings;
+
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// No description provided for @signUpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get signUpTitle;
+
+  /// No description provided for @authChooseRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your role'**
+  String get authChooseRole;
+
+  /// No description provided for @authRolePatient.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient'**
+  String get authRolePatient;
+
+  /// No description provided for @authRolePatientHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Track air quality risk and inhaler use'**
+  String get authRolePatientHint;
+
+  /// No description provided for @authRoleProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider'**
+  String get authRoleProvider;
+
+  /// No description provided for @authRoleProviderHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Link patients and review clinical evidence'**
+  String get authRoleProviderHint;
+
+  /// No description provided for @authFullNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get authFullNameLabel;
+
+  /// No description provided for @authNpiLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'NPI number'**
+  String get authNpiLabel;
+
+  /// No description provided for @authNpiHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'10-digit National Provider Identifier'**
+  String get authNpiHelper;
+
+  /// No description provided for @authOrContinueWith.
+  ///
+  /// In en, this message translates to:
+  /// **'or continue with'**
+  String get authOrContinueWith;
+
+  /// No description provided for @authContinueGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get authContinueGoogle;
+
+  /// No description provided for @authContinueApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get authContinueApple;
+
+  /// No description provided for @authCheckEmailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your email'**
+  String get authCheckEmailTitle;
+
+  /// No description provided for @authCheckEmailBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a confirmation link to {email}. Open it, then sign in.'**
+  String authCheckEmailBody(String email);
+
+  /// No description provided for @authBackToSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to sign in'**
+  String get authBackToSignIn;
+
+  /// No description provided for @authCompleteProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your profile'**
+  String get authCompleteProfileTitle;
+
+  /// No description provided for @authCompleteProfileBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us who you are so we can open the right home screen.'**
+  String get authCompleteProfileBody;
+
+  /// No description provided for @authSaveProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Save profile'**
+  String get authSaveProfile;
+
+  /// No description provided for @authSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get authSignOut;
+
+  /// No description provided for @authRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get authRetry;
+
+  /// No description provided for @authWorking.
+  ///
+  /// In en, this message translates to:
+  /// **'Working…'**
+  String get authWorking;
+
+  /// No description provided for @authValidationInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get authValidationInvalidEmail;
+
+  /// No description provided for @authValidationPasswordMin.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get authValidationPasswordMin;
+
+  /// No description provided for @authValidationNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get authValidationNameRequired;
+
+  /// No description provided for @authValidationInvalidNpi.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid 10-digit NPI'**
+  String get authValidationInvalidNpi;
+
+  /// No description provided for @authErrorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get authErrorGeneric;
+
+  /// No description provided for @authErrorInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email or password'**
+  String get authErrorInvalidCredentials;
+
+  /// No description provided for @authErrorEmailTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'An account with this email already exists'**
+  String get authErrorEmailTaken;
+
+  /// No description provided for @authErrorEmailNotConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your email before signing in'**
+  String get authErrorEmailNotConfirmed;
+
+  /// No description provided for @authErrorWeakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak'**
+  String get authErrorWeakPassword;
+
+  /// No description provided for @authErrorRateLimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Try again later.'**
+  String get authErrorRateLimited;
+
+  /// No description provided for @authBiometricTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock Howse Asthma'**
+  String get authBiometricTitle;
+
+  /// No description provided for @authBiometricHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Use your fingerprint or face to continue.'**
+  String get authBiometricHint;
+
+  /// No description provided for @authBiometricReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock Howse Asthma'**
+  String get authBiometricReason;
+
+  /// No description provided for @authBiometricUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get authBiometricUnlock;
+
+  /// No description provided for @authBiometricFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric unlock failed. Try again.'**
+  String get authBiometricFailed;
+
+  /// No description provided for @authBiometricToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric unlock'**
+  String get authBiometricToggle;
+
+  /// No description provided for @authBiometricToggleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Require biometric unlock when opening the app'**
+  String get authBiometricToggleHint;
+
+  /// No description provided for @authBiometricUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometrics are not available on this device'**
+  String get authBiometricUnavailable;
+
+  /// No description provided for @authOnboardingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient setup'**
+  String get authOnboardingTitle;
+
+  /// No description provided for @authOnboardingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If your clinician shared a 6-digit invite code, enter it now. You can also do this later in Settings.'**
+  String get authOnboardingBody;
+
+  /// No description provided for @authOnboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip for now'**
+  String get authOnboardingSkip;
+
+  /// No description provided for @authInviteCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider invite code'**
+  String get authInviteCodeLabel;
+
+  /// No description provided for @authInviteCodeHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'6 digits, expires in 24 hours'**
+  String get authInviteCodeHelper;
+
+  /// No description provided for @authInviteRedeem.
+  ///
+  /// In en, this message translates to:
+  /// **'Redeem'**
+  String get authInviteRedeem;
+
+  /// No description provided for @authInviteRedeemAndContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Redeem and continue'**
+  String get authInviteRedeemAndContinue;
+
+  /// No description provided for @authInviteInvalidFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code must be 6 digits'**
+  String get authInviteInvalidFormat;
+
+  /// No description provided for @authInviteRedeemedPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite redeemed. Waiting for provider confirmation.'**
+  String get authInviteRedeemedPending;
+
+  /// No description provided for @authInviteRedeemFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not redeem invite code'**
+  String get authInviteRedeemFailed;
+
+  /// No description provided for @authInviteIssueFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not issue invite code'**
+  String get authInviteIssueFailed;
+
+  /// No description provided for @authConfirmLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get authConfirmLink;
+
+  /// No description provided for @authRejectLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get authRejectLink;
+
+  /// No description provided for @authLinkStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending confirmation'**
+  String get authLinkStatusPending;
+
+  /// No description provided for @settingsSystemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get settingsSystemDefault;
+
+  /// No description provided for @settingsLocationTodo.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission will be requested in a later update'**
+  String get settingsLocationTodo;
+
+  /// No description provided for @providerHomeTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get providerHomeTab;
+
+  /// No description provided for @providerLinkTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Link'**
+  String get providerLinkTab;
+
+  /// No description provided for @providerHomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider home'**
+  String get providerHomeTitle;
+
+  /// No description provided for @providerHomeWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {email}'**
+  String providerHomeWelcome(String email);
+
+  /// No description provided for @providerHomePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient clinical dashboards arrive in a later release. Start by linking patients.'**
+  String get providerHomePlaceholder;
+
+  /// No description provided for @providerLinkPatientsCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Link patients'**
+  String get providerLinkPatientsCta;
+
+  /// No description provided for @providerLinkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Link patients'**
+  String get providerLinkTitle;
+
+  /// No description provided for @providerLinkIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue a 6-digit code (valid 24 hours). The patient enters it, then both sides confirm.'**
+  String get providerLinkIntro;
+
+  /// No description provided for @providerIssueInviteCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue invite code'**
+  String get providerIssueInviteCta;
+
+  /// No description provided for @providerInviteTtlHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid for 24 hours'**
+  String get providerInviteTtlHint;
+
+  /// No description provided for @providerInviteCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code copied'**
+  String get providerInviteCopied;
+
+  /// No description provided for @providerPendingLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending links'**
+  String get providerPendingLinks;
+
+  /// No description provided for @providerNoPendingLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending links'**
+  String get providerNoPendingLinks;
+
+  /// No description provided for @providerPendingPatient.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient {idPrefix}…'**
+  String providerPendingPatient(String idPrefix);
+
+  /// No description provided for @providerRecentInvites.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent invite codes'**
+  String get providerRecentInvites;
+
+  /// No description provided for @providerNoInvites.
+  ///
+  /// In en, this message translates to:
+  /// **'No invite codes yet'**
+  String get providerNoInvites;
+
+  /// No description provided for @providerInviteConsumed.
+  ///
+  /// In en, this message translates to:
+  /// **'Used'**
+  String get providerInviteConsumed;
+
+  /// No description provided for @providerInviteActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get providerInviteActive;
 }
 
 class _AppLocalizationsDelegate
