@@ -281,7 +281,7 @@
   "panicCallNamed": "Appeler {name}",
   "panicDialFailed": "Impossible d’ouvrir le composeur sur cet appareil.",
   "alertTitle": "Alerte de risque",
-  "alertFcmPendingNote": "La livraison push nécessite la configuration Firebase (bientôt). Cet écran est l’alerte in-app.",
+  "alertFcmPendingNote": "Si les notifications push sont activées sur cet appareil, vous recevez aussi une notification système lorsque l’app est en arrière-plan.",
   "reportEvidenceBody": "Résumé de l’usage d’inhalateur, ACT et PDC pour revue clinique ou d’assurance.",
   "reportShareTodo": "Partage / export arrivera avec le flux PA/LMN du professionnel.",
   "settingsAlertsTitle": "Préférences d’alertes",
@@ -336,5 +336,8 @@
   "stateOnlyNjAppliedHint": "Les comptages trafic NJDOT proches ont augmenté le poids TRAP. Les capteurs de qualité de l’air s’appliquent toujours à l’échelle nationale.",
   "stateOnlyNjOutsideHint": "Vous êtes hors du New Jersey. La pondération AADT fret est NJ uniquement ; TRAP utilise toujours les capteurs d’air.",
   "stateOnlyNjNoCountHint": "Aucun comptage fret NJDOT à proximité. TRAP utilise les capteurs de qualité de l’air sans le poids fret NJ.",
-  "locationsCapReached": "Vous pouvez enregistrer jusqu’à 10 lieux. Supprimez-en un pour en ajouter un autre."
+  "locationsCapReached": "Vous pouvez enregistrer jusqu’à 10 lieux. Supprimez-en un pour en ajouter un autre.",
+  "settingsDeveloperSection": "Développeur",
+  "settingsApiConsole": "Console API",
+  "debugApiConsoleBanner": "DEBUG — ne pas capturer d’écran pour un partage public"
 }

@@ -1,6 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../core/supabase/supabase_service.dart';
+import '../../../core/debug/debug_functions_client.dart';
 import 'environment_snapshot.dart';
 
 class EnvironmentRiskException implements Exception {
@@ -20,7 +20,7 @@ class EnvironmentRiskRepository {
     required double longitude,
   }) async {
     try {
-      final response = await SupabaseService.client.functions.invoke(
+      final response = await DebugFunctionsClient.invoke(
         'calculate-environment-risk',
         body: {
           'latitude': latitude,
@@ -46,7 +46,7 @@ class EnvironmentRiskRepository {
     String triggerReason = 'RISK_THRESHOLD',
   }) async {
     try {
-      final response = await SupabaseService.client.functions.invoke(
+      final response = await DebugFunctionsClient.invoke(
         'notify-environment-risk',
         body: {
           'latitude': latitude,

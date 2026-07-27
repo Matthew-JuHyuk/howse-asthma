@@ -1,7 +1,8 @@
 // Howse Asthma — notify-environment-risk (PAT-04 / PAT-09 / PAT-10)
-// Server-authoritative risk from environment_forecasts. FCM deferred (4.6a).
+// Server-authoritative risk from environment_forecasts + FCM HTTP v1 (WBS 4.6a).
 
 import { corsHeaders, jsonResponse } from "../_shared/cors.ts";
+import { sendFcmToTokens } from "../_shared/fcm.ts";
 import { encodeGeohash } from "../_shared/geohash.ts";
 import { isInServiceArea } from "../_shared/geo_bounds.ts";
 import { requireRole, requireUser } from "../_shared/user_client.ts";
@@ -189,7 +190,6 @@ Deno.serve(async (req) => {
         forecast_id: forecast.id,
         server_authoritative: true,
         fcm_pending: true,
-        note: "FCM delivery requires Firebase (WBS 4.6a)",
         checked_at: nowIso,
       },
     })
@@ -207,6 +207,41 @@ Deno.serve(async (req) => {
     updated_at: new Date().toISOString(),
   });
 
+  const { data: tokenRows } = await admin
+    .from("device_push_tokens")
+    .select("id, fcm_token")
+    .eq("profile_id", user.id);
+
+  const fcm = await sendFcmToTokens(
+    admin,
+    (tokenRows ?? []) as Array<{ id: string; fcm_token: string }>,
+    {
+      alertId: inserted.id as string,
+      riskScore: Math.min(4, Math.max(1, Math.round(riskScore))),
+      uiState,
+      triggerReason,
+    },
+  );
+
+  const fcmSent = fcm.sent > 0;
+  await admin
+    .from("environment_alerts_sent")
+    .update({
+      payload: {
+        ui_state: uiState,
+        forecast_id: forecast.id,
+        server_authoritative: true,
+        fcm_pending: !fcmSent,
+        fcm_sent: fcmSent,
+        fcm_attempted: fcm.attempted,
+        fcm_sent_count: fcm.sent,
+        fcm_failed_count: fcm.failed,
+        fcm_error: fcm.error ?? null,
+        checked_at: nowIso,
+      },
+    })
+    .eq("id", inserted.id);
+
   return jsonResponse({
     status: "recorded",
     alert_id: inserted.id,
@@ -214,7 +249,11 @@ Deno.serve(async (req) => {
     risk_score: riskScore,
     ui_state: uiState,
     trigger_reason: triggerReason,
-    fcm_sent: false,
-    fcm_pending: true,
+    fcm_sent: fcmSent,
+    fcm_pending: !fcmSent,
+    fcm_attempted: fcm.attempted,
+    fcm_sent_count: fcm.sent,
+    fcm_failed_count: fcm.failed,
+    fcm_error: fcm.error ?? null,
   });
 });

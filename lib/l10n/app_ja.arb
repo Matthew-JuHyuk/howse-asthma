@@ -350,7 +350,7 @@
   },
   "panicDialFailed": "この端末で電話ダイヤラーを開けませんでした。",
   "alertTitle": "リスクアラート",
-  "alertFcmPendingNote": "プッシュ配信には Firebase 設定が必要です（近日）。この画面はアプリ内アラートです。",
+  "alertFcmPendingNote": "この端末でプッシュが有効なら、アプリがバックグラウンドでも OS 通知を受け取ります。",
   "reportEvidenceBody": "臨床または保険レビュー向けの吸入器使用、ACT、PDC の要約。",
   "reportShareTodo": "共有 / エクスポートは医療者の PA/LMN フローと一緒に提供されます。",
   "settingsAlertsTitle": "アラート設定",
@@ -453,5 +453,8 @@
   "stateOnlyNjNotApplied": "NJ 専用：貨物 AADT 重み未適用",
   "stateOnlyNjAppliedHint": "近くの NJDOT 交通量が TRAP の重みを上げました。大気質センサーは全国で引き続き適用されます。",
   "stateOnlyNjOutsideHint": "ニュージャージー外です。貨物 AADT の重み付けは NJ 専用で、TRAP は空気センサーを引き続き使います。",
-  "stateOnlyNjNoCountHint": "近くに NJDOT 貨物カウントがありません。TRAP は NJ 貨物重みなしで大気質センサーを使います。"
+  "stateOnlyNjNoCountHint": "近くに NJDOT 貨物カウントがありません。TRAP は NJ 貨物重みなしで大気質センサーを使います。",
+  "settingsDeveloperSection": "開発者",
+  "settingsApiConsole": "API コンソール",
+  "debugApiConsoleBanner": "DEBUG — 公開共有用のスクリーンショットは避けてください"
 }

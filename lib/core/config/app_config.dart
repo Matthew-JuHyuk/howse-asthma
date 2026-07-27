@@ -27,6 +27,12 @@ class AppConfig {
     return raw == 'true' || raw == '1' || raw == 'yes';
   }
 
+  /// Debug API Console (see `doc/debug-mode-design.md`). Release builds forbid true.
+  static bool get debugApiConsole {
+    final raw = _read('DEBUG_API_CONSOLE').trim().toLowerCase();
+    return raw == 'true' || raw == '1' || raw == 'yes';
+  }
+
   static String _read(String key) {
     if (!dotenv.isInitialized) return '';
     return dotenv.env[key] ?? '';

@@ -13,6 +13,10 @@ $secrets = [ordered]@{
     RESEND_FROM_EMAIL        = "YOUR_RESEND_FROM_EMAIL"
     RESEND_REPLY_TO          = "YOUR_RESEND_REPLY_TO"
     EFAX_ENABLED             = "false"
+    # Firebase service account JSON as a single-line string (WBS 4.6a FCM).
+    # Prefer: supabase secrets set FIREBASE_SERVICE_ACCOUNT_JSON --env-file ...
+    # Do not commit the real JSON.
+    # FIREBASE_SERVICE_ACCOUNT_JSON = '{"type":"service_account",...}'
 }
 
 $argsList = @()

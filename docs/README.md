@@ -26,3 +26,6 @@ When you add or change something under `supabase/` (migrations, RLS SQL, Edge Fu
 | [`rls-policies.md`](./rls-policies.md) | RLS policy summary |
 | [`edge-functions.md`](./edge-functions.md) | Edge Function overview |
 | [`auth.md`](./auth.md) | Auth, OAuth setup, biometric unlock, care-link pairing |
+| [`phase6-test-plan.md`](./phase6-test-plan.md) | Phase 6 device test plan (summary; full Korean in `doc/`) |
+| [`debug-mode-design.md`](./debug-mode-design.md) | Debug API Console design (summary; full Korean in `doc/`) |
+| [`fcm-setup.md`](./fcm-setup.md) | Firebase / FCM client + Edge secret setup (WBS 4.6a) |

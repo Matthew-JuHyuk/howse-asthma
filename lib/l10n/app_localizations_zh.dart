@@ -874,7 +874,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get alertTitle => '风险警报';
 
   @override
-  String get alertFcmPendingNote => '推送投递需要配置 Firebase（即将推出）。此屏幕为应用内警报。';
+  String get alertFcmPendingNote => '若此设备已启用推送，应用在后台时也会收到系统通知。';
 
   @override
   String get reportEvidenceBody => '供临床或保险审阅的吸入器使用、ACT 与 PDC 摘要。';
@@ -1057,4 +1057,13 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get stateOnlyNjNoCountHint =>
       '附近没有 NJDOT 货运计数。TRAP 在无 NJ 货运权重的情况下使用空气质量传感器。';
+
+  @override
+  String get settingsDeveloperSection => '开发者';
+
+  @override
+  String get settingsApiConsole => 'API 控制台';
+
+  @override
+  String get debugApiConsoleBanner => 'DEBUG — 请勿截图用于公开分享';
 }

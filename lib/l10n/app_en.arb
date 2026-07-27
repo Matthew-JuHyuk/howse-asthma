@@ -331,7 +331,7 @@
   },
   "panicDialFailed": "Could not open the phone dialer on this device.",
   "alertTitle": "Risk alert",
-  "alertFcmPendingNote": "Push delivery needs Firebase setup (coming next). This screen is the in-app alert.",
+  "alertFcmPendingNote": "If push is enabled on this device, you also get an OS notification when the app is in the background.",
   "reportEvidenceBody": "Summary of inhaler use, ACT, and PDC for clinician or insurance review.",
   "reportShareTodo": "Share / export will arrive with provider PA/LMN flow.",
   "settingsAlertsTitle": "Alert Preferences",
@@ -418,5 +418,8 @@
   "stateOnlyNjNotApplied": "NJ-only: freight AADT weight not applied",
   "stateOnlyNjAppliedHint": "Nearby NJDOT traffic counts raised the TRAP weight. Air quality sensors still apply nationwide.",
   "stateOnlyNjOutsideHint": "You are outside New Jersey. Freight AADT weighting is NJ-only; TRAP still uses air sensors.",
-  "stateOnlyNjNoCountHint": "No nearby NJDOT freight count. TRAP uses air-quality sensors without the NJ freight weight."
+  "stateOnlyNjNoCountHint": "No nearby NJDOT freight count. TRAP uses air-quality sensors without the NJ freight weight.",
+  "settingsDeveloperSection": "Developer",
+  "settingsApiConsole": "API Console",
+  "debugApiConsoleBanner": "DEBUG — do not screenshot for public share"
 }

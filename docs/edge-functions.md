@@ -3,7 +3,7 @@
 | Function | Path | Status |
 | --- | --- | --- |
 | `calculate-environment-risk` | [`supabase/functions/calculate-environment-risk/`](../supabase/functions/calculate-environment-risk/) | Live sources + Geohash cache + `forecast_points` |
-| `notify-environment-risk` | [`supabase/functions/notify-environment-risk/`](../supabase/functions/notify-environment-risk/) | PATIENT-only; atomic cooldown claim; FCM pending 4.6a |
+| `notify-environment-risk` | [`supabase/functions/notify-environment-risk/`](../supabase/functions/notify-environment-risk/) | PATIENT-only; cooldown + FCM HTTP v1 (`FIREBASE_SERVICE_ACCOUNT_JSON`) |
 | `log-inhaler-event` | [`supabase/functions/log-inhaler-event/`](../supabase/functions/log-inhaler-event/) | PATIENT-only Edge insert (client INSERT revoked) + 60/hr |
 | `issue-invite-code` | [`supabase/functions/issue-invite-code/`](../supabase/functions/issue-invite-code/) | 8-char alphanumeric invite (TTL 24h) |
 | `redeem-invite-code` | [`supabase/functions/redeem-invite-code/`](../supabase/functions/redeem-invite-code/) | Atomic redeem RPC (8-char) |
@@ -83,7 +83,7 @@ Responses may include `forecast_points` (up to 2 days): Open-Meteo morning/after
 
 `trigger_reason`: `RISK_THRESHOLD` | `LOCATION_ENTRY` | `SAVED_LOCATION_CHANGE` | `MANUAL`.
 
-Respects `notification_preferences`, requires risk ≥ 3 from cached `environment_forecasts`, cooldown key `COMPOSITE:{reason}:{geohash}` (60 min), max 3 alerts/hour/patient. Writes `environment_alerts_sent`; `fcm_sent` stays false until Firebase (WBS 4.6a).
+Respects `notification_preferences`, requires risk ≥ 3 from cached `environment_forecasts`, cooldown key `COMPOSITE:{geohash}` (60 min atomic claim), max 3 alerts/hour/patient. Writes `environment_alerts_sent`, then sends FCM HTTP v1 to `device_push_tokens` when `FIREBASE_SERVICE_ACCOUNT_JSON` is set. See [`fcm-setup.md`](./fcm-setup.md).
 
 ### Latency smoke (2026-07-26, Newark NJ sample)
 

@@ -937,7 +937,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get alertFcmPendingNote =>
-      'La livraison push nécessite la configuration Firebase (bientôt). Cet écran est l’alerte in-app.';
+      'Si les notifications push sont activées sur cet appareil, vous recevez aussi une notification système lorsque l’app est en arrière-plan.';
 
   @override
   String get reportEvidenceBody =>
@@ -1140,4 +1140,14 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get stateOnlyNjNoCountHint =>
       'Aucun comptage fret NJDOT à proximité. TRAP utilise les capteurs de qualité de l’air sans le poids fret NJ.';
+
+  @override
+  String get settingsDeveloperSection => 'Développeur';
+
+  @override
+  String get settingsApiConsole => 'Console API';
+
+  @override
+  String get debugApiConsoleBanner =>
+      'DEBUG — ne pas capturer d’écran pour un partage public';
 }

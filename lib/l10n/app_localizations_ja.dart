@@ -879,7 +879,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get alertFcmPendingNote =>
-      'プッシュ配信には Firebase 設定が必要です（近日）。この画面はアプリ内アラートです。';
+      'この端末でプッシュが有効なら、アプリがバックグラウンドでも OS 通知を受け取ります。';
 
   @override
   String get reportEvidenceBody => '臨床または保険レビュー向けの吸入器使用、ACT、PDC の要約。';
@@ -1063,4 +1063,13 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get stateOnlyNjNoCountHint =>
       '近くに NJDOT 貨物カウントがありません。TRAP は NJ 貨物重みなしで大気質センサーを使います。';
+
+  @override
+  String get settingsDeveloperSection => '開発者';
+
+  @override
+  String get settingsApiConsole => 'API コンソール';
+
+  @override
+  String get debugApiConsoleBanner => 'DEBUG — 公開共有用のスクリーンショットは避けてください';
 }

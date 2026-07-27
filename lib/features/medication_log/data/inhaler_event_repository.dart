@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/debug/debug_functions_client.dart';
 import '../../../core/supabase/supabase_service.dart';
 
 /// Inhaler events — writes go through Edge `log-inhaler-event` so
@@ -14,7 +15,7 @@ class InhalerEventRepository {
     String inputMeans = 'tap',
   }) async {
     try {
-      final response = await SupabaseService.client.functions.invoke(
+      final response = await DebugFunctionsClient.invoke(
         'log-inhaler-event',
         body: {
           'latitude': ?latitude,

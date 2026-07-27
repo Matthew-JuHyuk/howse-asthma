@@ -281,7 +281,7 @@
   "panicCallNamed": "呼叫 {name}",
   "panicDialFailed": "无法在此设备上打开电话拨号盘。",
   "alertTitle": "风险警报",
-  "alertFcmPendingNote": "推送投递需要配置 Firebase（即将推出）。此屏幕为应用内警报。",
+  "alertFcmPendingNote": "若此设备已启用推送，应用在后台时也会收到系统通知。",
   "reportEvidenceBody": "供临床或保险审阅的吸入器使用、ACT 与 PDC 摘要。",
   "reportShareTodo": "分享 / 导出会随医护人员 PA/LMN 流程一并提供。",
   "settingsAlertsTitle": "警报偏好",
@@ -336,5 +336,8 @@
   "stateOnlyNjAppliedHint": "附近的 NJDOT 交通计数提高了 TRAP 权重。空气质量传感器仍在全国适用。",
   "stateOnlyNjOutsideHint": "你在新泽西州以外。货运 AADT 加权仅限 NJ；TRAP 仍使用空气传感器。",
   "stateOnlyNjNoCountHint": "附近没有 NJDOT 货运计数。TRAP 在无 NJ 货运权重的情况下使用空气质量传感器。",
-  "locationsCapReached": "最多可保存 10 个地点。请先删除一个再添加。"
+  "locationsCapReached": "最多可保存 10 个地点。请先删除一个再添加。",
+  "settingsDeveloperSection": "开发者",
+  "settingsApiConsole": "API 控制台",
+  "debugApiConsoleBanner": "DEBUG — 请勿截图用于公开分享"
 }

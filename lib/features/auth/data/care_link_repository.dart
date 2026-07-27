@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/debug/debug_functions_client.dart';
 import '../../../core/supabase/supabase_service.dart';
 
 /// Patient–provider invite pairing via Edge Functions.
@@ -7,16 +8,20 @@ class CareLinkRepository {
   CareLinkRepository();
 
   Future<Map<String, dynamic>> issueInviteCode() async {
-    final response = await SupabaseService.client.functions.invoke(
-      'issue-invite-code',
-      body: const <String, dynamic>{},
-    );
-    return _asMap(response.data);
+    try {
+      final response = await DebugFunctionsClient.invoke(
+        'issue-invite-code',
+        body: const <String, dynamic>{},
+      );
+      return _asMap(response.data);
+    } on FunctionException catch (e) {
+      throw CareLinkException(_stableCode(e));
+    }
   }
 
   Future<Map<String, dynamic>> redeemInviteCode(String code) async {
     try {
-      final response = await SupabaseService.client.functions.invoke(
+      final response = await DebugFunctionsClient.invoke(
         'redeem-invite-code',
         body: {'code': code.trim().toUpperCase()},
       );
@@ -31,7 +36,7 @@ class CareLinkRepository {
     required bool accept,
   }) async {
     try {
-      final response = await SupabaseService.client.functions.invoke(
+      final response = await DebugFunctionsClient.invoke(
         'confirm-care-link',
         body: {
           'link_id': linkId,

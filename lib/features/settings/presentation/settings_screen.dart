@@ -4,13 +4,16 @@ import 'package:geolocator/geolocator.dart' show LocationPermission;
 
 import '../../../core/biometrics/biometric_prefs.dart';
 import '../../../core/biometrics/biometric_service.dart';
+import '../../../core/debug/debug_gates.dart';
 import '../../../core/locale/locale_controller.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/phone/phone_e164.dart';
+import '../../../core/push/fcm_service.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../auth/data/care_link_repository.dart';
+import '../../debug/presentation/api_console_screen.dart';
 import '../../locations/presentation/locations_screen.dart';
 import '../data/emergency_contact_repository.dart';
 import '../data/notification_prefs_repository.dart';
@@ -400,13 +403,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ],
                   ),
                 ),
+                if (DebugGates.enabled) ...[
+                  const SizedBox(height: 12),
+                  _section(
+                    title: l10n.settingsDeveloperSection,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(
+                        Icons.bug_report_outlined,
+                        color: AppTheme.brand600,
+                      ),
+                      title: Text(l10n.settingsApiConsole),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const ApiConsoleScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading:
                       const Icon(Icons.logout, color: AppTheme.error600),
                   title: Text(l10n.authSignOut),
-                  onTap: () => SupabaseService.client.auth.signOut(),
+                  onTap: () async {
+                    try {
+                      await FcmService.instance.unregisterCurrentDevice();
+                    } catch (_) {}
+                    await SupabaseService.client.auth.signOut();
+                  },
                 ),
               ],
             );

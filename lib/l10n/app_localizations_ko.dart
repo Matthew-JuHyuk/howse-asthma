@@ -880,7 +880,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get alertFcmPendingNote =>
-      '푸시 전송에는 Firebase 설정이 필요합니다(곧 제공). 이 화면은 앱 내 알림입니다.';
+      '이 기기에서 푸시가 켜져 있으면 앱이 백그라운드일 때도 OS 알림을 받습니다.';
 
   @override
   String get reportEvidenceBody => '의료진 또는 보험 검토용 흡입기 사용, ACT, PDC 요약.';
@@ -1064,4 +1064,13 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get stateOnlyNjNoCountHint =>
       '주변 NJDOT 화물 교통량이 없습니다. TRAP는 NJ 화물 가중치 없이 대기질 센서를 사용합니다.';
+
+  @override
+  String get settingsDeveloperSection => '개발자';
+
+  @override
+  String get settingsApiConsole => 'API 콘솔';
+
+  @override
+  String get debugApiConsoleBanner => 'DEBUG — 공개 공유용 스크린샷 금지';
 }

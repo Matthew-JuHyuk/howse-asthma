@@ -350,7 +350,7 @@
   },
   "panicDialFailed": "이 기기에서 전화 다이얼러를 열 수 없습니다.",
   "alertTitle": "위험 알림",
-  "alertFcmPendingNote": "푸시 전송에는 Firebase 설정이 필요합니다(곧 제공). 이 화면은 앱 내 알림입니다.",
+  "alertFcmPendingNote": "이 기기에서 푸시가 켜져 있으면 앱이 백그라운드일 때도 OS 알림을 받습니다.",
   "reportEvidenceBody": "의료진 또는 보험 검토용 흡입기 사용, ACT, PDC 요약.",
   "reportShareTodo": "공유/내보내기는 의료진 PA/LMN 흐름과 함께 제공됩니다.",
   "settingsAlertsTitle": "알림 환경설정",
@@ -453,5 +453,8 @@
   "stateOnlyNjNotApplied": "NJ 전용: 화물 AADT 가중치 미적용",
   "stateOnlyNjAppliedHint": "주변 NJDOT 교통량이 TRAP 가중치를 높였습니다. 대기질 센서는 전국에서 계속 적용됩니다.",
   "stateOnlyNjOutsideHint": "뉴저지 밖입니다. 화물 AADT 가중치는 NJ 전용이며, TRAP는 공기 센서를 계속 사용합니다.",
-  "stateOnlyNjNoCountHint": "주변 NJDOT 화물 교통량이 없습니다. TRAP는 NJ 화물 가중치 없이 대기질 센서를 사용합니다."
+  "stateOnlyNjNoCountHint": "주변 NJDOT 화물 교통량이 없습니다. TRAP는 NJ 화물 가중치 없이 대기질 센서를 사용합니다.",
+  "settingsDeveloperSection": "개발자",
+  "settingsApiConsole": "API 콘솔",
+  "debugApiConsoleBanner": "DEBUG — 공개 공유용 스크린샷 금지"
 }

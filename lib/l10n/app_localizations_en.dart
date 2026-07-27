@@ -915,7 +915,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get alertFcmPendingNote =>
-      'Push delivery needs Firebase setup (coming next). This screen is the in-app alert.';
+      'If push is enabled on this device, you also get an OS notification when the app is in the background.';
 
   @override
   String get reportEvidenceBody =>
@@ -1116,4 +1116,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get stateOnlyNjNoCountHint =>
       'No nearby NJDOT freight count. TRAP uses air-quality sensors without the NJ freight weight.';
+
+  @override
+  String get settingsDeveloperSection => 'Developer';
+
+  @override
+  String get settingsApiConsole => 'API Console';
+
+  @override
+  String get debugApiConsoleBanner =>
+      'DEBUG — do not screenshot for public share';
 }

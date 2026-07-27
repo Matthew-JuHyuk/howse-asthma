@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/debug/debug_gates.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../alerts/presentation/alert_screen.dart';
+import '../../debug/presentation/api_console_screen.dart';
 import '../../environment/data/environment_risk_repository.dart';
 import '../../environment/data/environment_snapshot.dart';
 import '../../environment/presentation/env_screen.dart';
@@ -29,6 +31,25 @@ class _HomeScreenState extends State<HomeScreen> {
   EnvironmentSnapshot? _snapshot;
   DateTime? _lastInhalerAt;
   bool _alertOffered = false;
+  int _debugTitleTaps = 0;
+  DateTime? _debugTitleTapAt;
+
+  void _onDebugTitleTap() {
+    if (!DebugGates.enabled) return;
+    final now = DateTime.now();
+    if (_debugTitleTapAt == null ||
+        now.difference(_debugTitleTapAt!) > const Duration(seconds: 2)) {
+      _debugTitleTaps = 0;
+    }
+    _debugTitleTapAt = now;
+    _debugTitleTaps++;
+    if (_debugTitleTaps >= 5) {
+      _debugTitleTaps = 0;
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const ApiConsoleScreen()),
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -181,11 +202,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          l10n.appTitle,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.brand700,
+                        GestureDetector(
+                          onTap: _onDebugTitleTap,
+                          child: Text(
+                            l10n.appTitle,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.brand700,
+                            ),
                           ),
                         ),
                         Text(

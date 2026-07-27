@@ -1801,7 +1801,7 @@ abstract class AppLocalizations {
   /// No description provided for @alertFcmPendingNote.
   ///
   /// In en, this message translates to:
-  /// **'Push delivery needs Firebase setup (coming next). This screen is the in-app alert.'**
+  /// **'If push is enabled on this device, you also get an OS notification when the app is in the background.'**
   String get alertFcmPendingNote;
 
   /// No description provided for @reportEvidenceBody.
@@ -2133,6 +2133,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No nearby NJDOT freight count. TRAP uses air-quality sensors without the NJ freight weight.'**
   String get stateOnlyNjNoCountHint;
+
+  /// No description provided for @settingsDeveloperSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Developer'**
+  String get settingsDeveloperSection;
+
+  /// No description provided for @settingsApiConsole.
+  ///
+  /// In en, this message translates to:
+  /// **'API Console'**
+  String get settingsApiConsole;
+
+  /// No description provided for @debugApiConsoleBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'DEBUG — do not screenshot for public share'**
+  String get debugApiConsoleBanner;
 }
 
 class _AppLocalizationsDelegate

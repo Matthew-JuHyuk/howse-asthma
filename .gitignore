@@ -50,5 +50,8 @@ app.*.map.json
 /scripts/set-edge-secrets.ps1
 !/scripts/set-edge-secrets.example.ps1
 
+# Firebase Android config (download from Console; never commit)
+android/app/google-services.json
+
 /doc/
 /.cursor/

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../core/locale/locale_controller.dart';
 import '../../../core/location/environment_monitor.dart';
 import '../../../core/location/location_service.dart';
+import '../../../core/push/fcm_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../medication_log/data/inhaler_event_repository.dart';
@@ -33,6 +34,7 @@ class _HomeShellState extends State<HomeShell> {
   Timer? _panicTimer;
   bool _panicTriggered = false;
   EnvironmentMonitor? _envMonitor;
+  final _fcm = FcmService.instance;
 
   @override
   void initState() {
@@ -41,6 +43,8 @@ class _HomeShellState extends State<HomeShell> {
       if (!mounted) return;
       _envMonitor = EnvironmentMonitor.maybeOf(context);
       _envMonitor?.start();
+      // FCM token upsert for OS push when notify records an alert (WBS 4.6a).
+      unawaited(_fcm.registerCurrentDevice());
     });
   }
 
@@ -48,6 +52,7 @@ class _HomeShellState extends State<HomeShell> {
   void dispose() {
     _panicTimer?.cancel();
     _envMonitor?.stop();
+    unawaited(_fcm.dispose());
     super.dispose();
   }
 
