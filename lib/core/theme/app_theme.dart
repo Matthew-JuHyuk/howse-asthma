@@ -29,6 +29,12 @@ class AppTheme {
   static const Color neutral800 = Color(0xFF1E293B);
   static const Color neutral900 = Color(0xFF0F172A);
 
+  /// Welcome / Direction C (Sprint 2) — slate navy canvas.
+  static const Color welcomeBackground = Color(0xFF1E293B);
+  static const Color welcomeOnBackground = neutral0;
+  static const Color welcomeMuted = brand200;
+  static const Color welcomeAccent = brand400;
+
   static const Color defaultBackground = neutral100;
   static const Color defaultFont = neutral900;
   static const Color subtext = neutral500;

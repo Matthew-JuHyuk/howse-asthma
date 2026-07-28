@@ -9,7 +9,9 @@ void main() {
   testWidgets('App boots and renders the sign-in flow', (WidgetTester tester) async {
     dotenv.loadFromString(isOptional: true);
     await tester.pumpWidget(const HowseAsthmaApp());
-    await tester.pumpAndSettle();
+    // Breathing logo uses a repeating animation — settle would never finish.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
     final appLocalizations = AppLocalizations.of(
       tester.element(find.byType(Scaffold).first),

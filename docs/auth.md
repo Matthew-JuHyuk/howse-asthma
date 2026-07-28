@@ -5,13 +5,15 @@ Howse Asthma uses Supabase Auth in a single OSMU app. After sign-in, the client 
 
 ## Email / password
 
-1. Sign in: email + password (`signInWithPassword`).
-2. Sign up: role, full name, language, password; providers also enter NPI (10 digits + checksum).
-3. On success with a session, the app inserts `profiles` and either `patient_details` or
+1. Welcome offers a small “continue with email” link to the existing email forms.
+2. Sign in: email + password (`signInWithPassword`).
+3. Sign up (clinician path or email): role, full name, language, password; providers also
+   enter NPI (10 digits + checksum). Patient social/default path auto-creates `PATIENT`.
+4. On success with a session, the app inserts `profiles` and either `patient_details` or
    `provider_credentials`.
-4. If email confirmation is enabled in the Supabase project, the session may be null after
-   signup — the app shows a “check your email” screen. Metadata from signup is retained so
-   profile completion can prefill after the first confirmed login.
+5. If email confirmation is enabled in the Supabase project, the session may be null after
+   signup — the app shows a “check your email” screen (no in-app OTP UI). Metadata from
+   signup is retained so profile completion can prefill after the first confirmed login.
 
 Set `DESIGN_PREVIEW=false` (or remove it) in `.env` to use this AuthGate path.
 
@@ -32,7 +34,10 @@ Client calls `signInWithOAuth` with redirect scheme:
 Apple Sign In is offered on iOS only. Windows desktop OAuth depends on the system browser
 callback; prefer Android device testing for Google.
 
-If OAuth succeeds but no `profiles` row exists, the complete-profile screen collects role / NPI.
+If OAuth succeeds and metadata has a usable name (or email local-part), the app auto-creates
+a **patient** profile. Otherwise a slim complete-profile screen collects the name (role locked
+to patient unless the clinician signup path set provider metadata). New patients then see a
+one-tap breathing First Check-in before Home.
 
 ## Biometric unlock
 

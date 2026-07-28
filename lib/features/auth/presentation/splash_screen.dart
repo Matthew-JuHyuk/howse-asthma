@@ -1,142 +1,239 @@
-import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../core/config/app_config.dart';
+import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
+import '../domain/auth_error_mapper.dart';
+import '../domain/user_profile.dart';
 import 'login_screen.dart';
 import 'sign_up_screen.dart';
+import 'widgets/breathing_shield_logo.dart';
+import 'widgets/welcome_language_chip.dart';
 
-/// SCR-AUTH-01 — splash / auth gate (Subframe basic design reference).
-class SplashScreen extends StatelessWidget {
+/// S2-SCR-01 — Direction C Welcome & Auth (replaces legacy splash gate).
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  bool _termsAccepted = false;
+  bool _isSubmitting = false;
+  String? _errorMessage;
+
+  static const _oauthRedirect = 'io.supabase.howseasthma://login-callback/';
+
+  Future<void> _oauth(OAuthProvider provider) async {
+    if (!_termsAccepted) return;
+    setState(() {
+      _isSubmitting = true;
+      _errorMessage = null;
+    });
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      await SupabaseService.client.auth.signInWithOAuth(
+        provider,
+        redirectTo: kIsWeb ? null : _oauthRedirect,
+      );
+    } catch (e) {
+      if (mounted) {
+        setState(() => _errorMessage = AuthErrorMapper.map(e, l10n));
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
+  }
+
+  void _termsPendingSnack() {
+    final l10n = AppLocalizations.of(context)!;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.welcomeTermsPending)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final showApple = !kIsWeb && Platform.isIOS;
+    final configured = AppConfig.isSupabaseConfigured;
+    final canAuth = configured && _termsAccepted && !_isSubmitting;
 
     return Scaffold(
+      backgroundColor: AppTheme.welcomeBackground,
       body: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            center: const Alignment(0, -0.35),
+            radius: 1.1,
             colors: [
-              AppTheme.brand700,
-              AppTheme.brand800,
+              AppTheme.welcomeAccent.withValues(alpha: 0.22),
+              AppTheme.welcomeBackground,
               AppTheme.neutral900,
             ],
           ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Spacer(),
-                Container(
-                  width: 96,
-                  height: 96,
-                  decoration: BoxDecoration(
-                    color: AppTheme.brand400.withValues(alpha: 0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.air,
-                    size: 48,
-                    color: AppTheme.brand200,
-                  ),
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: WelcomeLanguageChip(),
                 ),
                 const SizedBox(height: 24),
+                const Center(child: BreathingShieldLogo()),
+                const SizedBox(height: 20),
                 Text(
                   l10n.appTitle,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 32,
+                    fontSize: 28,
                     fontWeight: FontWeight.w700,
-                    color: AppTheme.neutral0,
-                    letterSpacing: -0.5,
+                    color: AppTheme.welcomeOnBackground,
                   ),
                 ),
-                const SizedBox(height: 12),
-                Container(
-                  width: 48,
-                  height: 2,
-                  decoration: BoxDecoration(
-                    color: AppTheme.brand400.withValues(alpha: 0.5),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 10),
                 Text(
-                  l10n.splashTagline,
+                  l10n.appTagline,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 16,
-                    height: 1.6,
-                    color: AppTheme.brand200,
+                    height: 1.4,
+                    color: AppTheme.welcomeMuted,
                   ),
                 ),
-                const Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
+                const SizedBox(height: 24),
+                _Benefit(text: l10n.welcomeBenefit1),
+                _Benefit(text: l10n.welcomeBenefit2),
+                _Benefit(text: l10n.welcomeBenefit3),
+                const SizedBox(height: 28),
+                if (!configured) ...[
+                  Text(
+                    l10n.supabaseNotConfigured,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: AppTheme.error500),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+                if (_errorMessage != null) ...[
+                  Text(
+                    _errorMessage!,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: AppTheme.error500),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+                if (showApple) ...[
+                  FilledButton.icon(
+                    onPressed:
+                        canAuth ? () => _oauth(OAuthProvider.apple) : null,
+                    icon: const Icon(Icons.apple),
+                    label: Text(l10n.authContinueApple),
                     style: FilledButton.styleFrom(
-                      backgroundColor: AppTheme.brand400,
+                      backgroundColor: AppTheme.neutral0,
                       foregroundColor: AppTheme.neutral900,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const SignUpScreen(),
-                        ),
-                      );
-                    },
-                    child: Text(l10n.splashGetStarted),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+                FilledButton.icon(
+                  onPressed:
+                      canAuth ? () => _oauth(OAuthProvider.google) : null,
+                  icon: const Icon(Icons.g_mobiledata, size: 28),
+                  label: Text(l10n.authContinueGoogle),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppTheme.welcomeAccent,
+                    foregroundColor: AppTheme.neutral900,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 8),
                 TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => const LoginScreen(),
-                      ),
-                    );
-                  },
-                  child: Text.rich(
-                    TextSpan(
-                      style: const TextStyle(
-                        color: AppTheme.brand300,
-                        fontSize: 15,
-                      ),
-                      children: [
-                        TextSpan(text: '${l10n.splashAlreadyHaveAccount} '),
-                        TextSpan(
-                          text: l10n.splashSignIn,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            decoration: TextDecoration.underline,
-                            color: AppTheme.neutral0,
+                  onPressed: !canAuth
+                      ? null
+                      : () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => const LoginScreen(),
+                            ),
+                          );
+                        },
+                  child: Text(
+                    l10n.welcomeContinueEmail,
+                    style: TextStyle(
+                      color: canAuth
+                          ? AppTheme.welcomeMuted
+                          : AppTheme.neutral500,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Checkbox(
+                      value: _termsAccepted,
+                      checkColor: AppTheme.neutral900,
+                      side: const BorderSide(color: AppTheme.welcomeMuted),
+                      fillColor: WidgetStateProperty.resolveWith((states) {
+                        if (states.contains(WidgetState.selected)) {
+                          return AppTheme.welcomeAccent;
+                        }
+                        return Colors.transparent;
+                      }),
+                      onChanged: configured
+                          ? (v) =>
+                              setState(() => _termsAccepted = v ?? false)
+                          : null,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: GestureDetector(
+                          onTap: _termsPendingSnack,
+                          child: Text(
+                            l10n.welcomeTermsAgree,
+                            style: const TextStyle(
+                              color: AppTheme.welcomeMuted,
+                              fontSize: 13,
+                              height: 1.35,
+                            ),
                           ),
                         ),
-                      ],
+                      ),
+                    ),
+                  ],
+                ),
+                TextButton(
+                  onPressed: configured
+                      ? () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => const SignUpScreen(
+                                initialRole: UserRole.provider,
+                              ),
+                            ),
+                          );
+                        }
+                      : null,
+                  child: Text(
+                    l10n.welcomeClinicianLink,
+                    style: const TextStyle(
+                      color: AppTheme.brand300,
+                      fontSize: 13,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _Dot(active: true),
-                    const SizedBox(width: 8),
-                    _Dot(active: false),
-                    const SizedBox(width: 8),
-                    _Dot(active: false),
-                  ],
                 ),
               ],
             ),
@@ -147,21 +244,31 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-class _Dot extends StatelessWidget {
-  const _Dot({required this.active});
+class _Benefit extends StatelessWidget {
+  const _Benefit({required this.text});
 
-  final bool active;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 8,
-      height: 8,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: active
-            ? AppTheme.brand400
-            : AppTheme.brand400.withValues(alpha: 0.3),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.check, size: 18, color: AppTheme.welcomeAccent),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                color: AppTheme.welcomeOnBackground,
+                fontSize: 14,
+                height: 1.35,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -590,7 +590,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get providerInviteActive => '有効';
 
   @override
-  String get splashTagline => 'すべての家族のための、よりスマートな喘息予防。';
+  String get splashTagline => 'トリガーから守るスマートなシールド';
 
   @override
   String get splashGetStarted => 'はじめる';
@@ -1072,4 +1072,58 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get debugApiConsoleBanner => 'DEBUG — 公開共有用のスクリーンショットは避けてください';
+
+  @override
+  String get appTagline => 'トリガーから守るスマートなシールド';
+
+  @override
+  String get welcomeBenefit1 => '大気質・花粉リスクの先回りアラート';
+
+  @override
+  String get welcomeBenefit2 => '3秒でできる毎日の呼吸チェック';
+
+  @override
+  String get welcomeBenefit3 => '医師と共有できる信頼できるデータレポート';
+
+  @override
+  String get welcomeContinueEmail => 'またはメールで続ける';
+
+  @override
+  String get welcomeTermsAgree => '利用規約とプライバシーポリシーに同意します';
+
+  @override
+  String get welcomeTermsPending => '法務リンクは公開後に利用できます。';
+
+  @override
+  String get welcomeClinicianLink => '医療従事者です';
+
+  @override
+  String get checkInWelcomeHome => 'おかえりなさい！';
+
+  @override
+  String get checkInQuestion => '今の呼吸の状態は？';
+
+  @override
+  String get checkInBreathUsual => 'いつもどおり';
+
+  @override
+  String get checkInBreathTight => '少し苦しい';
+
+  @override
+  String get checkInBreathSymptoms => '症状がある';
+
+  @override
+  String get checkInAeroPoints => '初回チェックイン完了！+5 AeroPoints';
+
+  @override
+  String get shieldLocationTitle => '先制シールドを有効にする';
+
+  @override
+  String get shieldLocationBody => '周囲の先制シールドを有効にするため位置情報が必要です。';
+
+  @override
+  String get shieldLocationAllow => '位置情報を許可';
+
+  @override
+  String get shieldLocationNotNow => '今はしない';
 }

@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/biometrics/biometric_prefs.dart';
 import '../../../core/config/app_config.dart';
+import '../../../core/locale/locale_controller.dart';
+import '../../../core/onboarding/first_check_in_prefs.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../home/presentation/home_shell.dart';
@@ -11,10 +15,10 @@ import '../data/profile_repository.dart';
 import '../domain/user_profile.dart';
 import 'biometric_lock_screen.dart';
 import 'complete_profile_screen.dart';
-import 'patient_onboarding_screen.dart';
+import 'first_check_in_screen.dart';
 import 'splash_screen.dart';
 
-/// Session gate: login → optional biometric → profile → role shell.
+/// Session gate: Welcome → profile → first check-in → role shell.
 class AuthGate extends StatefulWidget {
   const AuthGate({super.key});
 
@@ -33,7 +37,8 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
   bool _biometricRequired = false;
   bool _checkingBiometric = false;
   String? _biometricCheckedForUser;
-  bool _onboardingDone = true;
+  bool _checkInDone = true;
+  bool _autoCreatingProfile = false;
   Object? _profileError;
 
   @override
@@ -50,7 +55,6 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Relock only when backgrounded — not on transient `inactive` (e.g. app switcher).
     if (state == AppLifecycleState.paused && _biometricRequired) {
       setState(() => _unlocked = false);
     }
@@ -80,22 +84,77 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
     });
 
     try {
-      final profile = await _profiles.fetchCurrent();
-      final onboardingDone = profile?.role == UserRole.patient
-          ? await BiometricPrefs.isPatientOnboardingDone(userId)
+      var profile = await _profiles.fetchCurrent();
+      profile ??= await _tryAutoCreatePatient(userId);
+      final checkInDone = profile?.role == UserRole.patient
+          ? await _isPatientReadyForHome(userId)
           : true;
       if (!mounted) return;
       setState(() {
         _profile = profile;
-        _onboardingDone = onboardingDone;
+        _checkInDone = checkInDone;
         _loadingProfile = false;
+        _autoCreatingProfile = false;
       });
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _profileError = e;
         _loadingProfile = false;
+        _autoCreatingProfile = false;
       });
+    }
+  }
+
+  /// Legacy onboarding OR new first check-in qualifies for Home.
+  Future<bool> _isPatientReadyForHome(String userId) async {
+    if (await FirstCheckInPrefs.isDone(userId)) return true;
+    return BiometricPrefs.isPatientOnboardingDone(userId);
+  }
+
+  UserRole? _metaRole() {
+    final meta = SupabaseService.currentUser?.userMetadata ?? {};
+    return UserRole.fromDb(meta['role'] as String?);
+  }
+
+  /// Social / email session without profiles row → default PATIENT.
+  Future<UserProfile?> _tryAutoCreatePatient(String userId) async {
+    final user = SupabaseService.currentUser;
+    if (user == null || user.id != userId) return null;
+
+    final meta = user.userMetadata ?? {};
+    final metaRole = UserRole.fromDb(meta['role'] as String?);
+    if (metaRole == UserRole.provider) return null;
+
+    var name = (meta['full_name'] as String?)?.trim() ??
+        (meta['name'] as String?)?.trim() ??
+        '';
+    if (name.isEmpty) {
+      final email = user.email;
+      if (email != null && email.contains('@')) {
+        name = email.split('@').first.trim();
+      }
+    }
+    if (name.isEmpty) return null;
+
+    // Prefer auth metadata, then Welcome/Settings prefs, else en.
+    var lang = (meta['language_code'] as String?)?.trim() ?? '';
+    if (!localeDisplayNames.containsKey(lang)) {
+      lang = await LocaleController.savedLanguageCode() ?? 'en';
+    }
+
+    if (mounted) {
+      setState(() => _autoCreatingProfile = true);
+    }
+    try {
+      return await _profiles.createProfile(
+        role: UserRole.patient,
+        fullName: name,
+        languageCode: lang,
+      );
+    } catch (_) {
+      // Race with signup/trigger insert — re-read instead of forcing complete-profile.
+      return _profiles.fetchCurrent();
     }
   }
 
@@ -105,7 +164,8 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
     _loadScheduled = false;
     _loadingProfile = false;
     _profileError = null;
-    _onboardingDone = true;
+    _checkInDone = true;
+    _autoCreatingProfile = false;
     _biometricCheckedForUser = null;
     _biometricRequired = false;
     _checkingBiometric = false;
@@ -181,6 +241,7 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
         }
 
         if (_loadingProfile ||
+            _autoCreatingProfile ||
             (_profile == null && _profileError == null && _loadScheduled)) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
@@ -216,7 +277,12 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
         }
 
         if (_profile == null) {
+          // Provider metadata must not be forced into a patient-only form.
+          final locked = _metaRole() == UserRole.provider
+              ? UserRole.provider
+              : UserRole.patient;
           return CompleteProfileScreen(
+            lockedRole: locked,
             onCompleted: () {
               setState(() {
                 _loadScheduled = false;
@@ -228,10 +294,15 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
           );
         }
 
-        if (_profile!.role == UserRole.patient && !_onboardingDone) {
-          return PatientOnboardingScreen(
+        if (_profile!.role == UserRole.patient && !_checkInDone) {
+          return FirstCheckInScreen(
             userId: userId,
-            onFinished: () => setState(() => _onboardingDone = true),
+            onFinished: () {
+              setState(() => _checkInDone = true);
+              unawaited(
+                BiometricPrefs.setPatientOnboardingDone(userId, true),
+              );
+            },
           );
         }
 

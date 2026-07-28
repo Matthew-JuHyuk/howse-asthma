@@ -11,10 +11,17 @@ import '../domain/npi_validator.dart';
 import '../domain/user_profile.dart';
 
 /// Completes profile after OAuth (or any session without a profiles row).
+///
+/// [lockedRole] hides the patient/provider switcher (Sprint 2: default patient).
 class CompleteProfileScreen extends StatefulWidget {
-  const CompleteProfileScreen({super.key, this.onCompleted});
+  const CompleteProfileScreen({
+    super.key,
+    this.onCompleted,
+    this.lockedRole,
+  });
 
   final VoidCallback? onCompleted;
+  final UserRole? lockedRole;
 
   @override
   State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
@@ -28,22 +35,38 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final _clinicController = TextEditingController();
   final _profiles = ProfileRepository();
 
-  UserRole _role = UserRole.patient;
+  late UserRole _role;
   String _languageCode = 'en';
   bool _isSubmitting = false;
   String? _errorMessage;
 
+  bool get _roleLocked => widget.lockedRole != null;
+
   @override
   void initState() {
     super.initState();
+    _role = widget.lockedRole ?? UserRole.patient;
     final meta = SupabaseService.currentUser?.userMetadata ?? {};
     final role = UserRole.fromDb(meta['role'] as String?);
-    if (role != null) _role = role;
-    final name = meta['full_name'] as String?;
+    if (!_roleLocked && role != null) _role = role;
+    final name = (meta['full_name'] as String?) ?? (meta['name'] as String?);
     if (name != null && name.isNotEmpty) _nameController.text = name;
+    if (_nameController.text.isEmpty) {
+      final email = SupabaseService.currentUser?.email;
+      if (email != null && email.contains('@')) {
+        _nameController.text = email.split('@').first;
+      }
+    }
     final lang = meta['language_code'] as String?;
     if (lang != null && localeDisplayNames.containsKey(lang)) {
       _languageCode = lang;
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        final saved = await LocaleController.savedLanguageCode();
+        if (saved != null && mounted) {
+          setState(() => _languageCode = saved);
+        }
+      });
     }
     final npi = meta['npi'] as String?;
     if (npi != null) _npiController.text = npi;
@@ -139,23 +162,25 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ] else
                     Text(l10n.authCompleteProfileBody),
                   const SizedBox(height: 16),
-                  SegmentedButton<UserRole>(
-                    segments: [
-                      ButtonSegment(
-                        value: UserRole.patient,
-                        label: Text(l10n.authRolePatient),
-                      ),
-                      ButtonSegment(
-                        value: UserRole.provider,
-                        label: Text(l10n.authRoleProvider),
-                      ),
-                    ],
-                    selected: {_role},
-                    onSelectionChanged: (value) {
-                      setState(() => _role = value.first);
-                    },
-                  ),
-                  const SizedBox(height: 16),
+                  if (!_roleLocked) ...[
+                    SegmentedButton<UserRole>(
+                      segments: [
+                        ButtonSegment(
+                          value: UserRole.patient,
+                          label: Text(l10n.authRolePatient),
+                        ),
+                        ButtonSegment(
+                          value: UserRole.provider,
+                          label: Text(l10n.authRoleProvider),
+                        ),
+                      ],
+                      selected: {_role},
+                      onSelectionChanged: (value) {
+                        setState(() => _role = value.first);
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                   TextFormField(
                     controller: _nameController,
                     textCapitalization: TextCapitalization.words,

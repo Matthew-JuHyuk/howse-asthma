@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,14 +24,14 @@ const Map<String, String> localeDisplayNames = {
 
 const _prefsKey = 'app_locale_code';
 
-/// App language. Default for new installs is English (product default).
-/// Persists the user's choice; `null` is not used for the initial value.
+/// App language. First launch follows OS when supported (Sprint 2 S2-I18N-03);
+/// a manual choice in prefs always wins (S2-I18N-06).
 class LocaleController extends ValueNotifier<Locale> {
   LocaleController() : super(const Locale('en'));
 
   bool _loaded = false;
 
-  /// Load saved preference (falls back to English).
+  /// Load saved preference, else device locale, else English.
   Future<void> load() async {
     if (_loaded) return;
     final prefs = await SharedPreferences.getInstance();
@@ -39,14 +40,41 @@ class LocaleController extends ValueNotifier<Locale> {
         supportedLocales.any((l) => l.languageCode == code)) {
       value = Locale(code);
     } else {
-      value = const Locale('en');
+      value = resolveInitialLocale(
+        platformLocales: PlatformDispatcher.instance.locales,
+      );
     }
     _loaded = true;
+  }
+
+  /// Visible for tests — maps device locales to a supported [Locale].
+  static Locale resolveInitialLocale({
+    required List<Locale> platformLocales,
+  }) {
+    for (final device in platformLocales) {
+      for (final supported in supportedLocales) {
+        if (supported.languageCode == device.languageCode) {
+          return supported;
+        }
+      }
+    }
+    return const Locale('en');
   }
 
   Future<void> setLocale(Locale locale) async {
     value = locale;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_prefsKey, locale.languageCode);
+  }
+
+  /// Language chosen on Welcome/Settings (prefs), if any.
+  static Future<String?> savedLanguageCode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final code = prefs.getString(_prefsKey);
+    if (code != null &&
+        supportedLocales.any((l) => l.languageCode == code)) {
+      return code;
+    }
+    return null;
   }
 }

@@ -625,7 +625,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get splashTagline =>
-      'Une prévention de l’asthme plus intelligente pour chaque famille.';
+      'Votre bouclier intelligent contre les declencheurs';
 
   @override
   String get splashGetStarted => 'Commencer';
@@ -1150,4 +1150,62 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get debugApiConsoleBanner =>
       'DEBUG — ne pas capturer d’écran pour un partage public';
+
+  @override
+  String get appTagline => 'Votre bouclier intelligent contre les declencheurs';
+
+  @override
+  String get welcomeBenefit1 => 'Alertes proactives qualite de l air et pollen';
+
+  @override
+  String get welcomeBenefit2 => 'Un check-in quotidien de 3 secondes';
+
+  @override
+  String get welcomeBenefit3 =>
+      'Rapports fiables a partager avec votre clinicien';
+
+  @override
+  String get welcomeContinueEmail => 'ou continuer avec e-mail';
+
+  @override
+  String get welcomeTermsAgree =>
+      'J accepte les Conditions et la Politique de confidentialite';
+
+  @override
+  String get welcomeTermsPending =>
+      'Les liens juridiques seront disponibles une fois publies.';
+
+  @override
+  String get welcomeClinicianLink => 'Je suis clinicien';
+
+  @override
+  String get checkInWelcomeHome => 'Bienvenue chez vous !';
+
+  @override
+  String get checkInQuestion => 'Comment respirez-vous en ce moment ?';
+
+  @override
+  String get checkInBreathUsual => 'Comme d habitude';
+
+  @override
+  String get checkInBreathTight => 'Un peu serree';
+
+  @override
+  String get checkInBreathSymptoms => 'J ai des symptomes';
+
+  @override
+  String get checkInAeroPoints => 'Premier check-in termine ! +5 AeroPoints';
+
+  @override
+  String get shieldLocationTitle => 'Activez votre bouclier preventif';
+
+  @override
+  String get shieldLocationBody =>
+      'Activez le bouclier autour de vous — la localisation est necessaire pour l air et le pollen.';
+
+  @override
+  String get shieldLocationAllow => 'Autoriser la localisation';
+
+  @override
+  String get shieldLocationNotNow => 'Pas maintenant';
 }

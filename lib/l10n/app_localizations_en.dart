@@ -609,7 +609,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get providerInviteActive => 'Active';
 
   @override
-  String get splashTagline => 'Smarter asthma prevention for every family.';
+  String get splashTagline => 'Your smart shield against triggers';
 
   @override
   String get splashGetStarted => 'Get Started';
@@ -1126,4 +1126,64 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get debugApiConsoleBanner =>
       'DEBUG — do not screenshot for public share';
+
+  @override
+  String get appTagline => 'Your smart shield against triggers';
+
+  @override
+  String get welcomeBenefit1 =>
+      'Proactive alerts for air quality & pollen risk';
+
+  @override
+  String get welcomeBenefit2 =>
+      'A 3-second daily check-in for breathing control';
+
+  @override
+  String get welcomeBenefit3 =>
+      'Trusted data reports you can share with your clinician';
+
+  @override
+  String get welcomeContinueEmail => 'or continue with email';
+
+  @override
+  String get welcomeTermsAgree =>
+      'I agree to the Terms of Service and Privacy Policy';
+
+  @override
+  String get welcomeTermsPending =>
+      'Legal document links will be available once published.';
+
+  @override
+  String get welcomeClinicianLink => 'I\'m a clinician';
+
+  @override
+  String get checkInWelcomeHome => 'Welcome Home!';
+
+  @override
+  String get checkInQuestion => 'How is your breathing right now?';
+
+  @override
+  String get checkInBreathUsual => 'About the same as usual';
+
+  @override
+  String get checkInBreathTight => 'A bit tight';
+
+  @override
+  String get checkInBreathSymptoms => 'I have symptoms';
+
+  @override
+  String get checkInAeroPoints => 'First check-in done! +5 AeroPoints';
+
+  @override
+  String get shieldLocationTitle => 'Activate your preemptive shield';
+
+  @override
+  String get shieldLocationBody =>
+      'Turn on your preemptive shield around you — we need location for nearby air & pollen.';
+
+  @override
+  String get shieldLocationAllow => 'Allow location';
+
+  @override
+  String get shieldLocationNotNow => 'Not now';
 }

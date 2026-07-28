@@ -1249,7 +1249,7 @@ abstract class AppLocalizations {
   /// No description provided for @splashTagline.
   ///
   /// In en, this message translates to:
-  /// **'Smarter asthma prevention for every family.'**
+  /// **'Your smart shield against triggers'**
   String get splashTagline;
 
   /// No description provided for @splashGetStarted.
@@ -2151,6 +2151,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'DEBUG — do not screenshot for public share'**
   String get debugApiConsoleBanner;
+
+  /// No description provided for @appTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Your smart shield against triggers'**
+  String get appTagline;
+
+  /// No description provided for @welcomeBenefit1.
+  ///
+  /// In en, this message translates to:
+  /// **'Proactive alerts for air quality & pollen risk'**
+  String get welcomeBenefit1;
+
+  /// No description provided for @welcomeBenefit2.
+  ///
+  /// In en, this message translates to:
+  /// **'A 3-second daily check-in for breathing control'**
+  String get welcomeBenefit2;
+
+  /// No description provided for @welcomeBenefit3.
+  ///
+  /// In en, this message translates to:
+  /// **'Trusted data reports you can share with your clinician'**
+  String get welcomeBenefit3;
+
+  /// No description provided for @welcomeContinueEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'or continue with email'**
+  String get welcomeContinueEmail;
+
+  /// No description provided for @welcomeTermsAgree.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the Terms of Service and Privacy Policy'**
+  String get welcomeTermsAgree;
+
+  /// No description provided for @welcomeTermsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal document links will be available once published.'**
+  String get welcomeTermsPending;
+
+  /// No description provided for @welcomeClinicianLink.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m a clinician'**
+  String get welcomeClinicianLink;
+
+  /// No description provided for @checkInWelcomeHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Home!'**
+  String get checkInWelcomeHome;
+
+  /// No description provided for @checkInQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How is your breathing right now?'**
+  String get checkInQuestion;
+
+  /// No description provided for @checkInBreathUsual.
+  ///
+  /// In en, this message translates to:
+  /// **'About the same as usual'**
+  String get checkInBreathUsual;
+
+  /// No description provided for @checkInBreathTight.
+  ///
+  /// In en, this message translates to:
+  /// **'A bit tight'**
+  String get checkInBreathTight;
+
+  /// No description provided for @checkInBreathSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'I have symptoms'**
+  String get checkInBreathSymptoms;
+
+  /// No description provided for @checkInAeroPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'First check-in done! +5 AeroPoints'**
+  String get checkInAeroPoints;
+
+  /// No description provided for @shieldLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate your preemptive shield'**
+  String get shieldLocationTitle;
+
+  /// No description provided for @shieldLocationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on your preemptive shield around you — we need location for nearby air & pollen.'**
+  String get shieldLocationBody;
+
+  /// No description provided for @shieldLocationAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow location'**
+  String get shieldLocationAllow;
+
+  /// No description provided for @shieldLocationNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get shieldLocationNotNow;
 }
 
 class _AppLocalizationsDelegate

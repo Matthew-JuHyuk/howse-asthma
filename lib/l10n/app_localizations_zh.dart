@@ -587,7 +587,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get providerInviteActive => '有效';
 
   @override
-  String get splashTagline => '为每个家庭提供更智能的哮喘预防。';
+  String get splashTagline => '抵御诱发因素的智能防护盾';
 
   @override
   String get splashGetStarted => '开始使用';
@@ -1066,4 +1066,58 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get debugApiConsoleBanner => 'DEBUG — 请勿截图用于公开分享';
+
+  @override
+  String get appTagline => '抵御诱发因素的智能防护盾';
+
+  @override
+  String get welcomeBenefit1 => '空气质量与花粉风险的主动预警';
+
+  @override
+  String get welcomeBenefit2 => '每日3秒呼吸自主检查';
+
+  @override
+  String get welcomeBenefit3 => '可与医生共享的可信数据报告';
+
+  @override
+  String get welcomeContinueEmail => '或使用邮箱继续';
+
+  @override
+  String get welcomeTermsAgree => '我同意服务条款与隐私政策';
+
+  @override
+  String get welcomeTermsPending => '法律文件链接将在发布后提供。';
+
+  @override
+  String get welcomeClinicianLink => '我是临床医护人员';
+
+  @override
+  String get checkInWelcomeHome => '欢迎回家！';
+
+  @override
+  String get checkInQuestion => '您现在的呼吸状况如何？';
+
+  @override
+  String get checkInBreathUsual => '与平时差不多';
+
+  @override
+  String get checkInBreathTight => '有点闷';
+
+  @override
+  String get checkInBreathSymptoms => '有症状';
+
+  @override
+  String get checkInAeroPoints => '首次签到完成！+5 AeroPoints';
+
+  @override
+  String get shieldLocationTitle => '启用您的预先防护盾';
+
+  @override
+  String get shieldLocationBody => '开启周围预先防护需要位置信息以获取附近空气与花粉。';
+
+  @override
+  String get shieldLocationAllow => '允许位置';
+
+  @override
+  String get shieldLocationNotNow => '暂不';
 }

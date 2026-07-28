@@ -590,7 +590,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get providerInviteActive => '활성';
 
   @override
-  String get splashTagline => '모든 가족을 위한 더 스마트한 천식 예방.';
+  String get splashTagline => '환경 자극으로부터 호흡을 지키는 스마트한 울타리';
 
   @override
   String get splashGetStarted => '시작하기';
@@ -1073,4 +1073,58 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get debugApiConsoleBanner => 'DEBUG — 공개 공유용 스크린샷 금지';
+
+  @override
+  String get appTagline => '환경 자극으로부터 호흡을 지키는 스마트한 울타리';
+
+  @override
+  String get welcomeBenefit1 => '실시간 환경 위험(AQI·꽃가루) 선제 예측 및 알림';
+
+  @override
+  String get welcomeBenefit2 => '3초 만에 끝나는 매일의 호흡 주도권 체크';
+
+  @override
+  String get welcomeBenefit3 => '의사와 공유하는 신뢰할 수 있는 데이터 리포트';
+
+  @override
+  String get welcomeContinueEmail => '또는 이메일로 시작하기';
+
+  @override
+  String get welcomeTermsAgree => '이용약관 및 개인정보 처리방침에 동의합니다';
+
+  @override
+  String get welcomeTermsPending => '약관 링크는 게시 후 제공됩니다.';
+
+  @override
+  String get welcomeClinicianLink => '의료진입니다';
+
+  @override
+  String get checkInWelcomeHome => 'Welcome Home!';
+
+  @override
+  String get checkInQuestion => '지금 호흡 상태는 어떤가요?';
+
+  @override
+  String get checkInBreathUsual => '평소와 같음';
+
+  @override
+  String get checkInBreathTight => '약간 답답함';
+
+  @override
+  String get checkInBreathSymptoms => '증상 있음';
+
+  @override
+  String get checkInAeroPoints => '첫 체크인 완료! +5 AeroPoint';
+
+  @override
+  String get shieldLocationTitle => '선제적 울타리를 활성화하세요';
+
+  @override
+  String get shieldLocationBody => '당신 주위의 선제적 울타리를 활성화하려면 위치가 필요합니다.';
+
+  @override
+  String get shieldLocationAllow => '위치 허용';
+
+  @override
+  String get shieldLocationNotNow => '나중에';
 }

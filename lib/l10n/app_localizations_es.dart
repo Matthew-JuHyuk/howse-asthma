@@ -621,7 +621,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get splashTagline =>
-      'Prevención del asma más inteligente para cada familia.';
+      'Tu escudo inteligente contra los desencadenantes';
 
   @override
   String get splashGetStarted => 'Comenzar';
@@ -1142,4 +1142,63 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get debugApiConsoleBanner =>
       'DEBUG — no capturar pantalla para compartir en público';
+
+  @override
+  String get appTagline => 'Tu escudo inteligente contra los desencadenantes';
+
+  @override
+  String get welcomeBenefit1 =>
+      'Alertas proactivas de calidad del aire y polen';
+
+  @override
+  String get welcomeBenefit2 =>
+      'Check-in diario de 3 segundos para tu respiracion';
+
+  @override
+  String get welcomeBenefit3 => 'Informes de datos confiables para tu clinico';
+
+  @override
+  String get welcomeContinueEmail => 'o continuar con correo';
+
+  @override
+  String get welcomeTermsAgree =>
+      'Acepto los Terminos y la Politica de privacidad';
+
+  @override
+  String get welcomeTermsPending =>
+      'Los enlaces legales estaran disponibles cuando se publiquen.';
+
+  @override
+  String get welcomeClinicianLink => 'Soy profesional de la salud';
+
+  @override
+  String get checkInWelcomeHome => 'Bienvenido a casa!';
+
+  @override
+  String get checkInQuestion => 'Como esta tu respiracion ahora?';
+
+  @override
+  String get checkInBreathUsual => 'Como de costumbre';
+
+  @override
+  String get checkInBreathTight => 'Un poco apretada';
+
+  @override
+  String get checkInBreathSymptoms => 'Tengo sintomas';
+
+  @override
+  String get checkInAeroPoints => 'Primer check-in listo! +5 AeroPoints';
+
+  @override
+  String get shieldLocationTitle => 'Activa tu escudo preventivo';
+
+  @override
+  String get shieldLocationBody =>
+      'Activa el escudo a tu alrededor: necesitamos la ubicacion para aire y polen cercanos.';
+
+  @override
+  String get shieldLocationAllow => 'Permitir ubicacion';
+
+  @override
+  String get shieldLocationNotNow => 'Ahora no';
 }

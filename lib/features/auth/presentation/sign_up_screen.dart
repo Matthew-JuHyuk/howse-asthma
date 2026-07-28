@@ -13,7 +13,10 @@ import 'check_email_screen.dart';
 
 /// SCR-AUTH-03 — email signup with role, name, language, and NPI for providers.
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  const SignUpScreen({super.key, this.initialRole = UserRole.patient});
+
+  /// Welcome clinician link uses [UserRole.provider].
+  final UserRole initialRole;
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -27,10 +30,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _npiController = TextEditingController();
   final _profiles = ProfileRepository();
 
-  UserRole _role = UserRole.patient;
+  late UserRole _role;
   String _languageCode = 'en';
   bool _isSubmitting = false;
   String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _role = widget.initialRole;
+  }
 
   @override
   void dispose() {

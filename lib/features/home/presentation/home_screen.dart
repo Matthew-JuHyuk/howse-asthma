@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../../core/debug/debug_gates.dart';
 import '../../../core/location/location_service.dart';
+import '../../../core/onboarding/first_check_in_prefs.dart';
+import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../alerts/presentation/alert_screen.dart';
@@ -54,7 +57,52 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _refresh();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _maybePromptShieldLocation();
+      if (mounted) await _refresh();
+    });
+  }
+
+  /// S2-PERM — once-per-user shield copy, then When-In-Use only.
+  Future<void> _maybePromptShieldLocation() async {
+    final userId = SupabaseService.currentUser?.id;
+    if (userId == null || !mounted) return;
+    if (await FirstCheckInPrefs.wasShieldLocationPrompted(userId)) return;
+
+    final perm = await _location.checkPermission();
+    if (perm == LocationPermission.whileInUse ||
+        perm == LocationPermission.always ||
+        perm == LocationPermission.deniedForever) {
+      // Already decided (allow or permanent deny) — do not re-prompt.
+      await FirstCheckInPrefs.setShieldLocationPrompted(userId, true);
+      return;
+    }
+
+    if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    final allow = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.shieldLocationTitle),
+        content: Text(l10n.shieldLocationBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.shieldLocationNotNow),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.shieldLocationAllow),
+          ),
+        ],
+      ),
+    );
+
+    await FirstCheckInPrefs.setShieldLocationPrompted(userId, true);
+    if (allow == true) {
+      await _location.requestPermission();
+    }
   }
 
   bool _refreshing = false;
