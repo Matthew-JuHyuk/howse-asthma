@@ -2259,6 +2259,353 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not now'**
   String get shieldLocationNotNow;
+
+  /// No description provided for @settingsPushMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get settingsPushMaster;
+
+  /// No description provided for @settingsPushMasterHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Master switch for all Howse Asthma alerts on this device'**
+  String get settingsPushMasterHint;
+
+  /// No description provided for @pushConsentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay ahead of asthma triggers'**
+  String get pushConsentTitle;
+
+  /// No description provided for @pushConsentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We can send simple alerts when nearby air or flood risk rises, and later tips for safer times to open windows. You can change this anytime in Settings.'**
+  String get pushConsentBody;
+
+  /// No description provided for @pushConsentAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow notifications'**
+  String get pushConsentAllow;
+
+  /// No description provided for @pushConsentNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get pushConsentNotNow;
+
+  /// No description provided for @homeNearPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Near {place}'**
+  String homeNearPlace(String place);
+
+  /// No description provided for @homeStaleLocationNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing your last saved reading while we wait for location.'**
+  String get homeStaleLocationNotice;
+
+  /// No description provided for @homeStaleRefreshNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing your last saved reading. Pull to refresh when you have a connection.'**
+  String get homeStaleRefreshNotice;
+
+  /// No description provided for @homeStaleCacheNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This reading may be a little old. Treat with care.'**
+  String get homeStaleCacheNotice;
+
+  /// No description provided for @homeNowDoThisHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Do this now to lower your chance of an attack'**
+  String get homeNowDoThisHeading;
+
+  /// No description provided for @homeDraftBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft'**
+  String get homeDraftBadge;
+
+  /// No description provided for @homeNowDoThisFloodTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay inside if you can'**
+  String get homeNowDoThisFloodTitle;
+
+  /// No description provided for @homeNowDoThisFloodBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood alerts often mean damp rooms. Keep your inhaler close and avoid flooded areas.'**
+  String get homeNowDoThisFloodBody;
+
+  /// No description provided for @homeNowDoThisTrapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ease up on outdoor activity'**
+  String get homeNowDoThisTrapTitle;
+
+  /// No description provided for @homeNowDoThisTrapBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Traffic-related air pollution nearby looks high. Short outdoor trips only if needed.'**
+  String get homeNowDoThisTrapBody;
+
+  /// No description provided for @homeNowDoThisPollenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep windows closed for now'**
+  String get homeNowDoThisPollenTitle;
+
+  /// No description provided for @homeNowDoThisPollenBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pollen is high. Rinse face and change clothes after being outside.'**
+  String get homeNowDoThisPollenBody;
+
+  /// No description provided for @homeNowDoThisRiskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Slow down outdoors'**
+  String get homeNowDoThisRiskTitle;
+
+  /// No description provided for @homeNowDoThisRiskBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall risk is elevated. Keep your inhaler with you and rest if breathing feels hard.'**
+  String get homeNowDoThisRiskBody;
+
+  /// No description provided for @homeNowDoThisCalmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A calmer window for fresh air'**
+  String get homeNowDoThisCalmTitle;
+
+  /// No description provided for @homeNowDoThisCalmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside air looks manageable. A short air-out may help — still keep your inhaler nearby.'**
+  String get homeNowDoThisCalmBody;
+
+  /// No description provided for @homeAdherenceSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Your inhaler week'**
+  String get homeAdherenceSection;
+
+  /// No description provided for @adherenceWeekHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Filled days show logged inhaler uses (1-Tap).'**
+  String get adherenceWeekHint;
+
+  /// No description provided for @homeMoldAxis.
+  ///
+  /// In en, this message translates to:
+  /// **'Mold risk'**
+  String get homeMoldAxis;
+
+  /// No description provided for @homeMoldElevatedDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher dampness signal'**
+  String get homeMoldElevatedDraft;
+
+  /// No description provided for @homeMoldPendingDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Humidity data pending'**
+  String get homeMoldPendingDraft;
+
+  /// No description provided for @homeFloodAsMoldFactor.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood / damp factor'**
+  String get homeFloodAsMoldFactor;
+
+  /// No description provided for @homeForecastLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Short outlook'**
+  String get homeForecastLink;
+
+  /// No description provided for @homeForecastHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Next day {date} · score {score}'**
+  String homeForecastHint(String date, String score);
+
+  /// No description provided for @homeSensorDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearest air sensor {km} km ({mi} mi) · search ~{radiusKm} km ({radiusMi} mi)'**
+  String homeSensorDistance(
+    String km,
+    String mi,
+    String radiusKm,
+    String radiusMi,
+  );
+
+  /// No description provided for @homeSensorNearestOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearest air sensor {km} km ({mi} mi)'**
+  String homeSensorNearestOnly(String km, String mi);
+
+  /// No description provided for @homeSensorRadiusOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Sensor search ~{km} km ({mi} mi)'**
+  String homeSensorRadiusOnly(String km, String mi);
+
+  /// No description provided for @weekdayMonShort.
+  ///
+  /// In en, this message translates to:
+  /// **'M'**
+  String get weekdayMonShort;
+
+  /// No description provided for @weekdayTueShort.
+  ///
+  /// In en, this message translates to:
+  /// **'T'**
+  String get weekdayTueShort;
+
+  /// No description provided for @weekdayWedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'W'**
+  String get weekdayWedShort;
+
+  /// No description provided for @weekdayThuShort.
+  ///
+  /// In en, this message translates to:
+  /// **'T'**
+  String get weekdayThuShort;
+
+  /// No description provided for @weekdayFriShort.
+  ///
+  /// In en, this message translates to:
+  /// **'F'**
+  String get weekdayFriShort;
+
+  /// No description provided for @weekdaySatShort.
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get weekdaySatShort;
+
+  /// No description provided for @weekdaySunShort.
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get weekdaySunShort;
+
+  /// No description provided for @logAdherenceCalendarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Adherence calendar'**
+  String get logAdherenceCalendarTitle;
+
+  /// No description provided for @homeNowDoThisMoldTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cut down indoor dampness'**
+  String get homeNowDoThisMoldTitle;
+
+  /// No description provided for @homeNowDoThisMoldBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor dampness looks high. Run a fan or dehumidifier if you have one, and avoid wet basements.'**
+  String get homeNowDoThisMoldBody;
+
+  /// No description provided for @homeMoldDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Dampness conditions near you (outdoor proxy — not a spore count)'**
+  String get homeMoldDetail;
+
+  /// No description provided for @homeMoldTip.
+  ///
+  /// In en, this message translates to:
+  /// **'High mold risk means keep rooms drier when you can. Flood warnings raise dampness risk.'**
+  String get homeMoldTip;
+
+  /// No description provided for @homeMoldRh.
+  ///
+  /// In en, this message translates to:
+  /// **'Humidity {pct}%'**
+  String homeMoldRh(String pct);
+
+  /// No description provided for @homeMoldTempF.
+  ///
+  /// In en, this message translates to:
+  /// **'{temp}°F'**
+  String homeMoldTempF(String temp);
+
+  /// No description provided for @homeMoldDewF.
+  ///
+  /// In en, this message translates to:
+  /// **'Dew {temp}°F'**
+  String homeMoldDewF(String temp);
+
+  /// No description provided for @homeMoldWetHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} wet hours (24h)'**
+  String homeMoldWetHours(int hours);
+
+  /// No description provided for @homeMoldProxyDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor estimate only'**
+  String get homeMoldProxyDisclaimer;
+
+  /// No description provided for @homeVentilationSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside air looks calmer — a short air-out may help.'**
+  String get homeVentilationSnack;
+
+  /// No description provided for @settingsAlertPositive.
+  ///
+  /// In en, this message translates to:
+  /// **'Fresh-air tips'**
+  String get settingsAlertPositive;
+
+  /// No description provided for @settingsAlertPositiveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When outdoor air looks safer for a short window open (draft rules)'**
+  String get settingsAlertPositiveHint;
+
+  /// No description provided for @settingsBgTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Background refresh'**
+  String get settingsBgTitle;
+
+  /// No description provided for @settingsBgBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Howse Asthma refreshes nearby air while you use the app. We do not request Always location in this version.'**
+  String get settingsBgBody;
+
+  /// No description provided for @settingsBgRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh while using the app'**
+  String get settingsBgRefresh;
+
+  /// No description provided for @settingsBgRefreshHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Update risk when you move or keep the app open'**
+  String get settingsBgRefreshHint;
 }
 
 class _AppLocalizationsDelegate

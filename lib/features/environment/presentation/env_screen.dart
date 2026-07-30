@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/environment/environment_snapshot_cache.dart';
 import '../../../core/location/location_service.dart';
+import '../../../core/location/place_label_resolver.dart';
+import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/environment_risk_repository.dart';
@@ -21,7 +24,9 @@ class EnvScreen extends StatefulWidget {
 class _EnvScreenState extends State<EnvScreen> {
   final _location = const LocationService();
   final _risk = EnvironmentRiskRepository();
+  final _placeLabels = PlaceLabelResolver();
   bool _loading = true;
+  bool _quietRefresh = false;
   String? _error;
   EnvironmentSnapshot? _snap;
 
@@ -31,13 +36,32 @@ class _EnvScreenState extends State<EnvScreen> {
     if (widget.initial != null) {
       _snap = widget.initial;
       _loading = false;
+    } else {
+      _hydrateCache();
     }
     _load();
   }
 
+  Future<void> _hydrateCache() async {
+    final userId = SupabaseService.currentUser?.id;
+    if (userId == null) return;
+    final cached = await EnvironmentSnapshotCache.read(userId);
+    if (cached != null && mounted && _snap == null) {
+      setState(() {
+        _snap = cached;
+        _loading = false;
+      });
+    }
+  }
+
   Future<void> _load() async {
+    final had = _snap != null;
     setState(() {
-      _loading = true;
+      if (!had) {
+        _loading = true;
+      } else {
+        _quietRefresh = true;
+      }
       _error = null;
     });
     final loc = await _location.getCurrentPosition();
@@ -45,25 +69,33 @@ class _EnvScreenState extends State<EnvScreen> {
     if (!loc.isOk) {
       setState(() {
         _loading = false;
-        _error = loc.failure?.name ?? 'unavailable';
+        _quietRefresh = false;
+        if (!had) _error = loc.failure?.name ?? 'unavailable';
       });
       return;
     }
     try {
-      final snap = await _risk.fetchRisk(
-        latitude: loc.position!.latitude,
-        longitude: loc.position!.longitude,
-      );
+      final lat = loc.position!.latitude;
+      final lon = loc.position!.longitude;
+      final label = await _placeLabels.resolve(latitude: lat, longitude: lon);
+      final snap = await _risk.fetchRisk(latitude: lat, longitude: lon);
+      final enriched = snap.copyWith(locationLabel: label);
+      final userId = SupabaseService.currentUser?.id;
+      if (userId != null) {
+        await EnvironmentSnapshotCache.write(userId, enriched);
+      }
       if (!mounted) return;
       setState(() {
-        _snap = snap;
+        _snap = enriched;
         _loading = false;
+        _quietRefresh = false;
       });
     } catch (_) {
       if (!mounted) return;
       setState(() {
         _loading = false;
-        _error = 'server_error';
+        _quietRefresh = false;
+        if (!had) _error = 'server_error';
       });
     }
   }
@@ -80,14 +112,30 @@ class _EnvScreenState extends State<EnvScreen> {
           children: [
             Text(l10n.envTitle,
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            const Text(
-              'SCR-PAT-ENV',
-              style: TextStyle(fontSize: 11, color: AppTheme.neutral400),
+            Text(
+              snap?.locationLabel != null
+                  ? l10n.homeNearPlace(snap!.locationLabel!)
+                  : 'SCR-PAT-ENV',
+              style: const TextStyle(fontSize: 11, color: AppTheme.neutral400),
             ),
           ],
         ),
         actions: [
-          IconButton(onPressed: _loading ? null : _load, icon: const Icon(Icons.refresh)),
+          if (_quietRefresh)
+            const Padding(
+              padding: EdgeInsets.only(right: 8),
+              child: Center(
+                child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+            ),
+          IconButton(
+            onPressed: (_loading && snap == null) ? null : _load,
+            icon: const Icon(Icons.refresh),
+          ),
         ],
       ),
       body: RefreshIndicator(
@@ -105,10 +153,17 @@ class _EnvScreenState extends State<EnvScreen> {
               Text(l10n.locationUnavailable)
             else if (snap != null) ...[
               _banner(l10n, snap),
-              if (snap.degraded) ...[
+              if (snap.degraded || snap.fromStaleCache) ...[
                 const SizedBox(height: 8),
-                Text(l10n.homeDegradedNotice,
-                    style: const TextStyle(fontSize: 12, color: AppTheme.warning600)),
+                Text(
+                  snap.fromStaleCache
+                      ? l10n.homeStaleCacheNotice
+                      : l10n.homeDegradedNotice,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppTheme.warning600,
+                  ),
+                ),
               ],
               const SizedBox(height: 12),
               StateOnlySourceBadge.njdot(snap),
@@ -128,12 +183,51 @@ class _EnvScreenState extends State<EnvScreen> {
                     'AQI ${snap.aqiEpa} (${snap.aqiSource ?? '—'})',
                   if (snap.localPm25 != null)
                     'Local PM2.5 ${snap.localPm25!.toStringAsFixed(1)}',
+                  if (snap.nearestPurpleAirKm != null)
+                    l10n.homeSensorNearestOnly(
+                      snap.nearestPurpleAirKm!.toStringAsFixed(1),
+                      (snap.nearestPurpleAirKm! * 0.621371).toStringAsFixed(1),
+                    ),
+                  if (snap.purpleAirSearchRadiusKm != null)
+                    l10n.homeSensorRadiusOnly(
+                      snap.purpleAirSearchRadiusKm!.toStringAsFixed(1),
+                      (snap.purpleAirSearchRadiusKm! * 0.621371)
+                          .toStringAsFixed(1),
+                    ),
+                ].join(' · '),
+              ),
+              const SizedBox(height: 10),
+              _axis(
+                icon: Icons.spa_outlined,
+                title: l10n.homeMoldAxis,
+                level: snap.moldLevel ??
+                    (snap.moldScore != null
+                        ? '${snap.moldScore}'
+                        : l10n.homeMoldPendingDraft),
+                detail: l10n.homeMoldDetail,
+                tip: l10n.homeMoldTip,
+                filled: (snap.moldScore ?? 1).clamp(1, 5),
+                accent: (snap.moldScore ?? 0) >= 3 ? AppTheme.warning600 : null,
+                meta: [
+                  if (snap.moldRhPct != null)
+                    l10n.homeMoldRh(snap.moldRhPct!.round().toString()),
+                  if (snap.moldTempC != null)
+                    l10n.homeMoldTempF(
+                      (snap.moldTempC! * 9 / 5 + 32).round().toString(),
+                    ),
+                  if (snap.moldDewPointC != null)
+                    l10n.homeMoldDewF(
+                      (snap.moldDewPointC! * 9 / 5 + 32).round().toString(),
+                    ),
+                  if (snap.moldHWetHours != null)
+                    l10n.homeMoldWetHours(snap.moldHWetHours!),
+                  l10n.homeMoldProxyDisclaimer,
                 ].join(' · '),
               ),
               const SizedBox(height: 10),
               _axis(
                 icon: Icons.flood_outlined,
-                title: l10n.mockFloodAxis,
+                title: l10n.homeFloodAsMoldFactor,
                 level: snap.hasFlashFloodWarning
                     ? l10n.homeFloodActive
                     : l10n.homeFloodNone,
@@ -142,7 +236,9 @@ class _EnvScreenState extends State<EnvScreen> {
                 filled: snap.hasFlashFloodWarning ? 4 : 1,
                 accent: snap.hasFlashFloodWarning ? AppTheme.error600 : null,
                 meta: snap.usgsStreamRateFtHr != null
-                    ? l10n.envUsgsRate(snap.usgsStreamRateFtHr!.toStringAsFixed(2))
+                    ? l10n.envUsgsRate(
+                        snap.usgsStreamRateFtHr!.toStringAsFixed(2),
+                      )
                     : null,
               ),
               const SizedBox(height: 10),

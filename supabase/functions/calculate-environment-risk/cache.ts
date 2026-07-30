@@ -21,6 +21,15 @@ function rowToSnapshot(
     source_coverage?: EnvironmentSnapshot["source_coverage"];
     pollen_fetched_at?: string;
     degraded?: boolean;
+    nearest_purpleair_km?: number | null;
+    purpleair_search_radius_km?: number | null;
+    mold_score?: EnvironmentSnapshot["mold_score"];
+    mold_level?: EnvironmentSnapshot["mold_level"];
+    mold_rh_pct?: number | null;
+    mold_dew_point_c?: number | null;
+    mold_temp_c?: number | null;
+    mold_h_wet_hours?: number | null;
+    mold_factors?: EnvironmentSnapshot["mold_factors"];
   } | null;
 
   return {
@@ -56,6 +65,15 @@ function rowToSnapshot(
     from_stale_cache: opts?.from_stale_cache ?? false,
     degraded: Boolean(raw?.degraded) || Boolean(opts?.from_stale_cache),
     pollen_fetched_at: raw?.pollen_fetched_at ?? null,
+    nearest_purpleair_km: raw?.nearest_purpleair_km ?? null,
+    purpleair_search_radius_km: raw?.purpleair_search_radius_km ?? null,
+    mold_score: (raw?.mold_score as EnvironmentSnapshot["mold_score"]) ?? null,
+    mold_level: (raw?.mold_level as EnvironmentSnapshot["mold_level"]) ?? null,
+    mold_rh_pct: raw?.mold_rh_pct ?? null,
+    mold_dew_point_c: raw?.mold_dew_point_c ?? null,
+    mold_temp_c: raw?.mold_temp_c ?? null,
+    mold_h_wet_hours: raw?.mold_h_wet_hours ?? null,
+    mold_factors: raw?.mold_factors ?? null,
   };
 }
 
@@ -192,6 +210,15 @@ export async function writeForecastCache(
       forecast_points: snapshot.forecast_points,
       pollen_fetched_at: snapshot.pollen_fetched_at,
       degraded: snapshot.degraded ?? false,
+      nearest_purpleair_km: snapshot.nearest_purpleair_km ?? null,
+      purpleair_search_radius_km: snapshot.purpleair_search_radius_km ?? null,
+      mold_score: snapshot.mold_score ?? null,
+      mold_level: snapshot.mold_level ?? null,
+      mold_rh_pct: snapshot.mold_rh_pct ?? null,
+      mold_dew_point_c: snapshot.mold_dew_point_c ?? null,
+      mold_temp_c: snapshot.mold_temp_c ?? null,
+      mold_h_wet_hours: snapshot.mold_h_wet_hours ?? null,
+      mold_factors: snapshot.mold_factors ?? null,
     },
   }).select("id").single();
 

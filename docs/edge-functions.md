@@ -81,9 +81,9 @@ Responses may include `forecast_points` (up to 2 days): Open-Meteo morning/after
 }
 ```
 
-`trigger_reason`: `RISK_THRESHOLD` | `LOCATION_ENTRY` | `SAVED_LOCATION_CHANGE` | `MANUAL`.
+`trigger_reason`: `RISK_THRESHOLD` | `LOCATION_ENTRY` | `SAVED_LOCATION_CHANGE` | `MANUAL` | `VENTILATION_WINDOW`.
 
-Respects `notification_preferences`, requires risk ≥ 3 from cached `environment_forecasts`, cooldown key `COMPOSITE:{geohash}` (60 min atomic claim), max 3 alerts/hour/patient. Writes `environment_alerts_sent`, then sends FCM HTTP v1 to `device_push_tokens` when `FIREBASE_SERVICE_ACCOUNT_JSON` is set. See [`fcm-setup.md`](./fcm-setup.md).
+Respects `notification_preferences` (including `push_positive_ventilation` for ventilation tips). Risk alerts require score ≥ 3 from cached `environment_forecasts`. Ventilation tips require server-side eligibility (AQI/pollen/TRAP/mold/flood rules) and risk &lt; 3. Cooldown keys `COMPOSITE:{geohash}` (60 min) or `VENTILATION:{geohash}` (6 h). Max 3 alerts/hour/patient. Writes `environment_alerts_sent`, then sends FCM HTTP v1 to `device_push_tokens` when `FIREBASE_SERVICE_ACCOUNT_JSON` is set. See [`fcm-setup.md`](./fcm-setup.md).
 
 ### Latency smoke (2026-07-26, Newark NJ sample)
 

@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../../core/debug/debug_gates.dart';
+import '../../../core/environment/environment_snapshot_cache.dart';
 import '../../../core/location/location_service.dart';
+import '../../../core/location/place_label_resolver.dart';
 import '../../../core/onboarding/first_check_in_prefs.dart';
+import '../../../core/push/fcm_service.dart';
+import '../../../core/push/notification_consent_prefs.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
@@ -12,11 +16,14 @@ import '../../debug/presentation/api_console_screen.dart';
 import '../../environment/data/environment_risk_repository.dart';
 import '../../environment/data/environment_snapshot.dart';
 import '../../environment/presentation/env_screen.dart';
+import '../../environment/presentation/forecast_screen.dart';
 import '../../environment/presentation/widgets/state_only_source_badge.dart';
 import '../../medication_log/data/inhaler_event_repository.dart';
+import '../../medication_log/presentation/widgets/adherence_week_strip.dart';
 import '../../panic/presentation/panic_screen.dart';
+import '../../settings/data/notification_prefs_repository.dart';
 
-/// SCR-PAT-HOME — binds Edge risk + location (WBS 4.1–4.2a).
+/// SCR-PAT-HOME — binds Edge risk + location (WBS 4.1–4.2a / Sprint 3).
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -28,11 +35,15 @@ class _HomeScreenState extends State<HomeScreen> {
   final _location = const LocationService();
   final _riskRepo = EnvironmentRiskRepository();
   final _inhalerRepo = InhalerEventRepository();
+  final _placeLabels = PlaceLabelResolver();
 
   bool _loading = true;
+  bool _quietRefresh = false;
   String? _errorCode;
+  String? _softNotice;
   EnvironmentSnapshot? _snapshot;
   DateTime? _lastInhalerAt;
+  List<Map<String, dynamic>> _recentEvents = const [];
   bool _alertOffered = false;
   int _debugTitleTaps = 0;
   DateTime? _debugTitleTapAt;
@@ -58,9 +69,24 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _hydrateCache();
       await _maybePromptShieldLocation();
+      if (mounted) await _maybePromptNotificationConsent();
       if (mounted) await _refresh();
     });
+  }
+
+  Future<void> _hydrateCache() async {
+    final userId = SupabaseService.currentUser?.id;
+    if (userId == null) return;
+    final cached = await EnvironmentSnapshotCache.read(userId);
+    if (cached != null && mounted) {
+      setState(() {
+        _snapshot = cached;
+        _loading = false;
+        _softNotice = null;
+      });
+    }
   }
 
   /// S2-PERM — once-per-user shield copy, then When-In-Use only.
@@ -73,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (perm == LocationPermission.whileInUse ||
         perm == LocationPermission.always ||
         perm == LocationPermission.deniedForever) {
-      // Already decided (allow or permanent deny) — do not re-prompt.
       await FirstCheckInPrefs.setShieldLocationPrompted(userId, true);
       return;
     }
@@ -105,14 +130,84 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  /// W3-3.3 — explain before OS notification permission.
+  Future<void> _maybePromptNotificationConsent() async {
+    final userId = SupabaseService.currentUser?.id;
+    if (userId == null) return;
+    if (!mounted) return;
+    if (await NotificationConsentPrefs.wasConsentPrompted(userId)) return;
+
+    if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    final allow = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) {
+        return Padding(
+          padding: EdgeInsets.fromLTRB(
+            24,
+            24,
+            24,
+            24 + MediaQuery.paddingOf(ctx).bottom,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                l10n.pushConsentTitle,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(l10n.pushConsentBody),
+              const SizedBox(height: 20),
+              FilledButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: Text(l10n.pushConsentAllow),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: Text(l10n.pushConsentNotNow),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (!mounted) return;
+    await NotificationConsentPrefs.setConsentPrompted(userId, true);
+    if (allow == true) {
+      await NotificationConsentPrefs.setMasterEnabled(userId, true);
+      await NotificationConsentPrefs.setPositiveEnabled(userId, true);
+      try {
+        await NotificationPrefsRepository().update(
+          pushPositiveVentilation: true,
+        );
+      } catch (_) {}
+      await FcmService.instance.registerCurrentDevice();
+    } else {
+      await NotificationConsentPrefs.setMasterEnabled(userId, false);
+    }
+  }
+
   bool _refreshing = false;
 
   Future<void> _refresh() async {
     if (_refreshing) return;
     _refreshing = true;
+    final hadSnap = _snapshot != null;
     setState(() {
-      _loading = true;
+      if (!hadSnap) {
+        _loading = true;
+      } else {
+        _quietRefresh = true;
+      }
       _errorCode = null;
+      _softNotice = null;
     });
 
     try {
@@ -122,44 +217,102 @@ class _HomeScreenState extends State<HomeScreen> {
       if (!loc.isOk) {
         setState(() {
           _loading = false;
-          _errorCode = loc.failure?.name ?? 'unavailable';
-          _snapshot = null;
+          _quietRefresh = false;
+          if (hadSnap) {
+            _softNotice = 'location';
+          } else {
+            _errorCode = loc.failure?.name ?? 'unavailable';
+            _snapshot = null;
+          }
         });
         return;
       }
 
+      final lat = loc.position!.latitude;
+      final lon = loc.position!.longitude;
+      final label = await _placeLabels.resolve(latitude: lat, longitude: lon);
+
       try {
         final snap = await _riskRepo.fetchRisk(
-          latitude: loc.position!.latitude,
-          longitude: loc.position!.longitude,
+          latitude: lat,
+          longitude: lon,
         );
+        final enriched = snap.copyWith(locationLabel: label);
         final last = await _inhalerRepo.latestRecordedAt();
+        final events = await _inhalerRepo.listRecent(days: 14);
+        final userId = SupabaseService.currentUser?.id;
+        if (userId != null) {
+          await EnvironmentSnapshotCache.write(userId, enriched);
+        }
         if (!mounted) return;
         setState(() {
-          _snapshot = snap;
+          _snapshot = enriched;
           _lastInhalerAt = last;
+          _recentEvents = events;
           _loading = false;
+          _quietRefresh = false;
         });
-        await _maybeNotifyAndOfferAlert(
-          snap,
-          loc.position!.latitude,
-          loc.position!.longitude,
-        );
+        await _maybeNotifyAndOfferAlert(enriched, lat, lon);
+        await _maybeOfferVentilationTip(enriched, lat, lon);
       } on EnvironmentRiskException catch (e) {
         if (!mounted) return;
         setState(() {
           _loading = false;
-          _errorCode = e.code;
+          _quietRefresh = false;
+          if (hadSnap) {
+            _softNotice = 'refresh';
+          } else {
+            _errorCode = e.code;
+          }
         });
       } catch (_) {
         if (!mounted) return;
         setState(() {
           _loading = false;
-          _errorCode = 'server_error';
+          _quietRefresh = false;
+          if (hadSnap) {
+            _softNotice = 'refresh';
+          } else {
+            _errorCode = 'server_error';
+          }
         });
       }
     } finally {
       _refreshing = false;
+    }
+  }
+
+  Future<void> _maybeOfferVentilationTip(
+    EnvironmentSnapshot snap,
+    double lat,
+    double lon,
+  ) async {
+    if (!_canSuggestVentilation(snap)) return;
+    final userId = SupabaseService.currentUser?.id;
+    if (userId == null) return;
+    if (!await NotificationConsentPrefs.isMasterEnabled(userId)) return;
+    if (!await NotificationConsentPrefs.isPositiveEnabled(userId)) return;
+    if (!await NotificationConsentPrefs.canSendPositive(userId)) return;
+
+    try {
+      final result = await _riskRepo.notifyRiskThreshold(
+        latitude: lat,
+        longitude: lon,
+        triggerReason: 'VENTILATION_WINDOW',
+      );
+      final status = result['status'] as String?;
+      if (status == 'recorded') {
+        await NotificationConsentPrefs.markPositiveSent(userId);
+      }
+      if (!mounted) return;
+      if (status == 'recorded') {
+        final l10n = AppLocalizations.of(context)!;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.homeVentilationSnack)),
+        );
+      }
+    } catch (_) {
+      // Offline / Edge unavailable — Home CTA already covers the tip.
     }
   }
 
@@ -176,18 +329,15 @@ class _HomeScreenState extends State<HomeScreen> {
     _alertOffered = true;
     String? status;
     try {
-      // Server recomputes risk from cache; client scores are not trusted.
       final result = await _riskRepo.notifyRiskThreshold(
         latitude: lat,
         longitude: lon,
       );
       status = result['status'] as String?;
     } catch (_) {
-      // Cooldown / offline — do not force a duplicate alert UI.
       return;
     }
     if (!mounted) return;
-    // Align with EnvironmentMonitor: only land in-app when Edge recorded.
     if (status != 'recorded') return;
     await Navigator.of(context).push(
       MaterialPageRoute(
@@ -216,6 +366,118 @@ class _HomeScreenState extends State<HomeScreen> {
     final days = today.difference(day).inDays;
     if (days <= 0) return l10n.homeLastInhalerToday;
     return l10n.homeLastInhalerDays(days);
+  }
+
+  /// Draft “now do this” rules (Q-S3-04 / wbs3-decisions) — plain actions.
+  ({String title, String body}) _nowDoThis(
+    AppLocalizations l10n,
+    EnvironmentSnapshot snap,
+  ) {
+    if (snap.hasFlashFloodWarning) {
+      return (title: l10n.homeNowDoThisFloodTitle, body: l10n.homeNowDoThisFloodBody);
+    }
+    final trap = snap.trapLevel;
+    if (trap == 'HIGH' || trap == 'CRITICAL') {
+      return (title: l10n.homeNowDoThisTrapTitle, body: l10n.homeNowDoThisTrapBody);
+    }
+    if ((snap.pollenUpi ?? 0) >= 3) {
+      return (
+        title: l10n.homeNowDoThisPollenTitle,
+        body: l10n.homeNowDoThisPollenBody,
+      );
+    }
+    if ((snap.moldScore ?? 0) >= 3) {
+      return (
+        title: l10n.homeNowDoThisMoldTitle,
+        body: l10n.homeNowDoThisMoldBody,
+      );
+    }
+    if (snap.riskScore >= 3) {
+      return (
+        title: l10n.homeNowDoThisRiskTitle,
+        body: l10n.homeNowDoThisRiskBody,
+      );
+    }
+    if (_canSuggestVentilation(snap)) {
+      return (
+        title: l10n.homeNowDoThisCalmTitle,
+        body: l10n.homeNowDoThisCalmBody,
+      );
+    }
+    return (
+      title: l10n.homeNowDoThisCalmTitle,
+      body: l10n.homeNowDoThisCalmBody,
+    );
+  }
+
+  /// Q-S3-04 draft: no flood, AQI≤50 (or missing+TRAP≤LOW), pollen≤2, mold≤2.
+  bool _canSuggestVentilation(EnvironmentSnapshot snap) {
+    if (snap.hasFlashFloodWarning) return false;
+    if ((snap.moldScore ?? 0) > 2) return false;
+    if ((snap.pollenUpi ?? 0) > 2) return false;
+    final trap = snap.trapLevel;
+    if (trap == 'HIGH' || trap == 'CRITICAL') return false;
+    final aqi = snap.aqiEpa;
+    if (aqi != null && aqi > 50) return false;
+    if (aqi == null && trap != null && trap != 'LOW' && trap != 'MODERATE') {
+      return false;
+    }
+    return true;
+  }
+
+  String _moldAxisValue(AppLocalizations l10n, EnvironmentSnapshot snap) {
+    final level = snap.moldLevel;
+    if (level != null && level.isNotEmpty) return level;
+    if (snap.moldScore != null) return '${snap.moldScore}';
+    return l10n.homeMoldPendingDraft;
+  }
+
+  String? _moldFactorsLine(AppLocalizations l10n, EnvironmentSnapshot snap) {
+    final parts = <String>[];
+    if (snap.moldRhPct != null) {
+      parts.add(l10n.homeMoldRh(snap.moldRhPct!.round().toString()));
+    }
+    if (snap.moldTempC != null) {
+      final f = snap.moldTempC! * 9 / 5 + 32;
+      parts.add(l10n.homeMoldTempF(f.round().toString()));
+    }
+    if (snap.moldDewPointC != null) {
+      final f = snap.moldDewPointC! * 9 / 5 + 32;
+      parts.add(l10n.homeMoldDewF(f.round().toString()));
+    }
+    if (snap.moldHWetHours != null) {
+      parts.add(l10n.homeMoldWetHours(snap.moldHWetHours!));
+    }
+    if (parts.isEmpty) return null;
+    return parts.join(' · ');
+  }
+
+  String? _sensorDistanceLine(AppLocalizations l10n, EnvironmentSnapshot snap) {
+    final nearest = snap.nearestPurpleAirKm;
+    final radius = snap.purpleAirSearchRadiusKm;
+    if (nearest == null && radius == null) return null;
+    final miNearest =
+        nearest == null ? null : (nearest * 0.621371).toStringAsFixed(1);
+    final miRadius =
+        radius == null ? null : (radius * 0.621371).toStringAsFixed(1);
+    if (nearest != null && radius != null) {
+      return l10n.homeSensorDistance(
+        nearest.toStringAsFixed(1),
+        miNearest!,
+        radius.toStringAsFixed(1),
+        miRadius!,
+      );
+    }
+    if (nearest != null) {
+      return l10n.homeSensorNearestOnly(
+        nearest.toStringAsFixed(1),
+        miNearest!,
+      );
+    }
+    return l10n.homeSensorRadiusOnly(
+      radius!.toStringAsFixed(1),
+      miRadius!,
+    );
   }
 
   @override
@@ -261,7 +523,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Text(
-                          'SCR-PAT-HOME',
+                          snap?.locationLabel != null
+                              ? l10n.homeNearPlace(snap!.locationLabel!)
+                              : 'SCR-PAT-HOME',
                           style: const TextStyle(
                             fontSize: 11,
                             color: AppTheme.neutral400,
@@ -270,9 +534,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
+                  if (_quietRefresh)
+                    const Padding(
+                      padding: EdgeInsets.only(right: 4),
+                      child: SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    ),
                   IconButton(
                     icon: const Icon(Icons.refresh),
-                    onPressed: _loading ? null : _refresh,
+                    onPressed: (_loading && snap == null) ? null : _refresh,
                   ),
                 ],
               ),
@@ -285,6 +558,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 l10n.homeDailySummary,
                 style: const TextStyle(color: AppTheme.subtext),
               ),
+              if (_softNotice != null) ...[
+                const SizedBox(height: 10),
+                Text(
+                  _softNotice == 'location'
+                      ? l10n.homeStaleLocationNotice
+                      : l10n.homeStaleRefreshNotice,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppTheme.warning600,
+                  ),
+                ),
+              ],
               if (warning) ...[
                 const SizedBox(height: 12),
                 Material(
@@ -312,22 +597,100 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
               const SizedBox(height: 16),
-              if (_loading)
+              if (_loading && snap == null)
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 40),
                   child: Center(child: CircularProgressIndicator()),
                 )
-              else if (_errorCode != null)
+              else if (_errorCode != null && snap == null)
                 _LocationErrorCard(
                   code: _errorCode!,
                   onRetry: _refresh,
                   onOpenSettings: () => _location.openAppSettings(),
                 )
               else if (snap != null) ...[
+                Builder(
+                  builder: (context) {
+                    final action = _nowDoThis(l10n, snap);
+                    return Material(
+                      color: AppTheme.brand50,
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    l10n.homeNowDoThisHeading,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  l10n.homeDraftBadge,
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    color: AppTheme.neutral400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              action.title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.brand700,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              action.body,
+                              style: const TextStyle(
+                                color: AppTheme.neutral700,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 14),
+                Text(
+                  l10n.homeAdherenceSection,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                AdherenceWeekStrip(events: _recentEvents),
+                Text(
+                  _lastInhalerLabel(l10n),
+                  style: const TextStyle(color: AppTheme.subtext, fontSize: 13),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  l10n.homeEnvFactors,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 8),
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const EnvScreen()),
+                      MaterialPageRoute(
+                        builder: (_) => EnvScreen(initial: snap),
+                      ),
                     );
                   },
                   borderRadius: BorderRadius.circular(12),
@@ -339,12 +702,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       color: warning
                           ? const Color(0xFFFFF7ED)
-                          : AppTheme.brand50,
+                          : AppTheme.neutral0,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: warning
                             ? const Color(0xFFFDBA74)
-                            : AppTheme.brand200,
+                            : AppTheme.neutral200,
                       ),
                     ),
                     child: Row(
@@ -396,6 +759,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontSize: 13,
                                 ),
                               ),
+                              if (_sensorDistanceLine(l10n, snap) != null) ...[
+                                const SizedBox(height: 4),
+                                Text(
+                                  _sensorDistanceLine(l10n, snap)!,
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    color: AppTheme.neutral400,
+                                  ),
+                                ),
+                              ],
                             ],
                           ),
                         ),
@@ -405,10 +778,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                if (snap.degraded) ...[
+                if (snap.degraded || snap.fromStaleCache) ...[
                   const SizedBox(height: 10),
                   Text(
-                    l10n.homeDegradedNotice,
+                    snap.fromStaleCache
+                        ? l10n.homeStaleCacheNotice
+                        : l10n.homeDegradedNotice,
                     style: const TextStyle(
                       fontSize: 12,
                       color: AppTheme.warning600,
@@ -417,14 +792,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
                 const SizedBox(height: 10),
                 StateOnlySourceBadge.njdot(snap, compact: true),
-                const SizedBox(height: 20),
-                Text(
-                  l10n.homeEnvFactors,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
                 const SizedBox(height: 8),
                 _FactorRow(
                   icon: Icons.local_shipping_outlined,
@@ -432,8 +799,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   value: _axisLevel(snap.trapLevel, false),
                 ),
                 _FactorRow(
+                  icon: Icons.spa_outlined,
+                  title: l10n.homeMoldAxis,
+                  value: _moldAxisValue(l10n, snap),
+                  subtitle: _moldFactorsLine(l10n, snap),
+                ),
+                _FactorRow(
                   icon: Icons.flood_outlined,
-                  title: l10n.mockFloodAxis,
+                  title: l10n.homeFloodAsMoldFactor,
                   value: snap.hasFlashFloodWarning
                       ? l10n.homeFloodActive
                       : l10n.homeFloodNone,
@@ -445,11 +818,29 @@ class _HomeScreenState extends State<HomeScreen> {
                       ? 'UPI ${snap.pollenUpi}'
                       : '—',
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  _lastInhalerLabel(l10n),
-                  style: const TextStyle(color: AppTheme.subtext, fontSize: 13),
-                ),
+                if (snap.forecastPoints.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(Icons.calendar_view_day_outlined,
+                        color: AppTheme.brand600),
+                    title: Text(l10n.homeForecastLink),
+                    subtitle: Text(
+                      l10n.homeForecastHint(
+                        snap.forecastPoints.first.date,
+                        '${snap.forecastPoints.first.compositeScore ?? '—'}',
+                      ),
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => ForecastScreen(initial: snap),
+                        ),
+                      );
+                    },
+                  ),
+                ],
                 if (warning) ...[
                   const SizedBox(height: 16),
                   Row(
@@ -459,7 +850,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => const EnvScreen(),
+                                builder: (_) => EnvScreen(initial: snap),
                               ),
                             );
                           },
@@ -499,11 +890,13 @@ class _FactorRow extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.value,
+    this.subtitle,
   });
 
   final IconData icon;
   final String title;
   final String value;
+  final String? subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -511,6 +904,12 @@ class _FactorRow extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: Icon(icon, color: AppTheme.brand600),
       title: Text(title),
+      subtitle: subtitle != null
+          ? Text(
+              subtitle!,
+              style: const TextStyle(fontSize: 11, color: AppTheme.neutral400),
+            )
+          : null,
       trailing: Text(
         value,
         style: const TextStyle(fontWeight: FontWeight.w600),

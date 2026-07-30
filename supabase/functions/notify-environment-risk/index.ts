@@ -6,8 +6,10 @@ import { sendFcmToTokens } from "../_shared/fcm.ts";
 import { encodeGeohash } from "../_shared/geohash.ts";
 import { isInServiceArea } from "../_shared/geo_bounds.ts";
 import { requireRole, requireUser } from "../_shared/user_client.ts";
+import { canSuggestVentilation } from "./ventilation_eligibility.ts";
 
 const COOLDOWN_MINUTES = 60;
+const VENTILATION_COOLDOWN_MINUTES = 360;
 const GLOBAL_MAX_ALERTS_PER_HOUR = 3;
 
 const TRIGGER_REASONS = new Set([
@@ -15,6 +17,7 @@ const TRIGGER_REASONS = new Set([
   "LOCATION_ENTRY",
   "SAVED_LOCATION_CHANGE",
   "MANUAL",
+  "VENTILATION_WINDOW",
 ]);
 
 Deno.serve(async (req) => {
@@ -57,9 +60,13 @@ Deno.serve(async (req) => {
     return jsonResponse({ error: "invalid_trigger_reason" }, 400);
   }
 
+  const isVentilation = triggerReason === "VENTILATION_WINDOW";
+
   const { data: prefs } = await admin
     .from("notification_preferences")
-    .select("push_risk_ge3, push_location_entry, push_saved_location_change")
+    .select(
+      "push_risk_ge3, push_location_entry, push_saved_location_change, push_positive_ventilation",
+    )
     .eq("patient_id", user.id)
     .maybeSingle();
 
@@ -94,6 +101,18 @@ Deno.serve(async (req) => {
         fcm_sent: false,
       });
     }
+    if (
+      isVentilation &&
+      prefs.push_positive_ventilation === false
+    ) {
+      return jsonResponse({
+        status: "skipped",
+        reason: "push_positive_ventilation_disabled",
+        fcm_sent: false,
+      });
+    }
+  } else if (isVentilation) {
+    // No prefs row yet — default allow positive (column default TRUE) after upsert below.
   }
 
   const geohash = encodeGeohash(latitude, longitude, 5);
@@ -102,7 +121,9 @@ Deno.serve(async (req) => {
 
   const { data: forecast } = await admin
     .from("environment_forecasts")
-    .select("id, risk_score, ui_state, expires_at, created_at")
+    .select(
+      "id, risk_score, ui_state, expires_at, created_at, aqi_epa, pollen_upi, trap_level, has_flash_flood_warning, raw_response",
+    )
     .eq("geohash", geohash)
     .order("created_at", { ascending: false })
     .limit(1)
@@ -127,7 +148,28 @@ Deno.serve(async (req) => {
     ? forecast.ui_state
     : "WARNING";
 
-  if (!Number.isFinite(riskScore) || riskScore < 3) {
+  // Eligibility BEFORE cooldown claim — avoid burning cooldown on skip/fail.
+  if (isVentilation) {
+    if (
+      !canSuggestVentilation({
+        risk_score: riskScore,
+        aqi_epa: forecast.aqi_epa as number | null,
+        pollen_upi: forecast.pollen_upi as number | null,
+        trap_level: forecast.trap_level as string | null,
+        has_flash_flood_warning: forecast.has_flash_flood_warning as boolean,
+        raw_response: forecast.raw_response as {
+          mold_score?: number | null;
+        } | null,
+      })
+    ) {
+      return jsonResponse({
+        status: "skipped",
+        reason: "ventilation_eligibility_failed",
+        risk_score: riskScore,
+        fcm_sent: false,
+      });
+    }
+  } else if (!Number.isFinite(riskScore) || riskScore < 3) {
     return jsonResponse({
       status: "skipped",
       reason: "risk_below_threshold",
@@ -150,15 +192,20 @@ Deno.serve(async (req) => {
     });
   }
 
-  // Dedup per patient + geohash (shared across trigger reasons — 5.7 hardening)
-  const cooldownKey = `COMPOSITE:${geohash}`;
+  const cooldownMinutes = isVentilation
+    ? VENTILATION_COOLDOWN_MINUTES
+    : COOLDOWN_MINUTES;
+  const cooldownKey = isVentilation
+    ? `VENTILATION:${geohash}`
+    : `COMPOSITE:${geohash}`;
+  const alertType = "COMPOSITE";
 
   const { data: claimed, error: claimErr } = await admin.rpc(
     "try_claim_alert_cooldown",
     {
       p_patient_id: user.id,
       p_cooldown_key: cooldownKey,
-      p_minutes: COOLDOWN_MINUTES,
+      p_minutes: cooldownMinutes,
     },
   );
   if (claimErr) {
@@ -169,17 +216,16 @@ Deno.serve(async (req) => {
     return jsonResponse({
       status: "cooldown",
       reason: "alert_cooldown_active",
-      cooldown_minutes: COOLDOWN_MINUTES,
+      cooldown_minutes: cooldownMinutes,
       fcm_sent: false,
     });
   }
 
-  // History row (best-effort after atomic claim).
   const { data: inserted, error } = await admin
     .from("environment_alerts_sent")
     .insert({
       patient_id: user.id,
-      alert_type: "COMPOSITE",
+      alert_type: alertType,
       trigger_reason: triggerReason,
       cooldown_key: cooldownKey,
       risk_level: Math.min(4, Math.max(1, Math.round(riskScore))),
@@ -191,6 +237,7 @@ Deno.serve(async (req) => {
         server_authoritative: true,
         fcm_pending: true,
         checked_at: nowIso,
+        positive: isVentilation,
       },
     })
     .select("id, sent_at")
@@ -238,6 +285,7 @@ Deno.serve(async (req) => {
         fcm_failed_count: fcm.failed,
         fcm_error: fcm.error ?? null,
         checked_at: nowIso,
+        positive: isVentilation,
       },
     })
     .eq("id", inserted.id);

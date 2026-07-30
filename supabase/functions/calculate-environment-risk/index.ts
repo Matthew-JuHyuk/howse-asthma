@@ -1,6 +1,10 @@
 // Howse Asthma — calculate-environment-risk (hardened live sources + Geohash cache)
 
-import { aggregateRiskScores, applyFreightWeight } from "./aggregate.ts";
+import { aggregateRiskScores, applyFreightWeight, scoreToUiState } from "./aggregate.ts";
+import {
+  applyMoldToComposite,
+  computeMoldIndex,
+} from "./mold_score.ts";
 import {
   readForecastCache,
   readRecentPollen,
@@ -26,6 +30,7 @@ import { fetchGooglePollen } from "./sources/google_pollen.ts";
 import { fetchNwsAlerts } from "./sources/nws.ts";
 import { queryNjdotNearbyAadt } from "./sources/njdot.ts";
 import { fetchOpenMeteo } from "./sources/openmeteo.ts";
+import { fetchOpenMeteoWeather } from "./sources/open_meteo_weather.ts";
 import { fetchPurpleAir } from "./sources/purpleair.ts";
 import { fetchUsgs } from "./sources/usgs.ts";
 
@@ -141,6 +146,7 @@ Deno.serve(async (req) => {
     guardedSource(admin, "airnow", () => fetchAirNow(query)),
     guardedSource(admin, "purpleair", () => fetchPurpleAir(query)),
     guardedSource(admin, "openmeteo", () => fetchOpenMeteo(query)),
+    guardedSource(admin, "openmeteo_weather", () => fetchOpenMeteoWeather(query)),
     skipPollenApi
       ? Promise.resolve({
         source: "google_pollen",
@@ -181,6 +187,8 @@ Deno.serve(async (req) => {
   let pollenFetchedAt: string | null = null;
   let pm25: number | null = null;
   let localPm25: number | null = null;
+  let nearestPurpleAirKm: number | null = null;
+  let purpleAirSearchRadiusKm: number | null = null;
   let nearFreight = false;
   let streamRate: number | null = null;
   let openMeteoDaily: Array<{
@@ -193,6 +201,15 @@ Deno.serve(async (req) => {
     pollen_upi?: number;
     dominant?: string;
   }> = [];
+  let weatherHours: Array<{
+    time: string;
+    rh?: number;
+    dew_c?: number;
+    temp_c?: number;
+  }> = [];
+  let weatherRh: number | undefined;
+  let weatherDew: number | undefined;
+  let weatherTemp: number | undefined;
 
   for (const result of settled) {
     if (result.status !== "fulfilled") {
@@ -223,15 +240,35 @@ Deno.serve(async (req) => {
       if (d.pm25 != null && pm25 == null) pm25 = d.pm25;
       if (d.daily?.length) openMeteoDaily = d.daily;
     }
+    if (src.source === "openmeteo_weather") {
+      const d = src.data as {
+        hours?: typeof weatherHours;
+        current_rh?: number;
+        current_dew_c?: number;
+        current_temp_c?: number;
+      };
+      if (d.hours?.length) weatherHours = d.hours;
+      weatherRh = d.current_rh;
+      weatherDew = d.current_dew_c;
+      weatherTemp = d.current_temp_c;
+    }
     if (src.source === "purpleair") {
       const d = src.data as {
         local_pm25?: number;
         trap_level?: TrapLevel;
         approx_aqi?: number;
+        nearest_purpleair_km?: number;
+        purpleair_search_radius_km?: number;
       };
       if (d.local_pm25 != null) localPm25 = d.local_pm25;
       if (d.trap_level) trapLevel = d.trap_level;
       if (d.approx_aqi != null) purpleApproxAqi = d.approx_aqi;
+      if (d.nearest_purpleair_km != null) {
+        nearestPurpleAirKm = d.nearest_purpleair_km;
+      }
+      if (d.purpleair_search_radius_km != null) {
+        purpleAirSearchRadiusKm = d.purpleair_search_radius_km;
+      }
     }
     if (src.source === "google_pollen") {
       const d = src.data as {
@@ -306,12 +343,34 @@ Deno.serve(async (req) => {
 
   trapLevel = applyFreightWeight(trapLevel, nearFreight);
 
-  const aggregated = aggregateRiskScores({
+  const mold = computeMoldIndex({
+    hours: weatherHours,
+    current_rh: weatherRh,
+    current_dew_c: weatherDew,
+    current_temp_c: weatherTemp,
+    flashFloodActive,
+    usgsStreamRateFtHr: streamRate,
+  });
+
+  const baseAgg = aggregateRiskScores({
     flashFloodActive,
     aqi,
     trapLevel,
     pollenUpi,
   });
+  const mergedScore = applyMoldToComposite(
+    baseAgg.risk_score,
+    mold.mold_score,
+    flashFloodActive,
+  );
+  const aggregated = {
+    risk_score: mergedScore,
+    ui_state: scoreToUiState(mergedScore),
+    triggers: {
+      ...baseAgg.triggers,
+      mold: mold.mold_score >= 3,
+    },
+  };
 
   const degraded = isDegraded(summary, aqi);
 
@@ -333,6 +392,7 @@ Deno.serve(async (req) => {
     const dayPollen = pol?.pollen_upi ??
       (date === today || date === pollenDaily[0]?.date ? pollenUpi : null);
     const dayFlood = Boolean(flashFloodActive && date === floodAnchorDate);
+    const dayMoldScore = date === today ? mold.mold_score : mold.mold_score;
     const periods = (om?.periods ?? [
       { period: "morning" as const },
       { period: "afternoon" as const },
@@ -350,13 +410,19 @@ Deno.serve(async (req) => {
       trapLevel,
       pollenUpi: dayPollen,
     });
+    const dayMerged = applyMoldToComposite(
+      dayScore.risk_score,
+      dayMoldScore,
+      dayFlood,
+    );
     forecastPoints.push({
       date,
       periods,
       pollen_upi: dayPollen ?? null,
       dominant_pollen_type: pol?.dominant ?? dominantPollen,
       us_aqi_max: om?.us_aqi_max ?? null,
-      composite_score: dayScore.risk_score,
+      composite_score: dayMerged,
+      mold_score: dayMoldScore,
     });
   }
 
@@ -391,6 +457,15 @@ Deno.serve(async (req) => {
     from_stale_cache: false,
     degraded,
     pollen_fetched_at: pollenFetchedAt,
+    nearest_purpleair_km: nearestPurpleAirKm,
+    purpleair_search_radius_km: purpleAirSearchRadiusKm,
+    mold_score: mold.mold_score,
+    mold_level: mold.mold_level,
+    mold_rh_pct: mold.rh_pct ?? null,
+    mold_dew_point_c: mold.dew_point_c ?? null,
+    mold_temp_c: mold.temp_c ?? null,
+    mold_h_wet_hours: mold.h_wet_hours,
+    mold_factors: mold.factors,
   };
 
   const forecastId = await writeForecastCache(admin, query, snapshot);

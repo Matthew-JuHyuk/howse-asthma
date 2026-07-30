@@ -1,7 +1,7 @@
 # Phase 6 — Device Integration Test Plan
 
-> Canonical Korean plan (detail + result sheet): [`doc/phase6-test-plan.md`](../doc/phase6-test-plan.md)  
-> Debug console design: [`doc/debug-mode-design.md`](../doc/debug-mode-design.md) · English summary: [`debug-mode-design.md`](./debug-mode-design.md)
+> Canonical Korean plan (detail + result sheet): [`doc/qa/phase6-test-plan.md`](../doc/qa/phase6-test-plan.md)  
+> Debug console design: [`doc/qa/debug-mode-design.md`](../doc/qa/debug-mode-design.md) · English summary: [`debug-mode-design.md`](./debug-mode-design.md)
 
 **Scope (WBS 6.1–6.5):** real Android USB device (no emulator). Auth → patient core → NJ env/alerts → performance notes → `flutter analyze` / `flutter test`.
 
@@ -46,4 +46,4 @@ flutter run
 
 See Korean doc §5. Fill the result sheet in §7 of that file and sync WBS Phase 6 checkboxes when done.
 
-Full case IDs: `TC-AUTH-*`, `TC-PAT-*`, `TC-ENV-*`, `TC-PERF-*`, `TC-CI-01` in [`doc/phase6-test-plan.md`](../doc/phase6-test-plan.md).
+Full case IDs: `TC-AUTH-*`, `TC-PAT-*`, `TC-ENV-*`, `TC-PERF-*`, `TC-CI-01` in [`doc/qa/phase6-test-plan.md`](../doc/qa/phase6-test-plan.md).

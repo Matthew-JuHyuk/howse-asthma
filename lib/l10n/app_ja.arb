@@ -474,5 +474,113 @@
   "shieldLocationTitle": "先制シールドを有効にする",
   "shieldLocationBody": "周囲の先制シールドを有効にするため位置情報が必要です。",
   "shieldLocationAllow": "位置情報を許可",
-  "shieldLocationNotNow": "今はしない"
+  "shieldLocationNotNow": "今はしない",
+  "settingsPushMaster": "プッシュ通知",
+  "settingsPushMasterHint": "この端末の Howse Asthma 通知のマスタースイッチ",
+  "pushConsentTitle": "喘息のきっかけを先に知らせます",
+  "pushConsentBody": "近くの空気や洪水リスクが上がったとき、簡単な通知を送れます。設定でいつでも変更できます。",
+  "pushConsentAllow": "通知を許可",
+  "pushConsentNotNow": "今はしない",
+  "homeNearPlace": "{place} の近く",
+  "@homeNearPlace": {
+    "placeholders": {
+      "place": {"type": "String"}
+    }
+  },
+  "homeStaleLocationNotice": "位置を待つ間、前回の読み取りを表示しています。",
+  "homeStaleRefreshNotice": "前回の読み取りを表示中。接続できたら引き下げて更新してください。",
+  "homeStaleCacheNotice": "この読み取りは少し古い可能性があります。注意してご覧ください。",
+  "homeNowDoThisHeading": "発作のリスクを下げるために今できること",
+  "homeDraftBadge": "草案",
+  "homeNowDoThisFloodTitle": "できれば屋内にいてください",
+  "homeNowDoThisFloodBody": "洪水警報は湿気と関係することがあります。吸入器を近くに置き、浸水地域を避けてください。",
+  "homeNowDoThisTrapTitle": "屋外活動を控えてください",
+  "homeNowDoThisTrapBody": "近くの交通関連の大気汚染が高そうです。必要なときだけ短く外出してください。",
+  "homeNowDoThisPollenTitle": "今は窓を閉めてください",
+  "homeNowDoThisPollenBody": "花粉が高いです。外出後は顔を洗い、服を着替えてください。",
+  "homeNowDoThisRiskTitle": "屋外ではゆっくり",
+  "homeNowDoThisRiskBody": "全体リスクが高めです。吸入器を持ち、息が苦しいときは休んでください。",
+  "homeNowDoThisCalmTitle": "換気しやすい時間帯",
+  "homeNowDoThisCalmBody": "外の空気はまずまずです。短く換気してもよいですが、吸入器は近くに。",
+  "homeAdherenceSection": "今週の吸入器",
+  "adherenceWeekHint": "色付きの日は 1-Tap 記録がある日です。",
+  "homeMoldAxis": "カビリスク",
+  "homeMoldElevatedDraft": "湿気シグナル高め",
+  "homeMoldPendingDraft": "湿度データ待ち",
+  "homeFloodAsMoldFactor": "洪水・湿気要因",
+  "homeForecastLink": "短期見通し",
+  "homeForecastHint": "翌日 {date} · スコア {score}",
+  "@homeForecastHint": {
+    "placeholders": {
+      "date": {"type": "String"},
+      "score": {"type": "String"}
+    }
+  },
+  "homeSensorDistance": "最寄りセンサー {km} km ({mi} mi) · 検索 ~{radiusKm} km ({radiusMi} mi)",
+  "@homeSensorDistance": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"},
+      "radiusKm": {"type": "String"},
+      "radiusMi": {"type": "String"}
+    }
+  },
+  "homeSensorNearestOnly": "最寄りセンサー {km} km ({mi} mi)",
+  "@homeSensorNearestOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "homeSensorRadiusOnly": "センサー検索 ~{km} km ({mi} mi)",
+  "@homeSensorRadiusOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "weekdayMonShort": "月",
+  "weekdayTueShort": "火",
+  "weekdayWedShort": "水",
+  "weekdayThuShort": "木",
+  "weekdayFriShort": "金",
+  "weekdaySatShort": "土",
+  "weekdaySunShort": "日",
+  "logAdherenceCalendarTitle": "服薬カレンダー",
+  "homeNowDoThisMoldTitle": "室内の湿気を減らす",
+  "homeNowDoThisMoldBody": "屋外の湿気が高そうです。可能なら扇風機や除湿機を使い、湿った地下室は避けてください。",
+  "homeMoldDetail": "付近の湿気条件（屋外の代理指標 — 胞子数ではありません）",
+  "homeMoldTip": "カビリスクが高いときは部屋を乾燥気味に。洪水警報は湿気リスクを上げます。",
+  "homeMoldRh": "湿度 {pct}%",
+  "@homeMoldRh": {
+    "placeholders": {
+      "pct": {"type": "String"}
+    }
+  },
+  "homeMoldTempF": "{temp}°F",
+  "@homeMoldTempF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldDewF": "露点 {temp}°F",
+  "@homeMoldDewF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldWetHours": "湿潤 {hours}時間（24時間）",
+  "@homeMoldWetHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "homeMoldProxyDisclaimer": "屋外推定のみ",
+  "homeVentilationSnack": "外気が比較的穏やかです — 短い換気が役立つ場合があります。",
+  "settingsAlertPositive": "換気のヒント",
+  "settingsAlertPositiveHint": "外気が一時的に良いときに短い換気を案内（草案ルール）",
+  "settingsBgTitle": "バックグラウンド更新",
+  "settingsBgBody": "アプリ使用中に付近の空気を更新します。この版では常時位置は求めません。",
+  "settingsBgRefresh": "アプリ使用中に更新",
+  "settingsBgRefreshHint": "移動時やアプリを開いている間にリスクを更新"
 }

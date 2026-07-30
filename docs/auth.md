@@ -11,9 +11,10 @@ Howse Asthma uses Supabase Auth in a single OSMU app. After sign-in, the client 
    enter NPI (10 digits + checksum). Patient social/default path auto-creates `PATIENT`.
 4. On success with a session, the app inserts `profiles` and either `patient_details` or
    `provider_credentials`.
-5. If email confirmation is enabled in the Supabase project, the session may be null after
-   signup — the app shows a “check your email” screen (no in-app OTP UI). Metadata from
-   signup is retained so profile completion can prefill after the first confirmed login.
+5. **Email confirmation OFF** (product decision, kept 2026-07-30):
+   `auth.email.enable_confirmations = false`. The app does **not** open Check email
+   after signup; if Auth returns no session it signs in with the same password.
+   Keep the hosted Dashboard setting aligned (Confirm email = OFF).
 
 Set `DESIGN_PREVIEW=false` (or remove it) in `.env` to use this AuthGate path.
 

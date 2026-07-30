@@ -1201,4 +1201,218 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get shieldLocationNotNow => 'Ahora no';
+
+  @override
+  String get settingsPushMaster => 'Notificaciones push';
+
+  @override
+  String get settingsPushMasterHint =>
+      'Interruptor general de alertas de Howse Asthma en este dispositivo';
+
+  @override
+  String get pushConsentTitle => 'Anticipe los desencadenantes del asma';
+
+  @override
+  String get pushConsentBody =>
+      'Podemos enviar alertas simples cuando suba el riesgo de aire o inundacion, y mas adelante consejos para ventilar. Puede cambiarlo en Ajustes.';
+
+  @override
+  String get pushConsentAllow => 'Permitir notificaciones';
+
+  @override
+  String get pushConsentNotNow => 'Ahora no';
+
+  @override
+  String homeNearPlace(String place) {
+    return 'Cerca de $place';
+  }
+
+  @override
+  String get homeStaleLocationNotice =>
+      'Mostramos su ultima lectura mientras esperamos la ubicacion.';
+
+  @override
+  String get homeStaleRefreshNotice =>
+      'Mostramos su ultima lectura. Deslice para actualizar cuando haya conexion.';
+
+  @override
+  String get homeStaleCacheNotice =>
+      'Esta lectura puede estar un poco atrasada. Use con cuidado.';
+
+  @override
+  String get homeNowDoThisHeading =>
+      'Haga esto ahora para bajar el riesgo de un ataque';
+
+  @override
+  String get homeDraftBadge => 'Borrador';
+
+  @override
+  String get homeNowDoThisFloodTitle => 'Quedese adentro si puede';
+
+  @override
+  String get homeNowDoThisFloodBody =>
+      'Las alertas de inundacion suelen indicar humedad. Tenga el inhalador cerca y evite zonas inundadas.';
+
+  @override
+  String get homeNowDoThisTrapTitle => 'Reduzca la actividad al aire libre';
+
+  @override
+  String get homeNowDoThisTrapBody =>
+      'La contaminacion del trafico cerca parece alta. Salga poco si es necesario.';
+
+  @override
+  String get homeNowDoThisPollenTitle =>
+      'Mantenga las ventanas cerradas por ahora';
+
+  @override
+  String get homeNowDoThisPollenBody =>
+      'El polen esta alto. Enjuaguese la cara y cambiese tras estar afuera.';
+
+  @override
+  String get homeNowDoThisRiskTitle => 'Vaya con calma al aire libre';
+
+  @override
+  String get homeNowDoThisRiskBody =>
+      'El riesgo general esta elevado. Lleve el inhalador y descanse si le cuesta respirar.';
+
+  @override
+  String get homeNowDoThisCalmTitle => 'Momento mas calmo para airear';
+
+  @override
+  String get homeNowDoThisCalmBody =>
+      'El aire exterior se ve manejable. Una ventilacion corta puede ayudar — mantenga el inhalador cerca.';
+
+  @override
+  String get homeAdherenceSection => 'Su semana de inhalador';
+
+  @override
+  String get adherenceWeekHint =>
+      'Los dias marcados tienen usos registrados (1-Tap).';
+
+  @override
+  String get homeMoldAxis => 'Riesgo de moho';
+
+  @override
+  String get homeMoldElevatedDraft => 'Senal de humedad alta';
+
+  @override
+  String get homeMoldPendingDraft => 'Humedad pendiente';
+
+  @override
+  String get homeFloodAsMoldFactor => 'Factor inundacion / humedad';
+
+  @override
+  String get homeForecastLink => 'Pronostico corto';
+
+  @override
+  String homeForecastHint(String date, String score) {
+    return 'Manana $date · puntuacion $score';
+  }
+
+  @override
+  String homeSensorDistance(
+    String km,
+    String mi,
+    String radiusKm,
+    String radiusMi,
+  ) {
+    return 'Sensor mas cercano $km km ($mi mi) · busqueda ~$radiusKm km ($radiusMi mi)';
+  }
+
+  @override
+  String homeSensorNearestOnly(String km, String mi) {
+    return 'Sensor mas cercano $km km ($mi mi)';
+  }
+
+  @override
+  String homeSensorRadiusOnly(String km, String mi) {
+    return 'Busqueda de sensores ~$km km ($mi mi)';
+  }
+
+  @override
+  String get weekdayMonShort => 'L';
+
+  @override
+  String get weekdayTueShort => 'M';
+
+  @override
+  String get weekdayWedShort => 'X';
+
+  @override
+  String get weekdayThuShort => 'J';
+
+  @override
+  String get weekdayFriShort => 'V';
+
+  @override
+  String get weekdaySatShort => 'S';
+
+  @override
+  String get weekdaySunShort => 'D';
+
+  @override
+  String get logAdherenceCalendarTitle => 'Calendario de cumplimiento';
+
+  @override
+  String get homeNowDoThisMoldTitle => 'Reduzca la humedad interior';
+
+  @override
+  String get homeNowDoThisMoldBody =>
+      'La humedad exterior parece alta. Use ventilador o deshumidificador si puede, y evite sotanos humedos.';
+
+  @override
+  String get homeMoldDetail =>
+      'Condiciones de humedad cerca (estimacion exterior — no es conteo de esporas)';
+
+  @override
+  String get homeMoldTip =>
+      'Riesgo alto de moho: mantenga las habitaciones mas secas. Las inundaciones aumentan el riesgo.';
+
+  @override
+  String homeMoldRh(String pct) {
+    return 'Humedad $pct%';
+  }
+
+  @override
+  String homeMoldTempF(String temp) {
+    return '$temp°F';
+  }
+
+  @override
+  String homeMoldDewF(String temp) {
+    return 'Rocio $temp°F';
+  }
+
+  @override
+  String homeMoldWetHours(int hours) {
+    return '$hours horas humedas (24h)';
+  }
+
+  @override
+  String get homeMoldProxyDisclaimer => 'Solo estimacion exterior';
+
+  @override
+  String get homeVentilationSnack =>
+      'El aire exterior se ve mas calmo — una ventilacion corta puede ayudar.';
+
+  @override
+  String get settingsAlertPositive => 'Consejos de aire fresco';
+
+  @override
+  String get settingsAlertPositiveHint =>
+      'Cuando el aire exterior parece mas seguro para abrir un poco (reglas borrador)';
+
+  @override
+  String get settingsBgTitle => 'Actualizacion en segundo plano';
+
+  @override
+  String get settingsBgBody =>
+      'Howse Asthma actualiza el aire cercano mientras usa la app. No pedimos ubicacion Siempre en esta version.';
+
+  @override
+  String get settingsBgRefresh => 'Actualizar al usar la app';
+
+  @override
+  String get settingsBgRefreshHint =>
+      'Actualizar el riesgo al moverse o mantener la app abierta';
 }

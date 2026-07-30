@@ -28,6 +28,7 @@ class NotificationPrefsRepository {
     bool? pushRiskGe3,
     bool? pushLocationEntry,
     bool? pushSavedLocationChange,
+    bool? pushPositiveVentilation,
   }) async {
     final userId = SupabaseService.currentUser?.id;
     if (userId == null) throw StateError('not_authenticated');
@@ -37,6 +38,7 @@ class NotificationPrefsRepository {
       'push_risk_ge3': ?pushRiskGe3,
       'push_location_entry': ?pushLocationEntry,
       'push_saved_location_change': ?pushSavedLocationChange,
+      'push_positive_ventilation': ?pushPositiveVentilation,
     };
 
     await SupabaseService.client

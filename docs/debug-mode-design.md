@@ -1,6 +1,6 @@
 # Debug API Console — Design (Phase 6)
 
-> Full design (Korean): [`doc/debug-mode-design.md`](../doc/debug-mode-design.md)
+> Full design (Korean): [`doc/qa/debug-mode-design.md`](../doc/qa/debug-mode-design.md)
 
 ## Purpose
 

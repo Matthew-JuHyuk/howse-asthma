@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/locale/locale_controller.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../home/presentation/home_shell.dart';
+import '../../home/presentation/home_shell.dart'; // AppLocaleScope
 import '../data/profile_repository.dart';
 import '../domain/auth_error_mapper.dart';
 import '../domain/npi_validator.dart';
 import '../domain/user_profile.dart';
-import 'check_email_screen.dart';
 
 /// SCR-AUTH-03 — email signup with role, name, language, and NPI for providers.
 class SignUpScreen extends StatefulWidget {
@@ -58,10 +58,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
 
     final l10n = AppLocalizations.of(context)!;
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
     try {
       final response = await SupabaseService.client.auth.signUp(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
+        email: email,
+        password: password,
         data: {
           'role': _role.dbValue,
           'full_name': _nameController.text.trim(),
@@ -70,16 +72,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
       );
 
-      if (response.session == null) {
-        if (!mounted) return;
-        await Navigator.of(context).pushReplacement(
-          MaterialPageRoute<void>(
-            builder: (_) => CheckEmailScreen(
-              email: _emailController.text.trim(),
-            ),
-          ),
+      // Email confirmation is intentionally OFF — do not route to CheckEmailScreen.
+      // If Auth returns no session, sign in immediately with the same password.
+      var session = response.session;
+      if (session == null) {
+        final signedIn = await SupabaseService.client.auth.signInWithPassword(
+          email: email,
+          password: password,
         );
-        return;
+        session = signedIn.session;
+      }
+      if (session == null) {
+        throw const AuthException('Unable to establish session after sign-up');
       }
 
       await _profiles.createProfile(
@@ -112,6 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.signUpTitle)),

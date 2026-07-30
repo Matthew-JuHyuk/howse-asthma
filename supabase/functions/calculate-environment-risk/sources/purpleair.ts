@@ -8,7 +8,11 @@ import type { LocationQuery, SourceResult, TrapLevel } from "../../_shared/types
 
 const HIGH_UGM3 = 12.0;
 const CRITICAL_UGM3 = 35.5;
+/** Half-width of query bbox in degrees (~8.9 km at mid-latitudes). */
 const BBOX_DEG = 0.08;
+/** Documented search radius shown in UI (BBOX_DEG * ~111 km/deg). */
+export const PURPLEAIR_SEARCH_RADIUS_KM =
+  Math.round(BBOX_DEG * 111 * 10) / 10;
 
 function pm25ToTrap(pm25: number): TrapLevel {
   if (pm25 > CRITICAL_UGM3) return "CRITICAL";
@@ -34,7 +38,23 @@ export function pm25ToApproxAqi(pm25: number): number {
   return pm25 > 500 ? 500 : 0;
 }
 
-/** PurpleAir TRAP proxy — bbox + minimal fields. */
+function haversineKm(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+): number {
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const R = 6371;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+/** PurpleAir TRAP proxy — bbox + minimal fields + nearest-sensor distance. */
 export async function fetchPurpleAir(
   query: LocationQuery,
 ): Promise<
@@ -42,6 +62,8 @@ export async function fetchPurpleAir(
     local_pm25?: number;
     trap_level?: TrapLevel;
     approx_aqi?: number;
+    nearest_purpleair_km?: number;
+    purpleair_search_radius_km?: number;
     httpStatus?: number;
   }>
 > {
@@ -76,11 +98,21 @@ export async function fetchPurpleAir(
     const fields = json.fields ?? [];
     const pmIdx = fields.indexOf("pm2.5_10minute");
     const confIdx = fields.indexOf("confidence");
+    const latIdx = fields.indexOf("latitude");
+    const lonIdx = fields.indexOf("longitude");
     if (pmIdx < 0 || !json.data?.length) {
-      return { source: "purpleair", ok: true, data: { trap_level: "LOW" } };
+      return {
+        source: "purpleair",
+        ok: true,
+        data: {
+          trap_level: "LOW",
+          purpleair_search_radius_km: PURPLEAIR_SEARCH_RADIUS_KM,
+        },
+      };
     }
 
-    const values: number[] = [];
+    let nearestPm: number | null = null;
+    let nearestKm: number | null = null;
     for (const row of json.data) {
       const pm = Number(row[pmIdx]);
       if (!Number.isFinite(pm) || pm < 0) continue;
@@ -88,20 +120,42 @@ export async function fetchPurpleAir(
         const conf = Number(row[confIdx]);
         if (Number.isFinite(conf) && conf < 50) continue;
       }
-      values.push(pm);
+      let distKm = Number.POSITIVE_INFINITY;
+      if (latIdx >= 0 && lonIdx >= 0) {
+        const lat = Number(row[latIdx]);
+        const lon = Number(row[lonIdx]);
+        if (Number.isFinite(lat) && Number.isFinite(lon)) {
+          distKm = haversineKm(query.latitude, query.longitude, lat, lon);
+        }
+      }
+      if (nearestKm == null || distKm < nearestKm) {
+        nearestKm = Number.isFinite(distKm) ? distKm : nearestKm;
+        nearestPm = pm;
+      }
     }
-    if (values.length === 0) {
-      return { source: "purpleair", ok: true, data: { trap_level: "LOW" } };
+    if (nearestPm == null) {
+      return {
+        source: "purpleair",
+        ok: true,
+        data: {
+          trap_level: "LOW",
+          purpleair_search_radius_km: PURPLEAIR_SEARCH_RADIUS_KM,
+        },
+      };
     }
-    values.sort((a, b) => a - b);
-    const median = values[Math.floor(values.length / 2)]!;
+    const nearestRounded =
+      nearestKm != null && Number.isFinite(nearestKm)
+        ? Math.round(nearestKm * 10) / 10
+        : undefined;
     return {
       source: "purpleair",
       ok: true,
       data: {
-        local_pm25: median,
-        trap_level: pm25ToTrap(median),
-        approx_aqi: pm25ToApproxAqi(median),
+        local_pm25: nearestPm,
+        trap_level: pm25ToTrap(nearestPm),
+        approx_aqi: pm25ToApproxAqi(nearestPm),
+        nearest_purpleair_km: nearestRounded,
+        purpleair_search_radius_km: PURPLEAIR_SEARCH_RADIUS_KM,
       },
     };
   } catch (e) {

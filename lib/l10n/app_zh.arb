@@ -474,5 +474,113 @@
   "shieldLocationTitle": "启用您的预先防护盾",
   "shieldLocationBody": "开启周围预先防护需要位置信息以获取附近空气与花粉。",
   "shieldLocationAllow": "允许位置",
-  "shieldLocationNotNow": "暂不"
+  "shieldLocationNotNow": "暂不",
+  "settingsPushMaster": "推送通知",
+  "settingsPushMasterHint": "此设备上 Howse Asthma 通知总开关",
+  "pushConsentTitle": "提前了解哮喘诱因",
+  "pushConsentBody": "附近空气或洪水风险升高时可发送简单提醒，之后也可提示适合开窗的时间。可在设置中随时更改。",
+  "pushConsentAllow": "允许通知",
+  "pushConsentNotNow": "暂不",
+  "homeNearPlace": "靠近 {place}",
+  "@homeNearPlace": {
+    "placeholders": {
+      "place": {"type": "String"}
+    }
+  },
+  "homeStaleLocationNotice": "正在等待定位，先显示上次读数。",
+  "homeStaleRefreshNotice": "正在显示上次读数。有网络时下拉刷新。",
+  "homeStaleCacheNotice": "此读数可能稍旧，请谨慎参考。",
+  "homeNowDoThisHeading": "现在这样做可降低发作风险",
+  "homeDraftBadge": "草案",
+  "homeNowDoThisFloodTitle": "尽量留在室内",
+  "homeNowDoThisFloodBody": "洪水警报常意味着潮湿。把吸入器放在身边，避开积水区域。",
+  "homeNowDoThisTrapTitle": "减少户外活动",
+  "homeNowDoThisTrapBody": "附近交通相关空气污染偏高。非必要少出门、短时间即可。",
+  "homeNowDoThisPollenTitle": "暂时关闭窗户",
+  "homeNowDoThisPollenBody": "花粉偏高。户外归来后洗脸并更换衣物。",
+  "homeNowDoThisRiskTitle": "户外放慢节奏",
+  "homeNowDoThisRiskBody": "整体风险偏高。随身带吸入器，呼吸困难时休息。",
+  "homeNowDoThisCalmTitle": "较适合通风的时段",
+  "homeNowDoThisCalmBody": "室外空气尚可。短时通风或许有帮助——仍请备好吸入器。",
+  "homeAdherenceSection": "本周吸入器",
+  "adherenceWeekHint": "有颜色的日期表示已记录使用（1-Tap）。",
+  "homeMoldAxis": "霉菌风险",
+  "homeMoldElevatedDraft": "潮湿信号偏高",
+  "homeMoldPendingDraft": "湿度数据待定",
+  "homeFloodAsMoldFactor": "洪水/潮湿因素",
+  "homeForecastLink": "短期展望",
+  "homeForecastHint": "次日 {date} · 分数 {score}",
+  "@homeForecastHint": {
+    "placeholders": {
+      "date": {"type": "String"},
+      "score": {"type": "String"}
+    }
+  },
+  "homeSensorDistance": "最近传感器 {km} km ({mi} mi) · 搜索约 {radiusKm} km ({radiusMi} mi)",
+  "@homeSensorDistance": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"},
+      "radiusKm": {"type": "String"},
+      "radiusMi": {"type": "String"}
+    }
+  },
+  "homeSensorNearestOnly": "最近传感器 {km} km ({mi} mi)",
+  "@homeSensorNearestOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "homeSensorRadiusOnly": "传感器搜索约 {km} km ({mi} mi)",
+  "@homeSensorRadiusOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "weekdayMonShort": "一",
+  "weekdayTueShort": "二",
+  "weekdayWedShort": "三",
+  "weekdayThuShort": "四",
+  "weekdayFriShort": "五",
+  "weekdaySatShort": "六",
+  "weekdaySunShort": "日",
+  "logAdherenceCalendarTitle": "用药日历",
+  "homeNowDoThisMoldTitle": "降低室内潮湿",
+  "homeNowDoThisMoldBody": "室外潮湿偏高。如有条件请使用风扇或除湿机，并避开潮湿地下室。",
+  "homeMoldDetail": "附近潮湿条件（室外估算 — 不是孢子计数）",
+  "homeMoldTip": "霉菌风险高时尽量保持房间更干。洪水警报会提高潮湿风险。",
+  "homeMoldRh": "湿度 {pct}%",
+  "@homeMoldRh": {
+    "placeholders": {
+      "pct": {"type": "String"}
+    }
+  },
+  "homeMoldTempF": "{temp}°F",
+  "@homeMoldTempF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldDewF": "露点 {temp}°F",
+  "@homeMoldDewF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldWetHours": "潮湿 {hours} 小时（24小时）",
+  "@homeMoldWetHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "homeMoldProxyDisclaimer": "仅室外估算",
+  "homeVentilationSnack": "室外空气较平稳 — 短时通风或许有帮助。",
+  "settingsAlertPositive": "通风提示",
+  "settingsAlertPositiveHint": "室外空气暂时较好时提示短时开窗（草案规则）",
+  "settingsBgTitle": "后台刷新",
+  "settingsBgBody": "使用应用时会刷新附近空气。本版本不请求始终定位。",
+  "settingsBgRefresh": "使用应用时刷新",
+  "settingsBgRefreshHint": "移动或保持应用打开时更新风险"
 }

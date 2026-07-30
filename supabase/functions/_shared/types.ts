@@ -14,6 +14,7 @@ export type EnvironmentTriggers = {
   air_quality: boolean;
   pollen: boolean;
   smoke_trap: boolean;
+  mold?: boolean;
 };
 
 export type SourceCoverageEntry = {
@@ -38,6 +39,7 @@ export type ForecastDayPoint = {
   dominant_pollen_type?: string | null;
   us_aqi_max?: number | null;
   composite_score?: 1 | 2 | 3 | 4;
+  mold_score?: 1 | 2 | 3 | 4 | null;
 };
 
 export type EnvironmentSnapshot = {
@@ -71,6 +73,24 @@ export type EnvironmentSnapshot = {
   degraded?: boolean;
   /** ISO timestamp when pollen fields were last refreshed from Google. */
   pollen_fetched_at?: string | null;
+  /** Distance (km) to nearest PurpleAir sensor used for local PM2.5. */
+  nearest_purpleair_km?: number | null;
+  /** PurpleAir bbox search radius from query point (km). */
+  purpleair_search_radius_km?: number | null;
+  /** Mold dampness axis 1–4 (outdoor proxy; see mold-index-research). */
+  mold_score?: 1 | 2 | 3 | 4 | null;
+  mold_level?: TrapLevel | null;
+  mold_rh_pct?: number | null;
+  mold_dew_point_c?: number | null;
+  mold_temp_c?: number | null;
+  mold_h_wet_hours?: number | null;
+  mold_factors?: {
+    h_wet_hours: number;
+    rh80_streak_hours: number;
+    flood_or_stream: boolean;
+    rh_threshold_wet: number;
+    rh_threshold_high: number;
+  } | null;
 };
 
 export type SourceResult<T> = {

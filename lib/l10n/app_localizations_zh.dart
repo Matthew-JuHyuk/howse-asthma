@@ -1120,4 +1120,198 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get shieldLocationNotNow => '暂不';
+
+  @override
+  String get settingsPushMaster => '推送通知';
+
+  @override
+  String get settingsPushMasterHint => '此设备上 Howse Asthma 通知总开关';
+
+  @override
+  String get pushConsentTitle => '提前了解哮喘诱因';
+
+  @override
+  String get pushConsentBody => '附近空气或洪水风险升高时可发送简单提醒，之后也可提示适合开窗的时间。可在设置中随时更改。';
+
+  @override
+  String get pushConsentAllow => '允许通知';
+
+  @override
+  String get pushConsentNotNow => '暂不';
+
+  @override
+  String homeNearPlace(String place) {
+    return '靠近 $place';
+  }
+
+  @override
+  String get homeStaleLocationNotice => '正在等待定位，先显示上次读数。';
+
+  @override
+  String get homeStaleRefreshNotice => '正在显示上次读数。有网络时下拉刷新。';
+
+  @override
+  String get homeStaleCacheNotice => '此读数可能稍旧，请谨慎参考。';
+
+  @override
+  String get homeNowDoThisHeading => '现在这样做可降低发作风险';
+
+  @override
+  String get homeDraftBadge => '草案';
+
+  @override
+  String get homeNowDoThisFloodTitle => '尽量留在室内';
+
+  @override
+  String get homeNowDoThisFloodBody => '洪水警报常意味着潮湿。把吸入器放在身边，避开积水区域。';
+
+  @override
+  String get homeNowDoThisTrapTitle => '减少户外活动';
+
+  @override
+  String get homeNowDoThisTrapBody => '附近交通相关空气污染偏高。非必要少出门、短时间即可。';
+
+  @override
+  String get homeNowDoThisPollenTitle => '暂时关闭窗户';
+
+  @override
+  String get homeNowDoThisPollenBody => '花粉偏高。户外归来后洗脸并更换衣物。';
+
+  @override
+  String get homeNowDoThisRiskTitle => '户外放慢节奏';
+
+  @override
+  String get homeNowDoThisRiskBody => '整体风险偏高。随身带吸入器，呼吸困难时休息。';
+
+  @override
+  String get homeNowDoThisCalmTitle => '较适合通风的时段';
+
+  @override
+  String get homeNowDoThisCalmBody => '室外空气尚可。短时通风或许有帮助——仍请备好吸入器。';
+
+  @override
+  String get homeAdherenceSection => '本周吸入器';
+
+  @override
+  String get adherenceWeekHint => '有颜色的日期表示已记录使用（1-Tap）。';
+
+  @override
+  String get homeMoldAxis => '霉菌风险';
+
+  @override
+  String get homeMoldElevatedDraft => '潮湿信号偏高';
+
+  @override
+  String get homeMoldPendingDraft => '湿度数据待定';
+
+  @override
+  String get homeFloodAsMoldFactor => '洪水/潮湿因素';
+
+  @override
+  String get homeForecastLink => '短期展望';
+
+  @override
+  String homeForecastHint(String date, String score) {
+    return '次日 $date · 分数 $score';
+  }
+
+  @override
+  String homeSensorDistance(
+    String km,
+    String mi,
+    String radiusKm,
+    String radiusMi,
+  ) {
+    return '最近传感器 $km km ($mi mi) · 搜索约 $radiusKm km ($radiusMi mi)';
+  }
+
+  @override
+  String homeSensorNearestOnly(String km, String mi) {
+    return '最近传感器 $km km ($mi mi)';
+  }
+
+  @override
+  String homeSensorRadiusOnly(String km, String mi) {
+    return '传感器搜索约 $km km ($mi mi)';
+  }
+
+  @override
+  String get weekdayMonShort => '一';
+
+  @override
+  String get weekdayTueShort => '二';
+
+  @override
+  String get weekdayWedShort => '三';
+
+  @override
+  String get weekdayThuShort => '四';
+
+  @override
+  String get weekdayFriShort => '五';
+
+  @override
+  String get weekdaySatShort => '六';
+
+  @override
+  String get weekdaySunShort => '日';
+
+  @override
+  String get logAdherenceCalendarTitle => '用药日历';
+
+  @override
+  String get homeNowDoThisMoldTitle => '降低室内潮湿';
+
+  @override
+  String get homeNowDoThisMoldBody => '室外潮湿偏高。如有条件请使用风扇或除湿机，并避开潮湿地下室。';
+
+  @override
+  String get homeMoldDetail => '附近潮湿条件（室外估算 — 不是孢子计数）';
+
+  @override
+  String get homeMoldTip => '霉菌风险高时尽量保持房间更干。洪水警报会提高潮湿风险。';
+
+  @override
+  String homeMoldRh(String pct) {
+    return '湿度 $pct%';
+  }
+
+  @override
+  String homeMoldTempF(String temp) {
+    return '$temp°F';
+  }
+
+  @override
+  String homeMoldDewF(String temp) {
+    return '露点 $temp°F';
+  }
+
+  @override
+  String homeMoldWetHours(int hours) {
+    return '潮湿 $hours 小时（24小时）';
+  }
+
+  @override
+  String get homeMoldProxyDisclaimer => '仅室外估算';
+
+  @override
+  String get homeVentilationSnack => '室外空气较平稳 — 短时通风或许有帮助。';
+
+  @override
+  String get settingsAlertPositive => '通风提示';
+
+  @override
+  String get settingsAlertPositiveHint => '室外空气暂时较好时提示短时开窗（草案规则）';
+
+  @override
+  String get settingsBgTitle => '后台刷新';
+
+  @override
+  String get settingsBgBody => '使用应用时会刷新附近空气。本版本不请求始终定位。';
+
+  @override
+  String get settingsBgRefresh => '使用应用时刷新';
+
+  @override
+  String get settingsBgRefreshHint => '移动或保持应用打开时更新风险';
 }

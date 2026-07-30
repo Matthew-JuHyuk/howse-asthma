@@ -126,20 +126,28 @@ export async function sendFcmToTokens(
   let sent = 0;
   let failed = 0;
 
+  const isPositive = payload.triggerReason === "VENTILATION_WINDOW";
+  const title = isPositive
+    ? "Good window for fresh air"
+    : "Asthma risk alert";
+  const body = isPositive
+    ? "Outside air looks calmer. A short air-out may help — keep your inhaler nearby."
+    : `Risk level ${payload.riskScore} (${payload.uiState}). Open Howse Asthma for details.`;
+
   for (const row of tokens) {
-    const body = {
+    const bodyMsg = {
       message: {
         token: row.fcm_token,
         notification: {
-          title: "Asthma risk alert",
-          body: `Risk level ${payload.riskScore} (${payload.uiState}). Open Howse Asthma for details.`,
+          title,
+          body,
         },
         data: {
           alert_id: payload.alertId,
           risk_score: String(payload.riskScore),
           ui_state: payload.uiState,
           trigger_reason: payload.triggerReason,
-          type: "environment_risk",
+          type: isPositive ? "ventilation_tip" : "environment_risk",
         },
         android: {
           priority: "HIGH",
@@ -155,7 +163,7 @@ export async function sendFcmToTokens(
           "Content-Type": "application/json",
           "User-Agent": "HowseAsthma-Edge/1.0",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(bodyMsg),
       });
       if (res.ok) {
         sent++;

@@ -439,5 +439,113 @@
   "shieldLocationTitle": "Activate your preemptive shield",
   "shieldLocationBody": "Turn on your preemptive shield around you — we need location for nearby air & pollen.",
   "shieldLocationAllow": "Allow location",
-  "shieldLocationNotNow": "Not now"
+  "shieldLocationNotNow": "Not now",
+  "settingsPushMaster": "Push notifications",
+  "settingsPushMasterHint": "Master switch for all Howse Asthma alerts on this device",
+  "pushConsentTitle": "Stay ahead of asthma triggers",
+  "pushConsentBody": "We can send simple alerts when nearby air or flood risk rises, and later tips for safer times to open windows. You can change this anytime in Settings.",
+  "pushConsentAllow": "Allow notifications",
+  "pushConsentNotNow": "Not now",
+  "homeNearPlace": "Near {place}",
+  "@homeNearPlace": {
+    "placeholders": {
+      "place": {"type": "String"}
+    }
+  },
+  "homeStaleLocationNotice": "Showing your last saved reading while we wait for location.",
+  "homeStaleRefreshNotice": "Showing your last saved reading. Pull to refresh when you have a connection.",
+  "homeStaleCacheNotice": "This reading may be a little old. Treat with care.",
+  "homeNowDoThisHeading": "Do this now to lower your chance of an attack",
+  "homeDraftBadge": "Draft",
+  "homeNowDoThisFloodTitle": "Stay inside if you can",
+  "homeNowDoThisFloodBody": "Flood alerts often mean damp rooms. Keep your inhaler close and avoid flooded areas.",
+  "homeNowDoThisTrapTitle": "Ease up on outdoor activity",
+  "homeNowDoThisTrapBody": "Traffic-related air pollution nearby looks high. Short outdoor trips only if needed.",
+  "homeNowDoThisPollenTitle": "Keep windows closed for now",
+  "homeNowDoThisPollenBody": "Pollen is high. Rinse face and change clothes after being outside.",
+  "homeNowDoThisRiskTitle": "Slow down outdoors",
+  "homeNowDoThisRiskBody": "Overall risk is elevated. Keep your inhaler with you and rest if breathing feels hard.",
+  "homeNowDoThisCalmTitle": "A calmer window for fresh air",
+  "homeNowDoThisCalmBody": "Outside air looks manageable. A short air-out may help — still keep your inhaler nearby.",
+  "homeAdherenceSection": "Your inhaler week",
+  "adherenceWeekHint": "Filled days show logged inhaler uses (1-Tap).",
+  "homeMoldAxis": "Mold risk",
+  "homeMoldElevatedDraft": "Higher dampness signal",
+  "homeMoldPendingDraft": "Humidity data pending",
+  "homeFloodAsMoldFactor": "Flood / damp factor",
+  "homeForecastLink": "Short outlook",
+  "homeForecastHint": "Next day {date} · score {score}",
+  "@homeForecastHint": {
+    "placeholders": {
+      "date": {"type": "String"},
+      "score": {"type": "String"}
+    }
+  },
+  "homeSensorDistance": "Nearest air sensor {km} km ({mi} mi) · search ~{radiusKm} km ({radiusMi} mi)",
+  "@homeSensorDistance": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"},
+      "radiusKm": {"type": "String"},
+      "radiusMi": {"type": "String"}
+    }
+  },
+  "homeSensorNearestOnly": "Nearest air sensor {km} km ({mi} mi)",
+  "@homeSensorNearestOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "homeSensorRadiusOnly": "Sensor search ~{km} km ({mi} mi)",
+  "@homeSensorRadiusOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "weekdayMonShort": "M",
+  "weekdayTueShort": "T",
+  "weekdayWedShort": "W",
+  "weekdayThuShort": "T",
+  "weekdayFriShort": "F",
+  "weekdaySatShort": "S",
+  "weekdaySunShort": "S",
+  "logAdherenceCalendarTitle": "Adherence calendar",
+  "homeNowDoThisMoldTitle": "Cut down indoor dampness",
+  "homeNowDoThisMoldBody": "Outdoor dampness looks high. Run a fan or dehumidifier if you have one, and avoid wet basements.",
+  "homeMoldDetail": "Dampness conditions near you (outdoor proxy — not a spore count)",
+  "homeMoldTip": "High mold risk means keep rooms drier when you can. Flood warnings raise dampness risk.",
+  "homeMoldRh": "Humidity {pct}%",
+  "@homeMoldRh": {
+    "placeholders": {
+      "pct": {"type": "String"}
+    }
+  },
+  "homeMoldTempF": "{temp}°F",
+  "@homeMoldTempF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldDewF": "Dew {temp}°F",
+  "@homeMoldDewF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldWetHours": "{hours} wet hours (24h)",
+  "@homeMoldWetHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "homeMoldProxyDisclaimer": "Outdoor estimate only",
+  "homeVentilationSnack": "Outside air looks calmer — a short air-out may help.",
+  "settingsAlertPositive": "Fresh-air tips",
+  "settingsAlertPositiveHint": "When outdoor air looks safer for a short window open (draft rules)",
+  "settingsBgTitle": "Background refresh",
+  "settingsBgBody": "Howse Asthma refreshes nearby air while you use the app. We do not request Always location in this version.",
+  "settingsBgRefresh": "Refresh while using the app",
+  "settingsBgRefreshHint": "Update risk when you move or keep the app open"
 }

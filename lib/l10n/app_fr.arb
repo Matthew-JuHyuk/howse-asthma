@@ -474,5 +474,113 @@
   "shieldLocationTitle": "Activez votre bouclier preventif",
   "shieldLocationBody": "Activez le bouclier autour de vous — la localisation est necessaire pour l air et le pollen.",
   "shieldLocationAllow": "Autoriser la localisation",
-  "shieldLocationNotNow": "Pas maintenant"
+  "shieldLocationNotNow": "Pas maintenant",
+  "settingsPushMaster": "Notifications push",
+  "settingsPushMasterHint": "Interrupteur general des alertes Howse Asthma sur cet appareil",
+  "pushConsentTitle": "Anticipez les declencheurs d asthme",
+  "pushConsentBody": "Nous pouvons envoyer des alertes simples si le risque air ou inondation monte. Modifiable dans Reglages.",
+  "pushConsentAllow": "Autoriser les notifications",
+  "pushConsentNotNow": "Pas maintenant",
+  "homeNearPlace": "Pres de {place}",
+  "@homeNearPlace": {
+    "placeholders": {
+      "place": {"type": "String"}
+    }
+  },
+  "homeStaleLocationNotice": "Derniere lecture affichee en attendant la localisation.",
+  "homeStaleRefreshNotice": "Derniere lecture affichee. Tirez pour actualiser quand vous etes en ligne.",
+  "homeStaleCacheNotice": "Cette lecture peut etre un peu ancienne. Prudence.",
+  "homeNowDoThisHeading": "Faites ceci maintenant pour reduire le risque de crise",
+  "homeDraftBadge": "Brouillon",
+  "homeNowDoThisFloodTitle": "Restez a l interieur si possible",
+  "homeNowDoThisFloodBody": "Les alertes d inondation signalent souvent l humidite. Gardez l inhalateur a portee.",
+  "homeNowDoThisTrapTitle": "Reduisez l activite en exterieur",
+  "homeNowDoThisTrapBody": "La pollution liee au trafic semble elevee. Sorties courtes seulement si besoin.",
+  "homeNowDoThisPollenTitle": "Gardez les fenetres fermees pour l instant",
+  "homeNowDoThisPollenBody": "Le pollen est eleve. Rincez le visage et changez de vetements apres l exterieur.",
+  "homeNowDoThisRiskTitle": "Allez doucement dehors",
+  "homeNowDoThisRiskBody": "Le risque global est eleve. Gardez l inhalateur et reposez-vous si la respiration est dure.",
+  "homeNowDoThisCalmTitle": "Fenetre plus calme pour aerer",
+  "homeNowDoThisCalmBody": "L air exterieur semble gerable. Une courte aeration peut aider — inhalateur a portee.",
+  "homeAdherenceSection": "Votre semaine d inhalateur",
+  "adherenceWeekHint": "Les jours colores ont des usages enregistres (1-Tap).",
+  "homeMoldAxis": "Risque moisissure",
+  "homeMoldElevatedDraft": "Signal d humidite eleve",
+  "homeMoldPendingDraft": "Humidite en attente",
+  "homeFloodAsMoldFactor": "Facteur inondation / humidite",
+  "homeForecastLink": "Apercu court",
+  "homeForecastHint": "Jour suivant {date} · score {score}",
+  "@homeForecastHint": {
+    "placeholders": {
+      "date": {"type": "String"},
+      "score": {"type": "String"}
+    }
+  },
+  "homeSensorDistance": "Capteur le plus proche {km} km ({mi} mi) · recherche ~{radiusKm} km ({radiusMi} mi)",
+  "@homeSensorDistance": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"},
+      "radiusKm": {"type": "String"},
+      "radiusMi": {"type": "String"}
+    }
+  },
+  "homeSensorNearestOnly": "Capteur le plus proche {km} km ({mi} mi)",
+  "@homeSensorNearestOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "homeSensorRadiusOnly": "Recherche capteurs ~{km} km ({mi} mi)",
+  "@homeSensorRadiusOnly": {
+    "placeholders": {
+      "km": {"type": "String"},
+      "mi": {"type": "String"}
+    }
+  },
+  "weekdayMonShort": "L",
+  "weekdayTueShort": "M",
+  "weekdayWedShort": "M",
+  "weekdayThuShort": "J",
+  "weekdayFriShort": "V",
+  "weekdaySatShort": "S",
+  "weekdaySunShort": "D",
+  "logAdherenceCalendarTitle": "Calendrier d adherence",
+  "homeNowDoThisMoldTitle": "Reduisez l humidite interieure",
+  "homeNowDoThisMoldBody": "L humidite exterieure semble elevee. Utilisez un ventilateur ou un deshumidificateur si possible.",
+  "homeMoldDetail": "Conditions d humidite a proximite (proxy exterieur — pas un compte de spores)",
+  "homeMoldTip": "Risque moisissure eleve : gardez les pieces plus seches. Les inondations augmentent le risque.",
+  "homeMoldRh": "Humidite {pct}%",
+  "@homeMoldRh": {
+    "placeholders": {
+      "pct": {"type": "String"}
+    }
+  },
+  "homeMoldTempF": "{temp}°F",
+  "@homeMoldTempF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldDewF": "Point de rosee {temp}°F",
+  "@homeMoldDewF": {
+    "placeholders": {
+      "temp": {"type": "String"}
+    }
+  },
+  "homeMoldWetHours": "{hours} heures humides (24h)",
+  "@homeMoldWetHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "homeMoldProxyDisclaimer": "Estimation exterieure seulement",
+  "homeVentilationSnack": "L air exterieur semble plus calme — une courte aeration peut aider.",
+  "settingsAlertPositive": "Conseils d air frais",
+  "settingsAlertPositiveHint": "Quand l air exterieur semble plus sur pour ouvrir un peu (regles brouillon)",
+  "settingsBgTitle": "Actualisation en arriere-plan",
+  "settingsBgBody": "Howse Asthma actualise l air proche pendant l utilisation. Pas de localisation Toujours dans cette version.",
+  "settingsBgRefresh": "Actualiser pendant l utilisation",
+  "settingsBgRefreshHint": "Mettre a jour le risque en bougeant ou en gardant l app ouverte"
 }

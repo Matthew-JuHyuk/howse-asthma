@@ -6,6 +6,8 @@ import '../../../core/locale/locale_controller.dart';
 import '../../../core/location/environment_monitor.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/push/fcm_service.dart';
+import '../../../core/push/notification_consent_prefs.dart';
+import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../medication_log/data/inhaler_event_repository.dart';
@@ -39,12 +41,18 @@ class _HomeShellState extends State<HomeShell> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
-      _envMonitor = EnvironmentMonitor.maybeOf(context);
-      _envMonitor?.start();
-      // FCM token upsert for OS push when notify records an alert (WBS 4.6a).
-      unawaited(_fcm.registerCurrentDevice());
+      final userId = SupabaseService.currentUser?.id ?? '';
+      final bgOk = await NotificationConsentPrefs.isBgRefreshEnabled(userId);
+      if (!mounted) return;
+      if (bgOk) {
+        _envMonitor = EnvironmentMonitor.maybeOf(context);
+        _envMonitor?.start();
+      }
+      if (await NotificationConsentPrefs.isMasterEnabled(userId)) {
+        unawaited(_fcm.registerCurrentDevice());
+      }
     });
   }
 

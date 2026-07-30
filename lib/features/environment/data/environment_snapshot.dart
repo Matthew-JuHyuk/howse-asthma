@@ -24,6 +24,15 @@ class EnvironmentSnapshot {
     this.degraded = false,
     this.pollenFetchedAt,
     this.forecastId,
+    this.nearestPurpleAirKm,
+    this.purpleAirSearchRadiusKm,
+    this.locationLabel,
+    this.moldScore,
+    this.moldLevel,
+    this.moldRhPct,
+    this.moldDewPointC,
+    this.moldTempC,
+    this.moldHWetHours,
   });
 
   final int riskScore;
@@ -50,6 +59,22 @@ class EnvironmentSnapshot {
   final String? pollenFetchedAt;
   final String? forecastId;
 
+  /// Distance to nearest PurpleAir sensor used for local PM2.5 (km).
+  final double? nearestPurpleAirKm;
+
+  /// PurpleAir bbox search radius from query point (km).
+  final double? purpleAirSearchRadiusKm;
+
+  /// Client-resolved place name (saved location label); optional on Edge.
+  final String? locationLabel;
+
+  final int? moldScore;
+  final String? moldLevel;
+  final double? moldRhPct;
+  final double? moldDewPointC;
+  final double? moldTempC;
+  final int? moldHWetHours;
+
   bool get isWarningOrAbove =>
       uiState == 'WARNING' ||
       uiState == 'EMERGENCY' ||
@@ -59,6 +84,146 @@ class EnvironmentSnapshot {
     final njdot = sourceCoverage?['njdot'];
     if (njdot == null) return false;
     return njdot.scope == 'NJ_ONLY' && !njdot.applied;
+  }
+
+  EnvironmentSnapshot copyWith({
+    int? riskScore,
+    String? uiState,
+    Map<String, bool>? triggers,
+    String? geohash,
+    int? aqiEpa,
+    String? aqiSource,
+    double? pm25,
+    double? localPm25,
+    String? trapLevel,
+    bool? trapNearFreightWeight,
+    int? pollenUpi,
+    String? dominantPollenType,
+    bool? hasFlashFloodWarning,
+    String? floodAlertHeadline,
+    double? usgsStreamRateFtHr,
+    Map<String, String>? dataSourceSummary,
+    Map<String, SourceCoverage>? sourceCoverage,
+    List<ForecastDayPoint>? forecastPoints,
+    bool? fromCache,
+    bool? fromStaleCache,
+    bool? degraded,
+    String? pollenFetchedAt,
+    String? forecastId,
+    double? nearestPurpleAirKm,
+    double? purpleAirSearchRadiusKm,
+    String? locationLabel,
+    int? moldScore,
+    String? moldLevel,
+    double? moldRhPct,
+    double? moldDewPointC,
+    double? moldTempC,
+    int? moldHWetHours,
+  }) {
+    return EnvironmentSnapshot(
+      riskScore: riskScore ?? this.riskScore,
+      uiState: uiState ?? this.uiState,
+      triggers: triggers ?? this.triggers,
+      geohash: geohash ?? this.geohash,
+      aqiEpa: aqiEpa ?? this.aqiEpa,
+      aqiSource: aqiSource ?? this.aqiSource,
+      pm25: pm25 ?? this.pm25,
+      localPm25: localPm25 ?? this.localPm25,
+      trapLevel: trapLevel ?? this.trapLevel,
+      trapNearFreightWeight:
+          trapNearFreightWeight ?? this.trapNearFreightWeight,
+      pollenUpi: pollenUpi ?? this.pollenUpi,
+      dominantPollenType: dominantPollenType ?? this.dominantPollenType,
+      hasFlashFloodWarning:
+          hasFlashFloodWarning ?? this.hasFlashFloodWarning,
+      floodAlertHeadline: floodAlertHeadline ?? this.floodAlertHeadline,
+      usgsStreamRateFtHr: usgsStreamRateFtHr ?? this.usgsStreamRateFtHr,
+      dataSourceSummary: dataSourceSummary ?? this.dataSourceSummary,
+      sourceCoverage: sourceCoverage ?? this.sourceCoverage,
+      forecastPoints: forecastPoints ?? this.forecastPoints,
+      fromCache: fromCache ?? this.fromCache,
+      fromStaleCache: fromStaleCache ?? this.fromStaleCache,
+      degraded: degraded ?? this.degraded,
+      pollenFetchedAt: pollenFetchedAt ?? this.pollenFetchedAt,
+      forecastId: forecastId ?? this.forecastId,
+      nearestPurpleAirKm: nearestPurpleAirKm ?? this.nearestPurpleAirKm,
+      purpleAirSearchRadiusKm:
+          purpleAirSearchRadiusKm ?? this.purpleAirSearchRadiusKm,
+      locationLabel: locationLabel ?? this.locationLabel,
+      moldScore: moldScore ?? this.moldScore,
+      moldLevel: moldLevel ?? this.moldLevel,
+      moldRhPct: moldRhPct ?? this.moldRhPct,
+      moldDewPointC: moldDewPointC ?? this.moldDewPointC,
+      moldTempC: moldTempC ?? this.moldTempC,
+      moldHWetHours: moldHWetHours ?? this.moldHWetHours,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'risk_score': riskScore,
+      'ui_state': uiState,
+      'triggers': triggers,
+      'geohash': geohash,
+      'aqi_epa': aqiEpa,
+      'aqi_source': aqiSource,
+      'pm25': pm25,
+      'local_pm25': localPm25,
+      'trap_level': trapLevel,
+      'trap_near_freight_weight': trapNearFreightWeight,
+      'pollen_upi': pollenUpi,
+      'dominant_pollen_type': dominantPollenType,
+      'has_flash_flood_warning': hasFlashFloodWarning,
+      'flood_alert_headline': floodAlertHeadline,
+      'usgs_stream_rate_ft_hr': usgsStreamRateFtHr,
+      'data_source_summary': dataSourceSummary,
+      if (sourceCoverage != null)
+        'source_coverage': sourceCoverage!.map(
+          (k, v) => MapEntry(k, {
+            'scope': v.scope,
+            'applied': v.applied,
+            if (v.reason != null) 'reason': v.reason,
+          }),
+        ),
+      'forecast_points': forecastPoints
+          .map(
+            (p) => {
+              'date': p.date,
+              'pollen_upi': p.pollenUpi,
+              'dominant_pollen_type': p.dominantPollenType,
+              'us_aqi_max': p.usAqiMax,
+              'composite_score': p.compositeScore,
+              'periods': p.periods
+                  .map(
+                    (per) => {
+                      'period': per.period,
+                      'us_aqi': per.usAqi,
+                      'pollen_upi': per.pollenUpi,
+                      'trap_level': per.trapLevel,
+                      'flood_active': per.floodActive,
+                    },
+                  )
+                  .toList(),
+            },
+          )
+          .toList(),
+      'from_cache': fromCache,
+      'from_stale_cache': fromStaleCache,
+      'degraded': degraded,
+      'pollen_fetched_at': pollenFetchedAt,
+      'forecast_id': forecastId,
+      if (nearestPurpleAirKm != null)
+        'nearest_purpleair_km': nearestPurpleAirKm,
+      if (purpleAirSearchRadiusKm != null)
+        'purpleair_search_radius_km': purpleAirSearchRadiusKm,
+      if (locationLabel != null) 'location_label': locationLabel,
+      if (moldScore != null) 'mold_score': moldScore,
+      if (moldLevel != null) 'mold_level': moldLevel,
+      if (moldRhPct != null) 'mold_rh_pct': moldRhPct,
+      if (moldDewPointC != null) 'mold_dew_point_c': moldDewPointC,
+      if (moldTempC != null) 'mold_temp_c': moldTempC,
+      if (moldHWetHours != null) 'mold_h_wet_hours': moldHWetHours,
+    };
   }
 
   factory EnvironmentSnapshot.fromJson(Map<String, dynamic> json) {
@@ -125,6 +290,16 @@ class EnvironmentSnapshot {
       degraded: json['degraded'] == true,
       pollenFetchedAt: json['pollen_fetched_at'] as String?,
       forecastId: json['forecast_id'] as String? ?? json['id'] as String?,
+      nearestPurpleAirKm: (json['nearest_purpleair_km'] as num?)?.toDouble(),
+      purpleAirSearchRadiusKm:
+          (json['purpleair_search_radius_km'] as num?)?.toDouble(),
+      locationLabel: json['location_label'] as String?,
+      moldScore: (json['mold_score'] as num?)?.toInt(),
+      moldLevel: json['mold_level'] as String?,
+      moldRhPct: (json['mold_rh_pct'] as num?)?.toDouble(),
+      moldDewPointC: (json['mold_dew_point_c'] as num?)?.toDouble(),
+      moldTempC: (json['mold_temp_c'] as num?)?.toDouble(),
+      moldHWetHours: (json['mold_h_wet_hours'] as num?)?.toInt(),
     );
   }
 }

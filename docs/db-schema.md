@@ -177,6 +177,7 @@ CREATE TABLE public.notification_preferences (
     push_risk_ge3 BOOLEAN NOT NULL DEFAULT TRUE,
     push_location_entry BOOLEAN NOT NULL DEFAULT TRUE,
     push_saved_location_change BOOLEAN NOT NULL DEFAULT TRUE,
+    push_positive_ventilation BOOLEAN NOT NULL DEFAULT TRUE, -- W3 security 2026-07-30
     last_alert_at TIMESTAMPTZ, -- UX helper; server cooldown uses alerts_sent
     updated_at TIMESTAMPTZ NOT NULL DEFAULT TIMEZONE('utc', NOW())
 );
@@ -248,7 +249,8 @@ CREATE TABLE public.environment_alerts_sent (
         CHECK (alert_type IN ('TRAP_SOOT', 'FLASH_FLOOD', 'POLLEN', 'COMPOSITE')),
     trigger_reason VARCHAR(40) NOT NULL
         CHECK (trigger_reason IN (
-            'LOCATION_ENTRY', 'SAVED_LOCATION_CHANGE', 'RISK_THRESHOLD', 'MANUAL'
+            'LOCATION_ENTRY', 'SAVED_LOCATION_CHANGE', 'RISK_THRESHOLD', 'MANUAL',
+            'VENTILATION_WINDOW'
         )),
     cooldown_key TEXT NOT NULL, -- type + grid key for de-duplication
     risk_level SMALLINT CHECK (risk_level BETWEEN 1 AND 4),

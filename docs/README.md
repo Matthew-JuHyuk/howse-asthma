@@ -29,3 +29,4 @@ When you add or change something under `supabase/` (migrations, RLS SQL, Edge Fu
 | [`phase6-test-plan.md`](./phase6-test-plan.md) | Phase 6 device test plan (summary; full Korean in `doc/`) |
 | [`debug-mode-design.md`](./debug-mode-design.md) | Debug API Console design (summary; full Korean in `doc/`) |
 | [`fcm-setup.md`](./fcm-setup.md) | Firebase / FCM client + Edge secret setup (WBS 4.6a) |
+| [`sprint2-test-review-backlog.md`](./sprint2-test-review-backlog.md) | Sprint 2 on-device test review backlog |

@@ -1126,4 +1126,200 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get shieldLocationNotNow => '今はしない';
+
+  @override
+  String get settingsPushMaster => 'プッシュ通知';
+
+  @override
+  String get settingsPushMasterHint => 'この端末の Howse Asthma 通知のマスタースイッチ';
+
+  @override
+  String get pushConsentTitle => '喘息のきっかけを先に知らせます';
+
+  @override
+  String get pushConsentBody => '近くの空気や洪水リスクが上がったとき、簡単な通知を送れます。設定でいつでも変更できます。';
+
+  @override
+  String get pushConsentAllow => '通知を許可';
+
+  @override
+  String get pushConsentNotNow => '今はしない';
+
+  @override
+  String homeNearPlace(String place) {
+    return '$place の近く';
+  }
+
+  @override
+  String get homeStaleLocationNotice => '位置を待つ間、前回の読み取りを表示しています。';
+
+  @override
+  String get homeStaleRefreshNotice => '前回の読み取りを表示中。接続できたら引き下げて更新してください。';
+
+  @override
+  String get homeStaleCacheNotice => 'この読み取りは少し古い可能性があります。注意してご覧ください。';
+
+  @override
+  String get homeNowDoThisHeading => '発作のリスクを下げるために今できること';
+
+  @override
+  String get homeDraftBadge => '草案';
+
+  @override
+  String get homeNowDoThisFloodTitle => 'できれば屋内にいてください';
+
+  @override
+  String get homeNowDoThisFloodBody =>
+      '洪水警報は湿気と関係することがあります。吸入器を近くに置き、浸水地域を避けてください。';
+
+  @override
+  String get homeNowDoThisTrapTitle => '屋外活動を控えてください';
+
+  @override
+  String get homeNowDoThisTrapBody => '近くの交通関連の大気汚染が高そうです。必要なときだけ短く外出してください。';
+
+  @override
+  String get homeNowDoThisPollenTitle => '今は窓を閉めてください';
+
+  @override
+  String get homeNowDoThisPollenBody => '花粉が高いです。外出後は顔を洗い、服を着替えてください。';
+
+  @override
+  String get homeNowDoThisRiskTitle => '屋外ではゆっくり';
+
+  @override
+  String get homeNowDoThisRiskBody => '全体リスクが高めです。吸入器を持ち、息が苦しいときは休んでください。';
+
+  @override
+  String get homeNowDoThisCalmTitle => '換気しやすい時間帯';
+
+  @override
+  String get homeNowDoThisCalmBody => '外の空気はまずまずです。短く換気してもよいですが、吸入器は近くに。';
+
+  @override
+  String get homeAdherenceSection => '今週の吸入器';
+
+  @override
+  String get adherenceWeekHint => '色付きの日は 1-Tap 記録がある日です。';
+
+  @override
+  String get homeMoldAxis => 'カビリスク';
+
+  @override
+  String get homeMoldElevatedDraft => '湿気シグナル高め';
+
+  @override
+  String get homeMoldPendingDraft => '湿度データ待ち';
+
+  @override
+  String get homeFloodAsMoldFactor => '洪水・湿気要因';
+
+  @override
+  String get homeForecastLink => '短期見通し';
+
+  @override
+  String homeForecastHint(String date, String score) {
+    return '翌日 $date · スコア $score';
+  }
+
+  @override
+  String homeSensorDistance(
+    String km,
+    String mi,
+    String radiusKm,
+    String radiusMi,
+  ) {
+    return '最寄りセンサー $km km ($mi mi) · 検索 ~$radiusKm km ($radiusMi mi)';
+  }
+
+  @override
+  String homeSensorNearestOnly(String km, String mi) {
+    return '最寄りセンサー $km km ($mi mi)';
+  }
+
+  @override
+  String homeSensorRadiusOnly(String km, String mi) {
+    return 'センサー検索 ~$km km ($mi mi)';
+  }
+
+  @override
+  String get weekdayMonShort => '月';
+
+  @override
+  String get weekdayTueShort => '火';
+
+  @override
+  String get weekdayWedShort => '水';
+
+  @override
+  String get weekdayThuShort => '木';
+
+  @override
+  String get weekdayFriShort => '金';
+
+  @override
+  String get weekdaySatShort => '土';
+
+  @override
+  String get weekdaySunShort => '日';
+
+  @override
+  String get logAdherenceCalendarTitle => '服薬カレンダー';
+
+  @override
+  String get homeNowDoThisMoldTitle => '室内の湿気を減らす';
+
+  @override
+  String get homeNowDoThisMoldBody =>
+      '屋外の湿気が高そうです。可能なら扇風機や除湿機を使い、湿った地下室は避けてください。';
+
+  @override
+  String get homeMoldDetail => '付近の湿気条件（屋外の代理指標 — 胞子数ではありません）';
+
+  @override
+  String get homeMoldTip => 'カビリスクが高いときは部屋を乾燥気味に。洪水警報は湿気リスクを上げます。';
+
+  @override
+  String homeMoldRh(String pct) {
+    return '湿度 $pct%';
+  }
+
+  @override
+  String homeMoldTempF(String temp) {
+    return '$temp°F';
+  }
+
+  @override
+  String homeMoldDewF(String temp) {
+    return '露点 $temp°F';
+  }
+
+  @override
+  String homeMoldWetHours(int hours) {
+    return '湿潤 $hours時間（24時間）';
+  }
+
+  @override
+  String get homeMoldProxyDisclaimer => '屋外推定のみ';
+
+  @override
+  String get homeVentilationSnack => '外気が比較的穏やかです — 短い換気が役立つ場合があります。';
+
+  @override
+  String get settingsAlertPositive => '換気のヒント';
+
+  @override
+  String get settingsAlertPositiveHint => '外気が一時的に良いときに短い換気を案内（草案ルール）';
+
+  @override
+  String get settingsBgTitle => 'バックグラウンド更新';
+
+  @override
+  String get settingsBgBody => 'アプリ使用中に付近の空気を更新します。この版では常時位置は求めません。';
+
+  @override
+  String get settingsBgRefresh => 'アプリ使用中に更新';
+
+  @override
+  String get settingsBgRefreshHint => '移動時やアプリを開いている間にリスクを更新';
 }

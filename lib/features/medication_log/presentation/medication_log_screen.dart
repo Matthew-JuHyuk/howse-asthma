@@ -6,6 +6,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../assessments/presentation/act_screen.dart';
 import '../../assessments/presentation/pdc_screen.dart';
 import '../data/inhaler_event_repository.dart';
+import 'widgets/adherence_week_strip.dart';
 
 /// SCR-PAT-LOG — inhaler timeline from `inhaler_events`.
 class MedicationLogScreen extends StatefulWidget {
@@ -89,6 +90,13 @@ class _MedicationLogScreenState extends State<MedicationLogScreen> {
                 style: const TextStyle(color: AppTheme.subtext),
               ),
               const SizedBox(height: 12),
+              Text(
+                l10n.logAdherenceCalendarTitle,
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 8),
+              AdherenceWeekStrip(events: _events),
+              const SizedBox(height: 16),
               Wrap(
                 spacing: 8,
                 children: [

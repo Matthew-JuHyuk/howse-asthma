@@ -5,10 +5,12 @@ import 'package:geolocator/geolocator.dart' show LocationPermission;
 import '../../../core/biometrics/biometric_prefs.dart';
 import '../../../core/biometrics/biometric_service.dart';
 import '../../../core/debug/debug_gates.dart';
+import '../../../core/environment/environment_snapshot_cache.dart';
 import '../../../core/locale/locale_controller.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/phone/phone_e164.dart';
 import '../../../core/push/fcm_service.dart';
+import '../../../core/push/notification_consent_prefs.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
@@ -45,6 +47,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _pushRiskGe3 = true;
   bool _pushLocationEntry = true;
   bool _pushHome = true;
+  bool _pushMaster = false;
+  bool _pushPositive = true;
+  bool _bgRefresh = true;
   String? _locationStatus;
 
   @override
@@ -65,6 +70,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final userId = SupabaseService.currentUser?.id ?? '';
     final enabled = await BiometricPrefs.isUnlockEnabled(userId);
     final available = await _biometrics.canCheckBiometrics();
+    final pushMaster = await NotificationConsentPrefs.isMasterEnabled(userId);
+    final pushPositive =
+        await NotificationConsentPrefs.isPositiveEnabled(userId);
+    final bgRefresh =
+        await NotificationConsentPrefs.isBgRefreshEnabled(userId);
     Map<String, dynamic>? contact;
     Map<String, dynamic>? prefs;
     try {
@@ -91,7 +101,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _pushRiskGe3 = prefs['push_risk_ge3'] != false;
         _pushLocationEntry = prefs['push_location_entry'] != false;
         _pushHome = prefs['push_saved_location_change'] != false;
+        // Prefer server column when present; fall back to local until migrated.
+        if (prefs.containsKey('push_positive_ventilation')) {
+          _pushPositive = prefs['push_positive_ventilation'] != false;
+        } else {
+          _pushPositive = pushPositive;
+        }
+      } else {
+        _pushPositive = pushPositive;
       }
+      _pushMaster = pushMaster;
+      _bgRefresh = bgRefresh;
       _locationStatus = !serviceOn
           ? 'serviceDisabled'
           : perm == LocationPermission.deniedForever
@@ -207,8 +227,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: ValueListenableBuilder<Locale>(
           valueListenable: widget.localeController,
           builder: (context, currentLocale, _) {
+            // W3-2.1: clear bottom nav without a huge empty gap.
             return ListView(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 88),
               children: [
                 Text(
                   l10n.settingsTitle,
@@ -249,10 +270,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     children: [
                       SwitchListTile(
                         contentPadding: EdgeInsets.zero,
+                        title: Text(l10n.settingsPushMaster),
+                        subtitle: Text(l10n.settingsPushMasterHint),
+                        value: _pushMaster,
+                        onChanged: (v) async {
+                          final userId =
+                              SupabaseService.currentUser?.id ?? '';
+                          final previous = _pushMaster;
+                          setState(() => _pushMaster = v);
+                          try {
+                            await NotificationConsentPrefs.setMasterEnabled(
+                              userId,
+                              v,
+                            );
+                            await NotificationConsentPrefs.setConsentPrompted(
+                              userId,
+                              true,
+                            );
+                            if (v) {
+                              await FcmService.instance.registerCurrentDevice();
+                              // Ensure server prefs row exists for Edge enforcement.
+                              await _notifPrefs.getOrCreate();
+                            } else {
+                              await FcmService.instance
+                                  .unregisterCurrentDevice();
+                            }
+                          } catch (_) {
+                            if (mounted) {
+                              setState(() => _pushMaster = previous);
+                            }
+                          }
+                        },
+                      ),
+                      SwitchListTile(
+                        contentPadding: EdgeInsets.zero,
                         title: Text(l10n.settingsAlertRisk),
                         subtitle: Text(l10n.settingsAlertRiskHint),
                         value: _pushRiskGe3,
-                        onChanged: (v) async {
+                        onChanged: !_pushMaster
+                            ? null
+                            : (v) async {
                           final previous = _pushRiskGe3;
                           setState(() => _pushRiskGe3 = v);
                           try {
@@ -267,7 +324,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: Text(l10n.settingsAlertLocationEntry),
                         subtitle: Text(l10n.settingsAlertLocationEntryHint),
                         value: _pushLocationEntry,
-                        onChanged: (v) async {
+                        onChanged: !_pushMaster
+                            ? null
+                            : (v) async {
                           final previous = _pushLocationEntry;
                           setState(() => _pushLocationEntry = v);
                           try {
@@ -284,7 +343,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: Text(l10n.settingsAlertHome),
                         subtitle: Text(l10n.settingsAlertHomeHint),
                         value: _pushHome,
-                        onChanged: (v) async {
+                        onChanged: !_pushMaster
+                            ? null
+                            : (v) async {
                           final previous = _pushHome;
                           setState(() => _pushHome = v);
                           try {
@@ -293,6 +354,73 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             );
                           } catch (_) {
                             if (mounted) setState(() => _pushHome = previous);
+                          }
+                        },
+                      ),
+                      SwitchListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(l10n.settingsAlertPositive),
+                        subtitle: Text(l10n.settingsAlertPositiveHint),
+                        value: _pushPositive,
+                        onChanged: !_pushMaster
+                            ? null
+                            : (v) async {
+                          final userId =
+                              SupabaseService.currentUser?.id ?? '';
+                          final previous = _pushPositive;
+                          setState(() => _pushPositive = v);
+                          try {
+                            await NotificationConsentPrefs.setPositiveEnabled(
+                              userId,
+                              v,
+                            );
+                            await _notifPrefs.update(
+                              pushPositiveVentilation: v,
+                            );
+                          } catch (_) {
+                            if (mounted) {
+                              setState(() => _pushPositive = previous);
+                            }
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                _section(
+                  title: l10n.settingsBgTitle,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.settingsBgBody,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppTheme.subtext,
+                        ),
+                      ),
+                      SwitchListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(l10n.settingsBgRefresh),
+                        subtitle: Text(l10n.settingsBgRefreshHint),
+                        value: _bgRefresh,
+                        onChanged: (v) async {
+                          final userId =
+                              SupabaseService.currentUser?.id ?? '';
+                          final previous = _bgRefresh;
+                          setState(() => _bgRefresh = v);
+                          try {
+                            await NotificationConsentPrefs.setBgRefreshEnabled(
+                              userId,
+                              v,
+                            );
+                            await NotificationConsentPrefs.setBgExplained(
+                              userId,
+                              true,
+                            );
+                          } catch (_) {
+                            if (mounted) setState(() => _bgRefresh = previous);
                           }
                         },
                       ),
@@ -432,9 +560,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const Icon(Icons.logout, color: AppTheme.error600),
                   title: Text(l10n.authSignOut),
                   onTap: () async {
+                    final userId = SupabaseService.currentUser?.id;
                     try {
                       await FcmService.instance.unregisterCurrentDevice();
                     } catch (_) {}
+                    if (userId != null) {
+                      try {
+                        await EnvironmentSnapshotCache.clear(userId);
+                      } catch (_) {}
+                    }
                     await SupabaseService.client.auth.signOut();
                   },
                 ),
