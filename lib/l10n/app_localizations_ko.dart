@@ -1327,4 +1327,896 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsBgRefreshHint => '이동하거나 앱을 열어 둔 동안 위험을 갱신';
+
+  @override
+  String get s5AboutApp => 'Howse Asthma 정보';
+
+  @override
+  String get s5AboutAppBody =>
+      'Howse Asthma는 증상과 흡입기 사용을 기록하고 의료진에게 보여줄 요약을 준비하도록 돕습니다. 진단하거나 치료를 권고하지 않아요.';
+
+  @override
+  String get s5ActNotice =>
+      '답변은 의료진과 공유할 수 있도록 저장돼요. 이 설문은 공식 채점 기준으로 검증되지 않았기 때문에 앱에서 점수를 보여주지 않아요.';
+
+  @override
+  String get s5ActSaved => '답변을 저장했어요.';
+
+  @override
+  String get s5ActSubtitle => '지난 4주에 대한 5개 질문';
+
+  @override
+  String get s5ActTitle => '천식 조절 설문';
+
+  @override
+  String get s5AddDetails => '상세 추가';
+
+  @override
+  String get s5AddRecord => '기록 추가';
+
+  @override
+  String get s5AlertArrive => '새 장소에 도착했을 때';
+
+  @override
+  String get s5AlertArriveHint => '도착한 곳의 주변 환경이 더 나쁠 때. 앱을 사용하는 동안에만 작동해요.';
+
+  @override
+  String get s5AlertFreshAirHint =>
+      '실외 대기질·꽃가루·홍수 정보가 모두 잔잔해 보일 때. 일반 정보이며 의학적 조언이 아니에요.';
+
+  @override
+  String get s5AlertSavedPlaces => '저장한 장소';
+
+  @override
+  String get s5AlertSavedPlacesHint => '저장한 장소의 주변 환경이 나빠질 때.';
+
+  @override
+  String get s5AlertWorse => '환경이 나빠질 때';
+
+  @override
+  String get s5AlertWorseHint =>
+      '주변 대기질·꽃가루·홍수 정보가 나빠질 때. 같은 알림은 1시간 안에 반복하지 않아요.';
+
+  @override
+  String get s5AqiGood => '좋음';
+
+  @override
+  String get s5AqiModerate => '보통';
+
+  @override
+  String get s5AqiUsg => '민감군에 나쁨';
+
+  @override
+  String get s5AqiUnhealthy => '나쁨';
+
+  @override
+  String get s5AqiVeryUnhealthy => '매우 나쁨';
+
+  @override
+  String get s5AqiHazardous => '위험';
+
+  @override
+  String s5AqiValue(String category, int aqi) {
+    return '$category (AQI $aqi)';
+  }
+
+  @override
+  String get s5Back => '이전';
+
+  @override
+  String get s5BarrierCost => '약값';
+
+  @override
+  String get s5BarrierHardToGet => '약을 구하기 어려움';
+
+  @override
+  String get s5BarrierHardToUnderstand => '설명을 이해하기 어려움';
+
+  @override
+  String get s5BarrierHowToUse => '약 사용법';
+
+  @override
+  String get s5BarrierNone => '어려움 없음';
+
+  @override
+  String get s5BarrierOtherHint => '직접 입력 (선택)';
+
+  @override
+  String get s5Cancel => '취소';
+
+  @override
+  String get s5Change => '변경';
+
+  @override
+  String get s5ChoosePlace => '지역 선택';
+
+  @override
+  String get s5Close => '닫기';
+
+  @override
+  String get s5DataSourcesTitle => '데이터 출처';
+
+  @override
+  String get s5DataSourcesBody =>
+      '대기질: 미국 EPA AirNow, Open-Meteo, 주변 PurpleAir 센서.\n꽃가루: Google Pollen API (Universal Pollen Index).\n날씨·습도: Open-Meteo.\n홍수 알림: 미국 국립기상청(NWS). 하천 수위: 미국 지질조사국(USGS).\n교통량(뉴저지 전용): 뉴저지 교통국(NJDOT).\n값이 늦거나 빠질 수 있어요. 실외 환경을 나타내며 건강 상태를 뜻하지 않아요.';
+
+  @override
+  String get s5Delete => '삭제';
+
+  @override
+  String get s5DeleteConfirm => '이 기록을 삭제할까요?';
+
+  @override
+  String get s5DeleteFailed => '삭제하지 못했어요. 다시 시도해 주세요.';
+
+  @override
+  String get s5Edit => '수정';
+
+  @override
+  String get s5EnglishVersion => '영문 (의료진용)';
+
+  @override
+  String get s5EntryRemoved => '기록을 취소했어요.';
+
+  @override
+  String get s5EnvAirDetail =>
+      '공공 측정소와 주변 센서의 미국 EPA 대기질 지수예요. 지역의 실외 공기를 나타내며 교통 매연만 따로 측정한 값이 아니에요.';
+
+  @override
+  String get s5EnvAirQuality => '대기질';
+
+  @override
+  String get s5EnvAlertsHeading => '환경 알림';
+
+  @override
+  String get s5EnvCardTitle => '오늘의 주변 환경';
+
+  @override
+  String get s5EnvFlood => '홍수 알림';
+
+  @override
+  String get s5EnvFloodDetail => '미국 국립기상청(NWS)의 공공 경보예요.';
+
+  @override
+  String get s5EnvForecast => '환경 예보';
+
+  @override
+  String get s5EnvHumidity => '습도 조건';
+
+  @override
+  String get s5EnvHumidityDetail => '실외 기상 자료이며 실내 습도나 곰팡이 측정값이 아니에요.';
+
+  @override
+  String get s5EnvLoadFailed => '환경 정보를 불러오지 못했어요.';
+
+  @override
+  String get s5EnvNeedPlace => '지역을 선택하면 주변 환경을 볼 수 있어요.';
+
+  @override
+  String get s5EnvNotAvailable => '확인 불가';
+
+  @override
+  String get s5EnvOlderNotice => '마지막으로 확인한 정보예요.';
+
+  @override
+  String get s5EnvPollen => '꽃가루 지수';
+
+  @override
+  String get s5EnvPollenDetail =>
+      'Google의 Universal Pollen Index로 0(없음)부터 5(매우 높음)까지예요. 낮은 숫자가 모든 사람에게 안전하다는 뜻은 아니에요.';
+
+  @override
+  String get s5EnvSeeDetails => '환경 자세히 보기';
+
+  @override
+  String get s5EnvUnavailable => '현재 환경 정보를 확인할 수 없어요.';
+
+  @override
+  String get s5FewRecordsNotice => '기록이 적어 요약에 빈 항목이 있을 수 있어요.';
+
+  @override
+  String get s5FgRefreshTitle => '앱 사용 중 환경 새로고침';
+
+  @override
+  String get s5FgRefreshHint => '앱이 열려 있는 동안 주변을 확인해요. 백그라운드에서는 작동하지 않아요.';
+
+  @override
+  String get s5FieldDate => '날짜';
+
+  @override
+  String get s5FieldMedication => '약';
+
+  @override
+  String get s5FieldNote => '메모 (선택)';
+
+  @override
+  String get s5FieldPuffs => '흡입 횟수 (선택)';
+
+  @override
+  String get s5FieldReason => '사용 이유 (선택)';
+
+  @override
+  String get s5FieldTime => '시각';
+
+  @override
+  String get s5FilterAll => '전체';
+
+  @override
+  String get s5FilterInhaler => '흡입기';
+
+  @override
+  String get s5FilterMedCheck => '약 사용 확인';
+
+  @override
+  String get s5FilterSymptoms => '증상';
+
+  @override
+  String get s5FloodIssued => '홍수 경보 발표됨';
+
+  @override
+  String get s5FloodNone => '발표된 홍수 경보 없음';
+
+  @override
+  String get s5FloodUnknown => '경보 정보를 확인할 수 없음';
+
+  @override
+  String s5ForecastCheckedAt(String time) {
+    return '확인 시각 $time';
+  }
+
+  @override
+  String s5ForecastValidFor(String date) {
+    return '$date 예보';
+  }
+
+  @override
+  String get s5FromUrgentHelp => '긴급 도움에서 기록';
+
+  @override
+  String get s5HomeStateEmpty => '첫 기록을 남겨 보세요. 진료 때 전달할 내용을 함께 정리할 수 있어요.';
+
+  @override
+  String s5HomeStateQuestions(int n) {
+    return '의사에게 전달할 질문 $n개가 있어요.';
+  }
+
+  @override
+  String s5HomeStateRecords(int n) {
+    return '최근 7일 중 기록이 있는 날: $n일';
+  }
+
+  @override
+  String get s5HomeSubtitle => '기록을 모아 진료 때 전달할 수 있어요.';
+
+  @override
+  String get s5HomeTitle => '오늘 상태를 기록해 보세요';
+
+  @override
+  String s5HumidityValue(int rh) {
+    return '실외 습도 $rh%';
+  }
+
+  @override
+  String get s5IncludeEnvironment => '주변 환경 (선택)';
+
+  @override
+  String get s5IncludeEnvironmentHint =>
+      '오늘의 대기질·꽃가루·홍수 알림을 추가해요. 상세 위치는 포함하지 않아요.';
+
+  @override
+  String get s5InhalerEditTitle => '흡입기 사용 상세';
+
+  @override
+  String get s5InhalerEntry => '흡입기 사용';
+
+  @override
+  String get s5InhalerLogged => '흡입기 사용을 기록했어요.';
+
+  @override
+  String get s5InhalerOneEntryHint =>
+      '한 번 저장은 사용 기록 1건이에요. 1회 흡입이나 1일 사용으로 계산하지 않아요.';
+
+  @override
+  String s5InhalerUnknownCount(int n) {
+    return '약 이름 미확인: $n건';
+  }
+
+  @override
+  String get s5InsCost => '비용 어려움';
+
+  @override
+  String get s5InsDenial => '거절 사유 (안내받은 경우)';
+
+  @override
+  String get s5InsMedHistory => '사용해 본 약';
+
+  @override
+  String get s5InsuranceIntro => '의료진의 서류 작성을 위해 정보를 정리해요.';
+
+  @override
+  String get s5InsuranceLimits =>
+      '모든 항목은 선택이에요. 이 앱은 보험사에 아무것도 제출하지 않으며 승인 여부를 판단하지 않아요.';
+
+  @override
+  String get s5InsuranceTitle => '보험 서류 준비';
+
+  @override
+  String s5LanguageName(String lang) {
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': '영어',
+      'es': '스페인어',
+      'fr': '프랑스어',
+      'ko': '한국어',
+      'ja': '일본어',
+      'zh': '중국어',
+      'other': '다른 언어',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get s5Last30Days => '최근 30일';
+
+  @override
+  String get s5Last7Days => '최근 7일';
+
+  @override
+  String get s5LogInhaler => '흡입기 사용 기록';
+
+  @override
+  String get s5LogLegend => '한 줄은 저장된 기록 1건이에요. 기록이 없는 날은 ‘미기록’이며 0과 달라요.';
+
+  @override
+  String get s5LogSymptoms => '증상 기록';
+
+  @override
+  String get s5MedAdd => '약 추가';
+
+  @override
+  String s5MedCheckCounts(int a, int b, int c, int d) {
+    return '사용함 $a일 · 사용하지 않음 $b일 · 기억나지 않음 $c일 · 미기록 $d일';
+  }
+
+  @override
+  String get s5MedCheckIntro =>
+      '약을 사용했는지 스스로 확인하는 기록이에요. 약국 조제 자료를 바탕으로 하지 않아요.';
+
+  @override
+  String get s5MedCheckQuestion => '계획한 대로 약을 사용했나요?';
+
+  @override
+  String get s5MedCheckTitle => '오늘의 약 사용 확인';
+
+  @override
+  String get s5MedChooseHint => '약을 선택하거나 ‘약 이름을 모르겠어요’를 선택하세요.';
+
+  @override
+  String get s5MedDailyCheck => '매일 확인';
+
+  @override
+  String get s5MedDailyCheckHint =>
+      '홈에 ‘오늘의 약 사용 확인’을 표시해요. 의료진이 매일 사용하라고 한 약일 때만 켜세요.';
+
+  @override
+  String get s5MedDefault => '빠른 기록 기본값';
+
+  @override
+  String get s5MedDefaultHint => '홈에서 ‘흡입기 사용 기록’을 누를 때 사용해요.';
+
+  @override
+  String get s5MedEdit => '약 수정';
+
+  @override
+  String get s5MedNameLabel => '약 이름 (라벨에 적힌 대로)';
+
+  @override
+  String get s5MedNotApplicable => '오늘은 사용할 예정이 아니었음';
+
+  @override
+  String s5MedNotApplicableDays(int n) {
+    return '해당 없음: $n일';
+  }
+
+  @override
+  String get s5MedNotRecorded => '약 미기록';
+
+  @override
+  String get s5MedNotSure => '기억나지 않아요';
+
+  @override
+  String get s5MedNotUsed => '사용하지 않았어요';
+
+  @override
+  String get s5MedOther => '다른 이름';
+
+  @override
+  String get s5MedOtherHint => '약 이름을 입력하세요';
+
+  @override
+  String get s5MedReasonCost => '비용 부담';
+
+  @override
+  String get s5MedReasonForgot => '잊음';
+
+  @override
+  String get s5MedReasonNoMedicine => '약이 없었음';
+
+  @override
+  String get s5MedReasonQuestion => '이유 (선택)';
+
+  @override
+  String get s5MedUnknown => '약 이름을 모르겠어요';
+
+  @override
+  String get s5MedUnknownShort => '약 이름 미확인';
+
+  @override
+  String get s5MedUsed => '사용했어요';
+
+  @override
+  String get s5MyLanguage => '내 언어';
+
+  @override
+  String get s5MyLogTitle => '내 기록';
+
+  @override
+  String get s5MyMedsEmpty => '저장한 약이 아직 없어요.';
+
+  @override
+  String get s5MyMedsHint => '직접 확인한 약 이름으로 기록을 빠르게 해요. 복용량 권고가 아니에요.';
+
+  @override
+  String get s5MyMedsOpen => '내 약 관리';
+
+  @override
+  String get s5MyMedsTitle => '내 약 정보';
+
+  @override
+  String get s5NavEnvironment => '환경';
+
+  @override
+  String get s5NavLog => '기록';
+
+  @override
+  String get s5NavVisitPrep => '진료 준비';
+
+  @override
+  String get s5NoAnswer => '답하지 않음';
+
+  @override
+  String get s5NoRecordsYet => '아직 기록이 없어요';
+
+  @override
+  String s5NoSymptomDays(int n) {
+    return '‘증상 없음’으로 기록한 날: $n일';
+  }
+
+  @override
+  String get s5NotRecorded => '미기록';
+
+  @override
+  String get s5NotRecordedToday => '오늘 미기록';
+
+  @override
+  String s5NotTranslatedLine(String language, String text) {
+    return '[미번역 · 원문 $language] $text';
+  }
+
+  @override
+  String get s5OsNotificationsOff =>
+      '휴대폰 설정에서 Howse Asthma 알림이 꺼져 있어 알림이 표시되지 않아요.';
+
+  @override
+  String get s5PdfAboutMedCheck =>
+      '약 사용 확인은 환자의 자가보고예요. 약국 조제 자료가 아니며 PDC(처방 일수 비율)가 아니에요.';
+
+  @override
+  String get s5PdfAboutNoScore => '설문 점수나 앱이 만든 위험 점수는 포함하지 않아요.';
+
+  @override
+  String get s5PdfAboutPatientReported =>
+      '모든 기록은 환자가 Howse Asthma 앱에 직접 입력했으며 검증되지 않았어요.';
+
+  @override
+  String get s5PdfAppendix => '부록: 환자 메모';
+
+  @override
+  String s5PdfDaysNotRecorded(int n) {
+    return '증상 기록이 없는 날(미기록): $n일';
+  }
+
+  @override
+  String get s5PdfDisclaimer =>
+      '이 요약은 의료진 검토를 위한 환자 보고 정보예요. 진단이나 사전 승인 결정이 아니에요.';
+
+  @override
+  String get s5PdfEnvNote => '요약을 만든 시점의 일반적인 실외 환경이에요. 위치는 포함하지 않아요.';
+
+  @override
+  String get s5PdfFailed => 'PDF를 만들지 못했어요. 입력한 내용은 유지했어요. 다시 시도해 주세요.';
+
+  @override
+  String get s5PdfFontFailed => 'PDF 글꼴을 준비하지 못했어요. 인터넷 연결을 확인하고 다시 시도해 주세요.';
+
+  @override
+  String s5PdfGeneratedAt(String time) {
+    return '생성: $time';
+  }
+
+  @override
+  String s5PdfInhalerByMed(String name, int n) {
+    return '$name: $n건';
+  }
+
+  @override
+  String s5PdfInhalerMedNotRecorded(int n) {
+    return '약 미기록: $n건';
+  }
+
+  @override
+  String s5PdfInhalerUnknown(int n) {
+    return '환자가 약 이름을 모름: $n건';
+  }
+
+  @override
+  String s5PdfInhalerUses(int n, int days) {
+    return '흡입기 사용 기록: $n건 ($days일)';
+  }
+
+  @override
+  String get s5PdfIsEnglish => 'PDF는 영문으로 만들어져요. 직접 입력한 글은 원문 그대로 들어가요.';
+
+  @override
+  String get s5PdfMedNamesAsEntered => '약 이름은 환자가 입력한 그대로 표시해요.';
+
+  @override
+  String get s5PdfNotRecorded => '미기록';
+
+  @override
+  String s5PdfNotUsedReason(String label, int n) {
+    return '사용하지 않은 이유(자가보고) — $label: $n일';
+  }
+
+  @override
+  String get s5PdfOutdated =>
+      '마지막 PDF 이후 기록이나 답변이 바뀌었어요. 변경 내용을 넣으려면 PDF를 새로 만드세요.';
+
+  @override
+  String s5PdfPeriod(String start, String end, int days) {
+    return '요약 기간: $start – $end ($days일)';
+  }
+
+  @override
+  String s5PdfReasonCount(String label, int n) {
+    return '사용 이유 — $label: $n건';
+  }
+
+  @override
+  String s5PdfRecordedDays(int n) {
+    return '환자 기록이 있는 날: $n일';
+  }
+
+  @override
+  String get s5PdfSectionAboutData => '자료의 성격';
+
+  @override
+  String get s5PdfSectionBarriers => '치료 접근의 어려움 (자가보고)';
+
+  @override
+  String get s5PdfSectionEnvironment => '주변 환경 (참고)';
+
+  @override
+  String get s5PdfSectionInhaler => '흡입기 사용';
+
+  @override
+  String get s5PdfSectionInsurance => '서류용 메모 (환자 제공)';
+
+  @override
+  String get s5PdfSectionMedChecks => '자가보고 약 사용 기록';
+
+  @override
+  String get s5PdfSectionQuestions => '환자 질문';
+
+  @override
+  String get s5PdfSectionSymptoms => '증상';
+
+  @override
+  String s5PdfSymptomCodeDays(String label, int n) {
+    return '$label: $n일';
+  }
+
+  @override
+  String s5PdfSymptomDays(int n, int days) {
+    return '증상이 있었던 날: $days일 중 $n일';
+  }
+
+  @override
+  String s5PdfSymptomOtherDays(int n) {
+    return '환자가 직접 적은 기타 증상: $n일';
+  }
+
+  @override
+  String get s5PdfTitle => '환자 보고 천식 진료 요약';
+
+  @override
+  String s5PeriodAndRecordedDays(int days, int n) {
+    return '기간 $days일 · 기록이 있는 날 $n일';
+  }
+
+  @override
+  String get s5PhoneHint => '국가번호를 포함해 입력하세요. 예: +1 201 555 0123';
+
+  @override
+  String get s5PhoneInvalid => '이름과 국가번호를 포함한 전화번호를 입력하세요. 예: +1 201 555 0123';
+
+  @override
+  String get s5PollenGrass => '잔디';
+
+  @override
+  String s5PollenMainType(String type) {
+    return '주요 종류: $type';
+  }
+
+  @override
+  String get s5PollenTree => '나무';
+
+  @override
+  String get s5PollenWeed => '잡초';
+
+  @override
+  String get s5PrepareVisit => '진료 준비하기';
+
+  @override
+  String get s5PreviewEditHint =>
+      '질문이나 메모는 이전 화면에서 고칠 수 있어요. 숫자는 내 기록에서 원래 기록을 고쳐 주세요.';
+
+  @override
+  String get s5PreviewSummary => '진료 요약 미리보기';
+
+  @override
+  String get s5PreviewTitle => '진료 요약 미리보기';
+
+  @override
+  String s5PuffsValue(int n) {
+    return '$n회 흡입';
+  }
+
+  @override
+  String s5QuestionN(int n) {
+    return '질문 $n';
+  }
+
+  @override
+  String s5QuestionOf(int n, int total) {
+    return '질문 $n/$total';
+  }
+
+  @override
+  String get s5ReasonBeforeActivity => '활동 전';
+
+  @override
+  String get s5ReasonOther => '기타';
+
+  @override
+  String get s5ReasonSymptoms => '증상 때문에';
+
+  @override
+  String s5RecentInhaler(int n) {
+    return '흡입기 사용 기록 $n건';
+  }
+
+  @override
+  String s5RecentSymptomDays(int n) {
+    return '증상이 있었던 날 $n일';
+  }
+
+  @override
+  String get s5RecentTitle => '최근 7일';
+
+  @override
+  String get s5RecordsLoadFailed => '기록을 불러오지 못했어요. 다시 시도해 주세요.';
+
+  @override
+  String get s5RecordsManageHint =>
+      '기록은 내 기록에서 수정하거나 삭제할 수 있어요. 삭제할 때는 항상 확인해요.';
+
+  @override
+  String get s5Refresh => '새로고침';
+
+  @override
+  String get s5Reload => '다시 불러오기';
+
+  @override
+  String get s5Save => '저장';
+
+  @override
+  String get s5Saved => '기록을 저장했어요.';
+
+  @override
+  String get s5SavedPlacesHint => '집, 학교, 직장 같은 저장한 장소';
+
+  @override
+  String get s5SaveFailed => '저장하지 못했어요. 입력한 내용은 유지했어요.';
+
+  @override
+  String get s5SavePdf => 'PDF 저장';
+
+  @override
+  String get s5SettingsAlerts => '알림';
+
+  @override
+  String get s5SettingsArea => '지역';
+
+  @override
+  String get s5SettingsHelp => '도움말';
+
+  @override
+  String get s5SettingsLanguageNote =>
+      '진료 요약은 영문으로 만들어지며, 공유 전에 내 언어와 비교해 확인할 수 있어요.';
+
+  @override
+  String get s5SettingsSecurityData => '보안·데이터';
+
+  @override
+  String get s5Share => '공유';
+
+  @override
+  String get s5SourcesAir => '대기질: EPA AirNow, Open-Meteo, PurpleAir';
+
+  @override
+  String get s5SourcesFlood => '홍수 알림: 미국 국립기상청';
+
+  @override
+  String get s5SourcesNjTraffic => '교통량 자료는 뉴저지에서만 사용해요.';
+
+  @override
+  String get s5SourcesNoRiskScore => '앱 내부 종합 점수는 천식 발작 위험이 아니며 표시하지 않아요.';
+
+  @override
+  String get s5SourcesPollen => '꽃가루: Google Pollen API';
+
+  @override
+  String get s5SourcesTitle => '출처와 한계';
+
+  @override
+  String get s5SourcesWeather => '날씨·습도: Open-Meteo';
+
+  @override
+  String get s5StatusLatest => '최신';
+
+  @override
+  String get s5StatusOlder => '오래된 자료';
+
+  @override
+  String get s5StatusUnavailable => '지금은 확인 불가';
+
+  @override
+  String get s5SymActivityLimited => '활동에 지장';
+
+  @override
+  String get s5SymCough => '기침';
+
+  @override
+  String get s5SymNightWaking => '밤에 잠에서 깸';
+
+  @override
+  String get s5SymNone => '증상 없음';
+
+  @override
+  String get s5SymOther => '직접 입력';
+
+  @override
+  String get s5SymOtherHint => '내 말로 적어 주세요';
+
+  @override
+  String get s5SymShortBreath => '숨쉬기 불편함';
+
+  @override
+  String get s5SymWheeze => '쌕쌕거림';
+
+  @override
+  String get s5SymptomEditTitle => '증상 수정';
+
+  @override
+  String get s5SymptomEntry => '증상';
+
+  @override
+  String get s5SymptomNoneHint => '기록하지 않은 날은 ‘증상 없음’이 아니라 ‘미기록’으로 표시돼요.';
+
+  @override
+  String get s5SymptomQuestion => '어떤 증상이 있었나요?';
+
+  @override
+  String get s5Today => '오늘';
+
+  @override
+  String get s5Undo => '실행 취소';
+
+  @override
+  String s5UntranslatedNotice(int n) {
+    return '번역하지 못한 항목 $n개가 있어요. 영문 PDF에 원문 그대로 ‘Not translated’ 표시와 함께 들어가요. 원문을 확인해 주세요.';
+  }
+
+  @override
+  String s5UpdatedAt(String time) {
+    return '갱신 $time';
+  }
+
+  @override
+  String get s5UpiHigh => '높음';
+
+  @override
+  String get s5UpiLow => '낮음';
+
+  @override
+  String get s5UpiModerate => '보통';
+
+  @override
+  String get s5UpiNone => '없음';
+
+  @override
+  String s5UpiValue(int upi, String category) {
+    return '5 중 $upi · $category';
+  }
+
+  @override
+  String get s5UpiVeryHigh => '매우 높음';
+
+  @override
+  String get s5UpiVeryLow => '매우 낮음';
+
+  @override
+  String get s5UrgentActionPlan => '의료진에게 받은 천식 행동계획이 있다면 그대로 따르세요.';
+
+  @override
+  String get s5UrgentCall911Locked => '긴급 도움: 911 전화';
+
+  @override
+  String get s5UrgentHelp => '긴급 도움';
+
+  @override
+  String get s5UrgentIntro => '숨쉬기가 매우 힘들거나 나아지지 않으면 911에 전화하세요.';
+
+  @override
+  String get s5UrgentLogHint => '선택: 흡입기를 사용했다는 기록을 남길 수 있어요.';
+
+  @override
+  String get s5UrgentNoContact => '아직 비상 연락처가 없어요. 설정 → 도움말에서 추가하세요.';
+
+  @override
+  String s5UsingMedication(String name) {
+    return '기록할 약: $name';
+  }
+
+  @override
+  String get s5ViewMyLog => '내 기록 보기';
+
+  @override
+  String get s5VisitBarriers => '치료를 받는 데 어려움이 있었나요?';
+
+  @override
+  String s5VisitCardDetail(int days, int recorded, int questions) {
+    return '최근 $days일 · 기록이 있는 날 $recorded일 · 질문 $questions개';
+  }
+
+  @override
+  String get s5VisitCardTitle => '진료 때 전달할 내용';
+
+  @override
+  String get s5VisitInclude => '포함할 기록';
+
+  @override
+  String get s5VisitIntro => '증상과 궁금한 점을 정리해 의료진에게 보여주세요.';
+
+  @override
+  String get s5VisitPeriod => '요약 기간';
+
+  @override
+  String get s5VisitPrepTitle => '진료 준비';
+
+  @override
+  String get s5VisitQuestions => '의사에게 물어볼 내용';
+
+  @override
+  String get s5VisitQuestionsHint => '내 언어로 적으세요. 비워 두어도 괜찮아요.';
 }

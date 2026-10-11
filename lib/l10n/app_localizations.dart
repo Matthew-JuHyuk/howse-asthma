@@ -2606,6 +2606,1584 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update risk when you move or keep the app open'**
   String get settingsBgRefreshHint;
+
+  /// No description provided for @s5AboutApp.
+  ///
+  /// In en, this message translates to:
+  /// **'About Howse Asthma'**
+  String get s5AboutApp;
+
+  /// No description provided for @s5AboutAppBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Howse Asthma helps you keep a record of symptoms and inhaler use and prepare a summary for your clinician. It does not diagnose or give treatment advice.'**
+  String get s5AboutAppBody;
+
+  /// No description provided for @s5ActNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answers are saved so you can share them with your clinician. This version of the questionnaire has not been checked against the official scoring, so the app does not show a score.'**
+  String get s5ActNotice;
+
+  /// No description provided for @s5ActSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answers were saved.'**
+  String get s5ActSaved;
+
+  /// No description provided for @s5ActSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'5 questions about the past 4 weeks'**
+  String get s5ActSubtitle;
+
+  /// No description provided for @s5ActTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Asthma control questionnaire'**
+  String get s5ActTitle;
+
+  /// No description provided for @s5AddDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Add details'**
+  String get s5AddDetails;
+
+  /// No description provided for @s5AddRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Add record'**
+  String get s5AddRecord;
+
+  /// No description provided for @s5AlertArrive.
+  ///
+  /// In en, this message translates to:
+  /// **'When you arrive somewhere'**
+  String get s5AlertArrive;
+
+  /// No description provided for @s5AlertArriveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When local conditions are worse where you arrive. Only while the app is open.'**
+  String get s5AlertArriveHint;
+
+  /// No description provided for @s5AlertFreshAirHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When outdoor air quality, pollen, and flood information all look calm. General information, not medical advice.'**
+  String get s5AlertFreshAirHint;
+
+  /// No description provided for @s5AlertSavedPlaces.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved places'**
+  String get s5AlertSavedPlaces;
+
+  /// No description provided for @s5AlertSavedPlacesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When local conditions get worse at a place you saved.'**
+  String get s5AlertSavedPlacesHint;
+
+  /// No description provided for @s5AlertWorse.
+  ///
+  /// In en, this message translates to:
+  /// **'When conditions get worse'**
+  String get s5AlertWorse;
+
+  /// No description provided for @s5AlertWorseHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.'**
+  String get s5AlertWorseHint;
+
+  /// No description provided for @s5AqiGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get s5AqiGood;
+
+  /// No description provided for @s5AqiModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get s5AqiModerate;
+
+  /// No description provided for @s5AqiUsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Unhealthy for sensitive groups'**
+  String get s5AqiUsg;
+
+  /// No description provided for @s5AqiUnhealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Unhealthy'**
+  String get s5AqiUnhealthy;
+
+  /// No description provided for @s5AqiVeryUnhealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'Very unhealthy'**
+  String get s5AqiVeryUnhealthy;
+
+  /// No description provided for @s5AqiHazardous.
+  ///
+  /// In en, this message translates to:
+  /// **'Hazardous'**
+  String get s5AqiHazardous;
+
+  /// No description provided for @s5AqiValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{category} (AQI {aqi})'**
+  String s5AqiValue(String category, int aqi);
+
+  /// No description provided for @s5Back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get s5Back;
+
+  /// No description provided for @s5BarrierCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost of medicine'**
+  String get s5BarrierCost;
+
+  /// No description provided for @s5BarrierHardToGet.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard to get medicine'**
+  String get s5BarrierHardToGet;
+
+  /// No description provided for @s5BarrierHardToUnderstand.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard to understand instructions'**
+  String get s5BarrierHardToUnderstand;
+
+  /// No description provided for @s5BarrierHowToUse.
+  ///
+  /// In en, this message translates to:
+  /// **'How to use my medicine'**
+  String get s5BarrierHowToUse;
+
+  /// No description provided for @s5BarrierNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No difficulties'**
+  String get s5BarrierNone;
+
+  /// No description provided for @s5BarrierOtherHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe in your own words (optional)'**
+  String get s5BarrierOtherHint;
+
+  /// No description provided for @s5Cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get s5Cancel;
+
+  /// No description provided for @s5Change.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get s5Change;
+
+  /// No description provided for @s5ChoosePlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a place'**
+  String get s5ChoosePlace;
+
+  /// No description provided for @s5Close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get s5Close;
+
+  /// No description provided for @s5DataSourcesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Data sources'**
+  String get s5DataSourcesTitle;
+
+  /// No description provided for @s5DataSourcesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Air quality: U.S. EPA AirNow, Open-Meteo, and nearby PurpleAir sensors.\nPollen: Google Pollen API (Universal Pollen Index).\nWeather and humidity: Open-Meteo.\nFlood alerts: U.S. National Weather Service. Stream levels: U.S. Geological Survey.\nTraffic counts (New Jersey only): NJ Department of Transportation.\nValues can be delayed or missing. They describe outdoor conditions, not your health.'**
+  String get s5DataSourcesBody;
+
+  /// No description provided for @s5Delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get s5Delete;
+
+  /// No description provided for @s5DeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this entry?'**
+  String get s5DeleteConfirm;
+
+  /// No description provided for @s5DeleteFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not delete. Please try again.'**
+  String get s5DeleteFailed;
+
+  /// No description provided for @s5Edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get s5Edit;
+
+  /// No description provided for @s5EnglishVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'English (for clinician)'**
+  String get s5EnglishVersion;
+
+  /// No description provided for @s5EntryRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'Entry removed.'**
+  String get s5EntryRemoved;
+
+  /// No description provided for @s5EnvAirDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.'**
+  String get s5EnvAirDetail;
+
+  /// No description provided for @s5EnvAirQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Air quality'**
+  String get s5EnvAirQuality;
+
+  /// No description provided for @s5EnvAlertsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment alerts'**
+  String get s5EnvAlertsHeading;
+
+  /// No description provided for @s5EnvCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s local environment'**
+  String get s5EnvCardTitle;
+
+  /// No description provided for @s5EnvFlood.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood alerts'**
+  String get s5EnvFlood;
+
+  /// No description provided for @s5EnvFloodDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Public alerts from the U.S. National Weather Service.'**
+  String get s5EnvFloodDetail;
+
+  /// No description provided for @s5EnvForecast.
+  ///
+  /// In en, this message translates to:
+  /// **'Environmental forecast'**
+  String get s5EnvForecast;
+
+  /// No description provided for @s5EnvHumidity.
+  ///
+  /// In en, this message translates to:
+  /// **'Humidity conditions'**
+  String get s5EnvHumidity;
+
+  /// No description provided for @s5EnvHumidityDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor weather data. It is not an indoor humidity or mold measurement.'**
+  String get s5EnvHumidityDetail;
+
+  /// No description provided for @s5EnvLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load environmental information.'**
+  String get s5EnvLoadFailed;
+
+  /// No description provided for @s5EnvNeedPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a place to see your local environment.'**
+  String get s5EnvNeedPlace;
+
+  /// No description provided for @s5EnvNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available'**
+  String get s5EnvNotAvailable;
+
+  /// No description provided for @s5EnvOlderNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the last information we checked.'**
+  String get s5EnvOlderNotice;
+
+  /// No description provided for @s5EnvPollen.
+  ///
+  /// In en, this message translates to:
+  /// **'Pollen index'**
+  String get s5EnvPollen;
+
+  /// No description provided for @s5EnvPollenDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Universal Pollen Index from Google, from 0 (none) to 5 (very high). A low number does not mean it is safe for everyone.'**
+  String get s5EnvPollenDetail;
+
+  /// No description provided for @s5EnvSeeDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'See environment details'**
+  String get s5EnvSeeDetails;
+
+  /// No description provided for @s5EnvUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Environmental data is currently unavailable.'**
+  String get s5EnvUnavailable;
+
+  /// No description provided for @s5FewRecordsNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Some sections may be empty because few records are available.'**
+  String get s5FewRecordsNotice;
+
+  /// No description provided for @s5FgRefreshTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh environment while using the app'**
+  String get s5FgRefreshTitle;
+
+  /// No description provided for @s5FgRefreshHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Checks your area while the app is open. It does not run in the background.'**
+  String get s5FgRefreshHint;
+
+  /// No description provided for @s5FieldDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get s5FieldDate;
+
+  /// No description provided for @s5FieldMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication'**
+  String get s5FieldMedication;
+
+  /// No description provided for @s5FieldNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note (optional)'**
+  String get s5FieldNote;
+
+  /// No description provided for @s5FieldPuffs.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of puffs (optional)'**
+  String get s5FieldPuffs;
+
+  /// No description provided for @s5FieldReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (optional)'**
+  String get s5FieldReason;
+
+  /// No description provided for @s5FieldTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get s5FieldTime;
+
+  /// No description provided for @s5FilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get s5FilterAll;
+
+  /// No description provided for @s5FilterInhaler.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler'**
+  String get s5FilterInhaler;
+
+  /// No description provided for @s5FilterMedCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication check-in'**
+  String get s5FilterMedCheck;
+
+  /// No description provided for @s5FilterSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get s5FilterSymptoms;
+
+  /// No description provided for @s5FloodIssued.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood warning issued'**
+  String get s5FloodIssued;
+
+  /// No description provided for @s5FloodNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No flood warnings issued'**
+  String get s5FloodNone;
+
+  /// No description provided for @s5FloodUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t check alert information'**
+  String get s5FloodUnknown;
+
+  /// No description provided for @s5ForecastCheckedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked {time}'**
+  String s5ForecastCheckedAt(String time);
+
+  /// No description provided for @s5ForecastValidFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Forecast for {date}'**
+  String s5ForecastValidFor(String date);
+
+  /// No description provided for @s5FromUrgentHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged from Urgent help'**
+  String get s5FromUrgentHelp;
+
+  /// No description provided for @s5HomeStateEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Make your first record. You can organize what to share at your visit along the way.'**
+  String get s5HomeStateEmpty;
+
+  /// No description provided for @s5HomeStateQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{You have 1 question for your doctor.} other{You have {n} questions for your doctor.}}'**
+  String s5HomeStateQuestions(int n);
+
+  /// No description provided for @s5HomeStateRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'Days with records in the last 7 days: {n}'**
+  String s5HomeStateRecords(int n);
+
+  /// No description provided for @s5HomeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bring your records to your next visit.'**
+  String get s5HomeSubtitle;
+
+  /// No description provided for @s5HomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Record how you\'re doing today'**
+  String get s5HomeTitle;
+
+  /// No description provided for @s5HumidityValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor humidity {rh}%'**
+  String s5HumidityValue(int rh);
+
+  /// No description provided for @s5IncludeEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Local environment (optional)'**
+  String get s5IncludeEnvironment;
+
+  /// No description provided for @s5IncludeEnvironmentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Adds today\'s air quality, pollen, and flood alerts. Your exact location is not included.'**
+  String get s5IncludeEnvironmentHint;
+
+  /// No description provided for @s5InhalerEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use details'**
+  String get s5InhalerEditTitle;
+
+  /// No description provided for @s5InhalerEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use'**
+  String get s5InhalerEntry;
+
+  /// No description provided for @s5InhalerLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use logged.'**
+  String get s5InhalerLogged;
+
+  /// No description provided for @s5InhalerOneEntryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Each save is one inhaler-use entry. It is not counted as one puff or one day.'**
+  String get s5InhalerOneEntryHint;
+
+  /// No description provided for @s5InhalerUnknownCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication not identified: {n}'**
+  String s5InhalerUnknownCount(int n);
+
+  /// No description provided for @s5InsCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost difficulties'**
+  String get s5InsCost;
+
+  /// No description provided for @s5InsDenial.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason given for a denial, if any'**
+  String get s5InsDenial;
+
+  /// No description provided for @s5InsMedHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicines I have tried'**
+  String get s5InsMedHistory;
+
+  /// No description provided for @s5InsuranceIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Organize information for your clinician\'s paperwork.'**
+  String get s5InsuranceIntro;
+
+  /// No description provided for @s5InsuranceLimits.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything here is optional. This app does not submit anything to insurers and does not decide approvals.'**
+  String get s5InsuranceLimits;
+
+  /// No description provided for @s5InsuranceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare insurance paperwork'**
+  String get s5InsuranceTitle;
+
+  /// No description provided for @s5LanguageName.
+  ///
+  /// In en, this message translates to:
+  /// **'{lang, select, en{English} es{Spanish} fr{French} ko{Korean} ja{Japanese} zh{Chinese} other{another language}}'**
+  String s5LanguageName(String lang);
+
+  /// No description provided for @s5Last30Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 30 days'**
+  String get s5Last30Days;
+
+  /// No description provided for @s5Last7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get s5Last7Days;
+
+  /// No description provided for @s5LogInhaler.
+  ///
+  /// In en, this message translates to:
+  /// **'Log inhaler use'**
+  String get s5LogInhaler;
+
+  /// No description provided for @s5LogLegend.
+  ///
+  /// In en, this message translates to:
+  /// **'Each line is one saved entry. Days without entries are “not recorded”, which is different from zero.'**
+  String get s5LogLegend;
+
+  /// No description provided for @s5LogSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Log symptoms'**
+  String get s5LogSymptoms;
+
+  /// No description provided for @s5MedAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add medication'**
+  String get s5MedAdd;
+
+  /// No description provided for @s5MedCheckCounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Days used: {a} · not used: {b} · don\'t remember: {c} · not recorded: {d}'**
+  String s5MedCheckCounts(int a, int b, int c, int d);
+
+  /// No description provided for @s5MedCheckIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'A self-reported check of whether you used your medicine. It is not based on pharmacy records.'**
+  String get s5MedCheckIntro;
+
+  /// No description provided for @s5MedCheckQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you use your medicine as planned?'**
+  String get s5MedCheckQuestion;
+
+  /// No description provided for @s5MedCheckTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s medication check-in'**
+  String get s5MedCheckTitle;
+
+  /// No description provided for @s5MedChooseHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a medication, or “I don\'t know the medication name”.'**
+  String get s5MedChooseHint;
+
+  /// No description provided for @s5MedDailyCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily check-in'**
+  String get s5MedDailyCheck;
+
+  /// No description provided for @s5MedDailyCheckHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Show “Today\'s medication check-in” on Home. Turn on only if your clinician asked you to use this medicine every day.'**
+  String get s5MedDailyCheckHint;
+
+  /// No description provided for @s5MedDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Default for quick logging'**
+  String get s5MedDefault;
+
+  /// No description provided for @s5MedDefaultHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Used when you tap “Log inhaler use” on Home.'**
+  String get s5MedDefaultHint;
+
+  /// No description provided for @s5MedEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit medication'**
+  String get s5MedEdit;
+
+  /// No description provided for @s5MedNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication name (as on your label)'**
+  String get s5MedNameLabel;
+
+  /// No description provided for @s5MedNotApplicable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not scheduled for today'**
+  String get s5MedNotApplicable;
+
+  /// No description provided for @s5MedNotApplicableDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Not scheduled: {n} days'**
+  String s5MedNotApplicableDays(int n);
+
+  /// No description provided for @s5MedNotRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication not recorded'**
+  String get s5MedNotRecorded;
+
+  /// No description provided for @s5MedNotSure.
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t remember'**
+  String get s5MedNotSure;
+
+  /// No description provided for @s5MedNotUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'I did not use it'**
+  String get s5MedNotUsed;
+
+  /// No description provided for @s5MedOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Another name'**
+  String get s5MedOther;
+
+  /// No description provided for @s5MedOtherHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type the medication name'**
+  String get s5MedOtherHint;
+
+  /// No description provided for @s5MedReasonCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost'**
+  String get s5MedReasonCost;
+
+  /// No description provided for @s5MedReasonForgot.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot'**
+  String get s5MedReasonForgot;
+
+  /// No description provided for @s5MedReasonNoMedicine.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t have the medicine'**
+  String get s5MedReasonNoMedicine;
+
+  /// No description provided for @s5MedReasonQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason (optional)'**
+  String get s5MedReasonQuestion;
+
+  /// No description provided for @s5MedUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t know the medication name'**
+  String get s5MedUnknown;
+
+  /// No description provided for @s5MedUnknownShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication not identified'**
+  String get s5MedUnknownShort;
+
+  /// No description provided for @s5MedUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'I used it'**
+  String get s5MedUsed;
+
+  /// No description provided for @s5MyLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'My language'**
+  String get s5MyLanguage;
+
+  /// No description provided for @s5MyLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My log'**
+  String get s5MyLogTitle;
+
+  /// No description provided for @s5MyMedsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No medications saved yet.'**
+  String get s5MyMedsEmpty;
+
+  /// No description provided for @s5MyMedsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Names you confirmed, to make logging faster. This is not a dosing recommendation.'**
+  String get s5MyMedsHint;
+
+  /// No description provided for @s5MyMedsOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage my medications'**
+  String get s5MyMedsOpen;
+
+  /// No description provided for @s5MyMedsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My medications'**
+  String get s5MyMedsTitle;
+
+  /// No description provided for @s5NavEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment'**
+  String get s5NavEnvironment;
+
+  /// No description provided for @s5NavLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Log'**
+  String get s5NavLog;
+
+  /// No description provided for @s5NavVisitPrep.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit prep'**
+  String get s5NavVisitPrep;
+
+  /// No description provided for @s5NoAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Prefer not to answer'**
+  String get s5NoAnswer;
+
+  /// No description provided for @s5NoRecordsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No records yet'**
+  String get s5NoRecordsYet;
+
+  /// No description provided for @s5NoSymptomDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Days marked “no symptoms”: {n}'**
+  String s5NoSymptomDays(int n);
+
+  /// No description provided for @s5NotRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not recorded'**
+  String get s5NotRecorded;
+
+  /// No description provided for @s5NotRecordedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Not recorded today'**
+  String get s5NotRecordedToday;
+
+  /// No description provided for @s5NotTranslatedLine.
+  ///
+  /// In en, this message translates to:
+  /// **'[Not translated · original in {language}] {text}'**
+  String s5NotTranslatedLine(String language, String text);
+
+  /// No description provided for @s5OsNotificationsOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are turned off for Howse Asthma in your phone settings, so alerts can\'t appear.'**
+  String get s5OsNotificationsOff;
+
+  /// No description provided for @s5PdfAboutMedCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication check-ins are self-reported by the patient. They are not pharmacy refill data and are not a proportion of days covered (PDC).'**
+  String get s5PdfAboutMedCheck;
+
+  /// No description provided for @s5PdfAboutNoScore.
+  ///
+  /// In en, this message translates to:
+  /// **'No questionnaire score or app-generated risk score is included.'**
+  String get s5PdfAboutNoScore;
+
+  /// No description provided for @s5PdfAboutPatientReported.
+  ///
+  /// In en, this message translates to:
+  /// **'All entries were recorded by the patient in the Howse Asthma app and have not been verified.'**
+  String get s5PdfAboutPatientReported;
+
+  /// No description provided for @s5PdfAppendix.
+  ///
+  /// In en, this message translates to:
+  /// **'Appendix: patient notes'**
+  String get s5PdfAppendix;
+
+  /// No description provided for @s5PdfDaysNotRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Days with no symptom entry (not recorded): {n}'**
+  String s5PdfDaysNotRecorded(int n);
+
+  /// No description provided for @s5PdfDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'This summary contains patient-reported information for clinician review. It is not a diagnosis or a prior authorization decision.'**
+  String get s5PdfDisclaimer;
+
+  /// No description provided for @s5PdfEnvNote.
+  ///
+  /// In en, this message translates to:
+  /// **'General outdoor conditions when this summary was created. Location is not included.'**
+  String get s5PdfEnvNote;
+
+  /// No description provided for @s5PdfFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create the PDF. Your entries are kept. Please try again.'**
+  String get s5PdfFailed;
+
+  /// No description provided for @s5PdfFontFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t prepare the PDF fonts. Check your internet connection and try again.'**
+  String get s5PdfFontFailed;
+
+  /// No description provided for @s5PdfGeneratedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created: {time}'**
+  String s5PdfGeneratedAt(String time);
+
+  /// No description provided for @s5PdfInhalerByMed.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {n} entries'**
+  String s5PdfInhalerByMed(String name, int n);
+
+  /// No description provided for @s5PdfInhalerMedNotRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication not recorded: {n} entries'**
+  String s5PdfInhalerMedNotRecorded(int n);
+
+  /// No description provided for @s5PdfInhalerUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication not identified by patient: {n} entries'**
+  String s5PdfInhalerUnknown(int n);
+
+  /// No description provided for @s5PdfInhalerUses.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use entries: {n} (on {days} days)'**
+  String s5PdfInhalerUses(int n, int days);
+
+  /// No description provided for @s5PdfIsEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'The PDF is created in English. Free text you typed stays in your language.'**
+  String get s5PdfIsEnglish;
+
+  /// No description provided for @s5PdfMedNamesAsEntered.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication names are shown as entered by the patient.'**
+  String get s5PdfMedNamesAsEntered;
+
+  /// No description provided for @s5PdfNotRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not recorded'**
+  String get s5PdfNotRecorded;
+
+  /// No description provided for @s5PdfNotUsedReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for not using (self-reported) — {label}: {n} days'**
+  String s5PdfNotUsedReason(String label, int n);
+
+  /// No description provided for @s5PdfOutdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Your records or answers changed after the last PDF. Create a new PDF to include the changes.'**
+  String get s5PdfOutdated;
+
+  /// No description provided for @s5PdfPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary period: {start} – {end} ({days} days)'**
+  String s5PdfPeriod(String start, String end, int days);
+
+  /// No description provided for @s5PdfReasonCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason — {label}: {n} entries'**
+  String s5PdfReasonCount(String label, int n);
+
+  /// No description provided for @s5PdfRecordedDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Days with any patient entry: {n}'**
+  String s5PdfRecordedDays(int n);
+
+  /// No description provided for @s5PdfSectionAboutData.
+  ///
+  /// In en, this message translates to:
+  /// **'About this information'**
+  String get s5PdfSectionAboutData;
+
+  /// No description provided for @s5PdfSectionBarriers.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulties getting care (self-reported)'**
+  String get s5PdfSectionBarriers;
+
+  /// No description provided for @s5PdfSectionEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Local environment (reference)'**
+  String get s5PdfSectionEnvironment;
+
+  /// No description provided for @s5PdfSectionInhaler.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use'**
+  String get s5PdfSectionInhaler;
+
+  /// No description provided for @s5PdfSectionInsurance.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes for paperwork (patient-provided)'**
+  String get s5PdfSectionInsurance;
+
+  /// No description provided for @s5PdfSectionMedChecks.
+  ///
+  /// In en, this message translates to:
+  /// **'Self-reported medication use'**
+  String get s5PdfSectionMedChecks;
+
+  /// No description provided for @s5PdfSectionQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient questions'**
+  String get s5PdfSectionQuestions;
+
+  /// No description provided for @s5PdfSectionSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get s5PdfSectionSymptoms;
+
+  /// No description provided for @s5PdfSymptomCodeDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{label}: {n} days'**
+  String s5PdfSymptomCodeDays(String label, int n);
+
+  /// No description provided for @s5PdfSymptomDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Days with any symptom: {n} of {days}'**
+  String s5PdfSymptomDays(int n, int days);
+
+  /// No description provided for @s5PdfSymptomOtherDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Other symptoms described by patient: {n} days'**
+  String s5PdfSymptomOtherDays(int n);
+
+  /// No description provided for @s5PdfTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient-reported asthma visit summary'**
+  String get s5PdfTitle;
+
+  /// No description provided for @s5PeriodAndRecordedDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Period: {days} days · Days with records: {n}'**
+  String s5PeriodAndRecordedDays(int days, int n);
+
+  /// No description provided for @s5PhoneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Include the country code. Example: +1 201 555 0123'**
+  String get s5PhoneHint;
+
+  /// No description provided for @s5PhoneInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a name and a phone number with the country code, for example +1 201 555 0123.'**
+  String get s5PhoneInvalid;
+
+  /// No description provided for @s5PollenGrass.
+  ///
+  /// In en, this message translates to:
+  /// **'Grass'**
+  String get s5PollenGrass;
+
+  /// No description provided for @s5PollenMainType.
+  ///
+  /// In en, this message translates to:
+  /// **'Main type: {type}'**
+  String s5PollenMainType(String type);
+
+  /// No description provided for @s5PollenTree.
+  ///
+  /// In en, this message translates to:
+  /// **'Tree'**
+  String get s5PollenTree;
+
+  /// No description provided for @s5PollenWeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Weed'**
+  String get s5PollenWeed;
+
+  /// No description provided for @s5PrepareVisit.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare for visit'**
+  String get s5PrepareVisit;
+
+  /// No description provided for @s5PreviewEditHint.
+  ///
+  /// In en, this message translates to:
+  /// **'To change a question or note, go back and edit it. To change numbers, edit the entries in My log.'**
+  String get s5PreviewEditHint;
+
+  /// No description provided for @s5PreviewSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview visit summary'**
+  String get s5PreviewSummary;
+
+  /// No description provided for @s5PreviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit summary preview'**
+  String get s5PreviewTitle;
+
+  /// No description provided for @s5PuffsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{1 puff} other{{n} puffs}}'**
+  String s5PuffsValue(int n);
+
+  /// No description provided for @s5QuestionN.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {n}'**
+  String s5QuestionN(int n);
+
+  /// No description provided for @s5QuestionOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {n} of {total}'**
+  String s5QuestionOf(int n, int total);
+
+  /// No description provided for @s5ReasonBeforeActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Before activity'**
+  String get s5ReasonBeforeActivity;
+
+  /// No description provided for @s5ReasonOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get s5ReasonOther;
+
+  /// No description provided for @s5ReasonSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Because of symptoms'**
+  String get s5ReasonSymptoms;
+
+  /// No description provided for @s5RecentInhaler.
+  ///
+  /// In en, this message translates to:
+  /// **'Inhaler use entries: {n}'**
+  String s5RecentInhaler(int n);
+
+  /// No description provided for @s5RecentSymptomDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Days with symptoms: {n}'**
+  String s5RecentSymptomDays(int n);
+
+  /// No description provided for @s5RecentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get s5RecentTitle;
+
+  /// No description provided for @s5RecordsLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load your records. Please try again.'**
+  String get s5RecordsLoadFailed;
+
+  /// No description provided for @s5RecordsManageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'You can edit or delete entries in My log. Deleting always asks you to confirm.'**
+  String get s5RecordsManageHint;
+
+  /// No description provided for @s5Refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get s5Refresh;
+
+  /// No description provided for @s5Reload.
+  ///
+  /// In en, this message translates to:
+  /// **'Load again'**
+  String get s5Reload;
+
+  /// No description provided for @s5Save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get s5Save;
+
+  /// No description provided for @s5Saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved.'**
+  String get s5Saved;
+
+  /// No description provided for @s5SavedPlacesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved places such as home, school, or work'**
+  String get s5SavedPlacesHint;
+
+  /// No description provided for @s5SaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save. Your entries are still here.'**
+  String get s5SaveFailed;
+
+  /// No description provided for @s5SavePdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Save PDF'**
+  String get s5SavePdf;
+
+  /// No description provided for @s5SettingsAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts'**
+  String get s5SettingsAlerts;
+
+  /// No description provided for @s5SettingsArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get s5SettingsArea;
+
+  /// No description provided for @s5SettingsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get s5SettingsHelp;
+
+  /// No description provided for @s5SettingsLanguageNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your visit summary is created in English. You can compare it with your own language before sharing.'**
+  String get s5SettingsLanguageNote;
+
+  /// No description provided for @s5SettingsSecurityData.
+  ///
+  /// In en, this message translates to:
+  /// **'Security and data'**
+  String get s5SettingsSecurityData;
+
+  /// No description provided for @s5Share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get s5Share;
+
+  /// No description provided for @s5SourcesAir.
+  ///
+  /// In en, this message translates to:
+  /// **'Air quality: EPA AirNow, Open-Meteo, PurpleAir'**
+  String get s5SourcesAir;
+
+  /// No description provided for @s5SourcesFlood.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood alerts: National Weather Service'**
+  String get s5SourcesFlood;
+
+  /// No description provided for @s5SourcesNjTraffic.
+  ///
+  /// In en, this message translates to:
+  /// **'Traffic count data is used only in New Jersey.'**
+  String get s5SourcesNjTraffic;
+
+  /// No description provided for @s5SourcesNoRiskScore.
+  ///
+  /// In en, this message translates to:
+  /// **'The app\'s internal combined score is not an asthma attack risk and is not shown.'**
+  String get s5SourcesNoRiskScore;
+
+  /// No description provided for @s5SourcesPollen.
+  ///
+  /// In en, this message translates to:
+  /// **'Pollen: Google Pollen API'**
+  String get s5SourcesPollen;
+
+  /// No description provided for @s5SourcesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources and limits'**
+  String get s5SourcesTitle;
+
+  /// No description provided for @s5SourcesWeather.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather and humidity: Open-Meteo'**
+  String get s5SourcesWeather;
+
+  /// No description provided for @s5StatusLatest.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest'**
+  String get s5StatusLatest;
+
+  /// No description provided for @s5StatusOlder.
+  ///
+  /// In en, this message translates to:
+  /// **'Older data'**
+  String get s5StatusOlder;
+
+  /// No description provided for @s5StatusUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t check right now'**
+  String get s5StatusUnavailable;
+
+  /// No description provided for @s5SymActivityLimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Activities limited'**
+  String get s5SymActivityLimited;
+
+  /// No description provided for @s5SymCough.
+  ///
+  /// In en, this message translates to:
+  /// **'Cough'**
+  String get s5SymCough;
+
+  /// No description provided for @s5SymNightWaking.
+  ///
+  /// In en, this message translates to:
+  /// **'Woke up at night'**
+  String get s5SymNightWaking;
+
+  /// No description provided for @s5SymNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No symptoms'**
+  String get s5SymNone;
+
+  /// No description provided for @s5SymOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Something else'**
+  String get s5SymOther;
+
+  /// No description provided for @s5SymOtherHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe in your own words'**
+  String get s5SymOtherHint;
+
+  /// No description provided for @s5SymShortBreath.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard to breathe'**
+  String get s5SymShortBreath;
+
+  /// No description provided for @s5SymWheeze.
+  ///
+  /// In en, this message translates to:
+  /// **'Wheezing'**
+  String get s5SymWheeze;
+
+  /// No description provided for @s5SymptomEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit symptoms'**
+  String get s5SymptomEditTitle;
+
+  /// No description provided for @s5SymptomEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get s5SymptomEntry;
+
+  /// No description provided for @s5SymptomNoneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Days you don\'t record are shown as “not recorded”, not as “no symptoms”.'**
+  String get s5SymptomNoneHint;
+
+  /// No description provided for @s5SymptomQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What did you notice?'**
+  String get s5SymptomQuestion;
+
+  /// No description provided for @s5Today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get s5Today;
+
+  /// No description provided for @s5Undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get s5Undo;
+
+  /// No description provided for @s5UntranslatedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{1 entry is not translated. It appears in the English PDF in your language, marked “Not translated”.} other{{n} entries are not translated. They appear in the English PDF in your language, marked “Not translated”.}}'**
+  String s5UntranslatedNotice(int n);
+
+  /// No description provided for @s5UpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {time}'**
+  String s5UpdatedAt(String time);
+
+  /// No description provided for @s5UpiHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get s5UpiHigh;
+
+  /// No description provided for @s5UpiLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get s5UpiLow;
+
+  /// No description provided for @s5UpiModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get s5UpiModerate;
+
+  /// No description provided for @s5UpiNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get s5UpiNone;
+
+  /// No description provided for @s5UpiValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{upi} of 5 · {category}'**
+  String s5UpiValue(int upi, String category);
+
+  /// No description provided for @s5UpiVeryHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Very high'**
+  String get s5UpiVeryHigh;
+
+  /// No description provided for @s5UpiVeryLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Very low'**
+  String get s5UpiVeryLow;
+
+  /// No description provided for @s5UrgentActionPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'If your clinician gave you an asthma action plan, follow it.'**
+  String get s5UrgentActionPlan;
+
+  /// No description provided for @s5UrgentCall911Locked.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent help: call 911'**
+  String get s5UrgentCall911Locked;
+
+  /// No description provided for @s5UrgentHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent help'**
+  String get s5UrgentHelp;
+
+  /// No description provided for @s5UrgentIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'If breathing is very hard or not getting better, call 911.'**
+  String get s5UrgentIntro;
+
+  /// No description provided for @s5UrgentLogHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional: save a record that you used your inhaler.'**
+  String get s5UrgentLogHint;
+
+  /// No description provided for @s5UrgentNoContact.
+  ///
+  /// In en, this message translates to:
+  /// **'No emergency contact yet. Add one in Settings → Help.'**
+  String get s5UrgentNoContact;
+
+  /// No description provided for @s5UsingMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Logs as: {name}'**
+  String s5UsingMedication(String name);
+
+  /// No description provided for @s5ViewMyLog.
+  ///
+  /// In en, this message translates to:
+  /// **'View my log'**
+  String get s5ViewMyLog;
+
+  /// No description provided for @s5VisitBarriers.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you have trouble getting care?'**
+  String get s5VisitBarriers;
+
+  /// No description provided for @s5VisitCardDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Last {days} days · Days with records: {recorded} · Questions: {questions}'**
+  String s5VisitCardDetail(int days, int recorded, int questions);
+
+  /// No description provided for @s5VisitCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What to share at your visit'**
+  String get s5VisitCardTitle;
+
+  /// No description provided for @s5VisitInclude.
+  ///
+  /// In en, this message translates to:
+  /// **'Records to include'**
+  String get s5VisitInclude;
+
+  /// No description provided for @s5VisitIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Organize your symptoms and questions to show your clinician.'**
+  String get s5VisitIntro;
+
+  /// No description provided for @s5VisitPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary period'**
+  String get s5VisitPeriod;
+
+  /// No description provided for @s5VisitPrepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit prep'**
+  String get s5VisitPrepTitle;
+
+  /// No description provided for @s5VisitQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions for your doctor'**
+  String get s5VisitQuestions;
+
+  /// No description provided for @s5VisitQuestionsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write in your own language. You can leave these empty.'**
+  String get s5VisitQuestionsHint;
 }
 
 class _AppLocalizationsDelegate

@@ -35,9 +35,13 @@ class LocationService {
       Geolocator.requestPermission();
 
   /// Foreground "when in use" location for risk / 1-Tap snapshot.
+  ///
+  /// [requestIfDenied] false = never show the OS prompt (automatic refreshes);
+  /// the prompt is only shown when the user asks for location-based data.
   Future<LocationResult> getCurrentPosition({
     LocationAccuracy accuracy = LocationAccuracy.medium,
     Duration timeLimit = const Duration(seconds: 15),
+    bool requestIfDenied = true,
   }) async {
     try {
       final enabled = await Geolocator.isLocationServiceEnabled();
@@ -46,7 +50,7 @@ class LocationService {
       }
 
       var permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
+      if (permission == LocationPermission.denied && requestIfDenied) {
         permission = await Geolocator.requestPermission();
       }
       if (permission == LocationPermission.denied) {

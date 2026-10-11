@@ -42,6 +42,18 @@ class FcmService {
     }
   }
 
+  /// OS-level notification permission; null when push is unavailable here.
+  Future<bool?> osPermissionGranted() async {
+    if (!_firebaseReady || !isSupported) return null;
+    try {
+      final s = await FirebaseMessaging.instance.getNotificationSettings();
+      return s.authorizationStatus == AuthorizationStatus.authorized ||
+          s.authorizationStatus == AuthorizationStatus.provisional;
+    } catch (_) {
+      return null;
+    }
+  }
+
   /// Request permission, upsert token, listen for refresh (patient session).
   Future<void> registerCurrentDevice() async {
     if (!_firebaseReady || !isSupported) return;

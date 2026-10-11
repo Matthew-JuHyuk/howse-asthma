@@ -4,7 +4,7 @@
 | --- | --- | --- |
 | `calculate-environment-risk` | [`supabase/functions/calculate-environment-risk/`](../supabase/functions/calculate-environment-risk/) | Live sources + Geohash cache + `forecast_points` |
 | `notify-environment-risk` | [`supabase/functions/notify-environment-risk/`](../supabase/functions/notify-environment-risk/) | PATIENT-only; cooldown + FCM HTTP v1 (`FIREBASE_SERVICE_ACCOUNT_JSON`) |
-| `log-inhaler-event` | [`supabase/functions/log-inhaler-event/`](../supabase/functions/log-inhaler-event/) | PATIENT-only Edge insert (client INSERT revoked) + 60/hr |
+| `log-inhaler-event` | [`supabase/functions/log-inhaler-event/`](../supabase/functions/log-inhaler-event/) | PATIENT-only; `action` = `create` (default, idempotent via `client_request_id`, 60/hr) · `update` (patient-reported details only) · `void` (soft delete). Env snapshot is server-copied and never editable |
 | `issue-invite-code` | [`supabase/functions/issue-invite-code/`](../supabase/functions/issue-invite-code/) | 8-char alphanumeric invite (TTL 24h) |
 | `redeem-invite-code` | [`supabase/functions/redeem-invite-code/`](../supabase/functions/redeem-invite-code/) | Atomic redeem RPC (8-char) |
 | `confirm-care-link` | [`supabase/functions/confirm-care-link/`](../supabase/functions/confirm-care-link/) | Deployed — dual confirm RPC |

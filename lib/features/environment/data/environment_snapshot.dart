@@ -33,6 +33,7 @@ class EnvironmentSnapshot {
     this.moldDewPointC,
     this.moldTempC,
     this.moldHWetHours,
+    this.fetchedAt,
   });
 
   final int riskScore;
@@ -74,6 +75,17 @@ class EnvironmentSnapshot {
   final double? moldDewPointC;
   final double? moldTempC;
   final int? moldHWetHours;
+
+  /// When this device received the snapshot (client clock, UTC).
+  final DateTime? fetchedAt;
+
+  /// `ok`, a provider error code, or null when the source was not queried.
+  String? sourceStatus(String source) => dataSourceSummary?[source];
+
+  bool sourceOk(String source) {
+    final s = sourceStatus(source);
+    return s == 'ok' || s == 'pollen_cache_6h';
+  }
 
   bool get isWarningOrAbove =>
       uiState == 'WARNING' ||
@@ -119,8 +131,10 @@ class EnvironmentSnapshot {
     double? moldDewPointC,
     double? moldTempC,
     int? moldHWetHours,
+    DateTime? fetchedAt,
   }) {
     return EnvironmentSnapshot(
+      fetchedAt: fetchedAt ?? this.fetchedAt,
       riskScore: riskScore ?? this.riskScore,
       uiState: uiState ?? this.uiState,
       triggers: triggers ?? this.triggers,
@@ -223,6 +237,8 @@ class EnvironmentSnapshot {
       if (moldDewPointC != null) 'mold_dew_point_c': moldDewPointC,
       if (moldTempC != null) 'mold_temp_c': moldTempC,
       if (moldHWetHours != null) 'mold_h_wet_hours': moldHWetHours,
+      if (fetchedAt != null)
+        'client_fetched_at': fetchedAt!.toUtc().toIso8601String(),
     };
   }
 
@@ -300,6 +316,9 @@ class EnvironmentSnapshot {
       moldDewPointC: (json['mold_dew_point_c'] as num?)?.toDouble(),
       moldTempC: (json['mold_temp_c'] as num?)?.toDouble(),
       moldHWetHours: (json['mold_h_wet_hours'] as num?)?.toInt(),
+      fetchedAt: json['client_fetched_at'] is String
+          ? DateTime.tryParse(json['client_fetched_at'] as String)
+          : null,
     );
   }
 }

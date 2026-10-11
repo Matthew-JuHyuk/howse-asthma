@@ -4,7 +4,8 @@ import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/act_repository.dart';
 
-/// SCR-PAT-ACT — 5-question Asthma Control Test → `act_assessments`.
+/// SCR-PAT-ACT — 5-question asthma control questionnaire → `act_assessments`.
+/// Answers are stored for clinician review; no score is shown to the patient.
 class ActScreen extends StatefulWidget {
   const ActScreen({super.key});
 
@@ -56,10 +57,10 @@ class _ActScreenState extends State<ActScreen> {
         answers: _answers.cast<int>(),
         languageUsed: lang,
       );
-      if (!mounted) return;
-      final total = row['total_score'];
+      if (!mounted || row.isEmpty) return;
+      // Wording is not a validated ACT translation: never show a score.
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.actSaved(total as int))),
+        SnackBar(content: Text(l10n.s5ActSaved)),
       );
       Navigator.of(context).pop(true);
     } catch (_) {
@@ -81,24 +82,18 @@ class _ActScreenState extends State<ActScreen> {
 
     return Scaffold(
       backgroundColor: AppTheme.defaultBackground,
-      appBar: AppBar(
-        title: Column(
-          children: [
-            Text(l10n.actTitle,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            const Text(
-              'SCR-PAT-ACT',
-              style: TextStyle(fontSize: 11, color: AppTheme.neutral400),
-            ),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: Text(l10n.s5ActTitle)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
           Text(
-            '${l10n.mockQuestion} ${_index + 1} of 5',
-            style: const TextStyle(fontSize: 12, color: AppTheme.brand600),
+            l10n.s5ActNotice,
+            style: const TextStyle(color: AppTheme.neutral700),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            l10n.s5QuestionOf(_index + 1, 5),
+            style: const TextStyle(fontSize: 14, color: AppTheme.brand700),
           ),
           const SizedBox(height: 16),
           Text(
@@ -142,16 +137,17 @@ class _ActScreenState extends State<ActScreen> {
               ),
             ),
           const SizedBox(height: 12),
-          Row(
+          OverflowBar(
+            alignment: MainAxisAlignment.spaceBetween,
+            overflowSpacing: 8,
             children: [
               if (_index > 0)
                 OutlinedButton(
                   onPressed: _saving
                       ? null
                       : () => setState(() => _index -= 1),
-                  child: Text(l10n.mockBackToCalmHome),
+                  child: Text(l10n.s5Back),
                 ),
-              const Spacer(),
               FilledButton(
                 onPressed: _saving || selected == null
                     ? null

@@ -1399,4 +1399,946 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsBgRefreshHint =>
       'Update risk when you move or keep the app open';
+
+  @override
+  String get s5AboutApp => 'About Howse Asthma';
+
+  @override
+  String get s5AboutAppBody =>
+      'Howse Asthma helps you keep a record of symptoms and inhaler use and prepare a summary for your clinician. It does not diagnose or give treatment advice.';
+
+  @override
+  String get s5ActNotice =>
+      'Your answers are saved so you can share them with your clinician. This version of the questionnaire has not been checked against the official scoring, so the app does not show a score.';
+
+  @override
+  String get s5ActSaved => 'Your answers were saved.';
+
+  @override
+  String get s5ActSubtitle => '5 questions about the past 4 weeks';
+
+  @override
+  String get s5ActTitle => 'Asthma control questionnaire';
+
+  @override
+  String get s5AddDetails => 'Add details';
+
+  @override
+  String get s5AddRecord => 'Add record';
+
+  @override
+  String get s5AlertArrive => 'When you arrive somewhere';
+
+  @override
+  String get s5AlertArriveHint =>
+      'When local conditions are worse where you arrive. Only while the app is open.';
+
+  @override
+  String get s5AlertFreshAirHint =>
+      'When outdoor air quality, pollen, and flood information all look calm. General information, not medical advice.';
+
+  @override
+  String get s5AlertSavedPlaces => 'Saved places';
+
+  @override
+  String get s5AlertSavedPlacesHint =>
+      'When local conditions get worse at a place you saved.';
+
+  @override
+  String get s5AlertWorse => 'When conditions get worse';
+
+  @override
+  String get s5AlertWorseHint =>
+      'When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.';
+
+  @override
+  String get s5AqiGood => 'Good';
+
+  @override
+  String get s5AqiModerate => 'Moderate';
+
+  @override
+  String get s5AqiUsg => 'Unhealthy for sensitive groups';
+
+  @override
+  String get s5AqiUnhealthy => 'Unhealthy';
+
+  @override
+  String get s5AqiVeryUnhealthy => 'Very unhealthy';
+
+  @override
+  String get s5AqiHazardous => 'Hazardous';
+
+  @override
+  String s5AqiValue(String category, int aqi) {
+    return '$category (AQI $aqi)';
+  }
+
+  @override
+  String get s5Back => 'Back';
+
+  @override
+  String get s5BarrierCost => 'Cost of medicine';
+
+  @override
+  String get s5BarrierHardToGet => 'Hard to get medicine';
+
+  @override
+  String get s5BarrierHardToUnderstand => 'Hard to understand instructions';
+
+  @override
+  String get s5BarrierHowToUse => 'How to use my medicine';
+
+  @override
+  String get s5BarrierNone => 'No difficulties';
+
+  @override
+  String get s5BarrierOtherHint => 'Describe in your own words (optional)';
+
+  @override
+  String get s5Cancel => 'Cancel';
+
+  @override
+  String get s5Change => 'Change';
+
+  @override
+  String get s5ChoosePlace => 'Choose a place';
+
+  @override
+  String get s5Close => 'Close';
+
+  @override
+  String get s5DataSourcesTitle => 'Data sources';
+
+  @override
+  String get s5DataSourcesBody =>
+      'Air quality: U.S. EPA AirNow, Open-Meteo, and nearby PurpleAir sensors.\nPollen: Google Pollen API (Universal Pollen Index).\nWeather and humidity: Open-Meteo.\nFlood alerts: U.S. National Weather Service. Stream levels: U.S. Geological Survey.\nTraffic counts (New Jersey only): NJ Department of Transportation.\nValues can be delayed or missing. They describe outdoor conditions, not your health.';
+
+  @override
+  String get s5Delete => 'Delete';
+
+  @override
+  String get s5DeleteConfirm => 'Delete this entry?';
+
+  @override
+  String get s5DeleteFailed => 'Could not delete. Please try again.';
+
+  @override
+  String get s5Edit => 'Edit';
+
+  @override
+  String get s5EnglishVersion => 'English (for clinician)';
+
+  @override
+  String get s5EntryRemoved => 'Entry removed.';
+
+  @override
+  String get s5EnvAirDetail =>
+      'U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.';
+
+  @override
+  String get s5EnvAirQuality => 'Air quality';
+
+  @override
+  String get s5EnvAlertsHeading => 'Environment alerts';
+
+  @override
+  String get s5EnvCardTitle => 'Today\'s local environment';
+
+  @override
+  String get s5EnvFlood => 'Flood alerts';
+
+  @override
+  String get s5EnvFloodDetail =>
+      'Public alerts from the U.S. National Weather Service.';
+
+  @override
+  String get s5EnvForecast => 'Environmental forecast';
+
+  @override
+  String get s5EnvHumidity => 'Humidity conditions';
+
+  @override
+  String get s5EnvHumidityDetail =>
+      'Outdoor weather data. It is not an indoor humidity or mold measurement.';
+
+  @override
+  String get s5EnvLoadFailed => 'Couldn\'t load environmental information.';
+
+  @override
+  String get s5EnvNeedPlace => 'Choose a place to see your local environment.';
+
+  @override
+  String get s5EnvNotAvailable => 'Not available';
+
+  @override
+  String get s5EnvOlderNotice => 'This is the last information we checked.';
+
+  @override
+  String get s5EnvPollen => 'Pollen index';
+
+  @override
+  String get s5EnvPollenDetail =>
+      'Universal Pollen Index from Google, from 0 (none) to 5 (very high). A low number does not mean it is safe for everyone.';
+
+  @override
+  String get s5EnvSeeDetails => 'See environment details';
+
+  @override
+  String get s5EnvUnavailable => 'Environmental data is currently unavailable.';
+
+  @override
+  String get s5FewRecordsNotice =>
+      'Some sections may be empty because few records are available.';
+
+  @override
+  String get s5FgRefreshTitle => 'Refresh environment while using the app';
+
+  @override
+  String get s5FgRefreshHint =>
+      'Checks your area while the app is open. It does not run in the background.';
+
+  @override
+  String get s5FieldDate => 'Date';
+
+  @override
+  String get s5FieldMedication => 'Medication';
+
+  @override
+  String get s5FieldNote => 'Note (optional)';
+
+  @override
+  String get s5FieldPuffs => 'Number of puffs (optional)';
+
+  @override
+  String get s5FieldReason => 'Reason (optional)';
+
+  @override
+  String get s5FieldTime => 'Time';
+
+  @override
+  String get s5FilterAll => 'All';
+
+  @override
+  String get s5FilterInhaler => 'Inhaler';
+
+  @override
+  String get s5FilterMedCheck => 'Medication check-in';
+
+  @override
+  String get s5FilterSymptoms => 'Symptoms';
+
+  @override
+  String get s5FloodIssued => 'Flood warning issued';
+
+  @override
+  String get s5FloodNone => 'No flood warnings issued';
+
+  @override
+  String get s5FloodUnknown => 'Can\'t check alert information';
+
+  @override
+  String s5ForecastCheckedAt(String time) {
+    return 'Checked $time';
+  }
+
+  @override
+  String s5ForecastValidFor(String date) {
+    return 'Forecast for $date';
+  }
+
+  @override
+  String get s5FromUrgentHelp => 'Logged from Urgent help';
+
+  @override
+  String get s5HomeStateEmpty =>
+      'Make your first record. You can organize what to share at your visit along the way.';
+
+  @override
+  String s5HomeStateQuestions(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'You have $n questions for your doctor.',
+      one: 'You have 1 question for your doctor.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5HomeStateRecords(int n) {
+    return 'Days with records in the last 7 days: $n';
+  }
+
+  @override
+  String get s5HomeSubtitle => 'Bring your records to your next visit.';
+
+  @override
+  String get s5HomeTitle => 'Record how you\'re doing today';
+
+  @override
+  String s5HumidityValue(int rh) {
+    return 'Outdoor humidity $rh%';
+  }
+
+  @override
+  String get s5IncludeEnvironment => 'Local environment (optional)';
+
+  @override
+  String get s5IncludeEnvironmentHint =>
+      'Adds today\'s air quality, pollen, and flood alerts. Your exact location is not included.';
+
+  @override
+  String get s5InhalerEditTitle => 'Inhaler use details';
+
+  @override
+  String get s5InhalerEntry => 'Inhaler use';
+
+  @override
+  String get s5InhalerLogged => 'Inhaler use logged.';
+
+  @override
+  String get s5InhalerOneEntryHint =>
+      'Each save is one inhaler-use entry. It is not counted as one puff or one day.';
+
+  @override
+  String s5InhalerUnknownCount(int n) {
+    return 'Medication not identified: $n';
+  }
+
+  @override
+  String get s5InsCost => 'Cost difficulties';
+
+  @override
+  String get s5InsDenial => 'Reason given for a denial, if any';
+
+  @override
+  String get s5InsMedHistory => 'Medicines I have tried';
+
+  @override
+  String get s5InsuranceIntro =>
+      'Organize information for your clinician\'s paperwork.';
+
+  @override
+  String get s5InsuranceLimits =>
+      'Everything here is optional. This app does not submit anything to insurers and does not decide approvals.';
+
+  @override
+  String get s5InsuranceTitle => 'Prepare insurance paperwork';
+
+  @override
+  String s5LanguageName(String lang) {
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'English',
+      'es': 'Spanish',
+      'fr': 'French',
+      'ko': 'Korean',
+      'ja': 'Japanese',
+      'zh': 'Chinese',
+      'other': 'another language',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get s5Last30Days => 'Last 30 days';
+
+  @override
+  String get s5Last7Days => 'Last 7 days';
+
+  @override
+  String get s5LogInhaler => 'Log inhaler use';
+
+  @override
+  String get s5LogLegend =>
+      'Each line is one saved entry. Days without entries are “not recorded”, which is different from zero.';
+
+  @override
+  String get s5LogSymptoms => 'Log symptoms';
+
+  @override
+  String get s5MedAdd => 'Add medication';
+
+  @override
+  String s5MedCheckCounts(int a, int b, int c, int d) {
+    return 'Days used: $a · not used: $b · don\'t remember: $c · not recorded: $d';
+  }
+
+  @override
+  String get s5MedCheckIntro =>
+      'A self-reported check of whether you used your medicine. It is not based on pharmacy records.';
+
+  @override
+  String get s5MedCheckQuestion => 'Did you use your medicine as planned?';
+
+  @override
+  String get s5MedCheckTitle => 'Today\'s medication check-in';
+
+  @override
+  String get s5MedChooseHint =>
+      'Choose a medication, or “I don\'t know the medication name”.';
+
+  @override
+  String get s5MedDailyCheck => 'Daily check-in';
+
+  @override
+  String get s5MedDailyCheckHint =>
+      'Show “Today\'s medication check-in” on Home. Turn on only if your clinician asked you to use this medicine every day.';
+
+  @override
+  String get s5MedDefault => 'Default for quick logging';
+
+  @override
+  String get s5MedDefaultHint => 'Used when you tap “Log inhaler use” on Home.';
+
+  @override
+  String get s5MedEdit => 'Edit medication';
+
+  @override
+  String get s5MedNameLabel => 'Medication name (as on your label)';
+
+  @override
+  String get s5MedNotApplicable => 'Not scheduled for today';
+
+  @override
+  String s5MedNotApplicableDays(int n) {
+    return 'Not scheduled: $n days';
+  }
+
+  @override
+  String get s5MedNotRecorded => 'Medication not recorded';
+
+  @override
+  String get s5MedNotSure => 'I don\'t remember';
+
+  @override
+  String get s5MedNotUsed => 'I did not use it';
+
+  @override
+  String get s5MedOther => 'Another name';
+
+  @override
+  String get s5MedOtherHint => 'Type the medication name';
+
+  @override
+  String get s5MedReasonCost => 'Cost';
+
+  @override
+  String get s5MedReasonForgot => 'Forgot';
+
+  @override
+  String get s5MedReasonNoMedicine => 'Didn\'t have the medicine';
+
+  @override
+  String get s5MedReasonQuestion => 'Reason (optional)';
+
+  @override
+  String get s5MedUnknown => 'I don\'t know the medication name';
+
+  @override
+  String get s5MedUnknownShort => 'Medication not identified';
+
+  @override
+  String get s5MedUsed => 'I used it';
+
+  @override
+  String get s5MyLanguage => 'My language';
+
+  @override
+  String get s5MyLogTitle => 'My log';
+
+  @override
+  String get s5MyMedsEmpty => 'No medications saved yet.';
+
+  @override
+  String get s5MyMedsHint =>
+      'Names you confirmed, to make logging faster. This is not a dosing recommendation.';
+
+  @override
+  String get s5MyMedsOpen => 'Manage my medications';
+
+  @override
+  String get s5MyMedsTitle => 'My medications';
+
+  @override
+  String get s5NavEnvironment => 'Environment';
+
+  @override
+  String get s5NavLog => 'Log';
+
+  @override
+  String get s5NavVisitPrep => 'Visit prep';
+
+  @override
+  String get s5NoAnswer => 'Prefer not to answer';
+
+  @override
+  String get s5NoRecordsYet => 'No records yet';
+
+  @override
+  String s5NoSymptomDays(int n) {
+    return 'Days marked “no symptoms”: $n';
+  }
+
+  @override
+  String get s5NotRecorded => 'Not recorded';
+
+  @override
+  String get s5NotRecordedToday => 'Not recorded today';
+
+  @override
+  String s5NotTranslatedLine(String language, String text) {
+    return '[Not translated · original in $language] $text';
+  }
+
+  @override
+  String get s5OsNotificationsOff =>
+      'Notifications are turned off for Howse Asthma in your phone settings, so alerts can\'t appear.';
+
+  @override
+  String get s5PdfAboutMedCheck =>
+      'Medication check-ins are self-reported by the patient. They are not pharmacy refill data and are not a proportion of days covered (PDC).';
+
+  @override
+  String get s5PdfAboutNoScore =>
+      'No questionnaire score or app-generated risk score is included.';
+
+  @override
+  String get s5PdfAboutPatientReported =>
+      'All entries were recorded by the patient in the Howse Asthma app and have not been verified.';
+
+  @override
+  String get s5PdfAppendix => 'Appendix: patient notes';
+
+  @override
+  String s5PdfDaysNotRecorded(int n) {
+    return 'Days with no symptom entry (not recorded): $n';
+  }
+
+  @override
+  String get s5PdfDisclaimer =>
+      'This summary contains patient-reported information for clinician review. It is not a diagnosis or a prior authorization decision.';
+
+  @override
+  String get s5PdfEnvNote =>
+      'General outdoor conditions when this summary was created. Location is not included.';
+
+  @override
+  String get s5PdfFailed =>
+      'Couldn\'t create the PDF. Your entries are kept. Please try again.';
+
+  @override
+  String get s5PdfFontFailed =>
+      'Couldn\'t prepare the PDF fonts. Check your internet connection and try again.';
+
+  @override
+  String s5PdfGeneratedAt(String time) {
+    return 'Created: $time';
+  }
+
+  @override
+  String s5PdfInhalerByMed(String name, int n) {
+    return '$name: $n entries';
+  }
+
+  @override
+  String s5PdfInhalerMedNotRecorded(int n) {
+    return 'Medication not recorded: $n entries';
+  }
+
+  @override
+  String s5PdfInhalerUnknown(int n) {
+    return 'Medication not identified by patient: $n entries';
+  }
+
+  @override
+  String s5PdfInhalerUses(int n, int days) {
+    return 'Inhaler use entries: $n (on $days days)';
+  }
+
+  @override
+  String get s5PdfIsEnglish =>
+      'The PDF is created in English. Free text you typed stays in your language.';
+
+  @override
+  String get s5PdfMedNamesAsEntered =>
+      'Medication names are shown as entered by the patient.';
+
+  @override
+  String get s5PdfNotRecorded => 'Not recorded';
+
+  @override
+  String s5PdfNotUsedReason(String label, int n) {
+    return 'Reason for not using (self-reported) — $label: $n days';
+  }
+
+  @override
+  String get s5PdfOutdated =>
+      'Your records or answers changed after the last PDF. Create a new PDF to include the changes.';
+
+  @override
+  String s5PdfPeriod(String start, String end, int days) {
+    return 'Summary period: $start – $end ($days days)';
+  }
+
+  @override
+  String s5PdfReasonCount(String label, int n) {
+    return 'Reason — $label: $n entries';
+  }
+
+  @override
+  String s5PdfRecordedDays(int n) {
+    return 'Days with any patient entry: $n';
+  }
+
+  @override
+  String get s5PdfSectionAboutData => 'About this information';
+
+  @override
+  String get s5PdfSectionBarriers =>
+      'Difficulties getting care (self-reported)';
+
+  @override
+  String get s5PdfSectionEnvironment => 'Local environment (reference)';
+
+  @override
+  String get s5PdfSectionInhaler => 'Inhaler use';
+
+  @override
+  String get s5PdfSectionInsurance => 'Notes for paperwork (patient-provided)';
+
+  @override
+  String get s5PdfSectionMedChecks => 'Self-reported medication use';
+
+  @override
+  String get s5PdfSectionQuestions => 'Patient questions';
+
+  @override
+  String get s5PdfSectionSymptoms => 'Symptoms';
+
+  @override
+  String s5PdfSymptomCodeDays(String label, int n) {
+    return '$label: $n days';
+  }
+
+  @override
+  String s5PdfSymptomDays(int n, int days) {
+    return 'Days with any symptom: $n of $days';
+  }
+
+  @override
+  String s5PdfSymptomOtherDays(int n) {
+    return 'Other symptoms described by patient: $n days';
+  }
+
+  @override
+  String get s5PdfTitle => 'Patient-reported asthma visit summary';
+
+  @override
+  String s5PeriodAndRecordedDays(int days, int n) {
+    return 'Period: $days days · Days with records: $n';
+  }
+
+  @override
+  String get s5PhoneHint =>
+      'Include the country code. Example: +1 201 555 0123';
+
+  @override
+  String get s5PhoneInvalid =>
+      'Enter a name and a phone number with the country code, for example +1 201 555 0123.';
+
+  @override
+  String get s5PollenGrass => 'Grass';
+
+  @override
+  String s5PollenMainType(String type) {
+    return 'Main type: $type';
+  }
+
+  @override
+  String get s5PollenTree => 'Tree';
+
+  @override
+  String get s5PollenWeed => 'Weed';
+
+  @override
+  String get s5PrepareVisit => 'Prepare for visit';
+
+  @override
+  String get s5PreviewEditHint =>
+      'To change a question or note, go back and edit it. To change numbers, edit the entries in My log.';
+
+  @override
+  String get s5PreviewSummary => 'Preview visit summary';
+
+  @override
+  String get s5PreviewTitle => 'Visit summary preview';
+
+  @override
+  String s5PuffsValue(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n puffs',
+      one: '1 puff',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5QuestionN(int n) {
+    return 'Question $n';
+  }
+
+  @override
+  String s5QuestionOf(int n, int total) {
+    return 'Question $n of $total';
+  }
+
+  @override
+  String get s5ReasonBeforeActivity => 'Before activity';
+
+  @override
+  String get s5ReasonOther => 'Other';
+
+  @override
+  String get s5ReasonSymptoms => 'Because of symptoms';
+
+  @override
+  String s5RecentInhaler(int n) {
+    return 'Inhaler use entries: $n';
+  }
+
+  @override
+  String s5RecentSymptomDays(int n) {
+    return 'Days with symptoms: $n';
+  }
+
+  @override
+  String get s5RecentTitle => 'Last 7 days';
+
+  @override
+  String get s5RecordsLoadFailed =>
+      'Couldn\'t load your records. Please try again.';
+
+  @override
+  String get s5RecordsManageHint =>
+      'You can edit or delete entries in My log. Deleting always asks you to confirm.';
+
+  @override
+  String get s5Refresh => 'Refresh';
+
+  @override
+  String get s5Reload => 'Load again';
+
+  @override
+  String get s5Save => 'Save';
+
+  @override
+  String get s5Saved => 'Saved.';
+
+  @override
+  String get s5SavedPlacesHint => 'Saved places such as home, school, or work';
+
+  @override
+  String get s5SaveFailed => 'Could not save. Your entries are still here.';
+
+  @override
+  String get s5SavePdf => 'Save PDF';
+
+  @override
+  String get s5SettingsAlerts => 'Alerts';
+
+  @override
+  String get s5SettingsArea => 'Area';
+
+  @override
+  String get s5SettingsHelp => 'Help';
+
+  @override
+  String get s5SettingsLanguageNote =>
+      'Your visit summary is created in English. You can compare it with your own language before sharing.';
+
+  @override
+  String get s5SettingsSecurityData => 'Security and data';
+
+  @override
+  String get s5Share => 'Share';
+
+  @override
+  String get s5SourcesAir => 'Air quality: EPA AirNow, Open-Meteo, PurpleAir';
+
+  @override
+  String get s5SourcesFlood => 'Flood alerts: National Weather Service';
+
+  @override
+  String get s5SourcesNjTraffic =>
+      'Traffic count data is used only in New Jersey.';
+
+  @override
+  String get s5SourcesNoRiskScore =>
+      'The app\'s internal combined score is not an asthma attack risk and is not shown.';
+
+  @override
+  String get s5SourcesPollen => 'Pollen: Google Pollen API';
+
+  @override
+  String get s5SourcesTitle => 'Sources and limits';
+
+  @override
+  String get s5SourcesWeather => 'Weather and humidity: Open-Meteo';
+
+  @override
+  String get s5StatusLatest => 'Latest';
+
+  @override
+  String get s5StatusOlder => 'Older data';
+
+  @override
+  String get s5StatusUnavailable => 'Can\'t check right now';
+
+  @override
+  String get s5SymActivityLimited => 'Activities limited';
+
+  @override
+  String get s5SymCough => 'Cough';
+
+  @override
+  String get s5SymNightWaking => 'Woke up at night';
+
+  @override
+  String get s5SymNone => 'No symptoms';
+
+  @override
+  String get s5SymOther => 'Something else';
+
+  @override
+  String get s5SymOtherHint => 'Describe in your own words';
+
+  @override
+  String get s5SymShortBreath => 'Hard to breathe';
+
+  @override
+  String get s5SymWheeze => 'Wheezing';
+
+  @override
+  String get s5SymptomEditTitle => 'Edit symptoms';
+
+  @override
+  String get s5SymptomEntry => 'Symptoms';
+
+  @override
+  String get s5SymptomNoneHint =>
+      'Days you don\'t record are shown as “not recorded”, not as “no symptoms”.';
+
+  @override
+  String get s5SymptomQuestion => 'What did you notice?';
+
+  @override
+  String get s5Today => 'Today';
+
+  @override
+  String get s5Undo => 'Undo';
+
+  @override
+  String s5UntranslatedNotice(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other:
+          '$n entries are not translated. They appear in the English PDF in your language, marked “Not translated”.',
+      one:
+          '1 entry is not translated. It appears in the English PDF in your language, marked “Not translated”.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5UpdatedAt(String time) {
+    return 'Updated $time';
+  }
+
+  @override
+  String get s5UpiHigh => 'High';
+
+  @override
+  String get s5UpiLow => 'Low';
+
+  @override
+  String get s5UpiModerate => 'Moderate';
+
+  @override
+  String get s5UpiNone => 'None';
+
+  @override
+  String s5UpiValue(int upi, String category) {
+    return '$upi of 5 · $category';
+  }
+
+  @override
+  String get s5UpiVeryHigh => 'Very high';
+
+  @override
+  String get s5UpiVeryLow => 'Very low';
+
+  @override
+  String get s5UrgentActionPlan =>
+      'If your clinician gave you an asthma action plan, follow it.';
+
+  @override
+  String get s5UrgentCall911Locked => 'Urgent help: call 911';
+
+  @override
+  String get s5UrgentHelp => 'Urgent help';
+
+  @override
+  String get s5UrgentIntro =>
+      'If breathing is very hard or not getting better, call 911.';
+
+  @override
+  String get s5UrgentLogHint =>
+      'Optional: save a record that you used your inhaler.';
+
+  @override
+  String get s5UrgentNoContact =>
+      'No emergency contact yet. Add one in Settings → Help.';
+
+  @override
+  String s5UsingMedication(String name) {
+    return 'Logs as: $name';
+  }
+
+  @override
+  String get s5ViewMyLog => 'View my log';
+
+  @override
+  String get s5VisitBarriers => 'Did you have trouble getting care?';
+
+  @override
+  String s5VisitCardDetail(int days, int recorded, int questions) {
+    return 'Last $days days · Days with records: $recorded · Questions: $questions';
+  }
+
+  @override
+  String get s5VisitCardTitle => 'What to share at your visit';
+
+  @override
+  String get s5VisitInclude => 'Records to include';
+
+  @override
+  String get s5VisitIntro =>
+      'Organize your symptoms and questions to show your clinician.';
+
+  @override
+  String get s5VisitPeriod => 'Summary period';
+
+  @override
+  String get s5VisitPrepTitle => 'Visit prep';
+
+  @override
+  String get s5VisitQuestions => 'Questions for your doctor';
+
+  @override
+  String get s5VisitQuestionsHint =>
+      'Write in your own language. You can leave these empty.';
 }

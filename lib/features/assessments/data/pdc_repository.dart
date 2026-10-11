@@ -1,65 +1,67 @@
 import '../../../core/supabase/supabase_service.dart';
+import '../../records/domain/record_models.dart';
 
+/// Daily self-reported medication check (not a pharmacy-claims PDC).
 class PdcRepository {
   PdcRepository();
 
   /// Local calendar date YYYY-MM-DD (not UTC — US evenings must not roll day).
-  static String localDateString([DateTime? now]) {
-    final local = (now ?? DateTime.now()).toLocal();
-    return '${local.year.toString().padLeft(4, '0')}-'
-        '${local.month.toString().padLeft(2, '0')}-'
-        '${local.day.toString().padLeft(2, '0')}';
-  }
+  static String localDateString([DateTime? now]) =>
+      isoDate((now ?? DateTime.now()).toLocal());
 
-  Future<Map<String, dynamic>> upsertToday({required bool taken}) async {
+  Future<MedCheckRecord?> upsert({
+    required DateTime date,
+    required String status,
+    String? reason,
+  }) async {
     final userId = SupabaseService.currentUser?.id;
     if (userId == null) throw StateError('not_authenticated');
 
-    final date = localDateString();
-
-    final upserted = await SupabaseService.client
+    final row = await SupabaseService.client
         .from('pdc_daily_checks')
         .upsert(
           {
             'patient_id': userId,
-            'check_date': date,
-            'taken': taken,
+            'check_date': isoDate(date),
+            'status': status,
+            'reason': status == MedCheckRecord.notUsed ? reason : null,
+            'taken': switch (status) {
+              MedCheckRecord.used => true,
+              MedCheckRecord.notUsed => false,
+              _ => null,
+            },
             'updated_at': DateTime.now().toUtc().toIso8601String(),
           },
           onConflict: 'patient_id,check_date',
         )
         .select()
         .single();
-    return Map<String, dynamic>.from(upserted as Map);
+    return MedCheckRecord.fromRow(Map<String, dynamic>.from(row as Map));
   }
 
-  Future<List<Map<String, dynamic>>> listRecent({int days = 30}) async {
+  Future<void> delete(String id) async {
+    await SupabaseService.client.from('pdc_daily_checks').delete().eq('id', id);
+  }
+
+  Future<List<MedCheckRecord>> listBetween(DateTime start, DateTime end) async {
     final userId = SupabaseService.currentUser?.id;
     if (userId == null) return const [];
-
-    final since = DateTime.now().toLocal().subtract(Duration(days: days));
-    final date = localDateString(since);
-
     final rows = await SupabaseService.client
         .from('pdc_daily_checks')
-        .select('id, check_date, taken, updated_at')
+        .select('id, check_date, taken, status, reason, updated_at')
         .eq('patient_id', userId)
-        .gte('check_date', date)
+        .gte('check_date', isoDate(start))
+        .lte('check_date', isoDate(end))
         .order('check_date', ascending: false);
-    return List<Map<String, dynamic>>.from(rows as List);
+    return (rows as List)
+        .map((r) => MedCheckRecord.fromRow(Map<String, dynamic>.from(r as Map)))
+        .whereType<MedCheckRecord>()
+        .toList();
   }
 
-  Future<bool?> todayTaken() async {
-    final userId = SupabaseService.currentUser?.id;
-    if (userId == null) return null;
-    final date = localDateString();
-    final row = await SupabaseService.client
-        .from('pdc_daily_checks')
-        .select('taken')
-        .eq('patient_id', userId)
-        .eq('check_date', date)
-        .maybeSingle();
-    if (row == null) return null;
-    return row['taken'] as bool?;
+  Future<MedCheckRecord?> today() async {
+    final now = DateTime.now();
+    final list = await listBetween(now, now);
+    return list.isEmpty ? null : list.first;
   }
 }

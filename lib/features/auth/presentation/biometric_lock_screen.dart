@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/biometrics/biometric_service.dart';
 import '../../../core/supabase/supabase_service.dart';
@@ -108,6 +109,23 @@ class _BiometricLockScreenState extends State<BiometricLockScreen> {
                 ),
               ],
               const Spacer(),
+              // Reachable while locked; reveals no personal data.
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppTheme.error600,
+                    minimumSize: const Size.fromHeight(52),
+                  ),
+                  onPressed: () => launchUrl(
+                    Uri.parse('tel:911'),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                  icon: const Icon(Icons.call),
+                  label: Text(l10n.s5UrgentCall911Locked),
+                ),
+              ),
+              const SizedBox(height: 8),
               TextButton(
                 onPressed: _busy ? null : _signOut,
                 child: Text(l10n.mockUsePassword),

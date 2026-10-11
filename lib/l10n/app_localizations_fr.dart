@@ -1422,4 +1422,961 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get settingsBgRefreshHint =>
       'Mettre a jour le risque en bougeant ou en gardant l app ouverte';
+
+  @override
+  String get s5AboutApp => 'À propos de Howse Asthma';
+
+  @override
+  String get s5AboutAppBody =>
+      'Howse Asthma vous aide à noter vos symptômes et l’usage de votre inhalateur, et à préparer un résumé pour votre médecin. L’app ne pose pas de diagnostic et ne conseille pas de traitement.';
+
+  @override
+  String get s5ActNotice =>
+      'Vos réponses sont enregistrées pour les partager avec votre médecin. Ce questionnaire n’a pas été vérifié avec le barème officiel, donc l’app n’affiche pas de score.';
+
+  @override
+  String get s5ActSaved => 'Vos réponses ont été enregistrées.';
+
+  @override
+  String get s5ActSubtitle => '5 questions sur les 4 dernières semaines';
+
+  @override
+  String get s5ActTitle => 'Questionnaire de contrôle de l’asthme';
+
+  @override
+  String get s5AddDetails => 'Ajouter des détails';
+
+  @override
+  String get s5AddRecord => 'Ajouter une entrée';
+
+  @override
+  String get s5AlertArrive => 'À l’arrivée dans un lieu';
+
+  @override
+  String get s5AlertArriveHint =>
+      'Quand les conditions sont plus mauvaises là où vous arrivez. Seulement lorsque l’app est ouverte.';
+
+  @override
+  String get s5AlertFreshAirHint =>
+      'Quand la qualité de l’air, le pollen et les informations d’inondation semblent calmes dehors. Information générale, pas un conseil médical.';
+
+  @override
+  String get s5AlertSavedPlaces => 'Lieux enregistrés';
+
+  @override
+  String get s5AlertSavedPlacesHint =>
+      'Quand les conditions se dégradent dans un lieu que vous avez enregistré.';
+
+  @override
+  String get s5AlertWorse => 'Quand les conditions se dégradent';
+
+  @override
+  String get s5AlertWorseHint =>
+      'Quand la qualité de l’air, le pollen ou les informations d’inondation près de vous se dégradent. La même alerte n’est pas répétée dans l’heure.';
+
+  @override
+  String get s5AqiGood => 'Bonne';
+
+  @override
+  String get s5AqiModerate => 'Modérée';
+
+  @override
+  String get s5AqiUsg => 'Mauvaise pour les groupes sensibles';
+
+  @override
+  String get s5AqiUnhealthy => 'Mauvaise';
+
+  @override
+  String get s5AqiVeryUnhealthy => 'Très mauvaise';
+
+  @override
+  String get s5AqiHazardous => 'Dangereuse';
+
+  @override
+  String s5AqiValue(String category, int aqi) {
+    return '$category (AQI $aqi)';
+  }
+
+  @override
+  String get s5Back => 'Retour';
+
+  @override
+  String get s5BarrierCost => 'Coût des médicaments';
+
+  @override
+  String get s5BarrierHardToGet => 'Difficile d’obtenir les médicaments';
+
+  @override
+  String get s5BarrierHardToUnderstand =>
+      'Instructions difficiles à comprendre';
+
+  @override
+  String get s5BarrierHowToUse => 'Comment utiliser mes médicaments';
+
+  @override
+  String get s5BarrierNone => 'Aucune difficulté';
+
+  @override
+  String get s5BarrierOtherHint => 'Décrivez avec vos mots (facultatif)';
+
+  @override
+  String get s5Cancel => 'Annuler';
+
+  @override
+  String get s5Change => 'Changer';
+
+  @override
+  String get s5ChoosePlace => 'Choisir un lieu';
+
+  @override
+  String get s5Close => 'Fermer';
+
+  @override
+  String get s5DataSourcesTitle => 'Sources des données';
+
+  @override
+  String get s5DataSourcesBody =>
+      'Qualité de l’air : EPA AirNow (États-Unis), Open-Meteo et capteurs PurpleAir à proximité.\nPollen : Google Pollen API (Universal Pollen Index).\nMétéo et humidité : Open-Meteo.\nAlertes d’inondation : National Weather Service (NWS). Niveau des cours d’eau : U.S. Geological Survey (USGS).\nComptages de trafic (New Jersey seulement) : New Jersey Department of Transportation (NJDOT).\nLes valeurs peuvent arriver en retard ou manquer. Elles décrivent l’extérieur, pas votre santé.';
+
+  @override
+  String get s5Delete => 'Supprimer';
+
+  @override
+  String get s5DeleteConfirm => 'Supprimer cette entrée ?';
+
+  @override
+  String get s5DeleteFailed => 'Impossible de supprimer. Veuillez réessayer.';
+
+  @override
+  String get s5Edit => 'Modifier';
+
+  @override
+  String get s5EnglishVersion => 'Anglais (pour le médecin)';
+
+  @override
+  String get s5EntryRemoved => 'Entrée annulée.';
+
+  @override
+  String get s5EnvAirDetail =>
+      'Indice de qualité de l’air de l’EPA des États-Unis, à partir de stations publiques et de capteurs proches. Il décrit l’air extérieur de votre zone, pas seulement les gaz d’échappement.';
+
+  @override
+  String get s5EnvAirQuality => 'Qualité de l’air';
+
+  @override
+  String get s5EnvAlertsHeading => 'Alertes d’environnement';
+
+  @override
+  String get s5EnvCardTitle => 'Votre environnement aujourd’hui';
+
+  @override
+  String get s5EnvFlood => 'Alertes d’inondation';
+
+  @override
+  String get s5EnvFloodDetail =>
+      'Alertes publiques du National Weather Service (NWS).';
+
+  @override
+  String get s5EnvForecast => 'Prévision de l’environnement';
+
+  @override
+  String get s5EnvHumidity => 'Humidité';
+
+  @override
+  String get s5EnvHumidityDetail =>
+      'Donnée météo extérieure. Ce n’est pas une mesure d’humidité intérieure ni de moisissure.';
+
+  @override
+  String get s5EnvLoadFailed =>
+      'Impossible de charger les informations d’environnement.';
+
+  @override
+  String get s5EnvNeedPlace =>
+      'Choisissez un lieu pour voir votre environnement.';
+
+  @override
+  String get s5EnvNotAvailable => 'Indisponible';
+
+  @override
+  String get s5EnvOlderNotice => 'Voici la dernière information vérifiée.';
+
+  @override
+  String get s5EnvPollen => 'Indice de pollen';
+
+  @override
+  String get s5EnvPollenDetail =>
+      'Universal Pollen Index de Google, de 0 (aucun) à 5 (très élevé). Un chiffre bas ne signifie pas que c’est sans risque pour tout le monde.';
+
+  @override
+  String get s5EnvSeeDetails => 'Voir le détail de l’environnement';
+
+  @override
+  String get s5EnvUnavailable =>
+      'Les informations d’environnement ne sont pas disponibles pour le moment.';
+
+  @override
+  String get s5FewRecordsNotice =>
+      'Il y a peu d’entrées, donc certaines parties du résumé peuvent être vides.';
+
+  @override
+  String get s5FgRefreshTitle =>
+      'Actualiser l’environnement pendant l’utilisation';
+
+  @override
+  String get s5FgRefreshHint =>
+      'Vérifie votre zone tant que l’app est ouverte. Cela ne fonctionne pas en arrière-plan.';
+
+  @override
+  String get s5FieldDate => 'Date';
+
+  @override
+  String get s5FieldMedication => 'Médicament';
+
+  @override
+  String get s5FieldNote => 'Note (facultatif)';
+
+  @override
+  String get s5FieldPuffs => 'Nombre de bouffées (facultatif)';
+
+  @override
+  String get s5FieldReason => 'Motif (facultatif)';
+
+  @override
+  String get s5FieldTime => 'Heure';
+
+  @override
+  String get s5FilterAll => 'Tout';
+
+  @override
+  String get s5FilterInhaler => 'Inhalateur';
+
+  @override
+  String get s5FilterMedCheck => 'Prise de médicament';
+
+  @override
+  String get s5FilterSymptoms => 'Symptômes';
+
+  @override
+  String get s5FloodIssued => 'Alerte d’inondation émise';
+
+  @override
+  String get s5FloodNone => 'Aucune alerte d’inondation';
+
+  @override
+  String get s5FloodUnknown => 'Impossible de vérifier les alertes';
+
+  @override
+  String s5ForecastCheckedAt(String time) {
+    return 'Vérifié à $time';
+  }
+
+  @override
+  String s5ForecastValidFor(String date) {
+    return 'Prévision pour le $date';
+  }
+
+  @override
+  String get s5FromUrgentHelp => 'Noté depuis Aide urgente';
+
+  @override
+  String get s5HomeStateEmpty =>
+      'Faites votre première entrée. Vous pourrez ainsi préparer ce que vous voulez dire à votre consultation.';
+
+  @override
+  String s5HomeStateQuestions(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Vous avez $n questions pour votre médecin.',
+      one: 'Vous avez 1 question pour votre médecin.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5HomeStateRecords(int n) {
+    return 'Jours avec des entrées sur les 7 derniers jours : $n';
+  }
+
+  @override
+  String get s5HomeSubtitle =>
+      'Rassemblez vos entrées pour les montrer à votre consultation.';
+
+  @override
+  String get s5HomeTitle => 'Notez comment vous vous sentez aujourd’hui';
+
+  @override
+  String s5HumidityValue(int rh) {
+    return 'Humidité extérieure $rh %';
+  }
+
+  @override
+  String get s5IncludeEnvironment => 'Environnement (facultatif)';
+
+  @override
+  String get s5IncludeEnvironmentHint =>
+      'Ajoute la qualité de l’air, le pollen et les alertes d’inondation d’aujourd’hui. Votre position exacte n’est pas incluse.';
+
+  @override
+  String get s5InhalerEditTitle => 'Détails de l’usage de l’inhalateur';
+
+  @override
+  String get s5InhalerEntry => 'Usage de l’inhalateur';
+
+  @override
+  String get s5InhalerLogged => 'Usage de l’inhalateur enregistré.';
+
+  @override
+  String get s5InhalerOneEntryHint =>
+      'Chaque enregistrement compte pour 1 entrée. Il n’est pas compté comme 1 bouffée ni comme 1 jour.';
+
+  @override
+  String s5InhalerUnknownCount(int n) {
+    return 'Médicament non identifié : $n';
+  }
+
+  @override
+  String get s5InsCost => 'Difficultés de coût';
+
+  @override
+  String get s5InsDenial => 'Motif de refus (s’il vous a été indiqué)';
+
+  @override
+  String get s5InsMedHistory => 'Médicaments déjà essayés';
+
+  @override
+  String get s5InsuranceIntro =>
+      'Regroupez des informations pour les formulaires de votre médecin.';
+
+  @override
+  String get s5InsuranceLimits =>
+      'Tout est facultatif. Cette app n’envoie rien à votre assurance et ne décide aucune approbation.';
+
+  @override
+  String get s5InsuranceTitle => 'Préparer les formulaires d’assurance';
+
+  @override
+  String s5LanguageName(String lang) {
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'anglais',
+      'es': 'espagnol',
+      'fr': 'français',
+      'ko': 'coréen',
+      'ja': 'japonais',
+      'zh': 'chinois',
+      'other': 'une autre langue',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get s5Last30Days => '30 derniers jours';
+
+  @override
+  String get s5Last7Days => '7 derniers jours';
+
+  @override
+  String get s5LogInhaler => 'Noter l’inhalateur';
+
+  @override
+  String get s5LogLegend =>
+      'Chaque ligne est 1 entrée enregistrée. Les jours sans entrée indiquent « Non enregistré », ce qui n’est pas zéro.';
+
+  @override
+  String get s5LogSymptoms => 'Noter les symptômes';
+
+  @override
+  String get s5MedAdd => 'Ajouter un médicament';
+
+  @override
+  String s5MedCheckCounts(int a, int b, int c, int d) {
+    return 'Utilisé $a · Non utilisé $b · Je ne sais plus $c · Non enregistré $d (jours)';
+  }
+
+  @override
+  String get s5MedCheckIntro =>
+      'Vous indiquez vous-même si vous avez pris votre médicament. Ce n’est pas basé sur les données de la pharmacie.';
+
+  @override
+  String get s5MedCheckQuestion =>
+      'Avez-vous pris votre médicament comme prévu ?';
+
+  @override
+  String get s5MedCheckTitle => 'Prise de médicament d’aujourd’hui';
+
+  @override
+  String get s5MedChooseHint =>
+      'Choisissez un médicament, ou « Je ne connais pas le nom ».';
+
+  @override
+  String get s5MedDailyCheck => 'Vérification quotidienne';
+
+  @override
+  String get s5MedDailyCheckHint =>
+      'Affiche « Prise de médicament d’aujourd’hui » sur l’accueil. Activez seulement si votre médecin vous a demandé de le prendre chaque jour.';
+
+  @override
+  String get s5MedDefault => 'Médicament par défaut';
+
+  @override
+  String get s5MedDefaultHint =>
+      'Utilisé quand vous appuyez sur « Noter l’inhalateur » à l’accueil.';
+
+  @override
+  String get s5MedEdit => 'Modifier le médicament';
+
+  @override
+  String get s5MedNameLabel => 'Nom du médicament (comme sur l’étiquette)';
+
+  @override
+  String get s5MedNotApplicable => 'Pas prévu aujourd’hui';
+
+  @override
+  String s5MedNotApplicableDays(int n) {
+    return 'Non prévu : $n jours';
+  }
+
+  @override
+  String get s5MedNotRecorded => 'Médicament non renseigné';
+
+  @override
+  String get s5MedNotSure => 'Je ne me souviens pas';
+
+  @override
+  String get s5MedNotUsed => 'Je ne l’ai pas pris';
+
+  @override
+  String get s5MedOther => 'Un autre nom';
+
+  @override
+  String get s5MedOtherHint => 'Saisissez le nom du médicament';
+
+  @override
+  String get s5MedReasonCost => 'Coût';
+
+  @override
+  String get s5MedReasonForgot => 'Oubli';
+
+  @override
+  String get s5MedReasonNoMedicine => 'Je n’avais pas le médicament';
+
+  @override
+  String get s5MedReasonQuestion => 'Motif (facultatif)';
+
+  @override
+  String get s5MedUnknown => 'Je ne connais pas le nom';
+
+  @override
+  String get s5MedUnknownShort => 'Médicament non identifié';
+
+  @override
+  String get s5MedUsed => 'Je l’ai pris';
+
+  @override
+  String get s5MyLanguage => 'Ma langue';
+
+  @override
+  String get s5MyLogTitle => 'Mon journal';
+
+  @override
+  String get s5MyMedsEmpty => 'Aucun médicament enregistré pour le moment.';
+
+  @override
+  String get s5MyMedsHint =>
+      'Utilisez les noms que vous avez confirmés pour noter plus vite. Ce n’est pas une recommandation de dose.';
+
+  @override
+  String get s5MyMedsOpen => 'Gérer mes médicaments';
+
+  @override
+  String get s5MyMedsTitle => 'Mes médicaments';
+
+  @override
+  String get s5NavEnvironment => 'Environnement';
+
+  @override
+  String get s5NavLog => 'Journal';
+
+  @override
+  String get s5NavVisitPrep => 'Consultation';
+
+  @override
+  String get s5NoAnswer => 'Je préfère ne pas répondre';
+
+  @override
+  String get s5NoRecordsYet => 'Aucune entrée pour le moment';
+
+  @override
+  String s5NoSymptomDays(int n) {
+    return 'Jours notés « aucun symptôme » : $n';
+  }
+
+  @override
+  String get s5NotRecorded => 'Non enregistré';
+
+  @override
+  String get s5NotRecordedToday => 'Non enregistré aujourd’hui';
+
+  @override
+  String s5NotTranslatedLine(String language, String text) {
+    return '[Non traduit · original en $language] $text';
+  }
+
+  @override
+  String get s5OsNotificationsOff =>
+      'Les notifications de Howse Asthma sont désactivées dans les réglages du téléphone, donc les alertes ne s’afficheront pas.';
+
+  @override
+  String get s5PdfAboutMedCheck =>
+      'Les prises de médicament sont déclarées par le patient. Ce ne sont pas des données de pharmacie ni un PDC (proportion de jours couverts).';
+
+  @override
+  String get s5PdfAboutNoScore =>
+      'Aucun score de questionnaire ni score de risque de l’app n’est inclus.';
+
+  @override
+  String get s5PdfAboutPatientReported =>
+      'Toutes les entrées ont été saisies par le patient dans l’app Howse Asthma et n’ont pas été vérifiées.';
+
+  @override
+  String get s5PdfAppendix => 'Annexe : notes du patient';
+
+  @override
+  String s5PdfDaysNotRecorded(int n) {
+    return 'Jours sans entrée de symptômes (non enregistré) : $n';
+  }
+
+  @override
+  String get s5PdfDisclaimer =>
+      'Ce résumé contient des informations déclarées par le patient, pour lecture par le médecin. Ce n’est ni un diagnostic ni une décision d’autorisation préalable.';
+
+  @override
+  String get s5PdfEnvNote =>
+      'Conditions extérieures générales au moment de la création du résumé. La position n’est pas incluse.';
+
+  @override
+  String get s5PdfFailed =>
+      'Impossible de créer le PDF. Vos entrées sont conservées. Veuillez réessayer.';
+
+  @override
+  String get s5PdfFontFailed =>
+      'Impossible de préparer les polices du PDF. Vérifiez votre connexion internet et réessayez.';
+
+  @override
+  String s5PdfGeneratedAt(String time) {
+    return 'Créé : $time';
+  }
+
+  @override
+  String s5PdfInhalerByMed(String name, int n) {
+    return '$name : $n';
+  }
+
+  @override
+  String s5PdfInhalerMedNotRecorded(int n) {
+    return 'Médicament non renseigné : $n';
+  }
+
+  @override
+  String s5PdfInhalerUnknown(int n) {
+    return 'Médicament non identifié par le patient : $n';
+  }
+
+  @override
+  String s5PdfInhalerUses(int n, int days) {
+    return 'Entrées d’usage de l’inhalateur : $n (sur $days jours)';
+  }
+
+  @override
+  String get s5PdfIsEnglish =>
+      'Le PDF est créé en anglais. Le texte que vous avez saisi reste dans votre langue.';
+
+  @override
+  String get s5PdfMedNamesAsEntered =>
+      'Les noms de médicaments apparaissent tels que le patient les a saisis.';
+
+  @override
+  String get s5PdfNotRecorded => 'Non enregistré';
+
+  @override
+  String s5PdfNotUsedReason(String label, int n) {
+    return 'Motif de non-prise (déclaré) — $label : $n jours';
+  }
+
+  @override
+  String get s5PdfOutdated =>
+      'Vos entrées ou réponses ont changé depuis le dernier PDF. Créez un nouveau PDF pour inclure les changements.';
+
+  @override
+  String s5PdfPeriod(String start, String end, int days) {
+    return 'Période : $start – $end ($days jours)';
+  }
+
+  @override
+  String s5PdfReasonCount(String label, int n) {
+    return 'Motif — $label : $n';
+  }
+
+  @override
+  String s5PdfRecordedDays(int n) {
+    return 'Jours avec une entrée du patient : $n';
+  }
+
+  @override
+  String get s5PdfSectionAboutData => 'À propos de ces données';
+
+  @override
+  String get s5PdfSectionBarriers =>
+      'Difficultés pour recevoir des soins (déclarées)';
+
+  @override
+  String get s5PdfSectionEnvironment => 'Environnement (référence)';
+
+  @override
+  String get s5PdfSectionInhaler => 'Usage de l’inhalateur';
+
+  @override
+  String get s5PdfSectionInsurance =>
+      'Notes pour les formulaires (fournies par le patient)';
+
+  @override
+  String get s5PdfSectionMedChecks =>
+      'Prise de médicament déclarée par le patient';
+
+  @override
+  String get s5PdfSectionQuestions => 'Questions du patient';
+
+  @override
+  String get s5PdfSectionSymptoms => 'Symptômes';
+
+  @override
+  String s5PdfSymptomCodeDays(String label, int n) {
+    return '$label : $n jours';
+  }
+
+  @override
+  String s5PdfSymptomDays(int n, int days) {
+    return 'Jours avec des symptômes : $n sur $days';
+  }
+
+  @override
+  String s5PdfSymptomOtherDays(int n) {
+    return 'Autres symptômes décrits par le patient : $n jours';
+  }
+
+  @override
+  String get s5PdfTitle => 'Résumé d’asthme déclaré par le patient';
+
+  @override
+  String s5PeriodAndRecordedDays(int days, int n) {
+    return 'Période : $days jours · Jours avec des entrées : $n';
+  }
+
+  @override
+  String get s5PhoneHint =>
+      'Indiquez l’indicatif du pays, par exemple +1 201 555 0123';
+
+  @override
+  String get s5PhoneInvalid =>
+      'Saisissez un nom et un numéro avec l’indicatif du pays, par exemple +1 201 555 0123.';
+
+  @override
+  String get s5PollenGrass => 'Graminées';
+
+  @override
+  String s5PollenMainType(String type) {
+    return 'Type principal : $type';
+  }
+
+  @override
+  String get s5PollenTree => 'Arbres';
+
+  @override
+  String get s5PollenWeed => 'Herbacées';
+
+  @override
+  String get s5PrepareVisit => 'Préparer ma consultation';
+
+  @override
+  String get s5PreviewEditHint =>
+      'Pour modifier une question ou une note, revenez à l’écran précédent. Pour corriger les chiffres, modifiez l’entrée dans Mon journal.';
+
+  @override
+  String get s5PreviewSummary => 'Voir le résumé de consultation';
+
+  @override
+  String get s5PreviewTitle => 'Aperçu du résumé';
+
+  @override
+  String s5PuffsValue(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n bouffées',
+      one: '1 bouffée',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5QuestionN(int n) {
+    return 'Question $n';
+  }
+
+  @override
+  String s5QuestionOf(int n, int total) {
+    return 'Question $n sur $total';
+  }
+
+  @override
+  String get s5ReasonBeforeActivity => 'Avant une activité';
+
+  @override
+  String get s5ReasonOther => 'Autre';
+
+  @override
+  String get s5ReasonSymptoms => 'À cause de symptômes';
+
+  @override
+  String s5RecentInhaler(int n) {
+    return 'Entrées d’inhalateur : $n';
+  }
+
+  @override
+  String s5RecentSymptomDays(int n) {
+    return 'Jours avec des symptômes : $n';
+  }
+
+  @override
+  String get s5RecentTitle => '7 derniers jours';
+
+  @override
+  String get s5RecordsLoadFailed =>
+      'Impossible de charger vos entrées. Veuillez réessayer.';
+
+  @override
+  String get s5RecordsManageHint =>
+      'Vous pouvez modifier ou supprimer des entrées dans Mon journal. La suppression demande toujours une confirmation.';
+
+  @override
+  String get s5Refresh => 'Actualiser';
+
+  @override
+  String get s5Reload => 'Recharger';
+
+  @override
+  String get s5Save => 'Enregistrer';
+
+  @override
+  String get s5Saved => 'Enregistré.';
+
+  @override
+  String get s5SavedPlacesHint =>
+      'Lieux enregistrés, comme le domicile, l’école ou le travail';
+
+  @override
+  String get s5SaveFailed =>
+      'Impossible d’enregistrer. Vos saisies sont conservées.';
+
+  @override
+  String get s5SavePdf => 'Enregistrer le PDF';
+
+  @override
+  String get s5SettingsAlerts => 'Alertes';
+
+  @override
+  String get s5SettingsArea => 'Zone';
+
+  @override
+  String get s5SettingsHelp => 'Aide';
+
+  @override
+  String get s5SettingsLanguageNote =>
+      'Le résumé de consultation est créé en anglais. Vous pouvez le comparer avec votre langue avant de le partager.';
+
+  @override
+  String get s5SettingsSecurityData => 'Sécurité et données';
+
+  @override
+  String get s5Share => 'Partager';
+
+  @override
+  String get s5SourcesAir =>
+      'Qualité de l’air : EPA AirNow, Open-Meteo, PurpleAir';
+
+  @override
+  String get s5SourcesFlood =>
+      'Alertes d’inondation : National Weather Service';
+
+  @override
+  String get s5SourcesNjTraffic =>
+      'Les données de trafic ne sont utilisées qu’au New Jersey.';
+
+  @override
+  String get s5SourcesNoRiskScore =>
+      'Le score interne de l’app n’est pas un risque de crise d’asthme et n’est pas affiché.';
+
+  @override
+  String get s5SourcesPollen => 'Pollen : Google Pollen API';
+
+  @override
+  String get s5SourcesTitle => 'Sources et limites';
+
+  @override
+  String get s5SourcesWeather => 'Météo et humidité : Open-Meteo';
+
+  @override
+  String get s5StatusLatest => 'À jour';
+
+  @override
+  String get s5StatusOlder => 'Donnée plus ancienne';
+
+  @override
+  String get s5StatusUnavailable => 'Impossible de vérifier pour le moment';
+
+  @override
+  String get s5SymActivityLimited => 'Activités limitées';
+
+  @override
+  String get s5SymCough => 'Toux';
+
+  @override
+  String get s5SymNightWaking => 'Réveil la nuit';
+
+  @override
+  String get s5SymNone => 'Aucun symptôme';
+
+  @override
+  String get s5SymOther => 'Autre chose';
+
+  @override
+  String get s5SymOtherHint => 'Décrivez avec vos mots';
+
+  @override
+  String get s5SymShortBreath => 'Difficulté à respirer';
+
+  @override
+  String get s5SymWheeze => 'Sifflement';
+
+  @override
+  String get s5SymptomEditTitle => 'Modifier les symptômes';
+
+  @override
+  String get s5SymptomEntry => 'Symptômes';
+
+  @override
+  String get s5SymptomNoneHint =>
+      'Les jours que vous ne notez pas apparaissent comme « Non enregistré », et non comme « Aucun symptôme ».';
+
+  @override
+  String get s5SymptomQuestion => 'Qu’avez-vous ressenti ?';
+
+  @override
+  String get s5Today => 'Aujourd’hui';
+
+  @override
+  String get s5Undo => 'Annuler';
+
+  @override
+  String s5UntranslatedNotice(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other:
+          '$n éléments ne sont pas traduits. Ils apparaissent dans le PDF anglais dans votre langue, avec la mention « Not translated ». Vérifiez-les.',
+      one:
+          '1 élément n’est pas traduit. Il apparaît dans le PDF anglais dans votre langue, avec la mention « Not translated ». Vérifiez-le.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5UpdatedAt(String time) {
+    return 'Mis à jour $time';
+  }
+
+  @override
+  String get s5UpiHigh => 'Élevé';
+
+  @override
+  String get s5UpiLow => 'Bas';
+
+  @override
+  String get s5UpiModerate => 'Modéré';
+
+  @override
+  String get s5UpiNone => 'Aucun';
+
+  @override
+  String s5UpiValue(int upi, String category) {
+    return '$upi sur 5 · $category';
+  }
+
+  @override
+  String get s5UpiVeryHigh => 'Très élevé';
+
+  @override
+  String get s5UpiVeryLow => 'Très bas';
+
+  @override
+  String get s5UrgentActionPlan =>
+      'Si votre médecin vous a remis un plan d’action pour l’asthme, suivez-le.';
+
+  @override
+  String get s5UrgentCall911Locked => 'Aide urgente : appeler le 911';
+
+  @override
+  String get s5UrgentHelp => 'Aide urgente';
+
+  @override
+  String get s5UrgentIntro =>
+      'Si respirer est très difficile ou ne s’améliore pas, appelez le 911.';
+
+  @override
+  String get s5UrgentLogHint =>
+      'Facultatif : vous pouvez noter que vous avez utilisé votre inhalateur.';
+
+  @override
+  String get s5UrgentNoContact =>
+      'Aucun contact d’urgence pour le moment. Ajoutez-en un dans Paramètres → Aide.';
+
+  @override
+  String s5UsingMedication(String name) {
+    return 'Sera noté : $name';
+  }
+
+  @override
+  String get s5ViewMyLog => 'Voir mon journal';
+
+  @override
+  String get s5VisitBarriers =>
+      'Avez-vous eu des difficultés à recevoir vos soins ?';
+
+  @override
+  String s5VisitCardDetail(int days, int recorded, int questions) {
+    return '$days derniers jours · Jours avec des entrées : $recorded · Questions : $questions';
+  }
+
+  @override
+  String get s5VisitCardTitle => 'À montrer lors de votre consultation';
+
+  @override
+  String get s5VisitInclude => 'Entrées à inclure';
+
+  @override
+  String get s5VisitIntro =>
+      'Organisez vos symptômes et vos questions pour les montrer à votre médecin.';
+
+  @override
+  String get s5VisitPeriod => 'Période du résumé';
+
+  @override
+  String get s5VisitPrepTitle => 'Préparer la consultation';
+
+  @override
+  String get s5VisitQuestions => 'Questions pour votre médecin';
+
+  @override
+  String get s5VisitQuestionsHint =>
+      'Écrivez dans votre langue. Vous pouvez laisser vide.';
 }

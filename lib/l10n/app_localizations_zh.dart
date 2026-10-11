@@ -1314,4 +1314,896 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsBgRefreshHint => '移动或保持应用打开时更新风险';
+
+  @override
+  String get s5AboutApp => '关于 Howse Asthma';
+
+  @override
+  String get s5AboutAppBody =>
+      'Howse Asthma 帮你记录症状和吸入器使用情况，并准备就诊时给医生看的摘要。它不会诊断，也不会给出治疗建议。';
+
+  @override
+  String get s5ActNotice => '你的回答会保存下来，方便分享给医生。这份问卷没有按官方评分标准核验，所以应用不显示分数。';
+
+  @override
+  String get s5ActSaved => '回答已保存。';
+
+  @override
+  String get s5ActSubtitle => '关于过去 4 周的 5 个问题';
+
+  @override
+  String get s5ActTitle => '哮喘控制问卷';
+
+  @override
+  String get s5AddDetails => '添加详情';
+
+  @override
+  String get s5AddRecord => '添加记录';
+
+  @override
+  String get s5AlertArrive => '到达新地点时';
+
+  @override
+  String get s5AlertArriveHint => '当你到达的地方环境更差时。只在应用打开时有效。';
+
+  @override
+  String get s5AlertFreshAirHint => '当室外空气质量、花粉和洪水信息都比较平静时。这是一般信息，不是医疗建议。';
+
+  @override
+  String get s5AlertSavedPlaces => '已保存的地点';
+
+  @override
+  String get s5AlertSavedPlacesHint => '当你保存的地点环境变差时。';
+
+  @override
+  String get s5AlertWorse => '环境变差时';
+
+  @override
+  String get s5AlertWorseHint => '当你附近的空气质量、花粉或洪水信息变差时。同一条提醒在 1 小时内不会重复。';
+
+  @override
+  String get s5AqiGood => '优';
+
+  @override
+  String get s5AqiModerate => '良';
+
+  @override
+  String get s5AqiUsg => '对敏感人群不健康';
+
+  @override
+  String get s5AqiUnhealthy => '不健康';
+
+  @override
+  String get s5AqiVeryUnhealthy => '非常不健康';
+
+  @override
+  String get s5AqiHazardous => '危害';
+
+  @override
+  String s5AqiValue(String category, int aqi) {
+    return '$category（AQI $aqi）';
+  }
+
+  @override
+  String get s5Back => '返回';
+
+  @override
+  String get s5BarrierCost => '药费';
+
+  @override
+  String get s5BarrierHardToGet => '药不好买到';
+
+  @override
+  String get s5BarrierHardToUnderstand => '说明不好懂';
+
+  @override
+  String get s5BarrierHowToUse => '药怎么用';
+
+  @override
+  String get s5BarrierNone => '没有困难';
+
+  @override
+  String get s5BarrierOtherHint => '用自己的话写（可选）';
+
+  @override
+  String get s5Cancel => '取消';
+
+  @override
+  String get s5Change => '更改';
+
+  @override
+  String get s5ChoosePlace => '选择地区';
+
+  @override
+  String get s5Close => '关闭';
+
+  @override
+  String get s5DataSourcesTitle => '数据来源';
+
+  @override
+  String get s5DataSourcesBody =>
+      '空气质量：美国 EPA AirNow、Open-Meteo，以及附近的 PurpleAir 传感器。\n花粉：Google Pollen API（Universal Pollen Index）。\n天气和湿度：Open-Meteo。\n洪水警报：美国国家气象局（NWS）。河流水位：美国地质调查局（USGS）。\n交通量（仅新泽西州）：新泽西州交通局（NJDOT）。\n数值可能延迟或缺失。它们描述的是室外环境，不是你的健康状况。';
+
+  @override
+  String get s5Delete => '删除';
+
+  @override
+  String get s5DeleteConfirm => '删除这条记录？';
+
+  @override
+  String get s5DeleteFailed => '无法删除。请再试一次。';
+
+  @override
+  String get s5Edit => '编辑';
+
+  @override
+  String get s5EnglishVersion => '英文（给医生）';
+
+  @override
+  String get s5EntryRemoved => '已撤销这条记录。';
+
+  @override
+  String get s5EnvAirDetail =>
+      '来自公共监测站和附近传感器的美国 EPA 空气质量指数。它描述你所在地区的室外空气，并不只测量交通尾气。';
+
+  @override
+  String get s5EnvAirQuality => '空气质量';
+
+  @override
+  String get s5EnvAlertsHeading => '环境提醒';
+
+  @override
+  String get s5EnvCardTitle => '今天的周边环境';
+
+  @override
+  String get s5EnvFlood => '洪水警报';
+
+  @override
+  String get s5EnvFloodDetail => '美国国家气象局（NWS）的公开警报。';
+
+  @override
+  String get s5EnvForecast => '环境预报';
+
+  @override
+  String get s5EnvHumidity => '湿度';
+
+  @override
+  String get s5EnvHumidityDetail => '室外天气数据。不是室内湿度，也不是霉菌测量值。';
+
+  @override
+  String get s5EnvLoadFailed => '无法加载环境信息。';
+
+  @override
+  String get s5EnvNeedPlace => '选择一个地区后，就能查看周边环境。';
+
+  @override
+  String get s5EnvNotAvailable => '无法查看';
+
+  @override
+  String get s5EnvOlderNotice => '这是上次查到的信息。';
+
+  @override
+  String get s5EnvPollen => '花粉指数';
+
+  @override
+  String get s5EnvPollenDetail =>
+      'Google 的 Universal Pollen Index，从 0（无）到 5（非常高）。数字低并不表示对每个人都安全。';
+
+  @override
+  String get s5EnvSeeDetails => '查看环境详情';
+
+  @override
+  String get s5EnvUnavailable => '目前无法查看环境信息。';
+
+  @override
+  String get s5FewRecordsNotice => '记录较少，摘要里有些部分可能是空的。';
+
+  @override
+  String get s5FgRefreshTitle => '使用应用时刷新环境';
+
+  @override
+  String get s5FgRefreshHint => '应用打开时查看你周边的环境。在后台不会运行。';
+
+  @override
+  String get s5FieldDate => '日期';
+
+  @override
+  String get s5FieldMedication => '药物';
+
+  @override
+  String get s5FieldNote => '备注（可选）';
+
+  @override
+  String get s5FieldPuffs => '吸入次数（可选）';
+
+  @override
+  String get s5FieldReason => '使用原因（可选）';
+
+  @override
+  String get s5FieldTime => '时间';
+
+  @override
+  String get s5FilterAll => '全部';
+
+  @override
+  String get s5FilterInhaler => '吸入器';
+
+  @override
+  String get s5FilterMedCheck => '用药确认';
+
+  @override
+  String get s5FilterSymptoms => '症状';
+
+  @override
+  String get s5FloodIssued => '已发布洪水警报';
+
+  @override
+  String get s5FloodNone => '没有发布中的洪水警报';
+
+  @override
+  String get s5FloodUnknown => '无法查看警报信息';
+
+  @override
+  String s5ForecastCheckedAt(String time) {
+    return '查看时间 $time';
+  }
+
+  @override
+  String s5ForecastValidFor(String date) {
+    return '$date 的预报';
+  }
+
+  @override
+  String get s5FromUrgentHelp => '从紧急帮助记录';
+
+  @override
+  String get s5HomeStateEmpty => '先记下第一条记录。之后可以一起整理就诊时要说的内容。';
+
+  @override
+  String s5HomeStateQuestions(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '有 $n 个问题要告诉医生。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5HomeStateRecords(int n) {
+    return '最近 7 天中有记录的天数：$n 天';
+  }
+
+  @override
+  String get s5HomeSubtitle => '把记录整理好，就诊时可以给医生看。';
+
+  @override
+  String get s5HomeTitle => '记录今天的感觉';
+
+  @override
+  String s5HumidityValue(int rh) {
+    return '室外湿度 $rh%';
+  }
+
+  @override
+  String get s5IncludeEnvironment => '周边环境（可选）';
+
+  @override
+  String get s5IncludeEnvironmentHint => '加入今天的空气质量、花粉和洪水警报。不包含你的具体位置。';
+
+  @override
+  String get s5InhalerEditTitle => '吸入器使用详情';
+
+  @override
+  String get s5InhalerEntry => '吸入器使用';
+
+  @override
+  String get s5InhalerLogged => '已记录吸入器使用。';
+
+  @override
+  String get s5InhalerOneEntryHint => '每保存一次就是 1 条使用记录。不会按 1 次吸入或 1 天来计算。';
+
+  @override
+  String s5InhalerUnknownCount(int n) {
+    return '不知道药名：$n 条';
+  }
+
+  @override
+  String get s5InsCost => '费用方面的困难';
+
+  @override
+  String get s5InsDenial => '拒绝原因（如果有人告诉过你）';
+
+  @override
+  String get s5InsMedHistory => '用过的药';
+
+  @override
+  String get s5InsuranceIntro => '帮你整理信息，方便医生填写表格。';
+
+  @override
+  String get s5InsuranceLimits => '这里的内容都是可选的。本应用不会向保险公司提交任何内容，也不会判断能否获批。';
+
+  @override
+  String get s5InsuranceTitle => '准备保险表格';
+
+  @override
+  String s5LanguageName(String lang) {
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': '英语',
+      'es': '西班牙语',
+      'fr': '法语',
+      'ko': '韩语',
+      'ja': '日语',
+      'zh': '中文',
+      'other': '其他语言',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get s5Last30Days => '最近 30 天';
+
+  @override
+  String get s5Last7Days => '最近 7 天';
+
+  @override
+  String get s5LogInhaler => '记录吸入器';
+
+  @override
+  String get s5LogLegend => '每一行是 1 条已保存的记录。没有记录的日子显示为“未记录”，这和 0 不一样。';
+
+  @override
+  String get s5LogSymptoms => '记录症状';
+
+  @override
+  String get s5MedAdd => '添加药物';
+
+  @override
+  String s5MedCheckCounts(int a, int b, int c, int d) {
+    return '用了 $a 天 · 没用 $b 天 · 不记得 $c 天 · 未记录 $d 天';
+  }
+
+  @override
+  String get s5MedCheckIntro => '这是你自己确认是否用了药。不是根据药房配药数据。';
+
+  @override
+  String get s5MedCheckQuestion => '你有按计划用药吗？';
+
+  @override
+  String get s5MedCheckTitle => '今天的用药确认';
+
+  @override
+  String get s5MedChooseHint => '选择一种药，或选择“我不知道药名”。';
+
+  @override
+  String get s5MedDailyCheck => '每天确认';
+
+  @override
+  String get s5MedDailyCheckHint => '在首页显示“今天的用药确认”。只有医生让你每天使用这种药时才打开。';
+
+  @override
+  String get s5MedDefault => '快速记录时使用的药';
+
+  @override
+  String get s5MedDefaultHint => '在首页点“记录吸入器”时使用。';
+
+  @override
+  String get s5MedEdit => '编辑药物';
+
+  @override
+  String get s5MedNameLabel => '药名（按标签上的写法）';
+
+  @override
+  String get s5MedNotApplicable => '今天没有计划使用';
+
+  @override
+  String s5MedNotApplicableDays(int n) {
+    return '没有计划：$n 天';
+  }
+
+  @override
+  String get s5MedNotRecorded => '未填写药物';
+
+  @override
+  String get s5MedNotSure => '不记得了';
+
+  @override
+  String get s5MedNotUsed => '没有用';
+
+  @override
+  String get s5MedOther => '其他名称';
+
+  @override
+  String get s5MedOtherHint => '输入药名';
+
+  @override
+  String get s5MedReasonCost => '费用';
+
+  @override
+  String get s5MedReasonForgot => '忘了';
+
+  @override
+  String get s5MedReasonNoMedicine => '没有药';
+
+  @override
+  String get s5MedReasonQuestion => '原因（可选）';
+
+  @override
+  String get s5MedUnknown => '我不知道药名';
+
+  @override
+  String get s5MedUnknownShort => '不知道药名';
+
+  @override
+  String get s5MedUsed => '用了';
+
+  @override
+  String get s5MyLanguage => '我的语言';
+
+  @override
+  String get s5MyLogTitle => '我的记录';
+
+  @override
+  String get s5MyMedsEmpty => '还没有保存药物。';
+
+  @override
+  String get s5MyMedsHint => '用你确认过的药名，可以更快地记录。这不是剂量建议。';
+
+  @override
+  String get s5MyMedsOpen => '管理我的药物';
+
+  @override
+  String get s5MyMedsTitle => '我的药物';
+
+  @override
+  String get s5NavEnvironment => '环境';
+
+  @override
+  String get s5NavLog => '记录';
+
+  @override
+  String get s5NavVisitPrep => '就诊准备';
+
+  @override
+  String get s5NoAnswer => '不想回答';
+
+  @override
+  String get s5NoRecordsYet => '还没有记录';
+
+  @override
+  String s5NoSymptomDays(int n) {
+    return '记为“无症状”的天数：$n 天';
+  }
+
+  @override
+  String get s5NotRecorded => '未记录';
+
+  @override
+  String get s5NotRecordedToday => '今天未记录';
+
+  @override
+  String s5NotTranslatedLine(String language, String text) {
+    return '[未翻译 · 原文为$language] $text';
+  }
+
+  @override
+  String get s5OsNotificationsOff => '手机设置里已关闭 Howse Asthma 的通知，所以提醒不会出现。';
+
+  @override
+  String get s5PdfAboutMedCheck => '用药确认是患者自己报告的。不是药房配药数据，也不是 PDC（处方覆盖天数比例）。';
+
+  @override
+  String get s5PdfAboutNoScore => '不包含问卷分数，也不包含应用生成的风险分数。';
+
+  @override
+  String get s5PdfAboutPatientReported =>
+      '所有记录都是患者在 Howse Asthma 应用中自行输入的，未经核实。';
+
+  @override
+  String get s5PdfAppendix => '附录：患者备注';
+
+  @override
+  String s5PdfDaysNotRecorded(int n) {
+    return '没有症状记录的天数（未记录）：$n 天';
+  }
+
+  @override
+  String get s5PdfDisclaimer => '本摘要是供医生查看的患者自述信息。不是诊断，也不是事先授权决定。';
+
+  @override
+  String get s5PdfEnvNote => '生成摘要时的一般室外环境。不包含位置。';
+
+  @override
+  String get s5PdfFailed => '无法创建 PDF。你输入的内容已保留。请再试一次。';
+
+  @override
+  String get s5PdfFontFailed => '无法准备 PDF 字体。请检查网络连接后再试。';
+
+  @override
+  String s5PdfGeneratedAt(String time) {
+    return '生成时间：$time';
+  }
+
+  @override
+  String s5PdfInhalerByMed(String name, int n) {
+    return '$name：$n 条';
+  }
+
+  @override
+  String s5PdfInhalerMedNotRecorded(int n) {
+    return '未填写药物：$n 条';
+  }
+
+  @override
+  String s5PdfInhalerUnknown(int n) {
+    return '患者不知道药名：$n 条';
+  }
+
+  @override
+  String s5PdfInhalerUses(int n, int days) {
+    return '吸入器使用记录：$n 条（$days 天）';
+  }
+
+  @override
+  String get s5PdfIsEnglish => 'PDF 用英语生成。你自己输入的文字会原样保留。';
+
+  @override
+  String get s5PdfMedNamesAsEntered => '药名按患者输入的原文显示。';
+
+  @override
+  String get s5PdfNotRecorded => '未记录';
+
+  @override
+  String s5PdfNotUsedReason(String label, int n) {
+    return '未用药原因（患者自述）— $label：$n 天';
+  }
+
+  @override
+  String get s5PdfOutdated => '上次生成 PDF 之后，记录或回答有变化。请重新生成 PDF，才能包含这些更改。';
+
+  @override
+  String s5PdfPeriod(String start, String end, int days) {
+    return '摘要期间：$start – $end（$days 天）';
+  }
+
+  @override
+  String s5PdfReasonCount(String label, int n) {
+    return '使用原因 — $label：$n 条';
+  }
+
+  @override
+  String s5PdfRecordedDays(int n) {
+    return '有患者记录的天数：$n 天';
+  }
+
+  @override
+  String get s5PdfSectionAboutData => '关于这些数据';
+
+  @override
+  String get s5PdfSectionBarriers => '接受治疗时的困难（患者自述）';
+
+  @override
+  String get s5PdfSectionEnvironment => '周边环境（参考）';
+
+  @override
+  String get s5PdfSectionInhaler => '吸入器使用';
+
+  @override
+  String get s5PdfSectionInsurance => '表格用备注（患者提供）';
+
+  @override
+  String get s5PdfSectionMedChecks => '患者自述的用药情况';
+
+  @override
+  String get s5PdfSectionQuestions => '患者的问题';
+
+  @override
+  String get s5PdfSectionSymptoms => '症状';
+
+  @override
+  String s5PdfSymptomCodeDays(String label, int n) {
+    return '$label：$n 天';
+  }
+
+  @override
+  String s5PdfSymptomDays(int n, int days) {
+    return '有症状的天数：$days 天中的 $n 天';
+  }
+
+  @override
+  String s5PdfSymptomOtherDays(int n) {
+    return '患者自己写下的其他症状：$n 天';
+  }
+
+  @override
+  String get s5PdfTitle => '患者自述的哮喘就诊摘要';
+
+  @override
+  String s5PeriodAndRecordedDays(int days, int n) {
+    return '期间 $days 天 · 有记录的天数 $n 天';
+  }
+
+  @override
+  String get s5PhoneHint => '请包含国家代码，例如 +1 201 555 0123';
+
+  @override
+  String get s5PhoneInvalid => '请输入姓名，以及带国家代码的电话号码，例如 +1 201 555 0123。';
+
+  @override
+  String get s5PollenGrass => '草类';
+
+  @override
+  String s5PollenMainType(String type) {
+    return '主要类型：$type';
+  }
+
+  @override
+  String get s5PollenTree => '树木';
+
+  @override
+  String get s5PollenWeed => '杂草';
+
+  @override
+  String get s5PrepareVisit => '准备就诊';
+
+  @override
+  String get s5PreviewEditHint => '问题和备注可以回到上一页修改。要改数字，请在“我的记录”里修改原来的记录。';
+
+  @override
+  String get s5PreviewSummary => '查看就诊摘要';
+
+  @override
+  String get s5PreviewTitle => '就诊摘要预览';
+
+  @override
+  String s5PuffsValue(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n 次吸入',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5QuestionN(int n) {
+    return '问题 $n';
+  }
+
+  @override
+  String s5QuestionOf(int n, int total) {
+    return '问题 $n/$total';
+  }
+
+  @override
+  String get s5ReasonBeforeActivity => '活动之前';
+
+  @override
+  String get s5ReasonOther => '其他';
+
+  @override
+  String get s5ReasonSymptoms => '因为有症状';
+
+  @override
+  String s5RecentInhaler(int n) {
+    return '吸入器使用记录 $n 条';
+  }
+
+  @override
+  String s5RecentSymptomDays(int n) {
+    return '有症状的天数 $n 天';
+  }
+
+  @override
+  String get s5RecentTitle => '最近 7 天';
+
+  @override
+  String get s5RecordsLoadFailed => '无法加载记录。请再试一次。';
+
+  @override
+  String get s5RecordsManageHint => '可以在“我的记录”里编辑或删除。删除前总会请你确认。';
+
+  @override
+  String get s5Refresh => '刷新';
+
+  @override
+  String get s5Reload => '重新加载';
+
+  @override
+  String get s5Save => '保存';
+
+  @override
+  String get s5Saved => '已保存。';
+
+  @override
+  String get s5SavedPlacesHint => '已保存的地点，例如家、学校或工作地点';
+
+  @override
+  String get s5SaveFailed => '无法保存。你输入的内容还在。';
+
+  @override
+  String get s5SavePdf => '保存 PDF';
+
+  @override
+  String get s5SettingsAlerts => '提醒';
+
+  @override
+  String get s5SettingsArea => '地区';
+
+  @override
+  String get s5SettingsHelp => '帮助';
+
+  @override
+  String get s5SettingsLanguageNote => '就诊摘要会用英语生成。分享之前，可以和你自己的语言对照查看。';
+
+  @override
+  String get s5SettingsSecurityData => '安全与数据';
+
+  @override
+  String get s5Share => '分享';
+
+  @override
+  String get s5SourcesAir => '空气质量：EPA AirNow、Open-Meteo、PurpleAir';
+
+  @override
+  String get s5SourcesFlood => '洪水警报：美国国家气象局';
+
+  @override
+  String get s5SourcesNjTraffic => '交通量数据只在新泽西州使用。';
+
+  @override
+  String get s5SourcesNoRiskScore => '应用内部的综合分数不是哮喘发作风险，也不会显示。';
+
+  @override
+  String get s5SourcesPollen => '花粉：Google Pollen API';
+
+  @override
+  String get s5SourcesTitle => '来源与限制';
+
+  @override
+  String get s5SourcesWeather => '天气和湿度：Open-Meteo';
+
+  @override
+  String get s5StatusLatest => '最新';
+
+  @override
+  String get s5StatusOlder => '较早的数据';
+
+  @override
+  String get s5StatusUnavailable => '现在无法查看';
+
+  @override
+  String get s5SymActivityLimited => '活动受限';
+
+  @override
+  String get s5SymCough => '咳嗽';
+
+  @override
+  String get s5SymNightWaking => '夜里醒来';
+
+  @override
+  String get s5SymNone => '无症状';
+
+  @override
+  String get s5SymOther => '自己填写';
+
+  @override
+  String get s5SymOtherHint => '用自己的话描述';
+
+  @override
+  String get s5SymShortBreath => '呼吸困难';
+
+  @override
+  String get s5SymWheeze => '喘鸣';
+
+  @override
+  String get s5SymptomEditTitle => '编辑症状';
+
+  @override
+  String get s5SymptomEntry => '症状';
+
+  @override
+  String get s5SymptomNoneHint => '你没有记录的日子会显示为“未记录”，而不是“无症状”。';
+
+  @override
+  String get s5SymptomQuestion => '你有哪些症状？';
+
+  @override
+  String get s5Today => '今天';
+
+  @override
+  String get s5Undo => '撤销';
+
+  @override
+  String s5UntranslatedNotice(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '有 $n 项没有翻译。它们会以原文出现在英文 PDF 中，并标有 “Not translated”。请核对原文。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s5UpdatedAt(String time) {
+    return '更新于 $time';
+  }
+
+  @override
+  String get s5UpiHigh => '高';
+
+  @override
+  String get s5UpiLow => '低';
+
+  @override
+  String get s5UpiModerate => '中等';
+
+  @override
+  String get s5UpiNone => '无';
+
+  @override
+  String s5UpiValue(int upi, String category) {
+    return '5 分中的 $upi · $category';
+  }
+
+  @override
+  String get s5UpiVeryHigh => '非常高';
+
+  @override
+  String get s5UpiVeryLow => '非常低';
+
+  @override
+  String get s5UrgentActionPlan => '如果医生给过你哮喘行动计划，请按那个计划做。';
+
+  @override
+  String get s5UrgentCall911Locked => '紧急帮助：拨打 911';
+
+  @override
+  String get s5UrgentHelp => '紧急帮助';
+
+  @override
+  String get s5UrgentIntro => '如果呼吸非常困难，或没有好转，请拨打 911。';
+
+  @override
+  String get s5UrgentLogHint => '可选：可以记下你使用了吸入器。';
+
+  @override
+  String get s5UrgentNoContact => '还没有紧急联系人。请在设置 → 帮助里添加。';
+
+  @override
+  String s5UsingMedication(String name) {
+    return '将记录为：$name';
+  }
+
+  @override
+  String get s5ViewMyLog => '查看我的记录';
+
+  @override
+  String get s5VisitBarriers => '接受治疗时有没有遇到困难？';
+
+  @override
+  String s5VisitCardDetail(int days, int recorded, int questions) {
+    return '最近 $days 天 · 有记录 $recorded 天 · 问题 $questions 个';
+  }
+
+  @override
+  String get s5VisitCardTitle => '就诊时要给医生看的内容';
+
+  @override
+  String get s5VisitInclude => '要包含的记录';
+
+  @override
+  String get s5VisitIntro => '整理你的症状和想问的问题，给医生看。';
+
+  @override
+  String get s5VisitPeriod => '摘要期间';
+
+  @override
+  String get s5VisitPrepTitle => '就诊准备';
+
+  @override
+  String get s5VisitQuestions => '想问医生的问题';
+
+  @override
+  String get s5VisitQuestionsHint => '用你自己的语言写。可以留空。';
 }

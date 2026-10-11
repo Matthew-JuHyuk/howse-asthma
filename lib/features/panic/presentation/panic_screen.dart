@@ -6,10 +6,14 @@ import '../../../core/phone/phone_e164.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../medication_log/data/inhaler_event_repository.dart';
+import '../../records/data/records_revision.dart';
+import '../../records/domain/record_models.dart';
 import '../../settings/data/emergency_contact_repository.dart';
 import '../data/panic_repository.dart';
 
-/// SCR-SYS-PANIC — Step1 breathe/inhaler, Step2 tel: (no auto-dial).
+/// Urgent help (internal id SCR-SYS-PANIC). Phone buttons only open the OS
+/// dialer — nothing is dialed or sent automatically, and environment data
+/// never decides whether this is an emergency.
 class PanicScreen extends StatefulWidget {
   const PanicScreen({super.key});
 
@@ -22,12 +26,13 @@ class _PanicScreenState extends State<PanicScreen> {
   final _inhalerRepo = InhalerEventRepository();
   final _contactRepo = EmergencyContactRepository();
   final _location = const LocationService();
+  final _inhalerRequestId = newRequestId();
 
-  int _step = 1;
   String? _episodeId;
   String? _contactPhone;
   String? _contactName;
   bool _busy = false;
+  bool _logged = false;
   bool _completed = false;
 
   @override
@@ -39,39 +44,45 @@ class _PanicScreenState extends State<PanicScreen> {
   @override
   void dispose() {
     if (!_completed && _episodeId != null) {
-      // Best-effort close without awaiting (widget disposing).
-      _panicRepo.complete(
-        episodeId: _episodeId!,
-        outcomeChip: 'dismissed',
-      );
+      _panicRepo.complete(episodeId: _episodeId!, outcomeChip: 'dismissed');
     }
     super.dispose();
   }
 
   Future<void> _bootstrap() async {
     try {
-      final episode = await _panicRepo.startEpisode();
       final contact = await _contactRepo.get();
-      if (!mounted) return;
-      setState(() {
-        _episodeId = episode['id'] as String?;
-        final phone = contact?['phone_e164'] as String?;
-        _contactPhone = phone != null && PhoneE164.isValid(phone) ? phone : null;
-        _contactName = contact?['display_name'] as String?;
-      });
+      if (mounted) {
+        setState(() {
+          final phone = contact?['phone_e164'] as String?;
+          _contactPhone = phone != null && PhoneE164.isValid(phone)
+              ? phone
+              : null;
+          _contactName = contact?['display_name'] as String?;
+        });
+      }
+    } catch (_) {}
+    try {
+      final episode = await _panicRepo.startEpisode();
+      if (mounted) setState(() => _episodeId = episode['id'] as String?);
     } catch (_) {}
   }
 
   Future<void> _logInhaler() async {
-    if (_busy) return;
+    if (_busy || _logged) return;
+    final l10n = AppLocalizations.of(context)!;
+    final lang = Localizations.localeOf(context).languageCode;
     setState(() => _busy = true);
     try {
-      final loc = await _location.getCurrentPosition();
+      final loc = await _location.getCurrentPosition(requestIfDenied: false);
       final event = await _inhalerRepo.logUse(
         latitude: loc.position?.latitude,
         longitude: loc.position?.longitude,
         isPanic: true,
+        clientRequestId: _inhalerRequestId,
+        sourceLanguage: lang,
       );
+      RecordsRevision.instance.bump();
       final eventId = event['id'] as String?;
       if (_episodeId != null && eventId != null) {
         await _panicRepo.linkInhalerEvent(
@@ -80,16 +91,15 @@ class _PanicScreenState extends State<PanicScreen> {
         );
       }
       if (!mounted) return;
-      final l10n = AppLocalizations.of(context)!;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.oneTapLoggedOk)),
-      );
+      setState(() => _logged = true);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.s5InhalerLogged)));
     } catch (_) {
       if (!mounted) return;
-      final l10n = AppLocalizations.of(context)!;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.oneTapLoggedFailed)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.s5SaveFailed)));
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -97,21 +107,21 @@ class _PanicScreenState extends State<PanicScreen> {
 
   Future<void> _dial(String raw) async {
     final l10n = AppLocalizations.of(context)!;
-    final sanitized = raw == '911'
-        ? '911'
-        : PhoneE164.normalize(raw);
-    if (sanitized == null && raw != '911') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.panicDialFailed)),
-      );
+    final number = raw == '911' ? '911' : PhoneE164.normalize(raw);
+    if (number == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.panicDialFailed)));
       return;
     }
-    final uri = Uri.parse('tel:${sanitized ?? raw}');
-    final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    final ok = await launchUrl(
+      Uri.parse('tel:$number'),
+      mode: LaunchMode.externalApplication,
+    );
     if (!ok && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.panicDialFailed)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.panicDialFailed)));
       return;
     }
     if (_episodeId != null) {
@@ -121,13 +131,10 @@ class _PanicScreenState extends State<PanicScreen> {
     }
   }
 
-  Future<void> _feelingBetter() async {
+  Future<void> _close(String outcome) async {
     if (_episodeId != null) {
       try {
-        await _panicRepo.complete(
-          episodeId: _episodeId!,
-          outcomeChip: 'feeling_better',
-        );
+        await _panicRepo.complete(episodeId: _episodeId!, outcomeChip: outcome);
       } catch (_) {}
     }
     _completed = true;
@@ -137,10 +144,12 @@ class _PanicScreenState extends State<PanicScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final bg = _step == 1 ? AppTheme.error600 : AppTheme.neutral900;
+    final hasContact = _contactPhone != null;
+    final contactLabel = (_contactName == null || _contactName!.isEmpty)
+        ? l10n.mockCallGuardian
+        : l10n.panicCallNamed(_contactName!);
 
     return PopScope(
-      canPop: true,
       onPopInvokedWithResult: (didPop, _) async {
         if (didPop && !_completed && _episodeId != null) {
           _completed = true;
@@ -153,131 +162,79 @@ class _PanicScreenState extends State<PanicScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: bg,
+        backgroundColor: AppTheme.defaultBackground,
+        appBar: AppBar(title: Text(l10n.s5UrgentHelp)),
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: _step == 1 ? _step1(l10n) : _step2(l10n),
+          top: false,
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+            children: [
+              Text(
+                l10n.s5UrgentIntro,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.s5UrgentActionPlan,
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 20),
+              FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppTheme.error600,
+                  minimumSize: const Size.fromHeight(56),
+                ),
+                onPressed: () => _dial('911'),
+                icon: const Icon(Icons.call),
+                label: Text(l10n.mockCall911),
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(56),
+                ),
+                onPressed: hasContact ? () => _dial(_contactPhone!) : null,
+                icon: const Icon(Icons.person_outline),
+                label: Text(contactLabel, textAlign: TextAlign.center),
+              ),
+              if (!hasContact) ...[
+                const SizedBox(height: 6),
+                Text(
+                  l10n.s5UrgentNoContact,
+                  style: const TextStyle(color: AppTheme.neutral700),
+                ),
+              ],
+              const SizedBox(height: 12),
+              Text(
+                l10n.panicNoAutoDial,
+                style: const TextStyle(color: AppTheme.neutral700),
+              ),
+              const Divider(height: 32),
+              Text(
+                l10n.s5UrgentLogHint,
+                style: const TextStyle(color: AppTheme.neutral700),
+              ),
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(52),
+                ),
+                onPressed: _busy || _logged ? null : _logInhaler,
+                icon: Icon(_logged ? Icons.check : Icons.medication_outlined),
+                label: Text(_logged ? l10n.s5InhalerLogged : l10n.s5LogInhaler),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: () => _close('feeling_better'),
+                child: Text(l10n.mockFeelingBetter),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _step1(AppLocalizations l10n) {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'SCR-SYS-PANIC',
-            style: TextStyle(color: Colors.white70, fontSize: 12),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            color: Colors.white24,
-            borderRadius: BorderRadius.circular(99),
-          ),
-          child: Text(
-            l10n.panicEmergencyBadge,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-        const Spacer(),
-        const Icon(Icons.air, size: 72, color: Colors.white),
-        const SizedBox(height: 16),
-        Text(
-          l10n.panicBreatheTitle,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 26,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          l10n.mockPanicStep1Body,
-          textAlign: TextAlign.center,
-          style: const TextStyle(color: Colors.white, fontSize: 15),
-        ),
-        const Spacer(),
-        FilledButton(
-          style: FilledButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: AppTheme.error600,
-            minimumSize: const Size.fromHeight(56),
-          ),
-          onPressed: _busy ? null : _logInhaler,
-          child: Text(l10n.panicTakeInhalerNow),
-        ),
-        const SizedBox(height: 12),
-        TextButton(
-          onPressed: () => setState(() => _step = 2),
-          child: Text(
-            l10n.panicNeedHelp,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _step2(AppLocalizations l10n) {
-    final contactLabel = _contactName == null || _contactName!.isEmpty
-        ? l10n.mockCallGuardian
-        : l10n.panicCallNamed(_contactName!);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          l10n.mockPanicStep2Title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          l10n.panicNoAutoDial,
-          style: const TextStyle(color: Colors.white70),
-        ),
-        const Spacer(),
-        FilledButton(
-          style: FilledButton.styleFrom(
-            backgroundColor: AppTheme.error600,
-            minimumSize: const Size.fromHeight(56),
-          ),
-          onPressed: () => _dial('911'),
-          child: Text(l10n.mockCall911),
-        ),
-        const SizedBox(height: 12),
-        OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.white,
-            side: const BorderSide(color: Colors.white54),
-            minimumSize: const Size.fromHeight(56),
-          ),
-          onPressed: _contactPhone == null ? null : () => _dial(_contactPhone!),
-          child: Text(contactLabel),
-        ),
-        const Spacer(),
-        TextButton(
-          onPressed: _feelingBetter,
-          child: Text(
-            l10n.mockFeelingBetter,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      ],
     );
   }
 }

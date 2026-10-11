@@ -547,5 +547,471 @@
   "settingsBgTitle": "Background refresh",
   "settingsBgBody": "Howse Asthma refreshes nearby air while you use the app. We do not request Always location in this version.",
   "settingsBgRefresh": "Refresh while using the app",
-  "settingsBgRefreshHint": "Update risk when you move or keep the app open"
+  "settingsBgRefreshHint": "Update risk when you move or keep the app open",
+  "s5AboutApp": "About Howse Asthma",
+  "s5AboutAppBody": "Howse Asthma helps you keep a record of symptoms and inhaler use and prepare a summary for your clinician. It does not diagnose or give treatment advice.",
+  "s5ActNotice": "Your answers are saved so you can share them with your clinician. This version of the questionnaire has not been checked against the official scoring, so the app does not show a score.",
+  "s5ActSaved": "Your answers were saved.",
+  "s5ActSubtitle": "5 questions about the past 4 weeks",
+  "s5ActTitle": "Asthma control questionnaire",
+  "s5AddDetails": "Add details",
+  "s5AddRecord": "Add record",
+  "s5AlertArrive": "When you arrive somewhere",
+  "s5AlertArriveHint": "When local conditions are worse where you arrive. Only while the app is open.",
+  "s5AlertFreshAirHint": "When outdoor air quality, pollen, and flood information all look calm. General information, not medical advice.",
+  "s5AlertSavedPlaces": "Saved places",
+  "s5AlertSavedPlacesHint": "When local conditions get worse at a place you saved.",
+  "s5AlertWorse": "When conditions get worse",
+  "s5AlertWorseHint": "When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.",
+  "s5AqiGood": "Good",
+  "s5AqiModerate": "Moderate",
+  "s5AqiUsg": "Unhealthy for sensitive groups",
+  "s5AqiUnhealthy": "Unhealthy",
+  "s5AqiVeryUnhealthy": "Very unhealthy",
+  "s5AqiHazardous": "Hazardous",
+  "s5AqiValue": "{category} (AQI {aqi})",
+  "@s5AqiValue": {
+    "placeholders": {
+      "category": {"type": "String"},
+      "aqi": {"type": "int"}
+    }
+  },
+  "s5Back": "Back",
+  "s5BarrierCost": "Cost of medicine",
+  "s5BarrierHardToGet": "Hard to get medicine",
+  "s5BarrierHardToUnderstand": "Hard to understand instructions",
+  "s5BarrierHowToUse": "How to use my medicine",
+  "s5BarrierNone": "No difficulties",
+  "s5BarrierOtherHint": "Describe in your own words (optional)",
+  "s5Cancel": "Cancel",
+  "s5Change": "Change",
+  "s5ChoosePlace": "Choose a place",
+  "s5Close": "Close",
+  "s5DataSourcesTitle": "Data sources",
+  "s5DataSourcesBody": "Air quality: U.S. EPA AirNow, Open-Meteo, and nearby PurpleAir sensors.\nPollen: Google Pollen API (Universal Pollen Index).\nWeather and humidity: Open-Meteo.\nFlood alerts: U.S. National Weather Service. Stream levels: U.S. Geological Survey.\nTraffic counts (New Jersey only): NJ Department of Transportation.\nValues can be delayed or missing. They describe outdoor conditions, not your health.",
+  "s5Delete": "Delete",
+  "s5DeleteConfirm": "Delete this entry?",
+  "s5DeleteFailed": "Could not delete. Please try again.",
+  "s5Edit": "Edit",
+  "s5EnglishVersion": "English (for clinician)",
+  "s5EntryRemoved": "Entry removed.",
+  "s5EnvAirDetail": "U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.",
+  "s5EnvAirQuality": "Air quality",
+  "s5EnvAlertsHeading": "Environment alerts",
+  "s5EnvCardTitle": "Today's local environment",
+  "s5EnvFlood": "Flood alerts",
+  "s5EnvFloodDetail": "Public alerts from the U.S. National Weather Service.",
+  "s5EnvForecast": "Environmental forecast",
+  "s5EnvHumidity": "Humidity conditions",
+  "s5EnvHumidityDetail": "Outdoor weather data. It is not an indoor humidity or mold measurement.",
+  "s5EnvLoadFailed": "Couldn't load environmental information.",
+  "s5EnvNeedPlace": "Choose a place to see your local environment.",
+  "s5EnvNotAvailable": "Not available",
+  "s5EnvOlderNotice": "This is the last information we checked.",
+  "s5EnvPollen": "Pollen index",
+  "s5EnvPollenDetail": "Universal Pollen Index from Google, from 0 (none) to 5 (very high). A low number does not mean it is safe for everyone.",
+  "s5EnvSeeDetails": "See environment details",
+  "s5EnvUnavailable": "Environmental data is currently unavailable.",
+  "s5FewRecordsNotice": "Some sections may be empty because few records are available.",
+  "s5FgRefreshTitle": "Refresh environment while using the app",
+  "s5FgRefreshHint": "Checks your area while the app is open. It does not run in the background.",
+  "s5FieldDate": "Date",
+  "s5FieldMedication": "Medication",
+  "s5FieldNote": "Note (optional)",
+  "s5FieldPuffs": "Number of puffs (optional)",
+  "s5FieldReason": "Reason (optional)",
+  "s5FieldTime": "Time",
+  "s5FilterAll": "All",
+  "s5FilterInhaler": "Inhaler",
+  "s5FilterMedCheck": "Medication check-in",
+  "s5FilterSymptoms": "Symptoms",
+  "s5FloodIssued": "Flood warning issued",
+  "s5FloodNone": "No flood warnings issued",
+  "s5FloodUnknown": "Can't check alert information",
+  "s5ForecastCheckedAt": "Checked {time}",
+  "@s5ForecastCheckedAt": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "s5ForecastValidFor": "Forecast for {date}",
+  "@s5ForecastValidFor": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "s5FromUrgentHelp": "Logged from Urgent help",
+  "s5HomeStateEmpty": "Make your first record. You can organize what to share at your visit along the way.",
+  "s5HomeStateQuestions": "{n, plural, =1{You have 1 question for your doctor.} other{You have {n} questions for your doctor.}}",
+  "@s5HomeStateQuestions": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5HomeStateRecords": "Days with records in the last 7 days: {n}",
+  "@s5HomeStateRecords": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5HomeSubtitle": "Bring your records to your next visit.",
+  "s5HomeTitle": "Record how you're doing today",
+  "s5HumidityValue": "Outdoor humidity {rh}%",
+  "@s5HumidityValue": {
+    "placeholders": {
+      "rh": {"type": "int"}
+    }
+  },
+  "s5IncludeEnvironment": "Local environment (optional)",
+  "s5IncludeEnvironmentHint": "Adds today's air quality, pollen, and flood alerts. Your exact location is not included.",
+  "s5InhalerEditTitle": "Inhaler use details",
+  "s5InhalerEntry": "Inhaler use",
+  "s5InhalerLogged": "Inhaler use logged.",
+  "s5InhalerOneEntryHint": "Each save is one inhaler-use entry. It is not counted as one puff or one day.",
+  "s5InhalerUnknownCount": "Medication not identified: {n}",
+  "@s5InhalerUnknownCount": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5InsCost": "Cost difficulties",
+  "s5InsDenial": "Reason given for a denial, if any",
+  "s5InsMedHistory": "Medicines I have tried",
+  "s5InsuranceIntro": "Organize information for your clinician's paperwork.",
+  "s5InsuranceLimits": "Everything here is optional. This app does not submit anything to insurers and does not decide approvals.",
+  "s5InsuranceTitle": "Prepare insurance paperwork",
+  "s5LanguageName": "{lang, select, en{English} es{Spanish} fr{French} ko{Korean} ja{Japanese} zh{Chinese} other{another language}}",
+  "@s5LanguageName": {
+    "placeholders": {
+      "lang": {"type": "String"}
+    }
+  },
+  "s5Last30Days": "Last 30 days",
+  "s5Last7Days": "Last 7 days",
+  "s5LogInhaler": "Log inhaler use",
+  "s5LogLegend": "Each line is one saved entry. Days without entries are “not recorded”, which is different from zero.",
+  "s5LogSymptoms": "Log symptoms",
+  "s5MedAdd": "Add medication",
+  "s5MedCheckCounts": "Days used: {a} · not used: {b} · don't remember: {c} · not recorded: {d}",
+  "@s5MedCheckCounts": {
+    "placeholders": {
+      "a": {"type": "int"},
+      "b": {"type": "int"},
+      "c": {"type": "int"},
+      "d": {"type": "int"}
+    }
+  },
+  "s5MedCheckIntro": "A self-reported check of whether you used your medicine. It is not based on pharmacy records.",
+  "s5MedCheckQuestion": "Did you use your medicine as planned?",
+  "s5MedCheckTitle": "Today's medication check-in",
+  "s5MedChooseHint": "Choose a medication, or “I don't know the medication name”.",
+  "s5MedDailyCheck": "Daily check-in",
+  "s5MedDailyCheckHint": "Show “Today's medication check-in” on Home. Turn on only if your clinician asked you to use this medicine every day.",
+  "s5MedDefault": "Default for quick logging",
+  "s5MedDefaultHint": "Used when you tap “Log inhaler use” on Home.",
+  "s5MedEdit": "Edit medication",
+  "s5MedNameLabel": "Medication name (as on your label)",
+  "s5MedNotApplicable": "Not scheduled for today",
+  "s5MedNotApplicableDays": "Not scheduled: {n} days",
+  "@s5MedNotApplicableDays": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5MedNotRecorded": "Medication not recorded",
+  "s5MedNotSure": "I don't remember",
+  "s5MedNotUsed": "I did not use it",
+  "s5MedOther": "Another name",
+  "s5MedOtherHint": "Type the medication name",
+  "s5MedReasonCost": "Cost",
+  "s5MedReasonForgot": "Forgot",
+  "s5MedReasonNoMedicine": "Didn't have the medicine",
+  "s5MedReasonQuestion": "Reason (optional)",
+  "s5MedUnknown": "I don't know the medication name",
+  "s5MedUnknownShort": "Medication not identified",
+  "s5MedUsed": "I used it",
+  "s5MyLanguage": "My language",
+  "s5MyLogTitle": "My log",
+  "s5MyMedsEmpty": "No medications saved yet.",
+  "s5MyMedsHint": "Names you confirmed, to make logging faster. This is not a dosing recommendation.",
+  "s5MyMedsOpen": "Manage my medications",
+  "s5MyMedsTitle": "My medications",
+  "s5NavEnvironment": "Environment",
+  "s5NavLog": "Log",
+  "s5NavVisitPrep": "Visit prep",
+  "s5NoAnswer": "Prefer not to answer",
+  "s5NoRecordsYet": "No records yet",
+  "s5NoSymptomDays": "Days marked “no symptoms”: {n}",
+  "@s5NoSymptomDays": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5NotRecorded": "Not recorded",
+  "s5NotRecordedToday": "Not recorded today",
+  "s5NotTranslatedLine": "[Not translated · original in {language}] {text}",
+  "@s5NotTranslatedLine": {
+    "placeholders": {
+      "language": {"type": "String"},
+      "text": {"type": "String"}
+    }
+  },
+  "s5OsNotificationsOff": "Notifications are turned off for Howse Asthma in your phone settings, so alerts can't appear.",
+  "s5PdfAboutMedCheck": "Medication check-ins are self-reported by the patient. They are not pharmacy refill data and are not a proportion of days covered (PDC).",
+  "s5PdfAboutNoScore": "No questionnaire score or app-generated risk score is included.",
+  "s5PdfAboutPatientReported": "All entries were recorded by the patient in the Howse Asthma app and have not been verified.",
+  "s5PdfAppendix": "Appendix: patient notes",
+  "s5PdfDaysNotRecorded": "Days with no symptom entry (not recorded): {n}",
+  "@s5PdfDaysNotRecorded": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfDisclaimer": "This summary contains patient-reported information for clinician review. It is not a diagnosis or a prior authorization decision.",
+  "s5PdfEnvNote": "General outdoor conditions when this summary was created. Location is not included.",
+  "s5PdfFailed": "Couldn't create the PDF. Your entries are kept. Please try again.",
+  "s5PdfFontFailed": "Couldn't prepare the PDF fonts. Check your internet connection and try again.",
+  "s5PdfGeneratedAt": "Created: {time}",
+  "@s5PdfGeneratedAt": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "s5PdfInhalerByMed": "{name}: {n} entries",
+  "@s5PdfInhalerByMed": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfInhalerMedNotRecorded": "Medication not recorded: {n} entries",
+  "@s5PdfInhalerMedNotRecorded": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfInhalerUnknown": "Medication not identified by patient: {n} entries",
+  "@s5PdfInhalerUnknown": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfInhalerUses": "Inhaler use entries: {n} (on {days} days)",
+  "@s5PdfInhalerUses": {
+    "placeholders": {
+      "n": {"type": "int"},
+      "days": {"type": "int"}
+    }
+  },
+  "s5PdfIsEnglish": "The PDF is created in English. Free text you typed stays in your language.",
+  "s5PdfMedNamesAsEntered": "Medication names are shown as entered by the patient.",
+  "s5PdfNotRecorded": "Not recorded",
+  "s5PdfNotUsedReason": "Reason for not using (self-reported) — {label}: {n} days",
+  "@s5PdfNotUsedReason": {
+    "placeholders": {
+      "label": {"type": "String"},
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfOutdated": "Your records or answers changed after the last PDF. Create a new PDF to include the changes.",
+  "s5PdfPeriod": "Summary period: {start} – {end} ({days} days)",
+  "@s5PdfPeriod": {
+    "placeholders": {
+      "start": {"type": "String"},
+      "end": {"type": "String"},
+      "days": {"type": "int"}
+    }
+  },
+  "s5PdfReasonCount": "Reason — {label}: {n} entries",
+  "@s5PdfReasonCount": {
+    "placeholders": {
+      "label": {"type": "String"},
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfRecordedDays": "Days with any patient entry: {n}",
+  "@s5PdfRecordedDays": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfSectionAboutData": "About this information",
+  "s5PdfSectionBarriers": "Difficulties getting care (self-reported)",
+  "s5PdfSectionEnvironment": "Local environment (reference)",
+  "s5PdfSectionInhaler": "Inhaler use",
+  "s5PdfSectionInsurance": "Notes for paperwork (patient-provided)",
+  "s5PdfSectionMedChecks": "Self-reported medication use",
+  "s5PdfSectionQuestions": "Patient questions",
+  "s5PdfSectionSymptoms": "Symptoms",
+  "s5PdfSymptomCodeDays": "{label}: {n} days",
+  "@s5PdfSymptomCodeDays": {
+    "placeholders": {
+      "label": {"type": "String"},
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfSymptomDays": "Days with any symptom: {n} of {days}",
+  "@s5PdfSymptomDays": {
+    "placeholders": {
+      "n": {"type": "int"},
+      "days": {"type": "int"}
+    }
+  },
+  "s5PdfSymptomOtherDays": "Other symptoms described by patient: {n} days",
+  "@s5PdfSymptomOtherDays": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5PdfTitle": "Patient-reported asthma visit summary",
+  "s5PeriodAndRecordedDays": "Period: {days} days · Days with records: {n}",
+  "@s5PeriodAndRecordedDays": {
+    "placeholders": {
+      "days": {"type": "int"},
+      "n": {"type": "int"}
+    }
+  },
+  "s5PhoneHint": "Include the country code. Example: +1 201 555 0123",
+  "s5PhoneInvalid": "Enter a name and a phone number with the country code, for example +1 201 555 0123.",
+  "s5PollenGrass": "Grass",
+  "s5PollenMainType": "Main type: {type}",
+  "@s5PollenMainType": {
+    "placeholders": {
+      "type": {"type": "String"}
+    }
+  },
+  "s5PollenTree": "Tree",
+  "s5PollenWeed": "Weed",
+  "s5PrepareVisit": "Prepare for visit",
+  "s5PreviewEditHint": "To change a question or note, go back and edit it. To change numbers, edit the entries in My log.",
+  "s5PreviewSummary": "Preview visit summary",
+  "s5PreviewTitle": "Visit summary preview",
+  "s5PuffsValue": "{n, plural, =1{1 puff} other{{n} puffs}}",
+  "@s5PuffsValue": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5QuestionN": "Question {n}",
+  "@s5QuestionN": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5QuestionOf": "Question {n} of {total}",
+  "@s5QuestionOf": {
+    "placeholders": {
+      "n": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "s5ReasonBeforeActivity": "Before activity",
+  "s5ReasonOther": "Other",
+  "s5ReasonSymptoms": "Because of symptoms",
+  "s5RecentInhaler": "Inhaler use entries: {n}",
+  "@s5RecentInhaler": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5RecentSymptomDays": "Days with symptoms: {n}",
+  "@s5RecentSymptomDays": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5RecentTitle": "Last 7 days",
+  "s5RecordsLoadFailed": "Couldn't load your records. Please try again.",
+  "s5RecordsManageHint": "You can edit or delete entries in My log. Deleting always asks you to confirm.",
+  "s5Refresh": "Refresh",
+  "s5Reload": "Load again",
+  "s5Save": "Save",
+  "s5Saved": "Saved.",
+  "s5SavedPlacesHint": "Saved places such as home, school, or work",
+  "s5SaveFailed": "Could not save. Your entries are still here.",
+  "s5SavePdf": "Save PDF",
+  "s5SettingsAlerts": "Alerts",
+  "s5SettingsArea": "Area",
+  "s5SettingsHelp": "Help",
+  "s5SettingsLanguageNote": "Your visit summary is created in English. You can compare it with your own language before sharing.",
+  "s5SettingsSecurityData": "Security and data",
+  "s5Share": "Share",
+  "s5SourcesAir": "Air quality: EPA AirNow, Open-Meteo, PurpleAir",
+  "s5SourcesFlood": "Flood alerts: National Weather Service",
+  "s5SourcesNjTraffic": "Traffic count data is used only in New Jersey.",
+  "s5SourcesNoRiskScore": "The app's internal combined score is not an asthma attack risk and is not shown.",
+  "s5SourcesPollen": "Pollen: Google Pollen API",
+  "s5SourcesTitle": "Sources and limits",
+  "s5SourcesWeather": "Weather and humidity: Open-Meteo",
+  "s5StatusLatest": "Latest",
+  "s5StatusOlder": "Older data",
+  "s5StatusUnavailable": "Can't check right now",
+  "s5SymActivityLimited": "Activities limited",
+  "s5SymCough": "Cough",
+  "s5SymNightWaking": "Woke up at night",
+  "s5SymNone": "No symptoms",
+  "s5SymOther": "Something else",
+  "s5SymOtherHint": "Describe in your own words",
+  "s5SymShortBreath": "Hard to breathe",
+  "s5SymWheeze": "Wheezing",
+  "s5SymptomEditTitle": "Edit symptoms",
+  "s5SymptomEntry": "Symptoms",
+  "s5SymptomNoneHint": "Days you don't record are shown as “not recorded”, not as “no symptoms”.",
+  "s5SymptomQuestion": "What did you notice?",
+  "s5Today": "Today",
+  "s5Undo": "Undo",
+  "s5UntranslatedNotice": "{n, plural, =1{1 entry is not translated. It appears in the English PDF in your language, marked “Not translated”.} other{{n} entries are not translated. They appear in the English PDF in your language, marked “Not translated”.}}",
+  "@s5UntranslatedNotice": {
+    "placeholders": {
+      "n": {"type": "int"}
+    }
+  },
+  "s5UpdatedAt": "Updated {time}",
+  "@s5UpdatedAt": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "s5UpiHigh": "High",
+  "s5UpiLow": "Low",
+  "s5UpiModerate": "Moderate",
+  "s5UpiNone": "None",
+  "s5UpiValue": "{upi} of 5 · {category}",
+  "@s5UpiValue": {
+    "placeholders": {
+      "upi": {"type": "int"},
+      "category": {"type": "String"}
+    }
+  },
+  "s5UpiVeryHigh": "Very high",
+  "s5UpiVeryLow": "Very low",
+  "s5UrgentActionPlan": "If your clinician gave you an asthma action plan, follow it.",
+  "s5UrgentCall911Locked": "Urgent help: call 911",
+  "s5UrgentHelp": "Urgent help",
+  "s5UrgentIntro": "If breathing is very hard or not getting better, call 911.",
+  "s5UrgentLogHint": "Optional: save a record that you used your inhaler.",
+  "s5UrgentNoContact": "No emergency contact yet. Add one in Settings → Help.",
+  "s5UsingMedication": "Logs as: {name}",
+  "@s5UsingMedication": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "s5ViewMyLog": "View my log",
+  "s5VisitBarriers": "Did you have trouble getting care?",
+  "s5VisitCardDetail": "Last {days} days · Days with records: {recorded} · Questions: {questions}",
+  "@s5VisitCardDetail": {
+    "placeholders": {
+      "days": {"type": "int"},
+      "recorded": {"type": "int"},
+      "questions": {"type": "int"}
+    }
+  },
+  "s5VisitCardTitle": "What to share at your visit",
+  "s5VisitInclude": "Records to include",
+  "s5VisitIntro": "Organize your symptoms and questions to show your clinician.",
+  "s5VisitPeriod": "Summary period",
+  "s5VisitPrepTitle": "Visit prep",
+  "s5VisitQuestions": "Questions for your doctor",
+  "s5VisitQuestionsHint": "Write in your own language. You can leave these empty."
 }

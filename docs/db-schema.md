@@ -441,6 +441,44 @@ GROUP BY patient_id;
 
 ---
 
+## 2.x Records & visit-prep extension (2026-10-11)
+
+Migration: [`supabase/migrations/20261011120000_s5_records_visit_prep.sql`](../supabase/migrations/20261011120000_s5_records_visit_prep.sql).
+
+**`inhaler_events` (added columns)** — still written only through the
+`log-inhaler-event` Edge Function.
+
+| Column | Notes |
+| --- | --- |
+| `medication_label` TEXT ≤120 | Patient-entered name; NULL when unknown |
+| `medication_status` | `identified` · `not_identified` · NULL (not asked) |
+| `puff_count` SMALLINT 1–20 | Optional |
+| `use_reason` | `symptoms` · `before_activity` · `other` |
+| `note` TEXT ≤1000 | Free text, stored in the original language |
+| `source_language` | Locale code of free text |
+| `tz_offset_minutes` | Device offset at record time → local-date aggregation |
+| `client_request_id` UUID | Unique per patient (partial index) — idempotent retries |
+| `voided_at` / `updated_at` | Soft delete (undo/delete) and detail edits |
+
+**`pdc_daily_checks` (added columns)** — `status` (`used` · `not_used` ·
+`not_sure` · `not_applicable`) and `reason` (only with `not_used`: `no_medicine` ·
+`cost` · `forgot` · `other` · `no_answer`). `taken` is now nullable; legacy rows
+are backfilled 1:1 (`true→used`, `false→not_used`). This is a self-reported
+daily check, **not** a pharmacy-claims PDC.
+
+**New tables**
+
+| Table | Purpose | RLS |
+| --- | --- | --- |
+| `symptom_entries` | Symptom chips (`cough`, `wheeze`, `short_breath`, `night_waking`, `activity_limited`) or exclusive `no_symptoms`; optional other text / note | Own CRUD · linked provider SELECT |
+| `patient_medications` | Saved medication display names; one `is_default` per patient; `daily_check_enabled` | Own CRUD · linked provider SELECT |
+| `visit_prep_drafts` | One row per patient: period (7/30), questions (≤10), access barriers, section toggles, optional insurance notes, last PDF fingerprint | Own only |
+
+Local date rule: an event's day is `recorded_at + tz_offset_minutes`; rows
+without an offset fall back to the device's current offset.
+
+---
+
 ## 3. RLS policy outline
 
 > Implemented in [`supabase/migrations/20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql).  
