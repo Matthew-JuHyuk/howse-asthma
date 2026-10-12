@@ -5,23 +5,30 @@ class SymptomRepository {
   SymptomRepository();
 
   static const _columns =
-      'id, recorded_at, tz_offset_minutes, symptoms, no_symptoms, other_text, '
-      'note, source_language, updated_at';
+      'id, recorded_at, occurred_at, tz_offset_minutes, symptoms, no_symptoms, '
+      'other_text, note, home_water, source_language, updated_at';
 
   Future<SymptomRecord> save({
     String? id,
     required DateTime recordedAt,
+    DateTime? occurredAt,
     required List<String> symptoms,
     required bool noSymptoms,
     String? otherText,
     String? note,
+    String? homeWater,
     String? sourceLanguage,
   }) async {
     final userId = SupabaseService.currentUser?.id;
     if (userId == null) throw StateError('not_authenticated');
     final values = <String, dynamic>{
       'recorded_at': recordedAt.toUtc().toIso8601String(),
-      'tz_offset_minutes': recordedAt.toLocal().timeZoneOffset.inMinutes,
+      'occurred_at': occurredAt?.toUtc().toIso8601String(),
+      'tz_offset_minutes': (occurredAt ?? recordedAt)
+          .toLocal()
+          .timeZoneOffset
+          .inMinutes,
+      'home_water': homeWater,
       'symptoms': noSymptoms ? <String>[] : symptoms,
       'no_symptoms': noSymptoms,
       'other_text': noSymptoms ? null : _blankToNull(otherText),

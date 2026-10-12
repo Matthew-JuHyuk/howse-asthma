@@ -5,6 +5,8 @@ import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../environment/data/environment_controller.dart';
 import '../../records/data/records_loader.dart';
+import '../../records/data/snapshot_repository.dart';
+import '../../records/domain/regimen_math.dart';
 import '../../records/domain/record_models.dart';
 import '../../records/domain/record_summary.dart';
 import '../data/visit_pdf.dart';
@@ -28,6 +30,7 @@ class _VisitPreviewScreenState extends State<VisitPreviewScreen> {
   String? _pdfError;
   RecordBundle? _bundle;
   RecordSummary? _summary;
+  List<EnvSnapshot> _snaps = const [];
   late final DateTime _generatedAt = DateTime.now();
 
   @override
@@ -44,9 +47,14 @@ class _VisitPreviewScreenState extends State<VisitPreviewScreen> {
     final range = RecordRange.lastDays(widget.draft.periodDays);
     try {
       final bundle = await RecordsLoader().load(range);
+      List<EnvSnapshot> snaps = const [];
+      try {
+        snaps = await SnapshotRepository().listRecent();
+      } catch (_) {}
       if (!mounted) return;
       setState(() {
         _bundle = bundle;
+        _snaps = snaps;
         _summary = RecordSummary.compute(range, bundle);
         _loading = false;
       });
@@ -59,6 +67,16 @@ class _VisitPreviewScreenState extends State<VisitPreviewScreen> {
       }
     }
   }
+
+  String _aqiLabel(AppLocalizations t, int? aqi) => switch (aqiBand(aqi)) {
+    AqiBand.good => t.s5AqiGood,
+    AqiBand.moderate => t.s5AqiModerate,
+    AqiBand.usg => t.s5AqiUsg,
+    AqiBand.unhealthy => t.s5AqiUnhealthy,
+    AqiBand.veryUnhealthy => t.s5AqiVeryUnhealthy,
+    AqiBand.hazardous => t.s5AqiHazardous,
+    null => t.s5EnvNotAvailable,
+  };
 
   VisitSummaryDoc _doc(BuildContext context, {required bool english}) {
     final locale = Localizations.localeOf(context);
@@ -75,6 +93,17 @@ class _VisitPreviewScreenState extends State<VisitPreviewScreen> {
       bundle: _bundle!,
       generatedAt: _generatedAt,
       environment: EnvironmentController.instance.snapshot,
+      environmentLines: [
+        for (final snap in _snaps.where((s) => s.linked))
+          environmentSourceLine(
+            pollutant: snap.pollutant,
+            aqi: snap.aqiValue,
+            category: _aqiLabel(t, snap.aqiValue),
+            provider: snap.provider,
+            observedAt: snap.observedAt?.toLocal().toString(),
+            dataKind: snap.dataKind,
+          ),
+      ],
     );
   }
 

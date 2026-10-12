@@ -2206,4 +2206,157 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get s5VisitQuestionsHint => '用你自己的语言写。可以留空。';
+
+  @override
+  String get s6AddTime => '添加时间';
+
+  @override
+  String get s6AddVisit => '添加我报告的就诊';
+
+  @override
+  String get s6BringPaper => '我会带上文件';
+
+  @override
+  String get s6BringPaperHint => '有文件并不表示医生已经确认。';
+
+  @override
+  String s6DaySummary(
+    String date,
+    int used,
+    int scheduled,
+    int open,
+    int symptoms,
+    String env,
+  ) {
+    return '$date · 已确认 $used/$scheduled · 未回复 $open · 症状 $symptoms · $env';
+  }
+
+  @override
+  String get s6DoseLater => '稍后确认';
+
+  @override
+  String get s6DoseNotUsed => '没能使用';
+
+  @override
+  String get s6DoseUnconfirmed => '还没有回复';
+
+  @override
+  String get s6DoseUsed => '我用了';
+
+  @override
+  String get s6EnvLinked => '已连接环境资料';
+
+  @override
+  String get s6EnvNoData => '该时间没有环境资料';
+
+  @override
+  String get s6EvidenceBody => '整理给医生查看的记录，以及还需要补充的信息。';
+
+  @override
+  String get s6EvidenceNotOfficial => '这是一份一般资料清单。不是某一保险的正式要求清单。';
+
+  @override
+  String get s6EvidenceTitle => '就诊与保险审核资料准备';
+
+  @override
+  String get s6HideMedName => '在锁屏上隐藏药名';
+
+  @override
+  String get s6HideMedNameHint => '提醒只在你保存的服药时间出现。不是每 30 分钟一次的提醒。';
+
+  @override
+  String get s6HomeWaterNo => '没有';
+
+  @override
+  String get s6HomeWaterQuestion => '家里有漏水或进水吗？';
+
+  @override
+  String get s6HomeWaterYes => '有';
+
+  @override
+  String get s6ItemClinician => '医生确认，或要带去的资料';
+
+  @override
+  String get s6ItemEnvironment => '事件当时的当地环境参考';
+
+  @override
+  String get s6ItemMedication => '药名和处方内容';
+
+  @override
+  String get s6ItemSymptoms => '持续的症状和对日常生活的影响';
+
+  @override
+  String get s6ItemUse => '使用期间和你确认过的使用记录';
+
+  @override
+  String get s6ItemVisits => '你报告的就诊和急诊';
+
+  @override
+  String get s6NoSchedule => '还没有保存服药时间。请在“我的药物”里添加。';
+
+  @override
+  String get s6OccurredLabel => '发生时间';
+
+  @override
+  String get s6PdfEnvLimit =>
+      '这只是地区参考。不能说明个人暴露，也不能说明症状原因。单个 AQI 不会同时指出臭氧和颗粒物，也不包含花粉。';
+
+  @override
+  String get s6PdfEnvTitle => '环境参考（附录）';
+
+  @override
+  String get s6PuffsEach => '每次吸入次数';
+
+  @override
+  String s6ReminderBodyNamed(String name) {
+    return '请确认 $name';
+  }
+
+  @override
+  String get s6ReminderBodyPrivate => '请确认用药';
+
+  @override
+  String get s6ReminderChannel => '按你保存的服药时间提醒。不是每 30 分钟一次的提醒。';
+
+  @override
+  String get s6ReminderTitle => '用药确认';
+
+  @override
+  String get s6RoleBoth => '每天以及需要时';
+
+  @override
+  String get s6RoleController => '每天使用的药';
+
+  @override
+  String get s6RoleRescue => '需要时使用';
+
+  @override
+  String get s6ScheduleTimes => '服药时间';
+
+  @override
+  String get s6StatusClinician => '需要医生确认';
+
+  @override
+  String get s6StatusNeedInfo => '需要补充信息';
+
+  @override
+  String get s6StatusRecorded => '已有记录';
+
+  @override
+  String get s6TimelineTitle => '治疗与环境';
+
+  @override
+  String get s6TodayDoses => '今天要确认的药';
+
+  @override
+  String get s6VisitKindEr => '急诊（我报告的）';
+
+  @override
+  String get s6VisitKindOffice => '门诊（我报告的）';
+
+  @override
+  String get s6VisitKindOther => '其他就诊（我报告的）';
+
+  @override
+  String get s6VisitKindUrgent => '紧急诊疗（我报告的）';
 }

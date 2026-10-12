@@ -4,7 +4,8 @@
 | --- | --- | --- |
 | `calculate-environment-risk` | [`supabase/functions/calculate-environment-risk/`](../supabase/functions/calculate-environment-risk/) | Live sources + Geohash cache + `forecast_points` |
 | `notify-environment-risk` | [`supabase/functions/notify-environment-risk/`](../supabase/functions/notify-environment-risk/) | PATIENT-only; cooldown + FCM HTTP v1 (`FIREBASE_SERVICE_ACCOUNT_JSON`) |
-| `log-inhaler-event` | [`supabase/functions/log-inhaler-event/`](../supabase/functions/log-inhaler-event/) | PATIENT-only; `action` = `create` (default, idempotent via `client_request_id`, 60/hr) · `update` (patient-reported details only) · `void` (soft delete). Env snapshot is server-copied and never editable |
+| `log-inhaler-event` | [`supabase/functions/log-inhaler-event/`](../supabase/functions/log-inhaler-event/) | PATIENT-only; `action` = `create` (default, idempotent via `client_request_id`, 60/hr) · `update` (patient-reported details only) · `void` (soft delete). Env copy only when `recorded_at` is within 20 minutes of now and of the cache row |
+| `link-event-environment` | [`supabase/functions/link-event-environment/`](../supabase/functions/link-event-environment/) | PATIENT-only. Copies the current geohash cache onto `environment_event_snapshots` inside the same 20-minute window. Otherwise `no_data`. AirNow is labeled provisional |
 | `issue-invite-code` | [`supabase/functions/issue-invite-code/`](../supabase/functions/issue-invite-code/) | 8-char alphanumeric invite (TTL 24h) |
 | `redeem-invite-code` | [`supabase/functions/redeem-invite-code/`](../supabase/functions/redeem-invite-code/) | Atomic redeem RPC (8-char) |
 | `confirm-care-link` | [`supabase/functions/confirm-care-link/`](../supabase/functions/confirm-care-link/) | Deployed — dual confirm RPC |

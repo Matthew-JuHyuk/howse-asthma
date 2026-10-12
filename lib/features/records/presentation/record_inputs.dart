@@ -8,6 +8,7 @@ import '../../assessments/data/pdc_repository.dart';
 import '../../medication_log/data/inhaler_event_repository.dart';
 import '../data/medication_repository.dart';
 import '../data/records_revision.dart';
+import '../data/snapshot_repository.dart';
 import '../data/symptom_repository.dart';
 import '../domain/record_models.dart';
 
@@ -634,6 +635,7 @@ class _SymptomSheetState extends State<_SymptomSheet> {
   bool _none = false;
   bool _otherOn = false;
   late DateTime _time;
+  String? _homeWater;
   bool _saving = false;
   String? _error;
 
@@ -648,6 +650,7 @@ class _SymptomSheetState extends State<_SymptomSheet> {
       _otherCtrl.text = e.otherText ?? '';
       _otherOn = _otherCtrl.text.isNotEmpty;
       _noteCtrl.text = e.note ?? '';
+      _homeWater = e.homeWater;
     }
   }
 
@@ -671,14 +674,25 @@ class _SymptomSheetState extends State<_SymptomSheet> {
       _error = null;
     });
     try {
-      await _repo.save(
+      final saved = await _repo.save(
         id: widget.existing?.id,
-        recordedAt: _time,
+        recordedAt: widget.existing?.recordedAtUtc ?? DateTime.now(),
+        occurredAt: _time,
         symptoms: SymptomRecord.codes.where(_selected.contains).toList(),
         noSymptoms: _none,
         otherText: _otherOn ? _otherCtrl.text : null,
         note: _noteCtrl.text,
+        homeWater: _homeWater,
         sourceLanguage: lang,
+      );
+      final loc = await const LocationService().getCurrentPosition(
+        requestIfDenied: false,
+      );
+      await SnapshotRepository().linkSymptom(
+        symptomId: saved.id,
+        occurredAt: saved.occurredAtUtc,
+        latitude: loc.position?.latitude,
+        longitude: loc.position?.longitude,
       );
       RecordsRevision.instance.bump();
       if (!mounted) return;
@@ -726,8 +740,29 @@ class _SymptomSheetState extends State<_SymptomSheet> {
       error: _error,
       onDelete: widget.existing != null ? _delete : null,
       children: [
-        _SectionLabel(l10n.s5FieldTime),
+        _SectionLabel(l10n.s6OccurredLabel),
         _TimeField(value: _time, onChanged: (t) => setState(() => _time = t)),
+        _SectionLabel(l10n.s6HomeWaterQuestion),
+        Wrap(
+          spacing: 8,
+          children: [
+            ChoiceChip(
+              label: Text(l10n.s6HomeWaterYes),
+              selected: _homeWater == 'yes',
+              onSelected: (_) => setState(() => _homeWater = 'yes'),
+            ),
+            ChoiceChip(
+              label: Text(l10n.s6HomeWaterNo),
+              selected: _homeWater == 'no',
+              onSelected: (_) => setState(() => _homeWater = 'no'),
+            ),
+            ChoiceChip(
+              label: Text(l10n.s5NoAnswer),
+              selected: _homeWater == 'no_answer',
+              onSelected: (_) => setState(() => _homeWater = 'no_answer'),
+            ),
+          ],
+        ),
         _SectionLabel(l10n.s5SymptomQuestion),
         Wrap(
           spacing: 8,

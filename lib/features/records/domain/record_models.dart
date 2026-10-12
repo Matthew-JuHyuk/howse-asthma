@@ -104,11 +104,13 @@ class SymptomRecord {
   const SymptomRecord({
     required this.id,
     required this.recordedAtUtc,
+    this.occurredAtUtc,
     this.tzOffsetMinutes,
     this.symptoms = const [],
     this.noSymptoms = false,
     this.otherText,
     this.note,
+    this.homeWater,
     this.sourceLanguage,
     this.updatedAt,
   });
@@ -123,16 +125,29 @@ class SymptomRecord {
 
   final String id;
   final DateTime recordedAtUtc;
+
+  /// When the symptom happened. Null on older rows — not guessed for environment.
+  final DateTime? occurredAtUtc;
   final int? tzOffsetMinutes;
   final List<String> symptoms;
   final bool noSymptoms;
   final String? otherText;
   final String? note;
+
+  /// Self-report only: `yes` / `no` / `no_answer`. Not a flood measurement.
+  final String? homeWater;
   final String? sourceLanguage;
   final DateTime? updatedAt;
 
   DateTime get localDate => recordLocalDate(recordedAtUtc, tzOffsetMinutes);
-  DateTime get localTime => recordLocalTime(recordedAtUtc, tzOffsetMinutes);
+
+  /// Calendar day of the symptom. Falls back to entry time only for display
+  /// of older rows that have no occurrence time.
+  DateTime get eventDate => occurredAtUtc == null
+      ? localDate
+      : recordLocalDate(occurredAtUtc!, tzOffsetMinutes);
+  DateTime get localTime =>
+      recordLocalTime(occurredAtUtc ?? recordedAtUtc, tzOffsetMinutes);
   bool get hasSymptoms =>
       symptoms.isNotEmpty || (otherText?.trim().isNotEmpty ?? false);
   DateTime get changedAt => updatedAt ?? recordedAtUtc;
@@ -142,11 +157,13 @@ class SymptomRecord {
     return SymptomRecord(
       id: row['id'] as String,
       recordedAtUtc: _ts(row['recorded_at']) ?? DateTime.now().toUtc(),
+      occurredAtUtc: _ts(row['occurred_at']),
       tzOffsetMinutes: (row['tz_offset_minutes'] as num?)?.toInt(),
       symptoms: raw is List ? raw.whereType<String>().toList() : const [],
       noSymptoms: row['no_symptoms'] == true,
       otherText: row['other_text'] as String?,
       note: row['note'] as String?,
+      homeWater: row['home_water'] as String?,
       sourceLanguage: row['source_language'] as String?,
       updatedAt: _ts(row['updated_at']),
     );

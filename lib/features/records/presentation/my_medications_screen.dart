@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/push/medication_reminder.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/medication_repository.dart';
+import '../data/regimen_repository.dart';
 import '../data/records_revision.dart';
 import '../domain/record_models.dart';
 import 'record_inputs.dart';
@@ -14,6 +16,12 @@ class MyMedicationsScreen extends StatefulWidget {
 
   @override
   State<MyMedicationsScreen> createState() => _MyMedicationsScreenState();
+}
+
+String _hhmm(int minutes) {
+  final hh = (minutes ~/ 60).toString().padLeft(2, '0');
+  final mm = (minutes % 60).toString().padLeft(2, '0');
+  return '$hh:$mm';
 }
 
 class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
@@ -46,6 +54,20 @@ class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
     final nameCtrl = TextEditingController(text: existing?.displayName ?? '');
     var isDefault = existing?.isDefault ?? (_meds?.isEmpty ?? true);
     var daily = existing?.dailyCheckEnabled ?? false;
+    MedicationRegimen? current;
+    if (existing != null) {
+      try {
+        current = (await RegimenRepository().listAll())
+            .where(
+              (r) => r.medicationId == existing.id && r.effectiveUntil == null,
+            )
+            .firstOrNull;
+      } catch (_) {}
+    }
+    var role = current?.role ?? 'controller';
+    var puffs = current?.puffsPerOccasion ?? 1;
+    var times = List<int>.from(current?.timesMinutes ?? const []);
+    if (!mounted) return;
     final result = await showDialog<String>(
       context: context,
       builder: (ctx) => StatefulBuilder(
@@ -75,6 +97,63 @@ class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
                   value: daily,
                   onChanged: (v) => setLocal(() => daily = v),
                 ),
+                DropdownButton<String>(
+                  isExpanded: true,
+                  value: role,
+                  items: [
+                    DropdownMenuItem(
+                      value: 'controller',
+                      child: Text(l10n.s6RoleController),
+                    ),
+                    DropdownMenuItem(
+                      value: 'rescue',
+                      child: Text(l10n.s6RoleRescue),
+                    ),
+                    DropdownMenuItem(value: 'both', child: Text(l10n.s6RoleBoth)),
+                  ],
+                  onChanged: (v) => setLocal(() => role = v ?? role),
+                ),
+                Row(
+                  children: [
+                    Text(l10n.s6PuffsEach),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: puffs > 1 ? () => setLocal(() => puffs--) : null,
+                      icon: const Icon(Icons.remove),
+                    ),
+                    Text('$puffs'),
+                    IconButton(
+                      onPressed: puffs < 20 ? () => setLocal(() => puffs++) : null,
+                      icon: const Icon(Icons.add),
+                    ),
+                  ],
+                ),
+                if (role != 'rescue') ...[
+                  Text(l10n.s6ScheduleTimes),
+                  for (var i = 0; i < times.length; i++)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(_hhmm(times[i])),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => setLocal(() => times.removeAt(i)),
+                      ),
+                    ),
+                  if (times.length < 6)
+                    TextButton(
+                      onPressed: () async {
+                        final picked = await showTimePicker(
+                          context: ctx,
+                          initialTime: TimeOfDay.now(),
+                        );
+                        if (picked == null) return;
+                        setLocal(
+                          () => times.add(picked.hour * 60 + picked.minute),
+                        );
+                      },
+                      child: Text(l10n.s6AddTime),
+                    ),
+                ],
               ],
             ),
           ),
@@ -109,12 +188,33 @@ class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
         await _repo.delete(existing!.id);
       } else {
         if (name.isEmpty) return;
-        await _repo.save(
+        final saved = await _repo.save(
           id: existing?.id,
           displayName: name,
           isDefault: isDefault,
           dailyCheckEnabled: daily,
         );
+        final schedule = role == 'rescue' || times.isNotEmpty;
+        if (schedule) {
+          await RegimenRepository().replaceOpen(
+            medicationId: saved.id,
+            role: role,
+            occasionsPerDay: role == 'rescue' ? 0 : times.length,
+            puffsPerOccasion: puffs,
+            timesMinutes: role == 'rescue' ? const [] : times,
+            effectiveFrom: DateTime.now(),
+          );
+          if (context.mounted) {
+            await MedicationReminder.instance.reschedule(
+              l10n,
+              await RegimenRepository().listAll(),
+              await RegimenRepository().listBetween(
+                dateOnly(DateTime.now()),
+                dateOnly(DateTime.now()),
+              ),
+            );
+          }
+        }
       }
       RecordsRevision.instance.bump();
       messenger.showSnackBar(SnackBar(content: Text(l10n.s5Saved)));

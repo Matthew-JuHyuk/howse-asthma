@@ -4184,6 +4184,295 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Write in your own language. You can leave these empty.'**
   String get s5VisitQuestionsHint;
+
+  /// No description provided for @s6AddTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a time'**
+  String get s6AddTime;
+
+  /// No description provided for @s6AddVisit.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a visit I reported'**
+  String get s6AddVisit;
+
+  /// No description provided for @s6BringPaper.
+  ///
+  /// In en, this message translates to:
+  /// **'I will bring a paper'**
+  String get s6BringPaper;
+
+  /// No description provided for @s6BringPaperHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Bringing a paper does not mean a clinician has confirmed it.'**
+  String get s6BringPaperHint;
+
+  /// No description provided for @s6DaySummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{date} · confirmed {used}/{scheduled} · unconfirmed {open} · symptoms {symptoms} · {env}'**
+  String s6DaySummary(
+    String date,
+    int used,
+    int scheduled,
+    int open,
+    int symptoms,
+    String env,
+  );
+
+  /// No description provided for @s6DoseLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Check later'**
+  String get s6DoseLater;
+
+  /// No description provided for @s6DoseNotUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'I could not use it'**
+  String get s6DoseNotUsed;
+
+  /// No description provided for @s6DoseUnconfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer yet'**
+  String get s6DoseUnconfirmed;
+
+  /// No description provided for @s6DoseUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'I used it'**
+  String get s6DoseUsed;
+
+  /// No description provided for @s6EnvLinked.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment linked'**
+  String get s6EnvLinked;
+
+  /// No description provided for @s6EnvNoData.
+  ///
+  /// In en, this message translates to:
+  /// **'No environment data for that time'**
+  String get s6EnvNoData;
+
+  /// No description provided for @s6EvidenceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Organizes records for your clinician and what still needs to be added.'**
+  String get s6EvidenceBody;
+
+  /// No description provided for @s6EvidenceNotOfficial.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a general list. It is not an official list of requirements from a specific insurance plan.'**
+  String get s6EvidenceNotOfficial;
+
+  /// No description provided for @s6EvidenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare records for a visit or insurance review'**
+  String get s6EvidenceTitle;
+
+  /// No description provided for @s6HideMedName.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide the medicine name on the lock screen'**
+  String get s6HideMedName;
+
+  /// No description provided for @s6HideMedNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The reminder still arrives at the times you saved. It is not a repeating background alert.'**
+  String get s6HideMedNameHint;
+
+  /// No description provided for @s6HomeWaterNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get s6HomeWaterNo;
+
+  /// No description provided for @s6HomeWaterQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Was there a leak or flooding at home?'**
+  String get s6HomeWaterQuestion;
+
+  /// No description provided for @s6HomeWaterYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get s6HomeWaterYes;
+
+  /// No description provided for @s6ItemClinician.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinician confirmation or papers to bring'**
+  String get s6ItemClinician;
+
+  /// No description provided for @s6ItemEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Local environment reference at the time of an event'**
+  String get s6ItemEnvironment;
+
+  /// No description provided for @s6ItemMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicine name and prescription'**
+  String get s6ItemMedication;
+
+  /// No description provided for @s6ItemSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing symptoms and limits on daily life'**
+  String get s6ItemSymptoms;
+
+  /// No description provided for @s6ItemUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Time period and use you confirmed'**
+  String get s6ItemUse;
+
+  /// No description provided for @s6ItemVisits.
+  ///
+  /// In en, this message translates to:
+  /// **'Visits and emergency visits you reported'**
+  String get s6ItemVisits;
+
+  /// No description provided for @s6NoSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved dose times yet. Add them under My medications.'**
+  String get s6NoSchedule;
+
+  /// No description provided for @s6OccurredLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'When it happened'**
+  String get s6OccurredLabel;
+
+  /// No description provided for @s6PdfEnvLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Regional reference only. It does not show personal exposure or the cause of symptoms. A single AQI does not name ozone and particles together, and it does not include pollen.'**
+  String get s6PdfEnvLimit;
+
+  /// No description provided for @s6PdfEnvTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Environment reference (appendix)'**
+  String get s6PdfEnvTitle;
+
+  /// No description provided for @s6PuffsEach.
+  ///
+  /// In en, this message translates to:
+  /// **'Puffs each time'**
+  String get s6PuffsEach;
+
+  /// No description provided for @s6ReminderBodyNamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to confirm {name}'**
+  String s6ReminderBodyNamed(String name);
+
+  /// No description provided for @s6ReminderBodyPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to confirm your medicine'**
+  String get s6ReminderBodyPrivate;
+
+  /// No description provided for @s6ReminderChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders at the dose times you saved. Not a 30-minute alert.'**
+  String get s6ReminderChannel;
+
+  /// No description provided for @s6ReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicine check'**
+  String get s6ReminderTitle;
+
+  /// No description provided for @s6RoleBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily and as needed'**
+  String get s6RoleBoth;
+
+  /// No description provided for @s6RoleController.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily medicine'**
+  String get s6RoleController;
+
+  /// No description provided for @s6RoleRescue.
+  ///
+  /// In en, this message translates to:
+  /// **'As needed'**
+  String get s6RoleRescue;
+
+  /// No description provided for @s6ScheduleTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Times you take it'**
+  String get s6ScheduleTimes;
+
+  /// No description provided for @s6StatusClinician.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinician confirmation needed'**
+  String get s6StatusClinician;
+
+  /// No description provided for @s6StatusNeedInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'More information needed'**
+  String get s6StatusNeedInfo;
+
+  /// No description provided for @s6StatusRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Recorded'**
+  String get s6StatusRecorded;
+
+  /// No description provided for @s6TimelineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Treatment and environment'**
+  String get s6TimelineTitle;
+
+  /// No description provided for @s6TodayDoses.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicines to confirm today'**
+  String get s6TodayDoses;
+
+  /// No description provided for @s6VisitKindEr.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency room (I reported this)'**
+  String get s6VisitKindEr;
+
+  /// No description provided for @s6VisitKindOffice.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinic visit (I reported this)'**
+  String get s6VisitKindOffice;
+
+  /// No description provided for @s6VisitKindOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other visit (I reported this)'**
+  String get s6VisitKindOther;
+
+  /// No description provided for @s6VisitKindUrgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent care (I reported this)'**
+  String get s6VisitKindUrgent;
 }
 
 class _AppLocalizationsDelegate

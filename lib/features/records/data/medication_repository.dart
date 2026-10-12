@@ -36,7 +36,7 @@ class MedicationRepository {
     return all.any((m) => m.dailyCheckEnabled);
   }
 
-  Future<void> save({
+  Future<PatientMedication> save({
     String? id,
     required String displayName,
     required bool isDefault,
@@ -60,11 +60,13 @@ class MedicationRepository {
       'daily_check_enabled': dailyCheckEnabled,
       'updated_at': DateTime.now().toUtc().toIso8601String(),
     };
-    if (id == null) {
-      await table.insert({...values, 'patient_id': userId});
-    } else {
-      await table.update(values).eq('id', id);
-    }
+    final row = id == null
+        ? await table
+              .insert({...values, 'patient_id': userId})
+              .select(_columns)
+              .single()
+        : await table.update(values).eq('id', id).select(_columns).single();
+    return PatientMedication.fromRow(Map<String, dynamic>.from(row as Map));
   }
 
   Future<void> delete(String id) async {

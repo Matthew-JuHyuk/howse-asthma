@@ -2379,4 +2379,170 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get s5VisitQuestionsHint =>
       'Écrivez dans votre langue. Vous pouvez laisser vide.';
+
+  @override
+  String get s6AddTime => 'Ajouter une heure';
+
+  @override
+  String get s6AddVisit => 'Ajouter une visite que j’ai signalée';
+
+  @override
+  String get s6BringPaper => 'J’apporterai un document';
+
+  @override
+  String get s6BringPaperHint =>
+      'Avoir un document ne signifie pas qu’un médecin l’a confirmé.';
+
+  @override
+  String s6DaySummary(
+    String date,
+    int used,
+    int scheduled,
+    int open,
+    int symptoms,
+    String env,
+  ) {
+    return '$date · confirmé $used/$scheduled · sans réponse $open · symptômes $symptoms · $env';
+  }
+
+  @override
+  String get s6DoseLater => 'Vérifier plus tard';
+
+  @override
+  String get s6DoseNotUsed => 'Je n’ai pas pu le prendre';
+
+  @override
+  String get s6DoseUnconfirmed => 'Pas encore de réponse';
+
+  @override
+  String get s6DoseUsed => 'Je l’ai pris';
+
+  @override
+  String get s6EnvLinked => 'Environnement lié';
+
+  @override
+  String get s6EnvNoData => 'Pas de donnée d’environnement pour cette heure';
+
+  @override
+  String get s6EvidenceBody =>
+      'Rassemble les notes pour votre médecin et ce qu’il reste à ajouter.';
+
+  @override
+  String get s6EvidenceNotOfficial =>
+      'Liste générale. Ce n’est pas la liste officielle des exigences d’une assurance précise.';
+
+  @override
+  String get s6EvidenceTitle =>
+      'Préparer les informations pour la consultation ou l’assurance';
+
+  @override
+  String get s6HideMedName =>
+      'Masquer le nom du médicament sur l’écran verrouillé';
+
+  @override
+  String get s6HideMedNameHint =>
+      'Le rappel arrive seulement aux heures enregistrées. Ce n’est pas une alerte toutes les 30 minutes.';
+
+  @override
+  String get s6HomeWaterNo => 'Non';
+
+  @override
+  String get s6HomeWaterQuestion =>
+      'Y a-t-il eu une fuite ou une inondation à la maison ?';
+
+  @override
+  String get s6HomeWaterYes => 'Oui';
+
+  @override
+  String get s6ItemClinician =>
+      'Confirmation du médecin ou documents à apporter';
+
+  @override
+  String get s6ItemEnvironment =>
+      'Référence d’environnement local au moment de l’événement';
+
+  @override
+  String get s6ItemMedication => 'Nom du médicament et prescription';
+
+  @override
+  String get s6ItemSymptoms =>
+      'Symptômes durables et limites dans la vie quotidienne';
+
+  @override
+  String get s6ItemUse => 'Période et prises que vous avez confirmées';
+
+  @override
+  String get s6ItemVisits =>
+      'Consultations et urgences que vous avez signalées';
+
+  @override
+  String get s6NoSchedule =>
+      'Aucune heure enregistrée. Ajoutez-les dans Mes médicaments.';
+
+  @override
+  String get s6OccurredLabel => 'Quand c’est arrivé';
+
+  @override
+  String get s6PdfEnvLimit =>
+      'Référence régionale seulement. Cela ne montre pas l’exposition personnelle ni la cause des symptômes. Un seul AQI ne nomme pas à la fois l’ozone et les particules, et n’inclut pas le pollen.';
+
+  @override
+  String get s6PdfEnvTitle => 'Référence d’environnement (annexe)';
+
+  @override
+  String get s6PuffsEach => 'Bouffées à chaque fois';
+
+  @override
+  String s6ReminderBodyNamed(String name) {
+    return 'Confirmez $name';
+  }
+
+  @override
+  String get s6ReminderBodyPrivate => 'Confirmez votre médicament';
+
+  @override
+  String get s6ReminderChannel =>
+      'Rappels aux heures de prise enregistrées. Pas une alerte toutes les 30 minutes.';
+
+  @override
+  String get s6ReminderTitle => 'Confirmation du médicament';
+
+  @override
+  String get s6RoleBoth => 'Chaque jour et au besoin';
+
+  @override
+  String get s6RoleController => 'Médicament quotidien';
+
+  @override
+  String get s6RoleRescue => 'Au besoin';
+
+  @override
+  String get s6ScheduleTimes => 'Heures de prise';
+
+  @override
+  String get s6StatusClinician => 'Confirmation du médecin nécessaire';
+
+  @override
+  String get s6StatusNeedInfo => 'Information à ajouter';
+
+  @override
+  String get s6StatusRecorded => 'Noté';
+
+  @override
+  String get s6TimelineTitle => 'Traitement et environnement';
+
+  @override
+  String get s6TodayDoses => 'Médicaments à confirmer aujourd’hui';
+
+  @override
+  String get s6VisitKindEr => 'Urgences (signalé par moi)';
+
+  @override
+  String get s6VisitKindOffice => 'Consultation (signalée par moi)';
+
+  @override
+  String get s6VisitKindOther => 'Autre visite (signalée par moi)';
+
+  @override
+  String get s6VisitKindUrgent => 'Soins urgents (signalés par moi)';
 }

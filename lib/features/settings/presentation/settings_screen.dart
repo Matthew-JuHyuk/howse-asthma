@@ -11,6 +11,7 @@ import '../../../core/location/environment_monitor.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/phone/phone_e164.dart';
 import '../../../core/push/fcm_service.dart';
+import '../../../core/push/medication_reminder.dart';
 import '../../../core/push/notification_consent_prefs.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../core/theme/app_theme.dart';
@@ -54,6 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _pushLocationEntry = true;
   bool _pushHome = true;
   bool _pushMaster = false;
+  bool _hideMedName = true;
   bool _pushPositive = true;
   bool _fgRefresh = true;
   bool? _osPushGranted;
@@ -83,6 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
     final fgRefresh = await NotificationConsentPrefs.isBgRefreshEnabled(userId);
     final osPush = await FcmService.instance.osPermissionGranted();
+    final hideMedName = await MedicationReminder.instance.hideMedicationName();
     Map<String, dynamic>? contact;
     Map<String, dynamic>? prefs;
     try {
@@ -116,6 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _pushPositive = pushPositive;
       }
       _pushMaster = pushMaster;
+      _hideMedName = hideMedName;
       _fgRefresh = fgRefresh;
       _osPushGranted = osPush;
       _locationStatus = !serviceOn
@@ -372,6 +376,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Text(l10n.locationOpenSettings),
               ),
             ],
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(l10n.s6HideMedName),
+              subtitle: Text(l10n.s6HideMedNameHint),
+              value: _hideMedName,
+              onChanged: (v) async {
+                await MedicationReminder.instance.setHideMedicationName(v);
+                if (mounted) setState(() => _hideMedName = v);
+              },
+            ),
             Text(l10n.s5EnvAlertsHeading, style: _subhead),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,

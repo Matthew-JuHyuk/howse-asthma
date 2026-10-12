@@ -90,6 +90,7 @@ class VisitSummaryBuilder {
     required RecordBundle bundle,
     required DateTime generatedAt,
     EnvironmentSnapshot? environment,
+    List<String> environmentLines = const [],
   }) {
     final s = summary;
     final notRecorded = SummaryLine(t.s5PdfNotRecorded);
@@ -248,6 +249,15 @@ class VisitSummaryBuilder {
               SummaryLine(t.s5UpdatedAt(_dt(env.fetchedAt!.toLocal()))),
             SummaryLine(t.s5PdfEnvNote),
           ],
+        ]),
+      );
+    }
+
+    if (environmentLines.isNotEmpty) {
+      sections.add(
+        SummarySection(t.s6PdfEnvTitle, [
+          for (final line in environmentLines) SummaryLine(line),
+          SummaryLine(t.s6PdfEnvLimit),
         ]),
       );
     }

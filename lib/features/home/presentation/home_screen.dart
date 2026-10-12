@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/location/location_service.dart';
+import '../../../core/push/medication_reminder.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../environment/data/environment_controller.dart';
@@ -8,6 +9,9 @@ import '../../environment/presentation/env_labels.dart';
 import '../../locations/presentation/locations_screen.dart';
 import '../../records/data/medication_repository.dart';
 import '../../records/data/records_loader.dart';
+import '../../records/data/regimen_repository.dart';
+import '../../records/data/snapshot_repository.dart';
+import '../../records/presentation/evidence_prep_screen.dart';
 import '../../records/data/records_revision.dart';
 import '../../records/domain/record_models.dart';
 import '../../records/domain/record_summary.dart';
@@ -35,6 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
   PatientMedication? _defaultMed;
   bool _dailyCheckEnabled = false;
   MedCheckRecord? _todayCheck;
+  List<MedicationRegimen> _regimens = const [];
+  List<OccasionCheck> _checks = const [];
+  RecordBundle? _bundle;
+  List<EnvSnapshot> _snaps = const [];
   bool _recordsFailed = false;
 
   @override
@@ -69,6 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
       final draft = results[1] as VisitPrepDraft;
       final meds = results[2] as List<PatientMedication>;
       final today = dateOnly(DateTime.now());
+      List<MedicationRegimen> regimens = const [];
+      List<OccasionCheck> checks = const [];
+      List<EnvSnapshot> snaps = const [];
+      try {
+        regimens = await RegimenRepository().listAll();
+        checks = await RegimenRepository().listBetween(range.start, range.end);
+        snaps = await SnapshotRepository().listRecent();
+      } catch (_) {}
       if (!mounted) return;
       setState(() {
         _summary = RecordSummary.compute(range, bundle);
@@ -78,8 +94,19 @@ class _HomeScreenState extends State<HomeScreen> {
         _todayCheck = bundle.medChecks
             .where((c) => c.date == today)
             .firstOrNull;
+        _regimens = regimens;
+        _checks = checks;
+        _bundle = bundle;
+        _snaps = snaps;
         _recordsFailed = false;
       });
+      if (mounted) {
+        await MedicationReminder.instance.reschedule(
+          AppLocalizations.of(context)!,
+          regimens,
+          checks,
+        );
+      }
     } catch (_) {
       if (mounted) setState(() => _recordsFailed = true);
     }
@@ -106,9 +133,13 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 16),
           _QuickLogButtons(defaultMed: _defaultMed),
           const SizedBox(height: 16),
+          _todayDoses(l10n),
+          const SizedBox(height: 12),
           _visitCard(l10n),
           const SizedBox(height: 12),
           _recentCard(l10n),
+          const SizedBox(height: 12),
+          _timeline(l10n),
           if (_dailyCheckEnabled) ...[
             const SizedBox(height: 12),
             _medCheckLink(l10n),
@@ -121,6 +152,104 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  Widget _todayDoses(AppLocalizations l10n) {
+    final today = dateOnly(DateTime.now());
+    final open = _regimens.where((r) => r.effectiveUntil == null && r.covers(today));
+    final slots = <({MedicationRegimen regimen, int index})>[];
+    for (final regimen in open.where((r) => r.schedulesReminders)) {
+      for (var i = 0; i < regimen.timesMinutes.length; i++) {
+        slots.add((regimen: regimen, index: i));
+      }
+    }
+    return _HomeCard(
+      title: l10n.s6TodayDoses,
+      children: [
+        if (slots.isEmpty)
+          Text(l10n.s6NoSchedule)
+        else
+          for (final slot in slots) _doseRow(l10n, slot.regimen, slot.index, today),
+      ],
+    );
+  }
+
+  Widget _doseRow(
+    AppLocalizations l10n,
+    MedicationRegimen regimen,
+    int index,
+    DateTime today,
+  ) {
+    final check = _checks
+        .where(
+          (c) =>
+              c.regimenId == regimen.id &&
+              c.localDate == today &&
+              c.occasionIndex == index,
+        )
+        .firstOrNull;
+    final minutes = regimen.timesMinutes[index];
+    final hh = (minutes ~/ 60).toString().padLeft(2, '0');
+    final mm = (minutes % 60).toString().padLeft(2, '0');
+    final name = regimen.medicationName ?? '';
+    final state = switch (check?.status) {
+      'used' => l10n.s6DoseUsed,
+      'not_used' => l10n.s6DoseNotUsed,
+      'deferred' => l10n.s6DoseLater,
+      _ => l10n.s6DoseUnconfirmed,
+    };
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('$name · $hh:$mm · $state'),
+          const SizedBox(height: 4),
+          Wrap(
+            spacing: 8,
+            children: [
+              _doseButton(l10n.s6DoseUsed, () => _respond(regimen, index, today, 'used')),
+              _doseButton(l10n.s6DoseLater, () => _respond(regimen, index, today, 'deferred')),
+              _doseButton(
+                l10n.s6DoseNotUsed,
+                () => _respond(regimen, index, today, 'not_used'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _doseButton(String label, VoidCallback onPressed) => OutlinedButton(
+    onPressed: onPressed,
+    child: Text(label),
+  );
+
+  Future<void> _respond(
+    MedicationRegimen regimen,
+    int index,
+    DateTime today,
+    String status,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      await RegimenRepository().respond(
+        regimenId: regimen.id,
+        localDate: today,
+        occasionIndex: index,
+        status: status,
+        requestId: newRequestId(),
+        source: 'in_app',
+      );
+      RecordsRevision.instance.bump();
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.s5SaveFailed)),
+        );
+      }
+    }
   }
 
   Widget _visitCard(AppLocalizations l10n) {
@@ -153,7 +282,56 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () => widget.onOpenTab(2),
           child: Text(l10n.s5PrepareVisit),
         ),
+        const SizedBox(height: 8),
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const EvidencePrepScreen()),
+          ),
+          child: Text(l10n.s6EvidenceTitle),
+        ),
       ],
+    );
+  }
+
+  Widget _timeline(AppLocalizations l10n) {
+    final range = RecordRange.lastDays(7);
+    return _HomeCard(
+      title: l10n.s6TimelineTitle,
+      children: [
+        for (final day in range.dates.toList().reversed)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Text(_dayText(l10n, day)),
+          ),
+      ],
+    );
+  }
+
+  String _dayText(AppLocalizations l10n, DateTime day) {
+    final d = dateOnly(day);
+    var scheduled = 0;
+    for (final regimen in _regimens) {
+      if (regimen.covers(d) && regimen.schedulesReminders) {
+        scheduled += regimen.occasionsPerDay;
+      }
+    }
+    final dayChecks = _checks.where((c) => c.localDate == d);
+    final used = dayChecks.where((c) => c.status == 'used').length;
+    final open = scheduled > dayChecks.length ? scheduled - dayChecks.length : 0;
+    final symptoms =
+        _bundle?.symptoms.where((s) => s.eventDate == d).length ?? 0;
+    final linked = _snaps.any((s) {
+      final t = s.eventTime?.toLocal();
+      return s.linked && t != null && dateOnly(t) == d;
+    });
+    return l10n.s6DaySummary(
+      '${d.month}/${d.day}',
+      used,
+      scheduled,
+      open,
+      symptoms,
+      linked ? l10n.s6EnvLinked : l10n.s6EnvNoData,
     );
   }
 

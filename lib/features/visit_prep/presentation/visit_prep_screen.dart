@@ -8,6 +8,7 @@ import '../../records/data/records_loader.dart';
 import '../../records/data/records_revision.dart';
 import '../../records/domain/record_models.dart';
 import '../../records/domain/record_summary.dart';
+import '../../records/presentation/evidence_prep_screen.dart';
 import '../data/visit_prep_repository.dart';
 import '../domain/visit_summary.dart';
 import 'visit_preview_screen.dart';
@@ -211,6 +212,13 @@ class _VisitPrepScreenState extends State<VisitPrepScreen> {
         Text(
           l10n.s5VisitIntro,
           style: const TextStyle(fontSize: 16, color: AppTheme.neutral700),
+        ),
+        const SizedBox(height: 12),
+        OutlinedButton(
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const EvidencePrepScreen()),
+          ),
+          child: Text(l10n.s6EvidenceTitle),
         ),
         if (stale) ...[
           const SizedBox(height: 12),

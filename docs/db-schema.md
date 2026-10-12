@@ -479,6 +479,24 @@ without an offset fall back to the device's current offset.
 
 ---
 
+## 2.y Prescription versions and event evidence (2026-10-11)
+
+Migration: [`supabase/migrations/20261011180000_s6_regimen_and_evidence.sql`](../supabase/migrations/20261011180000_s6_regimen_and_evidence.sql).
+Not applied to the remote project until `supabase db push`.
+
+| Table | Purpose | RLS |
+| --- | --- | --- |
+| `medication_regimens` | Versioned schedule for a saved medication. `effective_until` NULL is the open version. Changing the schedule closes the previous row. | Own CRUD · linked provider SELECT |
+| `medication_occasion_checks` | One answer per occasion: `used` · `not_used` · `deferred`. No row means unconfirmed, not missed. Unique `(regimen_id, local_date, occasion_index)`. | Own CRUD · linked provider SELECT |
+| `environment_event_snapshots` | Link from a symptom, inhaler event, or care report to a regional reading. Patients may insert `pending` or `no_data` with measurement columns NULL. `linked` values are written by `link-event-environment`. | Own insert/update under that check · linked provider SELECT |
+| `patient_care_reports` | Patient-reported visit (`er` · `urgent_care` · `office` · `other`). `has_attachment` does not set `clinician_confirmed`. Patients cannot set `clinician_confirmed`. | Own CRUD except confirmation · linked provider SELECT |
+| `coverage_policy_slots` / `coverage_policy_items` | Empty slots for a later policy id, product, drug, source, effective date, and evidence ids. No seed rows and no insurer requirements. | Own only |
+
+`symptom_entries` gains nullable `occurred_at` and `home_water` (`yes` · `no` · `no_answer`).
+The current environment cache is attached only when the event time is within 20 minutes of now and of the cache `created_at`.
+
+---
+
 ## 3. RLS policy outline
 
 > Implemented in [`supabase/migrations/20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql).  
@@ -532,6 +550,7 @@ Cooldown: `environment_alerts_sent` + `alert_policy.cooldown_minutes=60`
 | --- | --- | --- |
 | `points_delta` | ❌ | Draft seed values also server config |
 | `environment_forecasts` | ❌ | `calculate-environment-risk` |
+| Snapshot measurements (`linked` AQI / PM2.5) | ❌ | `link-event-environment` only. Client may store `pending` / `no_data` |
 | `environment_alerts_sent` | ❌ | Alert-dispatch Edge Function |
 | `outbound_transmissions` status | ❌ | Resend/e-Fax EF. No mock SENT |
 | Invite consume / link activate | Limited / RPC | `active` only after both confirm |
@@ -574,6 +593,7 @@ Secrets: `AIRNOW_API_KEY`, `PURPLEAIR_READ_KEY`, `GOOGLE_MAPS_API_KEY`,
 | Real food-bank partners | `food_bank_vouchers.is_draft=true` + redemption `WAITLIST` |
 | Points→donation conversion policy | `cash_equivalent_usd` nullable |
 | PA/LMN form copy | Storage PDF + `review_checklist` JSONB only |
+| Insurer policy text | `coverage_policy_*` columns exist and stay empty until a real policy is supplied. The app does not invent requirements |
 | VUI voice input | `input_means='voice'` allowed; unused in MVP |
 
 ---

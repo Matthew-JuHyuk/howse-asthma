@@ -234,7 +234,15 @@ Deno.serve(async (req) => {
   if (typeof details === "string") return jsonResponse({ error: details }, 400);
 
   let envFields: Record<string, unknown> = {};
-  if (latitude != null && longitude != null) {
+  // Do not attach the current cache to a back-dated entry.
+  const eventIso = typeof details.recorded_at === "string"
+    ? details.recorded_at
+    : new Date().toISOString();
+  const eventMs = Date.parse(eventIso);
+  const envWindowMs = 20 * 60_000;
+  const eventIsNow = Number.isFinite(eventMs) &&
+    Math.abs(Date.now() - eventMs) <= envWindowMs;
+  if (latitude != null && longitude != null && eventIsNow) {
     const geohash = encodeGeohash(latitude, longitude, 5);
     const { data: forecast } = await admin
       .from("environment_forecasts")
@@ -248,8 +256,7 @@ Deno.serve(async (req) => {
 
     if (forecast) {
       const createdMs = Date.parse(forecast.created_at as string);
-      const softStaleMs = 6 * 60 * 60_000;
-      if (Number.isFinite(createdMs) && Date.now() - createdMs <= softStaleMs) {
+      if (Number.isFinite(createdMs) && Math.abs(eventMs - createdMs) <= envWindowMs) {
         const raw = forecast.raw_response as {
           data_source_summary?: Record<string, string>;
         } | null;

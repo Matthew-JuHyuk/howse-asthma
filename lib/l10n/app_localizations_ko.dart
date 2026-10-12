@@ -2219,4 +2219,157 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get s5VisitQuestionsHint => '내 언어로 적으세요. 비워 두어도 괜찮아요.';
+
+  @override
+  String get s6AddTime => '시각 추가';
+
+  @override
+  String get s6AddVisit => '내가 보고한 진료 추가';
+
+  @override
+  String get s6BringPaper => '서류를 가져갈 예정';
+
+  @override
+  String get s6BringPaperHint => '서류가 있다는 것은 의료진이 확인했다는 뜻이 아닙니다.';
+
+  @override
+  String s6DaySummary(
+    String date,
+    int used,
+    int scheduled,
+    int open,
+    int symptoms,
+    String env,
+  ) {
+    return '$date · 확인 $used/$scheduled · 미응답 $open · 증상 $symptoms · $env';
+  }
+
+  @override
+  String get s6DoseLater => '나중에 확인';
+
+  @override
+  String get s6DoseNotUsed => '사용하지 못했어요';
+
+  @override
+  String get s6DoseUnconfirmed => '아직 응답 없음';
+
+  @override
+  String get s6DoseUsed => '사용했어요';
+
+  @override
+  String get s6EnvLinked => '환경 연결됨';
+
+  @override
+  String get s6EnvNoData => '당시 환경 자료 없음';
+
+  @override
+  String get s6EvidenceBody => '의료진이 검토할 기록과 추가로 필요한 정보를 정리합니다.';
+
+  @override
+  String get s6EvidenceNotOfficial => '일반적인 자료 목록입니다. 특정 보험의 공식 요구사항 목록이 아닙니다.';
+
+  @override
+  String get s6EvidenceTitle => '진료·보험 검토 자료 준비';
+
+  @override
+  String get s6HideMedName => '잠금 화면에서 약 이름 숨기기';
+
+  @override
+  String get s6HideMedNameHint => '알림은 저장한 복용 시각에만 옵니다. 30분마다 반복되는 알림이 아닙니다.';
+
+  @override
+  String get s6HomeWaterNo => '아니요';
+
+  @override
+  String get s6HomeWaterQuestion => '집에 누수나 침수가 있었나요?';
+
+  @override
+  String get s6HomeWaterYes => '예';
+
+  @override
+  String get s6ItemClinician => '의료진 확인 또는 첨부 자료';
+
+  @override
+  String get s6ItemEnvironment => '사건 당시 지역 환경 참고자료';
+
+  @override
+  String get s6ItemMedication => '약 이름과 처방 내용';
+
+  @override
+  String get s6ItemSymptoms => '지속된 증상과 일상생활의 어려움';
+
+  @override
+  String get s6ItemUse => '사용 기간과 환자가 확인한 사용 기록';
+
+  @override
+  String get s6ItemVisits => '환자가 보고한 진료·응급실 방문';
+
+  @override
+  String get s6NoSchedule => '저장한 복용 시각이 없습니다. 내 약에서 추가하세요.';
+
+  @override
+  String get s6OccurredLabel => '증상이 생긴 시각';
+
+  @override
+  String get s6PdfEnvLimit =>
+      '지역 참고입니다. 개인 노출이나 증상의 원인을 보여 주지 않습니다. AQI 하나만으로 오존과 입자를 함께 말하지 않으며, 꽃가루는 포함하지 않습니다.';
+
+  @override
+  String get s6PdfEnvTitle => '환경 참고 (부록)';
+
+  @override
+  String get s6PuffsEach => '한 번에 흡입하는 횟수';
+
+  @override
+  String s6ReminderBodyNamed(String name) {
+    return '$name 사용을 확인해 주세요';
+  }
+
+  @override
+  String get s6ReminderBodyPrivate => '약 사용을 확인해 주세요';
+
+  @override
+  String get s6ReminderChannel => '저장한 복용 시각의 알림입니다. 30분 반복 알림이 아닙니다.';
+
+  @override
+  String get s6ReminderTitle => '약 사용 확인';
+
+  @override
+  String get s6RoleBoth => '매일 그리고 필요할 때';
+
+  @override
+  String get s6RoleController => '매일 사용하는 약';
+
+  @override
+  String get s6RoleRescue => '필요할 때 사용하는 약';
+
+  @override
+  String get s6ScheduleTimes => '복용 시각';
+
+  @override
+  String get s6StatusClinician => '의료진 확인 필요';
+
+  @override
+  String get s6StatusNeedInfo => '정보 추가 필요';
+
+  @override
+  String get s6StatusRecorded => '기록 있음';
+
+  @override
+  String get s6TimelineTitle => '치료와 환경';
+
+  @override
+  String get s6TodayDoses => '오늘 확인할 약';
+
+  @override
+  String get s6VisitKindEr => '응급실 (내가 보고)';
+
+  @override
+  String get s6VisitKindOffice => '외래 진료 (내가 보고)';
+
+  @override
+  String get s6VisitKindOther => '기타 진료 (내가 보고)';
+
+  @override
+  String get s6VisitKindUrgent => '긴급 진료 (내가 보고)';
 }
