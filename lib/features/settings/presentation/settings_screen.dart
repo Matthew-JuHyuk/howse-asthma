@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart' show LocationPermission;
 
+import '../../../core/config/v2_nav_flag.dart';
 import '../../../core/biometrics/biometric_prefs.dart';
 import '../../../core/biometrics/biometric_service.dart';
 import '../../../core/debug/debug_gates.dart';
@@ -131,6 +132,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           : 'granted';
       _loading = false;
     });
+    await V2NavFlag.instance.load();
+    if (mounted) setState(() {});
   }
 
   Future<void> _toggleBiometric(bool value) async {
@@ -337,6 +340,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(height: 8),
             Text(l10n.s5SettingsLanguageNote, style: _hint),
           ],
+        ),
+      ),
+      _section(
+        title: l10n.v2SettingsTitle,
+        child: SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(l10n.v2NavToggle),
+          subtitle: Text(l10n.v2NavToggleHint),
+          value: V2NavFlag.instance.enabled,
+          onChanged: (value) async {
+            await V2NavFlag.instance.setEnabled(value);
+            if (mounted) setState(() {});
+          },
         ),
       ),
       // 2. My medications

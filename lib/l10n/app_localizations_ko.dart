@@ -2372,4 +2372,174 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get s6VisitKindUrgent => '긴급 진료 (내가 보고)';
+
+  @override
+  String get v2SettingsTitle => '급여 통지서';
+
+  @override
+  String get v2NavToggle => '급여 통지서 홈 보기';
+
+  @override
+  String get v2NavToggleHint =>
+      '거부 통지서를 읽고 진료 자료를 준비하는 미리보기입니다. 기존 기록은 그대로 열 수 있습니다. 실제 문서 읽기는 꺼져 있습니다.';
+
+  @override
+  String get v2HomeHeadline => '급여 거부 편지를 이해하고 진료 준비 자료를 만드세요.';
+
+  @override
+  String get v2HomeBody => '앱은 항소를 제출하지 않고, 보험이 승인할지도 판단하지 않습니다.';
+
+  @override
+  String get v2AddLetter => '거부 편지 추가';
+
+  @override
+  String get v2TrySample => '샘플로 체험';
+
+  @override
+  String get v2SampleBanner => '샘플입니다. 실제 통지서도, 실제 분석도 아닙니다.';
+
+  @override
+  String get v2LiveOffTitle => '실제 문서 읽기가 꺼져 있습니다';
+
+  @override
+  String get v2LiveOffBody =>
+      '이 빌드에서는 사진과 파일을 분석하지 않습니다. 표시된 샘플로 단계를 살펴볼 수 있습니다.';
+
+  @override
+  String get v2Close => '닫기';
+
+  @override
+  String get v2MyRecords => '내 기록';
+
+  @override
+  String get v2EmptyCases => '아직 편지가 없습니다.';
+
+  @override
+  String get v2MedNeedsReview => '약물 확인 필요';
+
+  @override
+  String get v2NextCheck => '다음: 내용 확인';
+
+  @override
+  String get v2NextDraft => '다음: 초안 만들기';
+
+  @override
+  String get v2Created => '추가됨';
+
+  @override
+  String get v2StatusDraft => '초안 준비됨';
+
+  @override
+  String get v2StatusReady => '초안을 만들 수 있음';
+
+  @override
+  String get v2StatusReview => '확인 필요';
+
+  @override
+  String get v2DeadlineLabel => '기한';
+
+  @override
+  String get v2ExplainTitle => '쉬운 설명';
+
+  @override
+  String get v2CheckTitle => '확인할 내용';
+
+  @override
+  String get v2RecordsTitle => '내 기록';
+
+  @override
+  String get v2DocsTitle => '문서 만들기';
+
+  @override
+  String get v2Original => '원문';
+
+  @override
+  String get v2Patient => '통지서의 이름';
+
+  @override
+  String get v2EditMedication => '약물명 원문';
+
+  @override
+  String get v2Dose => '적힌 그대로의 용량';
+
+  @override
+  String get v2ReasonMissing => '이유를 확인하지 못했습니다.';
+
+  @override
+  String get v2ConfirmDate => '통지서에 적힌 날짜가 맞습니다';
+
+  @override
+  String get v2SaveEdit => '수정 저장';
+
+  @override
+  String get v2ConfirmFacts => '이 내용을 확인했습니다';
+
+  @override
+  String get v2Confirmed => '확인함';
+
+  @override
+  String get v2NoRecords => '연결된 기록이 없습니다. 그래도 초안을 만들 수 있습니다. 복약 비율은 만들지 않습니다.';
+
+  @override
+  String get v2SelfReportLabel => '선택 메모 (환자 자가 보고)';
+
+  @override
+  String get v2EnglishDraft => '검토용 영어 초안입니다. 제출용 번역본이 아닙니다.';
+
+  @override
+  String get v2DraftBannerNote => '모든 페이지에 의사 검토가 필요하다는 표시가 있습니다.';
+
+  @override
+  String get v2StaleDraft => '내용이 바뀌었습니다. 공유하기 전에 초안을 다시 만드세요.';
+
+  @override
+  String get v2GenerateReview => '검토용 초안 만들기';
+
+  @override
+  String get v2GeneratePrepared => '제출 준비용 초안 만들기';
+
+  @override
+  String get v2PreparedBlocked => '제출 준비용 초안은 이름, 약물, 거부 이유를 확인해야 합니다.';
+
+  @override
+  String get v2NotInitial => '이 문서는 처음 받은 약제 거부가 아닙니다. 항소 초안을 만들지 않습니다.';
+
+  @override
+  String get v2GenericError => '이 단계를 마치지 못했습니다. 다시 시도할 수 있습니다.';
+
+  @override
+  String get v2Share => '공유';
+
+  @override
+  String get v2ClinicianPdf => '의사용 1페이지 PDF';
+
+  @override
+  String get v2ShareNotSubmitted => '공유했다고 해서 보험사가 파일을 받은 것은 아닙니다.';
+
+  @override
+  String get v2DeleteCase => '이 샘플 삭제';
+
+  @override
+  String get v2Deleted => '미리보기에서 제거했습니다.';
+
+  @override
+  String get v2FontUnavailable => 'PDF 글꼴을 불러오지 못했습니다. 인터넷에 연결된 뒤 다시 시도하세요.';
+
+  @override
+  String get v2NotEntered => '[미입력]';
+
+  @override
+  String get v2DocDeadline => '문서에 적힌 기한';
+
+  @override
+  String get v2CalcDeadline => '입력한 수령일 기준 계산';
+
+  @override
+  String get v2NeedReceived => '통지서는 받은 날부터 며칠로 적혀 있습니다. 날짜를 계산하려면 수령일을 입력하세요.';
+
+  @override
+  String get v2UnclearDeadline => '기한 문장이 분명하지 않습니다. 날짜를 계산하지 않았습니다.';
+
+  @override
+  String get v2AskPlan => '문서에서 기한을 확인하지 못했습니다. 보험사에 확인하세요.';
 }

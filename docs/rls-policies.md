@@ -20,6 +20,9 @@ Aligned with [`db-schema.md`](./db-schema.md) §3.
 | `environment_forecasts` | **No client access** — Edge / `service_role` cache only |
 | `food_bank_vouchers` | **SELECT** for any authenticated user |
 | `env_api_circuits`, `env_risk_rate_events` | **No client access** — Edge rate/circuit tables |
+| `appeal_cases` and child rows (`20261018120000_v2_appeal_cases.sql`) | Owner only. Hidden after `deleted_at` is set. Child writes must match the parent owner. Not applied remotely until `supabase db push` |
+| `evidence_catalog` | Authenticated **SELECT** of unexpired `approved` rows only. No client insert |
+| `appeal-documents` storage bucket | Private. Object path must start with the signed-in user id |
 | Points / donations / alert dispatch writes | **No client INSERT** — Edge / `service_role` |
 | `outbound_transmissions` | Provider may INSERT `QUEUED` only; status updates via Edge |
 

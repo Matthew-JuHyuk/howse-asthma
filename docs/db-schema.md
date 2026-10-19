@@ -497,6 +497,26 @@ The current environment cache is attached only when the event time is within 20 
 
 ---
 
+## 2.z Appeal-prep tables (2026-10-18)
+
+Migration: [`supabase/migrations/20261018120000_v2_appeal_cases.sql`](../supabase/migrations/20261018120000_v2_appeal_cases.sql).
+Not applied until `supabase db push`. The sample walkthrough does not write these rows.
+
+| Table | Purpose | RLS |
+| --- | --- | --- |
+| `appeal_cases` | One denial notice case. `demo_mode` marks synthetic rows. `deleted_at` hides the row from SELECT | Owner only |
+| `case_documents` / `document_pages` | Uploaded file metadata and page order. Paths are ids, not original file names | Owner, and the parent case owner must match |
+| `case_facts` / `fact_edits` | Append-only fact revisions and field edits | Owner |
+| `case_evidence` | Snapshot of an existing record linked to a case. Does not copy the source row into a second clinical table | Owner |
+| `evidence_catalog` | Reviewed excerpts only. No seed rows | SELECT of approved, unexpired rows |
+| `generated_artifacts` | Draft PDF metadata. Sharing is not a status | Owner |
+| `processing_jobs` | Durable job row with an idempotency key | Owner, and only while the case is not deleted |
+| `consent_events` / `audit_events` | Consent and minimal audit metadata. Audit rows are not updated | Owner |
+
+Storage bucket `appeal-documents` is private, 20 MB per object. The first path segment must be the user id.
+
+---
+
 ## 3. RLS policy outline
 
 > Implemented in [`supabase/migrations/20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql).  

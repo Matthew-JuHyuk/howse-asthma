@@ -4473,6 +4473,342 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Urgent care (I reported this)'**
   String get s6VisitKindUrgent;
+
+  /// No description provided for @v2SettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage letters'**
+  String get v2SettingsTitle;
+
+  /// No description provided for @v2NavToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show coverage-letter home'**
+  String get v2NavToggle;
+
+  /// No description provided for @v2NavToggleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A preview for reading a denial notice and preparing visit materials. Your records stay available. Live document reading stays off.'**
+  String get v2NavToggleHint;
+
+  /// No description provided for @v2HomeHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Understand a coverage denial letter and prepare materials for a visit.'**
+  String get v2HomeHeadline;
+
+  /// No description provided for @v2HomeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The app does not send an appeal and does not decide whether a plan will approve it.'**
+  String get v2HomeBody;
+
+  /// No description provided for @v2AddLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a denial letter'**
+  String get v2AddLetter;
+
+  /// No description provided for @v2TrySample.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a sample'**
+  String get v2TrySample;
+
+  /// No description provided for @v2SampleBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample. Not a real notice and not a live reading.'**
+  String get v2SampleBanner;
+
+  /// No description provided for @v2LiveOffTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Live reading is off'**
+  String get v2LiveOffTitle;
+
+  /// No description provided for @v2LiveOffBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos and files are not analyzed in this build. You can open the labeled sample and walk through the steps.'**
+  String get v2LiveOffBody;
+
+  /// No description provided for @v2Close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get v2Close;
+
+  /// No description provided for @v2MyRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'My records'**
+  String get v2MyRecords;
+
+  /// No description provided for @v2EmptyCases.
+  ///
+  /// In en, this message translates to:
+  /// **'No letters yet.'**
+  String get v2EmptyCases;
+
+  /// No description provided for @v2MedNeedsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication needs review'**
+  String get v2MedNeedsReview;
+
+  /// No description provided for @v2NextCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: review the facts'**
+  String get v2NextCheck;
+
+  /// No description provided for @v2NextDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: make a draft'**
+  String get v2NextDraft;
+
+  /// No description provided for @v2Created.
+  ///
+  /// In en, this message translates to:
+  /// **'Added'**
+  String get v2Created;
+
+  /// No description provided for @v2StatusDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Draft ready'**
+  String get v2StatusDraft;
+
+  /// No description provided for @v2StatusReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready for a draft'**
+  String get v2StatusReady;
+
+  /// No description provided for @v2StatusReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs review'**
+  String get v2StatusReview;
+
+  /// No description provided for @v2DeadlineLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Deadline'**
+  String get v2DeadlineLabel;
+
+  /// No description provided for @v2ExplainTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Plain explanation'**
+  String get v2ExplainTitle;
+
+  /// No description provided for @v2CheckTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Things to check'**
+  String get v2CheckTitle;
+
+  /// No description provided for @v2RecordsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My records'**
+  String get v2RecordsTitle;
+
+  /// No description provided for @v2DocsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Make documents'**
+  String get v2DocsTitle;
+
+  /// No description provided for @v2Original.
+  ///
+  /// In en, this message translates to:
+  /// **'Original text'**
+  String get v2Original;
+
+  /// No description provided for @v2Patient.
+  ///
+  /// In en, this message translates to:
+  /// **'Name on the notice'**
+  String get v2Patient;
+
+  /// No description provided for @v2EditMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication text'**
+  String get v2EditMedication;
+
+  /// No description provided for @v2Dose.
+  ///
+  /// In en, this message translates to:
+  /// **'Dose as written'**
+  String get v2Dose;
+
+  /// No description provided for @v2ReasonMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'The reason could not be confirmed.'**
+  String get v2ReasonMissing;
+
+  /// No description provided for @v2ConfirmDate.
+  ///
+  /// In en, this message translates to:
+  /// **'I confirm the date printed on the notice'**
+  String get v2ConfirmDate;
+
+  /// No description provided for @v2SaveEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save correction'**
+  String get v2SaveEdit;
+
+  /// No description provided for @v2ConfirmFacts.
+  ///
+  /// In en, this message translates to:
+  /// **'I reviewed these facts'**
+  String get v2ConfirmFacts;
+
+  /// No description provided for @v2Confirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed'**
+  String get v2Confirmed;
+
+  /// No description provided for @v2NoRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No records linked. You can still make a draft. No adherence figure is added.'**
+  String get v2NoRecords;
+
+  /// No description provided for @v2SelfReportLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional note (patient self-report)'**
+  String get v2SelfReportLabel;
+
+  /// No description provided for @v2EnglishDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'English draft for review. This is the draft to check, not a filed translation.'**
+  String get v2EnglishDraft;
+
+  /// No description provided for @v2DraftBannerNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Every page says clinician review is required.'**
+  String get v2DraftBannerNote;
+
+  /// No description provided for @v2StaleDraft.
+  ///
+  /// In en, this message translates to:
+  /// **'Facts changed. Make the draft again before sharing.'**
+  String get v2StaleDraft;
+
+  /// No description provided for @v2GenerateReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Make a review draft'**
+  String get v2GenerateReview;
+
+  /// No description provided for @v2GeneratePrepared.
+  ///
+  /// In en, this message translates to:
+  /// **'Make a prepared draft'**
+  String get v2GeneratePrepared;
+
+  /// No description provided for @v2PreparedBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'A prepared draft needs a confirmed name, medication, and denial reason.'**
+  String get v2PreparedBlocked;
+
+  /// No description provided for @v2NotInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'This document is not an initial drug denial. An appeal draft is not created.'**
+  String get v2NotInitial;
+
+  /// No description provided for @v2GenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'That step did not finish. You can try again.'**
+  String get v2GenericError;
+
+  /// No description provided for @v2Share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get v2Share;
+
+  /// No description provided for @v2ClinicianPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinician one-page PDF'**
+  String get v2ClinicianPdf;
+
+  /// No description provided for @v2ShareNotSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing does not mean the plan received this file.'**
+  String get v2ShareNotSubmitted;
+
+  /// No description provided for @v2DeleteCase.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this sample'**
+  String get v2DeleteCase;
+
+  /// No description provided for @v2Deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed from this preview.'**
+  String get v2Deleted;
+
+  /// No description provided for @v2FontUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'The PDF font could not be loaded. Try again when you are online.'**
+  String get v2FontUnavailable;
+
+  /// No description provided for @v2NotEntered.
+  ///
+  /// In en, this message translates to:
+  /// **'[not entered]'**
+  String get v2NotEntered;
+
+  /// No description provided for @v2DocDeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Deadline written on the document'**
+  String get v2DocDeadline;
+
+  /// No description provided for @v2CalcDeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculated from the received date you entered'**
+  String get v2CalcDeadline;
+
+  /// No description provided for @v2NeedReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'The notice counts days after you receive it. Enter that date before a date can be calculated.'**
+  String get v2NeedReceived;
+
+  /// No description provided for @v2UnclearDeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'The deadline wording is unclear. No date was calculated.'**
+  String get v2UnclearDeadline;
+
+  /// No description provided for @v2AskPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'A deadline was not found in the document. Ask the plan.'**
+  String get v2AskPlan;
 }
 
 class _AppLocalizationsDelegate

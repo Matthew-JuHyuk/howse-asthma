@@ -30,3 +30,8 @@ When you add or change something under `supabase/` (migrations, RLS SQL, Edge Fu
 | [`debug-mode-design.md`](./debug-mode-design.md) | Debug API Console design (summary; full Korean in `doc/`) |
 | [`fcm-setup.md`](./fcm-setup.md) | Firebase / FCM client + Edge secret setup (WBS 4.6a) |
 | [`sprint2-test-review-backlog.md`](./sprint2-test-review-backlog.md) | Sprint 2 on-device test review backlog |
+| [`v2/repository_audit.md`](./v2/repository_audit.md) | v2.0 pivot audit |
+| [`v2/wbs.md`](./v2/wbs.md) | v2.0 work breakdown and checkpoint |
+| [`v2/decisions.md`](./v2/decisions.md) | v2.0 decisions still in force |
+| [`v2/traceability.md`](./v2/traceability.md) | Requirement and test map |
+| [`v2/demo.md`](./v2/demo.md) | Sample walkthrough and flags |

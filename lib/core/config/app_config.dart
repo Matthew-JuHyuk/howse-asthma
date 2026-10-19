@@ -33,6 +33,21 @@ class AppConfig {
     return raw == 'true' || raw == '1' || raw == 'yes';
   }
 
+  /// Coverage-letter home. Existing records stay available when this is off.
+  static bool get v2NavigationEnabled => _flag('V2_NAVIGATION_ENABLED');
+
+  /// Real document reading. Off until an operator configures a provider.
+  static bool get liveDocumentProcessingEnabled =>
+      _flag('LIVE_DOCUMENT_PROCESSING_ENABLED');
+
+  /// Reviewed evidence excerpts. Off while the catalog is empty.
+  static bool get verifiedEvidenceEnabled => _flag('VERIFIED_EVIDENCE_ENABLED');
+
+  static bool _flag(String key) {
+    final raw = _read(key).trim().toLowerCase();
+    return raw == 'true' || raw == '1' || raw == 'yes';
+  }
+
   static String _read(String key) {
     if (!dotenv.isInitialized) return '';
     return dotenv.env[key] ?? '';

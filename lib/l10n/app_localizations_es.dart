@@ -2592,4 +2592,190 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get s6VisitKindUrgent => 'Atención urgente (lo informé yo)';
+
+  @override
+  String get v2SettingsTitle => 'Cartas de cobertura';
+
+  @override
+  String get v2NavToggle => 'Mostrar inicio de cartas de cobertura';
+
+  @override
+  String get v2NavToggleHint =>
+      'Una vista previa para entender un aviso de denegación y preparar la visita. Sus registros siguen disponibles. La lectura real de documentos está apagada.';
+
+  @override
+  String get v2HomeHeadline =>
+      'Entienda una carta de denegación de cobertura y prepare materiales para la visita.';
+
+  @override
+  String get v2HomeBody =>
+      'La aplicación no envía una apelación ni decide si el plan la aprobará.';
+
+  @override
+  String get v2AddLetter => 'Agregar carta de denegación';
+
+  @override
+  String get v2TrySample => 'Probar con un ejemplo';
+
+  @override
+  String get v2SampleBanner =>
+      'Ejemplo. No es un aviso real ni una lectura en vivo.';
+
+  @override
+  String get v2LiveOffTitle => 'La lectura en vivo está apagada';
+
+  @override
+  String get v2LiveOffBody =>
+      'En esta versión no se analizan fotos ni archivos. Puede abrir el ejemplo marcado y seguir los pasos.';
+
+  @override
+  String get v2Close => 'Cerrar';
+
+  @override
+  String get v2MyRecords => 'Mis registros';
+
+  @override
+  String get v2EmptyCases => 'Todavía no hay cartas.';
+
+  @override
+  String get v2MedNeedsReview => 'Falta confirmar el medicamento';
+
+  @override
+  String get v2NextCheck => 'Siguiente: revisar los datos';
+
+  @override
+  String get v2NextDraft => 'Siguiente: crear un borrador';
+
+  @override
+  String get v2Created => 'Agregado';
+
+  @override
+  String get v2StatusDraft => 'Borrador listo';
+
+  @override
+  String get v2StatusReady => 'Listo para un borrador';
+
+  @override
+  String get v2StatusReview => 'Hay que revisar';
+
+  @override
+  String get v2DeadlineLabel => 'Plazo';
+
+  @override
+  String get v2ExplainTitle => 'Explicación simple';
+
+  @override
+  String get v2CheckTitle => 'Qué revisar';
+
+  @override
+  String get v2RecordsTitle => 'Mis registros';
+
+  @override
+  String get v2DocsTitle => 'Crear documentos';
+
+  @override
+  String get v2Original => 'Texto original';
+
+  @override
+  String get v2Patient => 'Nombre en el aviso';
+
+  @override
+  String get v2EditMedication => 'Texto del medicamento';
+
+  @override
+  String get v2Dose => 'Dosis tal como está escrita';
+
+  @override
+  String get v2ReasonMissing => 'No se pudo confirmar el motivo.';
+
+  @override
+  String get v2ConfirmDate => 'Confirmo la fecha impresa en el aviso';
+
+  @override
+  String get v2SaveEdit => 'Guardar corrección';
+
+  @override
+  String get v2ConfirmFacts => 'Revisé estos datos';
+
+  @override
+  String get v2Confirmed => 'Revisado';
+
+  @override
+  String get v2NoRecords =>
+      'No hay registros vinculados. Aún puede crear un borrador. No se agrega una cifra de cumplimiento.';
+
+  @override
+  String get v2SelfReportLabel => 'Nota opcional (lo informa el paciente)';
+
+  @override
+  String get v2EnglishDraft =>
+      'Borrador en inglés para revisar. Es el borrador por comprobar, no una traducción para presentar.';
+
+  @override
+  String get v2DraftBannerNote =>
+      'Cada página dice que un clínico debe revisarlo.';
+
+  @override
+  String get v2StaleDraft =>
+      'Los datos cambiaron. Vuelva a crear el borrador antes de compartir.';
+
+  @override
+  String get v2GenerateReview => 'Crear borrador de revisión';
+
+  @override
+  String get v2GeneratePrepared => 'Crear borrador preparado';
+
+  @override
+  String get v2PreparedBlocked =>
+      'El borrador preparado necesita nombre, medicamento y motivo confirmados.';
+
+  @override
+  String get v2NotInitial =>
+      'Este documento no es una denegación inicial del medicamento. No se crea un borrador de apelación.';
+
+  @override
+  String get v2GenericError =>
+      'Ese paso no terminó. Puede intentarlo de nuevo.';
+
+  @override
+  String get v2Share => 'Compartir';
+
+  @override
+  String get v2ClinicianPdf => 'PDF de una página para el clínico';
+
+  @override
+  String get v2ShareNotSubmitted =>
+      'Compartir no significa que el plan haya recibido el archivo.';
+
+  @override
+  String get v2DeleteCase => 'Eliminar este ejemplo';
+
+  @override
+  String get v2Deleted => 'Se quitó de esta vista previa.';
+
+  @override
+  String get v2FontUnavailable =>
+      'No se pudo cargar la fuente del PDF. Inténtelo de nuevo en línea.';
+
+  @override
+  String get v2NotEntered => '[sin completar]';
+
+  @override
+  String get v2DocDeadline => 'Plazo escrito en el documento';
+
+  @override
+  String get v2CalcDeadline =>
+      'Calculado con la fecha de recepción que usted ingresó';
+
+  @override
+  String get v2NeedReceived =>
+      'El aviso cuenta los días después de recibirlo. Ingrese esa fecha antes de calcular una fecha.';
+
+  @override
+  String get v2UnclearDeadline =>
+      'El texto del plazo no es claro. No se calculó una fecha.';
+
+  @override
+  String get v2AskPlan =>
+      'No se encontró un plazo en el documento. Consulte al plan.';
 }

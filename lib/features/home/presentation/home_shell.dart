@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../../core/config/v2_nav_flag.dart';
 import '../../../core/debug/debug_gates.dart';
 import '../../../core/locale/locale_controller.dart';
 import '../../../core/location/environment_monitor.dart';
@@ -15,6 +16,7 @@ import '../../environment/presentation/env_screen.dart';
 import '../../panic/presentation/panic_screen.dart';
 import '../../records/presentation/my_log_screen.dart';
 import '../../settings/presentation/settings_screen.dart';
+import '../../appeal/presentation/appeal_home_screen.dart';
 import '../../visit_prep/presentation/visit_prep_screen.dart';
 import 'home_screen.dart';
 
@@ -42,6 +44,8 @@ class _HomeShellState extends State<HomeShell> {
   @override
   void initState() {
     super.initState();
+    V2NavFlag.instance.addListener(_onV2Flag);
+    unawaited(V2NavFlag.instance.load());
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
       final userId = SupabaseService.currentUser?.id ?? '';
@@ -59,8 +63,13 @@ class _HomeShellState extends State<HomeShell> {
     });
   }
 
+  void _onV2Flag() {
+    if (mounted) setState(() {});
+  }
+
   @override
   void dispose() {
+    V2NavFlag.instance.removeListener(_onV2Flag);
     _envMonitor?.stop();
     unawaited(_fcm.dispose());
     super.dispose();
@@ -105,7 +114,9 @@ class _HomeShellState extends State<HomeShell> {
   Widget _page(int i) {
     if (!_built.contains(i)) return const SizedBox.shrink();
     return switch (i) {
-      tabHome => HomeScreen(onOpenTab: _select),
+      tabHome => V2NavFlag.instance.enabled
+          ? AppealHomeScreen(onOpenRecords: () => _select(tabLog))
+          : HomeScreen(onOpenTab: _select),
       tabLog => const MyLogScreen(),
       tabVisit => const VisitPrepScreen(),
       _ => const EnvScreen(embedded: true),

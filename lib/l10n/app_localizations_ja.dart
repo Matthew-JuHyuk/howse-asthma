@@ -2376,4 +2376,188 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get s6VisitKindUrgent => '緊急診療（自分で報告）';
+
+  @override
+  String get v2SettingsTitle => 'Coverage letters';
+
+  @override
+  String get v2NavToggle => 'Show coverage-letter home';
+
+  @override
+  String get v2NavToggleHint =>
+      'A preview for reading a denial notice and preparing visit materials. Your records stay available. Live document reading stays off.';
+
+  @override
+  String get v2HomeHeadline =>
+      'Understand a coverage denial letter and prepare materials for a visit.';
+
+  @override
+  String get v2HomeBody =>
+      'The app does not send an appeal and does not decide whether a plan will approve it.';
+
+  @override
+  String get v2AddLetter => 'Add a denial letter';
+
+  @override
+  String get v2TrySample => 'Try a sample';
+
+  @override
+  String get v2SampleBanner =>
+      'Sample. Not a real notice and not a live reading.';
+
+  @override
+  String get v2LiveOffTitle => 'Live reading is off';
+
+  @override
+  String get v2LiveOffBody =>
+      'Photos and files are not analyzed in this build. You can open the labeled sample and walk through the steps.';
+
+  @override
+  String get v2Close => 'Close';
+
+  @override
+  String get v2MyRecords => 'My records';
+
+  @override
+  String get v2EmptyCases => 'No letters yet.';
+
+  @override
+  String get v2MedNeedsReview => 'Medication needs review';
+
+  @override
+  String get v2NextCheck => 'Next: review the facts';
+
+  @override
+  String get v2NextDraft => 'Next: make a draft';
+
+  @override
+  String get v2Created => 'Added';
+
+  @override
+  String get v2StatusDraft => 'Draft ready';
+
+  @override
+  String get v2StatusReady => 'Ready for a draft';
+
+  @override
+  String get v2StatusReview => 'Needs review';
+
+  @override
+  String get v2DeadlineLabel => 'Deadline';
+
+  @override
+  String get v2ExplainTitle => 'Plain explanation';
+
+  @override
+  String get v2CheckTitle => 'Things to check';
+
+  @override
+  String get v2RecordsTitle => 'My records';
+
+  @override
+  String get v2DocsTitle => 'Make documents';
+
+  @override
+  String get v2Original => 'Original text';
+
+  @override
+  String get v2Patient => 'Name on the notice';
+
+  @override
+  String get v2EditMedication => 'Medication text';
+
+  @override
+  String get v2Dose => 'Dose as written';
+
+  @override
+  String get v2ReasonMissing => 'The reason could not be confirmed.';
+
+  @override
+  String get v2ConfirmDate => 'I confirm the date printed on the notice';
+
+  @override
+  String get v2SaveEdit => 'Save correction';
+
+  @override
+  String get v2ConfirmFacts => 'I reviewed these facts';
+
+  @override
+  String get v2Confirmed => 'Reviewed';
+
+  @override
+  String get v2NoRecords =>
+      'No records linked. You can still make a draft. No adherence figure is added.';
+
+  @override
+  String get v2SelfReportLabel => 'Optional note (patient self-report)';
+
+  @override
+  String get v2EnglishDraft =>
+      'English draft for review. This is the draft to check, not a filed translation.';
+
+  @override
+  String get v2DraftBannerNote =>
+      'Every page says clinician review is required.';
+
+  @override
+  String get v2StaleDraft =>
+      'Facts changed. Make the draft again before sharing.';
+
+  @override
+  String get v2GenerateReview => 'Make a review draft';
+
+  @override
+  String get v2GeneratePrepared => 'Make a prepared draft';
+
+  @override
+  String get v2PreparedBlocked =>
+      'A prepared draft needs a confirmed name, medication, and denial reason.';
+
+  @override
+  String get v2NotInitial =>
+      'This document is not an initial drug denial. An appeal draft is not created.';
+
+  @override
+  String get v2GenericError => 'That step did not finish. You can try again.';
+
+  @override
+  String get v2Share => 'Share';
+
+  @override
+  String get v2ClinicianPdf => 'Clinician one-page PDF';
+
+  @override
+  String get v2ShareNotSubmitted =>
+      'Sharing does not mean the plan received this file.';
+
+  @override
+  String get v2DeleteCase => 'Delete this sample';
+
+  @override
+  String get v2Deleted => 'Removed from this preview.';
+
+  @override
+  String get v2FontUnavailable =>
+      'The PDF font could not be loaded. Try again when you are online.';
+
+  @override
+  String get v2NotEntered => '[not entered]';
+
+  @override
+  String get v2DocDeadline => 'Deadline written on the document';
+
+  @override
+  String get v2CalcDeadline => 'Calculated from the received date you entered';
+
+  @override
+  String get v2NeedReceived =>
+      'The notice counts days after you receive it. Enter that date before a date can be calculated.';
+
+  @override
+  String get v2UnclearDeadline =>
+      'The deadline wording is unclear. No date was calculated.';
+
+  @override
+  String get v2AskPlan =>
+      'A deadline was not found in the document. Ask the plan.';
 }
