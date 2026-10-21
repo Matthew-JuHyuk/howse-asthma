@@ -9,6 +9,8 @@
 | `issue-invite-code` | [`supabase/functions/issue-invite-code/`](../supabase/functions/issue-invite-code/) | 8-char alphanumeric invite (TTL 24h) |
 | `redeem-invite-code` | [`supabase/functions/redeem-invite-code/`](../supabase/functions/redeem-invite-code/) | Atomic redeem RPC (8-char) |
 | `confirm-care-link` | [`supabase/functions/confirm-care-link/`](../supabase/functions/confirm-care-link/) | Deployed — dual confirm RPC |
+| `analyze-letter` | [`supabase/functions/analyze-letter/`](../supabase/functions/analyze-letter/) | Deployed (v2). Reads an uploaded letter with the configured model. Returns `503 ai_not_configured` until AI secrets are set |
+| `delete-account` | [`supabase/functions/delete-account/`](../supabase/functions/delete-account/) | Deployed (v1). Removes the caller's files and auth user after `{ confirm: "DELETE" }` |
 
 Project: `jnzdovjjahvtxbhacjuv`  
 Dashboard: https://supabase.com/dashboard/project/jnzdovjjahvtxbhacjuv/functions
@@ -97,6 +99,31 @@ Respects `notification_preferences` (including `push_positive_ventilation` for v
 supabase db push
 supabase functions deploy calculate-environment-risk
 ```
+
+## analyze-letter
+
+POST with the user's JWT. Handlers verify the user themselves (`requireUser`).
+
+| Action | Result |
+| --- | --- |
+| `{ "action": "health" }` | `{ ai_configured, provider, model, prompt_version, missing }` — names the missing secret, never its value |
+| `{ "action": "start", "case_id", "set_revision" }` | `202 { job }`. `404 case_not_found` for another user's case; `409 stale_upload_set`; `503 ai_not_configured` |
+
+- One job per case and upload set (idempotency key `extract:set<N>`). A running job is held by a lease (170 s);
+  an expired lease can be reclaimed by a later `start`, at most 5 attempts. A finished job is returned as-is, so repeated taps never start a second paid call.
+- Two model calls: page transcription (skipped for plain-text uploads), then field extraction against a JSON schema. No tools are declared and `store=false`.
+- `validate.ts` keeps only quotes found in the page text, keeps medicine and dose verbatim, and marks missing values null and unclear values ambiguous.
+- Results are written only if the case still exists, is not being deleted and still points at the same upload set. Older packets are marked `stale`.
+- `processing_jobs` records provider, model, prompt version, request ids, duration and token counts. Letter text and keys are not logged.
+- Limits: 10 pages, 40 MB per set. Provider errors map to safe codes (`ai_rate_limited`, `ai_timeout`, `ai_unavailable`, `ai_model_not_found`, …).
+
+Secrets: `AI_PROVIDER` (`gemini` | `openai`), `GEMINI_API_KEY` or `OPENAI_API_KEY`, `AI_MODEL` (required; no default).
+
+## delete-account
+
+POST `{ "confirm": "DELETE" }` with the user's JWT → `{ deleted: true, storage_objects_removed }`.
+Removes every object under `<uid>/` in `appeal-documents`, then the auth user; rows owned by the user are removed by foreign-key cascade.
+Without the confirmation it returns `400 confirmation_required`. Only the caller's own id is used.
 
 ## Secrets
 

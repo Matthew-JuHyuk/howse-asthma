@@ -6,7 +6,8 @@
 | [`20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql) | RLS policies + `is_active_provider_of` | Applied remotely (2026-07-25) |
 | [`20260725230000_auth_security_hardening.sql`](../supabase/migrations/20260725230000_auth_security_hardening.sql) | Auth hardening: immutable role, SELECT-only care links/invites, atomic pairing RPCs | Applied remotely (2026-07-25) |
 | [`20261011180000_s6_regimen_and_evidence.sql`](../supabase/migrations/20261011180000_s6_regimen_and_evidence.sql) | Prescription versions, occasion checks, event snapshots, empty policy slots | In the repo. Apply with `supabase db push` before the app build that queries these tables |
-| [`20261018120000_v2_appeal_cases.sql`](../supabase/migrations/20261018120000_v2_appeal_cases.sql) | Appeal-prep cases, facts, jobs, private `appeal-documents` bucket | In the repo. Not required for the in-app sample. Apply before any client writes to these tables |
+| [`20261018120000_v2_appeal_cases.sql`](../supabase/migrations/20261018120000_v2_appeal_cases.sql) | Appeal-prep cases, facts, jobs, private `appeal-documents` bucket | Applied remotely |
+| [`20261021120000_s8_covernote_mvp1.sql`](../supabase/migrations/20261021120000_s8_covernote_mvp1.sql) | CoverNote: document kind, upload sets, job metadata, `case_requirements`, `local_context_entries`, tighter evidence/artifact policies. Additive | Applied remotely (2026-10-21). See [`db-schema.md`](./db-schema.md) §2.z2 |
 
 Schema: [`db-schema.md`](./db-schema.md).  
 RLS detail: [`rls-policies.md`](./rls-policies.md).

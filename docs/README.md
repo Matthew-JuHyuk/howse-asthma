@@ -30,8 +30,18 @@ When you add or change something under `supabase/` (migrations, RLS SQL, Edge Fu
 | [`debug-mode-design.md`](./debug-mode-design.md) | Debug API Console design (summary; full Korean in `doc/`) |
 | [`fcm-setup.md`](./fcm-setup.md) | Firebase / FCM client + Edge secret setup (WBS 4.6a) |
 | [`sprint2-test-review-backlog.md`](./sprint2-test-review-backlog.md) | Sprint 2 on-device test review backlog |
-| [`v2/repository_audit.md`](./v2/repository_audit.md) | v2.0 pivot audit |
-| [`v2/wbs.md`](./v2/wbs.md) | v2.0 work breakdown and checkpoint |
-| [`v2/decisions.md`](./v2/decisions.md) | v2.0 decisions still in force |
-| [`v2/traceability.md`](./v2/traceability.md) | Requirement and test map |
-| [`v2/demo.md`](./v2/demo.md) | Sample walkthrough and flags |
+| [`sprint8/handoff.md`](./sprint8/handoff.md) | **CoverNote MVP1** — current state, deliverables and owner actions |
+| [`sprint8/audit.md`](./sprint8/audit.md) | Starting point and keep/remove decisions |
+| [`sprint8/wbs.md`](./sprint8/wbs.md) | Work breakdown with status and evidence |
+| [`sprint8/requirements_traceability.md`](./sprint8/requirements_traceability.md) | P0 requirement → code → result |
+| [`sprint8/verification.md`](./sprint8/verification.md) | Acceptance tests and command output |
+| [`sprint8/defects.md`](./sprint8/defects.md) | Defects with cause, fix commit and re-check |
+| [`sprint8/auth_diagnosis.md`](./sprint8/auth_diagnosis.md) | Sign-in failure diagnosis |
+| [`sprint8/setup_runbook.md`](./sprint8/setup_runbook.md) | Secrets, auth settings, accounts, build and install |
+| [`sprint8/demo_script.md`](./sprint8/demo_script.md) | Sample and live demo steps |
+| [`sprint8/ai_usage.md`](./sprint8/ai_usage.md) | AI use in building and inside the app |
+| [`v2/repository_audit.md`](./v2/repository_audit.md) | v2.0 pivot audit (superseded by `sprint8/`) |
+| [`v2/wbs.md`](./v2/wbs.md) | v2.0 work breakdown and checkpoint (superseded) |
+| [`v2/decisions.md`](./v2/decisions.md) | v2.0 decisions; the preview flags and Settings switch were removed in Sprint 8 |
+| [`v2/traceability.md`](./v2/traceability.md) | v2.0 requirement and test map (superseded) |
+| [`v2/demo.md`](./v2/demo.md) | v2.0 sample walkthrough and flags (superseded by `sprint8/demo_script.md`) |
