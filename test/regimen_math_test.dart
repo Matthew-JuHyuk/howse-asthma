@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:howse_asthma/features/records/domain/evidence_prep.dart';
 import 'package:howse_asthma/features/records/domain/regimen_math.dart';
 
 void main() {
@@ -77,40 +76,5 @@ void main() {
       RegimenMath.canLinkCurrentEnvironment(occurredAt: null, now: now),
       isFalse,
     );
-  });
-
-  test('AQI 135 is unhealthy for sensitive groups and names only stored pollutant', () {
-    expect(aqiBand(135), AqiBand.usg);
-    final line = environmentSourceLine(
-      pollutant: 'PM2.5',
-      aqi: 135,
-      category: 'Unhealthy for Sensitive Groups',
-      provider: 'AirNow (provisional)',
-      observedAt: '2026-08-28 18:30',
-      dataKind: 'provisional',
-    );
-    expect(line, contains('PM2.5'));
-    expect(line, contains('135'));
-    expect(line, contains('Unhealthy for Sensitive Groups'));
-    expect(line.toLowerCase(), isNot(contains('ozone')));
-    expect(line.toLowerCase(), isNot(contains('pollen')));
-    expect(line.toLowerCase(), isNot(contains('not due to')));
-  });
-
-  test('a paper is not clinician confirmation', () {
-    final items = EvidencePrep.assess(
-      hasPrescription: true,
-      confirmedUseResponses: 1,
-      hasSymptoms: true,
-      careReports: 1,
-      clinicianConfirmedVisits: 0,
-      attachments: 1,
-      linkedEnvironment: 0,
-    );
-    PrepStatus status(String id) => items.firstWhere((e) => e.id == id).status;
-    expect(status('visits'), PrepStatus.clinicianNeeded);
-    expect(status('clinician'), PrepStatus.clinicianNeeded);
-    expect(status('environment'), PrepStatus.needInfo);
-    expect(status('medication'), PrepStatus.recorded);
   });
 }

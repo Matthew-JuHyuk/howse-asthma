@@ -13,7 +13,7 @@ import 'push_token_repository.dart';
 /// Use [instance] so register/unregister share the same token-refresh subscription.
 class FcmService {
   FcmService._({PushTokenRepository? tokens})
-      : _tokens = tokens ?? PushTokenRepository();
+    : _tokens = tokens ?? PushTokenRepository();
 
   static final FcmService instance = FcmService._();
 
@@ -59,29 +59,19 @@ class FcmService {
     if (!_firebaseReady || !isSupported) return;
     try {
       final messaging = FirebaseMessaging.instance;
-      await messaging.requestPermission(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
+      await messaging.requestPermission(alert: true, badge: true, sound: true);
 
       // Android 13+ also needs runtime POST_NOTIFICATIONS — requestPermission
       // covers iOS; on Android 13 firebase_messaging requests notification perm.
       final token = await messaging.getToken();
       if (token == null || token.isEmpty) return;
 
-      await _tokens.upsert(
-        fcmToken: token,
-        platform: _platformLabel(),
-      );
+      await _tokens.upsert(fcmToken: token, platform: _platformLabel());
 
       await _tokenRefreshSub?.cancel();
       _tokenRefreshSub = messaging.onTokenRefresh.listen((newToken) async {
         try {
-          await _tokens.upsert(
-            fcmToken: newToken,
-            platform: _platformLabel(),
-          );
+          await _tokens.upsert(fcmToken: newToken, platform: _platformLabel());
         } catch (e) {
           debugPrint('[FcmService] token refresh upsert failed: $e');
         }

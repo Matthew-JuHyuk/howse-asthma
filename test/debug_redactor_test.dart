@@ -7,10 +7,7 @@ void main() {
     test('masks secret keys recursively', () {
       final out = DebugRedactor.scrub({
         'authorization': 'Bearer secret',
-        'nested': {
-          'apiKey': 'abc',
-          'ok': true,
-        },
+        'nested': {'apiKey': 'abc', 'ok': true},
         'service_role': 'x',
         'privateKey': 'pk',
         'fcm_token': 'tok',
@@ -41,8 +38,7 @@ void main() {
         'note': 'ok',
         'contact': 'user@example.com',
         'tel': '+15551234567',
-        'blob':
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIn0.sig',
+        'blob': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIn0.sig',
       });
       expect(out['note'], 'ok');
       expect(out['contact'], '***');

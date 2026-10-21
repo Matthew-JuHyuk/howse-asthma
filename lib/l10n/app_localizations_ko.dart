@@ -9,7 +9,7 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get appTitle => 'Howse Asthma';
+  String get appTitle => 'CoverNote';
 
   @override
   String get loginTitle => '로그인';
@@ -2542,4 +2542,1224 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get v2AskPlan => '문서에서 기한을 확인하지 못했습니다. 보험사에 확인하세요.';
+
+  @override
+  String get cnTagline => '보험 편지, 다음 할 일을 분명하게';
+
+  @override
+  String get cnDemoBadge => '샘플';
+
+  @override
+  String get cnDemoBadgeLong => '가상 데이터로 만든 샘플입니다. 결과는 고정되어 있습니다.';
+
+  @override
+  String get cnAuthSignInTitle => '로그인';
+
+  @override
+  String get cnAuthCreateTitle => '계정 만들기';
+
+  @override
+  String get cnAuthResetTitle => '비밀번호 재설정';
+
+  @override
+  String get cnAuthSignIn => '로그인';
+
+  @override
+  String get cnAuthCreate => '계정 만들기';
+
+  @override
+  String get cnAuthSendReset => '재설정 링크 보내기';
+
+  @override
+  String cnAuthProfileError(String code) {
+    return '로그인은 되었지만 계정 정보를 불러오지 못했습니다($code).';
+  }
+
+  @override
+  String get cnRetry => '다시 시도';
+
+  @override
+  String get cnSignOut => '로그아웃';
+
+  @override
+  String get cnAuthPreparingAccount => '계정을 준비하는 중…';
+
+  @override
+  String get cnAuthNameLabel => '이름(선택)';
+
+  @override
+  String get cnAuthNameHelper => '패킷에 표시됩니다. 나중에 바꿀 수 있습니다.';
+
+  @override
+  String get cnAuthEmailLabel => '이메일';
+
+  @override
+  String get cnAuthPasswordLabel => '비밀번호';
+
+  @override
+  String get cnAuthPasswordHelper => '8자 이상';
+
+  @override
+  String get cnAuthShowPassword => '비밀번호 보기';
+
+  @override
+  String get cnAuthHidePassword => '비밀번호 숨기기';
+
+  @override
+  String get cnAuthPasswordRequired => '비밀번호를 입력하세요';
+
+  @override
+  String cnAuthCheckEmail(String email) {
+    return '$email(으)로 확인 링크를 보냈습니다. 이 휴대폰에서 링크를 연 뒤 로그인하세요.';
+  }
+
+  @override
+  String cnAuthResetSent(String email) {
+    return '$email 계정이 있으면 재설정 링크가 전송됩니다. 이 휴대폰에서 여세요.';
+  }
+
+  @override
+  String get cnAuthResent => '다시 보냈습니다.';
+
+  @override
+  String get cnAuthResend => '메일 다시 보내기';
+
+  @override
+  String get cnAuthSignInInstead => '인증했어요. 로그인';
+
+  @override
+  String get cnAuthForgot => '비밀번호를 잊으셨나요?';
+
+  @override
+  String get cnAuthNoAccount => '처음이신가요? 계정 만들기';
+
+  @override
+  String get cnAuthHaveAccount => '계정이 있으신가요? 로그인';
+
+  @override
+  String get cnAuthResetHint => '이메일을 입력하면 새 비밀번호를 설정할 링크를 보내드립니다.';
+
+  @override
+  String get cnAuthBackToSignIn => '로그인으로 돌아가기';
+
+  @override
+  String get cnAuthPrivacyLine => '편지와 기록은 내 계정에서만 볼 수 있습니다.';
+
+  @override
+  String get cnAuthPasswordUpdated => '비밀번호를 바꿨습니다.';
+
+  @override
+  String get cnAuthNewPasswordTitle => '새 비밀번호 설정';
+
+  @override
+  String get cnAuthNewPasswordLabel => '새 비밀번호';
+
+  @override
+  String get cnAuthSavePassword => '비밀번호 저장';
+
+  @override
+  String get cnLater => '나중에';
+
+  @override
+  String get cnAuthErrInvalidCredentials => '이메일 또는 비밀번호가 맞지 않습니다.';
+
+  @override
+  String get cnAuthErrNotConfirmed =>
+      '먼저 이메일 인증을 완료하세요. 받은편지함을 확인하거나 링크를 다시 보내세요.';
+
+  @override
+  String get cnAuthErrExists => '이 이메일로 만든 계정이 이미 있습니다. 로그인하세요.';
+
+  @override
+  String get cnAuthErrWeakPassword => '더 안전한 비밀번호를 사용하세요(8자 이상).';
+
+  @override
+  String get cnAuthErrSamePassword => '이전과 다른 비밀번호를 사용하세요.';
+
+  @override
+  String get cnAuthErrRateLimited => '시도가 너무 많습니다. 잠시 후 다시 시도하세요.';
+
+  @override
+  String get cnAuthErrInvalidEmail => '이메일 주소를 확인하세요.';
+
+  @override
+  String get cnAuthErrEmailNotAuthorized =>
+      '지금은 이 주소로 메일을 보낼 수 없습니다. 나중에 다시 시도하세요.';
+
+  @override
+  String get cnAuthErrDisabled => '이 로그인 방식은 꺼져 있습니다.';
+
+  @override
+  String get cnAuthErrSessionExpired => '세션이 끝났습니다. 다시 로그인하세요.';
+
+  @override
+  String cnAuthErrUnknown(String code) {
+    return '문제가 발생했습니다($code). 다시 시도하세요.';
+  }
+
+  @override
+  String get cnErrNetwork => '인터넷에 연결되어 있지 않습니다. 연결을 확인하고 다시 시도하세요.';
+
+  @override
+  String get cnErrServiceDown => '서비스가 응답하지 않습니다. 몇 분 뒤 다시 시도하세요.';
+
+  @override
+  String get cnTabHome => '홈';
+
+  @override
+  String get cnTabCases => '케이스';
+
+  @override
+  String get cnTabRecords => '기록';
+
+  @override
+  String get cnTabAccount => '계정';
+
+  @override
+  String get cnHomeHeadline => '보험 편지를 쉽게 이해하세요.';
+
+  @override
+  String get cnScanLetter => '편지 촬영';
+
+  @override
+  String get cnUploadFile => 'PDF·사진 올리기';
+
+  @override
+  String get cnTryDemo => '데모 보기';
+
+  @override
+  String get cnHomeSignInLine => '케이스를 저장하려면 계정이 필요합니다.';
+
+  @override
+  String get cnServiceNotConfigured =>
+      '이 빌드는 서버에 연결되어 있지 않습니다. 데모만 사용할 수 있습니다.';
+
+  @override
+  String get cnContinueCase => '진행 중인 케이스';
+
+  @override
+  String get cnHowItWorks => '이용 방법';
+
+  @override
+  String get cnStep1Title => '편지 읽기';
+
+  @override
+  String get cnStep1Body => '사진을 찍으면 이유, 다음 할 일, 날짜를 찾아 드립니다.';
+
+  @override
+  String get cnStep2Title => '자료 모으기';
+
+  @override
+  String get cnStep2Body => '편지가 요청한 자료를 내 기록과 연결합니다.';
+
+  @override
+  String get cnStep3Title => '패킷 만들기';
+
+  @override
+  String get cnStep3Body => '의사용 1페이지 요약과 재검토 요청 초안을 받습니다.';
+
+  @override
+  String get cnRecentCases => '다른 케이스';
+
+  @override
+  String get cnNoCasesYet => '아직 케이스가 없습니다';
+
+  @override
+  String get cnNoOtherCases => '다른 케이스가 없습니다.';
+
+  @override
+  String get cnSeeAllCases => '모든 케이스 보기';
+
+  @override
+  String get cnNoCasesBody => '보험 편지를 촬영해 시작하세요.';
+
+  @override
+  String get cnCasesSignInTitle => '로그인하면 케이스를 볼 수 있습니다';
+
+  @override
+  String get cnCasesSignInBody => '또는 데모로 사용 방법을 확인하세요.';
+
+  @override
+  String get cnCaseDeleted => '케이스를 삭제했습니다.';
+
+  @override
+  String get cnCaseUntitled => '보험 편지';
+
+  @override
+  String get cnStatusReading => '편지 읽는 중';
+
+  @override
+  String get cnStatusNeedsReview => '확인 필요';
+
+  @override
+  String get cnStatusGatherRecords => '자료 모으기';
+
+  @override
+  String get cnStatusPacketReady => '패킷 준비됨';
+
+  @override
+  String get cnStatusNeedsAttention => '조치 필요';
+
+  @override
+  String get cnStatusNotStarted => '시작 전';
+
+  @override
+  String get cnNextWaitReading => '편지를 읽고 있습니다.';
+
+  @override
+  String get cnNextTryAgain => '읽기가 멈췄습니다. 케이스를 열어 다시 시도하세요.';
+
+  @override
+  String cnNextFactsToConfirm(int count) {
+    return '확인할 내용 $count개';
+  }
+
+  @override
+  String cnNextItemsAttached(int done, int total) {
+    return '요청 자료 $total개 중 $done개 처리';
+  }
+
+  @override
+  String get cnNextSharePacket => '공유할 패킷이 준비됨';
+
+  @override
+  String get cnNextCreatePacket => '다음: 패킷 만들기';
+
+  @override
+  String cnDateToCheckShort(String date) {
+    return '확인할 날짜: $date';
+  }
+
+  @override
+  String cnDatePassedShort(String date) {
+    return '지난 날짜: $date';
+  }
+
+  @override
+  String get cnMoreActions => '더보기';
+
+  @override
+  String get cnDeleteCase => '케이스 삭제';
+
+  @override
+  String get cnDeleteCaseTitle => '이 케이스를 삭제할까요?';
+
+  @override
+  String get cnDeleteCaseBody =>
+      '편지 사진, 읽어낸 내용, 연결한 기록 요약, 패킷이 삭제됩니다. 복약·증상 기록은 그대로 남습니다.';
+
+  @override
+  String get cnCancel => '취소';
+
+  @override
+  String get cnDelete => '삭제';
+
+  @override
+  String get cnDeleteFailed => '삭제하지 못했습니다. 연결을 확인하고 다시 시도하세요.';
+
+  @override
+  String get cnKindInitialDenial => '약제 보장 거부';
+
+  @override
+  String get cnKindInfoRequest => '추가 자료 요청';
+
+  @override
+  String get cnKindReauth => '재승인(갱신) 안내';
+
+  @override
+  String get cnKindFinalDenial => '최종 이의신청 결정';
+
+  @override
+  String get cnKindEob => '청구서 또는 급여 설명서(EOB)';
+
+  @override
+  String get cnKindOther => '기타 편지';
+
+  @override
+  String get cnKindUncertain => '편지 종류 불분명';
+
+  @override
+  String get cnFieldPatientName => '환자 이름';
+
+  @override
+  String get cnFieldPlanName => '보험 상품';
+
+  @override
+  String get cnFieldMemberId => '회원 번호';
+
+  @override
+  String get cnFieldCaseReference => '케이스·참조 번호';
+
+  @override
+  String get cnFieldMedication => '약물(원문 그대로)';
+
+  @override
+  String get cnFieldDose => '용량(원문 그대로)';
+
+  @override
+  String get cnFieldNoticeDate => '통지 날짜';
+
+  @override
+  String get cnFieldContact => '문의처';
+
+  @override
+  String get cnFieldSubmissionRoute => '제출 경로';
+
+  @override
+  String get cnFactEdited => '직접 수정함';
+
+  @override
+  String get cnFactChecked => '확인함';
+
+  @override
+  String get cnFactNotInLetter => '편지에 없음';
+
+  @override
+  String get cnFactNeedsCheck => '확인 필요';
+
+  @override
+  String get cnFactFromLetter => '편지에서 찾음';
+
+  @override
+  String get cnWhoYou => '본인';
+
+  @override
+  String get cnWhoCareTeam => '의료진';
+
+  @override
+  String get cnWhoPlan => '보험사';
+
+  @override
+  String get cnWhoUnknown => '모름';
+
+  @override
+  String get cnReqLinked => '연결됨';
+
+  @override
+  String get cnReqAskedCareTeam => '의료진에 요청함';
+
+  @override
+  String get cnReqNotAvailable => '자료 없음';
+
+  @override
+  String get cnReqNotNeeded => '해당 없음';
+
+  @override
+  String get cnReqNeeded => '필요';
+
+  @override
+  String get cnReqReset => '필요로 되돌리기';
+
+  @override
+  String get cnRecMedication => '복약 기록';
+
+  @override
+  String get cnRecSymptoms => '증상 기록';
+
+  @override
+  String get cnRecLocalContext => '지역 환경 맥락';
+
+  @override
+  String get cnRecPrn => '필요 시 흡입기';
+
+  @override
+  String get cnDemoTitle => '데모';
+
+  @override
+  String get cnDemoReset => '데모 초기화';
+
+  @override
+  String get cnDemoResetDone => '데모를 초기화했습니다.';
+
+  @override
+  String get cnDemoIntro =>
+      '각 단계를 볼 수 있도록 결과가 고정된 가상 편지 3개입니다. 아무것도 업로드되지 않습니다.';
+
+  @override
+  String get cnUpEmpty => '빈 파일입니다.';
+
+  @override
+  String cnUpTooLarge(int mb) {
+    return '파일 하나는 ${mb}MB 이하여야 합니다.';
+  }
+
+  @override
+  String cnUpCaseTooLarge(int mb) {
+    return '전체 페이지는 ${mb}MB 이하여야 합니다.';
+  }
+
+  @override
+  String cnUpTooManyPages(int max) {
+    return '편지 하나에 최대 $max페이지까지 올릴 수 있습니다.';
+  }
+
+  @override
+  String get cnUpUnsupported => 'JPG, PNG, PDF를 사용하세요. HEIC 사진은 여기서 다시 촬영하세요.';
+
+  @override
+  String get cnUpBadFile => '읽을 수 없는 파일입니다. 다른 사진이나 PDF를 사용하세요.';
+
+  @override
+  String get cnUpEncrypted => '암호가 걸린 PDF입니다. 잠금 없는 사본을 저장하거나 사진을 찍으세요.';
+
+  @override
+  String get cnCameraUnavailable => '카메라를 사용할 수 없습니다. 대신 사진이나 PDF를 올릴 수 있습니다.';
+
+  @override
+  String get cnPhotosUnavailable =>
+      '사진을 열 수 없습니다. 설정에서 사진 접근을 허용하거나 PDF를 올리세요.';
+
+  @override
+  String get cnFilesUnavailable => '지금은 파일을 열 수 없습니다. 다시 시도하세요.';
+
+  @override
+  String get cnUploadFailed => '업로드가 끝나지 않았습니다. 페이지는 그대로 있으니 다시 시도하세요.';
+
+  @override
+  String get cnCaptureTitle => '편지 페이지 추가';
+
+  @override
+  String get cnReplacePagesTitle => '편지 페이지 교체';
+
+  @override
+  String get cnOpening => '여는 중…';
+
+  @override
+  String get cnCaptureEmptyTitle => '편지 페이지를 추가하세요';
+
+  @override
+  String get cnCaptureTips =>
+      '밝은 곳에 종이를 평평하게 놓고 네 모서리가 모두 보이게 찍으세요. 모든 페이지를 순서대로 추가하세요.';
+
+  @override
+  String get cnTakePhoto => '사진 찍기';
+
+  @override
+  String get cnAddPage => '페이지 추가';
+
+  @override
+  String get cnAddPhoto => '사진';
+
+  @override
+  String get cnAddPdf => 'PDF';
+
+  @override
+  String cnPagesSummary(int pages, String size) {
+    return '$pages페이지 · ${size}MB';
+  }
+
+  @override
+  String get cnUploadConsent =>
+      '업로드하면 이 페이지가 CoverNote 서버로 전송되고 AI 서비스가 내용을 읽습니다. 케이스는 언제든 삭제할 수 있습니다.';
+
+  @override
+  String get cnStageUploading => '업로드 중';
+
+  @override
+  String get cnUploadAndRead => '업로드하고 읽기';
+
+  @override
+  String cnPageN(int n) {
+    return '$n페이지';
+  }
+
+  @override
+  String cnPdfPages(int n, int count) {
+    return '파일 $n · PDF $count페이지';
+  }
+
+  @override
+  String cnPreviewPage(int n) {
+    return '$n페이지 미리보기';
+  }
+
+  @override
+  String get cnRotate => '회전';
+
+  @override
+  String get cnRetake => '다시 찍기';
+
+  @override
+  String get cnRemovePage => '삭제';
+
+  @override
+  String get cnReorder => '끌어서 순서 바꾸기';
+
+  @override
+  String get cnServiceUnavailableBody =>
+      '지금은 편지 읽기 기능을 사용할 수 없습니다. 페이지는 저장되어 있으니 나중에 다시 시도하세요.';
+
+  @override
+  String get cnNeedNewPagesBody => '더 선명하게 찍거나 페이지 수를 줄여 다시 올리세요.';
+
+  @override
+  String get cnPagesKept => '페이지는 저장되어 있고 바뀐 것은 없습니다.';
+
+  @override
+  String get cnReplacePages => '페이지 교체';
+
+  @override
+  String get cnTryAgain => '다시 시도';
+
+  @override
+  String get cnStageReading => '읽는 중';
+
+  @override
+  String get cnStageChecking => '확인 중';
+
+  @override
+  String get cnStageReady => '완료';
+
+  @override
+  String get cnReadingTitle => '편지를 읽고 있습니다';
+
+  @override
+  String get cnReadingBody => '끝나면 찾아낸 내용을 편지와 비교해 확인합니다.';
+
+  @override
+  String get cnReadingLeaveOk => '이 화면을 나가도 됩니다. 읽기는 계속되고 케이스는 저장됩니다.';
+
+  @override
+  String get cnStartReading => '읽기 시작';
+
+  @override
+  String get cnStepLetter => '편지';
+
+  @override
+  String get cnStepReview => '확인';
+
+  @override
+  String get cnStepEvidence => '자료';
+
+  @override
+  String get cnStepPacket => '패킷';
+
+  @override
+  String cnStepOf(int n, int total, String name) {
+    return '$total단계 중 $n단계: $name';
+  }
+
+  @override
+  String get cnSaving => '저장 중…';
+
+  @override
+  String get cnSaved => '저장됨';
+
+  @override
+  String get cnNotSavedRetry => '저장 안 됨 · 재시도';
+
+  @override
+  String get cnViewOriginal => '원본 페이지 보기';
+
+  @override
+  String cnLetterPagesRead(int count) {
+    return '$count페이지 읽음';
+  }
+
+  @override
+  String cnPagesHardToRead(String list) {
+    return '읽기 어려운 페이지: $list. 해당 내용을 꼼꼼히 확인하거나 다시 찍으세요.';
+  }
+
+  @override
+  String get cnRetakePages => '페이지 다시 찍기';
+
+  @override
+  String get cnHardToRead => '읽기 어려움';
+
+  @override
+  String get cnContinueToReview => '확인 단계로';
+
+  @override
+  String get cnOriginalPages => '원본 페이지';
+
+  @override
+  String get cnNoOriginal => '저장된 원본 페이지가 없습니다.';
+
+  @override
+  String get cnCheckDetails => '세부 내용 확인';
+
+  @override
+  String get cnCheckDetailsHint => '각 값을 편지와 비교하세요. 인용문을 누르면 원문 위치를 볼 수 있습니다.';
+
+  @override
+  String cnItemsLeftToCheck(int count) {
+    return '계속하려면 $count개 항목을 더 확인하세요';
+  }
+
+  @override
+  String get cnContinueToEvidence => '자료 단계로';
+
+  @override
+  String cnSeePage(int n) {
+    return '$n페이지 보기';
+  }
+
+  @override
+  String get cnWhatLetterIs => '편지 종류';
+
+  @override
+  String get cnLooksRight => '맞아요';
+
+  @override
+  String get cnChange => '변경';
+
+  @override
+  String get cnCardWhyDenied => '거부 이유';
+
+  @override
+  String get cnCardWhatTheyNeed => '요청한 내용';
+
+  @override
+  String get cnCardWhatItSays => '편지 내용';
+
+  @override
+  String get cnNoReasonFound => '편지에서 이유를 찾지 못했습니다.';
+
+  @override
+  String get cnCardNextStep => '다음 할 일';
+
+  @override
+  String cnNextDenial(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '의료진에게 재검토 요청을 부탁하세요. 편지에 보낼 자료가 $count개 적혀 있습니다.',
+      zero: '의료진에게 재검토 요청을 부탁하세요. 편지에 특정 자료는 적혀 있지 않습니다.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cnNextInfoRequest(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '보험사가 요청한 자료 $count개를 아래 날짜까지 보내세요.',
+      zero: '보험사가 요청한 정보를 아래 날짜까지 보내세요.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cnNextReauth => '현재 승인이 끝나는 날짜를 확인하고 의료진에게 갱신을 시작해 달라고 요청하세요.';
+
+  @override
+  String get cnNextFinal =>
+      '최종 결정 통지입니다. CoverNote는 이 편지에 대한 1차 재검토 요청 초안을 만들지 않습니다. 편지에 적힌 선택지를 보험사나 의료진에게 문의하세요.';
+
+  @override
+  String get cnNextEob => '거부 통지가 아니라 청구서나 급여 설명서로 보입니다. 보험사 회원 서비스에 확인하세요.';
+
+  @override
+  String get cnNextUncertain => '먼저 위에서 편지 종류를 확인하세요.';
+
+  @override
+  String cnWhereToSend(String route) {
+    return '제출 경로: $route';
+  }
+
+  @override
+  String cnWhoToCall(String contact) {
+    return '문의처: $contact';
+  }
+
+  @override
+  String get cnCardDate => '확인할 날짜';
+
+  @override
+  String cnDateCalculated(String anchor, int days) {
+    return '계산값: $anchor + 달력일 $days일';
+  }
+
+  @override
+  String get cnReceivedDateWord => '받은 날짜';
+
+  @override
+  String get cnNoticeDateWord => '통지 날짜';
+
+  @override
+  String get cnDateEnteredByYou => '직접 입력함';
+
+  @override
+  String get cnDateFromLetter => '편지에 적힌 날짜';
+
+  @override
+  String cnReceivedOn(String date) {
+    return '받은 날짜: $date';
+  }
+
+  @override
+  String get cnDatePassed => '이 날짜가 지났습니다. 보험사에 지금 할 수 있는 방법을 문의하세요.';
+
+  @override
+  String cnNeedReceivedDate(int days) {
+    return '편지에는 받은 날로부터 달력일 $days일이라고 적혀 있습니다. 언제 받으셨나요?';
+  }
+
+  @override
+  String get cnEnterReceivedDate => '받은 날짜 입력';
+
+  @override
+  String get cnDateConflict =>
+      '편지에 서로 다른 날짜가 있습니다. 어느 날짜가 맞는지 보험사에 확인한 뒤 선택하세요.';
+
+  @override
+  String cnUseThisDate(String date) {
+    return '$date 사용';
+  }
+
+  @override
+  String get cnDateUnclear =>
+      '표현이 불분명하거나 영업일 기준이라 CoverNote가 계산하지 않습니다. 보험사에 정확한 날짜를 문의하세요.';
+
+  @override
+  String get cnNoDeadline => '편지에서 재검토 기한을 찾지 못했습니다.';
+
+  @override
+  String cnReplyBy(String date) {
+    return '추가 자료 회신 기한: $date(편지 기준)';
+  }
+
+  @override
+  String get cnEnterDatePlanGave => '날짜 직접 입력';
+
+  @override
+  String get cnUseLetterDate => '편지 날짜 사용';
+
+  @override
+  String get cnLeaveUnknown => '일단 모름으로 두기';
+
+  @override
+  String get cnDateUnknownChecked => '모름으로 표시함';
+
+  @override
+  String get cnTypeAsWritten => '편지에 적힌 그대로 입력하세요.';
+
+  @override
+  String get cnCheckThisValue => '값이 이상해 보입니다. 편지와 비교하세요.';
+
+  @override
+  String get cnDone => '완료';
+
+  @override
+  String get cnEdit => '수정';
+
+  @override
+  String get cnAdd => '추가';
+
+  @override
+  String get cnNoRecordsToLink =>
+      '최근 30일 동안 연결할 기록이 없습니다. 누가 자료를 가지고 있는지는 표시할 수 있습니다.';
+
+  @override
+  String cnLinkTitle(String label) {
+    return '연결할 항목: $label';
+  }
+
+  @override
+  String get cnLinkNote => '내 기록은 요청을 보완할 뿐, 진료 기록이나 검사 결과를 대신하지 않습니다.';
+
+  @override
+  String cnMedLine(int taken, int notTaken, int unknown, int scheduled) {
+    return '예정 $scheduled회 중 복용 $taken / 미복용 $notTaken / 미확인 $unknown';
+  }
+
+  @override
+  String cnPrnLine(int uses, int puffs) {
+    return '필요 시 사용: $uses회, $puffs회 흡입';
+  }
+
+  @override
+  String get cnNoEntries => '기록 없음';
+
+  @override
+  String cnSymptomLine(int days, int night, int entries, int total) {
+    return '증상 $days일, 야간 각성 $night일 (총 $total일 중 $entries일 기록)';
+  }
+
+  @override
+  String cnPmLine(int days, int total, int high) {
+    return 'PM2.5 자료 $total일 중 $days일, AQI 100 초과 $high일';
+  }
+
+  @override
+  String cnReportsLine(int count) {
+    return '자가 보고 $count건';
+  }
+
+  @override
+  String get cnSyntheticData => '합성 데이터';
+
+  @override
+  String get cnLetterAsksFor => '편지가 요청한 자료';
+
+  @override
+  String get cnNoItemsListed => '편지에 특정 자료가 적혀 있지 않습니다. 직접 추가할 수 있습니다.';
+
+  @override
+  String get cnAddItemLabel => '추적할 항목 추가';
+
+  @override
+  String cnYourRecords(String from, String to) {
+    return '내 기록 ($from – $to)';
+  }
+
+  @override
+  String get cnLocalContextNote => '선택 사항인 참고 맥락입니다. 우리 집 측정값이나 증상의 원인이 아닙니다.';
+
+  @override
+  String get cnContinueToPacket => '패킷 단계로';
+
+  @override
+  String get cnAddedByYou => '직접 추가';
+
+  @override
+  String get cnFromLetter => '편지에서';
+
+  @override
+  String cnWhoHasIt(String who) {
+    return '자료 보유: $who';
+  }
+
+  @override
+  String cnLinkedTo(String record) {
+    return '연결됨: $record';
+  }
+
+  @override
+  String get cnSeeInLetter => '편지에서 보기';
+
+  @override
+  String get cnLinkRecords => '내 기록 연결';
+
+  @override
+  String get cnOtherStatus => '다른 상태';
+
+  @override
+  String get cnInPacket => '패킷에 포함';
+
+  @override
+  String get cnRemoveFromPacket => '패킷에서 빼기';
+
+  @override
+  String get cnAddToPacket => '패킷에 추가';
+
+  @override
+  String get cnErrNotSavedYet => '최근 변경 내용이 아직 저장되지 않았습니다. 연결을 확인하고 다시 시도하세요.';
+
+  @override
+  String get cnPacketChangedMeanwhile => '패킷을 만드는 동안 내용이 바뀌었습니다. 다시 생성하세요.';
+
+  @override
+  String get cnPacketFailed => '패킷을 만들지 못했습니다. 다시 시도하세요.';
+
+  @override
+  String get cnBeforeSharingTitle => '공유하기 전에';
+
+  @override
+  String get cnBeforeSharingBody =>
+      '이 파일에는 이름과 건강 정보가 들어 있습니다. 의료진이나 보험사에만 공유하세요. 공유한다고 제출되는 것은 아닙니다.';
+
+  @override
+  String get cnShare => '공유';
+
+  @override
+  String get cnMethodFax => '팩스';
+
+  @override
+  String get cnMethodMail => '우편';
+
+  @override
+  String get cnMethodPortal => '온라인 포털';
+
+  @override
+  String get cnMethodInPerson => '직접 방문';
+
+  @override
+  String get cnMethodCareTeam => '의료진이 보냄';
+
+  @override
+  String get cnMethodOther => '기타';
+
+  @override
+  String get cnPacketNoDraftFinal =>
+      '최종 결정 편지는 의사용 요약만 만들고 1차 재검토 초안은 만들지 않습니다.';
+
+  @override
+  String get cnPacketNoDraftEob => '청구서나 급여 설명서는 의사용 요약만 만듭니다.';
+
+  @override
+  String get cnPacketNoDraftReauth => '갱신 안내는 의료진의 갱신을 돕도록 의사용 요약만 만듭니다.';
+
+  @override
+  String get cnPacketNoDraftOther => '거부 통지나 추가 자료 요청이 아니면 의사용 요약만 만듭니다.';
+
+  @override
+  String get cnPacketContains => '패킷 구성';
+
+  @override
+  String get cnPartSummary => '의사용 요약(1페이지)';
+
+  @override
+  String get cnPartDraft => '재검토 요청 초안(의료진 작성용)';
+
+  @override
+  String get cnPartLetterText => '부록: 편지 원문 텍스트';
+
+  @override
+  String cnPacketEvidenceCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '기록 요약 $count개 추가됨',
+      zero: '추가한 기록 요약 없음',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cnIncludeLetterText => '편지 원문을 부록으로 추가';
+
+  @override
+  String get cnPacketStale => '마지막 패킷 이후 내용이 바뀌었습니다. 다시 생성해 업데이트하세요.';
+
+  @override
+  String get cnGenerating => '생성 중…';
+
+  @override
+  String get cnGeneratePacket => '검토 패킷 생성';
+
+  @override
+  String get cnSaveOrPrint => '저장·인쇄';
+
+  @override
+  String get cnISentIt => '보냈어요';
+
+  @override
+  String cnSharedOn(String date) {
+    return '공유함: $date';
+  }
+
+  @override
+  String cnUserReportedSent(String date, String method) {
+    return '직접 기록: $date에 보냄($method)';
+  }
+
+  @override
+  String get cnTabDoctorSummary => '의사용 요약';
+
+  @override
+  String get cnTabReviewDraft => '재검토 요청 초안';
+
+  @override
+  String get cnSentExplain =>
+      '언제 어떻게 보냈는지 기록하세요. CoverNote는 대신 제출하거나 결정을 추적하지 않습니다.';
+
+  @override
+  String get cnSave => '저장';
+
+  @override
+  String get cnCtxPm25 => 'PM2.5 (AQI)';
+
+  @override
+  String get cnCtxNo2 => 'NO₂';
+
+  @override
+  String get cnCtxOutdoorHumidity => '실외 습도';
+
+  @override
+  String cnObservedOn(String date) {
+    return '관측일 $date';
+  }
+
+  @override
+  String get cnCtxIntro =>
+      '출처가 있는 대기 측정값과 직접 겪은 일을 따로 기록합니다. 기록을 설명하는 데 도움이 될 때만 케이스에 추가하세요.';
+
+  @override
+  String get cnCtxReadings => '대기 측정값';
+
+  @override
+  String get cnCtxReadingsNote =>
+      '관측한 날짜의 지역 측정값입니다. 우리 집의 차량 배기가스 양을 측정한 것이 아닙니다.';
+
+  @override
+  String get cnCtxAddReading => '측정값 추가';
+
+  @override
+  String get cnCtxReports => '직접 겪은 일';
+
+  @override
+  String get cnCtxReportsNote => '직접 보고한 내용이며 측정값이 아닙니다.';
+
+  @override
+  String get cnCtxAddReport => '겪은 일 추가';
+
+  @override
+  String get cnReportExhaust => '근처 배기가스 냄새가 심함';
+
+  @override
+  String get cnReportWater => '집에 물이 샘';
+
+  @override
+  String get cnReportDamp => '실내가 눅눅하거나 곰팡이 냄새가 남';
+
+  @override
+  String cnOnDate(String date) {
+    return '날짜: $date';
+  }
+
+  @override
+  String get cnNoteOptional => '메모(선택)';
+
+  @override
+  String get cnCtxWhat => '측정 항목';
+
+  @override
+  String get cnCtxHumidityNote => '실외 습도는 날씨 자료이며 실내 습기나 곰팡이를 나타내지 않습니다.';
+
+  @override
+  String get cnCtxValue => '값';
+
+  @override
+  String get cnCtxValueInvalid => '올바른 숫자를 입력하세요.';
+
+  @override
+  String get cnCtxSource => '출처';
+
+  @override
+  String get cnCtxSourceHelp => '숫자의 출처(예: AirNow, 지역 측정소)';
+
+  @override
+  String get cnCtxSourceRequired => '출처를 입력하세요.';
+
+  @override
+  String get cnCtxPlace => '장소(우편번호 또는 동네, 선택)';
+
+  @override
+  String get cnRecordsSignInBody => '로그인하면 복약·증상·지역 맥락 기록을 보관할 수 있습니다.';
+
+  @override
+  String get cnRecordsYourRecords => '내 기록';
+
+  @override
+  String get cnRecMedicationSub => '복용하는 약과 용량';
+
+  @override
+  String get cnRecDailyLog => '일일 기록';
+
+  @override
+  String get cnRecDailyLogSub => '증상과 흡입기 사용';
+
+  @override
+  String get cnRecLocalContextSub => '대기 측정값과 직접 겪은 일';
+
+  @override
+  String get cnHelp => '도움';
+
+  @override
+  String get cnUrgentHelp => '긴급 도움';
+
+  @override
+  String get cnUrgentHelpSub => '호흡 응급 상황 대처와 911 전화';
+
+  @override
+  String cnLast30Days(String from, String to) {
+    return '최근 30일 ($from – $to)';
+  }
+
+  @override
+  String get cnNoSchedule => '정기 복용 일정 없음';
+
+  @override
+  String get cnRecordsUnknownNote => '기록이 없는 날은 미확인으로 남고 미복용으로 세지 않습니다.';
+
+  @override
+  String get cnDeleteAccountTitle => '계정을 삭제할까요?';
+
+  @override
+  String get cnDeleteAccountBody =>
+      '계정, 케이스, 올린 편지, 패킷, 기록이 영구 삭제되며 되돌릴 수 없습니다.';
+
+  @override
+  String get cnTypeDelete => '확인하려면 DELETE 입력';
+
+  @override
+  String get cnDeleteAccount => '계정 삭제';
+
+  @override
+  String get cnAccountDeleted => '계정을 삭제했습니다.';
+
+  @override
+  String get cnDeleteAccountFailed => '계정을 삭제하지 못했습니다. 나중에 다시 시도하세요.';
+
+  @override
+  String get cnAccountSignedOut => '로그인하지 않았습니다.';
+
+  @override
+  String get cnLanguage => '언어';
+
+  @override
+  String get cnServiceStatus => '편지 읽기 서비스';
+
+  @override
+  String get cnServiceReady => '사용 가능';
+
+  @override
+  String get cnServiceUnavailableShort => '지금은 사용할 수 없음';
+
+  @override
+  String get cnChecking => '확인 중…';
+
+  @override
+  String get cnServiceUnknown => '확인 안 함';
+
+  @override
+  String get cnCheck => '확인';
+
+  @override
+  String get cnAbout => '정보';
+
+  @override
+  String get cnAboutBody =>
+      'CoverNote는 약 관련 보험 편지를 읽고 의료진에게 전달할 자료를 준비하도록 돕습니다. 보험사에 제출하지 않으며, 보장 여부를 판단하지 않고, 의료 조언이 아닙니다.';
+
+  @override
+  String get cnDangerZone => '계정 삭제';
+
+  @override
+  String get cnErrServiceUnavailable => '지금은 편지 읽기 기능을 사용할 수 없습니다.';
+
+  @override
+  String get cnErrBusy => '서비스가 바쁩니다. 잠시 후 다시 시도하세요.';
+
+  @override
+  String get cnErrSlow => '읽기에 시간이 너무 오래 걸렸습니다. 다시 시도하세요.';
+
+  @override
+  String get cnErrUnreadable => '페이지를 읽지 못했습니다. 더 밝은 곳에서 다시 찍으세요.';
+
+  @override
+  String get cnErrTooManyPages => '페이지가 너무 많습니다. 10페이지까지 올리세요.';
+
+  @override
+  String get cnErrTooLarge => '파일이 너무 큽니다. 페이지 수나 크기를 줄이세요.';
+
+  @override
+  String get cnErrStale => '다른 기기에서 케이스가 바뀌었습니다. 최신 내용을 표시합니다.';
+
+  @override
+  String get cnErrCaseGone => '이 케이스는 더 이상 없습니다.';
+
+  @override
+  String get cnErrAttempts => '여러 번 읽기에 실패했습니다. 페이지를 교체하거나 나중에 다시 시도하세요.';
+
+  @override
+  String get cnErrDemoUpload => '데모에서는 파일을 읽을 수 없습니다. 로그인해 내 편지를 촬영하세요.';
+
+  @override
+  String cnErrGeneric(String code) {
+    return '문제가 발생했습니다($code). 다시 시도하세요.';
+  }
 }

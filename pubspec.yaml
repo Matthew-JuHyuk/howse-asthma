@@ -1,5 +1,5 @@
 name: howse_asthma
-description: "Asthma trigger alert and inhaler usage tracking app for underserved and non-native-English-speaking patients"
+description: "CoverNote - insurance letters, clear next steps"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -50,6 +50,10 @@ dependencies:
   flutter_local_notifications: ^22.3.1
   flutter_timezone: ^5.1.1
   timezone: ^0.11.1
+  image_picker: ^1.2.4
+  file_picker: ^13.1.0
+  crypto: ^3.0.7
+  image: ^4.12.0
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +65,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -74,8 +79,22 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  # Client-safe keys only; generated from .env by tool/make_client_env.mjs.
   assets:
-    - .env
+    - .env.client
+    - assets/branding/covernote_mark.png
+    - assets/fonts/NotoSans-Regular.ttf
+    - assets/fonts/NotoSans-Bold.ttf
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/branding/covernote_icon_1024.png
+  remove_alpha_ios: true
+  adaptive_icon_background: "#0F2E55"
+  adaptive_icon_foreground: assets/branding/covernote_foreground.png
+  adaptive_icon_monochrome: assets/branding/covernote_monochrome.png
+  min_sdk_android: 21
 
   # To add assets to your application, add an assets section, like this:
   # assets:

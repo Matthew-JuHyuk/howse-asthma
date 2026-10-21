@@ -20,12 +20,12 @@ class _ActScreenState extends State<ActScreen> {
   bool _saving = false;
 
   List<String> _questions(AppLocalizations l10n) => [
-        l10n.actQ1,
-        l10n.actQ2,
-        l10n.actQ3,
-        l10n.actQ4,
-        l10n.actQ5,
-      ];
+    l10n.actQ1,
+    l10n.actQ2,
+    l10n.actQ3,
+    l10n.actQ4,
+    l10n.actQ5,
+  ];
 
   /// Q1–Q4: frequency; Q5: control rating (still scored 1–5).
   List<String> _optionsForQuestion(AppLocalizations l10n, int questionIndex) {
@@ -59,15 +59,15 @@ class _ActScreenState extends State<ActScreen> {
       );
       if (!mounted || row.isEmpty) return;
       // Wording is not a validated ACT translation: never show a score.
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.s5ActSaved)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.s5ActSaved)));
       Navigator.of(context).pop(true);
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.authErrorGeneric)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.authErrorGeneric)));
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -112,7 +112,9 @@ class _ActScreenState extends State<ActScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Material(
-                color: selected == (i + 1) ? AppTheme.brand50 : AppTheme.neutral0,
+                color: selected == (i + 1)
+                    ? AppTheme.brand50
+                    : AppTheme.neutral0,
                 borderRadius: BorderRadius.circular(12),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
@@ -143,9 +145,7 @@ class _ActScreenState extends State<ActScreen> {
             children: [
               if (_index > 0)
                 OutlinedButton(
-                  onPressed: _saving
-                      ? null
-                      : () => setState(() => _index -= 1),
+                  onPressed: _saving ? null : () => setState(() => _index -= 1),
                   child: Text(l10n.s5Back),
                 ),
               FilledButton(
@@ -158,9 +158,7 @@ class _ActScreenState extends State<ActScreen> {
                           _submit();
                         }
                       },
-                child: Text(
-                  _index < 4 ? l10n.mockNext : l10n.mockSubmit,
-                ),
+                child: Text(_index < 4 ? l10n.mockNext : l10n.mockSubmit),
               ),
             ],
           ),

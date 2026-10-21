@@ -7,7 +7,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Howse Asthma</string>
+	<string>CoverNote</string>
+	<key>NSCameraUsageDescription</key>
+	<string>CoverNote uses the camera to photograph an insurance letter you choose to scan.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>CoverNote opens photos you pick so it can read an insurance letter.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

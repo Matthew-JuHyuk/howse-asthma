@@ -464,9 +464,7 @@ class _InhalerSheetState extends State<_InhalerSheet> {
       if (!mounted) return;
       Navigator.pop(context, true);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(_isEdit ? l10n.s5Saved : l10n.s5InhalerLogged),
-        ),
+        SnackBar(content: Text(_isEdit ? l10n.s5Saved : l10n.s5InhalerLogged)),
       );
     } catch (_) {
       if (!mounted) return;
@@ -553,7 +551,10 @@ class _InhalerSheetState extends State<_InhalerSheet> {
         DropdownButtonFormField<int?>(
           initialValue: _puffs,
           items: [
-            DropdownMenuItem<int?>(value: null, child: Text(l10n.s5NotRecorded)),
+            DropdownMenuItem<int?>(
+              value: null,
+              child: Text(l10n.s5NotRecorded),
+            ),
             for (var i = 1; i <= 10; i++)
               DropdownMenuItem<int?>(value: i, child: Text('$i')),
           ],
@@ -697,9 +698,9 @@ class _SymptomSheetState extends State<_SymptomSheet> {
       RecordsRevision.instance.bump();
       if (!mounted) return;
       Navigator.pop(context, true);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.s5Saved)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.s5Saved)));
     } catch (_) {
       if (!mounted) return;
       setState(() {
@@ -868,9 +869,9 @@ class _MedCheckSheetState extends State<_MedCheckSheet> {
       RecordsRevision.instance.bump();
       if (!mounted) return;
       Navigator.pop(context, true);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.s5Saved)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.s5Saved)));
     } catch (_) {
       if (!mounted) return;
       setState(() {
@@ -926,9 +927,7 @@ class _MedCheckSheetState extends State<_MedCheckSheet> {
                   final d = today.subtract(Duration(days: i));
                   return ChoiceChip(
                     label: Text(
-                      i == 0
-                          ? l10n.s5Today
-                          : DateFormat.MMMd(locale).format(d),
+                      i == 0 ? l10n.s5Today : DateFormat.MMMd(locale).format(d),
                     ),
                     selected: _date == d,
                     onSelected: widget.existing != null
@@ -967,8 +966,7 @@ class _MedCheckSheetState extends State<_MedCheckSheet> {
                 ChoiceChip(
                   label: Text(s5MedReasonLabel(l10n, r)),
                   selected: _reason == r,
-                  onSelected: (sel) =>
-                      setState(() => _reason = sel ? r : null),
+                  onSelected: (sel) => setState(() => _reason = sel ? r : null),
                 ),
             ],
           ),

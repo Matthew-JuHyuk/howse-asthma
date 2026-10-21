@@ -53,7 +53,10 @@ class _PatientMockShellState extends State<PatientMockShell> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.medication_outlined, size: 28),
-                  Text('1-Tap', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                  Text(
+                    '1-Tap',
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+                  ),
                 ],
               ),
             ),
@@ -61,7 +64,10 @@ class _PatientMockShellState extends State<PatientMockShell> {
             TextButton.icon(
               onPressed: () => MockNav.openCatalog(context),
               icon: const Icon(Icons.grid_view_rounded, size: 16),
-              label: Text(l10n.mockAllScreens, style: const TextStyle(fontSize: 11)),
+              label: Text(
+                l10n.mockAllScreens,
+                style: const TextStyle(fontSize: 11),
+              ),
             ),
           ],
         ),
@@ -70,11 +76,26 @@ class _PatientMockShellState extends State<PatientMockShell> {
         selectedIndex: _index,
         onDestinationSelected: (value) => setState(() => _index = value),
         destinations: [
-          NavigationDestination(icon: const Icon(Icons.home_outlined), label: l10n.mockTabHome),
-          NavigationDestination(icon: const Icon(Icons.medication_outlined), label: l10n.mockTabLog),
-          NavigationDestination(icon: const Icon(Icons.description_outlined), label: l10n.mockTabReport),
-          NavigationDestination(icon: const Icon(Icons.stars_outlined), label: l10n.mockTabReward),
-          NavigationDestination(icon: const Icon(Icons.settings_outlined), label: l10n.mockTabSettings),
+          NavigationDestination(
+            icon: const Icon(Icons.home_outlined),
+            label: l10n.mockTabHome,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.medication_outlined),
+            label: l10n.mockTabLog,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.description_outlined),
+            label: l10n.mockTabReport,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.stars_outlined),
+            label: l10n.mockTabReward,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.settings_outlined),
+            label: l10n.mockTabSettings,
+          ),
         ],
       ),
     );

@@ -74,19 +74,24 @@ class _ProviderSettingsScreenState extends State<ProviderSettingsScreen> {
                             currentLocale.languageCode,
                       ),
                     ),
-                    ...supportedLocales.map(
-                      (locale) => RadioListTile<Locale>(
-                        title: Text(
-                          localeDisplayNames[locale.languageCode] ??
-                              locale.languageCode,
-                        ),
-                        value: locale,
-                        groupValue: currentLocale,
-                        onChanged: (value) {
-                          if (value != null) {
-                            widget.localeController.setLocale(value);
-                          }
-                        },
+                    RadioGroup<Locale>(
+                      groupValue: currentLocale,
+                      onChanged: (value) {
+                        if (value != null) {
+                          widget.localeController.setLocale(value);
+                        }
+                      },
+                      child: Column(
+                        children: [
+                          for (final locale in supportedLocales)
+                            RadioListTile<Locale>(
+                              title: Text(
+                                localeDisplayNames[locale.languageCode] ??
+                                    locale.languageCode,
+                              ),
+                              value: locale,
+                            ),
+                        ],
                       ),
                     ),
                     const Divider(),
@@ -98,8 +103,7 @@ class _ProviderSettingsScreenState extends State<ProviderSettingsScreen> {
                             : l10n.authBiometricUnavailable,
                       ),
                       value: _biometricEnabled && _biometricAvailable,
-                      onChanged:
-                          _biometricAvailable ? _toggleBiometric : null,
+                      onChanged: _biometricAvailable ? _toggleBiometric : null,
                     ),
                     const Divider(),
                     ListTile(

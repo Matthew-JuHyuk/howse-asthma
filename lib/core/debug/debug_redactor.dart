@@ -11,9 +11,7 @@ class DebugRedactor {
     caseSensitive: false,
   );
 
-  static final _emailValue = RegExp(
-    r'^[^\s@]+@[^\s@]+\.[^\s@]+$',
-  );
+  static final _emailValue = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
   static final _e164Value = RegExp(r'^\+[1-9]\d{7,14}$');
   static final _jwtValue = RegExp(r'^eyJ[A-Za-z0-9_-]+\.');
   static final _uuidKey = RegExp(

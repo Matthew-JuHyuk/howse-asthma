@@ -210,7 +210,10 @@ class _MyLogScreenState extends State<MyLogScreen> {
       return [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Text(l10n.s5NoRecordsYet, style: const TextStyle(fontSize: 16)),
+          child: Text(
+            l10n.s5NoRecordsYet,
+            style: const TextStyle(fontSize: 16),
+          ),
         ),
       ];
     }
@@ -248,7 +251,9 @@ class _MyLogScreenState extends State<MyLogScreen> {
     String locale,
     _Item it,
   ) {
-    final time = it.time == null ? null : DateFormat.jm(locale).format(it.time!);
+    final time = it.time == null
+        ? null
+        : DateFormat.jm(locale).format(it.time!);
     if (it.inhaler != null) {
       final e = it.inhaler!;
       final med = e.medicationUnknown
@@ -340,10 +345,7 @@ class _EntryTile extends StatelessWidget {
           children: [
             if (subtitle.isNotEmpty) Text(subtitle),
             if (note != null && note!.isNotEmpty)
-              Text(
-                note!,
-                style: const TextStyle(color: AppTheme.neutral700),
-              ),
+              Text(note!, style: const TextStyle(color: AppTheme.neutral700)),
           ],
         ),
         trailing: Semantics(

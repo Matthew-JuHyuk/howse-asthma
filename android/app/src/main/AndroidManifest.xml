@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <!-- Background / always location is deferred until after FCM path (4.6a) + store justification. -->
     <application
-        android:label="howse_asthma"
+        android:label="CoverNote"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -26,11 +26,18 @@ class PatHomeMock extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.warning_amber_rounded, color: Colors.white, size: 20),
+                const Icon(
+                  Icons.warning_amber_rounded,
+                  color: Colors.white,
+                  size: 20,
+                ),
                 const SizedBox(width: 8),
                 Text(
                   '${l10n.mockStateWarning} — Score 3',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ],
             ),
@@ -45,7 +52,9 @@ class PatHomeMock extends StatelessWidget {
                 brandColor: warning ? AppTheme.error500 : AppTheme.brand600,
                 titleColor: warning ? AppTheme.error600 : AppTheme.brand700,
                 trailing: CircleAvatar(
-                  backgroundColor: warning ? const Color(0xFFFEE2E2) : AppTheme.neutral100,
+                  backgroundColor: warning
+                      ? const Color(0xFFFEE2E2)
+                      : AppTheme.neutral100,
                   child: Icon(
                     Icons.notifications_outlined,
                     color: warning ? AppTheme.error500 : AppTheme.neutral500,
@@ -62,7 +71,9 @@ class PatHomeMock extends StatelessWidget {
                 ),
               ),
               Text(
-                warning ? 'Your risk level is elevated today' : 'Here is your daily summary',
+                warning
+                    ? 'Your risk level is elevated today'
+                    : 'Here is your daily summary',
                 style: TextStyle(
                   color: warning ? AppTheme.error600 : AppTheme.subtext,
                   fontWeight: warning ? FontWeight.w700 : FontWeight.w400,
@@ -80,9 +91,12 @@ class PatHomeMock extends StatelessWidget {
                           backgroundColor: AppTheme.error500,
                           minimumSize: const Size.fromHeight(52),
                         ),
-                        onPressed: () => MockNav.push(context, MockScreenId.patLog),
+                        onPressed: () =>
+                            MockNav.push(context, MockScreenId.patLog),
                         icon: const Icon(Icons.medication_outlined),
-                        label: Text(l10n.medicationLogAddButton.split('/').first.trim()),
+                        label: Text(
+                          l10n.medicationLogAddButton.split('/').first.trim(),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -90,10 +104,14 @@ class PatHomeMock extends StatelessWidget {
                       child: OutlinedButton.icon(
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppTheme.error600,
-                          side: const BorderSide(color: AppTheme.error500, width: 2),
+                          side: const BorderSide(
+                            color: AppTheme.error500,
+                            width: 2,
+                          ),
                           minimumSize: const Size.fromHeight(52),
                         ),
-                        onPressed: () => MockNav.push(context, MockScreenId.sysAlert),
+                        onPressed: () =>
+                            MockNav.push(context, MockScreenId.sysAlert),
                         icon: const Icon(Icons.shield_outlined),
                         label: const Text('What to Do'),
                       ),
@@ -120,8 +138,12 @@ class PatHomeMock extends StatelessWidget {
                 barColor: warning ? AppTheme.error500 : AppTheme.brand400,
                 iconBg: warning ? const Color(0xFFFEE2E2) : AppTheme.neutral100,
                 iconColor: warning ? AppTheme.error600 : AppTheme.neutral600,
-                borderColor: warning ? const Color(0xFFFECACA) : AppTheme.neutral200,
-                tip: warning ? 'Roadside PM elevated — limit outdoor activity' : null,
+                borderColor: warning
+                    ? const Color(0xFFFECACA)
+                    : AppTheme.neutral200,
+                tip: warning
+                    ? 'Roadside PM elevated — limit outdoor activity'
+                    : null,
                 onTap: () => MockNav.push(context, MockScreenId.patEnv),
               ),
               const SizedBox(height: 10),
@@ -137,7 +159,9 @@ class PatHomeMock extends StatelessWidget {
                 barColor: warning ? AppTheme.warning500 : AppTheme.brand300,
                 iconBg: warning ? AppTheme.warning50 : AppTheme.brand50,
                 iconColor: warning ? AppTheme.warning600 : AppTheme.brand600,
-                borderColor: warning ? AppTheme.warning200 : AppTheme.neutral200,
+                borderColor: warning
+                    ? AppTheme.warning200
+                    : AppTheme.neutral200,
                 tip: warning ? 'Avoid low-lying roads and stay indoors' : null,
                 onTap: () => MockNav.push(context, MockScreenId.patEnv),
               ),
@@ -154,8 +178,12 @@ class PatHomeMock extends StatelessWidget {
                 barColor: warning ? AppTheme.error500 : AppTheme.warning500,
                 iconBg: warning ? const Color(0xFFFEE2E2) : AppTheme.warning50,
                 iconColor: warning ? AppTheme.error600 : AppTheme.warning600,
-                borderColor: warning ? const Color(0xFFFECACA) : AppTheme.neutral200,
-                tip: warning ? 'Close windows and keep rescue inhaler nearby' : null,
+                borderColor: warning
+                    ? const Color(0xFFFECACA)
+                    : AppTheme.neutral200,
+                tip: warning
+                    ? 'Close windows and keep rescue inhaler nearby'
+                    : null,
                 onTap: () => MockNav.push(context, MockScreenId.patEnv),
               ),
               const SizedBox(height: 16),
@@ -165,14 +193,20 @@ class PatHomeMock extends StatelessWidget {
                   Icon(
                     Icons.schedule,
                     size: 16,
-                    color: warning ? AppTheme.error500.withValues(alpha: 0.7) : AppTheme.neutral400,
+                    color: warning
+                        ? AppTheme.error500.withValues(alpha: 0.7)
+                        : AppTheme.neutral400,
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    warning ? 'Last inhaler use: 6 hours ago' : 'Last inhaler use: 2 days ago',
+                    warning
+                        ? 'Last inhaler use: 6 hours ago'
+                        : 'Last inhaler use: 2 days ago',
                     style: TextStyle(
                       fontSize: 12,
-                      color: warning ? AppTheme.error500.withValues(alpha: 0.7) : AppTheme.neutral400,
+                      color: warning
+                          ? AppTheme.error500.withValues(alpha: 0.7)
+                          : AppTheme.neutral400,
                     ),
                   ),
                 ],
@@ -180,7 +214,8 @@ class PatHomeMock extends StatelessWidget {
               const SizedBox(height: 16),
               if (!warning)
                 OutlinedButton(
-                  onPressed: () => MockNav.push(context, MockScreenId.patHomeWarn),
+                  onPressed: () =>
+                      MockNav.push(context, MockScreenId.patHomeWarn),
                   child: Text(l10n.mockShowWarningHome),
                 )
               else
@@ -244,20 +279,28 @@ class _RiskCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: warning ? AppTheme.error500 : AppTheme.brand600,
                         borderRadius: BorderRadius.circular(99),
                       ),
                       child: Text(
                         warning ? 'Score 3' : 'Score 1',
-                        style: const TextStyle(color: Colors.white, fontSize: 11),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 Text(
-                  warning ? 'Multiple risk factors elevated' : 'Risk level is low today',
+                  warning
+                      ? 'Multiple risk factors elevated'
+                      : 'Risk level is low today',
                   style: TextStyle(
                     fontSize: 12,
                     color: warning ? AppTheme.error600 : AppTheme.brand700,
@@ -299,7 +342,10 @@ class PatEnvMock extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   backgroundColor: AppTheme.brand100,
-                  child: Icon(Icons.check_circle_outline, color: AppTheme.brand600),
+                  child: Icon(
+                    Icons.check_circle_outline,
+                    color: AppTheme.brand600,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -308,11 +354,17 @@ class PatEnvMock extends StatelessWidget {
                     children: [
                       Text(
                         'Overall: Low Risk',
-                        style: const TextStyle(fontWeight: FontWeight.w700, color: AppTheme.brand700),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.brand700,
+                        ),
                       ),
                       Text(
                         'Conditions are mostly favorable today',
-                        style: const TextStyle(fontSize: 12, color: AppTheme.brand600),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppTheme.brand600,
+                        ),
                       ),
                     ],
                   ),
@@ -321,7 +373,10 @@ class PatEnvMock extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const Text('3-Axis Risk Detail', style: TextStyle(fontWeight: FontWeight.w700)),
+          const Text(
+            '3-Axis Risk Detail',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 12),
           MockFactorRow(
             icon: Icons.apartment_outlined,
@@ -329,7 +384,8 @@ class PatEnvMock extends StatelessWidget {
             level: 'Low',
             detail: 'Traffic-related air pollution proxy',
             filled: 1,
-            tip: 'Nearby air quality is good. Modeled proxy — not vehicle counts.',
+            tip:
+                'Nearby air quality is good. Modeled proxy — not vehicle counts.',
             iconBg: AppTheme.brand50,
             iconColor: AppTheme.brand600,
           ),
@@ -395,10 +451,19 @@ class PatForecastMock extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const Text('Daily Forecast', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-          const Text('Environmental risk outlook', style: TextStyle(color: AppTheme.subtext)),
+          const Text(
+            'Daily Forecast',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+          ),
+          const Text(
+            'Environmental risk outlook',
+            style: TextStyle(color: AppTheme.subtext),
+          ),
           const SizedBox(height: 16),
-          const Text('Select Day', style: TextStyle(fontSize: 12, color: AppTheme.neutral500)),
+          const Text(
+            'Select Day',
+            style: TextStyle(fontSize: 12, color: AppTheme.neutral500),
+          ),
           const SizedBox(height: 8),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -412,7 +477,9 @@ class PatForecastMock extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: i == 0 ? AppTheme.brand600 : AppTheme.neutral0,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: i == 0 ? AppTheme.brand600 : AppTheme.neutral200),
+                      border: Border.all(
+                        color: i == 0 ? AppTheme.brand600 : AppTheme.neutral200,
+                      ),
                     ),
                     child: Column(
                       children: [
@@ -420,7 +487,9 @@ class PatForecastMock extends StatelessWidget {
                           days[i].$1,
                           style: TextStyle(
                             fontSize: 11,
-                            color: i == 0 ? AppTheme.brand200 : AppTheme.neutral400,
+                            color: i == 0
+                                ? AppTheme.brand200
+                                : AppTheme.neutral400,
                           ),
                         ),
                         Text(
@@ -438,7 +507,10 @@ class PatForecastMock extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          const Text('Time of Day', style: TextStyle(fontSize: 12, color: AppTheme.neutral500)),
+          const Text(
+            'Time of Day',
+            style: TextStyle(fontSize: 12, color: AppTheme.neutral500),
+          ),
           const SizedBox(height: 8),
           MockFilterChipRow(labels: const ['Morning', 'Afternoon', 'Evening']),
           const SizedBox(height: 16),
@@ -446,11 +518,17 @@ class PatForecastMock extends StatelessWidget {
           Row(
             children: [
               const Expanded(
-                child: Text('Risk Forecast', style: TextStyle(fontWeight: FontWeight.w700)),
+                child: Text(
+                  'Risk Forecast',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
               ),
               Text(
                 'Fri 25 Jul — Morning',
-                style: const TextStyle(fontSize: 12, color: AppTheme.neutral400),
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: AppTheme.neutral400,
+                ),
               ),
             ],
           ),
@@ -460,9 +538,21 @@ class PatForecastMock extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                _forecastChip(l10n.mockTrapAxis, 'Low', 1, AppTheme.brand50, AppTheme.brand600),
+                _forecastChip(
+                  l10n.mockTrapAxis,
+                  'Low',
+                  1,
+                  AppTheme.brand50,
+                  AppTheme.brand600,
+                ),
                 const SizedBox(width: 10),
-                _forecastChip(l10n.mockFloodAxis, 'None', 1, AppTheme.neutral0, AppTheme.brand600),
+                _forecastChip(
+                  l10n.mockFloodAxis,
+                  'None',
+                  1,
+                  AppTheme.neutral0,
+                  AppTheme.brand600,
+                ),
                 const SizedBox(width: 10),
                 _forecastChip(
                   l10n.mockPollenAxis,
@@ -491,7 +581,13 @@ class PatForecastMock extends StatelessWidget {
     );
   }
 
-  Widget _forecastChip(String title, String level, int filled, Color bg, Color accent) {
+  Widget _forecastChip(
+    String title,
+    String level,
+    int filled,
+    Color bg,
+    Color accent,
+  ) {
     return Container(
       width: 220,
       padding: const EdgeInsets.all(16),
@@ -503,9 +599,15 @@ class PatForecastMock extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: TextStyle(fontWeight: FontWeight.w700, color: accent)),
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w700, color: accent),
+          ),
           const SizedBox(height: 8),
-          Text(level, style: TextStyle(fontWeight: FontWeight.w700, color: accent)),
+          Text(
+            level,
+            style: TextStyle(fontWeight: FontWeight.w700, color: accent),
+          ),
           const Spacer(),
           MockLevelBar(filled: filled, activeColor: accent),
         ],
@@ -525,10 +627,18 @@ class PatLogMock extends StatelessWidget {
       children: [
         MockBrandHeader(title: l10n.appTitle, screenId: MockScreenId.patLog.id),
         const SizedBox(height: 16),
-        const Text('Inhaler Log', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-        const Text('Track your medication use', style: TextStyle(color: AppTheme.subtext)),
+        const Text(
+          'Inhaler Log',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+        ),
+        const Text(
+          'Track your medication use',
+          style: TextStyle(color: AppTheme.subtext),
+        ),
         const SizedBox(height: 12),
-        MockFilterChipRow(labels: const ['All', 'Rescue', 'Controller', 'Missed']),
+        MockFilterChipRow(
+          labels: const ['All', 'Rescue', 'Controller', 'Missed'],
+        ),
         const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -541,7 +651,10 @@ class PatLogMock extends StatelessWidget {
               const Icon(Icons.bar_chart, color: AppTheme.brand600, size: 20),
               const SizedBox(width: 8),
               const Expanded(
-                child: Text('7 uses this week', style: TextStyle(fontSize: 12, color: AppTheme.brand700)),
+                child: Text(
+                  '7 uses this week',
+                  style: TextStyle(fontSize: 12, color: AppTheme.brand700),
+                ),
               ),
               Text(
                 '5 rescue | 2 controller',
@@ -575,22 +688,49 @@ class PatLogMock extends StatelessWidget {
           children: [
             Text('Today', style: TextStyle(fontWeight: FontWeight.w700)),
             SizedBox(width: 8),
-            Text('Jul 25', style: TextStyle(fontSize: 12, color: AppTheme.neutral400)),
+            Text(
+              'Jul 25',
+              style: TextStyle(fontSize: 12, color: AppTheme.neutral400),
+            ),
           ],
         ),
         const SizedBox(height: 8),
-        _logCard('Albuterol', 'Rescue', '8:15 AM', '2 puffs', 'Wheezing before use', true),
-        _logCard('Fluticasone', 'Controller', '7:00 AM', '1 puff', 'Morning routine', false),
+        _logCard(
+          'Albuterol',
+          'Rescue',
+          '8:15 AM',
+          '2 puffs',
+          'Wheezing before use',
+          true,
+        ),
+        _logCard(
+          'Fluticasone',
+          'Controller',
+          '7:00 AM',
+          '1 puff',
+          'Morning routine',
+          false,
+        ),
         const SizedBox(height: 8),
         const Row(
           children: [
             Text('Yesterday', style: TextStyle(fontWeight: FontWeight.w700)),
             SizedBox(width: 8),
-            Text('Jul 24', style: TextStyle(fontSize: 12, color: AppTheme.neutral400)),
+            Text(
+              'Jul 24',
+              style: TextStyle(fontSize: 12, color: AppTheme.neutral400),
+            ),
           ],
         ),
         const SizedBox(height: 8),
-        _logCard('Albuterol', 'Rescue', '9:30 PM', '2 puffs', 'Shortness of breath', true),
+        _logCard(
+          'Albuterol',
+          'Rescue',
+          '9:30 PM',
+          '2 puffs',
+          'Shortness of breath',
+          true,
+        ),
       ],
     );
   }
@@ -611,9 +751,17 @@ class PatLogMock extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(child: Text(name, style: const TextStyle(fontWeight: FontWeight.w700))),
+                Expanded(
+                  child: Text(
+                    name,
+                    style: const TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: rescue ? AppTheme.brand100 : AppTheme.neutral100,
                     borderRadius: BorderRadius.circular(99),
@@ -629,7 +777,10 @@ class PatLogMock extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text('$time · $dose', style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
+            Text(
+              '$time · $dose',
+              style: const TextStyle(fontSize: 12, color: AppTheme.subtext),
+            ),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -681,17 +832,27 @@ class PatActMock extends StatelessWidget {
               ),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppTheme.brand50,
                   borderRadius: BorderRadius.circular(99),
                 ),
-                child: const Text('~3 min', style: TextStyle(fontSize: 12, color: AppTheme.brand600)),
+                child: const Text(
+                  '~3 min',
+                  style: TextStyle(fontSize: 12, color: AppTheme.brand600),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 24),
-          const Icon(Icons.accessibility_new, size: 48, color: AppTheme.brand600),
+          const Icon(
+            Icons.accessibility_new,
+            size: 48,
+            color: AppTheme.brand600,
+          ),
           const SizedBox(height: 12),
           const Text(
             'How much did asthma limit your activities?',
@@ -716,8 +877,17 @@ class PatActMock extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(options[i].$1, style: const TextStyle(fontWeight: FontWeight.w700)),
-                          Text(options[i].$2, style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
+                          Text(
+                            options[i].$1,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          Text(
+                            options[i].$2,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppTheme.subtext,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -765,8 +935,14 @@ class PatPdcMock extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const Text('Daily Check-in', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-          const Text('Track your medication adherence', style: TextStyle(color: AppTheme.subtext)),
+          const Text(
+            'Daily Check-in',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+          ),
+          const Text(
+            'Track your medication adherence',
+            style: TextStyle(color: AppTheme.subtext),
+          ),
           const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.all(14),
@@ -779,7 +955,10 @@ class PatPdcMock extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   backgroundColor: AppTheme.brand100,
-                  child: Icon(Icons.local_fire_department, color: AppTheme.brand600),
+                  child: Icon(
+                    Icons.local_fire_department,
+                    color: AppTheme.brand600,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -788,19 +967,40 @@ class PatPdcMock extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Text('5-Day Streak', style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.brand700)),
+                          const Text(
+                            '5-Day Streak',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.brand700,
+                            ),
+                          ),
                           const SizedBox(width: 8),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: AppTheme.brand600,
                               borderRadius: BorderRadius.circular(99),
                             ),
-                            child: const Text('PDC 86%', style: TextStyle(color: Colors.white, fontSize: 11)),
+                            child: const Text(
+                              'PDC 86%',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      const Text("Keep it up! You're doing great", style: TextStyle(fontSize: 12, color: AppTheme.brand700)),
+                      const Text(
+                        "Keep it up! You're doing great",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppTheme.brand700,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -808,7 +1008,10 @@ class PatPdcMock extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const Text('Last 7 Days', style: TextStyle(fontWeight: FontWeight.w700)),
+          const Text(
+            'Last 7 Days',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -817,23 +1020,29 @@ class PatPdcMock extends StatelessWidget {
               final today = i == 6;
               return Column(
                 children: [
-                  Text(['S', 'S', 'M', 'T', 'W', 'T', 'F'][i], style: const TextStyle(fontSize: 11, color: AppTheme.neutral400)),
+                  Text(
+                    ['S', 'S', 'M', 'T', 'W', 'T', 'F'][i],
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: AppTheme.neutral400,
+                    ),
+                  ),
                   const SizedBox(height: 6),
                   CircleAvatar(
                     radius: 18,
                     backgroundColor: missed
                         ? const Color(0xFFFEE2E2)
                         : today
-                            ? AppTheme.brand600
-                            : AppTheme.brand100,
+                        ? AppTheme.brand600
+                        : AppTheme.brand100,
                     child: Icon(
                       missed ? Icons.close : Icons.check,
                       size: 18,
                       color: missed
                           ? AppTheme.error500
                           : today
-                              ? Colors.white
-                              : AppTheme.brand600,
+                          ? Colors.white
+                          : AppTheme.brand600,
                     ),
                   ),
                 ],
@@ -846,7 +1055,10 @@ class PatPdcMock extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(l10n.mockPdcPrompt, style: const TextStyle(fontWeight: FontWeight.w700)),
+                Text(
+                  l10n.mockPdcPrompt,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
                 const SizedBox(height: 12),
                 MockPrimaryCta(
                   label: l10n.mockTakenYes,
@@ -862,7 +1074,10 @@ class PatPdcMock extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          const Text('Monthly Progress', style: TextStyle(fontWeight: FontWeight.w700)),
+          const Text(
+            'Monthly Progress',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           MockSectionCard(
             child: Column(
@@ -870,7 +1085,13 @@ class PatPdcMock extends StatelessWidget {
                 const Row(
                   children: [
                     Expanded(child: Text('Days Covered')),
-                    Text('22 / 25', style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.brand700)),
+                    Text(
+                      '22 / 25',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.brand700,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -901,22 +1122,40 @@ class PatReportMock extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
       children: [
-        MockBrandHeader(title: l10n.appTitle, screenId: MockScreenId.patReport.id),
+        MockBrandHeader(
+          title: l10n.appTitle,
+          screenId: MockScreenId.patReport.id,
+        ),
         const SizedBox(height: 16),
-        const Text('My Report', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-        const Text('Evidence summary — Jul 2026', style: TextStyle(color: AppTheme.subtext)),
+        const Text(
+          'My Report',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+        ),
+        const Text(
+          'Evidence summary — Jul 2026',
+          style: TextStyle(color: AppTheme.subtext),
+        ),
         const SizedBox(height: 16),
         MockSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Inhaler Use', style: TextStyle(fontWeight: FontWeight.w700)),
+              const Text(
+                'Inhaler Use',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 8),
               Text(
                 '12',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppTheme.brand600, fontWeight: FontWeight.w700),
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: AppTheme.brand600,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-              const Text('total puffs · Past 7 days', style: TextStyle(color: AppTheme.subtext, fontSize: 13)),
+              const Text(
+                'total puffs · Past 7 days',
+                style: TextStyle(color: AppTheme.subtext, fontSize: 13),
+              ),
               const SizedBox(height: 12),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -928,7 +1167,9 @@ class PatReportMock extends StatelessWidget {
                         child: Container(
                           height: h,
                           decoration: BoxDecoration(
-                            color: h > 40 ? AppTheme.warning500 : AppTheme.brand300,
+                            color: h > 40
+                                ? AppTheme.warning500
+                                : AppTheme.brand300,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -947,13 +1188,35 @@ class PatReportMock extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(l10n.mockActScore, style: const TextStyle(fontSize: 12)),
-                    const Text('18 / 25', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.warning600)),
+                    Text(
+                      l10n.mockActScore,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    const Text(
+                      '18 / 25',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.warning600,
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.only(top: 8),
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(color: AppTheme.warning50, borderRadius: BorderRadius.circular(99)),
-                      child: const Text('Not well controlled', style: TextStyle(fontSize: 11, color: AppTheme.warning700)),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppTheme.warning50,
+                        borderRadius: BorderRadius.circular(99),
+                      ),
+                      child: const Text(
+                        'Not well controlled',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.warning700,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -965,13 +1228,35 @@ class PatReportMock extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(l10n.mockPdcRate, style: const TextStyle(fontSize: 12)),
-                    const Text('82%', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.brand600)),
+                    Text(
+                      l10n.mockPdcRate,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    const Text(
+                      '82%',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.brand600,
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.only(top: 8),
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(color: AppTheme.brand50, borderRadius: BorderRadius.circular(99)),
-                      child: const Text('Above 80% target', style: TextStyle(fontSize: 11, color: AppTheme.brand700)),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppTheme.brand50,
+                        borderRadius: BorderRadius.circular(99),
+                      ),
+                      child: const Text(
+                        'Above 80% target',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.brand700,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -980,15 +1265,28 @@ class PatReportMock extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        const Text('Environment Risk', style: TextStyle(fontWeight: FontWeight.w700)),
+        const Text(
+          'Environment Risk',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 8),
         Row(
           children: [
-            Expanded(child: _envMini(l10n.mockTrapAxis, 'Low', AppTheme.brand600)),
+            Expanded(
+              child: _envMini(l10n.mockTrapAxis, 'Low', AppTheme.brand600),
+            ),
             const SizedBox(width: 8),
-            Expanded(child: _envMini(l10n.mockPollenAxis, 'Moderate', AppTheme.warning600)),
+            Expanded(
+              child: _envMini(
+                l10n.mockPollenAxis,
+                'Moderate',
+                AppTheme.warning600,
+              ),
+            ),
             const SizedBox(width: 8),
-            Expanded(child: _envMini(l10n.mockFloodAxis, 'None', AppTheme.brand600)),
+            Expanded(
+              child: _envMini(l10n.mockFloodAxis, 'None', AppTheme.brand600),
+            ),
           ],
         ),
         const SizedBox(height: 12),
@@ -1002,12 +1300,18 @@ class PatReportMock extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Recent Symptoms', style: TextStyle(fontWeight: FontWeight.w700)),
+              const Text(
+                'Recent Symptoms',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
                 children: const [
-                  Chip(label: Text('Wheezing'), backgroundColor: AppTheme.warning50),
+                  Chip(
+                    label: Text('Wheezing'),
+                    backgroundColor: AppTheme.warning50,
+                  ),
                   Chip(label: Text('SOB'), backgroundColor: AppTheme.warning50),
                   Chip(label: Text('Cough'), backgroundColor: AppTheme.brand50),
                 ],
@@ -1016,7 +1320,11 @@ class PatReportMock extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        MockPrimaryCta(label: 'Share Report', icon: Icons.ios_share, onPressed: () {}),
+        MockPrimaryCta(
+          label: 'Share Report',
+          icon: Icons.ios_share,
+          onPressed: () {},
+        ),
       ],
     );
   }
@@ -1026,9 +1334,19 @@ class PatReportMock extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
           const SizedBox(height: 6),
-          Text(level, style: TextStyle(fontSize: 12, color: color, fontWeight: FontWeight.w700)),
+          Text(
+            level,
+            style: TextStyle(
+              fontSize: 12,
+              color: color,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ],
       ),
     );
@@ -1047,15 +1365,32 @@ class PatLocationsMock extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const Text('Saved Locations', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-          const Text('Used for local air quality and alerts', style: TextStyle(color: AppTheme.subtext)),
+          const Text(
+            'Saved Locations',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+          ),
+          const Text(
+            'Used for local air quality and alerts',
+            style: TextStyle(color: AppTheme.subtext),
+          ),
           const SizedBox(height: 12),
           MockFilterChipRow(labels: const ['All', 'Home', 'School', 'Work']),
           const SizedBox(height: 16),
           Row(
             children: [
-              const Expanded(child: Text('Your Places', style: TextStyle(fontWeight: FontWeight.w700))),
-              Text('2 saved', style: const TextStyle(fontSize: 12, color: AppTheme.neutral400)),
+              const Expanded(
+                child: Text(
+                  'Your Places',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+              ),
+              Text(
+                '2 saved',
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: AppTheme.neutral400,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
@@ -1067,19 +1402,40 @@ class PatLocationsMock extends StatelessWidget {
                   children: [
                     const Icon(Icons.home_outlined, color: AppTheme.brand600),
                     const SizedBox(width: 8),
-                    Text(l10n.mockHomeLocation, style: const TextStyle(fontWeight: FontWeight.w700)),
+                    Text(
+                      l10n.mockHomeLocation,
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
                     const Spacer(),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(color: AppTheme.brand100, borderRadius: BorderRadius.circular(99)),
-                      child: const Text('Primary', style: TextStyle(fontSize: 11, color: AppTheme.brand700)),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppTheme.brand100,
+                        borderRadius: BorderRadius.circular(99),
+                      ),
+                      child: const Text(
+                        'Primary',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppTheme.brand700,
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 6),
-                Text(l10n.mockDummyAddress, style: const TextStyle(color: AppTheme.subtext, fontSize: 13)),
+                Text(
+                  l10n.mockDummyAddress,
+                  style: const TextStyle(color: AppTheme.subtext, fontSize: 13),
+                ),
                 const SizedBox(height: 8),
-                const Text('TRAP monitoring active · Flood alerts on', style: TextStyle(fontSize: 12, color: AppTheme.brand700)),
+                const Text(
+                  'TRAP monitoring active · Flood alerts on',
+                  style: TextStyle(fontSize: 12, color: AppTheme.brand700),
+                ),
               ],
             ),
           ),
@@ -1092,13 +1448,25 @@ class PatLocationsMock extends StatelessWidget {
                   children: [
                     const Icon(Icons.work_outline, color: AppTheme.neutral500),
                     const SizedBox(width: 8),
-                    Text(l10n.mockWorkLocation, style: const TextStyle(fontWeight: FontWeight.w700)),
+                    Text(
+                      l10n.mockWorkLocation,
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
                     const Spacer(),
-                    const Text('Secondary', style: TextStyle(fontSize: 11, color: AppTheme.neutral500)),
+                    const Text(
+                      'Secondary',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: AppTheme.neutral500,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 6),
-                Text(l10n.mockDummyWorkAddress, style: const TextStyle(color: AppTheme.subtext, fontSize: 13)),
+                Text(
+                  l10n.mockDummyWorkAddress,
+                  style: const TextStyle(color: AppTheme.subtext, fontSize: 13),
+                ),
               ],
             ),
           ),
@@ -1129,33 +1497,66 @@ class PatRewardMock extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
       children: [
-        MockBrandHeader(title: l10n.appTitle, screenId: MockScreenId.patReward.id),
+        MockBrandHeader(
+          title: l10n.appTitle,
+          screenId: MockScreenId.patReward.id,
+        ),
         const SizedBox(height: 12),
         MockDraftBanner(message: l10n.mockDraftBanner),
         const SizedBox(height: 16),
-        const Text('Rewards', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-        const Text('Earn points, redeem rewards', style: TextStyle(color: AppTheme.subtext)),
+        const Text(
+          'Rewards',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+        ),
+        const Text(
+          'Earn points, redeem rewards',
+          style: TextStyle(color: AppTheme.subtext),
+        ),
         const SizedBox(height: 16),
         MockSectionCard(
           color: AppTheme.brand50,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.mockPointsBalance, style: const TextStyle(color: AppTheme.subtext)),
-              const Text('320', style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700, color: AppTheme.brand700)),
-              const Text('180 earned · 140 bonus', style: TextStyle(fontSize: 12, color: AppTheme.brand600)),
+              Text(
+                l10n.mockPointsBalance,
+                style: const TextStyle(color: AppTheme.subtext),
+              ),
+              const Text(
+                '320',
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.brand700,
+                ),
+              ),
+              const Text(
+                '180 earned · 140 bonus',
+                style: TextStyle(fontSize: 12, color: AppTheme.brand600),
+              ),
             ],
           ),
         ),
         const SizedBox(height: 16),
-        const Text('How You Earn', style: TextStyle(fontWeight: FontWeight.w700)),
+        const Text(
+          'How You Earn',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         const SizedBox(height: 8),
         MockSectionCard(
           child: Column(
             children: [
-              _earnRow('Daily Inhaler Log', 'Log each use to earn points', '+5 pts'),
+              _earnRow(
+                'Daily Inhaler Log',
+                'Log each use to earn points',
+                '+5 pts',
+              ),
               const Divider(),
-              _earnRow(l10n.mockActSurvey, 'Complete monthly assessment', '+10 pts'),
+              _earnRow(
+                l10n.mockActSurvey,
+                'Complete monthly assessment',
+                '+10 pts',
+              ),
               const Divider(),
               _earnRow('7-Day Streak', 'Log every day for a week', '+25 pts'),
             ],
@@ -1196,8 +1597,17 @@ class PatRewardMock extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
-      subtitle: Text(subtitle, style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
-      trailing: Text(pts, style: const TextStyle(fontWeight: FontWeight.w700, color: AppTheme.brand700)),
+      subtitle: Text(
+        subtitle,
+        style: const TextStyle(fontSize: 12, color: AppTheme.subtext),
+      ),
+      trailing: Text(
+        pts,
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+          color: AppTheme.brand700,
+        ),
+      ),
     );
   }
 }
@@ -1220,8 +1630,14 @@ class PatVoucherMock extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Your Balance', style: TextStyle(color: AppTheme.subtext)),
-                const Text('120 points available', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+                const Text(
+                  'Your Balance',
+                  style: TextStyle(color: AppTheme.subtext),
+                ),
+                const Text(
+                  '120 points available',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                ),
               ],
             ),
           ),
@@ -1230,12 +1646,24 @@ class PatVoucherMock extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Exchange Item', style: TextStyle(fontWeight: FontWeight.w700)),
+                const Text(
+                  'Exchange Item',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
                 const SizedBox(height: 8),
-                Text(l10n.mockDummyFoodBank, style: const TextStyle(fontWeight: FontWeight.w600)),
-                Text(l10n.mockVoucherCost, style: const TextStyle(color: AppTheme.subtext)),
+                Text(
+                  l10n.mockDummyFoodBank,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  l10n.mockVoucherCost,
+                  style: const TextStyle(color: AppTheme.subtext),
+                ),
                 const SizedBox(height: 12),
-                const Text('Important Notice', style: TextStyle(fontWeight: FontWeight.w700)),
+                const Text(
+                  'Important Notice',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
                 const Text(
                   'Points are held until a partner is confirmed',
                   style: TextStyle(fontSize: 13, color: AppTheme.subtext),
@@ -1246,7 +1674,10 @@ class PatVoucherMock extends StatelessWidget {
                   icon: Icons.hourglass_empty,
                   onPressed: () => Navigator.pop(context),
                 ),
-                TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Cancel'),
+                ),
               ],
             ),
           ),
@@ -1268,7 +1699,10 @@ class PatDonateMock extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const Text('Support asthma research', style: TextStyle(color: AppTheme.subtext)),
+          const Text(
+            'Support asthma research',
+            style: TextStyle(color: AppTheme.subtext),
+          ),
           const SizedBox(height: 12),
           MockSectionCard(child: Text(l10n.mockDonateTransparency)),
           const SizedBox(height: 12),
@@ -1276,12 +1710,35 @@ class PatDonateMock extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('1,250 Points', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.brand700)),
-                const Text('\$12.50 value · Available for donation', style: TextStyle(color: AppTheme.subtext)),
+                const Text(
+                  '1,250 Points',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.brand700,
+                  ),
+                ),
+                const Text(
+                  '\$12.50 value · Available for donation',
+                  style: TextStyle(color: AppTheme.subtext),
+                ),
                 const SizedBox(height: 16),
-                const Text('Select Amount', style: TextStyle(fontWeight: FontWeight.w700)),
+                const Text(
+                  'Select Amount',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
                 const SizedBox(height: 8),
-                MockFilterChipRow(labels: const ['\$5', '\$10', '\$25', '\$50', '\$100', 'Other'], selectedIndex: 1),
+                MockFilterChipRow(
+                  labels: const [
+                    '\$5',
+                    '\$10',
+                    '\$25',
+                    '\$50',
+                    '\$100',
+                    'Other',
+                  ],
+                  selectedIndex: 1,
+                ),
               ],
             ),
           ),
@@ -1290,9 +1747,9 @@ class PatDonateMock extends StatelessWidget {
             label: l10n.mockDonateCta,
             icon: Icons.open_in_new,
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.mockExternalOnly)),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(l10n.mockExternalOnly)));
             },
           ),
           const SizedBox(height: 8),
@@ -1316,7 +1773,12 @@ class PatRewardHistMock extends StatelessWidget {
     final rows = [
       ('+10 pts', 'Daily check-in', 'Today', null),
       ('Donate 50 pts', 'Provider TBD — donation queued', 'Today', 'Pending'),
-      ('Voucher request', '150 pts — placeholder pending partner', 'Yesterday', 'Waitlisted'),
+      (
+        'Voucher request',
+        '150 pts — placeholder pending partner',
+        'Yesterday',
+        'Waitlisted',
+      ),
       ('+5 pts', l10n.mockInhalerEvent, 'Yesterday', null),
       ('Donate 25 pts', 'No provider — points refunded', 'Jul 23', 'Failed'),
     ];
@@ -1330,7 +1792,10 @@ class PatRewardHistMock extends StatelessWidget {
           const SizedBox(height: 12),
           MockFilterChipRow(labels: const ['All', 'Earn', 'Voucher', 'Donate']),
           const SizedBox(height: 12),
-          const Text('Balance: 185 pts · Lifetime: 340 pts', style: TextStyle(fontSize: 12, color: AppTheme.subtext)),
+          const Text(
+            'Balance: 185 pts · Lifetime: 340 pts',
+            style: TextStyle(fontSize: 12, color: AppTheme.subtext),
+          ),
           const SizedBox(height: 12),
           for (final row in rows)
             Padding(
@@ -1342,20 +1807,44 @@ class PatRewardHistMock extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(row.$1, style: const TextStyle(fontWeight: FontWeight.w700)),
-                          Text(row.$2, style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
-                          Text(row.$3, style: const TextStyle(fontSize: 11, color: AppTheme.neutral400)),
+                          Text(
+                            row.$1,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          Text(
+                            row.$2,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppTheme.subtext,
+                            ),
+                          ),
+                          Text(
+                            row.$3,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: AppTheme.neutral400,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     if (row.$4 != null)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: AppTheme.warning50,
                           borderRadius: BorderRadius.circular(99),
                         ),
-                        child: Text(row.$4!, style: const TextStyle(fontSize: 11, color: AppTheme.warning700)),
+                        child: Text(
+                          row.$4!,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: AppTheme.warning700,
+                          ),
+                        ),
                       ),
                   ],
                 ),
@@ -1376,14 +1865,23 @@ class PatSettingsMock extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
       children: [
-        Text(l10n.settingsTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-        Text(MockScreenId.patSettings.id, style: const TextStyle(color: AppTheme.neutral400, fontSize: 12)),
+        Text(
+          l10n.settingsTitle,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+        ),
+        Text(
+          MockScreenId.patSettings.id,
+          style: const TextStyle(color: AppTheme.neutral400, fontSize: 12),
+        ),
         const SizedBox(height: 16),
         MockSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.settingsLanguageLabel, style: const TextStyle(fontWeight: FontWeight.w700)),
+              Text(
+                l10n.settingsLanguageLabel,
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
@@ -1404,7 +1902,10 @@ class PatSettingsMock extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Alert Preferences', style: TextStyle(fontWeight: FontWeight.w700)),
+              const Text(
+                'Alert Preferences',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text('Risk Alerts'),
@@ -1435,7 +1936,10 @@ class PatSettingsMock extends StatelessWidget {
             children: [
               const ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: Text('Security', style: TextStyle(fontWeight: FontWeight.w700)),
+                title: Text(
+                  'Security',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
               ),
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
@@ -1454,7 +1958,10 @@ class PatSettingsMock extends StatelessWidget {
               const Divider(),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.contact_phone_outlined, color: AppTheme.brand600),
+                leading: const Icon(
+                  Icons.contact_phone_outlined,
+                  color: AppTheme.brand600,
+                ),
                 title: Text(l10n.mockEmergencyContact),
                 subtitle: Text(l10n.mockDummyContact),
               ),
@@ -1474,7 +1981,10 @@ class PatSettingsMock extends StatelessWidget {
             children: [
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.grid_view_rounded, color: AppTheme.brand600),
+                leading: const Icon(
+                  Icons.grid_view_rounded,
+                  color: AppTheme.brand600,
+                ),
                 title: Text(l10n.mockAllScreens),
                 onTap: () => MockNav.openCatalog(context),
               ),

@@ -2,11 +2,17 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Central place to read environment-specific configuration values.
 ///
-/// Values come from the `.env` file (loaded via flutter_dotenv in `main.dart`).
-/// Copy `.env.example` to `.env` and fill in real Supabase project values
-/// before running the app.
+/// Values come from the bundled `.env.client` asset (loaded via flutter_dotenv
+/// in `main.dart`). Generate it with `node tool/make_client_env.mjs`, which
+/// copies only the client-safe keys from `.env`.
 class AppConfig {
   AppConfig._();
+
+  static const appName = 'CoverNote';
+
+  /// Deep link registered in AndroidManifest (scheme + host) and in the
+  /// Supabase Auth redirect allow list.
+  static const authRedirect = 'io.supabase.howseasthma://login-callback/';
 
   static String get supabaseUrl => _read('SUPABASE_URL');
 
@@ -21,30 +27,14 @@ class AppConfig {
       _read('SUPABASE_ANON_KEY') != 'YOUR_SUPABASE_ANON_KEY';
 
   /// When true, skip AuthGate and open patient design-preview mockups.
-  /// Set in `.env` for device design feedback (see `lib/features/design_preview/`).
   static bool get designPreview {
     final raw = _read('DESIGN_PREVIEW').trim().toLowerCase();
     return raw == 'true' || raw == '1' || raw == 'yes';
   }
 
-  /// Debug API Console (see `doc/qa/debug-mode-design.md`). Release builds forbid true.
+  /// Debug API Console. Release builds forbid true.
   static bool get debugApiConsole {
     final raw = _read('DEBUG_API_CONSOLE').trim().toLowerCase();
-    return raw == 'true' || raw == '1' || raw == 'yes';
-  }
-
-  /// Coverage-letter home. Existing records stay available when this is off.
-  static bool get v2NavigationEnabled => _flag('V2_NAVIGATION_ENABLED');
-
-  /// Real document reading. Off until an operator configures a provider.
-  static bool get liveDocumentProcessingEnabled =>
-      _flag('LIVE_DOCUMENT_PROCESSING_ENABLED');
-
-  /// Reviewed evidence excerpts. Off while the catalog is empty.
-  static bool get verifiedEvidenceEnabled => _flag('VERIFIED_EVIDENCE_ENABLED');
-
-  static bool _flag(String key) {
-    final raw = _read(key).trim().toLowerCase();
     return raw == 'true' || raw == '1' || raw == 'yes';
   }
 

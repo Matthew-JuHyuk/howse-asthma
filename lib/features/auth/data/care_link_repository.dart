@@ -38,10 +38,7 @@ class CareLinkRepository {
     try {
       final response = await DebugFunctionsClient.invoke(
         'confirm-care-link',
-        body: {
-          'link_id': linkId,
-          'action': accept ? 'confirm' : 'reject',
-        },
+        body: {'link_id': linkId, 'action': accept ? 'confirm' : 'reject'},
       );
       return _asMap(response.data);
     } on FunctionException catch (e) {

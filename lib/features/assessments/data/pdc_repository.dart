@@ -19,21 +19,18 @@ class PdcRepository {
 
     final row = await SupabaseService.client
         .from('pdc_daily_checks')
-        .upsert(
-          {
-            'patient_id': userId,
-            'check_date': isoDate(date),
-            'status': status,
-            'reason': status == MedCheckRecord.notUsed ? reason : null,
-            'taken': switch (status) {
-              MedCheckRecord.used => true,
-              MedCheckRecord.notUsed => false,
-              _ => null,
-            },
-            'updated_at': DateTime.now().toUtc().toIso8601String(),
+        .upsert({
+          'patient_id': userId,
+          'check_date': isoDate(date),
+          'status': status,
+          'reason': status == MedCheckRecord.notUsed ? reason : null,
+          'taken': switch (status) {
+            MedCheckRecord.used => true,
+            MedCheckRecord.notUsed => false,
+            _ => null,
           },
-          onConflict: 'patient_id,check_date',
-        )
+          'updated_at': DateTime.now().toUtc().toIso8601String(),
+        }, onConflict: 'patient_id,check_date')
         .select()
         .single();
     return MedCheckRecord.fromRow(Map<String, dynamic>.from(row as Map));

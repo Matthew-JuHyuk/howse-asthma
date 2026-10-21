@@ -10,7 +10,7 @@ import 'core/supabase/supabase_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
+  await dotenv.load(fileName: '.env.client');
   assert(
     !kReleaseMode || !AppConfig.designPreview,
     'DESIGN_PREVIEW must be false in release builds',
@@ -36,5 +36,5 @@ Future<void> main() async {
   }
 
   await SupabaseService.initialize();
-  runApp(const HowseAsthmaApp());
+  runApp(const CoverNoteApp());
 }

@@ -433,3 +433,16 @@ enabled = true
 verify_jwt = false
 import_map = "./functions/log-inhaler-event/deno.json"
 entrypoint = "./functions/log-inhaler-event/index.ts"
+
+[functions.analyze-letter]
+enabled = true
+# Gateway check off; handler requires a real user JWT via requireUser().
+verify_jwt = false
+import_map = "./functions/analyze-letter/deno.json"
+entrypoint = "./functions/analyze-letter/index.ts"
+
+[functions.delete-account]
+enabled = true
+verify_jwt = false
+import_map = "./functions/delete-account/deno.json"
+entrypoint = "./functions/delete-account/index.ts"

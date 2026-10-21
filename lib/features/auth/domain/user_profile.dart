@@ -4,9 +4,9 @@ enum UserRole {
   provider;
 
   String get dbValue => switch (this) {
-        UserRole.patient => 'PATIENT',
-        UserRole.provider => 'PROVIDER',
-      };
+    UserRole.patient => 'PATIENT',
+    UserRole.provider => 'PROVIDER',
+  };
 
   static UserRole? fromDb(String? value) {
     switch (value) {

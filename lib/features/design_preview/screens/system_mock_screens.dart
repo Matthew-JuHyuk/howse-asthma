@@ -29,13 +29,19 @@ class SysAlertMock extends StatelessWidget {
             child: const Text(
               'RISK ALERT',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1,
+              ),
             ),
           ),
           const SizedBox(height: 16),
           Text(
             'Active risk conditions in your area',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 12),
           MockFactorRow(
@@ -51,20 +57,38 @@ class SysAlertMock extends StatelessWidget {
             borderColor: const Color(0xFFFECACA),
           ),
           const SizedBox(height: 16),
-          const Text('What to Do', style: TextStyle(fontWeight: FontWeight.w700)),
+          const Text(
+            'What to Do',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: const [
-              Chip(avatar: Icon(Icons.home_outlined, size: 16), label: Text('Stay Indoors')),
-              Chip(avatar: Icon(Icons.window, size: 16), label: Text('Close Windows')),
-              Chip(avatar: Icon(Icons.medication_outlined, size: 16), label: Text('Rescue Inhaler')),
-              Chip(avatar: Icon(Icons.self_improvement, size: 16), label: Text('Stay Calm')),
+              Chip(
+                avatar: Icon(Icons.home_outlined, size: 16),
+                label: Text('Stay Indoors'),
+              ),
+              Chip(
+                avatar: Icon(Icons.window, size: 16),
+                label: Text('Close Windows'),
+              ),
+              Chip(
+                avatar: Icon(Icons.medication_outlined, size: 16),
+                label: Text('Rescue Inhaler'),
+              ),
+              Chip(
+                avatar: Icon(Icons.self_improvement, size: 16),
+                label: Text('Stay Calm'),
+              ),
             ],
           ),
           const SizedBox(height: 16),
-          const Text('Other Conditions', style: TextStyle(fontWeight: FontWeight.w700)),
+          const Text(
+            'Other Conditions',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           MockFactorRow(
             icon: Icons.apartment_outlined,
@@ -120,14 +144,21 @@ class SysPanicMock extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white24,
                   borderRadius: BorderRadius.circular(99),
                 ),
                 child: const Text(
                   'EMERGENCY',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, letterSpacing: 1),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1,
+                  ),
                 ),
               ),
               const Spacer(),
@@ -136,7 +167,11 @@ class SysPanicMock extends StatelessWidget {
               const Text(
                 'Breathe & Use Inhaler',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
@@ -166,13 +201,17 @@ class SysPanicMock extends StatelessWidget {
                   foregroundColor: Colors.white,
                   minimumSize: const Size.fromHeight(56),
                 ),
-                onPressed: () => MockNav.push(context, MockScreenId.sysPanicStep2),
+                onPressed: () =>
+                    MockNav.push(context, MockScreenId.sysPanicStep2),
                 child: Text(l10n.mockPanicStep2Title),
               ),
               const SizedBox(height: 12),
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(l10n.mockDismiss, style: const TextStyle(color: Colors.white)),
+                child: Text(
+                  l10n.mockDismiss,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -196,27 +235,50 @@ class SysPanicStep2Mock extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(MockScreenId.sysPanicStep2.id, style: const TextStyle(color: AppTheme.neutral400, fontSize: 12)),
+              Text(
+                MockScreenId.sysPanicStep2.id,
+                style: const TextStyle(
+                  color: AppTheme.neutral400,
+                  fontSize: 12,
+                ),
+              ),
               const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 alignment: Alignment.center,
                 child: const Text(
                   'EMERGENCY',
-                  style: TextStyle(color: AppTheme.error500, fontWeight: FontWeight.w700, letterSpacing: 1),
+                  style: TextStyle(
+                    color: AppTheme.error500,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1,
+                  ),
                 ),
               ),
               const Spacer(),
               Text(
                 l10n.mockPanicStep2Title,
-                style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const SizedBox(height: 8),
-              Text(l10n.mockPanicStep2Body, style: const TextStyle(color: AppTheme.neutral300)),
+              Text(
+                l10n.mockPanicStep2Body,
+                style: const TextStyle(color: AppTheme.neutral300),
+              ),
               const SizedBox(height: 12),
               const Text(
                 'This app does not auto-dial',
-                style: TextStyle(color: AppTheme.warning500, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: AppTheme.warning500,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(height: 28),
               FilledButton.icon(
@@ -251,7 +313,10 @@ class SysPanicStep2Mock extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
-                child: Text(l10n.mockFeelingBetter, style: const TextStyle(color: AppTheme.brand300)),
+                child: Text(
+                  l10n.mockFeelingBetter,
+                  style: const TextStyle(color: AppTheme.brand300),
+                ),
               ),
             ],
           ),

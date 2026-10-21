@@ -109,7 +109,10 @@ class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
                       value: 'rescue',
                       child: Text(l10n.s6RoleRescue),
                     ),
-                    DropdownMenuItem(value: 'both', child: Text(l10n.s6RoleBoth)),
+                    DropdownMenuItem(
+                      value: 'both',
+                      child: Text(l10n.s6RoleBoth),
+                    ),
                   ],
                   onChanged: (v) => setLocal(() => role = v ?? role),
                 ),
@@ -118,12 +121,16 @@ class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
                     Text(l10n.s6PuffsEach),
                     const Spacer(),
                     IconButton(
-                      onPressed: puffs > 1 ? () => setLocal(() => puffs--) : null,
+                      onPressed: puffs > 1
+                          ? () => setLocal(() => puffs--)
+                          : null,
                       icon: const Icon(Icons.remove),
                     ),
                     Text('$puffs'),
                     IconButton(
-                      onPressed: puffs < 20 ? () => setLocal(() => puffs++) : null,
+                      onPressed: puffs < 20
+                          ? () => setLocal(() => puffs++)
+                          : null,
                       icon: const Icon(Icons.add),
                     ),
                   ],

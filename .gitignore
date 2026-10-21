@@ -46,6 +46,8 @@ app.*.map.json
 
 # Environment secrets — never commit real values
 .env
+.env.demo
+.env.client
 !.env.example
 /scripts/set-edge-secrets.ps1
 !/scripts/set-edge-secrets.example.ps1

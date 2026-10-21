@@ -184,7 +184,13 @@ class MedCheckRecord {
   static const notSure = 'not_sure';
   static const notApplicable = 'not_applicable';
   static const statuses = [used, notUsed, notSure, notApplicable];
-  static const reasons = ['no_medicine', 'cost', 'forgot', 'other', 'no_answer'];
+  static const reasons = [
+    'no_medicine',
+    'cost',
+    'forgot',
+    'other',
+    'no_answer',
+  ];
 
   final String id;
 

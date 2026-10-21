@@ -3,7 +3,7 @@ import 'package:local_auth/local_auth.dart';
 /// Thin wrapper around [LocalAuthentication].
 class BiometricService {
   BiometricService({LocalAuthentication? auth})
-      : _auth = auth ?? LocalAuthentication();
+    : _auth = auth ?? LocalAuthentication();
 
   final LocalAuthentication _auth;
 

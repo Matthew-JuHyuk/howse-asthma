@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/locale/locale_controller.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../home/presentation/home_shell.dart';
 import 'provider_link_screen.dart';
 import 'provider_settings_screen.dart';
 
@@ -23,9 +23,7 @@ class _ProviderHomeShellState extends State<ProviderHomeShell> {
     final localeController = AppLocaleScope.of(context);
 
     final pages = [
-      _ProviderHomeTab(
-        onLinkPatients: () => setState(() => _index = 1),
-      ),
+      _ProviderHomeTab(onLinkPatients: () => setState(() => _index = 1)),
       const ProviderLinkScreen(),
       ProviderSettingsScreen(localeController: localeController),
     ];

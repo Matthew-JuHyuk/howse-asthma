@@ -32,10 +32,17 @@ class MockScreenChrome extends StatelessWidget {
         automaticallyImplyLeading: showBack,
         title: Column(
           children: [
-            Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
             Text(
               screenId,
-              style: const TextStyle(fontSize: 11, color: AppTheme.neutral400, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                fontSize: 11,
+                color: AppTheme.neutral400,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),
@@ -70,16 +77,18 @@ class MockSectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         side: const BorderSide(color: AppTheme.neutral200),
       ),
-      child: Padding(
-        padding: padding,
-        child: child,
-      ),
+      child: Padding(padding: padding, child: child),
     );
   }
 }
 
 class MockChip extends StatelessWidget {
-  const MockChip({super.key, required this.label, this.selected = false, this.onTap});
+  const MockChip({
+    super.key,
+    required this.label,
+    this.selected = false,
+    this.onTap,
+  });
 
   final String label;
   final bool selected;
@@ -119,7 +128,10 @@ class MockPrimaryCta extends StatelessWidget {
       label: Text(label),
       style: color == null
           ? null
-          : FilledButton.styleFrom(backgroundColor: color, foregroundColor: AppTheme.neutral0),
+          : FilledButton.styleFrom(
+              backgroundColor: color,
+              foregroundColor: AppTheme.neutral0,
+            ),
     );
   }
 }
@@ -148,7 +160,10 @@ class MockNavTile extends StatelessWidget {
         child: Icon(icon, size: 20),
       ),
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
-      subtitle: Text(subtitle, style: const TextStyle(color: AppTheme.subtext, fontSize: 13)),
+      subtitle: Text(
+        subtitle,
+        style: const TextStyle(color: AppTheme.subtext, fontSize: 13),
+      ),
       trailing: const Icon(Icons.chevron_right, color: AppTheme.neutral400),
       onTap: () => MockNav.push(context, target),
     );
@@ -177,19 +192,33 @@ class MockRiskBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: warning ? const Color(0xFFFDBA74) : AppTheme.brand200),
+        border: Border.all(
+          color: warning ? const Color(0xFFFDBA74) : AppTheme.brand200,
+        ),
       ),
       child: Row(
         children: [
-          Icon(warning ? Icons.warning_amber_rounded : Icons.check_circle_outline, color: accent),
+          Icon(
+            warning ? Icons.warning_amber_rounded : Icons.check_circle_outline,
+            color: accent,
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(stateLabel, style: TextStyle(color: accent, fontWeight: FontWeight.w700)),
+                Text(
+                  stateLabel,
+                  style: TextStyle(color: accent, fontWeight: FontWeight.w700),
+                ),
                 const SizedBox(height: 2),
-                Text(message, style: const TextStyle(color: AppTheme.neutral700, fontSize: 13)),
+                Text(
+                  message,
+                  style: const TextStyle(
+                    color: AppTheme.neutral700,
+                    fontSize: 13,
+                  ),
+                ),
               ],
             ),
           ),
@@ -216,12 +245,20 @@ class MockDraftBanner extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.science_outlined, size: 18, color: AppTheme.warning700),
+          const Icon(
+            Icons.science_outlined,
+            size: 18,
+            color: AppTheme.warning700,
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(fontSize: 12, color: AppTheme.warning800, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppTheme.warning800,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -327,36 +364,58 @@ class MockFactorRow extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
+                          child: Text(
+                            title,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
                         ),
                         Container(
                           width: 8,
                           height: 8,
-                          decoration: BoxDecoration(color: levelColor, shape: BoxShape.circle),
+                          decoration: BoxDecoration(
+                            color: levelColor,
+                            shape: BoxShape.circle,
+                          ),
                         ),
                         const SizedBox(width: 6),
                         Text(
                           level,
-                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: levelColor),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: levelColor,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(detail, style: const TextStyle(fontSize: 12, color: AppTheme.subtext)),
+                    Text(
+                      detail,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppTheme.subtext,
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     MockLevelBar(filled: filled, activeColor: barColor),
                     if (tip != null) ...[
                       const SizedBox(height: 10),
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: levelColor.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           tip!,
-                          style: TextStyle(fontSize: 12, color: levelColor.withValues(alpha: 0.9)),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: levelColor.withValues(alpha: 0.9),
+                          ),
                         ),
                       ),
                     ],
@@ -398,13 +457,17 @@ class MockFilterChipRow extends StatelessWidget {
               selectedColor: AppTheme.brand600,
               checkmarkColor: AppTheme.neutral0,
               labelStyle: TextStyle(
-                color: i == selectedIndex ? AppTheme.neutral0 : AppTheme.neutral600,
+                color: i == selectedIndex
+                    ? AppTheme.neutral0
+                    : AppTheme.neutral600,
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
               backgroundColor: AppTheme.neutral0,
               side: BorderSide(
-                color: i == selectedIndex ? AppTheme.brand600 : AppTheme.neutral200,
+                color: i == selectedIndex
+                    ? AppTheme.brand600
+                    : AppTheme.neutral200,
               ),
             ),
           ],
@@ -448,8 +511,20 @@ class MockBrandHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(fontWeight: FontWeight.w700, color: titleColor)),
-              Text(screenId, style: const TextStyle(fontSize: 11, color: AppTheme.neutral400)),
+              Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: titleColor,
+                ),
+              ),
+              Text(
+                screenId,
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: AppTheme.neutral400,
+                ),
+              ),
             ],
           ),
         ),

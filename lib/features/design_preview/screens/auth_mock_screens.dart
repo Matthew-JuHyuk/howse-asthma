@@ -19,11 +19,7 @@ class Auth01SplashMock extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              AppTheme.brand700,
-              AppTheme.brand800,
-              AppTheme.neutral900,
-            ],
+            colors: [AppTheme.brand700, AppTheme.brand800, AppTheme.neutral900],
           ),
         ),
         child: SafeArea(
@@ -49,7 +45,11 @@ class Auth01SplashMock extends StatelessWidget {
                     color: AppTheme.brand400.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.air, size: 48, color: AppTheme.brand200),
+                  child: const Icon(
+                    Icons.air,
+                    size: 48,
+                    color: AppTheme.brand200,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Text(
@@ -114,8 +114,10 @@ class Auth02LoginMock extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(24, 24, 24, 32),
           children: [
-            Text(MockScreenId.auth02.id,
-                style: const TextStyle(color: AppTheme.neutral400, fontSize: 11)),
+            Text(
+              MockScreenId.auth02.id,
+              style: const TextStyle(color: AppTheme.neutral400, fontSize: 11),
+            ),
             const SizedBox(height: 24),
             Row(
               children: [
@@ -126,15 +128,21 @@ class Auth02LoginMock extends StatelessWidget {
                     color: AppTheme.brand100,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.air, size: 16, color: AppTheme.brand600),
+                  child: const Icon(
+                    Icons.air,
+                    size: 16,
+                    color: AppTheme.brand600,
+                  ),
                 ),
                 const SizedBox(width: 8),
-                Text(l10n.appTitle,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.brand700,
-                      fontSize: 18,
-                    )),
+                Text(
+                  l10n.appTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.brand700,
+                    fontSize: 18,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 32),
@@ -180,8 +188,10 @@ class Auth02LoginMock extends StatelessWidget {
                 const Expanded(child: Divider()),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Text(l10n.authOrContinueWith,
-                      style: const TextStyle(color: AppTheme.neutral500)),
+                  child: Text(
+                    l10n.authOrContinueWith,
+                    style: const TextStyle(color: AppTheme.neutral500),
+                  ),
                 ),
                 const Expanded(child: Divider()),
               ],
@@ -251,15 +261,22 @@ class Auth03SignUpMock extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Text(l10n.settingsLanguageLabel,
-              style: const TextStyle(fontWeight: FontWeight.w600)),
+          Text(
+            l10n.settingsLanguageLabel,
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: const ['EN', 'ES', 'FR', 'KO', 'JA', 'ZH']
-                .map((c) => Chip(label: Text(c)))
-                .toList(),
+            children: const [
+              'EN',
+              'ES',
+              'FR',
+              'KO',
+              'JA',
+              'ZH',
+            ].map((c) => Chip(label: Text(c))).toList(),
           ),
           const SizedBox(height: 12),
           TextField(
@@ -286,7 +303,9 @@ class Auth03SignUpMock extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => MockNav.push(context, MockScreenId.auth02),
-            child: Text('${l10n.splashAlreadyHaveAccount} ${l10n.splashSignIn}'),
+            child: Text(
+              '${l10n.splashAlreadyHaveAccount} ${l10n.splashSignIn}',
+            ),
           ),
         ],
       ),
@@ -327,11 +346,13 @@ class _RoleCard extends StatelessWidget {
               color: selected ? AppTheme.brand600 : AppTheme.neutral400,
             ),
             const SizedBox(height: 8),
-            Text(label,
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: selected ? AppTheme.brand700 : AppTheme.neutral500,
-                )),
+            Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: selected ? AppTheme.brand700 : AppTheme.neutral500,
+              ),
+            ),
           ],
         ),
       ),
@@ -352,8 +373,13 @@ class Auth04BiometricMock extends StatelessWidget {
           padding: const EdgeInsets.all(32),
           child: Column(
             children: [
-              Text(MockScreenId.auth04.id,
-                  style: const TextStyle(color: AppTheme.neutral400, fontSize: 11)),
+              Text(
+                MockScreenId.auth04.id,
+                style: const TextStyle(
+                  color: AppTheme.neutral400,
+                  fontSize: 11,
+                ),
+              ),
               const Spacer(),
               Container(
                 width: 128,
@@ -362,7 +388,11 @@ class Auth04BiometricMock extends StatelessWidget {
                   color: AppTheme.brand50,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.fingerprint, size: 64, color: AppTheme.brand600),
+                child: const Icon(
+                  Icons.fingerprint,
+                  size: 64,
+                  color: AppTheme.brand600,
+                ),
               ),
               const SizedBox(height: 28),
               Text(
@@ -384,7 +414,10 @@ class Auth04BiometricMock extends StatelessWidget {
               Text(
                 l10n.authTouchSensorHint,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppTheme.neutral400, fontSize: 13),
+                style: const TextStyle(
+                  color: AppTheme.neutral400,
+                  fontSize: 13,
+                ),
               ),
               const Spacer(),
               TextButton(
@@ -425,30 +458,43 @@ class Onb01PatientMock extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text(l10n.mockChooseLanguage,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+          Text(
+            l10n.mockChooseLanguage,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: const ['EN', 'ES', 'FR', 'KO', 'JA', 'ZH']
-                .map((c) => Chip(label: Text(c)))
-                .toList(),
+            children: const [
+              'EN',
+              'ES',
+              'FR',
+              'KO',
+              'JA',
+              'ZH',
+            ].map((c) => Chip(label: Text(c))).toList(),
           ),
           const Divider(height: 32),
-          Text(l10n.mockYourLocation,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+          Text(
+            l10n.mockYourLocation,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           FilledButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.my_location),
             label: Text(l10n.mockUseCurrentLocation),
           ),
-          Text(l10n.mockLocationTrapOnly,
-              style: const TextStyle(color: AppTheme.neutral400, fontSize: 12)),
+          Text(
+            l10n.mockLocationTrapOnly,
+            style: const TextStyle(color: AppTheme.neutral400, fontSize: 12),
+          ),
           const Divider(height: 32),
-          Text(l10n.mockLabelYourPlace,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+          Text(
+            l10n.mockLabelYourPlace,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
@@ -460,10 +506,14 @@ class Onb01PatientMock extends StatelessWidget {
             ],
           ),
           const Divider(height: 32),
-          Text(l10n.mockEmergencyContact,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-          Text(l10n.mockEmergencyOnePerson,
-              style: const TextStyle(color: AppTheme.neutral500)),
+          Text(
+            l10n.mockEmergencyContact,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          Text(
+            l10n.mockEmergencyOnePerson,
+            style: const TextStyle(color: AppTheme.neutral500),
+          ),
           const SizedBox(height: 8),
           TextField(
             decoration: InputDecoration(
@@ -480,10 +530,14 @@ class Onb01PatientMock extends StatelessWidget {
             keyboardType: TextInputType.phone,
           ),
           const Divider(height: 32),
-          Text(l10n.mockProviderPairing,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-          Text(l10n.authInviteCodeHelper,
-              style: const TextStyle(color: AppTheme.neutral500)),
+          Text(
+            l10n.mockProviderPairing,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          Text(
+            l10n.authInviteCodeHelper,
+            style: const TextStyle(color: AppTheme.neutral500),
+          ),
           const SizedBox(height: 8),
           TextField(
             decoration: InputDecoration(
@@ -493,8 +547,10 @@ class Onb01PatientMock extends StatelessWidget {
             keyboardType: TextInputType.number,
             maxLength: 6,
           ),
-          Text(l10n.mockPairingOptional,
-              style: const TextStyle(color: AppTheme.neutral400, fontSize: 12)),
+          Text(
+            l10n.mockPairingOptional,
+            style: const TextStyle(color: AppTheme.neutral400, fontSize: 12),
+          ),
           const SizedBox(height: 20),
           Row(
             children: [
@@ -546,13 +602,22 @@ class Onb02ProviderMock extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text(l10n.mockStep2Of4,
-              style: const TextStyle(color: AppTheme.brand600, fontWeight: FontWeight.w600)),
+          Text(
+            l10n.mockStep2Of4,
+            style: const TextStyle(
+              color: AppTheme.brand600,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           const SizedBox(height: 8),
-          Text(l10n.mockProfessionalProfile,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-          Text(l10n.mockTellPractice,
-              style: const TextStyle(color: AppTheme.neutral500)),
+          Text(
+            l10n.mockProfessionalProfile,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+          ),
+          Text(
+            l10n.mockTellPractice,
+            style: const TextStyle(color: AppTheme.neutral500),
+          ),
           const SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
@@ -584,8 +649,10 @@ class Onb02ProviderMock extends StatelessWidget {
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 12),
-          Text(l10n.mockCredentialsSecure,
-              style: const TextStyle(color: AppTheme.neutral500, fontSize: 12)),
+          Text(
+            l10n.mockCredentialsSecure,
+            style: const TextStyle(color: AppTheme.neutral500, fontSize: 12),
+          ),
           const SizedBox(height: 20),
           MockPrimaryCta(
             label: l10n.mockContinue,
@@ -594,7 +661,9 @@ class Onb02ProviderMock extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => MockNav.push(context, MockScreenId.auth02),
-            child: Text('${l10n.splashAlreadyHaveAccount} ${l10n.splashSignIn}'),
+            child: Text(
+              '${l10n.splashAlreadyHaveAccount} ${l10n.splashSignIn}',
+            ),
           ),
         ],
       ),

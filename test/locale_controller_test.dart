@@ -9,14 +9,14 @@ void main() {
   group('LocaleController.resolveInitialLocale', () {
     test('picks first supported device language', () {
       final locale = LocaleController.resolveInitialLocale(
-        platformLocales: const [Locale('es', 'US'), Locale('en', 'US')],
+        platformLocales: const [Locale('ko', 'KR'), Locale('en', 'US')],
       );
-      expect(locale.languageCode, 'es');
+      expect(locale.languageCode, 'ko');
     });
 
     test('falls back to en when unsupported', () {
       final locale = LocaleController.resolveInitialLocale(
-        platformLocales: const [Locale('de'), Locale('it')],
+        platformLocales: const [Locale('es'), Locale('fr')],
       );
       expect(locale.languageCode, 'en');
     });
@@ -30,20 +30,27 @@ void main() {
       expect(c.value.languageCode, 'ko');
     });
 
-    test('no prefs uses resolveInitialLocale path to a supported code',
-        () async {
-      SharedPreferences.setMockInitialValues({});
-      final c = LocaleController();
-      await c.load();
-      expect(
-        supportedLocales.any((l) => l.languageCode == c.value.languageCode),
-        isTrue,
-      );
-    });
+    test(
+      'no prefs uses resolveInitialLocale path to a supported code',
+      () async {
+        SharedPreferences.setMockInitialValues({});
+        final c = LocaleController();
+        await c.load();
+        expect(
+          supportedLocales.any((l) => l.languageCode == c.value.languageCode),
+          isTrue,
+        );
+      },
+    );
 
     test('savedLanguageCode reads prefs', () async {
-      SharedPreferences.setMockInitialValues({'app_locale_code': 'es'});
-      expect(await LocaleController.savedLanguageCode(), 'es');
+      SharedPreferences.setMockInitialValues({'app_locale_code': 'ko'});
+      expect(await LocaleController.savedLanguageCode(), 'ko');
+    });
+
+    test('a saved language that is no longer offered is ignored', () async {
+      SharedPreferences.setMockInitialValues({'app_locale_code': 'ja'});
+      expect(await LocaleController.savedLanguageCode(), isNull);
     });
   });
 }

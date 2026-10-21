@@ -31,8 +31,10 @@ class DebugFunctionsClient {
     final sw = Stopwatch()..start();
 
     try {
-      final response =
-          await SupabaseService.client.functions.invoke(name, body: body);
+      final response = await SupabaseService.client.functions.invoke(
+        name,
+        body: body,
+      );
       sw.stop();
       final map = _asMap(response.data);
       final metrics = DebugRedactor.scrub(
@@ -72,8 +74,8 @@ class DebugFunctionsClient {
           responseBody: detailsMap != null
               ? DebugRedactor.scrubOrNull(detailsMap)
               : (e.details is String
-                  ? DebugRedactor.scrub({'detail': e.details as String})
-                  : null),
+                    ? DebugRedactor.scrub({'detail': e.details as String})
+                    : null),
           statusCode: e.status,
           stableError: stable,
           elapsedMs: sw.elapsedMilliseconds,

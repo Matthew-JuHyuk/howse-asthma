@@ -1,9 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "Howse Asthma",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
+  "appTitle": "CoverNote",
   "loginTitle": "Log in",
   "loginEmailLabel": "Email",
   "loginPasswordLabel": "Password",
@@ -122,7 +119,6 @@
   "mockTabReport": "Report",
   "mockTabReward": "Reward",
   "mockTabSettings": "Settings",
-
   "navHome": "Home",
   "signUpTitle": "Create account",
   "authChooseRole": "Choose your role",
@@ -140,7 +136,9 @@
   "authCheckEmailBody": "We sent a confirmation link to {email}. Open it, then sign in.",
   "@authCheckEmailBody": {
     "placeholders": {
-      "email": {"type": "String"}
+      "email": {
+        "type": "String"
+      }
     }
   },
   "authBackToSignIn": "Back to sign in",
@@ -190,7 +188,9 @@
   "providerHomeWelcome": "Signed in as {email}",
   "@providerHomeWelcome": {
     "placeholders": {
-      "email": {"type": "String"}
+      "email": {
+        "type": "String"
+      }
     }
   },
   "providerHomePlaceholder": "Patient clinical dashboards arrive in a later release. Start by linking patients.",
@@ -205,7 +205,9 @@
   "providerPendingPatient": "Patient {idPrefix}…",
   "@providerPendingPatient": {
     "placeholders": {
-      "idPrefix": {"type": "String"}
+      "idPrefix": {
+        "type": "String"
+      }
     }
   },
   "providerRecentInvites": "Recent invite codes",
@@ -259,7 +261,9 @@
   "homeLastInhalerDays": "Last inhaler use: {days} days ago",
   "@homeLastInhalerDays": {
     "placeholders": {
-      "days": {"type": "int"}
+      "days": {
+        "type": "int"
+      }
     }
   },
   "locationServiceDisabled": "Turn on location services to see nearby asthma risk.",
@@ -274,7 +278,9 @@
   "logWeekSummary": "{count} inhaler events in the last 7 days",
   "@logWeekSummary": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "logFilterAll": "All",
@@ -303,7 +309,9 @@
   "actSaved": "ACT saved. Score: {score}",
   "@actSaved": {
     "placeholders": {
-      "score": {"type": "int"}
+      "score": {
+        "type": "int"
+      }
     }
   },
   "pdcTitle": "Daily medicine check",
@@ -313,9 +321,15 @@
   "pdcStreakHint": "Last 30 days: {taken} of {total} days taken ({rate})",
   "@pdcStreakHint": {
     "placeholders": {
-      "taken": {"type": "int"},
-      "total": {"type": "int"},
-      "rate": {"type": "String"}
+      "taken": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "rate": {
+        "type": "String"
+      }
     }
   },
   "panicEmergencyBadge": "EMERGENCY",
@@ -326,7 +340,9 @@
   "panicCallNamed": "Call {name}",
   "@panicCallNamed": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "panicDialFailed": "Could not open the phone dialer on this device.",
@@ -361,13 +377,17 @@
   "envUsgsRate": "USGS stream change: {rate} ft/hr",
   "@envUsgsRate": {
     "placeholders": {
-      "rate": {"type": "String"}
+      "rate": {
+        "type": "String"
+      }
     }
   },
   "envUpdatedAt": "Updated: {when}",
   "@envUpdatedAt": {
     "placeholders": {
-      "when": {"type": "String"}
+      "when": {
+        "type": "String"
+      }
     }
   },
   "envSourcesLabel": "Data sources",
@@ -378,14 +398,20 @@
   "forecastDayPollen": "Pollen UPI {upi} · {type}",
   "@forecastDayPollen": {
     "placeholders": {
-      "upi": {"type": "int"},
-      "type": {"type": "String"}
+      "upi": {
+        "type": "int"
+      },
+      "type": {
+        "type": "String"
+      }
     }
   },
   "forecastDayAqi": "Max US AQI {aqi}",
   "@forecastDayAqi": {
     "placeholders": {
-      "aqi": {"type": "int"}
+      "aqi": {
+        "type": "int"
+      }
     }
   },
   "forecastMorning": "Morning",
@@ -403,14 +429,20 @@
   "locationsDeleteBody": "Remove “{name}” from monitoring?",
   "@locationsDeleteBody": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "locationsCoords": "{lat}, {lon}",
   "@locationsCoords": {
     "placeholders": {
-      "lat": {"type": "String"},
-      "lon": {"type": "String"}
+      "lat": {
+        "type": "String"
+      },
+      "lon": {
+        "type": "String"
+      }
     }
   },
   "locationsPrimaryBadge": "Primary",
@@ -449,7 +481,9 @@
   "homeNearPlace": "Near {place}",
   "@homeNearPlace": {
     "placeholders": {
-      "place": {"type": "String"}
+      "place": {
+        "type": "String"
+      }
     }
   },
   "homeStaleLocationNotice": "Showing your last saved reading while we wait for location.",
@@ -477,31 +511,51 @@
   "homeForecastHint": "Next day {date} · score {score}",
   "@homeForecastHint": {
     "placeholders": {
-      "date": {"type": "String"},
-      "score": {"type": "String"}
+      "date": {
+        "type": "String"
+      },
+      "score": {
+        "type": "String"
+      }
     }
   },
   "homeSensorDistance": "Nearest air sensor {km} km ({mi} mi) · search ~{radiusKm} km ({radiusMi} mi)",
   "@homeSensorDistance": {
     "placeholders": {
-      "km": {"type": "String"},
-      "mi": {"type": "String"},
-      "radiusKm": {"type": "String"},
-      "radiusMi": {"type": "String"}
+      "km": {
+        "type": "String"
+      },
+      "mi": {
+        "type": "String"
+      },
+      "radiusKm": {
+        "type": "String"
+      },
+      "radiusMi": {
+        "type": "String"
+      }
     }
   },
   "homeSensorNearestOnly": "Nearest air sensor {km} km ({mi} mi)",
   "@homeSensorNearestOnly": {
     "placeholders": {
-      "km": {"type": "String"},
-      "mi": {"type": "String"}
+      "km": {
+        "type": "String"
+      },
+      "mi": {
+        "type": "String"
+      }
     }
   },
   "homeSensorRadiusOnly": "Sensor search ~{km} km ({mi} mi)",
   "@homeSensorRadiusOnly": {
     "placeholders": {
-      "km": {"type": "String"},
-      "mi": {"type": "String"}
+      "km": {
+        "type": "String"
+      },
+      "mi": {
+        "type": "String"
+      }
     }
   },
   "weekdayMonShort": "M",
@@ -519,25 +573,33 @@
   "homeMoldRh": "Humidity {pct}%",
   "@homeMoldRh": {
     "placeholders": {
-      "pct": {"type": "String"}
+      "pct": {
+        "type": "String"
+      }
     }
   },
   "homeMoldTempF": "{temp}°F",
   "@homeMoldTempF": {
     "placeholders": {
-      "temp": {"type": "String"}
+      "temp": {
+        "type": "String"
+      }
     }
   },
   "homeMoldDewF": "Dew {temp}°F",
   "@homeMoldDewF": {
     "placeholders": {
-      "temp": {"type": "String"}
+      "temp": {
+        "type": "String"
+      }
     }
   },
   "homeMoldWetHours": "{hours} wet hours (24h)",
   "@homeMoldWetHours": {
     "placeholders": {
-      "hours": {"type": "int"}
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "homeMoldProxyDisclaimer": "Outdoor estimate only",
@@ -572,8 +634,12 @@
   "s5AqiValue": "{category} (AQI {aqi})",
   "@s5AqiValue": {
     "placeholders": {
-      "category": {"type": "String"},
-      "aqi": {"type": "int"}
+      "category": {
+        "type": "String"
+      },
+      "aqi": {
+        "type": "int"
+      }
     }
   },
   "s5Back": "Back",
@@ -631,13 +697,17 @@
   "s5ForecastCheckedAt": "Checked {time}",
   "@s5ForecastCheckedAt": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "s5ForecastValidFor": "Forecast for {date}",
   "@s5ForecastValidFor": {
     "placeholders": {
-      "date": {"type": "String"}
+      "date": {
+        "type": "String"
+      }
     }
   },
   "s5FromUrgentHelp": "Logged from Urgent help",
@@ -645,13 +715,17 @@
   "s5HomeStateQuestions": "{n, plural, =1{You have 1 question for your doctor.} other{You have {n} questions for your doctor.}}",
   "@s5HomeStateQuestions": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5HomeStateRecords": "Days with records in the last 7 days: {n}",
   "@s5HomeStateRecords": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5HomeSubtitle": "Bring your records to your next visit.",
@@ -659,7 +733,9 @@
   "s5HumidityValue": "Outdoor humidity {rh}%",
   "@s5HumidityValue": {
     "placeholders": {
-      "rh": {"type": "int"}
+      "rh": {
+        "type": "int"
+      }
     }
   },
   "s5IncludeEnvironment": "Local environment (optional)",
@@ -671,7 +747,9 @@
   "s5InhalerUnknownCount": "Medication not identified: {n}",
   "@s5InhalerUnknownCount": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5InsCost": "Cost difficulties",
@@ -683,7 +761,9 @@
   "s5LanguageName": "{lang, select, en{English} es{Spanish} fr{French} ko{Korean} ja{Japanese} zh{Chinese} other{another language}}",
   "@s5LanguageName": {
     "placeholders": {
-      "lang": {"type": "String"}
+      "lang": {
+        "type": "String"
+      }
     }
   },
   "s5Last30Days": "Last 30 days",
@@ -695,10 +775,18 @@
   "s5MedCheckCounts": "Days used: {a} · not used: {b} · don't remember: {c} · not recorded: {d}",
   "@s5MedCheckCounts": {
     "placeholders": {
-      "a": {"type": "int"},
-      "b": {"type": "int"},
-      "c": {"type": "int"},
-      "d": {"type": "int"}
+      "a": {
+        "type": "int"
+      },
+      "b": {
+        "type": "int"
+      },
+      "c": {
+        "type": "int"
+      },
+      "d": {
+        "type": "int"
+      }
     }
   },
   "s5MedCheckIntro": "A self-reported check of whether you used your medicine. It is not based on pharmacy records.",
@@ -715,7 +803,9 @@
   "s5MedNotApplicableDays": "Not scheduled: {n} days",
   "@s5MedNotApplicableDays": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5MedNotRecorded": "Medication not recorded",
@@ -744,7 +834,9 @@
   "s5NoSymptomDays": "Days marked “no symptoms”: {n}",
   "@s5NoSymptomDays": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5NotRecorded": "Not recorded",
@@ -752,8 +844,12 @@
   "s5NotTranslatedLine": "[Not translated · original in {language}] {text}",
   "@s5NotTranslatedLine": {
     "placeholders": {
-      "language": {"type": "String"},
-      "text": {"type": "String"}
+      "language": {
+        "type": "String"
+      },
+      "text": {
+        "type": "String"
+      }
     }
   },
   "s5OsNotificationsOff": "Notifications are turned off for Howse Asthma in your phone settings, so alerts can't appear.",
@@ -764,7 +860,9 @@
   "s5PdfDaysNotRecorded": "Days with no symptom entry (not recorded): {n}",
   "@s5PdfDaysNotRecorded": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfDisclaimer": "This summary contains patient-reported information for clinician review. It is not a diagnosis or a prior authorization decision.",
@@ -774,33 +872,47 @@
   "s5PdfGeneratedAt": "Created: {time}",
   "@s5PdfGeneratedAt": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "s5PdfInhalerByMed": "{name}: {n} entries",
   "@s5PdfInhalerByMed": {
     "placeholders": {
-      "name": {"type": "String"},
-      "n": {"type": "int"}
+      "name": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfInhalerMedNotRecorded": "Medication not recorded: {n} entries",
   "@s5PdfInhalerMedNotRecorded": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfInhalerUnknown": "Medication not identified by patient: {n} entries",
   "@s5PdfInhalerUnknown": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfInhalerUses": "Inhaler use entries: {n} (on {days} days)",
   "@s5PdfInhalerUses": {
     "placeholders": {
-      "n": {"type": "int"},
-      "days": {"type": "int"}
+      "n": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
     }
   },
   "s5PdfIsEnglish": "The PDF is created in English. Free text you typed stays in your language.",
@@ -809,30 +921,46 @@
   "s5PdfNotUsedReason": "Reason for not using (self-reported) — {label}: {n} days",
   "@s5PdfNotUsedReason": {
     "placeholders": {
-      "label": {"type": "String"},
-      "n": {"type": "int"}
+      "label": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfOutdated": "Your records or answers changed after the last PDF. Create a new PDF to include the changes.",
   "s5PdfPeriod": "Summary period: {start} – {end} ({days} days)",
   "@s5PdfPeriod": {
     "placeholders": {
-      "start": {"type": "String"},
-      "end": {"type": "String"},
-      "days": {"type": "int"}
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
     }
   },
   "s5PdfReasonCount": "Reason — {label}: {n} entries",
   "@s5PdfReasonCount": {
     "placeholders": {
-      "label": {"type": "String"},
-      "n": {"type": "int"}
+      "label": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfRecordedDays": "Days with any patient entry: {n}",
   "@s5PdfRecordedDays": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfSectionAboutData": "About this information",
@@ -846,29 +974,43 @@
   "s5PdfSymptomCodeDays": "{label}: {n} days",
   "@s5PdfSymptomCodeDays": {
     "placeholders": {
-      "label": {"type": "String"},
-      "n": {"type": "int"}
+      "label": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfSymptomDays": "Days with any symptom: {n} of {days}",
   "@s5PdfSymptomDays": {
     "placeholders": {
-      "n": {"type": "int"},
-      "days": {"type": "int"}
+      "n": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
     }
   },
   "s5PdfSymptomOtherDays": "Other symptoms described by patient: {n} days",
   "@s5PdfSymptomOtherDays": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PdfTitle": "Patient-reported asthma visit summary",
   "s5PeriodAndRecordedDays": "Period: {days} days · Days with records: {n}",
   "@s5PeriodAndRecordedDays": {
     "placeholders": {
-      "days": {"type": "int"},
-      "n": {"type": "int"}
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5PhoneHint": "Include the country code. Example: +1 201 555 0123",
@@ -877,7 +1019,9 @@
   "s5PollenMainType": "Main type: {type}",
   "@s5PollenMainType": {
     "placeholders": {
-      "type": {"type": "String"}
+      "type": {
+        "type": "String"
+      }
     }
   },
   "s5PollenTree": "Tree",
@@ -889,20 +1033,28 @@
   "s5PuffsValue": "{n, plural, =1{1 puff} other{{n} puffs}}",
   "@s5PuffsValue": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5QuestionN": "Question {n}",
   "@s5QuestionN": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5QuestionOf": "Question {n} of {total}",
   "@s5QuestionOf": {
     "placeholders": {
-      "n": {"type": "int"},
-      "total": {"type": "int"}
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "s5ReasonBeforeActivity": "Before activity",
@@ -911,13 +1063,17 @@
   "s5RecentInhaler": "Inhaler use entries: {n}",
   "@s5RecentInhaler": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5RecentSymptomDays": "Days with symptoms: {n}",
   "@s5RecentSymptomDays": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5RecentTitle": "Last 7 days",
@@ -963,13 +1119,17 @@
   "s5UntranslatedNotice": "{n, plural, =1{1 entry is not translated. It appears in the English PDF in your language, marked “Not translated”.} other{{n} entries are not translated. They appear in the English PDF in your language, marked “Not translated”.}}",
   "@s5UntranslatedNotice": {
     "placeholders": {
-      "n": {"type": "int"}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "s5UpdatedAt": "Updated {time}",
   "@s5UpdatedAt": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "s5UpiHigh": "High",
@@ -979,8 +1139,12 @@
   "s5UpiValue": "{upi} of 5 · {category}",
   "@s5UpiValue": {
     "placeholders": {
-      "upi": {"type": "int"},
-      "category": {"type": "String"}
+      "upi": {
+        "type": "int"
+      },
+      "category": {
+        "type": "String"
+      }
     }
   },
   "s5UpiVeryHigh": "Very high",
@@ -994,7 +1158,9 @@
   "s5UsingMedication": "Logs as: {name}",
   "@s5UsingMedication": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "s5ViewMyLog": "View my log",
@@ -1002,9 +1168,15 @@
   "s5VisitCardDetail": "Last {days} days · Days with records: {recorded} · Questions: {questions}",
   "@s5VisitCardDetail": {
     "placeholders": {
-      "days": {"type": "int"},
-      "recorded": {"type": "int"},
-      "questions": {"type": "int"}
+      "days": {
+        "type": "int"
+      },
+      "recorded": {
+        "type": "int"
+      },
+      "questions": {
+        "type": "int"
+      }
     }
   },
   "s5VisitCardTitle": "What to share at your visit",
@@ -1021,12 +1193,24 @@
   "s6DaySummary": "{date} · confirmed {used}/{scheduled} · unconfirmed {open} · symptoms {symptoms} · {env}",
   "@s6DaySummary": {
     "placeholders": {
-      "date": {"type": "String"},
-      "used": {"type": "int"},
-      "scheduled": {"type": "int"},
-      "open": {"type": "int"},
-      "symptoms": {"type": "int"},
-      "env": {"type": "String"}
+      "date": {
+        "type": "String"
+      },
+      "used": {
+        "type": "int"
+      },
+      "scheduled": {
+        "type": "int"
+      },
+      "open": {
+        "type": "int"
+      },
+      "symptoms": {
+        "type": "int"
+      },
+      "env": {
+        "type": "String"
+      }
     }
   },
   "s6DoseLater": "Check later",
@@ -1057,7 +1241,9 @@
   "s6ReminderBodyNamed": "Time to confirm {name}",
   "@s6ReminderBodyNamed": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "s6ReminderBodyPrivate": "Time to confirm your medicine",
@@ -1131,5 +1317,738 @@
   "v2CalcDeadline": "Calculated from the received date you entered",
   "v2NeedReceived": "The notice counts days after you receive it. Enter that date before a date can be calculated.",
   "v2UnclearDeadline": "The deadline wording is unclear. No date was calculated.",
-  "v2AskPlan": "A deadline was not found in the document. Ask the plan."
+  "v2AskPlan": "A deadline was not found in the document. Ask the plan.",
+  "cnTagline": "Insurance letters, clear next steps",
+  "cnDemoBadge": "Sample",
+  "cnDemoBadgeLong": "Sample with made-up data. Results are fixed.",
+  "cnAuthSignInTitle": "Sign in",
+  "cnAuthCreateTitle": "Create account",
+  "cnAuthResetTitle": "Reset password",
+  "cnAuthSignIn": "Sign in",
+  "cnAuthCreate": "Create account",
+  "cnAuthSendReset": "Send reset link",
+  "cnAuthProfileError": "You are signed in, but your account could not be loaded ({code}).",
+  "@cnAuthProfileError": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "cnRetry": "Try again",
+  "cnSignOut": "Sign out",
+  "cnAuthPreparingAccount": "Setting up your account…",
+  "cnAuthNameLabel": "Name (optional)",
+  "cnAuthNameHelper": "Shown on your packets. You can change it later.",
+  "cnAuthEmailLabel": "Email",
+  "cnAuthPasswordLabel": "Password",
+  "cnAuthPasswordHelper": "At least 8 characters",
+  "cnAuthShowPassword": "Show password",
+  "cnAuthHidePassword": "Hide password",
+  "cnAuthPasswordRequired": "Enter your password",
+  "cnAuthCheckEmail": "We sent a confirmation link to {email}. Open it on this phone, then sign in.",
+  "@cnAuthCheckEmail": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "cnAuthResetSent": "If an account exists for {email}, a reset link is on its way. Open it on this phone.",
+  "@cnAuthResetSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "cnAuthResent": "Sent again.",
+  "cnAuthResend": "Resend email",
+  "cnAuthSignInInstead": "I confirmed. Sign in",
+  "cnAuthForgot": "Forgot password?",
+  "cnAuthNoAccount": "New here? Create an account",
+  "cnAuthHaveAccount": "Have an account? Sign in",
+  "cnAuthResetHint": "Enter your email and we will send a link to set a new password.",
+  "cnAuthBackToSignIn": "Back to sign in",
+  "cnAuthPrivacyLine": "Your letters and records are private to your account.",
+  "cnAuthPasswordUpdated": "Password updated.",
+  "cnAuthNewPasswordTitle": "Set a new password",
+  "cnAuthNewPasswordLabel": "New password",
+  "cnAuthSavePassword": "Save password",
+  "cnLater": "Later",
+  "cnAuthErrInvalidCredentials": "Email or password is not correct.",
+  "cnAuthErrNotConfirmed": "Please confirm your email first. Check your inbox or resend the link.",
+  "cnAuthErrExists": "An account with this email already exists. Sign in instead.",
+  "cnAuthErrWeakPassword": "Choose a stronger password (at least 8 characters).",
+  "cnAuthErrSamePassword": "Use a password different from your old one.",
+  "cnAuthErrRateLimited": "Too many tries. Wait a minute and try again.",
+  "cnAuthErrInvalidEmail": "Check the email address.",
+  "cnAuthErrEmailNotAuthorized": "We could not send email to this address right now. Try again later.",
+  "cnAuthErrDisabled": "This sign-in method is turned off.",
+  "cnAuthErrSessionExpired": "Your session ended. Please sign in again.",
+  "cnAuthErrUnknown": "Something went wrong ({code}). Try again.",
+  "@cnAuthErrUnknown": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "cnErrNetwork": "No connection. Check your internet and try again.",
+  "cnErrServiceDown": "The service is not responding. Try again in a few minutes.",
+  "cnTabHome": "Home",
+  "cnTabCases": "Cases",
+  "cnTabRecords": "Records",
+  "cnTabAccount": "Account",
+  "cnHomeHeadline": "Make sense of your insurance letter.",
+  "cnScanLetter": "Scan a letter",
+  "cnUploadFile": "Upload PDF / photo",
+  "cnTryDemo": "Try demo",
+  "cnHomeSignInLine": "Saving your cases needs an account.",
+  "cnServiceNotConfigured": "This build is not connected to the server. Only the demo works.",
+  "cnContinueCase": "Continue your case",
+  "cnHowItWorks": "How it works",
+  "cnStep1Title": "Read the letter",
+  "cnStep1Body": "Take a photo. We find the reason, the next step and the date.",
+  "cnStep2Title": "Gather records",
+  "cnStep2Body": "Match what the letter asks for to your own records.",
+  "cnStep3Title": "Create a packet",
+  "cnStep3Body": "Get a one-page doctor summary and a draft review request.",
+  "cnRecentCases": "Other cases",
+  "cnNoCasesYet": "No cases yet",
+  "cnNoOtherCases": "No other cases.",
+  "cnSeeAllCases": "See all cases",
+  "cnNoCasesBody": "Scan an insurance letter to start.",
+  "cnCasesSignInTitle": "Sign in to see your cases",
+  "cnCasesSignInBody": "Or open the demo to see how it works.",
+  "cnCaseDeleted": "Case deleted.",
+  "cnCaseUntitled": "Insurance letter",
+  "cnStatusReading": "Reading letter",
+  "cnStatusNeedsReview": "Needs review",
+  "cnStatusGatherRecords": "Gather records",
+  "cnStatusPacketReady": "Packet ready",
+  "cnStatusNeedsAttention": "Needs attention",
+  "cnStatusNotStarted": "Not started",
+  "cnNextWaitReading": "We are reading the letter.",
+  "cnNextTryAgain": "Reading stopped. Open the case to try again.",
+  "cnNextFactsToConfirm": "{count, plural, =1{1 fact to confirm} other{{count} facts to confirm}}",
+  "@cnNextFactsToConfirm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnNextItemsAttached": "{done} of {total} requested items handled",
+  "@cnNextItemsAttached": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "cnNextSharePacket": "Packet ready to share",
+  "cnNextCreatePacket": "Next: create the packet",
+  "cnDateToCheckShort": "Date to check: {date}",
+  "@cnDateToCheckShort": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnDatePassedShort": "Date passed: {date}",
+  "@cnDatePassedShort": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnMoreActions": "More actions",
+  "cnDeleteCase": "Delete case",
+  "cnDeleteCaseTitle": "Delete this case?",
+  "cnDeleteCaseBody": "This removes the letter pages, the facts read from them, linked record summaries and packets. Your medication and symptom records stay.",
+  "cnCancel": "Cancel",
+  "cnDelete": "Delete",
+  "cnDeleteFailed": "Could not delete. Check your connection and try again.",
+  "cnKindInitialDenial": "Drug coverage denial",
+  "cnKindInfoRequest": "Request for more information",
+  "cnKindReauth": "Renewal (reauthorization) notice",
+  "cnKindFinalDenial": "Final appeal decision",
+  "cnKindEob": "Bill or explanation of benefits",
+  "cnKindOther": "Other letter",
+  "cnKindUncertain": "Letter type not clear",
+  "cnFieldPatientName": "Patient name",
+  "cnFieldPlanName": "Plan",
+  "cnFieldMemberId": "Member ID",
+  "cnFieldCaseReference": "Case or reference number",
+  "cnFieldMedication": "Medication (as written)",
+  "cnFieldDose": "Dose (as written)",
+  "cnFieldNoticeDate": "Notice date",
+  "cnFieldContact": "Contact",
+  "cnFieldSubmissionRoute": "Where to send",
+  "cnFactEdited": "Edited by you",
+  "cnFactChecked": "Checked",
+  "cnFactNotInLetter": "Not in letter",
+  "cnFactNeedsCheck": "Needs check",
+  "cnFactFromLetter": "From letter",
+  "cnWhoYou": "You",
+  "cnWhoCareTeam": "Care team",
+  "cnWhoPlan": "Plan",
+  "cnWhoUnknown": "Not sure",
+  "cnReqLinked": "Linked",
+  "cnReqAskedCareTeam": "Asked care team",
+  "cnReqNotAvailable": "Not available",
+  "cnReqNotNeeded": "Not needed",
+  "cnReqNeeded": "Needed",
+  "cnReqReset": "Mark as needed",
+  "cnRecMedication": "Medication history",
+  "cnRecSymptoms": "Symptom log",
+  "cnRecLocalContext": "Local context",
+  "cnRecPrn": "As-needed inhaler",
+  "cnDemoTitle": "Demo",
+  "cnDemoReset": "Reset demo",
+  "cnDemoResetDone": "Demo reset.",
+  "cnDemoIntro": "Three made-up letters with fixed results, so you can see each step. Nothing is uploaded.",
+  "cnUpEmpty": "That file is empty.",
+  "cnUpTooLarge": "Each file must be {mb} MB or smaller.",
+  "@cnUpTooLarge": {
+    "placeholders": {
+      "mb": {
+        "type": "int"
+      }
+    }
+  },
+  "cnUpCaseTooLarge": "All pages together must be {mb} MB or smaller.",
+  "@cnUpCaseTooLarge": {
+    "placeholders": {
+      "mb": {
+        "type": "int"
+      }
+    }
+  },
+  "cnUpTooManyPages": "Up to {max} pages per letter.",
+  "@cnUpTooManyPages": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "cnUpUnsupported": "Use JPG, PNG or PDF. For HEIC photos, take a new photo here.",
+  "cnUpBadFile": "This file cannot be read. Try another photo or PDF.",
+  "cnUpEncrypted": "This PDF is password-protected. Save an unlocked copy or take photos.",
+  "cnCameraUnavailable": "The camera is not available. You can upload a photo or PDF instead.",
+  "cnPhotosUnavailable": "Photos cannot be opened. Allow photo access in settings, or upload a PDF.",
+  "cnFilesUnavailable": "Files cannot be opened right now. Try again.",
+  "cnUploadFailed": "Upload did not finish. Your pages are still here. Try again.",
+  "cnCaptureTitle": "Add letter pages",
+  "cnReplacePagesTitle": "Replace letter pages",
+  "cnOpening": "Opening…",
+  "cnCaptureEmptyTitle": "Add the pages of your letter",
+  "cnCaptureTips": "Lay the page flat in good light and fit all four corners in the frame. Add every page, in order.",
+  "cnTakePhoto": "Take photo",
+  "cnAddPage": "Add page",
+  "cnAddPhoto": "Photo",
+  "cnAddPdf": "PDF",
+  "cnPagesSummary": "{pages, plural, =1{1 page} other{{pages} pages}} · {size} MB",
+  "@cnPagesSummary": {
+    "placeholders": {
+      "pages": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "cnUploadConsent": "Uploading sends these pages to the CoverNote server, where an AI service reads them for you. You can delete the case at any time.",
+  "cnStageUploading": "Uploading",
+  "cnUploadAndRead": "Upload and read",
+  "cnPageN": "Page {n}",
+  "@cnPageN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cnPdfPages": "File {n} · PDF, {count, plural, =1{1 page} other{{count} pages}}",
+  "@cnPdfPages": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnPreviewPage": "Preview page {n}",
+  "@cnPreviewPage": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cnRotate": "Rotate",
+  "cnRetake": "Retake",
+  "cnRemovePage": "Remove",
+  "cnReorder": "Drag to reorder",
+  "cnServiceUnavailableBody": "The letter reader is not set up right now. Your pages are saved; try again later.",
+  "cnNeedNewPagesBody": "Take clearer photos or use fewer pages, then upload again.",
+  "cnPagesKept": "Your pages are saved. Nothing was changed.",
+  "cnReplacePages": "Replace pages",
+  "cnTryAgain": "Try again",
+  "cnStageReading": "Reading",
+  "cnStageChecking": "Checking",
+  "cnStageReady": "Ready",
+  "cnReadingTitle": "Reading your letter",
+  "cnReadingBody": "When it is done, you check what we found against the letter.",
+  "cnReadingLeaveOk": "You can leave this screen. Reading continues and your case is saved.",
+  "cnStartReading": "Start reading",
+  "cnStepLetter": "Letter",
+  "cnStepReview": "Review",
+  "cnStepEvidence": "Evidence",
+  "cnStepPacket": "Packet",
+  "cnStepOf": "Step {n} of {total}: {name}",
+  "@cnStepOf": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cnSaving": "Saving…",
+  "cnSaved": "Saved",
+  "cnNotSavedRetry": "Not saved · Retry",
+  "cnViewOriginal": "View original pages",
+  "cnLetterPagesRead": "{count, plural, =1{1 page read} other{{count} pages read}}",
+  "@cnLetterPagesRead": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnPagesHardToRead": "Hard to read: page {list}. Check these facts carefully or retake the page.",
+  "@cnPagesHardToRead": {
+    "placeholders": {
+      "list": {
+        "type": "String"
+      }
+    }
+  },
+  "cnRetakePages": "Retake pages",
+  "cnHardToRead": "Hard to read",
+  "cnContinueToReview": "Continue to review",
+  "cnOriginalPages": "Original pages",
+  "cnNoOriginal": "No original pages are stored.",
+  "cnCheckDetails": "Check the details",
+  "cnCheckDetailsHint": "Compare each value with your letter. Tap a quote to see where it came from.",
+  "cnItemsLeftToCheck": "{count, plural, =1{Check 1 more item to continue} other{Check {count} more items to continue}}",
+  "@cnItemsLeftToCheck": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnContinueToEvidence": "Continue to evidence",
+  "cnSeePage": "See page {n}",
+  "@cnSeePage": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cnWhatLetterIs": "What this letter is",
+  "cnLooksRight": "Looks right",
+  "cnChange": "Change",
+  "cnCardWhyDenied": "Why it was denied",
+  "cnCardWhatTheyNeed": "What they asked for",
+  "cnCardWhatItSays": "What the letter says",
+  "cnNoReasonFound": "No reason was found in the letter.",
+  "cnCardNextStep": "Next step",
+  "cnNextDenial": "{count, plural, =0{Ask your care team to request a review. The letter does not list specific items.} =1{Ask your care team to request a review. The letter lists 1 item to send.} other{Ask your care team to request a review. The letter lists {count} items to send.}}",
+  "@cnNextDenial": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnNextInfoRequest": "{count, plural, =0{Send the information the plan asked for by the date below.} =1{Send the 1 item the plan asked for by the date below.} other{Send the {count} items the plan asked for by the date below.}}",
+  "@cnNextInfoRequest": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnNextReauth": "Note when the current approval ends and ask your care team to start the renewal.",
+  "cnNextFinal": "This is a final decision. CoverNote does not draft a first review request for it. Ask the plan or your care team about the options the letter lists.",
+  "cnNextEob": "This looks like a bill or benefits statement, not a denial. Check it with the plan's member services.",
+  "cnNextUncertain": "First confirm what kind of letter this is, above.",
+  "cnWhereToSend": "Where to send: {route}",
+  "@cnWhereToSend": {
+    "placeholders": {
+      "route": {
+        "type": "String"
+      }
+    }
+  },
+  "cnWhoToCall": "Contact: {contact}",
+  "@cnWhoToCall": {
+    "placeholders": {
+      "contact": {
+        "type": "String"
+      }
+    }
+  },
+  "cnCardDate": "Date to check",
+  "cnDateCalculated": "Calculated: {anchor} + {days} calendar days",
+  "@cnDateCalculated": {
+    "placeholders": {
+      "anchor": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cnReceivedDateWord": "date you received it",
+  "cnNoticeDateWord": "notice date",
+  "cnDateEnteredByYou": "Entered by you",
+  "cnDateFromLetter": "Stated in the letter",
+  "cnReceivedOn": "You received it on {date}",
+  "@cnReceivedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnDatePassed": "This date has passed. Call the plan to ask what you can still do.",
+  "cnNeedReceivedDate": "The letter gives {days} calendar days from the day you received it. When did it arrive?",
+  "@cnNeedReceivedDate": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cnEnterReceivedDate": "Enter date received",
+  "cnDateConflict": "The letter gives different dates. Ask the plan which one applies, then pick it.",
+  "cnUseThisDate": "Use {date}",
+  "@cnUseThisDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnDateUnclear": "The wording is unclear or counts business days, so CoverNote does not calculate it. Ask the plan for the exact date.",
+  "cnNoDeadline": "No review deadline was found in the letter.",
+  "cnReplyBy": "Reply to the information request by {date} (from the letter)",
+  "@cnReplyBy": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnEnterDatePlanGave": "Enter a date",
+  "cnUseLetterDate": "Use the letter's date",
+  "cnLeaveUnknown": "Leave as unknown for now",
+  "cnDateUnknownChecked": "Unknown, noted",
+  "cnTypeAsWritten": "Type it exactly as the letter shows.",
+  "cnCheckThisValue": "This value looks unusual. Compare it with the letter.",
+  "cnDone": "Done",
+  "cnEdit": "Edit",
+  "cnAdd": "Add",
+  "cnNoRecordsToLink": "No records from the last 30 days to link. You can still mark who has this item.",
+  "cnLinkTitle": "Link a record to: {label}",
+  "@cnLinkTitle": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cnLinkNote": "Your own records support the request. They do not replace clinic notes or test results.",
+  "cnMedLine": "{taken} taken / {notTaken} not taken / {unknown} unknown of {scheduled} scheduled doses",
+  "@cnMedLine": {
+    "placeholders": {
+      "taken": {
+        "type": "int"
+      },
+      "notTaken": {
+        "type": "int"
+      },
+      "unknown": {
+        "type": "int"
+      },
+      "scheduled": {
+        "type": "int"
+      }
+    }
+  },
+  "cnPrnLine": "As-needed: {uses} uses, {puffs} puffs",
+  "@cnPrnLine": {
+    "placeholders": {
+      "uses": {
+        "type": "int"
+      },
+      "puffs": {
+        "type": "int"
+      }
+    }
+  },
+  "cnNoEntries": "No entries",
+  "cnSymptomLine": "Symptoms on {days} days, night waking on {night} days ({entries} of {total} days logged)",
+  "@cnSymptomLine": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "night": {
+        "type": "int"
+      },
+      "entries": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "cnPmLine": "PM2.5 data for {days} of {total} days; {high} days above AQI 100",
+  "@cnPmLine": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "high": {
+        "type": "int"
+      }
+    }
+  },
+  "cnReportsLine": "{count, plural, =1{1 self-report} other{{count} self-reports}}",
+  "@cnReportsLine": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnSyntheticData": "Synthetic data",
+  "cnLetterAsksFor": "What the letter asks for",
+  "cnNoItemsListed": "The letter does not list specific items. You can add your own.",
+  "cnAddItemLabel": "Add an item to track",
+  "cnYourRecords": "Your records ({from} – {to})",
+  "@cnYourRecords": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "cnLocalContextNote": "Optional context. Not a measurement at your home and not a cause of symptoms.",
+  "cnContinueToPacket": "Continue to packet",
+  "cnAddedByYou": "Added by you",
+  "cnFromLetter": "From letter",
+  "cnWhoHasIt": "Who has it: {who}",
+  "@cnWhoHasIt": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "cnLinkedTo": "Linked: {record}",
+  "@cnLinkedTo": {
+    "placeholders": {
+      "record": {
+        "type": "String"
+      }
+    }
+  },
+  "cnSeeInLetter": "See in letter",
+  "cnLinkRecords": "Link my records",
+  "cnOtherStatus": "Other status",
+  "cnInPacket": "In packet",
+  "cnRemoveFromPacket": "Remove from packet",
+  "cnAddToPacket": "Add to packet",
+  "cnErrNotSavedYet": "Your latest changes are not saved yet. Check your connection and try again.",
+  "cnPacketChangedMeanwhile": "Facts or records changed while the packet was being made. Generate it again.",
+  "cnPacketFailed": "The packet could not be made. Try again.",
+  "cnBeforeSharingTitle": "Before you share",
+  "cnBeforeSharingBody": "This file has your name and health details. Share it only with your care team or your plan. Sharing does not submit anything for you.",
+  "cnShare": "Share",
+  "cnMethodFax": "Fax",
+  "cnMethodMail": "Mail",
+  "cnMethodPortal": "Online portal",
+  "cnMethodInPerson": "In person",
+  "cnMethodCareTeam": "Care team sent it",
+  "cnMethodOther": "Other",
+  "cnPacketNoDraftFinal": "For a final decision, the packet has the doctor summary only. No first-level review draft is made.",
+  "cnPacketNoDraftEob": "For a bill or benefits statement, the packet has the doctor summary only.",
+  "cnPacketNoDraftReauth": "For a renewal notice, the packet has the doctor summary only, to help your care team renew.",
+  "cnPacketNoDraftOther": "Unless the letter is a denial or an information request, the packet has the doctor summary only.",
+  "cnPacketContains": "This packet will include",
+  "cnPartSummary": "Doctor summary (1 page)",
+  "cnPartDraft": "Review request draft (for your care team to complete)",
+  "cnPartLetterText": "Appendix: the letter text",
+  "cnPacketEvidenceCount": "{count, plural, =0{No record summaries added} =1{1 record summary added} other{{count} record summaries added}}",
+  "@cnPacketEvidenceCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cnIncludeLetterText": "Add the letter text as an appendix",
+  "cnPacketStale": "Facts or records changed since the last packet. Generate it again to update.",
+  "cnGenerating": "Generating…",
+  "cnGeneratePacket": "Generate review packet",
+  "cnSaveOrPrint": "Save or print",
+  "cnISentIt": "I sent it",
+  "cnSharedOn": "Shared on {date}",
+  "@cnSharedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnUserReportedSent": "You reported sending it on {date} ({method})",
+  "@cnUserReportedSent": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "cnTabDoctorSummary": "Doctor summary",
+  "cnTabReviewDraft": "Review request draft",
+  "cnSentExplain": "Record when and how it was sent. CoverNote does not send it or track a decision.",
+  "cnSave": "Save",
+  "cnCtxPm25": "PM2.5 (AQI)",
+  "cnCtxNo2": "NO₂",
+  "cnCtxOutdoorHumidity": "Outdoor humidity",
+  "cnObservedOn": "Observed {date}",
+  "@cnObservedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnCtxIntro": "Air readings from a named source and things you noticed, kept separate. Add them to a case only if they help explain your records.",
+  "cnCtxReadings": "Air readings",
+  "cnCtxReadingsNote": "Regional readings for the day they were observed. They do not measure traffic exhaust at your home.",
+  "cnCtxAddReading": "Add a reading",
+  "cnCtxReports": "What you noticed",
+  "cnCtxReportsNote": "Your own reports. They are not measurements.",
+  "cnCtxAddReport": "Add what you noticed",
+  "cnReportExhaust": "Strong exhaust nearby",
+  "cnReportWater": "Water intrusion at home",
+  "cnReportDamp": "Damp or musty indoor area",
+  "cnOnDate": "Date: {date}",
+  "@cnOnDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cnNoteOptional": "Note (optional)",
+  "cnCtxWhat": "Reading",
+  "cnCtxHumidityNote": "Outdoor humidity is weather data. It does not show dampness or mold inside your home.",
+  "cnCtxValue": "Value",
+  "cnCtxValueInvalid": "Enter a valid number.",
+  "cnCtxSource": "Source",
+  "cnCtxSourceHelp": "Where the number came from, for example AirNow or a local monitor",
+  "cnCtxSourceRequired": "Add the source.",
+  "cnCtxPlace": "Place (ZIP or town, optional)",
+  "cnRecordsSignInBody": "Sign in to keep medication, symptom and local context records.",
+  "cnRecordsYourRecords": "Your records",
+  "cnRecMedicationSub": "Medicines and doses you take",
+  "cnRecDailyLog": "Daily log",
+  "cnRecDailyLogSub": "Symptoms and inhaler use",
+  "cnRecLocalContextSub": "Air readings and what you noticed",
+  "cnHelp": "Help",
+  "cnUrgentHelp": "Urgent help",
+  "cnUrgentHelpSub": "Steps for a breathing emergency and calling 911",
+  "cnLast30Days": "Last 30 days ({from} – {to})",
+  "@cnLast30Days": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "cnNoSchedule": "No regular schedule set",
+  "cnRecordsUnknownNote": "Days without an entry stay unknown. They are not counted as missed.",
+  "cnDeleteAccountTitle": "Delete your account?",
+  "cnDeleteAccountBody": "This permanently deletes your account, cases, uploaded letters, packets and records. It cannot be undone.",
+  "cnTypeDelete": "Type DELETE to confirm",
+  "cnDeleteAccount": "Delete account",
+  "cnAccountDeleted": "Your account was deleted.",
+  "cnDeleteAccountFailed": "The account could not be deleted. Try again later.",
+  "cnAccountSignedOut": "You are not signed in.",
+  "cnLanguage": "Language",
+  "cnServiceStatus": "Letter reading service",
+  "cnServiceReady": "Available",
+  "cnServiceUnavailableShort": "Not available right now",
+  "cnChecking": "Checking…",
+  "cnServiceUnknown": "Not checked",
+  "cnCheck": "Check",
+  "cnAbout": "About",
+  "cnAboutBody": "CoverNote helps you read insurance letters about medicines and prepare papers for your care team. It does not submit anything to your plan, does not decide coverage, and is not medical advice.",
+  "cnDangerZone": "Delete account",
+  "cnErrServiceUnavailable": "The letter reader is not available right now.",
+  "cnErrBusy": "The service is busy. Wait a minute and try again.",
+  "cnErrSlow": "Reading took too long. Try again.",
+  "cnErrUnreadable": "The pages could not be read. Retake them in better light.",
+  "cnErrTooManyPages": "Too many pages. Upload up to 10.",
+  "cnErrTooLarge": "The files are too large. Use fewer or smaller pages.",
+  "cnErrStale": "This case changed on another device. Showing the latest version.",
+  "cnErrCaseGone": "This case no longer exists.",
+  "cnErrAttempts": "Reading failed several times. Replace the pages or try again later.",
+  "cnErrDemoUpload": "The demo cannot read files. Sign in to scan your own letter.",
+  "cnErrGeneric": "Something went wrong ({code}). Try again.",
+  "@cnErrGeneric": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  }
 }

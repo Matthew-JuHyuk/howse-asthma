@@ -11,15 +11,12 @@ class PushTokenRepository {
     final userId = SupabaseService.currentUser?.id;
     if (userId == null) throw StateError('not_authenticated');
 
-    await SupabaseService.client.from('device_push_tokens').upsert(
-      {
-        'profile_id': userId,
-        'fcm_token': fcmToken,
-        'platform': platform,
-        'last_seen_at': DateTime.now().toUtc().toIso8601String(),
-      },
-      onConflict: 'profile_id,fcm_token',
-    );
+    await SupabaseService.client.from('device_push_tokens').upsert({
+      'profile_id': userId,
+      'fcm_token': fcmToken,
+      'platform': platform,
+      'last_seen_at': DateTime.now().toUtc().toIso8601String(),
+    }, onConflict: 'profile_id,fcm_token');
   }
 
   Future<void> deleteToken(String fcmToken) async {

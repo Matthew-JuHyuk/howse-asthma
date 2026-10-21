@@ -2,30 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// The languages the app ships with. Keep this in sync with the ARB
-/// files under `lib/l10n/` and with `lib/l10n.yaml`.
-const List<Locale> supportedLocales = [
-  Locale('en'),
-  Locale('es'),
-  Locale('fr'),
-  Locale('ko'),
-  Locale('ja'),
-  Locale('zh'),
-];
+/// Languages the user can pick. Only languages with a complete, checked
+/// translation of the current screens are listed.
+const List<Locale> supportedLocales = [Locale('en'), Locale('ko')];
 
-const Map<String, String> localeDisplayNames = {
-  'en': 'English',
-  'es': 'Español',
-  'fr': 'Français',
-  'ko': '한국어',
-  'ja': '日本語',
-  'zh': '中文',
-};
+const Map<String, String> localeDisplayNames = {'en': 'English', 'ko': '한국어'};
 
 const _prefsKey = 'app_locale_code';
 
-/// App language. First launch follows OS when supported (Sprint 2 S2-I18N-03);
-/// a manual choice in prefs always wins (S2-I18N-06).
+/// App language. First launch follows the OS when supported; a manual choice
+/// in prefs always wins.
 class LocaleController extends ValueNotifier<Locale> {
   LocaleController() : super(const Locale('en'));
 
@@ -36,8 +22,7 @@ class LocaleController extends ValueNotifier<Locale> {
     if (_loaded) return;
     final prefs = await SharedPreferences.getInstance();
     final code = prefs.getString(_prefsKey);
-    if (code != null &&
-        supportedLocales.any((l) => l.languageCode == code)) {
+    if (code != null && supportedLocales.any((l) => l.languageCode == code)) {
       value = Locale(code);
     } else {
       value = resolveInitialLocale(
@@ -48,9 +33,7 @@ class LocaleController extends ValueNotifier<Locale> {
   }
 
   /// Visible for tests — maps device locales to a supported [Locale].
-  static Locale resolveInitialLocale({
-    required List<Locale> platformLocales,
-  }) {
+  static Locale resolveInitialLocale({required List<Locale> platformLocales}) {
     for (final device in platformLocales) {
       for (final supported in supportedLocales) {
         if (supported.languageCode == device.languageCode) {
@@ -62,6 +45,9 @@ class LocaleController extends ValueNotifier<Locale> {
   }
 
   Future<void> setLocale(Locale locale) async {
+    if (!supportedLocales.any((l) => l.languageCode == locale.languageCode)) {
+      return;
+    }
     value = locale;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_prefsKey, locale.languageCode);
@@ -71,10 +57,29 @@ class LocaleController extends ValueNotifier<Locale> {
   static Future<String?> savedLanguageCode() async {
     final prefs = await SharedPreferences.getInstance();
     final code = prefs.getString(_prefsKey);
-    if (code != null &&
-        supportedLocales.any((l) => l.languageCode == code)) {
+    if (code != null && supportedLocales.any((l) => l.languageCode == code)) {
       return code;
     }
     return null;
   }
+}
+
+class AppLocaleScope extends InheritedWidget {
+  const AppLocaleScope({
+    super.key,
+    required this.controller,
+    required super.child,
+  });
+
+  final LocaleController controller;
+
+  static LocaleController of(BuildContext context) {
+    final scope = context.dependOnInheritedWidgetOfExactType<AppLocaleScope>();
+    assert(scope != null, 'AppLocaleScope not found in widget tree');
+    return scope!.controller;
+  }
+
+  @override
+  bool updateShouldNotify(AppLocaleScope oldWidget) =>
+      controller != oldWidget.controller;
 }

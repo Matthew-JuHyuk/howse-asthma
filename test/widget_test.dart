@@ -6,19 +6,22 @@ import 'package:howse_asthma/app.dart';
 import 'package:howse_asthma/l10n/app_localizations.dart';
 
 void main() {
-  testWidgets('App boots and renders the sign-in flow', (WidgetTester tester) async {
-    dotenv.loadFromString(isOptional: true);
-    await tester.pumpWidget(const HowseAsthmaApp());
-    // Breathing logo uses a repeating animation — settle would never finish.
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 100));
+  testWidgets(
+    'Home shows the brand, Scan a letter and the demo before sign-in',
+    (tester) async {
+      dotenv.loadFromString(isOptional: true);
+      await tester.pumpWidget(const CoverNoteApp());
+      await tester.pump();
 
-    final appLocalizations = AppLocalizations.of(
-      tester.element(find.byType(Scaffold).first),
-    )!;
-
-    // Regardless of whether Supabase has been configured yet, the app
-    // title should be visible somewhere on the initial screen.
-    expect(find.text(appLocalizations.appTitle), findsWidgets);
-  });
+      final l = AppLocalizations.of(
+        tester.element(find.byType(Scaffold).first),
+      )!;
+      expect(find.text(l.appTitle), findsWidgets);
+      expect(find.text(l.cnScanLetter), findsOneWidget);
+      expect(find.text(l.cnUploadFile), findsOneWidget);
+      expect(find.text(l.cnTryDemo), findsOneWidget);
+      expect(find.text(l.cnTabCases), findsOneWidget);
+      expect(find.text(l.cnTabRecords), findsOneWidget);
+    },
+  );
 }

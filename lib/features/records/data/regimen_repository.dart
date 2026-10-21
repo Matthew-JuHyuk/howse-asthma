@@ -49,7 +49,9 @@ class MedicationRegimen {
           ? times.map((e) => (e as num).toInt()).toList()
           : const [],
       effectiveFrom: dateOnly(from),
-      effectiveUntil: untilRaw == null ? null : dateOnly(DateTime.parse(untilRaw)),
+      effectiveUntil: untilRaw == null
+          ? null
+          : dateOnly(DateTime.parse(untilRaw)),
       medicationName: med is Map ? med['display_name'] as String? : null,
     );
   }
@@ -95,7 +97,9 @@ class RegimenRepository {
         .eq('patient_id', userId)
         .order('effective_from', ascending: false);
     return (rows as List)
-        .map((r) => MedicationRegimen.fromRow(Map<String, dynamic>.from(r as Map)))
+        .map(
+          (r) => MedicationRegimen.fromRow(Map<String, dynamic>.from(r as Map)),
+        )
         .toList();
   }
 

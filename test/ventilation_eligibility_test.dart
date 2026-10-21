@@ -20,10 +20,7 @@ bool canSuggestVentilation({
 
 void main() {
   test('blocks moderate AQI even when composite risk is 2', () {
-    expect(
-      canSuggestVentilation(riskScore: 2, aqiEpa: 75),
-      isFalse,
-    );
+    expect(canSuggestVentilation(riskScore: 2, aqiEpa: 75), isFalse);
   });
 
   test('allows calm outdoor window', () {
@@ -40,13 +37,7 @@ void main() {
   });
 
   test('blocks flood and high mold', () {
-    expect(
-      canSuggestVentilation(riskScore: 1, hasFlashFlood: true),
-      isFalse,
-    );
-    expect(
-      canSuggestVentilation(riskScore: 1, moldScore: 3),
-      isFalse,
-    );
+    expect(canSuggestVentilation(riskScore: 1, hasFlashFlood: true), isFalse);
+    expect(canSuggestVentilation(riskScore: 1, moldScore: 3), isFalse);
   });
 }

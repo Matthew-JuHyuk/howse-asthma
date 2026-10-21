@@ -16,8 +16,7 @@ class ApiMetricsExtractor {
     if (functionName.contains('log-inhaler-event')) {
       return _logInhaler(body);
     }
-    if (functionName.contains('invite') ||
-        functionName.contains('care-link')) {
+    if (functionName.contains('invite') || functionName.contains('care-link')) {
       return _invite(body);
     }
     return _generic(body);
@@ -55,7 +54,8 @@ class ApiMetricsExtractor {
       final bad = <String>[];
       for (final e in summary.entries) {
         final v = e.value;
-        final isOk = v == true ||
+        final isOk =
+            v == true ||
             v == 'ok' ||
             (v is Map && (v['ok'] == true || v['status'] == 'ok'));
         if (isOk) {

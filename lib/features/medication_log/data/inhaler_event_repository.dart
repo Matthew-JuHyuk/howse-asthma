@@ -43,7 +43,8 @@ class InhalerEventRepository {
       'note': ?note,
       'source_language': ?sourceLanguage,
       'tz_offset_minutes': DateTime.now().timeZoneOffset.inMinutes,
-      if (recordedAt != null) 'recorded_at': recordedAt.toUtc().toIso8601String(),
+      if (recordedAt != null)
+        'recorded_at': recordedAt.toUtc().toIso8601String(),
     });
   }
 
@@ -67,7 +68,8 @@ class InhalerEventRepository {
       'use_reason': useReason,
       'note': note,
       'source_language': ?sourceLanguage,
-      if (recordedAt != null) 'recorded_at': recordedAt.toUtc().toIso8601String(),
+      if (recordedAt != null)
+        'recorded_at': recordedAt.toUtc().toIso8601String(),
     });
   }
 

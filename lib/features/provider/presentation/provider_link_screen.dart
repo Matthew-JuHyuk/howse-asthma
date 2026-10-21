@@ -75,9 +75,9 @@ class _ProviderLinkScreenState extends State<ProviderLinkScreen> {
       await _reload();
     } catch (_) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.authErrorGeneric)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.authErrorGeneric)));
       }
     }
   }
@@ -112,9 +112,7 @@ class _ProviderLinkScreenState extends State<ProviderLinkScreen> {
                     onPressed: _issuing ? null : _issue,
                     icon: const Icon(Icons.vpn_key_outlined),
                     label: Text(
-                      _issuing
-                          ? l10n.authWorking
-                          : l10n.providerIssueInviteCta,
+                      _issuing ? l10n.authWorking : l10n.providerIssueInviteCta,
                     ),
                   ),
                   if (_latestCode != null) ...[
@@ -134,7 +132,9 @@ class _ProviderLinkScreenState extends State<ProviderLinkScreen> {
                             );
                             if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(l10n.providerInviteCopied)),
+                              SnackBar(
+                                content: Text(l10n.providerInviteCopied),
+                              ),
                             );
                           },
                         ),

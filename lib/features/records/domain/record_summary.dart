@@ -127,7 +127,9 @@ class RecordSummary {
         for (final code in s.symptoms) {
           (byCode[code] ??= <DateTime>{}).add(s.localDate);
         }
-        if (s.otherText?.trim().isNotEmpty ?? false) otherDates.add(s.localDate);
+        if (s.otherText?.trim().isNotEmpty ?? false) {
+          otherDates.add(s.localDate);
+        }
       } else if (s.noSymptoms) {
         noSymptomDates.add(s.localDate);
       }

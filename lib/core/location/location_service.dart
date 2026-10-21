@@ -12,10 +12,10 @@ class LocationResult {
   const LocationResult._({this.position, this.failure});
 
   const LocationResult.ok(Position position)
-      : this._(position: position, failure: null);
+    : this._(position: position, failure: null);
 
   const LocationResult.fail(LocationFailure failure)
-      : this._(position: null, failure: failure);
+    : this._(position: null, failure: failure);
 
   final Position? position;
   final LocationFailure? failure;

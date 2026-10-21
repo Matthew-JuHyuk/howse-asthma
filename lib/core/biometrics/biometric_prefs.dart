@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class BiometricPrefs {
   BiometricPrefs._();
 
-  static String _enabledKey(String userId) => 'biometric_unlock_enabled_$userId';
-  static String _onboardingKey(String userId) => 'patient_onboarding_done_$userId';
+  static String _enabledKey(String userId) =>
+      'biometric_unlock_enabled_$userId';
+  static String _onboardingKey(String userId) =>
+      'patient_onboarding_done_$userId';
 
   static Future<bool> isUnlockEnabled(String userId) async {
     if (userId.isEmpty) return false;

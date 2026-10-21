@@ -68,7 +68,10 @@ class ProfileRepository {
       }
     } catch (e) {
       try {
-        await SupabaseService.client.from('profiles').delete().eq('id', user.id);
+        await SupabaseService.client
+            .from('profiles')
+            .delete()
+            .eq('id', user.id);
       } catch (_) {
         // Best-effort compensation; surface the original failure.
       }

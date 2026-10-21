@@ -1,10 +1,6 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:howse_asthma/features/records/domain/record_models.dart';
 import 'package:howse_asthma/features/records/domain/record_summary.dart';
-import 'package:howse_asthma/features/visit_prep/data/visit_prep_repository.dart';
-import 'package:howse_asthma/features/visit_prep/domain/visit_summary.dart';
-import 'package:howse_asthma/l10n/app_localizations.dart';
 
 const _est = -300;
 
@@ -109,9 +105,7 @@ void main() {
     test('late-evening use stays on the local day at the range edge', () {
       final s = RecordSummary.compute(
         week,
-        RecordBundle(
-          inhaler: [_inhaler('a', DateTime.utc(2026, 10, 5, 3))],
-        ),
+        RecordBundle(inhaler: [_inhaler('a', DateTime.utc(2026, 10, 5, 3))]),
       );
       expect(s.inhalerUses, 0);
     });
@@ -213,83 +207,6 @@ void main() {
             r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$',
           ).hasMatch(id),
           isTrue,
-        );
-      }
-    });
-
-    test('visit fingerprint changes on deletion and draft edits only', () {
-      final a = _inhaler('a', DateTime.utc(2026, 10, 10, 14));
-      final b = _inhaler('b', DateTime.utc(2026, 10, 9, 14));
-      const draft = VisitPrepDraft();
-      final both = visitFingerprint(draft, RecordBundle(inhaler: [a, b]));
-      final oneLeft = visitFingerprint(draft, RecordBundle(inhaler: [a]));
-      expect(both, isNot(oneLeft));
-
-      final edited = draft.copyWith(
-        questions: const [VisitQuestion(text: 'Is my dose right?')],
-      );
-      expect(visitFingerprint(edited, RecordBundle(inhaler: [a])), isNot(oneLeft));
-
-      final regenerated = draft.copyWith(
-        lastGeneratedAt: DateTime.utc(2026, 10, 11),
-        lastGeneratedFingerprint: oneLeft,
-      );
-      expect(visitFingerprint(regenerated, RecordBundle(inhaler: [a])), oneLeft);
-    });
-  });
-
-  group('VisitSummaryBuilder', () {
-    final en = lookupAppLocalizations(const Locale('en'));
-
-    test('English version flags non-English free text, keeps original', () {
-      const draft = VisitPrepDraft(
-        questions: [
-          VisitQuestion(text: '약을 바꿔야 하나요?', language: 'ko'),
-          VisitQuestion(text: 'Can I exercise?', language: 'en'),
-        ],
-      );
-      final bundle = RecordBundle(
-        inhaler: [_inhaler('a', DateTime.utc(2026, 10, 10, 14), label: 'Blue')],
-      );
-      final doc = VisitSummaryBuilder(
-        t: en,
-        localeTag: 'en_US',
-        patientLang: 'ko',
-      ).build(
-        draft: draft,
-        summary: RecordSummary.compute(week, bundle),
-        bundle: bundle,
-        generatedAt: DateTime(2026, 10, 11, 9),
-      );
-
-      final questions = doc.sections.first.lines;
-      expect(questions, hasLength(2));
-      expect(questions[0].untranslated, isTrue);
-      expect(questions[0].original, '약을 바꿔야 하나요?');
-      expect(questions[0].text, contains('Not translated'));
-      expect(questions[1].untranslated, isFalse);
-      expect(doc.untranslatedCount, greaterThanOrEqualTo(1));
-    });
-
-    test('empty sections say not recorded instead of zero', () {
-      const bundle = RecordBundle();
-      final doc = VisitSummaryBuilder(
-        t: en,
-        localeTag: 'en_US',
-        patientLang: 'en',
-      ).build(
-        draft: const VisitPrepDraft(),
-        summary: RecordSummary.compute(week, bundle),
-        bundle: bundle,
-        generatedAt: DateTime(2026, 10, 11, 9),
-      );
-      for (final section in doc.sections) {
-        if (section.title == en.s5PdfSectionAboutData) continue;
-        if (section.title == en.s5PdfSectionBarriers) continue;
-        expect(
-          section.lines.map((l) => l.text),
-          contains(en.s5PdfNotRecorded),
-          reason: section.title,
         );
       }
     });

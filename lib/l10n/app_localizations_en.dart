@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Howse Asthma';
+  String get appTitle => 'CoverNote';
 
   @override
   String get loginTitle => 'Log in';
@@ -2686,4 +2686,1317 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get v2AskPlan =>
       'A deadline was not found in the document. Ask the plan.';
+
+  @override
+  String get cnTagline => 'Insurance letters, clear next steps';
+
+  @override
+  String get cnDemoBadge => 'Sample';
+
+  @override
+  String get cnDemoBadgeLong => 'Sample with made-up data. Results are fixed.';
+
+  @override
+  String get cnAuthSignInTitle => 'Sign in';
+
+  @override
+  String get cnAuthCreateTitle => 'Create account';
+
+  @override
+  String get cnAuthResetTitle => 'Reset password';
+
+  @override
+  String get cnAuthSignIn => 'Sign in';
+
+  @override
+  String get cnAuthCreate => 'Create account';
+
+  @override
+  String get cnAuthSendReset => 'Send reset link';
+
+  @override
+  String cnAuthProfileError(String code) {
+    return 'You are signed in, but your account could not be loaded ($code).';
+  }
+
+  @override
+  String get cnRetry => 'Try again';
+
+  @override
+  String get cnSignOut => 'Sign out';
+
+  @override
+  String get cnAuthPreparingAccount => 'Setting up your account…';
+
+  @override
+  String get cnAuthNameLabel => 'Name (optional)';
+
+  @override
+  String get cnAuthNameHelper =>
+      'Shown on your packets. You can change it later.';
+
+  @override
+  String get cnAuthEmailLabel => 'Email';
+
+  @override
+  String get cnAuthPasswordLabel => 'Password';
+
+  @override
+  String get cnAuthPasswordHelper => 'At least 8 characters';
+
+  @override
+  String get cnAuthShowPassword => 'Show password';
+
+  @override
+  String get cnAuthHidePassword => 'Hide password';
+
+  @override
+  String get cnAuthPasswordRequired => 'Enter your password';
+
+  @override
+  String cnAuthCheckEmail(String email) {
+    return 'We sent a confirmation link to $email. Open it on this phone, then sign in.';
+  }
+
+  @override
+  String cnAuthResetSent(String email) {
+    return 'If an account exists for $email, a reset link is on its way. Open it on this phone.';
+  }
+
+  @override
+  String get cnAuthResent => 'Sent again.';
+
+  @override
+  String get cnAuthResend => 'Resend email';
+
+  @override
+  String get cnAuthSignInInstead => 'I confirmed. Sign in';
+
+  @override
+  String get cnAuthForgot => 'Forgot password?';
+
+  @override
+  String get cnAuthNoAccount => 'New here? Create an account';
+
+  @override
+  String get cnAuthHaveAccount => 'Have an account? Sign in';
+
+  @override
+  String get cnAuthResetHint =>
+      'Enter your email and we will send a link to set a new password.';
+
+  @override
+  String get cnAuthBackToSignIn => 'Back to sign in';
+
+  @override
+  String get cnAuthPrivacyLine =>
+      'Your letters and records are private to your account.';
+
+  @override
+  String get cnAuthPasswordUpdated => 'Password updated.';
+
+  @override
+  String get cnAuthNewPasswordTitle => 'Set a new password';
+
+  @override
+  String get cnAuthNewPasswordLabel => 'New password';
+
+  @override
+  String get cnAuthSavePassword => 'Save password';
+
+  @override
+  String get cnLater => 'Later';
+
+  @override
+  String get cnAuthErrInvalidCredentials => 'Email or password is not correct.';
+
+  @override
+  String get cnAuthErrNotConfirmed =>
+      'Please confirm your email first. Check your inbox or resend the link.';
+
+  @override
+  String get cnAuthErrExists =>
+      'An account with this email already exists. Sign in instead.';
+
+  @override
+  String get cnAuthErrWeakPassword =>
+      'Choose a stronger password (at least 8 characters).';
+
+  @override
+  String get cnAuthErrSamePassword =>
+      'Use a password different from your old one.';
+
+  @override
+  String get cnAuthErrRateLimited =>
+      'Too many tries. Wait a minute and try again.';
+
+  @override
+  String get cnAuthErrInvalidEmail => 'Check the email address.';
+
+  @override
+  String get cnAuthErrEmailNotAuthorized =>
+      'We could not send email to this address right now. Try again later.';
+
+  @override
+  String get cnAuthErrDisabled => 'This sign-in method is turned off.';
+
+  @override
+  String get cnAuthErrSessionExpired =>
+      'Your session ended. Please sign in again.';
+
+  @override
+  String cnAuthErrUnknown(String code) {
+    return 'Something went wrong ($code). Try again.';
+  }
+
+  @override
+  String get cnErrNetwork =>
+      'No connection. Check your internet and try again.';
+
+  @override
+  String get cnErrServiceDown =>
+      'The service is not responding. Try again in a few minutes.';
+
+  @override
+  String get cnTabHome => 'Home';
+
+  @override
+  String get cnTabCases => 'Cases';
+
+  @override
+  String get cnTabRecords => 'Records';
+
+  @override
+  String get cnTabAccount => 'Account';
+
+  @override
+  String get cnHomeHeadline => 'Make sense of your insurance letter.';
+
+  @override
+  String get cnScanLetter => 'Scan a letter';
+
+  @override
+  String get cnUploadFile => 'Upload PDF / photo';
+
+  @override
+  String get cnTryDemo => 'Try demo';
+
+  @override
+  String get cnHomeSignInLine => 'Saving your cases needs an account.';
+
+  @override
+  String get cnServiceNotConfigured =>
+      'This build is not connected to the server. Only the demo works.';
+
+  @override
+  String get cnContinueCase => 'Continue your case';
+
+  @override
+  String get cnHowItWorks => 'How it works';
+
+  @override
+  String get cnStep1Title => 'Read the letter';
+
+  @override
+  String get cnStep1Body =>
+      'Take a photo. We find the reason, the next step and the date.';
+
+  @override
+  String get cnStep2Title => 'Gather records';
+
+  @override
+  String get cnStep2Body =>
+      'Match what the letter asks for to your own records.';
+
+  @override
+  String get cnStep3Title => 'Create a packet';
+
+  @override
+  String get cnStep3Body =>
+      'Get a one-page doctor summary and a draft review request.';
+
+  @override
+  String get cnRecentCases => 'Other cases';
+
+  @override
+  String get cnNoCasesYet => 'No cases yet';
+
+  @override
+  String get cnNoOtherCases => 'No other cases.';
+
+  @override
+  String get cnSeeAllCases => 'See all cases';
+
+  @override
+  String get cnNoCasesBody => 'Scan an insurance letter to start.';
+
+  @override
+  String get cnCasesSignInTitle => 'Sign in to see your cases';
+
+  @override
+  String get cnCasesSignInBody => 'Or open the demo to see how it works.';
+
+  @override
+  String get cnCaseDeleted => 'Case deleted.';
+
+  @override
+  String get cnCaseUntitled => 'Insurance letter';
+
+  @override
+  String get cnStatusReading => 'Reading letter';
+
+  @override
+  String get cnStatusNeedsReview => 'Needs review';
+
+  @override
+  String get cnStatusGatherRecords => 'Gather records';
+
+  @override
+  String get cnStatusPacketReady => 'Packet ready';
+
+  @override
+  String get cnStatusNeedsAttention => 'Needs attention';
+
+  @override
+  String get cnStatusNotStarted => 'Not started';
+
+  @override
+  String get cnNextWaitReading => 'We are reading the letter.';
+
+  @override
+  String get cnNextTryAgain => 'Reading stopped. Open the case to try again.';
+
+  @override
+  String cnNextFactsToConfirm(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count facts to confirm',
+      one: '1 fact to confirm',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cnNextItemsAttached(int done, int total) {
+    return '$done of $total requested items handled';
+  }
+
+  @override
+  String get cnNextSharePacket => 'Packet ready to share';
+
+  @override
+  String get cnNextCreatePacket => 'Next: create the packet';
+
+  @override
+  String cnDateToCheckShort(String date) {
+    return 'Date to check: $date';
+  }
+
+  @override
+  String cnDatePassedShort(String date) {
+    return 'Date passed: $date';
+  }
+
+  @override
+  String get cnMoreActions => 'More actions';
+
+  @override
+  String get cnDeleteCase => 'Delete case';
+
+  @override
+  String get cnDeleteCaseTitle => 'Delete this case?';
+
+  @override
+  String get cnDeleteCaseBody =>
+      'This removes the letter pages, the facts read from them, linked record summaries and packets. Your medication and symptom records stay.';
+
+  @override
+  String get cnCancel => 'Cancel';
+
+  @override
+  String get cnDelete => 'Delete';
+
+  @override
+  String get cnDeleteFailed =>
+      'Could not delete. Check your connection and try again.';
+
+  @override
+  String get cnKindInitialDenial => 'Drug coverage denial';
+
+  @override
+  String get cnKindInfoRequest => 'Request for more information';
+
+  @override
+  String get cnKindReauth => 'Renewal (reauthorization) notice';
+
+  @override
+  String get cnKindFinalDenial => 'Final appeal decision';
+
+  @override
+  String get cnKindEob => 'Bill or explanation of benefits';
+
+  @override
+  String get cnKindOther => 'Other letter';
+
+  @override
+  String get cnKindUncertain => 'Letter type not clear';
+
+  @override
+  String get cnFieldPatientName => 'Patient name';
+
+  @override
+  String get cnFieldPlanName => 'Plan';
+
+  @override
+  String get cnFieldMemberId => 'Member ID';
+
+  @override
+  String get cnFieldCaseReference => 'Case or reference number';
+
+  @override
+  String get cnFieldMedication => 'Medication (as written)';
+
+  @override
+  String get cnFieldDose => 'Dose (as written)';
+
+  @override
+  String get cnFieldNoticeDate => 'Notice date';
+
+  @override
+  String get cnFieldContact => 'Contact';
+
+  @override
+  String get cnFieldSubmissionRoute => 'Where to send';
+
+  @override
+  String get cnFactEdited => 'Edited by you';
+
+  @override
+  String get cnFactChecked => 'Checked';
+
+  @override
+  String get cnFactNotInLetter => 'Not in letter';
+
+  @override
+  String get cnFactNeedsCheck => 'Needs check';
+
+  @override
+  String get cnFactFromLetter => 'From letter';
+
+  @override
+  String get cnWhoYou => 'You';
+
+  @override
+  String get cnWhoCareTeam => 'Care team';
+
+  @override
+  String get cnWhoPlan => 'Plan';
+
+  @override
+  String get cnWhoUnknown => 'Not sure';
+
+  @override
+  String get cnReqLinked => 'Linked';
+
+  @override
+  String get cnReqAskedCareTeam => 'Asked care team';
+
+  @override
+  String get cnReqNotAvailable => 'Not available';
+
+  @override
+  String get cnReqNotNeeded => 'Not needed';
+
+  @override
+  String get cnReqNeeded => 'Needed';
+
+  @override
+  String get cnReqReset => 'Mark as needed';
+
+  @override
+  String get cnRecMedication => 'Medication history';
+
+  @override
+  String get cnRecSymptoms => 'Symptom log';
+
+  @override
+  String get cnRecLocalContext => 'Local context';
+
+  @override
+  String get cnRecPrn => 'As-needed inhaler';
+
+  @override
+  String get cnDemoTitle => 'Demo';
+
+  @override
+  String get cnDemoReset => 'Reset demo';
+
+  @override
+  String get cnDemoResetDone => 'Demo reset.';
+
+  @override
+  String get cnDemoIntro =>
+      'Three made-up letters with fixed results, so you can see each step. Nothing is uploaded.';
+
+  @override
+  String get cnUpEmpty => 'That file is empty.';
+
+  @override
+  String cnUpTooLarge(int mb) {
+    return 'Each file must be $mb MB or smaller.';
+  }
+
+  @override
+  String cnUpCaseTooLarge(int mb) {
+    return 'All pages together must be $mb MB or smaller.';
+  }
+
+  @override
+  String cnUpTooManyPages(int max) {
+    return 'Up to $max pages per letter.';
+  }
+
+  @override
+  String get cnUpUnsupported =>
+      'Use JPG, PNG or PDF. For HEIC photos, take a new photo here.';
+
+  @override
+  String get cnUpBadFile =>
+      'This file cannot be read. Try another photo or PDF.';
+
+  @override
+  String get cnUpEncrypted =>
+      'This PDF is password-protected. Save an unlocked copy or take photos.';
+
+  @override
+  String get cnCameraUnavailable =>
+      'The camera is not available. You can upload a photo or PDF instead.';
+
+  @override
+  String get cnPhotosUnavailable =>
+      'Photos cannot be opened. Allow photo access in settings, or upload a PDF.';
+
+  @override
+  String get cnFilesUnavailable =>
+      'Files cannot be opened right now. Try again.';
+
+  @override
+  String get cnUploadFailed =>
+      'Upload did not finish. Your pages are still here. Try again.';
+
+  @override
+  String get cnCaptureTitle => 'Add letter pages';
+
+  @override
+  String get cnReplacePagesTitle => 'Replace letter pages';
+
+  @override
+  String get cnOpening => 'Opening…';
+
+  @override
+  String get cnCaptureEmptyTitle => 'Add the pages of your letter';
+
+  @override
+  String get cnCaptureTips =>
+      'Lay the page flat in good light and fit all four corners in the frame. Add every page, in order.';
+
+  @override
+  String get cnTakePhoto => 'Take photo';
+
+  @override
+  String get cnAddPage => 'Add page';
+
+  @override
+  String get cnAddPhoto => 'Photo';
+
+  @override
+  String get cnAddPdf => 'PDF';
+
+  @override
+  String cnPagesSummary(int pages, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages pages',
+      one: '1 page',
+    );
+    return '$_temp0 · $size MB';
+  }
+
+  @override
+  String get cnUploadConsent =>
+      'Uploading sends these pages to the CoverNote server, where an AI service reads them for you. You can delete the case at any time.';
+
+  @override
+  String get cnStageUploading => 'Uploading';
+
+  @override
+  String get cnUploadAndRead => 'Upload and read';
+
+  @override
+  String cnPageN(int n) {
+    return 'Page $n';
+  }
+
+  @override
+  String cnPdfPages(int n, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+    );
+    return 'File $n · PDF, $_temp0';
+  }
+
+  @override
+  String cnPreviewPage(int n) {
+    return 'Preview page $n';
+  }
+
+  @override
+  String get cnRotate => 'Rotate';
+
+  @override
+  String get cnRetake => 'Retake';
+
+  @override
+  String get cnRemovePage => 'Remove';
+
+  @override
+  String get cnReorder => 'Drag to reorder';
+
+  @override
+  String get cnServiceUnavailableBody =>
+      'The letter reader is not set up right now. Your pages are saved; try again later.';
+
+  @override
+  String get cnNeedNewPagesBody =>
+      'Take clearer photos or use fewer pages, then upload again.';
+
+  @override
+  String get cnPagesKept => 'Your pages are saved. Nothing was changed.';
+
+  @override
+  String get cnReplacePages => 'Replace pages';
+
+  @override
+  String get cnTryAgain => 'Try again';
+
+  @override
+  String get cnStageReading => 'Reading';
+
+  @override
+  String get cnStageChecking => 'Checking';
+
+  @override
+  String get cnStageReady => 'Ready';
+
+  @override
+  String get cnReadingTitle => 'Reading your letter';
+
+  @override
+  String get cnReadingBody =>
+      'When it is done, you check what we found against the letter.';
+
+  @override
+  String get cnReadingLeaveOk =>
+      'You can leave this screen. Reading continues and your case is saved.';
+
+  @override
+  String get cnStartReading => 'Start reading';
+
+  @override
+  String get cnStepLetter => 'Letter';
+
+  @override
+  String get cnStepReview => 'Review';
+
+  @override
+  String get cnStepEvidence => 'Evidence';
+
+  @override
+  String get cnStepPacket => 'Packet';
+
+  @override
+  String cnStepOf(int n, int total, String name) {
+    return 'Step $n of $total: $name';
+  }
+
+  @override
+  String get cnSaving => 'Saving…';
+
+  @override
+  String get cnSaved => 'Saved';
+
+  @override
+  String get cnNotSavedRetry => 'Not saved · Retry';
+
+  @override
+  String get cnViewOriginal => 'View original pages';
+
+  @override
+  String cnLetterPagesRead(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages read',
+      one: '1 page read',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cnPagesHardToRead(String list) {
+    return 'Hard to read: page $list. Check these facts carefully or retake the page.';
+  }
+
+  @override
+  String get cnRetakePages => 'Retake pages';
+
+  @override
+  String get cnHardToRead => 'Hard to read';
+
+  @override
+  String get cnContinueToReview => 'Continue to review';
+
+  @override
+  String get cnOriginalPages => 'Original pages';
+
+  @override
+  String get cnNoOriginal => 'No original pages are stored.';
+
+  @override
+  String get cnCheckDetails => 'Check the details';
+
+  @override
+  String get cnCheckDetailsHint =>
+      'Compare each value with your letter. Tap a quote to see where it came from.';
+
+  @override
+  String cnItemsLeftToCheck(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Check $count more items to continue',
+      one: 'Check 1 more item to continue',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cnContinueToEvidence => 'Continue to evidence';
+
+  @override
+  String cnSeePage(int n) {
+    return 'See page $n';
+  }
+
+  @override
+  String get cnWhatLetterIs => 'What this letter is';
+
+  @override
+  String get cnLooksRight => 'Looks right';
+
+  @override
+  String get cnChange => 'Change';
+
+  @override
+  String get cnCardWhyDenied => 'Why it was denied';
+
+  @override
+  String get cnCardWhatTheyNeed => 'What they asked for';
+
+  @override
+  String get cnCardWhatItSays => 'What the letter says';
+
+  @override
+  String get cnNoReasonFound => 'No reason was found in the letter.';
+
+  @override
+  String get cnCardNextStep => 'Next step';
+
+  @override
+  String cnNextDenial(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Ask your care team to request a review. The letter lists $count items to send.',
+      one:
+          'Ask your care team to request a review. The letter lists 1 item to send.',
+      zero:
+          'Ask your care team to request a review. The letter does not list specific items.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cnNextInfoRequest(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Send the $count items the plan asked for by the date below.',
+      one: 'Send the 1 item the plan asked for by the date below.',
+      zero: 'Send the information the plan asked for by the date below.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cnNextReauth =>
+      'Note when the current approval ends and ask your care team to start the renewal.';
+
+  @override
+  String get cnNextFinal =>
+      'This is a final decision. CoverNote does not draft a first review request for it. Ask the plan or your care team about the options the letter lists.';
+
+  @override
+  String get cnNextEob =>
+      'This looks like a bill or benefits statement, not a denial. Check it with the plan\'s member services.';
+
+  @override
+  String get cnNextUncertain =>
+      'First confirm what kind of letter this is, above.';
+
+  @override
+  String cnWhereToSend(String route) {
+    return 'Where to send: $route';
+  }
+
+  @override
+  String cnWhoToCall(String contact) {
+    return 'Contact: $contact';
+  }
+
+  @override
+  String get cnCardDate => 'Date to check';
+
+  @override
+  String cnDateCalculated(String anchor, int days) {
+    return 'Calculated: $anchor + $days calendar days';
+  }
+
+  @override
+  String get cnReceivedDateWord => 'date you received it';
+
+  @override
+  String get cnNoticeDateWord => 'notice date';
+
+  @override
+  String get cnDateEnteredByYou => 'Entered by you';
+
+  @override
+  String get cnDateFromLetter => 'Stated in the letter';
+
+  @override
+  String cnReceivedOn(String date) {
+    return 'You received it on $date';
+  }
+
+  @override
+  String get cnDatePassed =>
+      'This date has passed. Call the plan to ask what you can still do.';
+
+  @override
+  String cnNeedReceivedDate(int days) {
+    return 'The letter gives $days calendar days from the day you received it. When did it arrive?';
+  }
+
+  @override
+  String get cnEnterReceivedDate => 'Enter date received';
+
+  @override
+  String get cnDateConflict =>
+      'The letter gives different dates. Ask the plan which one applies, then pick it.';
+
+  @override
+  String cnUseThisDate(String date) {
+    return 'Use $date';
+  }
+
+  @override
+  String get cnDateUnclear =>
+      'The wording is unclear or counts business days, so CoverNote does not calculate it. Ask the plan for the exact date.';
+
+  @override
+  String get cnNoDeadline => 'No review deadline was found in the letter.';
+
+  @override
+  String cnReplyBy(String date) {
+    return 'Reply to the information request by $date (from the letter)';
+  }
+
+  @override
+  String get cnEnterDatePlanGave => 'Enter a date';
+
+  @override
+  String get cnUseLetterDate => 'Use the letter\'s date';
+
+  @override
+  String get cnLeaveUnknown => 'Leave as unknown for now';
+
+  @override
+  String get cnDateUnknownChecked => 'Unknown, noted';
+
+  @override
+  String get cnTypeAsWritten => 'Type it exactly as the letter shows.';
+
+  @override
+  String get cnCheckThisValue =>
+      'This value looks unusual. Compare it with the letter.';
+
+  @override
+  String get cnDone => 'Done';
+
+  @override
+  String get cnEdit => 'Edit';
+
+  @override
+  String get cnAdd => 'Add';
+
+  @override
+  String get cnNoRecordsToLink =>
+      'No records from the last 30 days to link. You can still mark who has this item.';
+
+  @override
+  String cnLinkTitle(String label) {
+    return 'Link a record to: $label';
+  }
+
+  @override
+  String get cnLinkNote =>
+      'Your own records support the request. They do not replace clinic notes or test results.';
+
+  @override
+  String cnMedLine(int taken, int notTaken, int unknown, int scheduled) {
+    return '$taken taken / $notTaken not taken / $unknown unknown of $scheduled scheduled doses';
+  }
+
+  @override
+  String cnPrnLine(int uses, int puffs) {
+    return 'As-needed: $uses uses, $puffs puffs';
+  }
+
+  @override
+  String get cnNoEntries => 'No entries';
+
+  @override
+  String cnSymptomLine(int days, int night, int entries, int total) {
+    return 'Symptoms on $days days, night waking on $night days ($entries of $total days logged)';
+  }
+
+  @override
+  String cnPmLine(int days, int total, int high) {
+    return 'PM2.5 data for $days of $total days; $high days above AQI 100';
+  }
+
+  @override
+  String cnReportsLine(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count self-reports',
+      one: '1 self-report',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cnSyntheticData => 'Synthetic data';
+
+  @override
+  String get cnLetterAsksFor => 'What the letter asks for';
+
+  @override
+  String get cnNoItemsListed =>
+      'The letter does not list specific items. You can add your own.';
+
+  @override
+  String get cnAddItemLabel => 'Add an item to track';
+
+  @override
+  String cnYourRecords(String from, String to) {
+    return 'Your records ($from – $to)';
+  }
+
+  @override
+  String get cnLocalContextNote =>
+      'Optional context. Not a measurement at your home and not a cause of symptoms.';
+
+  @override
+  String get cnContinueToPacket => 'Continue to packet';
+
+  @override
+  String get cnAddedByYou => 'Added by you';
+
+  @override
+  String get cnFromLetter => 'From letter';
+
+  @override
+  String cnWhoHasIt(String who) {
+    return 'Who has it: $who';
+  }
+
+  @override
+  String cnLinkedTo(String record) {
+    return 'Linked: $record';
+  }
+
+  @override
+  String get cnSeeInLetter => 'See in letter';
+
+  @override
+  String get cnLinkRecords => 'Link my records';
+
+  @override
+  String get cnOtherStatus => 'Other status';
+
+  @override
+  String get cnInPacket => 'In packet';
+
+  @override
+  String get cnRemoveFromPacket => 'Remove from packet';
+
+  @override
+  String get cnAddToPacket => 'Add to packet';
+
+  @override
+  String get cnErrNotSavedYet =>
+      'Your latest changes are not saved yet. Check your connection and try again.';
+
+  @override
+  String get cnPacketChangedMeanwhile =>
+      'Facts or records changed while the packet was being made. Generate it again.';
+
+  @override
+  String get cnPacketFailed => 'The packet could not be made. Try again.';
+
+  @override
+  String get cnBeforeSharingTitle => 'Before you share';
+
+  @override
+  String get cnBeforeSharingBody =>
+      'This file has your name and health details. Share it only with your care team or your plan. Sharing does not submit anything for you.';
+
+  @override
+  String get cnShare => 'Share';
+
+  @override
+  String get cnMethodFax => 'Fax';
+
+  @override
+  String get cnMethodMail => 'Mail';
+
+  @override
+  String get cnMethodPortal => 'Online portal';
+
+  @override
+  String get cnMethodInPerson => 'In person';
+
+  @override
+  String get cnMethodCareTeam => 'Care team sent it';
+
+  @override
+  String get cnMethodOther => 'Other';
+
+  @override
+  String get cnPacketNoDraftFinal =>
+      'For a final decision, the packet has the doctor summary only. No first-level review draft is made.';
+
+  @override
+  String get cnPacketNoDraftEob =>
+      'For a bill or benefits statement, the packet has the doctor summary only.';
+
+  @override
+  String get cnPacketNoDraftReauth =>
+      'For a renewal notice, the packet has the doctor summary only, to help your care team renew.';
+
+  @override
+  String get cnPacketNoDraftOther =>
+      'Unless the letter is a denial or an information request, the packet has the doctor summary only.';
+
+  @override
+  String get cnPacketContains => 'This packet will include';
+
+  @override
+  String get cnPartSummary => 'Doctor summary (1 page)';
+
+  @override
+  String get cnPartDraft =>
+      'Review request draft (for your care team to complete)';
+
+  @override
+  String get cnPartLetterText => 'Appendix: the letter text';
+
+  @override
+  String cnPacketEvidenceCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count record summaries added',
+      one: '1 record summary added',
+      zero: 'No record summaries added',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cnIncludeLetterText => 'Add the letter text as an appendix';
+
+  @override
+  String get cnPacketStale =>
+      'Facts or records changed since the last packet. Generate it again to update.';
+
+  @override
+  String get cnGenerating => 'Generating…';
+
+  @override
+  String get cnGeneratePacket => 'Generate review packet';
+
+  @override
+  String get cnSaveOrPrint => 'Save or print';
+
+  @override
+  String get cnISentIt => 'I sent it';
+
+  @override
+  String cnSharedOn(String date) {
+    return 'Shared on $date';
+  }
+
+  @override
+  String cnUserReportedSent(String date, String method) {
+    return 'You reported sending it on $date ($method)';
+  }
+
+  @override
+  String get cnTabDoctorSummary => 'Doctor summary';
+
+  @override
+  String get cnTabReviewDraft => 'Review request draft';
+
+  @override
+  String get cnSentExplain =>
+      'Record when and how it was sent. CoverNote does not send it or track a decision.';
+
+  @override
+  String get cnSave => 'Save';
+
+  @override
+  String get cnCtxPm25 => 'PM2.5 (AQI)';
+
+  @override
+  String get cnCtxNo2 => 'NO₂';
+
+  @override
+  String get cnCtxOutdoorHumidity => 'Outdoor humidity';
+
+  @override
+  String cnObservedOn(String date) {
+    return 'Observed $date';
+  }
+
+  @override
+  String get cnCtxIntro =>
+      'Air readings from a named source and things you noticed, kept separate. Add them to a case only if they help explain your records.';
+
+  @override
+  String get cnCtxReadings => 'Air readings';
+
+  @override
+  String get cnCtxReadingsNote =>
+      'Regional readings for the day they were observed. They do not measure traffic exhaust at your home.';
+
+  @override
+  String get cnCtxAddReading => 'Add a reading';
+
+  @override
+  String get cnCtxReports => 'What you noticed';
+
+  @override
+  String get cnCtxReportsNote => 'Your own reports. They are not measurements.';
+
+  @override
+  String get cnCtxAddReport => 'Add what you noticed';
+
+  @override
+  String get cnReportExhaust => 'Strong exhaust nearby';
+
+  @override
+  String get cnReportWater => 'Water intrusion at home';
+
+  @override
+  String get cnReportDamp => 'Damp or musty indoor area';
+
+  @override
+  String cnOnDate(String date) {
+    return 'Date: $date';
+  }
+
+  @override
+  String get cnNoteOptional => 'Note (optional)';
+
+  @override
+  String get cnCtxWhat => 'Reading';
+
+  @override
+  String get cnCtxHumidityNote =>
+      'Outdoor humidity is weather data. It does not show dampness or mold inside your home.';
+
+  @override
+  String get cnCtxValue => 'Value';
+
+  @override
+  String get cnCtxValueInvalid => 'Enter a valid number.';
+
+  @override
+  String get cnCtxSource => 'Source';
+
+  @override
+  String get cnCtxSourceHelp =>
+      'Where the number came from, for example AirNow or a local monitor';
+
+  @override
+  String get cnCtxSourceRequired => 'Add the source.';
+
+  @override
+  String get cnCtxPlace => 'Place (ZIP or town, optional)';
+
+  @override
+  String get cnRecordsSignInBody =>
+      'Sign in to keep medication, symptom and local context records.';
+
+  @override
+  String get cnRecordsYourRecords => 'Your records';
+
+  @override
+  String get cnRecMedicationSub => 'Medicines and doses you take';
+
+  @override
+  String get cnRecDailyLog => 'Daily log';
+
+  @override
+  String get cnRecDailyLogSub => 'Symptoms and inhaler use';
+
+  @override
+  String get cnRecLocalContextSub => 'Air readings and what you noticed';
+
+  @override
+  String get cnHelp => 'Help';
+
+  @override
+  String get cnUrgentHelp => 'Urgent help';
+
+  @override
+  String get cnUrgentHelpSub =>
+      'Steps for a breathing emergency and calling 911';
+
+  @override
+  String cnLast30Days(String from, String to) {
+    return 'Last 30 days ($from – $to)';
+  }
+
+  @override
+  String get cnNoSchedule => 'No regular schedule set';
+
+  @override
+  String get cnRecordsUnknownNote =>
+      'Days without an entry stay unknown. They are not counted as missed.';
+
+  @override
+  String get cnDeleteAccountTitle => 'Delete your account?';
+
+  @override
+  String get cnDeleteAccountBody =>
+      'This permanently deletes your account, cases, uploaded letters, packets and records. It cannot be undone.';
+
+  @override
+  String get cnTypeDelete => 'Type DELETE to confirm';
+
+  @override
+  String get cnDeleteAccount => 'Delete account';
+
+  @override
+  String get cnAccountDeleted => 'Your account was deleted.';
+
+  @override
+  String get cnDeleteAccountFailed =>
+      'The account could not be deleted. Try again later.';
+
+  @override
+  String get cnAccountSignedOut => 'You are not signed in.';
+
+  @override
+  String get cnLanguage => 'Language';
+
+  @override
+  String get cnServiceStatus => 'Letter reading service';
+
+  @override
+  String get cnServiceReady => 'Available';
+
+  @override
+  String get cnServiceUnavailableShort => 'Not available right now';
+
+  @override
+  String get cnChecking => 'Checking…';
+
+  @override
+  String get cnServiceUnknown => 'Not checked';
+
+  @override
+  String get cnCheck => 'Check';
+
+  @override
+  String get cnAbout => 'About';
+
+  @override
+  String get cnAboutBody =>
+      'CoverNote helps you read insurance letters about medicines and prepare papers for your care team. It does not submit anything to your plan, does not decide coverage, and is not medical advice.';
+
+  @override
+  String get cnDangerZone => 'Delete account';
+
+  @override
+  String get cnErrServiceUnavailable =>
+      'The letter reader is not available right now.';
+
+  @override
+  String get cnErrBusy => 'The service is busy. Wait a minute and try again.';
+
+  @override
+  String get cnErrSlow => 'Reading took too long. Try again.';
+
+  @override
+  String get cnErrUnreadable =>
+      'The pages could not be read. Retake them in better light.';
+
+  @override
+  String get cnErrTooManyPages => 'Too many pages. Upload up to 10.';
+
+  @override
+  String get cnErrTooLarge =>
+      'The files are too large. Use fewer or smaller pages.';
+
+  @override
+  String get cnErrStale =>
+      'This case changed on another device. Showing the latest version.';
+
+  @override
+  String get cnErrCaseGone => 'This case no longer exists.';
+
+  @override
+  String get cnErrAttempts =>
+      'Reading failed several times. Replace the pages or try again later.';
+
+  @override
+  String get cnErrDemoUpload =>
+      'The demo cannot read files. Sign in to scan your own letter.';
+
+  @override
+  String cnErrGeneric(String code) {
+    return 'Something went wrong ($code). Try again.';
+  }
 }
