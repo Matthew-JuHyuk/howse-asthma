@@ -2,11 +2,15 @@
 //
 //   node tool/analyze_probe.mjs health
 //   node tool/analyze_probe.mjs run <file> [<file> ...] [--expect <expected.json>]
+//   node tool/analyze_probe.mjs run <file>... --expect test/fixtures/letters/expected.json --fixture S8-01 [--obscured]
 //
 // "run" signs in as demo account A, creates a new (non-demo) case, uploads the
 // given files (PDF/JPEG/PNG), starts analysis and polls the job. It prints the
 // timing, token use and the extracted fields. With --expect, the result is
 // compared to an answer file kept outside the app; the server never sees it.
+// --fixture picks one entry from a fixture list (array with fixture_id).
+// --obscured means the deadline area was covered or blurred in the photo, so
+// the review deadline must come back empty rather than the printed value.
 // Never prints tokens, keys or passwords.
 
 import { existsSync, readFileSync } from 'node:fs';
@@ -65,6 +69,7 @@ async function run(files, expectPath) {
   if (cr.status >= 300) throw new Error(`case create failed: HTTP ${cr.status}`);
   const caseId = cr.json[0].id;
   let i = 0;
+  const uploaded = [];
   for (const f of files) {
     const mime = MIME[extname(f).toLowerCase()];
     if (!mime) throw new Error(`unsupported file type: ${basename(f)}`);
@@ -75,6 +80,7 @@ async function run(files, expectPath) {
       token, body: bytes, raw: true, headers: { 'Content-Type': mime, 'x-upsert': 'true' },
     });
     if (up.status >= 300) throw new Error(`upload failed: HTTP ${up.status}`);
+    uploaded.push(path);
     const doc = await http('POST', '/rest/v1/case_documents', {
       token, headers: { Prefer: 'return=minimal' },
       body: { case_id: caseId, owner_id: uid, revision: i + 1, set_revision: 1, file_index: i, object_path: path, mime, bytes: bytes.length, sha256: sha, upload_status: 'uploaded' },
@@ -85,7 +91,12 @@ async function run(files, expectPath) {
   const tUp = Date.now();
   const st = await http('POST', '/functions/v1/analyze-letter', { token, body: { action: 'start', case_id: caseId, set_revision: 1 } });
   console.log(JSON.stringify({ start_status: st.status, start: st.json?.error ?? st.json?.job?.status ?? null }));
-  if (st.status >= 300) return;
+  if (st.status >= 300) {
+    await http('DELETE', '/storage/v1/object/appeal-documents', { token, body: { prefixes: uploaded } });
+    const del = await http('DELETE', `/rest/v1/appeal_cases?id=eq.${caseId}`, { token });
+    console.log(JSON.stringify({ cleanup_case_status: del.status }));
+    return;
+  }
   let job = st.json.job;
   while (job.status === 'queued' || job.status === 'running') {
     await new Promise((r) => setTimeout(r, 2500));
@@ -116,7 +127,43 @@ async function run(files, expectPath) {
     warnings: f?.warnings ?? null,
   };
   console.log(JSON.stringify(summary, null, 2));
-  if (expectPath && f) compare(f, JSON.parse(readFileSync(expectPath, 'utf8')));
+  if (expectPath && f) {
+    const expect = JSON.parse(readFileSync(expectPath, 'utf8'));
+    if (Array.isArray(expect)) {
+      const entry = expect.find((e) => e.fixture_id === fixtureId);
+      if (!entry) throw new Error(`fixture ${fixtureId ?? '(none)'} not found in ${basename(expectPath)}`);
+      compareFixture(f, entry, obscured);
+    } else {
+      compare(f, expect);
+    }
+  }
+}
+
+function compareFixture(f, e, obscured) {
+  const rows = [];
+  const field = (k) => f.fields[k]?.value ?? null;
+  const exact = (item, expected, got) => rows.push({ item, expected, got, ok: expected === null ? got === null : got === expected });
+  const loose = (item, expected, got) => rows.push({ item, expected, got, ok: expected === null ? got === null : norm(got) === norm(expected) });
+  loose('patient_name', e.patient_name, field('patient_name'));
+  exact('case_reference', e.case_reference, field('case_reference'));
+  exact('medication (verbatim)', e.medication_raw, field('medication'));
+  exact('dose (verbatim)', e.dose_raw, field('dose'));
+  exact('document_kind', e.document_type, f.document_kind.value);
+  const review = f.deadlines.filter((d) => d.purpose === 'review_request' && d.kind === 'explicit_date' && d.date);
+  const wantDate = obscured ? null : e.appeal_deadline;
+  if (wantDate) {
+    const hit = review.find((d) => d.date === wantDate);
+    rows.push({ item: 'review deadline', expected: wantDate, got: review.map((d) => d.date), ok: !!hit && hit.status === 'extracted' && !f.deadline_state.conflict });
+  } else {
+    const asserted = review.length === 1 && !f.deadline_state.conflict && review[0].status === 'extracted' ? review[0].date : null;
+    rows.push({ item: 'review deadline not asserted', expected: null, got: asserted, ok: asserted === null });
+  }
+  for (const label of e.requested_documents ?? []) {
+    const ok = f.requested_items.some((r) => norm(r.label).includes(norm(label)) || norm(r.quote).includes(norm(label)));
+    rows.push({ item: `requested ~ ${label}`, expected: true, got: ok, ok });
+  }
+  for (const r of rows) console.log(JSON.stringify(r));
+  console.log(JSON.stringify({ fixture: e.fixture_id, note: e.notes, compared: rows.length, mismatches: rows.filter((r) => !r.ok).length }));
 }
 
 function norm(s) { return String(s ?? '').toLowerCase().replace(/\s+/g, ' ').trim(); }
@@ -145,16 +192,20 @@ function compare(f, expect) {
 }
 
 const args = process.argv.slice(2);
+let fixtureId = null;
+let obscured = false;
 try {
   if (args[0] === 'health') {
     const { token } = await signIn();
     const r = await http('POST', '/functions/v1/analyze-letter', { token, body: { action: 'health' } });
     console.log(JSON.stringify({ status: r.status, ...r.json }));
   } else if (args[0] === 'run') {
-    const ei = args.indexOf('--expect');
-    const expectPath = ei >= 0 ? args[ei + 1] : null;
+    const valueOf = (flag) => { const i = args.indexOf(flag); return i >= 0 ? args[i + 1] : null; };
+    const expectPath = valueOf('--expect');
+    fixtureId = valueOf('--fixture');
+    obscured = args.includes('--obscured');
     const rest = args.slice(1);
-    const files = rest.filter((a, idx) => a !== '--expect' && rest[idx - 1] !== '--expect');
+    const files = rest.filter((a, idx) => !a.startsWith('--') && !['--expect', '--fixture'].includes(rest[idx - 1]));
     await run(files, expectPath);
   } else {
     console.log('usage: node tool/analyze_probe.mjs health | run <file>... [--expect expected.json]');

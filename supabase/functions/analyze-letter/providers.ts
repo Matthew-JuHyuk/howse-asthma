@@ -1,7 +1,7 @@
 // Server-side model adapters. Keys come from Edge secrets only.
 //   AI_PROVIDER = gemini | openai
 //   GEMINI_API_KEY or OPENAI_API_KEY
-//   AI_MODEL (optional for gemini; required for openai)
+//   AI_MODEL (required; a model the account can use with file input and JSON schema output)
 // Requests set store=false. No tools are declared, so the model cannot browse
 // or call anything named in a document.
 
@@ -34,16 +34,13 @@ export type ProviderConfig = {
   key: string;
 };
 
-const GEMINI_DEFAULT_MODEL = "gemini-3.8-flash";
-
 export function readProviderConfig(): ProviderConfig | { missing: string } {
   const provider = (Deno.env.get("AI_PROVIDER") ?? "").trim().toLowerCase();
   if (provider !== "gemini" && provider !== "openai") return { missing: "AI_PROVIDER" };
   const keyName = provider === "gemini" ? "GEMINI_API_KEY" : "OPENAI_API_KEY";
   const key = (Deno.env.get(keyName) ?? "").trim();
   if (!key) return { missing: keyName };
-  let model = (Deno.env.get("AI_MODEL") ?? "").trim();
-  if (!model && provider === "gemini") model = GEMINI_DEFAULT_MODEL;
+  const model = (Deno.env.get("AI_MODEL") ?? "").trim();
   if (!model) return { missing: "AI_MODEL" };
   return { provider, model, key };
 }

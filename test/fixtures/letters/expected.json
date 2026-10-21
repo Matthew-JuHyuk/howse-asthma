@@ -1,0 +1,81 @@
+[
+  {
+    "fixture_id": "S8-01",
+    "patient_name": "Alex Sample",
+    "case_reference": "TEST-1001",
+    "medication_raw": "DemoController A 100 mcg",
+    "dose_raw": "2 puffs twice daily",
+    "document_type": "initial_drug_denial",
+    "appeal_deadline": "2026-11-14",
+    "requested_documents": [
+      "Medication history",
+      "Recent visit notes"
+    ],
+    "notes": "explicit deadline requires user confirmation"
+  },
+  {
+    "fixture_id": "S8-02",
+    "patient_name": "Jordan Example",
+    "case_reference": "TEST-1002",
+    "medication_raw": "DemoController B 200 mcg",
+    "dose_raw": "1 puff twice daily",
+    "document_type": "initial_drug_denial",
+    "appeal_deadline": null,
+    "requested_documents": [
+      "Prior medication history",
+      "Reason preferred medication could not be used"
+    ],
+    "notes": "received_date missing; date remains null; when user supplies 2026-10-20, 30 calendar days later is 2026-11-19"
+  },
+  {
+    "fixture_id": "S8-03",
+    "patient_name": "Sam Fiction",
+    "case_reference": "TEST-1003",
+    "medication_raw": "DemoController C 80 mcg",
+    "dose_raw": "2 puffs daily",
+    "document_type": "initial_drug_denial",
+    "appeal_deadline": null,
+    "requested_documents": [
+      "Recent visit notes"
+    ],
+    "notes": "ambiguous: 2026-11-16 and 2026-12-01; process both pages"
+  },
+  {
+    "fixture_id": "S8-04",
+    "patient_name": "Taylor Example",
+    "case_reference": "TEST-1004",
+    "medication_raw": "DemoController D 120 mcg",
+    "dose_raw": "1 puff daily",
+    "document_type": "additional_information_request",
+    "appeal_deadline": null,
+    "requested_documents": [
+      "Recent visit notes",
+      "Medication history"
+    ],
+    "notes": "response deadline 2026-11-02; not an appeal deadline; request pending"
+  },
+  {
+    "fixture_id": "S8-05",
+    "patient_name": "Casey Sample",
+    "case_reference": "TEST-1005",
+    "medication_raw": null,
+    "dose_raw": null,
+    "document_type": "eob_or_bill",
+    "appeal_deadline": null,
+    "requested_documents": [],
+    "notes": "no denial draft; not a bill"
+  },
+  {
+    "fixture_id": "S8-06",
+    "patient_name": "Morgan Example",
+    "case_reference": "TEST-1006",
+    "medication_raw": "DemoController F 90 mcg",
+    "dose_raw": "1 puff twice daily",
+    "document_type": "initial_drug_denial",
+    "appeal_deadline": "2026-11-18",
+    "requested_documents": [
+      "Recent visit notes"
+    ],
+    "notes": "cover lower date section / blur photograph; unreadable value must be null, not memorized"
+  }
+]

@@ -517,6 +517,28 @@ Storage bucket `appeal-documents` is private, 20 MB per object. The first path s
 
 ---
 
+## 2.z2 CoverNote letter analysis and packet (2026-10-21)
+
+Migration: [`supabase/migrations/20261021120000_s8_covernote_mvp1.sql`](../supabase/migrations/20261021120000_s8_covernote_mvp1.sql).
+Applied to the remote project (`supabase migration list` shows local = remote). Additive only.
+
+| Table | Change | RLS |
+| --- | --- | --- |
+| `appeal_cases` | + `document_kind` (CHECK: `initial_drug_denial` · `additional_information_request` · `reauthorization_notice` · `final_appeal_denial` · `eob_or_bill` · `other` · `uncertain`), `current_evidence_revision`, `reviewed_fact_revision`, `user_reported_submitted_on`, `user_reported_submit_method` (≤ 80 chars), `last_exported_at`. Sharing sets `last_exported_at` only; the submitted fields are written only when the user enters them | Unchanged (owner) |
+| `case_documents` | + `set_revision`, `file_index`. MIME CHECK: JPEG, PNG, PDF, plain text. A new upload set gets a new `set_revision`; earlier sets are kept | Unchanged |
+| `document_pages` | + `case_id`, `set_revision`, `page_number`, `legibility` (`clear` · `partly_unreadable` · `unreadable`) | Unchanged |
+| `processing_jobs` | + `provider`, `model`, `prompt_version`, `provider_request_ids`, `duration_ms`, `input_tokens`, `output_tokens`, `result_fact_revision`, `started_at`, `updated_at`. Written by `analyze-letter` with the service role | Owner **SELECT** only, and only while the case is not deleted |
+| `case_requirements` (new) | Items the notice asks for: `label`, `origin` (`extracted` · `user_added`), `source_page`, `source_quote`, `status` (`needed` · `linked` · `asked_care_team` · `not_available` · `not_applicable`), `responsible` (`patient` · `care_team` · `insurer` · `unknown`), `linked_evidence_id`. A status is a checklist state, not a coverage decision | Owner, parent case must be live and owned. Owner trigger `appeal_child_owner_matches` |
+| `case_evidence` | Policy tightened: the parent case must be live and owned | Owner |
+| `generated_artifacts` | + `bytes`, `sha256`, `includes` (JSONB list of included parts), `is_sample`. Policy tightened as above | Owner |
+| `local_context_entries` (new) | Per-day context: `kind` (`pm25` · `no2` · `outdoor_humidity` · `user_report`), `report_code` (`strong_exhaust` · `water_intrusion` · `damp_musty`), value or AQI, `unit`, `value_kind` (`observation` · `forecast` · `model` · `user_report`), `source_name`, `place_label`, `observed_at`, `fetched_at`, `is_synthetic`. A shape CHECK keeps patient reports and measured values apart: a report has no number, and a number needs a source | Own CRUD |
+
+Storage: `appeal-documents` allowed MIME types set to JPEG, PNG, PDF and plain text.
+
+The packet's local context counts only days with an observation inside the record window. Forecast rows are excluded. Outdoor humidity is labelled as outdoor and is not used to infer indoor conditions.
+
+---
+
 ## 3. RLS policy outline
 
 > Implemented in [`supabase/migrations/20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql).  

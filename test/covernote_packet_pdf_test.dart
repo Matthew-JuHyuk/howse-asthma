@@ -209,6 +209,84 @@ void main() {
     expect(text, isNot(contains('2026')));
   });
 
+  test('a case with no records prints no counts and no local context', () async {
+    final store = DemoCaseStore();
+    final input = await demoInput(
+      store,
+      'demo-missing-info',
+      linkEvidence: false,
+    );
+    expect(input.evidence, isEmpty);
+    expect(recordRows(input), isNull);
+
+    final res = await buildPacketPdf(input, fonts);
+    expect(res.includes, ['clinician_summary', 'review_request_draft']);
+    expect(res.pageCount, 1 + res.draftPages);
+  });
+
+  test('records table shows the denominator, PRN apart, unknown not missed', () async {
+    final store = DemoCaseStore();
+    final rows = recordRows(await demoInput(store, 'demo-missing-info'))!;
+    final byLabel = {for (final r in rows.rows.skip(1)) r[0]: r[1]};
+    expect(
+      byLabel['Scheduled doses'],
+      '51 taken / 3 not taken / 6 unknown of 60',
+    );
+    expect(byLabel['As-needed use'], '8 uses / 16 puffs');
+    expect(
+      rows.notes,
+      contains('Unknown = no answer recorded; not counted as missed.'),
+    );
+  });
+
+  test('editing a fact makes the packet stale; a late build stays stale', () async {
+    final store = DemoCaseStore();
+    const id = 'demo-missing-info';
+    final input = await demoInput(store, id);
+    final before = await store.load(id);
+    final built = await buildPacketPdf(input, fonts);
+    final first = await store.savePacket(
+      id,
+      built.bytes,
+      factRevision: before.row.factRevision,
+      evidenceRevision: before.row.evidenceRevision,
+      includes: built.includes,
+      isSample: true,
+    );
+    expect(first.status, 'ready');
+
+    final f = before.facts!;
+    await store.saveFacts(
+      id,
+      f.withField('dose', f.field('dose').edited('2 puffs once daily')),
+      before.row.factRevision,
+    );
+    final after = await store.load(id);
+    expect(after.artifacts.single.status, 'stale');
+
+    final late = await store.savePacket(
+      id,
+      built.bytes,
+      factRevision: before.row.factRevision,
+      evidenceRevision: before.row.evidenceRevision,
+      includes: built.includes,
+      isSample: true,
+    );
+    expect(late.status, 'stale');
+
+    final fresh = await store.savePacket(
+      id,
+      built.bytes,
+      factRevision: after.row.factRevision,
+      evidenceRevision: after.row.evidenceRevision,
+      includes: built.includes,
+      isSample: true,
+    );
+    expect(fresh.status, 'ready');
+    final now = await store.load(id);
+    expect(now.artifacts.where((a) => a.status == 'ready'), hasLength(1));
+  });
+
   test('file name carries the date only', () {
     expect(
       packetFileName(DateTime(2026, 10, 20)),

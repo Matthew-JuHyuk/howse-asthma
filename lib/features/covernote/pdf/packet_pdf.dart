@@ -588,6 +588,21 @@ pw.Widget _requestedTable(PacketInput input, _Compaction c) {
 }
 
 List<pw.Widget> _recordsTable(PacketInput input) {
+  final r = recordRows(input);
+  if (r == null) {
+    return [pw.Text('No patient records attached to this case.')];
+  }
+  return [
+    _table(r.rows, widths: [1.3, 2.9, 2.2]),
+    pw.Text(r.notes.join(' '), style: const pw.TextStyle(color: _grey)),
+  ];
+}
+
+/// Section D rows (header first) and the notes line, or null when the case
+/// has no medication or symptom record attached.
+({List<List<String>> rows, List<String> notes})? recordRows(
+  PacketInput input,
+) {
   final med = input.evidence
       .where((e) => e.recordType == 'medication_summary')
       .map((e) => MedicationSnapshot.fromJson(e.snapshot))
@@ -598,9 +613,7 @@ List<pw.Widget> _recordsTable(PacketInput input) {
       .map((e) => SymptomSnapshot.fromJson(e.snapshot))
       .whereType<SymptomSnapshot>()
       .firstOrNull;
-  if (med == null && sym == null) {
-    return [pw.Text('No patient records attached to this case.')];
-  }
+  if (med == null && sym == null) return null;
   final rows = <List<String>>[
     ['Record', 'Count', 'Note'],
   ];
@@ -633,10 +646,7 @@ List<pw.Widget> _recordsTable(PacketInput input) {
       'Entries on ${sym.daysWithEntries} of ${sym.range.dayCount} days',
     ]);
   }
-  return [
-    _table(rows, widths: [1.3, 2.9, 2.2]),
-    pw.Text(notes.join(' '), style: const pw.TextStyle(color: _grey)),
-  ];
+  return (rows: rows, notes: notes);
 }
 
 LocalContextSnapshot? _contextSnapshot(PacketInput input) {

@@ -13,6 +13,11 @@ $secrets = [ordered]@{
     RESEND_FROM_EMAIL        = "YOUR_RESEND_FROM_EMAIL"
     RESEND_REPLY_TO          = "YOUR_RESEND_REPLY_TO"
     EFAX_ENABLED             = "false"
+    # Letter analysis (analyze-letter). Set only the key for the chosen provider.
+    # AI_PROVIDER            = "gemini"            # or "openai"
+    # GEMINI_API_KEY         = "YOUR_GEMINI_API_KEY"
+    # OPENAI_API_KEY         = "YOUR_OPENAI_API_KEY"
+    # AI_MODEL               = "MODEL_ID_FROM_PROVIDER_DOCS"
     # Firebase service account JSON as a single-line string (WBS 4.6a FCM).
     # Prefer: supabase secrets set FIREBASE_SERVICE_ACCOUNT_JSON --env-file ...
     # Do not commit the real JSON.
