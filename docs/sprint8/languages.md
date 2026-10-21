@@ -65,6 +65,20 @@ They have **not** been read by native speakers. Before wide release, ask a
 native reader of each language to check, in this order: the reason explanations
 (`cnReason*`), the deadline and sharing wording, and the insurance terms.
 
+### Open questions the translators flagged
+
+These are word choices, not errors the checks can find. A native reader should settle them.
+
+* **Inhaler "puffs".** Spanish uses "inhalaciones", Portuguese "jatos", Haitian Creole "pouf". Portuguese also uses "bombinha" for the inhaler.
+* **Insurance terms with the English in brackets** (`cnKindInitialDenial`, `cnKindReauth`, `cnKindFinalDenial`, `cnReason*`). Check the local term and whether the extra English helps or clutters.
+* **`cnKindEob`.** Chinese, Gujarati and Arabic show "EOB" rather than the full English name, because the full name failed the script check.
+* **"Care team", "packet" and "case".** Spanish "equipo de atención", Gujarati "સારવાર ટીમ", Arabic "حزمة" and "حالة". Check they are clear to people with limited literacy.
+* **Haitian Creole.** "Medical necessity" and the medical words for asthma and inhaler are the translator's best guess.
+* **Arabic.** `s6ReminderChannel` is a literal rendering of "Not a 30-minute alert" and may be unclear.
+* **Chinese.** "Appeal" appears as 申诉 or 申訴 in some strings and as 复核 or 覆核 (review) in others. Pick one.
+* **`cnTypeDelete`.** "DELETE" stays in English in every language because the app compares the typed word.
+* **"Howse Asthma"** stays in English in the biometric prompt and one preview string; confirm that is wanted.
+
 ## Database
 
 `profiles.language_code` is `VARCHAR(10)` with a CHECK. Migration
