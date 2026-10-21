@@ -2,6 +2,7 @@
 //
 //   node tool/demo_accounts.mjs create          # sign up A and B if missing (idempotent)
 //   node tool/demo_accounts.mjs seed A          # reset A's demo data, then seed 30 days + 3 cases
+//   node tool/demo_accounts.mjs seed A --today=2026-10-20   # fix the window end
 //   node tool/demo_accounts.mjs reset A         # remove A's demo data only
 //   node tool/demo_accounts.mjs isolation       # B tries to read/change/download A's case
 //   node tool/demo_accounts.mjs status A        # counts only
@@ -18,9 +19,22 @@ import { randomBytes } from 'node:crypto';
 
 import { validateExtraction } from '../supabase/functions/analyze-letter/validate.ts';
 
-const DEMO_TODAY = '2026-10-20';
-const RANGE_START = '2026-09-20';
+// The app summarizes the 30 full days before the phone's local today, so
+// records are seeded relative to this computer's local date (run it in the
+// phone's time zone) unless --today=YYYY-MM-DD is given.
+function localToday() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+const todayArg = process.argv.find((a) => a.startsWith('--today='))?.slice('--today='.length);
+if (todayArg && !/^\d{4}-\d{2}-\d{2}$/.test(todayArg)) {
+  console.error('--today must be YYYY-MM-DD');
+  process.exit(2);
+}
+const DEMO_TODAY = todayArg ?? localToday();
 const RANGE_DAYS = 30;
+const RANGE_START = addDays(DEMO_TODAY, -RANGE_DAYS);
 const DEMO_TZ_OFFSET_MIN = -240; // America/New_York (EDT) for the whole demo window
 
 function loadEnv(path) {
@@ -586,7 +600,7 @@ async function isolation(cfg) {
   if (exposed.length) process.exitCode = 1;
 }
 
-const [cmd, who] = process.argv.slice(2);
+const [cmd, who] = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 const cfg = demoConfig();
 const pick = (w) => {
   const k = (w || '').toUpperCase();
