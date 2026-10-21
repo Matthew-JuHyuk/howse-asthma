@@ -105,8 +105,3 @@ bool _pdfLooksEncrypted(Uint8List bytes) {
   final text = String.fromCharCodes(slice);
   return text.contains('/Encrypt');
 }
-
-/// Document text is data. Nothing in it becomes a network call or a command.
-List<String> externalActionsFromDocument(String documentText) {
-  return const [];
-}

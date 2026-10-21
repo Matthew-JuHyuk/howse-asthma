@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:printing/printing.dart';
 
 import '../../../l10n/app_localizations.dart';
-import '../../appeal/domain/upload_guard.dart';
+import '../domain/upload_guard.dart';
 import '../data/case_store.dart';
 import '../domain/case_models.dart';
 import '../ui/brand.dart';

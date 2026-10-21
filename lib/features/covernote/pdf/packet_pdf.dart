@@ -115,7 +115,7 @@ String _status(Fact f) {
   if (f.status == FactStatus.userEntered) return 'Entered by patient';
   if (f.confirmed) return 'Checked by patient';
   if (f.status == FactStatus.ambiguous) return 'Needs check';
-  return 'From letter, not checked';
+  return 'Not checked';
 }
 
 String _value(Fact f) => f.hasValue ? f.value! : '—';
@@ -147,14 +147,18 @@ class _Compaction {
     this.reasonChars,
     this.rows,
     this.labelChars,
-    this.quotes,
-  );
+    this.quotes, {
+    this.contextOnSummary = true,
+  });
 
   final int reasons;
   final int reasonChars;
   final int rows;
   final int labelChars;
   final bool quotes;
+
+  /// Optional local context moves to the appendix as the last step.
+  final bool contextOnSummary;
 }
 
 const _levels = [
@@ -162,6 +166,7 @@ const _levels = [
   _Compaction(2, 180, 4, 70, false),
   _Compaction(1, 160, 3, 60, false),
   _Compaction(1, 120, 2, 50, false),
+  _Compaction(1, 120, 2, 50, false, contextOnSummary: false),
 ];
 
 const _format = PdfPageFormat(
@@ -247,7 +252,7 @@ Future<PacketResult> _build(
         header: (_) =>
             _pageHeader(sample, 'Appendix - letter details', draft: false),
         footer: (ctx) => _pageFooter(ctx),
-        build: (_) => _appendix(input),
+        build: (_) => _appendix(input, c),
       ),
     );
   }
@@ -276,8 +281,14 @@ pw.MultiPage _summaryPage(PacketInput input, _Compaction c) => pw.MultiPage(
     _requestedTable(input, c),
     pw.SizedBox(height: 8),
     _sectionTitle('D. Patient records (self-reported)'),
-    _recordsTable(input),
-    ..._localContext(input),
+    ..._recordsTable(input),
+    if (c.contextOnSummary)
+      ..._localContext(input)
+    else if (_contextSnapshot(input) != null) ...[
+      pw.SizedBox(height: 8),
+      _sectionTitle('E. Local context (supporting background only)'),
+      pw.Text('Attached in the appendix.'),
+    ],
     pw.SizedBox(height: 8),
     _sectionTitle('F. For the care team to review'),
     ..._careTeamItems(input),
@@ -496,7 +507,7 @@ pw.Widget _insuranceTable(PacketInput input, _Compaction c) {
             : _cut(r.text, c.reasonChars),
         r.status == FactStatus.userEntered
             ? 'Entered by patient'
-            : (r.confirmed ? 'Checked by patient' : 'From letter, not checked'),
+            : (r.confirmed ? 'Checked by patient' : 'Not checked'),
       ],
     if (f.reasons.isEmpty)
       ['Reason given', 'No reason found in the letter', '—'],
@@ -576,7 +587,7 @@ pw.Widget _requestedTable(PacketInput input, _Compaction c) {
   );
 }
 
-pw.Widget _recordsTable(PacketInput input) {
+List<pw.Widget> _recordsTable(PacketInput input) {
   final med = input.evidence
       .where((e) => e.recordType == 'medication_summary')
       .map((e) => MedicationSnapshot.fromJson(e.snapshot))
@@ -588,45 +599,58 @@ pw.Widget _recordsTable(PacketInput input) {
       .whereType<SymptomSnapshot>()
       .firstOrNull;
   if (med == null && sym == null) {
-    return pw.Text('No patient records attached to this case.');
+    return [pw.Text('No patient records attached to this case.')];
   }
   final rows = <List<String>>[
-    ['Record', 'Count', 'Period / note'],
+    ['Record', 'Count', 'Note'],
   ];
+  final notes = <String>[];
   if (med != null) {
-    final period = '${_dt(med.range.from)} - ${_dt(med.range.to)}';
+    notes.add('Period ${_dt(med.range.from)} - ${_dt(med.range.to)}.');
     if (med.hasSchedule) {
       rows.add([
-        'Scheduled doses${med.medications.isEmpty ? '' : ' (${_cut(med.medications.join(', '), 40)})'}',
-        '${med.taken} taken / ${med.notTaken} not taken / ${med.unknown + med.deferred} unknown of ${med.scheduled} scheduled',
-        '$period. Unknown = no answer recorded; not counted as missed.',
+        'Scheduled doses',
+        '${med.taken} taken / ${med.notTaken} not taken / ${med.unknown + med.deferred} unknown of ${med.scheduled}',
+        _cut(med.medications.join(', '), 40),
       ]);
+      notes.add('Unknown = no answer recorded; not counted as missed.');
     } else {
-      rows.add(['Scheduled doses', 'No schedule recorded', period]);
+      rows.add(['Scheduled doses', 'No schedule recorded', '']);
     }
     rows.add([
-      'As-needed (rescue) use',
-      '${med.prnUses} uses${med.prnUses > 0 ? ' / ${med.prnPuffs} puffs recorded' : ''}${med.prnUsesWithoutCount > 0 ? ' (${med.prnUsesWithoutCount} without puff count)' : ''}',
-      'Counted separately from scheduled doses.',
+      'As-needed use',
+      '${med.prnUses} uses${med.prnUses > 0 ? ' / ${med.prnPuffs} puffs' : ''}${med.prnUsesWithoutCount > 0 ? ' (${med.prnUsesWithoutCount} without puff count)' : ''}',
+      'Separate from scheduled doses',
     ]);
   }
   if (sym != null) {
+    if (med == null) {
+      notes.add('Period ${_dt(sym.range.from)} - ${_dt(sym.range.to)}.');
+    }
     rows.add([
       'Symptom days',
-      '${sym.daysWithSymptoms} days with symptoms; ${sym.nightWakingDays} with night waking',
-      '${_dt(sym.range.from)} - ${_dt(sym.range.to)}. Entries on ${sym.daysWithEntries} of ${sym.range.dayCount} days.',
+      '${sym.daysWithSymptoms} with symptoms; ${sym.nightWakingDays} with night waking',
+      'Entries on ${sym.daysWithEntries} of ${sym.range.dayCount} days',
     ]);
   }
-  return _table(rows, widths: [1.5, 2.6, 2.3]);
+  return [
+    _table(rows, widths: [1.3, 2.9, 2.2]),
+    pw.Text(notes.join(' '), style: const pw.TextStyle(color: _grey)),
+  ];
 }
 
-List<pw.Widget> _localContext(PacketInput input) {
+LocalContextSnapshot? _contextSnapshot(PacketInput input) {
   final ctx = input.evidence
       .where((e) => e.recordType == 'local_context')
       .map((e) => LocalContextSnapshot.fromJson(e.snapshot))
       .whereType<LocalContextSnapshot>()
       .firstOrNull;
-  if (ctx == null || ctx.isEmpty) return const [];
+  return ctx == null || ctx.isEmpty ? null : ctx;
+}
+
+List<pw.Widget> _localContext(PacketInput input, {bool appendix = false}) {
+  final ctx = _contextSnapshot(input);
+  if (ctx == null) return const [];
   final rows = <List<String>>[
     ['Context (optional)', 'Values', 'Source'],
   ];
@@ -654,7 +678,12 @@ List<pw.Widget> _localContext(PacketInput input) {
   }
   return [
     pw.SizedBox(height: 8),
-    _sectionTitle('E. Local context (supporting background only)'),
+    appendix
+        ? pw.Text(
+            'Local context (supporting background only)',
+            style: pw.TextStyle(fontWeight: pw.FontWeight.bold, color: _navy),
+          )
+        : _sectionTitle('E. Local context (supporting background only)'),
     _table(rows, widths: [1.6, 2.6, 2.0]),
     pw.Text(
       'Days without data are left blank. Same-day timing does not show a cause.',
@@ -791,7 +820,9 @@ List<pw.Widget> _draft(PacketInput input) {
       '- Coverage review brief (patient-prepared summary, page 1 of this packet)',
     ),
     for (final e in input.evidence)
-      p('- Summary of ${_evidenceName(e)} (${_date(e.from)} - ${_date(e.to)})'),
+      p(
+        '- ${_evidenceName(e)[0].toUpperCase()}${_evidenceName(e).substring(1)} (${_date(e.from)} - ${_date(e.to)})',
+      ),
     label('Clinician statement (to be completed by the clinician)'),
     blank,
     blank,
@@ -822,7 +853,7 @@ List<pw.Widget> _draft(PacketInput input) {
   ];
 }
 
-List<pw.Widget> _appendix(PacketInput input) {
+List<pw.Widget> _appendix(PacketInput input, _Compaction c) {
   final f = input.facts;
   final out = <pw.Widget>[
     pw.Text(
@@ -850,6 +881,7 @@ List<pw.Widget> _appendix(PacketInput input) {
           '${r.label} - ${_requirementState(r, input)}${r.sourceQuote != null ? '\nQuote${r.sourcePage != null ? ' (p.${r.sourcePage})' : ''}: "${r.sourceQuote}"' : ''}',
         ),
       ),
+    if (!c.contextOnSummary) ..._localContext(input, appendix: true),
   ];
   if (input.includeLetterText) {
     for (final p in input.letterPages) {

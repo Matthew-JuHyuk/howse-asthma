@@ -15,7 +15,9 @@ class AppTheme {
   static const Color brand700 = Color(0xFF115E59);
   static const Color brand800 = Color(0xFF134E4A);
   static const Color brand900 = Color(0xFF042F2E);
-  static const Color brandPrimary = brand600;
+
+  /// CoverNote teal, matched to the app icon.
+  static const Color brandPrimary = Color(0xFF167D8D);
 
   static const Color neutral0 = Color(0xFFFFFFFF);
   static const Color neutral50 = Color(0xFFF8FAFC);
@@ -67,6 +69,11 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: scheme,
       scaffoldBackgroundColor: defaultBackground,
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(fontSize: 17, height: 1.4),
+        bodyMedium: TextStyle(fontSize: 16, height: 1.4),
+        bodySmall: TextStyle(fontSize: 14, height: 1.35),
+      ),
       appBarTheme: const AppBarTheme(
         centerTitle: true,
         backgroundColor: neutral0,
