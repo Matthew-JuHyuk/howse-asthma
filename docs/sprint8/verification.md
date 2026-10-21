@@ -111,6 +111,9 @@ The tests cover: language resolution (device, saved, Chinese script/region), eve
 strings, plurals (0, 1, 2, 3, 11, 100; Arabic's six forms) and dates, right-to-left for Arabic only,
 the picker (all names in their own script, switching to Arabic flips direction, 200 % text),
 translated reason explanations on the review screen, and requirement hints.
+Release APK rebuilt from `6ed45bc`: 68.4 MB, SHA-256
+`C03EFE45C7B3282ED03FED2AF46843702ABD7893B93EC734CD39A2AAB0B5CBC2`.
+
 Status: widget-level `pass`; **on a phone: blocked** (not run). Translation review by native speakers:
 **not_run**.
 
