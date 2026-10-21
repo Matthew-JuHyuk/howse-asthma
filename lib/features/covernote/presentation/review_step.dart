@@ -294,12 +294,23 @@ class _WhyCard extends StatelessWidget {
               style: const TextStyle(color: CnColors.muted),
             ),
           for (final r in facts.reasons) ...[
-            Text(r.text, style: const TextStyle(fontSize: 16)),
+            Text(
+              needsTranslatedAid(context)
+                  ? reasonExplanation(l, r.code)
+                  : r.text,
+              style: const TextStyle(fontSize: 16),
+            ),
             _QuoteLink(page: r.page, quote: r.quote, onShowQuote: onShowQuote),
           ],
           if (facts.reasons.isEmpty && facts.requestedItems.isNotEmpty)
             for (final r in facts.requestedItems) ...[
               Text('• ${r.label}', style: const TextStyle(fontSize: 16)),
+              if (needsTranslatedAid(context) &&
+                  requirementHint(l, r.label) != null)
+                Text(
+                  requirementHint(l, r.label)!,
+                  style: const TextStyle(color: CnColors.muted),
+                ),
               _QuoteLink(
                 page: r.page,
                 quote: r.quote,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/locale/app_languages.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
@@ -291,7 +292,7 @@ class _TimeField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final locale = Localizations.localeOf(context).toLanguageTag();
+    final locale = intlLocaleFor(Localizations.localeOf(context));
     final text = DateFormat.yMMMd(locale).add_jm().format(value);
     return ListTile(
       contentPadding: EdgeInsets.zero,
@@ -902,7 +903,7 @@ class _MedCheckSheetState extends State<_MedCheckSheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final locale = Localizations.localeOf(context).toLanguageTag();
+    final locale = intlLocaleFor(Localizations.localeOf(context));
     final today = dateOnly(DateTime.now());
     return _SheetFrame(
       title: l10n.s5MedCheckTitle,

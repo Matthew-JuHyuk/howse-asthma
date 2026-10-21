@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/locale/language_picker.dart';
 import '../../../core/locale/locale_controller.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/supabase/supabase_service.dart';
@@ -156,22 +157,18 @@ class _AccountTabState extends State<AccountTab> {
                   ),
           ),
           SectionLabel(l.cnLanguage),
-          RadioGroup<String>(
-            groupValue: locale.value.languageCode,
-            onChanged: (v) {
-              if (v != null) locale.setLocale(Locale(v));
-            },
-            child: Column(
-              children: [
-                for (final loc in supportedLocales)
-                  RadioListTile<String>(
-                    value: loc.languageCode,
-                    title: Text(
-                      localeDisplayNames[loc.languageCode] ?? loc.languageCode,
-                    ),
-                    contentPadding: EdgeInsets.zero,
-                  ),
-              ],
+          CnCard(
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              minVerticalPadding: 12,
+              leading: const Icon(Icons.language),
+              title: Text(
+                nativeNameOf(locale.value),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+              subtitle: Text(l.cnLanguageNote),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => showLanguagePicker(context),
             ),
           ),
           SectionLabel(l.cnServiceStatus),

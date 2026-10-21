@@ -2050,5 +2050,20 @@
         "type": "String"
       }
     }
-  }
+  },
+  "cnLanguageChoose": "Choose your language",
+  "cnLanguageNote": "Some text was translated by software and may have mistakes. Medicine names, doses, dates and quotes from your letter are never translated.",
+  "cnLanguageButtonTooltip": "Change language",
+  "cnPacketEnglishNote": "The packet is written in English so your care team can read it.",
+  "cnReasonMissingInformation": "The plan says it did not get all the information it needed.",
+  "cnReasonStepTherapy": "The plan wants you to try other medicines first.",
+  "cnReasonMedicalNecessity": "The plan says it could not confirm that this medicine is medically needed.",
+  "cnReasonFormulary": "The plan says this medicine is not on its list of covered medicines.",
+  "cnReasonQuantityLimit": "The plan says the amount asked for is more than it covers.",
+  "cnReasonEligibility": "The plan says this is not covered under its coverage rules.",
+  "cnReasonOther": "The letter gives another reason. Open the quote from the letter to read it.",
+  "cnReqHintMedHistory": "Your past and current medicines",
+  "cnReqHintVisitNotes": "Notes from your doctor visits",
+  "cnReqHintTestResults": "Test or lab results",
+  "cnReqHintDoctorStatement": "A statement from your doctor"
 }

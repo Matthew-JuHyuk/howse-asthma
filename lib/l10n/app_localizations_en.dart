@@ -3999,4 +3999,58 @@ class AppLocalizationsEn extends AppLocalizations {
   String cnErrGeneric(String code) {
     return 'Something went wrong ($code). Try again.';
   }
+
+  @override
+  String get cnLanguageChoose => 'Choose your language';
+
+  @override
+  String get cnLanguageNote =>
+      'Some text was translated by software and may have mistakes. Medicine names, doses, dates and quotes from your letter are never translated.';
+
+  @override
+  String get cnLanguageButtonTooltip => 'Change language';
+
+  @override
+  String get cnPacketEnglishNote =>
+      'The packet is written in English so your care team can read it.';
+
+  @override
+  String get cnReasonMissingInformation =>
+      'The plan says it did not get all the information it needed.';
+
+  @override
+  String get cnReasonStepTherapy =>
+      'The plan wants you to try other medicines first.';
+
+  @override
+  String get cnReasonMedicalNecessity =>
+      'The plan says it could not confirm that this medicine is medically needed.';
+
+  @override
+  String get cnReasonFormulary =>
+      'The plan says this medicine is not on its list of covered medicines.';
+
+  @override
+  String get cnReasonQuantityLimit =>
+      'The plan says the amount asked for is more than it covers.';
+
+  @override
+  String get cnReasonEligibility =>
+      'The plan says this is not covered under its coverage rules.';
+
+  @override
+  String get cnReasonOther =>
+      'The letter gives another reason. Open the quote from the letter to read it.';
+
+  @override
+  String get cnReqHintMedHistory => 'Your past and current medicines';
+
+  @override
+  String get cnReqHintVisitNotes => 'Notes from your doctor visits';
+
+  @override
+  String get cnReqHintTestResults => 'Test or lab results';
+
+  @override
+  String get cnReqHintDoctorStatement => 'A statement from your doctor';
 }

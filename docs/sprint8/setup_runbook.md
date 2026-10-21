@@ -100,7 +100,7 @@ iOS cannot be built on Windows; it needs a Mac or a cloud macOS build.
 ## 7. Server deploys (already applied)
 
 ```powershell
-npx supabase migration list                                  # local = remote through 20261021120000
+npx supabase migration list                                  # local = remote through 20261021200000
 npx supabase functions deploy analyze-letter --project-ref jnzdovjjahvtxbhacjuv
 npx supabase functions deploy delete-account --project-ref jnzdovjjahvtxbhacjuv
 ```

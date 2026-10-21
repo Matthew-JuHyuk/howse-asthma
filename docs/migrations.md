@@ -8,6 +8,7 @@
 | [`20261011180000_s6_regimen_and_evidence.sql`](../supabase/migrations/20261011180000_s6_regimen_and_evidence.sql) | Prescription versions, occasion checks, event snapshots, empty policy slots | In the repo. Apply with `supabase db push` before the app build that queries these tables |
 | [`20261018120000_v2_appeal_cases.sql`](../supabase/migrations/20261018120000_v2_appeal_cases.sql) | Appeal-prep cases, facts, jobs, private `appeal-documents` bucket | Applied remotely |
 | [`20261021120000_s8_covernote_mvp1.sql`](../supabase/migrations/20261021120000_s8_covernote_mvp1.sql) | CoverNote: document kind, upload sets, job metadata, `case_requirements`, `local_context_entries`, tighter evidence/artifact policies. Additive | Applied remotely (2026-10-21). See [`db-schema.md`](./db-schema.md) §2.z2 |
+| [`20261021200000_s8_profile_languages.sql`](../supabase/migrations/20261021200000_s8_profile_languages.sql) | Widens the `profiles.language_code` CHECK to `en es pt ko gu zh-Hans zh-Hant ht ar` (keeps `fr ja zh`). Additive | Applied remotely (2026-10-21). See [`sprint8/languages.md`](./sprint8/languages.md) |
 
 Schema: [`db-schema.md`](./db-schema.md).  
 RLS detail: [`rls-policies.md`](./rls-policies.md).

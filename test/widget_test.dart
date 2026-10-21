@@ -54,7 +54,17 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  for (final code in ['en', 'ko']) {
+  for (final code in [
+    'en',
+    'ko',
+    'es',
+    'pt',
+    'gu',
+    'zh-Hans',
+    'zh-Hant',
+    'ht',
+    'ar',
+  ]) {
     testWidgets('360 dp wide at 200% text: home, demo list, review ($code)', (
       tester,
     ) async {
@@ -101,14 +111,41 @@ void main() {
         200,
         scrollable: list,
       );
+      await tester.ensureVisible(find.text(l.cnTryDemo));
+      await settle(3);
       await tester.tap(find.text(l.cnTryDemo));
       await settle();
       expect(tester.takeException(), isNull);
 
+      await tester.ensureVisible(find.text('DemoController A 100 mcg'));
+      await settle(3);
       await tester.tap(find.text('DemoController A 100 mcg'));
       await settle();
+      // Longer languages push the card below the first screenful.
+      await tester.scrollUntilVisible(
+        find.text(l.cnCardWhyDenied),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
       expect(find.text(l.cnCardWhyDenied), findsOneWidget);
       expect(tester.takeException(), isNull);
+      if (code != 'en') {
+        // The model's English reason is replaced by the fixed translation.
+        final explained = [
+          l.cnReasonMissingInformation,
+          l.cnReasonStepTherapy,
+          l.cnReasonMedicalNecessity,
+          l.cnReasonFormulary,
+          l.cnReasonQuantityLimit,
+          l.cnReasonEligibility,
+          l.cnReasonOther,
+        ];
+        expect(
+          explained.any((s) => find.text(s).evaluate().isNotEmpty),
+          isTrue,
+          reason: 'a translated reason should be on the review screen',
+        );
+      }
     });
   }
 }

@@ -104,6 +104,8 @@ CREATE TABLE public.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users (id) ON DELETE CASCADE,
     role VARCHAR(20) NOT NULL CHECK (role IN ('PATIENT', 'PROVIDER')),
     full_name TEXT NOT NULL,
+    -- Widened by 20261021200000_s8_profile_languages.sql to also allow
+    -- 'pt', 'gu', 'zh-Hans', 'zh-Hant', 'ht', 'ar' (BCP-47 tags the app stores).
     language_code VARCHAR(10) NOT NULL DEFAULT 'en'
         CHECK (language_code IN ('en', 'es', 'fr', 'ko', 'ja', 'zh')),
     created_at TIMESTAMPTZ NOT NULL DEFAULT TIMEZONE('utc', NOW()),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/config/app_config.dart';
+import '../../../core/locale/app_languages.dart';
+import '../../../core/locale/language_picker.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../l10n/app_localizations.dart';
@@ -95,7 +97,10 @@ class _AuthScreenState extends State<AuthScreen> {
             data: {
               'role': 'PATIENT',
               if (_name.text.trim().isNotEmpty) 'full_name': _name.text.trim(),
-              'language_code': Localizations.localeOf(context).languageCode,
+              'language_code':
+                  (appLanguageForLocale(Localizations.localeOf(context)) ??
+                          defaultAppLanguage)
+                      .tag,
             },
           );
           if (res.session == null) {
@@ -162,7 +167,10 @@ class _AuthScreenState extends State<AuthScreen> {
     final profileProblem = session.status == SessionStatus.profileError;
     final loadingProfile = session.status == SessionStatus.loadingProfile;
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        actions: const [LanguageButton(), SizedBox(width: 8)],
+      ),
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(

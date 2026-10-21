@@ -352,6 +352,11 @@ class _RequirementCard extends StatelessWidget {
             r.label,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
+          if (needsTranslatedAid(context) && requirementHint(l, r.label) != null)
+            Text(
+              requirementHint(l, r.label)!,
+              style: const TextStyle(color: CnColors.muted),
+            ),
           const SizedBox(height: 6),
           Wrap(
             spacing: 6,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/locale/app_languages.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../assessments/presentation/act_screen.dart';
@@ -189,7 +190,7 @@ class _MyLogScreenState extends State<MyLogScreen> {
 
   List<Widget> _timeline(BuildContext context, AppLocalizations l10n) {
     final b = _bundle!;
-    final locale = Localizations.localeOf(context).toLanguageTag();
+    final locale = intlLocaleFor(Localizations.localeOf(context));
     final items = <_Item>[];
     if (_filter == _Filter.all || _filter == _Filter.inhaler) {
       for (final e in b.inhaler) {

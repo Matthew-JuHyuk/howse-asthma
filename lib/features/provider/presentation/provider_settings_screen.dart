@@ -70,12 +70,11 @@ class _ProviderSettingsScreenState extends State<ProviderSettingsScreen> {
                     ListTile(
                       title: Text(l10n.settingsLanguageLabel),
                       subtitle: Text(
-                        localeDisplayNames[currentLocale.languageCode] ??
-                            currentLocale.languageCode,
+                        nativeNameOf(currentLocale),
                       ),
                     ),
                     RadioGroup<Locale>(
-                      groupValue: currentLocale,
+                      groupValue: appLanguageForLocale(currentLocale)?.locale,
                       onChanged: (value) {
                         if (value != null) {
                           widget.localeController.setLocale(value);
@@ -83,13 +82,14 @@ class _ProviderSettingsScreenState extends State<ProviderSettingsScreen> {
                       },
                       child: Column(
                         children: [
-                          for (final locale in supportedLocales)
+                          for (final language in appLanguages)
                             RadioListTile<Locale>(
-                              title: Text(
-                                localeDisplayNames[locale.languageCode] ??
-                                    locale.languageCode,
-                              ),
-                              value: locale,
+                              title: Text(language.nativeName),
+                              subtitle: language.englishName ==
+                                      language.nativeName
+                                  ? null
+                                  : Text(language.englishName),
+                              value: language.locale,
                             ),
                         ],
                       ),

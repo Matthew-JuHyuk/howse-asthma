@@ -1,7 +1,7 @@
 # Verification log
 
 Run date: 2026-10-20 (America/New_York). Machine: Windows 10, Flutter 3.44.7, Dart 3.12.2.
-Server: Supabase `jnzdovjjahvtxbhacjuv`; `analyze-letter` v2, `delete-account` v1; migrations through `20261021120000`.
+Server: Supabase `jnzdovjjahvtxbhacjuv`; `analyze-letter` v2, `delete-account` v1; migrations through `20261021200000`.
 Status words: `pass` (run and met), `fail`, `blocked` (outside setting or device missing), `not_run`.
 "Widget" means a Flutter widget test on this PC. **Nothing in this file was run on a phone.**
 
@@ -23,7 +23,7 @@ Status words: `pass` (run and met), `fail`, `blocked` (outside setting or device
 | AT12 | Airplane mode / permission denied / AI 429 | blocked | 429 maps to retryable `ai_rate_limited` in code; not exercised |
 | AT13 | A reads B's case/file/job | pass | 19 of 19 cross-account attempts blocked (below) |
 | AT14 | Prompt injection in a letter | pass (code) · blocked (live) | No tools are declared; letter text is wrapped as data; quotes must exist in page text. Live run blocked |
-| AT15 | Long text, 200 % font | pass (widget, PDF) · blocked (device) | 360 dp at 200 %: Home → demo → Review, English and Korean, no overflow. Long reasons + 10 extra items → summary stays one page, appendix added, min font 10 pt |
+| AT15 | Long text, 200 % font | pass (widget, PDF) · blocked (device) | 360 dp at 200 %: Home → demo → Review in all nine languages (English, Spanish, Portuguese, Korean, Gujarati, Chinese Simplified and Traditional, Haitian Creole, Arabic), no overflow. Long reasons + 10 extra items → summary stays one page, appendix added, min font 10 pt |
 | AT16 | Save / share / cancel | blocked | OS share sheet needs a device. Share writes `last_exported_at` only |
 | AT17 | Delete during analysis / double tap | blocked | Lease + idempotency key in code; needs a live job |
 | AT18 | Demo seed / reset | pass | `status A` after seed; reset touches demo-tagged rows of the demo account only |
@@ -93,6 +93,26 @@ powershell -ExecutionPolicy Bypass -File scripts/build_release.ps1
 
 Version `1.0.0+1`, application id `com.howseasthma.app`, signed with the debug key.
 Built from `06f4110`, which contains all app code on the branch; later commits only change docs.
+
+### Languages (2026-10-21)
+
+See [`languages.md`](./languages.md).
+
+```
+flutter analyze                       -> No issues found!
+flutter test                          -> 123 passed, 0 failed
+node tool/l10n_validate.mjs check <tag> for es pt zh_Hans zh_Hant gu ht ar
+                                      -> 657 keys each, problems 0
+supabase db push                      -> 20261021200000_s8_profile_languages.sql applied
+profiles.language_code on the server  -> en es pt ko gu zh-Hans zh-Hant ht ar accepted; "xx-bad" rejected (23514); original value restored
+```
+
+The tests cover: language resolution (device, saved, Chinese script/region), every language loading
+strings, plurals (0, 1, 2, 3, 11, 100; Arabic's six forms) and dates, right-to-left for Arabic only,
+the picker (all names in their own script, switching to Arabic flips direction, 200 % text),
+translated reason explanations on the review screen, and requirement hints.
+Status: widget-level `pass`; **on a phone: blocked** (not run). Translation review by native speakers:
+**not_run**.
 
 ## Not measured
 

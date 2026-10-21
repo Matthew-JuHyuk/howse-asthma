@@ -1,13 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/locale/app_languages.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/case_facts.dart';
 import '../domain/case_models.dart';
 import '../ui/brand.dart';
 
 String formatDay(BuildContext context, DateTime d) =>
-    DateFormat.yMMMd(Localizations.localeOf(context).toLanguageTag()).format(d);
+    DateFormat.yMMMd(intlLocaleFor(Localizations.localeOf(context))).format(d);
 
 String formatIsoDay(BuildContext context, String? iso) {
   final d = parseIsoDate(iso);
@@ -97,6 +98,43 @@ String requirementStatusLabel(AppLocalizations l, String s) => switch (s) {
   RequirementStatus.notApplicable => l.cnReqNotNeeded,
   _ => l.cnReqNeeded,
 };
+
+/// Plain-language explanation for a reason code from the letter. The model's
+/// own wording is English, so other languages show this fixed text and keep a
+/// link to the letter's quote.
+String reasonExplanation(AppLocalizations l, String code) => switch (code) {
+  'missing_information' => l.cnReasonMissingInformation,
+  'step_therapy' => l.cnReasonStepTherapy,
+  'medical_necessity' => l.cnReasonMedicalNecessity,
+  'formulary' => l.cnReasonFormulary,
+  'quantity_limit' => l.cnReasonQuantityLimit,
+  'eligibility_or_benefit' => l.cnReasonEligibility,
+  _ => l.cnReasonOther,
+};
+
+/// Whether text from the letter's analysis (English) needs a translated aid.
+bool needsTranslatedAid(BuildContext context) =>
+    Localizations.localeOf(context).languageCode != 'en';
+
+/// A short translated hint under an English requirement label such as
+/// "Medication history". The label itself stays as the letter words it.
+/// Returns `null` when the label is not one of the common kinds.
+String? requirementHint(AppLocalizations l, String label) {
+  final s = label.toLowerCase();
+  if (RegExp(r'letter of medical|doctor.s statement|prescriber statement|statement (from|by) (the )?(doctor|physician|prescriber)').hasMatch(s)) {
+    return l.cnReqHintDoctorStatement;
+  }
+  if (RegExp(r'medication history|pharmacy|prior medication|medicines? (tried|history)|drug history').hasMatch(s)) {
+    return l.cnReqHintMedHistory;
+  }
+  if (RegExp(r'visit note|chart note|office note|clinical note|progress note|medical record|chart').hasMatch(s)) {
+    return l.cnReqHintVisitNotes;
+  }
+  if (RegExp(r'test result|\blab(s|oratory)?\b|spirometr|pulmonary function|x-ray|imaging').hasMatch(s)) {
+    return l.cnReqHintTestResults;
+  }
+  return null;
+}
 
 String recordTypeLabel(AppLocalizations l, String type) => switch (type) {
   'medication_summary' => l.cnRecMedication,

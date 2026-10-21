@@ -2,18 +2,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Languages the user can pick. Only languages with a complete, checked
-/// translation of the current screens are listed.
-const List<Locale> supportedLocales = [Locale('en'), Locale('ko')];
+import 'app_languages.dart';
 
-const Map<String, String> localeDisplayNames = {'en': 'English', 'ko': '한국어'};
+export 'app_languages.dart';
+
+/// Languages the user can pick (see [appLanguages]).
+List<Locale> get supportedLocales => appSupportedLocales;
 
 const _prefsKey = 'app_locale_code';
 
 /// App language. First launch follows the OS when supported; a manual choice
 /// in prefs always wins.
 class LocaleController extends ValueNotifier<Locale> {
-  LocaleController() : super(const Locale('en'));
+  LocaleController() : super(defaultAppLanguage.locale);
 
   bool _loaded = false;
 
@@ -21,9 +22,9 @@ class LocaleController extends ValueNotifier<Locale> {
   Future<void> load() async {
     if (_loaded) return;
     final prefs = await SharedPreferences.getInstance();
-    final code = prefs.getString(_prefsKey);
-    if (code != null && supportedLocales.any((l) => l.languageCode == code)) {
-      value = Locale(code);
+    final saved = appLanguageForTag(prefs.getString(_prefsKey));
+    if (saved != null) {
+      value = saved.locale;
     } else {
       value = resolveInitialLocale(
         platformLocales: PlatformDispatcher.instance.locales,
@@ -35,32 +36,25 @@ class LocaleController extends ValueNotifier<Locale> {
   /// Visible for tests — maps device locales to a supported [Locale].
   static Locale resolveInitialLocale({required List<Locale> platformLocales}) {
     for (final device in platformLocales) {
-      for (final supported in supportedLocales) {
-        if (supported.languageCode == device.languageCode) {
-          return supported;
-        }
-      }
+      final match = appLanguageForLocale(device);
+      if (match != null) return match.locale;
     }
-    return const Locale('en');
+    return defaultAppLanguage.locale;
   }
 
   Future<void> setLocale(Locale locale) async {
-    if (!supportedLocales.any((l) => l.languageCode == locale.languageCode)) {
-      return;
-    }
-    value = locale;
+    final language = appLanguageForLocale(locale);
+    if (language == null) return;
+    value = language.locale;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_prefsKey, locale.languageCode);
+    await prefs.setString(_prefsKey, language.tag);
   }
 
-  /// Language chosen on Welcome/Settings (prefs), if any.
+  /// Language chosen on Welcome/Settings (prefs), if any. Returns the stored
+  /// tag, for example `ko` or `zh-Hans`.
   static Future<String?> savedLanguageCode() async {
     final prefs = await SharedPreferences.getInstance();
-    final code = prefs.getString(_prefsKey);
-    if (code != null && supportedLocales.any((l) => l.languageCode == code)) {
-      return code;
-    }
-    return null;
+    return appLanguageForTag(prefs.getString(_prefsKey))?.tag;
   }
 }
 

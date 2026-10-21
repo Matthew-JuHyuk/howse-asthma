@@ -1,3 +1,4 @@
+import '../../../core/locale/app_languages.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../domain/npi_validator.dart';
 import '../domain/user_profile.dart';
@@ -45,8 +46,9 @@ class ProfileRepository {
       }
     }
 
-    final allowedLanguages = {'en', 'es', 'fr', 'ko', 'ja', 'zh'};
-    final lang = allowedLanguages.contains(languageCode) ? languageCode : 'en';
+    // Stored as the BCP-47 tag of an offered language (`ko`, `zh-Hans`, ...).
+    // The set of allowed values is mirrored by a CHECK on profiles.language_code.
+    final lang = appLanguageForTag(languageCode)?.tag ?? defaultAppLanguage.tag;
 
     await SupabaseService.client.from('profiles').insert({
       'id': user.id,

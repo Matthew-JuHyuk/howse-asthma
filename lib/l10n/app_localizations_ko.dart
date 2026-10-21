@@ -3762,4 +3762,51 @@ class AppLocalizationsKo extends AppLocalizations {
   String cnErrGeneric(String code) {
     return '문제가 발생했습니다($code). 다시 시도하세요.';
   }
+
+  @override
+  String get cnLanguageChoose => '언어를 선택하세요';
+
+  @override
+  String get cnLanguageNote =>
+      '일부 문구는 소프트웨어로 번역되어 오류가 있을 수 있습니다. 약 이름, 용량, 날짜, 편지 속 인용문은 번역하지 않습니다.';
+
+  @override
+  String get cnLanguageButtonTooltip => '언어 변경';
+
+  @override
+  String get cnPacketEnglishNote => '의료진이 읽을 수 있도록 패킷은 영어로 작성됩니다.';
+
+  @override
+  String get cnReasonMissingInformation => '보험사는 필요한 정보를 모두 받지 못했다고 합니다.';
+
+  @override
+  String get cnReasonStepTherapy => '보험사는 다른 약을 먼저 써 보기를 요구합니다.';
+
+  @override
+  String get cnReasonMedicalNecessity =>
+      '보험사는 이 약이 의학적으로 필요하다고 확인할 수 없었다고 합니다.';
+
+  @override
+  String get cnReasonFormulary => '보험사는 이 약이 보장 약 목록에 없다고 합니다.';
+
+  @override
+  String get cnReasonQuantityLimit => '보험사는 요청한 양이 보장 범위를 넘는다고 합니다.';
+
+  @override
+  String get cnReasonEligibility => '보험사는 보장 규정상 이 약이 보장되지 않는다고 합니다.';
+
+  @override
+  String get cnReasonOther => '편지에 다른 이유가 적혀 있습니다. 편지 인용문을 열어 확인하세요.';
+
+  @override
+  String get cnReqHintMedHistory => '지금까지 쓴 약과 현재 쓰는 약';
+
+  @override
+  String get cnReqHintVisitNotes => '진료 때 의사가 쓴 기록';
+
+  @override
+  String get cnReqHintTestResults => '검사 결과';
+
+  @override
+  String get cnReqHintDoctorStatement => '의사의 설명서';
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/config/app_config.dart';
+import 'core/locale/fallback_localizations.dart';
 import 'core/locale/locale_controller.dart';
 import 'core/session/session_controller.dart';
 import 'core/theme/app_theme.dart';
@@ -63,11 +63,9 @@ class _CoverNoteAppState extends State<CoverNoteApp> {
                 theme: AppTheme.light,
                 locale: locale,
                 supportedLocales: supportedLocales,
-                localizationsDelegates: const [
+                localizationsDelegates: [
                   AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
+                  ...frameworkLocalizationDelegates,
                 ],
                 home: AppConfig.designPreview
                     ? const PatientMockShell()

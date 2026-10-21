@@ -34,7 +34,7 @@ All removed code is recoverable from `8bbef92`.
 | Rewards, streaks | Removed from the product path | `features/rewards` deleted |
 | Demo/live switch in Settings | Removed | `v2_nav_flag.dart` deleted; flags removed from `.env.example` |
 | SOS header button | Moved to Records → urgent help | `records_tab.dart:130` opens the existing `PanicScreen` (`tel:` 911) |
-| Unreviewed languages | Removed; English and Korean only | `app_es/fr/ja/zh.arb` deleted |
+| Unreviewed languages | Removed at first (English and Korean only); the older files were not reused. On 2026-10-21 the app was widened to the New Jersey language set with new translations. See [`languages.md`](./languages.md) | `app_es/fr/ja/zh.arb` deleted, then new `app_*.arb` |
 | Provider (clinician) role screens | Kept in code, not on the patient path | `lib/features/provider` |
 
 ## Decisions recorded during the sprint

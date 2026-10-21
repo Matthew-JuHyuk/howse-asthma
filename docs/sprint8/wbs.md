@@ -25,7 +25,7 @@ Commits are on `sprint8-covernote-mvp1`.
 | W8-17 | DEMO-01 | Cursor | W8-12 | `data/demo_case_store.dart`, `tool/demo_accounts.mjs` | Public demo; A/B accounts; idempotent seed/reset (51/3/6 of 60, PRN 8/16, 22 of 30 days) | Status + tests | M | verified | `status A`; snapshot tests |
 | W8-18 | DATA-01 | Cursor | W8-07 | `supabase/migrations/20261021120000_s8_covernote_mvp1.sql` | Additive schema, RLS, private storage | Isolation run | M | verified | migration applied; isolation 19/19 blocked |
 | W8-19 | AUTH-01 | Cursor | W8-18 | `supabase/functions/delete-account`, `account_tab.dart` | Delete account + files | Probe | S | verified | `delete_account_probe.mjs` 7/7 |
-| W8-20 | UX-02 | Cursor | — | `lib/l10n/app_en.arb`, `app_ko.arb`, `l10n.yaml` | English and Korean only | gen-l10n + Korean widget test | S | verified | `widget_test.dart` |
+| W8-20 | UX-02 | Cursor | — | `lib/l10n/app_en.arb`, `app_ko.arb`, `l10n.yaml` | English and Korean first; then the New Jersey language set (see `languages.md`) | gen-l10n + per-language widget tests | S | verified (widget) | `widget_test.dart`, `languages_render_test.dart` |
 | W8-21 | UX-04 | Cursor | W8-05 | presentation files | 360 dp, 200 % text, 48 dp targets, labels | Widget tests at 200 % | M | verified (widget) / blocked (device) | `widget_test.dart` 200 % en + ko |
 | W8-22 | AT19 | Cursor | W8-04…W8-21 | `scripts/build_release.ps1` | Release APK | Build succeeds | S | verified (build) | `app-release.apk` 66.8 MB |
 | W8-23 | AT19 | User | W8-22, W8-08 | phone | Install, camera, live AI, PDF share, restart | Device log + screenshots | M | blocked | no device connected |

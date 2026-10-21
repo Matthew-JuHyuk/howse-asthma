@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/locale/language_picker.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../l10n/app_localizations.dart';
 import '../auth/auth_screen.dart';
@@ -79,6 +80,7 @@ class HomeTabState extends State<HomeTab> {
             Row(
               children: [
                 const Expanded(child: BrandLockup(compact: true)),
+                const LanguageButton(),
                 _AccountButton(
                   signedIn: signedIn,
                   name: session.profile?.fullName,

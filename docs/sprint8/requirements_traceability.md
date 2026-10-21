@@ -12,7 +12,7 @@ A requirement with several parts lists each part. Paths are under `lib/features/
 | UX-02 | Scan on the first screen at 360 dp | same | verified | Korean test: Scan bottom < 560 dp |
 | UX-02 | 4 tabs, SOS moved to Records → urgent help | `covernote_root.dart`, `records_tab.dart:130` | verified | Korean test taps every tab |
 | UX-02 | Continue your case with real counts, no internal ids | `case_card.dart`, `case_labels.dart` | verified (demo) | demo journey; live list not_run |
-| UX-02 | English + Korean only | `lib/l10n/app_en.arb`, `app_ko.arb` | verified | other ARB files removed; Korean test |
+| UX-02 | Languages: English + Korean at first; widened to the New Jersey set on 2026-10-21 (owner decision) | `lib/core/locale/app_languages.dart`, `lib/l10n/app_*.arb`, [`languages.md`](./languages.md) | verified (widget) · translations not native-reviewed | 9 languages, render tests at 200 % text |
 | UX-03 | Letter / Review / Evidence / Packet with saved state | `case_screen.dart` | verified | demo journey |
 | UX-03 | Why / Next / Date cards, page + quote, open the letter | `review_step.dart`, `letter_view.dart` | verified (demo) | demo journey sees `cnCardWhyDenied` |
 | UX-03 | Inline edit, autosave, Saved; Continue to evidence unlocks after checks | `review_step.dart`, `case_facts.dart` (`readyForEvidence`) | verified | demo journey; deadline test "evidence stays locked" |

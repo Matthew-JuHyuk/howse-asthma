@@ -11,7 +11,8 @@ outside settings or a connected phone. Details: [verification.md](./verification
 | Branch | `sprint8-covernote-mvp1` (base `8bbef92`) |
 | Release APK | `build/app/outputs/flutter-apk/app-release.apk` — version `1.0.0+1`, id `com.howseasthma.app`, debug-key signed |
 | APK SHA-256 | see [verification.md](./verification.md) § Release build |
-| Migration | `supabase/migrations/20261021120000_s8_covernote_mvp1.sql` — applied to `jnzdovjjahvtxbhacjuv` |
+| Migration | `supabase/migrations/20261021120000_s8_covernote_mvp1.sql` and `20261021200000_s8_profile_languages.sql` — applied to `jnzdovjjahvtxbhacjuv` |
+| Languages | Nine, see [`languages.md`](./languages.md). Translations are not yet reviewed by native speakers |
 | Edge Functions | `analyze-letter` v2, `delete-account` v1 (deployed) |
 | Build command | `powershell -ExecutionPolicy Bypass -File scripts/build_release.ps1` |
 | Test accounts | `node tool/demo_accounts.mjs create` / `seed A` / `reset A` (credentials in git-ignored `.env.demo`) |

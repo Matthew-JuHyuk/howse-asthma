@@ -285,6 +285,14 @@ class _PacketStepState extends State<PacketStep> {
                 ),
               ),
               const SizedBox(height: 6),
+              if (needsTranslatedAid(context))
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Text(
+                    l.cnPacketEnglishNote,
+                    style: const TextStyle(color: CnColors.muted),
+                  ),
+                ),
               Text('• ${l.cnPartSummary}'),
               if (draft) Text('• ${l.cnPartDraft}'),
               if (_includeLetter) Text('• ${l.cnPartLetterText}'),

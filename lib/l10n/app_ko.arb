@@ -1342,5 +1342,20 @@
   "cnErrCaseGone": "이 케이스는 더 이상 없습니다.",
   "cnErrAttempts": "여러 번 읽기에 실패했습니다. 페이지를 교체하거나 나중에 다시 시도하세요.",
   "cnErrDemoUpload": "데모에서는 파일을 읽을 수 없습니다. 로그인해 내 편지를 촬영하세요.",
-  "cnErrGeneric": "문제가 발생했습니다({code}). 다시 시도하세요."
+  "cnErrGeneric": "문제가 발생했습니다({code}). 다시 시도하세요.",
+  "cnLanguageChoose": "언어를 선택하세요",
+  "cnLanguageNote": "일부 문구는 소프트웨어로 번역되어 오류가 있을 수 있습니다. 약 이름, 용량, 날짜, 편지 속 인용문은 번역하지 않습니다.",
+  "cnLanguageButtonTooltip": "언어 변경",
+  "cnPacketEnglishNote": "의료진이 읽을 수 있도록 패킷은 영어로 작성됩니다.",
+  "cnReasonMissingInformation": "보험사는 필요한 정보를 모두 받지 못했다고 합니다.",
+  "cnReasonStepTherapy": "보험사는 다른 약을 먼저 써 보기를 요구합니다.",
+  "cnReasonMedicalNecessity": "보험사는 이 약이 의학적으로 필요하다고 확인할 수 없었다고 합니다.",
+  "cnReasonFormulary": "보험사는 이 약이 보장 약 목록에 없다고 합니다.",
+  "cnReasonQuantityLimit": "보험사는 요청한 양이 보장 범위를 넘는다고 합니다.",
+  "cnReasonEligibility": "보험사는 보장 규정상 이 약이 보장되지 않는다고 합니다.",
+  "cnReasonOther": "편지에 다른 이유가 적혀 있습니다. 편지 인용문을 열어 확인하세요.",
+  "cnReqHintMedHistory": "지금까지 쓴 약과 현재 쓰는 약",
+  "cnReqHintVisitNotes": "진료 때 의사가 쓴 기록",
+  "cnReqHintTestResults": "검사 결과",
+  "cnReqHintDoctorStatement": "의사의 설명서"
 }

@@ -1,0 +1,2170 @@
+{
+  "appTitle": {
+    "en": "CoverNote"
+  },
+  "loginEmailLabel": {
+    "en": "Email"
+  },
+  "loginPasswordLabel": {
+    "en": "Password"
+  },
+  "loginButton": {
+    "en": "Log in"
+  },
+  "signUpButton": {
+    "en": "Sign up"
+  },
+  "medicationLogAddButton": {
+    "en": "Log Inhaler / Medication Use"
+  },
+  "settingsTitle": {
+    "en": "Settings"
+  },
+  "settingsLanguageLabel": {
+    "en": "Language"
+  },
+  "mockContinue": {
+    "en": "Continue"
+  },
+  "mockUnlock": {
+    "en": "Unlock"
+  },
+  "mockUsePassword": {
+    "en": "Use password instead"
+  },
+  "mockHomeLocation": {
+    "en": "Home"
+  },
+  "mockDummyAddress": {
+    "en": "123 Main St, Newark, NJ"
+  },
+  "mockEmergencyContact": {
+    "en": "Emergency contact"
+  },
+  "mockDummyContact": {
+    "en": "Alex Guardian · +1 555 0100"
+  },
+  "mockInviteCode": {
+    "en": "Provider invite code"
+  },
+  "mockAllScreens": {
+    "en": "All screens"
+  },
+  "mockStateCalm": {
+    "en": "CALM"
+  },
+  "mockStateWarning": {
+    "en": "WARNING"
+  },
+  "mockForecast": {
+    "en": "Forecast"
+  },
+  "mockShowWarningHome": {
+    "en": "Preview WARNING home"
+  },
+  "mockBackToCalmHome": {
+    "en": "Back"
+  },
+  "mockTrapAxis": {
+    "en": "TRAP / soot"
+  },
+  "mockFloodAxis": {
+    "en": "Flash flood"
+  },
+  "mockPollenAxis": {
+    "en": "Pollen"
+  },
+  "mockActSurvey": {
+    "en": "ACT survey"
+  },
+  "mockActHint": {
+    "en": "5 pictogram questions (4 weeks)"
+  },
+  "mockPdcCheck": {
+    "en": "Daily PDC check"
+  },
+  "mockPdcHint": {
+    "en": "One-tap adherence"
+  },
+  "mockInhalerEvent": {
+    "en": "Inhaler logged"
+  },
+  "mockQuestion": {
+    "en": "Question"
+  },
+  "mockSubmit": {
+    "en": "Submit"
+  },
+  "mockPdcPrompt": {
+    "en": "Did you take your controller medicine today?"
+  },
+  "mockTakenYes": {
+    "en": "Yes, I took it"
+  },
+  "mockTakenNo": {
+    "en": "Not today"
+  },
+  "mockActScore": {
+    "en": "Latest ACT"
+  },
+  "mockPdcRate": {
+    "en": "PDC (30d)"
+  },
+  "mockLocationsTitle": {
+    "en": "Saved places"
+  },
+  "mockLocationsHint": {
+    "en": "Home and work monitoring"
+  },
+  "mockWorkLocation": {
+    "en": "Work"
+  },
+  "mockDummyWorkAddress": {
+    "en": "1 Market St, Jersey City, NJ"
+  },
+  "mockAddLocation": {
+    "en": "Add place"
+  },
+  "mockDraftBanner": {
+    "en": "DRAFT — points & vouchers are preview only"
+  },
+  "mockPointsBalance": {
+    "en": "Points balance"
+  },
+  "mockVoucherTitle": {
+    "en": "Food bank voucher"
+  },
+  "mockDonateTitle": {
+    "en": "Donate"
+  },
+  "mockDonateHint": {
+    "en": "Third-party giving only"
+  },
+  "mockRewardHistory": {
+    "en": "History"
+  },
+  "mockRewardHistoryHint": {
+    "en": "Points and donations"
+  },
+  "mockDummyFoodBank": {
+    "en": "NJ Community Food Bank (demo)"
+  },
+  "mockVoucherCost": {
+    "en": "50 points · $10 value (draft)"
+  },
+  "mockJoinWaitlist": {
+    "en": "Join waitlist"
+  },
+  "mockDonateTransparency": {
+    "en": "Donations go through a verified third-party nonprofit platform. Howse Asthma never stores card details."
+  },
+  "mockDonateCta": {
+    "en": "Open donate (external)"
+  },
+  "mockExternalOnly": {
+    "en": "External donation provider is not wired in design preview."
+  },
+  "mockSignOutPreview": {
+    "en": "Sign out (preview)"
+  },
+  "mockDismiss": {
+    "en": "Dismiss"
+  },
+  "mockPanicStep1Body": {
+    "en": "Step 1 — Stay with your inhaler. Continue for emergency contacts."
+  },
+  "mockPanicStep2Title": {
+    "en": "Call for help"
+  },
+  "mockPanicStep2Body": {
+    "en": "Design preview: buttons do not place a real call. On device builds, Step 2 uses tel: links."
+  },
+  "mockCall911": {
+    "en": "Call 911"
+  },
+  "mockCallGuardian": {
+    "en": "Call emergency contact"
+  },
+  "mockFeelingBetter": {
+    "en": "I am feeling better"
+  },
+  "mockTabHome": {
+    "en": "Home"
+  },
+  "mockTabLog": {
+    "en": "Log"
+  },
+  "mockTabReport": {
+    "en": "Report"
+  },
+  "mockTabReward": {
+    "en": "Reward"
+  },
+  "mockTabSettings": {
+    "en": "Settings"
+  },
+  "authChooseRole": {
+    "en": "Choose your role"
+  },
+  "authRolePatient": {
+    "en": "Patient"
+  },
+  "authRoleProvider": {
+    "en": "Provider"
+  },
+  "authFullNameLabel": {
+    "en": "Full name"
+  },
+  "authNpiLabel": {
+    "en": "NPI number"
+  },
+  "authNpiHelper": {
+    "en": "10-digit National Provider Identifier"
+  },
+  "authOrContinueWith": {
+    "en": "or continue with"
+  },
+  "authContinueGoogle": {
+    "en": "Continue with Google"
+  },
+  "authContinueApple": {
+    "en": "Continue with Apple"
+  },
+  "authSignOut": {
+    "en": "Sign out"
+  },
+  "authRetry": {
+    "en": "Retry"
+  },
+  "authWorking": {
+    "en": "Working…"
+  },
+  "authErrorGeneric": {
+    "en": "Something went wrong. Please try again."
+  },
+  "authBiometricTitle": {
+    "en": "Unlock Howse Asthma"
+  },
+  "authBiometricHint": {
+    "en": "Use biometrics to continue"
+  },
+  "authBiometricReason": {
+    "en": "Unlock Howse Asthma"
+  },
+  "authBiometricToggle": {
+    "en": "Biometric unlock"
+  },
+  "authBiometricToggleHint": {
+    "en": "Require biometric unlock when opening the app"
+  },
+  "authBiometricUnavailable": {
+    "en": "Biometrics are not available on this device"
+  },
+  "authOnboardingTitle": {
+    "en": "Patient setup"
+  },
+  "authOnboardingSkip": {
+    "en": "Skip for now"
+  },
+  "authInviteCodeLabel": {
+    "en": "Provider invite code"
+  },
+  "authInviteCodeHelper": {
+    "en": "8 letters/numbers, expires in 24 hours"
+  },
+  "authInviteIssueFailed": {
+    "en": "Could not issue invite code"
+  },
+  "authConfirmLink": {
+    "en": "Confirm"
+  },
+  "authRejectLink": {
+    "en": "Reject"
+  },
+  "authLinkStatusPending": {
+    "en": "Pending confirmation"
+  },
+  "providerHomeTab": {
+    "en": "Home"
+  },
+  "providerLinkTab": {
+    "en": "Link"
+  },
+  "providerHomeTitle": {
+    "en": "Provider home"
+  },
+  "providerHomeWelcome": {
+    "en": "Signed in as {email}",
+    "placeholders": [
+      "email"
+    ]
+  },
+  "providerHomePlaceholder": {
+    "en": "Patient clinical dashboards arrive in a later release. Start by linking patients."
+  },
+  "providerLinkPatientsCta": {
+    "en": "Link patients"
+  },
+  "providerLinkTitle": {
+    "en": "Link patients"
+  },
+  "providerLinkIntro": {
+    "en": "Issue an 8-character code (valid 24 hours). The patient enters it, then both sides confirm."
+  },
+  "providerIssueInviteCta": {
+    "en": "Issue invite code"
+  },
+  "providerInviteTtlHint": {
+    "en": "Valid for 24 hours"
+  },
+  "providerInviteCopied": {
+    "en": "Invite code copied"
+  },
+  "providerPendingLinks": {
+    "en": "Pending links"
+  },
+  "providerNoPendingLinks": {
+    "en": "No pending links"
+  },
+  "providerPendingPatient": {
+    "en": "Patient {idPrefix}…",
+    "placeholders": [
+      "idPrefix"
+    ]
+  },
+  "providerRecentInvites": {
+    "en": "Recent invite codes"
+  },
+  "providerNoInvites": {
+    "en": "No invite codes yet"
+  },
+  "providerInviteConsumed": {
+    "en": "Used"
+  },
+  "providerInviteActive": {
+    "en": "Active"
+  },
+  "splashTagline": {
+    "en": "Your smart shield against triggers"
+  },
+  "splashGetStarted": {
+    "en": "Get Started"
+  },
+  "splashAlreadyHaveAccount": {
+    "en": "Already have an account?"
+  },
+  "splashSignIn": {
+    "en": "Sign in"
+  },
+  "authForgotPassword": {
+    "en": "Forgot password?"
+  },
+  "authNoAccount": {
+    "en": "No account?"
+  },
+  "authUseBiometricHint": {
+    "en": "Use Face ID or fingerprint to unlock"
+  },
+  "authTouchSensorHint": {
+    "en": "Touch sensor or look at camera"
+  },
+  "mockChooseLanguage": {
+    "en": "Choose Language"
+  },
+  "mockYourLocation": {
+    "en": "Your Location"
+  },
+  "mockUseCurrentLocation": {
+    "en": "Use Current Location"
+  },
+  "mockLocationTrapOnly": {
+    "en": "Location is used for TRAP air quality data only"
+  },
+  "mockLabelYourPlace": {
+    "en": "Label Your Place"
+  },
+  "mockSchool": {
+    "en": "School"
+  },
+  "mockWork": {
+    "en": "Work"
+  },
+  "mockOther": {
+    "en": "Other"
+  },
+  "mockEmergencyOnePerson": {
+    "en": "One person to call in an emergency"
+  },
+  "mockContactName": {
+    "en": "Contact Name"
+  },
+  "mockPhoneNumber": {
+    "en": "Phone Number"
+  },
+  "mockProviderPairing": {
+    "en": "Provider Pairing"
+  },
+  "mockPairingOptional": {
+    "en": "Optional — you can add this later in Settings"
+  },
+  "mockNext": {
+    "en": "Next"
+  },
+  "mockProfessionalProfile": {
+    "en": "Professional Profile"
+  },
+  "mockStep2Of4": {
+    "en": "Step 2 of 4"
+  },
+  "mockTellPractice": {
+    "en": "Tell us about your medical practice"
+  },
+  "mockSpecialtyLabel": {
+    "en": "Specialty"
+  },
+  "mockClinicLabel": {
+    "en": "Practice / Clinic Name"
+  },
+  "mockNpiFormatOnly": {
+    "en": "Format check only. NPI verification occurs after submission."
+  },
+  "mockCredentialsSecure": {
+    "en": "Your credentials are encrypted and stored securely. We never share provider data without consent."
+  },
+  "actPast4Weeks": {
+    "en": "In the past 4 weeks"
+  },
+  "actQ1": {
+    "en": "How much of the time did your asthma keep you from getting as much done at work, school or home?"
+  },
+  "actQ2": {
+    "en": "How often have you had shortness of breath?"
+  },
+  "actQ3": {
+    "en": "How often did your asthma symptoms wake you up at night or earlier than usual?"
+  },
+  "actQ4": {
+    "en": "How often have you used your rescue inhaler or nebulizer medication?"
+  },
+  "actQ5": {
+    "en": "How would you rate your asthma control?"
+  },
+  "actOpt1": {
+    "en": "All of the time"
+  },
+  "actOpt2": {
+    "en": "Most of the time"
+  },
+  "actOpt3": {
+    "en": "Some of the time"
+  },
+  "actOpt4": {
+    "en": "A little of the time"
+  },
+  "actOpt5": {
+    "en": "None of the time"
+  },
+  "actQ5Opt1": {
+    "en": "Not controlled at all"
+  },
+  "actQ5Opt2": {
+    "en": "Poorly controlled"
+  },
+  "actQ5Opt3": {
+    "en": "Somewhat controlled"
+  },
+  "actQ5Opt4": {
+    "en": "Well controlled"
+  },
+  "actQ5Opt5": {
+    "en": "Completely controlled"
+  },
+  "panicNoAutoDial": {
+    "en": "Buttons open the phone dialer. Calls are never placed automatically."
+  },
+  "panicCallNamed": {
+    "en": "Call {name}",
+    "placeholders": [
+      "name"
+    ]
+  },
+  "panicDialFailed": {
+    "en": "Could not open the phone dialer on this device."
+  },
+  "s5ActNotice": {
+    "en": "Your answers are saved so you can share them with your clinician. This version of the questionnaire has not been checked against the official scoring, so the app does not show a score."
+  },
+  "s5ActSaved": {
+    "en": "Your answers were saved."
+  },
+  "s5ActSubtitle": {
+    "en": "5 questions about the past 4 weeks"
+  },
+  "s5ActTitle": {
+    "en": "Asthma control questionnaire"
+  },
+  "s5AddDetails": {
+    "en": "Add details"
+  },
+  "s5AddRecord": {
+    "en": "Add record"
+  },
+  "s5Back": {
+    "en": "Back"
+  },
+  "s5Cancel": {
+    "en": "Cancel"
+  },
+  "s5Change": {
+    "en": "Change"
+  },
+  "s5Delete": {
+    "en": "Delete"
+  },
+  "s5DeleteConfirm": {
+    "en": "Delete this entry?"
+  },
+  "s5DeleteFailed": {
+    "en": "Could not delete. Please try again."
+  },
+  "s5Edit": {
+    "en": "Edit"
+  },
+  "s5EntryRemoved": {
+    "en": "Entry removed."
+  },
+  "s5FieldDate": {
+    "en": "Date"
+  },
+  "s5FieldMedication": {
+    "en": "Medication"
+  },
+  "s5FieldNote": {
+    "en": "Note (optional)"
+  },
+  "s5FieldPuffs": {
+    "en": "Number of puffs (optional)"
+  },
+  "s5FieldReason": {
+    "en": "Reason (optional)"
+  },
+  "s5FieldTime": {
+    "en": "Time"
+  },
+  "s5FilterAll": {
+    "en": "All"
+  },
+  "s5FilterInhaler": {
+    "en": "Inhaler"
+  },
+  "s5FilterMedCheck": {
+    "en": "Medication check-in"
+  },
+  "s5FilterSymptoms": {
+    "en": "Symptoms"
+  },
+  "s5FromUrgentHelp": {
+    "en": "Logged from Urgent help"
+  },
+  "s5InhalerEditTitle": {
+    "en": "Inhaler use details"
+  },
+  "s5InhalerEntry": {
+    "en": "Inhaler use"
+  },
+  "s5InhalerLogged": {
+    "en": "Inhaler use logged."
+  },
+  "s5InhalerOneEntryHint": {
+    "en": "Each save is one inhaler-use entry. It is not counted as one puff or one day."
+  },
+  "s5InhalerUnknownCount": {
+    "en": "Medication not identified: {n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "s5Last30Days": {
+    "en": "Last 30 days"
+  },
+  "s5Last7Days": {
+    "en": "Last 7 days"
+  },
+  "s5LogInhaler": {
+    "en": "Log inhaler use"
+  },
+  "s5LogLegend": {
+    "en": "Each line is one saved entry. Days without entries are “not recorded”, which is different from zero."
+  },
+  "s5LogSymptoms": {
+    "en": "Log symptoms"
+  },
+  "s5MedAdd": {
+    "en": "Add medication"
+  },
+  "s5MedCheckCounts": {
+    "en": "Days used: {a} · not used: {b} · don't remember: {c} · not recorded: {d}",
+    "placeholders": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  "s5MedCheckIntro": {
+    "en": "A self-reported check of whether you used your medicine. It is not based on pharmacy records."
+  },
+  "s5MedCheckQuestion": {
+    "en": "Did you use your medicine as planned?"
+  },
+  "s5MedCheckTitle": {
+    "en": "Today's medication check-in"
+  },
+  "s5MedChooseHint": {
+    "en": "Choose a medication, or “I don't know the medication name”."
+  },
+  "s5MedDailyCheck": {
+    "en": "Daily check-in"
+  },
+  "s5MedDailyCheckHint": {
+    "en": "Show “Today's medication check-in” on Home. Turn on only if your clinician asked you to use this medicine every day."
+  },
+  "s5MedDefault": {
+    "en": "Default for quick logging"
+  },
+  "s5MedDefaultHint": {
+    "en": "Used when you tap “Log inhaler use” on Home."
+  },
+  "s5MedEdit": {
+    "en": "Edit medication"
+  },
+  "s5MedNameLabel": {
+    "en": "Medication name (as on your label)"
+  },
+  "s5MedNotApplicable": {
+    "en": "Not scheduled for today"
+  },
+  "s5MedNotApplicableDays": {
+    "en": "Not scheduled: {n} days",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "s5MedNotRecorded": {
+    "en": "Medication not recorded"
+  },
+  "s5MedNotSure": {
+    "en": "I don't remember"
+  },
+  "s5MedNotUsed": {
+    "en": "I did not use it"
+  },
+  "s5MedOther": {
+    "en": "Another name"
+  },
+  "s5MedOtherHint": {
+    "en": "Type the medication name"
+  },
+  "s5MedReasonCost": {
+    "en": "Cost"
+  },
+  "s5MedReasonForgot": {
+    "en": "Forgot"
+  },
+  "s5MedReasonNoMedicine": {
+    "en": "Didn't have the medicine"
+  },
+  "s5MedReasonQuestion": {
+    "en": "Reason (optional)"
+  },
+  "s5MedUnknown": {
+    "en": "I don't know the medication name"
+  },
+  "s5MedUnknownShort": {
+    "en": "Medication not identified"
+  },
+  "s5MedUsed": {
+    "en": "I used it"
+  },
+  "s5MyLogTitle": {
+    "en": "My log"
+  },
+  "s5MyMedsEmpty": {
+    "en": "No medications saved yet."
+  },
+  "s5MyMedsHint": {
+    "en": "Names you confirmed, to make logging faster. This is not a dosing recommendation."
+  },
+  "s5MyMedsTitle": {
+    "en": "My medications"
+  },
+  "s5NoAnswer": {
+    "en": "Prefer not to answer"
+  },
+  "s5NoRecordsYet": {
+    "en": "No records yet"
+  },
+  "s5NoSymptomDays": {
+    "en": "Days marked “no symptoms”: {n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "s5NotRecorded": {
+    "en": "Not recorded"
+  },
+  "s5PeriodAndRecordedDays": {
+    "en": "Period: {days} days · Days with records: {n}",
+    "placeholders": [
+      "days",
+      "n"
+    ]
+  },
+  "s5PuffsValue": {
+    "en": "{n, plural, =1{1 puff} other{{n} puffs}}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "s5QuestionOf": {
+    "en": "Question {n} of {total}",
+    "placeholders": [
+      "n",
+      "total"
+    ]
+  },
+  "s5ReasonBeforeActivity": {
+    "en": "Before activity"
+  },
+  "s5ReasonOther": {
+    "en": "Other"
+  },
+  "s5ReasonSymptoms": {
+    "en": "Because of symptoms"
+  },
+  "s5RecentInhaler": {
+    "en": "Inhaler use entries: {n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "s5RecentSymptomDays": {
+    "en": "Days with symptoms: {n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "s5RecordsLoadFailed": {
+    "en": "Couldn't load your records. Please try again."
+  },
+  "s5Save": {
+    "en": "Save"
+  },
+  "s5Saved": {
+    "en": "Saved."
+  },
+  "s5SaveFailed": {
+    "en": "Could not save. Your entries are still here."
+  },
+  "s5SymActivityLimited": {
+    "en": "Activities limited"
+  },
+  "s5SymCough": {
+    "en": "Cough"
+  },
+  "s5SymNightWaking": {
+    "en": "Woke up at night"
+  },
+  "s5SymNone": {
+    "en": "No symptoms"
+  },
+  "s5SymOther": {
+    "en": "Something else"
+  },
+  "s5SymOtherHint": {
+    "en": "Describe in your own words"
+  },
+  "s5SymShortBreath": {
+    "en": "Hard to breathe"
+  },
+  "s5SymWheeze": {
+    "en": "Wheezing"
+  },
+  "s5SymptomEditTitle": {
+    "en": "Edit symptoms"
+  },
+  "s5SymptomEntry": {
+    "en": "Symptoms"
+  },
+  "s5SymptomNoneHint": {
+    "en": "Days you don't record are shown as “not recorded”, not as “no symptoms”."
+  },
+  "s5SymptomQuestion": {
+    "en": "What did you notice?"
+  },
+  "s5Today": {
+    "en": "Today"
+  },
+  "s5Undo": {
+    "en": "Undo"
+  },
+  "s5UrgentActionPlan": {
+    "en": "If your clinician gave you an asthma action plan, follow it."
+  },
+  "s5UrgentHelp": {
+    "en": "Urgent help"
+  },
+  "s5UrgentIntro": {
+    "en": "If breathing is very hard or not getting better, call 911."
+  },
+  "s5UrgentLogHint": {
+    "en": "Optional: save a record that you used your inhaler."
+  },
+  "s5UrgentNoContact": {
+    "en": "No emergency contact yet. Add one in Settings → Help."
+  },
+  "s6AddTime": {
+    "en": "Add a time"
+  },
+  "s6DoseLater": {
+    "en": "Check later"
+  },
+  "s6DoseNotUsed": {
+    "en": "I could not use it"
+  },
+  "s6DoseUsed": {
+    "en": "I used it"
+  },
+  "s6HomeWaterNo": {
+    "en": "No"
+  },
+  "s6HomeWaterQuestion": {
+    "en": "Was there a leak or flooding at home?"
+  },
+  "s6HomeWaterYes": {
+    "en": "Yes"
+  },
+  "s6OccurredLabel": {
+    "en": "When it happened"
+  },
+  "s6PuffsEach": {
+    "en": "Puffs each time"
+  },
+  "s6ReminderBodyNamed": {
+    "en": "Time to confirm {name}",
+    "placeholders": [
+      "name"
+    ]
+  },
+  "s6ReminderBodyPrivate": {
+    "en": "Time to confirm your medicine"
+  },
+  "s6ReminderChannel": {
+    "en": "Reminders at the dose times you saved. Not a 30-minute alert."
+  },
+  "s6ReminderTitle": {
+    "en": "Medicine check"
+  },
+  "s6RoleBoth": {
+    "en": "Daily and as needed"
+  },
+  "s6RoleController": {
+    "en": "Daily medicine"
+  },
+  "s6RoleRescue": {
+    "en": "As needed"
+  },
+  "s6ScheduleTimes": {
+    "en": "Times you take it"
+  },
+  "cnTagline": {
+    "en": "Insurance letters, clear next steps"
+  },
+  "cnDemoBadge": {
+    "en": "Sample"
+  },
+  "cnDemoBadgeLong": {
+    "en": "Sample with made-up data. Results are fixed."
+  },
+  "cnAuthSignInTitle": {
+    "en": "Sign in"
+  },
+  "cnAuthCreateTitle": {
+    "en": "Create account"
+  },
+  "cnAuthResetTitle": {
+    "en": "Reset password"
+  },
+  "cnAuthSignIn": {
+    "en": "Sign in"
+  },
+  "cnAuthCreate": {
+    "en": "Create account"
+  },
+  "cnAuthSendReset": {
+    "en": "Send reset link"
+  },
+  "cnAuthProfileError": {
+    "en": "You are signed in, but your account could not be loaded ({code}).",
+    "placeholders": [
+      "code"
+    ]
+  },
+  "cnRetry": {
+    "en": "Try again"
+  },
+  "cnSignOut": {
+    "en": "Sign out"
+  },
+  "cnAuthPreparingAccount": {
+    "en": "Setting up your account…"
+  },
+  "cnAuthNameLabel": {
+    "en": "Name (optional)"
+  },
+  "cnAuthNameHelper": {
+    "en": "Shown on your packets. You can change it later."
+  },
+  "cnAuthEmailLabel": {
+    "en": "Email"
+  },
+  "cnAuthPasswordLabel": {
+    "en": "Password"
+  },
+  "cnAuthPasswordHelper": {
+    "en": "At least 8 characters"
+  },
+  "cnAuthShowPassword": {
+    "en": "Show password"
+  },
+  "cnAuthHidePassword": {
+    "en": "Hide password"
+  },
+  "cnAuthPasswordRequired": {
+    "en": "Enter your password"
+  },
+  "cnAuthCheckEmail": {
+    "en": "We sent a confirmation link to {email}. Open it on this phone, then sign in.",
+    "placeholders": [
+      "email"
+    ]
+  },
+  "cnAuthResetSent": {
+    "en": "If an account exists for {email}, a reset link is on its way. Open it on this phone.",
+    "placeholders": [
+      "email"
+    ]
+  },
+  "cnAuthResent": {
+    "en": "Sent again."
+  },
+  "cnAuthResend": {
+    "en": "Resend email"
+  },
+  "cnAuthSignInInstead": {
+    "en": "I confirmed. Sign in"
+  },
+  "cnAuthForgot": {
+    "en": "Forgot password?"
+  },
+  "cnAuthNoAccount": {
+    "en": "New here? Create an account"
+  },
+  "cnAuthHaveAccount": {
+    "en": "Have an account? Sign in"
+  },
+  "cnAuthResetHint": {
+    "en": "Enter your email and we will send a link to set a new password."
+  },
+  "cnAuthBackToSignIn": {
+    "en": "Back to sign in"
+  },
+  "cnAuthPrivacyLine": {
+    "en": "Your letters and records are private to your account."
+  },
+  "cnAuthPasswordUpdated": {
+    "en": "Password updated."
+  },
+  "cnAuthNewPasswordTitle": {
+    "en": "Set a new password"
+  },
+  "cnAuthNewPasswordLabel": {
+    "en": "New password"
+  },
+  "cnAuthSavePassword": {
+    "en": "Save password"
+  },
+  "cnLater": {
+    "en": "Later"
+  },
+  "cnAuthErrInvalidCredentials": {
+    "en": "Email or password is not correct."
+  },
+  "cnAuthErrNotConfirmed": {
+    "en": "Please confirm your email first. Check your inbox or resend the link."
+  },
+  "cnAuthErrExists": {
+    "en": "An account with this email already exists. Sign in instead."
+  },
+  "cnAuthErrWeakPassword": {
+    "en": "Choose a stronger password (at least 8 characters)."
+  },
+  "cnAuthErrSamePassword": {
+    "en": "Use a password different from your old one."
+  },
+  "cnAuthErrRateLimited": {
+    "en": "Too many tries. Wait a minute and try again."
+  },
+  "cnAuthErrInvalidEmail": {
+    "en": "Check the email address."
+  },
+  "cnAuthErrEmailNotAuthorized": {
+    "en": "We could not send email to this address right now. Try again later."
+  },
+  "cnAuthErrDisabled": {
+    "en": "This sign-in method is turned off."
+  },
+  "cnAuthErrSessionExpired": {
+    "en": "Your session ended. Please sign in again."
+  },
+  "cnAuthErrUnknown": {
+    "en": "Something went wrong ({code}). Try again.",
+    "placeholders": [
+      "code"
+    ]
+  },
+  "cnErrNetwork": {
+    "en": "No connection. Check your internet and try again."
+  },
+  "cnErrServiceDown": {
+    "en": "The service is not responding. Try again in a few minutes."
+  },
+  "cnTabHome": {
+    "en": "Home"
+  },
+  "cnTabCases": {
+    "en": "Cases"
+  },
+  "cnTabRecords": {
+    "en": "Records"
+  },
+  "cnTabAccount": {
+    "en": "Account"
+  },
+  "cnHomeHeadline": {
+    "en": "Make sense of your insurance letter."
+  },
+  "cnScanLetter": {
+    "en": "Scan a letter"
+  },
+  "cnUploadFile": {
+    "en": "Upload PDF / photo"
+  },
+  "cnTryDemo": {
+    "en": "Try demo"
+  },
+  "cnHomeSignInLine": {
+    "en": "Saving your cases needs an account."
+  },
+  "cnServiceNotConfigured": {
+    "en": "This build is not connected to the server. Only the demo works."
+  },
+  "cnContinueCase": {
+    "en": "Continue your case"
+  },
+  "cnHowItWorks": {
+    "en": "How it works"
+  },
+  "cnStep1Title": {
+    "en": "Read the letter"
+  },
+  "cnStep1Body": {
+    "en": "Take a photo. We find the reason, the next step and the date."
+  },
+  "cnStep2Title": {
+    "en": "Gather records"
+  },
+  "cnStep2Body": {
+    "en": "Match what the letter asks for to your own records."
+  },
+  "cnStep3Title": {
+    "en": "Create a packet"
+  },
+  "cnStep3Body": {
+    "en": "Get a one-page doctor summary and a draft review request."
+  },
+  "cnRecentCases": {
+    "en": "Other cases"
+  },
+  "cnNoCasesYet": {
+    "en": "No cases yet"
+  },
+  "cnNoOtherCases": {
+    "en": "No other cases."
+  },
+  "cnSeeAllCases": {
+    "en": "See all cases"
+  },
+  "cnNoCasesBody": {
+    "en": "Scan an insurance letter to start."
+  },
+  "cnCasesSignInTitle": {
+    "en": "Sign in to see your cases"
+  },
+  "cnCasesSignInBody": {
+    "en": "Or open the demo to see how it works."
+  },
+  "cnCaseDeleted": {
+    "en": "Case deleted."
+  },
+  "cnCaseUntitled": {
+    "en": "Insurance letter"
+  },
+  "cnStatusReading": {
+    "en": "Reading letter"
+  },
+  "cnStatusNeedsReview": {
+    "en": "Needs review"
+  },
+  "cnStatusGatherRecords": {
+    "en": "Gather records"
+  },
+  "cnStatusPacketReady": {
+    "en": "Packet ready"
+  },
+  "cnStatusNeedsAttention": {
+    "en": "Needs attention"
+  },
+  "cnStatusNotStarted": {
+    "en": "Not started"
+  },
+  "cnNextWaitReading": {
+    "en": "We are reading the letter."
+  },
+  "cnNextTryAgain": {
+    "en": "Reading stopped. Open the case to try again."
+  },
+  "cnNextFactsToConfirm": {
+    "en": "{count, plural, =1{1 fact to confirm} other{{count} facts to confirm}}",
+    "placeholders": [
+      "count"
+    ]
+  },
+  "cnNextItemsAttached": {
+    "en": "{done} of {total} requested items handled",
+    "placeholders": [
+      "done",
+      "total"
+    ]
+  },
+  "cnNextSharePacket": {
+    "en": "Packet ready to share"
+  },
+  "cnNextCreatePacket": {
+    "en": "Next: create the packet"
+  },
+  "cnDateToCheckShort": {
+    "en": "Date to check: {date}",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnDatePassedShort": {
+    "en": "Date passed: {date}",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnMoreActions": {
+    "en": "More actions"
+  },
+  "cnDeleteCase": {
+    "en": "Delete case"
+  },
+  "cnDeleteCaseTitle": {
+    "en": "Delete this case?"
+  },
+  "cnDeleteCaseBody": {
+    "en": "This removes the letter pages, the facts read from them, linked record summaries and packets. Your medication and symptom records stay."
+  },
+  "cnCancel": {
+    "en": "Cancel"
+  },
+  "cnDelete": {
+    "en": "Delete"
+  },
+  "cnDeleteFailed": {
+    "en": "Could not delete. Check your connection and try again."
+  },
+  "cnKindInitialDenial": {
+    "en": "Drug coverage denial"
+  },
+  "cnKindInfoRequest": {
+    "en": "Request for more information"
+  },
+  "cnKindReauth": {
+    "en": "Renewal (reauthorization) notice"
+  },
+  "cnKindFinalDenial": {
+    "en": "Final appeal decision"
+  },
+  "cnKindEob": {
+    "en": "Bill or explanation of benefits"
+  },
+  "cnKindOther": {
+    "en": "Other letter"
+  },
+  "cnKindUncertain": {
+    "en": "Letter type not clear"
+  },
+  "cnFieldPatientName": {
+    "en": "Patient name"
+  },
+  "cnFieldPlanName": {
+    "en": "Plan"
+  },
+  "cnFieldMemberId": {
+    "en": "Member ID"
+  },
+  "cnFieldCaseReference": {
+    "en": "Case or reference number"
+  },
+  "cnFieldMedication": {
+    "en": "Medication (as written)"
+  },
+  "cnFieldDose": {
+    "en": "Dose (as written)"
+  },
+  "cnFieldNoticeDate": {
+    "en": "Notice date"
+  },
+  "cnFieldContact": {
+    "en": "Contact"
+  },
+  "cnFieldSubmissionRoute": {
+    "en": "Where to send"
+  },
+  "cnFactEdited": {
+    "en": "Edited by you"
+  },
+  "cnFactChecked": {
+    "en": "Checked"
+  },
+  "cnFactNotInLetter": {
+    "en": "Not in letter"
+  },
+  "cnFactNeedsCheck": {
+    "en": "Needs check"
+  },
+  "cnFactFromLetter": {
+    "en": "From letter"
+  },
+  "cnWhoYou": {
+    "en": "You"
+  },
+  "cnWhoCareTeam": {
+    "en": "Care team"
+  },
+  "cnWhoPlan": {
+    "en": "Plan"
+  },
+  "cnWhoUnknown": {
+    "en": "Not sure"
+  },
+  "cnReqLinked": {
+    "en": "Linked"
+  },
+  "cnReqAskedCareTeam": {
+    "en": "Asked care team"
+  },
+  "cnReqNotAvailable": {
+    "en": "Not available"
+  },
+  "cnReqNotNeeded": {
+    "en": "Not needed"
+  },
+  "cnReqNeeded": {
+    "en": "Needed"
+  },
+  "cnReqReset": {
+    "en": "Mark as needed"
+  },
+  "cnRecMedication": {
+    "en": "Medication history"
+  },
+  "cnRecSymptoms": {
+    "en": "Symptom log"
+  },
+  "cnRecLocalContext": {
+    "en": "Local context"
+  },
+  "cnRecPrn": {
+    "en": "As-needed inhaler"
+  },
+  "cnDemoTitle": {
+    "en": "Demo"
+  },
+  "cnDemoReset": {
+    "en": "Reset demo"
+  },
+  "cnDemoResetDone": {
+    "en": "Demo reset."
+  },
+  "cnDemoIntro": {
+    "en": "Three made-up letters with fixed results, so you can see each step. Nothing is uploaded."
+  },
+  "cnUpEmpty": {
+    "en": "That file is empty."
+  },
+  "cnUpTooLarge": {
+    "en": "Each file must be {mb} MB or smaller.",
+    "placeholders": [
+      "mb"
+    ]
+  },
+  "cnUpCaseTooLarge": {
+    "en": "All pages together must be {mb} MB or smaller.",
+    "placeholders": [
+      "mb"
+    ]
+  },
+  "cnUpTooManyPages": {
+    "en": "Up to {max} pages per letter.",
+    "placeholders": [
+      "max"
+    ]
+  },
+  "cnUpUnsupported": {
+    "en": "Use JPG, PNG or PDF. For HEIC photos, take a new photo here."
+  },
+  "cnUpBadFile": {
+    "en": "This file cannot be read. Try another photo or PDF."
+  },
+  "cnUpEncrypted": {
+    "en": "This PDF is password-protected. Save an unlocked copy or take photos."
+  },
+  "cnCameraUnavailable": {
+    "en": "The camera is not available. You can upload a photo or PDF instead."
+  },
+  "cnPhotosUnavailable": {
+    "en": "Photos cannot be opened. Allow photo access in settings, or upload a PDF."
+  },
+  "cnFilesUnavailable": {
+    "en": "Files cannot be opened right now. Try again."
+  },
+  "cnUploadFailed": {
+    "en": "Upload did not finish. Your pages are still here. Try again."
+  },
+  "cnCaptureTitle": {
+    "en": "Add letter pages"
+  },
+  "cnReplacePagesTitle": {
+    "en": "Replace letter pages"
+  },
+  "cnOpening": {
+    "en": "Opening…"
+  },
+  "cnCaptureEmptyTitle": {
+    "en": "Add the pages of your letter"
+  },
+  "cnCaptureTips": {
+    "en": "Lay the page flat in good light and fit all four corners in the frame. Add every page, in order."
+  },
+  "cnTakePhoto": {
+    "en": "Take photo"
+  },
+  "cnAddPage": {
+    "en": "Add page"
+  },
+  "cnAddPhoto": {
+    "en": "Photo"
+  },
+  "cnAddPdf": {
+    "en": "PDF"
+  },
+  "cnPagesSummary": {
+    "en": "{pages, plural, =1{1 page} other{{pages} pages}} · {size} MB",
+    "placeholders": [
+      "pages",
+      "size"
+    ]
+  },
+  "cnUploadConsent": {
+    "en": "Uploading sends these pages to the CoverNote server, where an AI service reads them for you. You can delete the case at any time."
+  },
+  "cnStageUploading": {
+    "en": "Uploading"
+  },
+  "cnUploadAndRead": {
+    "en": "Upload and read"
+  },
+  "cnPageN": {
+    "en": "Page {n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "cnPdfPages": {
+    "en": "File {n} · PDF, {count, plural, =1{1 page} other{{count} pages}}",
+    "placeholders": [
+      "n",
+      "count"
+    ]
+  },
+  "cnPreviewPage": {
+    "en": "Preview page {n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "cnRotate": {
+    "en": "Rotate"
+  },
+  "cnRetake": {
+    "en": "Retake"
+  },
+  "cnRemovePage": {
+    "en": "Remove"
+  },
+  "cnReorder": {
+    "en": "Drag to reorder"
+  },
+  "cnServiceUnavailableBody": {
+    "en": "The letter reader is not set up right now. Your pages are saved; try again later."
+  },
+  "cnNeedNewPagesBody": {
+    "en": "Take clearer photos or use fewer pages, then upload again."
+  },
+  "cnPagesKept": {
+    "en": "Your pages are saved. Nothing was changed."
+  },
+  "cnReplacePages": {
+    "en": "Replace pages"
+  },
+  "cnTryAgain": {
+    "en": "Try again"
+  },
+  "cnStageReading": {
+    "en": "Reading"
+  },
+  "cnStageChecking": {
+    "en": "Checking"
+  },
+  "cnStageReady": {
+    "en": "Ready"
+  },
+  "cnReadingTitle": {
+    "en": "Reading your letter"
+  },
+  "cnReadingBody": {
+    "en": "When it is done, you check what we found against the letter."
+  },
+  "cnReadingLeaveOk": {
+    "en": "You can leave this screen. Reading continues and your case is saved."
+  },
+  "cnStartReading": {
+    "en": "Start reading"
+  },
+  "cnStepLetter": {
+    "en": "Letter"
+  },
+  "cnStepReview": {
+    "en": "Review"
+  },
+  "cnStepEvidence": {
+    "en": "Evidence"
+  },
+  "cnStepPacket": {
+    "en": "Packet"
+  },
+  "cnStepOf": {
+    "en": "Step {n} of {total}: {name}",
+    "placeholders": [
+      "n",
+      "total",
+      "name"
+    ]
+  },
+  "cnSaving": {
+    "en": "Saving…"
+  },
+  "cnSaved": {
+    "en": "Saved"
+  },
+  "cnNotSavedRetry": {
+    "en": "Not saved · Retry"
+  },
+  "cnViewOriginal": {
+    "en": "View original pages"
+  },
+  "cnLetterPagesRead": {
+    "en": "{count, plural, =1{1 page read} other{{count} pages read}}",
+    "placeholders": [
+      "count"
+    ]
+  },
+  "cnPagesHardToRead": {
+    "en": "Hard to read: page {list}. Check these facts carefully or retake the page.",
+    "placeholders": [
+      "list"
+    ]
+  },
+  "cnRetakePages": {
+    "en": "Retake pages"
+  },
+  "cnHardToRead": {
+    "en": "Hard to read"
+  },
+  "cnContinueToReview": {
+    "en": "Continue to review"
+  },
+  "cnOriginalPages": {
+    "en": "Original pages"
+  },
+  "cnNoOriginal": {
+    "en": "No original pages are stored."
+  },
+  "cnCheckDetails": {
+    "en": "Check the details"
+  },
+  "cnCheckDetailsHint": {
+    "en": "Compare each value with your letter. Tap a quote to see where it came from."
+  },
+  "cnItemsLeftToCheck": {
+    "en": "{count, plural, =1{Check 1 more item to continue} other{Check {count} more items to continue}}",
+    "placeholders": [
+      "count"
+    ]
+  },
+  "cnContinueToEvidence": {
+    "en": "Continue to evidence"
+  },
+  "cnSeePage": {
+    "en": "See page {n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "cnWhatLetterIs": {
+    "en": "What this letter is"
+  },
+  "cnLooksRight": {
+    "en": "Looks right"
+  },
+  "cnChange": {
+    "en": "Change"
+  },
+  "cnCardWhyDenied": {
+    "en": "Why it was denied"
+  },
+  "cnCardWhatTheyNeed": {
+    "en": "What they asked for"
+  },
+  "cnCardWhatItSays": {
+    "en": "What the letter says"
+  },
+  "cnNoReasonFound": {
+    "en": "No reason was found in the letter."
+  },
+  "cnCardNextStep": {
+    "en": "Next step"
+  },
+  "cnNextDenial": {
+    "en": "{count, plural, =0{Ask your care team to request a review. The letter does not list specific items.} =1{Ask your care team to request a review. The letter lists 1 item to send.} other{Ask your care team to request a review. The letter lists {count} items to send.}}",
+    "placeholders": [
+      "count"
+    ]
+  },
+  "cnNextInfoRequest": {
+    "en": "{count, plural, =0{Send the information the plan asked for by the date below.} =1{Send the 1 item the plan asked for by the date below.} other{Send the {count} items the plan asked for by the date below.}}",
+    "placeholders": [
+      "count"
+    ]
+  },
+  "cnNextReauth": {
+    "en": "Note when the current approval ends and ask your care team to start the renewal."
+  },
+  "cnNextFinal": {
+    "en": "This is a final decision. CoverNote does not draft a first review request for it. Ask the plan or your care team about the options the letter lists."
+  },
+  "cnNextEob": {
+    "en": "This looks like a bill or benefits statement, not a denial. Check it with the plan's member services."
+  },
+  "cnNextUncertain": {
+    "en": "First confirm what kind of letter this is, above."
+  },
+  "cnWhereToSend": {
+    "en": "Where to send: {route}",
+    "placeholders": [
+      "route"
+    ]
+  },
+  "cnWhoToCall": {
+    "en": "Contact: {contact}",
+    "placeholders": [
+      "contact"
+    ]
+  },
+  "cnCardDate": {
+    "en": "Date to check"
+  },
+  "cnDateCalculated": {
+    "en": "Calculated: {anchor} + {days} calendar days",
+    "placeholders": [
+      "anchor",
+      "days"
+    ]
+  },
+  "cnReceivedDateWord": {
+    "en": "date you received it"
+  },
+  "cnNoticeDateWord": {
+    "en": "notice date"
+  },
+  "cnDateEnteredByYou": {
+    "en": "Entered by you"
+  },
+  "cnDateFromLetter": {
+    "en": "Stated in the letter"
+  },
+  "cnReceivedOn": {
+    "en": "You received it on {date}",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnDatePassed": {
+    "en": "This date has passed. Call the plan to ask what you can still do."
+  },
+  "cnNeedReceivedDate": {
+    "en": "The letter gives {days} calendar days from the day you received it. When did it arrive?",
+    "placeholders": [
+      "days"
+    ]
+  },
+  "cnEnterReceivedDate": {
+    "en": "Enter date received"
+  },
+  "cnDateConflict": {
+    "en": "The letter gives different dates. Ask the plan which one applies, then pick it."
+  },
+  "cnUseThisDate": {
+    "en": "Use {date}",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnDateUnclear": {
+    "en": "The wording is unclear or counts business days, so CoverNote does not calculate it. Ask the plan for the exact date."
+  },
+  "cnNoDeadline": {
+    "en": "No review deadline was found in the letter."
+  },
+  "cnReplyBy": {
+    "en": "Reply to the information request by {date} (from the letter)",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnEnterDatePlanGave": {
+    "en": "Enter a date"
+  },
+  "cnUseLetterDate": {
+    "en": "Use the letter's date"
+  },
+  "cnLeaveUnknown": {
+    "en": "Leave as unknown for now"
+  },
+  "cnDateUnknownChecked": {
+    "en": "Unknown, noted"
+  },
+  "cnTypeAsWritten": {
+    "en": "Type it exactly as the letter shows."
+  },
+  "cnCheckThisValue": {
+    "en": "This value looks unusual. Compare it with the letter."
+  },
+  "cnDone": {
+    "en": "Done"
+  },
+  "cnEdit": {
+    "en": "Edit"
+  },
+  "cnAdd": {
+    "en": "Add"
+  },
+  "cnNoRecordsToLink": {
+    "en": "No records from the last 30 days to link. You can still mark who has this item."
+  },
+  "cnLinkTitle": {
+    "en": "Link a record to: {label}",
+    "placeholders": [
+      "label"
+    ]
+  },
+  "cnLinkNote": {
+    "en": "Your own records support the request. They do not replace clinic notes or test results."
+  },
+  "cnMedLine": {
+    "en": "{taken} taken / {notTaken} not taken / {unknown} unknown of {scheduled} scheduled doses",
+    "placeholders": [
+      "taken",
+      "notTaken",
+      "unknown",
+      "scheduled"
+    ]
+  },
+  "cnPrnLine": {
+    "en": "As-needed: {uses} uses, {puffs} puffs",
+    "placeholders": [
+      "uses",
+      "puffs"
+    ]
+  },
+  "cnNoEntries": {
+    "en": "No entries"
+  },
+  "cnSymptomLine": {
+    "en": "Symptoms on {days} days, night waking on {night} days ({entries} of {total} days logged)",
+    "placeholders": [
+      "days",
+      "night",
+      "entries",
+      "total"
+    ]
+  },
+  "cnPmLine": {
+    "en": "PM2.5 data for {days} of {total} days; {high} days above AQI 100",
+    "placeholders": [
+      "days",
+      "total",
+      "high"
+    ]
+  },
+  "cnReportsLine": {
+    "en": "{count, plural, =1{1 self-report} other{{count} self-reports}}",
+    "placeholders": [
+      "count"
+    ]
+  },
+  "cnSyntheticData": {
+    "en": "Synthetic data"
+  },
+  "cnLetterAsksFor": {
+    "en": "What the letter asks for"
+  },
+  "cnNoItemsListed": {
+    "en": "The letter does not list specific items. You can add your own."
+  },
+  "cnAddItemLabel": {
+    "en": "Add an item to track"
+  },
+  "cnYourRecords": {
+    "en": "Your records ({from} – {to})",
+    "placeholders": [
+      "from",
+      "to"
+    ]
+  },
+  "cnLocalContextNote": {
+    "en": "Optional context. Not a measurement at your home and not a cause of symptoms."
+  },
+  "cnContinueToPacket": {
+    "en": "Continue to packet"
+  },
+  "cnAddedByYou": {
+    "en": "Added by you"
+  },
+  "cnFromLetter": {
+    "en": "From letter"
+  },
+  "cnWhoHasIt": {
+    "en": "Who has it: {who}",
+    "placeholders": [
+      "who"
+    ]
+  },
+  "cnLinkedTo": {
+    "en": "Linked: {record}",
+    "placeholders": [
+      "record"
+    ]
+  },
+  "cnSeeInLetter": {
+    "en": "See in letter"
+  },
+  "cnLinkRecords": {
+    "en": "Link my records"
+  },
+  "cnOtherStatus": {
+    "en": "Other status"
+  },
+  "cnInPacket": {
+    "en": "In packet"
+  },
+  "cnRemoveFromPacket": {
+    "en": "Remove from packet"
+  },
+  "cnAddToPacket": {
+    "en": "Add to packet"
+  },
+  "cnErrNotSavedYet": {
+    "en": "Your latest changes are not saved yet. Check your connection and try again."
+  },
+  "cnPacketChangedMeanwhile": {
+    "en": "Facts or records changed while the packet was being made. Generate it again."
+  },
+  "cnPacketFailed": {
+    "en": "The packet could not be made. Try again."
+  },
+  "cnBeforeSharingTitle": {
+    "en": "Before you share"
+  },
+  "cnBeforeSharingBody": {
+    "en": "This file has your name and health details. Share it only with your care team or your plan. Sharing does not submit anything for you."
+  },
+  "cnShare": {
+    "en": "Share"
+  },
+  "cnMethodFax": {
+    "en": "Fax"
+  },
+  "cnMethodMail": {
+    "en": "Mail"
+  },
+  "cnMethodPortal": {
+    "en": "Online portal"
+  },
+  "cnMethodInPerson": {
+    "en": "In person"
+  },
+  "cnMethodCareTeam": {
+    "en": "Care team sent it"
+  },
+  "cnMethodOther": {
+    "en": "Other"
+  },
+  "cnPacketNoDraftFinal": {
+    "en": "For a final decision, the packet has the doctor summary only. No first-level review draft is made."
+  },
+  "cnPacketNoDraftEob": {
+    "en": "For a bill or benefits statement, the packet has the doctor summary only."
+  },
+  "cnPacketNoDraftReauth": {
+    "en": "For a renewal notice, the packet has the doctor summary only, to help your care team renew."
+  },
+  "cnPacketNoDraftOther": {
+    "en": "Unless the letter is a denial or an information request, the packet has the doctor summary only."
+  },
+  "cnPacketContains": {
+    "en": "This packet will include"
+  },
+  "cnPartSummary": {
+    "en": "Doctor summary (1 page)"
+  },
+  "cnPartDraft": {
+    "en": "Review request draft (for your care team to complete)"
+  },
+  "cnPartLetterText": {
+    "en": "Appendix: the letter text"
+  },
+  "cnPacketEvidenceCount": {
+    "en": "{count, plural, =0{No record summaries added} =1{1 record summary added} other{{count} record summaries added}}",
+    "placeholders": [
+      "count"
+    ]
+  },
+  "cnIncludeLetterText": {
+    "en": "Add the letter text as an appendix"
+  },
+  "cnPacketStale": {
+    "en": "Facts or records changed since the last packet. Generate it again to update."
+  },
+  "cnGenerating": {
+    "en": "Generating…"
+  },
+  "cnGeneratePacket": {
+    "en": "Generate review packet"
+  },
+  "cnSaveOrPrint": {
+    "en": "Save or print"
+  },
+  "cnISentIt": {
+    "en": "I sent it"
+  },
+  "cnSharedOn": {
+    "en": "Shared on {date}",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnUserReportedSent": {
+    "en": "You reported sending it on {date} ({method})",
+    "placeholders": [
+      "date",
+      "method"
+    ]
+  },
+  "cnTabDoctorSummary": {
+    "en": "Doctor summary"
+  },
+  "cnTabReviewDraft": {
+    "en": "Review request draft"
+  },
+  "cnSentExplain": {
+    "en": "Record when and how it was sent. CoverNote does not send it or track a decision."
+  },
+  "cnSave": {
+    "en": "Save"
+  },
+  "cnCtxPm25": {
+    "en": "PM2.5 (AQI)"
+  },
+  "cnCtxNo2": {
+    "en": "NO₂"
+  },
+  "cnCtxOutdoorHumidity": {
+    "en": "Outdoor humidity"
+  },
+  "cnObservedOn": {
+    "en": "Observed {date}",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnCtxIntro": {
+    "en": "Air readings from a named source and things you noticed, kept separate. Add them to a case only if they help explain your records."
+  },
+  "cnCtxReadings": {
+    "en": "Air readings"
+  },
+  "cnCtxReadingsNote": {
+    "en": "Regional readings for the day they were observed. They do not measure traffic exhaust at your home."
+  },
+  "cnCtxAddReading": {
+    "en": "Add a reading"
+  },
+  "cnCtxReports": {
+    "en": "What you noticed"
+  },
+  "cnCtxReportsNote": {
+    "en": "Your own reports. They are not measurements."
+  },
+  "cnCtxAddReport": {
+    "en": "Add what you noticed"
+  },
+  "cnReportExhaust": {
+    "en": "Strong exhaust nearby"
+  },
+  "cnReportWater": {
+    "en": "Water intrusion at home"
+  },
+  "cnReportDamp": {
+    "en": "Damp or musty indoor area"
+  },
+  "cnOnDate": {
+    "en": "Date: {date}",
+    "placeholders": [
+      "date"
+    ]
+  },
+  "cnNoteOptional": {
+    "en": "Note (optional)"
+  },
+  "cnCtxWhat": {
+    "en": "Reading"
+  },
+  "cnCtxHumidityNote": {
+    "en": "Outdoor humidity is weather data. It does not show dampness or mold inside your home."
+  },
+  "cnCtxValue": {
+    "en": "Value"
+  },
+  "cnCtxValueInvalid": {
+    "en": "Enter a valid number."
+  },
+  "cnCtxSource": {
+    "en": "Source"
+  },
+  "cnCtxSourceHelp": {
+    "en": "Where the number came from, for example AirNow or a local monitor"
+  },
+  "cnCtxSourceRequired": {
+    "en": "Add the source."
+  },
+  "cnCtxPlace": {
+    "en": "Place (ZIP or town, optional)"
+  },
+  "cnRecordsSignInBody": {
+    "en": "Sign in to keep medication, symptom and local context records."
+  },
+  "cnRecordsYourRecords": {
+    "en": "Your records"
+  },
+  "cnRecMedicationSub": {
+    "en": "Medicines and doses you take"
+  },
+  "cnRecDailyLog": {
+    "en": "Daily log"
+  },
+  "cnRecDailyLogSub": {
+    "en": "Symptoms and inhaler use"
+  },
+  "cnRecLocalContextSub": {
+    "en": "Air readings and what you noticed"
+  },
+  "cnHelp": {
+    "en": "Help"
+  },
+  "cnUrgentHelp": {
+    "en": "Urgent help"
+  },
+  "cnUrgentHelpSub": {
+    "en": "Steps for a breathing emergency and calling 911"
+  },
+  "cnLast30Days": {
+    "en": "Last 30 days ({from} – {to})",
+    "placeholders": [
+      "from",
+      "to"
+    ]
+  },
+  "cnNoSchedule": {
+    "en": "No regular schedule set"
+  },
+  "cnRecordsUnknownNote": {
+    "en": "Days without an entry stay unknown. They are not counted as missed."
+  },
+  "cnDeleteAccountTitle": {
+    "en": "Delete your account?"
+  },
+  "cnDeleteAccountBody": {
+    "en": "This permanently deletes your account, cases, uploaded letters, packets and records. It cannot be undone."
+  },
+  "cnTypeDelete": {
+    "en": "Type DELETE to confirm"
+  },
+  "cnDeleteAccount": {
+    "en": "Delete account"
+  },
+  "cnAccountDeleted": {
+    "en": "Your account was deleted."
+  },
+  "cnDeleteAccountFailed": {
+    "en": "The account could not be deleted. Try again later."
+  },
+  "cnAccountSignedOut": {
+    "en": "You are not signed in."
+  },
+  "cnLanguage": {
+    "en": "Language"
+  },
+  "cnServiceStatus": {
+    "en": "Letter reading service"
+  },
+  "cnServiceReady": {
+    "en": "Available"
+  },
+  "cnServiceUnavailableShort": {
+    "en": "Not available right now"
+  },
+  "cnChecking": {
+    "en": "Checking…"
+  },
+  "cnServiceUnknown": {
+    "en": "Not checked"
+  },
+  "cnCheck": {
+    "en": "Check"
+  },
+  "cnAbout": {
+    "en": "About"
+  },
+  "cnAboutBody": {
+    "en": "CoverNote helps you read insurance letters about medicines and prepare papers for your care team. It does not submit anything to your plan, does not decide coverage, and is not medical advice."
+  },
+  "cnDangerZone": {
+    "en": "Delete account"
+  },
+  "cnErrServiceUnavailable": {
+    "en": "The letter reader is not available right now."
+  },
+  "cnErrBusy": {
+    "en": "The service is busy. Wait a minute and try again."
+  },
+  "cnErrSlow": {
+    "en": "Reading took too long. Try again."
+  },
+  "cnErrUnreadable": {
+    "en": "The pages could not be read. Retake them in better light."
+  },
+  "cnErrTooManyPages": {
+    "en": "Too many pages. Upload up to 10."
+  },
+  "cnErrTooLarge": {
+    "en": "The files are too large. Use fewer or smaller pages."
+  },
+  "cnErrStale": {
+    "en": "This case changed on another device. Showing the latest version."
+  },
+  "cnErrCaseGone": {
+    "en": "This case no longer exists."
+  },
+  "cnErrAttempts": {
+    "en": "Reading failed several times. Replace the pages or try again later."
+  },
+  "cnErrDemoUpload": {
+    "en": "The demo cannot read files. Sign in to scan your own letter."
+  },
+  "cnErrGeneric": {
+    "en": "Something went wrong ({code}). Try again.",
+    "placeholders": [
+      "code"
+    ]
+  },
+  "cnLanguageChoose": {
+    "en": "Choose your language"
+  },
+  "cnLanguageNote": {
+    "en": "Some text was translated by software and may have mistakes. Medicine names, doses, dates and quotes from your letter are never translated."
+  },
+  "cnLanguageButtonTooltip": {
+    "en": "Change language"
+  },
+  "cnPacketEnglishNote": {
+    "en": "The packet is written in English so your care team can read it."
+  },
+  "cnReasonMissingInformation": {
+    "en": "The plan says it did not get all the information it needed."
+  },
+  "cnReasonStepTherapy": {
+    "en": "The plan wants you to try other medicines first."
+  },
+  "cnReasonMedicalNecessity": {
+    "en": "The plan says it could not confirm that this medicine is medically needed."
+  },
+  "cnReasonFormulary": {
+    "en": "The plan says this medicine is not on its list of covered medicines."
+  },
+  "cnReasonQuantityLimit": {
+    "en": "The plan says the amount asked for is more than it covers."
+  },
+  "cnReasonEligibility": {
+    "en": "The plan says this is not covered under its coverage rules."
+  },
+  "cnReasonOther": {
+    "en": "The letter gives another reason. Open the quote from the letter to read it."
+  },
+  "cnReqHintMedHistory": {
+    "en": "Your past and current medicines"
+  },
+  "cnReqHintVisitNotes": {
+    "en": "Notes from your doctor visits"
+  },
+  "cnReqHintTestResults": {
+    "en": "Test or lab results"
+  },
+  "cnReqHintDoctorStatement": {
+    "en": "A statement from your doctor"
+  }
+}

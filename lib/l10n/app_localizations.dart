@@ -5,8 +5,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_gu.dart';
+import 'app_localizations_ht.dart';
 import 'app_localizations_ko.dart';
+import 'app_localizations_pt.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -94,8 +100,16 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
     Locale('en'),
+    Locale('es'),
+    Locale('gu'),
+    Locale('ht'),
     Locale('ko'),
+    Locale('pt'),
+    Locale('zh'),
+    Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+    Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
   ];
 
   /// No description provided for @appTitle.
@@ -6985,6 +6999,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong ({code}). Try again.'**
   String cnErrGeneric(String code);
+
+  /// No description provided for @cnLanguageChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language'**
+  String get cnLanguageChoose;
+
+  /// No description provided for @cnLanguageNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Some text was translated by software and may have mistakes. Medicine names, doses, dates and quotes from your letter are never translated.'**
+  String get cnLanguageNote;
+
+  /// No description provided for @cnLanguageButtonTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Change language'**
+  String get cnLanguageButtonTooltip;
+
+  /// No description provided for @cnPacketEnglishNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The packet is written in English so your care team can read it.'**
+  String get cnPacketEnglishNote;
+
+  /// No description provided for @cnReasonMissingInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'The plan says it did not get all the information it needed.'**
+  String get cnReasonMissingInformation;
+
+  /// No description provided for @cnReasonStepTherapy.
+  ///
+  /// In en, this message translates to:
+  /// **'The plan wants you to try other medicines first.'**
+  String get cnReasonStepTherapy;
+
+  /// No description provided for @cnReasonMedicalNecessity.
+  ///
+  /// In en, this message translates to:
+  /// **'The plan says it could not confirm that this medicine is medically needed.'**
+  String get cnReasonMedicalNecessity;
+
+  /// No description provided for @cnReasonFormulary.
+  ///
+  /// In en, this message translates to:
+  /// **'The plan says this medicine is not on its list of covered medicines.'**
+  String get cnReasonFormulary;
+
+  /// No description provided for @cnReasonQuantityLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'The plan says the amount asked for is more than it covers.'**
+  String get cnReasonQuantityLimit;
+
+  /// No description provided for @cnReasonEligibility.
+  ///
+  /// In en, this message translates to:
+  /// **'The plan says this is not covered under its coverage rules.'**
+  String get cnReasonEligibility;
+
+  /// No description provided for @cnReasonOther.
+  ///
+  /// In en, this message translates to:
+  /// **'The letter gives another reason. Open the quote from the letter to read it.'**
+  String get cnReasonOther;
+
+  /// No description provided for @cnReqHintMedHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Your past and current medicines'**
+  String get cnReqHintMedHistory;
+
+  /// No description provided for @cnReqHintVisitNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes from your doctor visits'**
+  String get cnReqHintVisitNotes;
+
+  /// No description provided for @cnReqHintTestResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Test or lab results'**
+  String get cnReqHintTestResults;
+
+  /// No description provided for @cnReqHintDoctorStatement.
+  ///
+  /// In en, this message translates to:
+  /// **'A statement from your doctor'**
+  String get cnReqHintDoctorStatement;
 }
 
 class _AppLocalizationsDelegate
@@ -6997,20 +7101,54 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'ko'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'ar',
+    'en',
+    'es',
+    'gu',
+    'ht',
+    'ko',
+    'pt',
+    'zh',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when language+script codes are specified.
+  switch (locale.languageCode) {
+    case 'zh':
+      {
+        switch (locale.scriptCode) {
+          case 'Hans':
+            return AppLocalizationsZhHans();
+          case 'Hant':
+            return AppLocalizationsZhHant();
+        }
+        break;
+      }
+  }
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
     case 'en':
       return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+    case 'gu':
+      return AppLocalizationsGu();
+    case 'ht':
+      return AppLocalizationsHt();
     case 'ko':
       return AppLocalizationsKo();
+    case 'pt':
+      return AppLocalizationsPt();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
   throw FlutterError(
