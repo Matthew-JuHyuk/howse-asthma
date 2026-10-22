@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/supabase/supabase_service.dart';
+import '../../assessments/data/pdc_repository.dart';
 import '../../medication_log/data/inhaler_event_repository.dart';
 import '../../records/data/regimen_repository.dart';
 import '../../records/data/symptom_repository.dart';
@@ -12,10 +13,14 @@ import '../../records/domain/record_models.dart';
 import '../domain/case_facts.dart';
 import '../domain/case_models.dart';
 import '../domain/record_snapshot.dart';
+import '../domain/s9_models.dart';
 import 'case_store.dart';
 
 const _bucket = 'appeal-documents';
-const _consentVersion = 'covernote-letter-2026-10';
+const _legacyCaseColumns =
+    'id, title, status, demo_mode, current_document_revision, current_fact_revision, '
+    'current_evidence_revision, document_kind, reviewed_fact_revision, '
+    'user_reported_submitted_on, user_reported_submit_method, last_exported_at, created_at, updated_at';
 
 class SupabaseCaseStore implements CaseStore {
   SupabaseCaseStore();
@@ -65,14 +70,25 @@ class SupabaseCaseStore implements CaseStore {
 
   @override
   Future<List<CaseSummary>> listCases() => _guard(() async {
-    final rows = await _db
-        .from('appeal_cases')
-        .select(CaseRow.columns)
-        .eq('owner_id', _uid)
-        .neq('status', 'deleting')
-        .order('updated_at', ascending: false)
-        .limit(50);
-    final cases = [for (final r in rows as List) CaseRow.fromRow(r as Map)];
+    List rows;
+    try {
+      rows = await _db
+          .from('appeal_cases')
+          .select(CaseRow.columns)
+          .eq('owner_id', _uid)
+          .neq('status', 'deleting')
+          .order('updated_at', ascending: false)
+          .limit(80) as List;
+    } catch (_) {
+      rows = await _db
+          .from('appeal_cases')
+          .select(_legacyCaseColumns)
+          .eq('owner_id', _uid)
+          .neq('status', 'deleting')
+          .order('updated_at', ascending: false)
+          .limit(80) as List;
+    }
+    final cases = [for (final r in rows) CaseRow.fromRow(r as Map)];
     if (cases.isEmpty) return const <CaseSummary>[];
     final ids = cases.map((c) => c.id).toList();
     final facts = await _db
@@ -97,8 +113,11 @@ class SupabaseCaseStore implements CaseStore {
               .cast<Map>()
               .where((x) => x['case_id'] == c.id)
               .toList();
+          final plan = c.planName ?? f?.field('plan_name').value;
           return CaseSummary(
-            row: c,
+            row: plan == null || plan.isEmpty
+                ? c
+                : c.copyWith(planName: plan),
             factsToConfirm: f?.factsToConfirm ?? 0,
             requirementsTotal: rs.length,
             requirementsSettled: rs
@@ -114,14 +133,30 @@ class SupabaseCaseStore implements CaseStore {
     ];
   });
 
+  Future<Map<String, dynamic>> _caseRow(String caseId) async {
+    try {
+      final row = await _db
+          .from('appeal_cases')
+          .select(CaseRow.columns)
+          .eq('id', caseId)
+          .maybeSingle();
+      if (row == null) throw const CaseStoreException('case_not_found');
+      return Map<String, dynamic>.from(row);
+    } catch (e) {
+      if (e is CaseStoreException) rethrow;
+      final row = await _db
+          .from('appeal_cases')
+          .select(_legacyCaseColumns)
+          .eq('id', caseId)
+          .maybeSingle();
+      if (row == null) throw const CaseStoreException('case_not_found');
+      return Map<String, dynamic>.from(row);
+    }
+  }
+
   @override
   Future<CaseDetail> load(String caseId) => _guard(() async {
-    final row = await _db
-        .from('appeal_cases')
-        .select(CaseRow.columns)
-        .eq('id', caseId)
-        .maybeSingle();
-    if (row == null) throw const CaseStoreException('case_not_found');
+    final row = await _caseRow(caseId);
     final c = CaseRow.fromRow(row);
     final results = await Future.wait([
       c.factRevision > 0
@@ -254,11 +289,6 @@ class SupabaseCaseStore implements CaseStore {
   @override
   Future<String> createFromPages(List<PreparedPage> pages) => _guard(() async {
     final uid = _uid;
-    await _db.from('consent_events').insert({
-      'owner_id': uid,
-      'purpose': 'letter_processing',
-      'version': _consentVersion,
-    });
     final row = await _db
         .from('appeal_cases')
         .insert({
@@ -458,6 +488,7 @@ class SupabaseCaseStore implements CaseStore {
     required Map<String, Object?> snapshot,
     required DayRange range,
     required String sourceType,
+    List<String> eventIds = const [],
   }) => _guard(() async {
     final row = await _db
         .from('case_evidence')
@@ -469,6 +500,7 @@ class SupabaseCaseStore implements CaseStore {
           'snapshot_json': snapshot,
           'source_type': sourceType,
           'included': true,
+          if (eventIds.isNotEmpty) 'source_event_ids': eventIds,
         })
         .select(
           'id, original_record_type, snapshot_json, source_type, date_range',
@@ -636,9 +668,31 @@ class SupabaseCaseStore implements CaseStore {
           .eq('patient_id', uid)
           .gte('local_date', isoDate(range.from))
           .lte('local_date', isoDate(range.to)),
+      PdcRepository().listBetween(range.from, range.to),
     ]);
     final regimens = results[0] as List<MedicationRegimen>;
     final checks = results[1] as List<OccasionCheck>;
+    final pdc = results[5] as List<MedCheckRecord>;
+    final extraChecks = <OccasionInput>[
+      for (final p in pdc)
+        if (p.status == MedCheckRecord.used)
+          OccasionInput('pdc:${p.id}', p.date, 'used')
+        else if (p.status == MedCheckRecord.notUsed)
+          OccasionInput('pdc:${p.id}', p.date, 'not_used'),
+    ];
+    final pdcRegimens = [
+      for (final p in pdc)
+        if (p.status == MedCheckRecord.used ||
+            p.status == MedCheckRecord.notUsed)
+          RegimenInput(
+            id: 'pdc:${p.id}',
+            medicationName: 'Daily medication check',
+            occasionsPerDay: 1,
+            puffsPerOccasion: 0,
+            effectiveFrom: p.date,
+            effectiveUntil: p.date,
+          ),
+    ];
     return RecordSnapshots(
       medication: MedicationSnapshot.compute(
         range: range,
@@ -653,10 +707,12 @@ class SupabaseCaseStore implements CaseStore {
                 effectiveFrom: r.effectiveFrom,
                 effectiveUntil: r.effectiveUntil,
               ),
+          ...pdcRegimens,
         ],
         checks: [
           for (final c in checks)
             OccasionInput(c.regimenId, c.localDate, c.status),
+          ...extraChecks,
         ],
         inhaler: results[2] as List<InhalerRecord>,
       ),
@@ -686,6 +742,51 @@ class SupabaseCaseStore implements CaseStore {
       return null;
     }
   }
+
+  @override
+  Future<void> setLifecycle(
+    String caseId,
+    CaseLifecycle lifecycle, {
+    String? outcome,
+  }) => _guard(() async {
+    await _db
+        .from('appeal_cases')
+        .update({
+          'lifecycle': lifecycleSql(lifecycle),
+          'completed_at': lifecycle == CaseLifecycle.completed
+              ? _now()
+              : null,
+          'completed_outcome': lifecycle == CaseLifecycle.completed
+              ? outcome
+              : null,
+          'archived_at': lifecycle == CaseLifecycle.archived ? _now() : null,
+          'updated_at': _now(),
+        })
+        .eq('id', caseId);
+  });
+
+  @override
+  Future<void> setTreatmentContext(String caseId, TreatmentContext context) =>
+      _guard(() async {
+        await _db
+            .from('appeal_cases')
+            .update({
+              'treatment_context': treatmentSql(context),
+              'updated_at': _now(),
+            })
+            .eq('id', caseId);
+      });
+
+  @override
+  Future<void> setAlias(String caseId, String? alias) => _guard(() async {
+    await _db
+        .from('appeal_cases')
+        .update({
+          'display_alias': alias,
+          'updated_at': _now(),
+        })
+        .eq('id', caseId);
+  });
 
   static String _now() => DateTime.now().toUtc().toIso8601String();
 }

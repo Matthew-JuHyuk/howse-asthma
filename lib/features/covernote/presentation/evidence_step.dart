@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../records/data/records_revision.dart';
 import '../data/case_store.dart';
 import '../domain/case_models.dart';
 import '../domain/record_snapshot.dart';
+import '../domain/s9_models.dart';
 import '../ui/brand.dart';
 import 'case_labels.dart';
 import 'review_step.dart' show ShowQuote;
+import 'translated_text.dart';
 
 /// Requested items from the letter, matched to the patient's own records.
 class EvidenceStep extends StatefulWidget {
@@ -30,22 +33,39 @@ class EvidenceStep extends StatefulWidget {
 }
 
 class _EvidenceStepState extends State<EvidenceStep> {
-  late final DayRange _range = DayRange.lastDays(widget.store.today, 30);
+  late DayRange _range = DayRange.lastDays(widget.store.today, 30);
   RecordSnapshots? _snap;
   String? _snapError;
   bool _busy = false;
   final _newItem = TextEditingController();
+  String _preset = '30';
 
   @override
   void initState() {
     super.initState();
+    RecordsRevision.instance.addListener(_loadSnapshots);
     _loadSnapshots();
   }
 
   @override
   void dispose() {
+    RecordsRevision.instance.removeListener(_loadSnapshots);
     _newItem.dispose();
     super.dispose();
+  }
+
+  void _setPreset(String p) {
+    final today = widget.store.today;
+    setState(() {
+      _preset = p;
+      _range = switch (p) {
+        '1' => DayRange.today(today),
+        '7' => DayRange.lastDays(today, 7),
+        _ => DayRange.lastDays(today, 30),
+      };
+      _snap = null;
+    });
+    _loadSnapshots();
   }
 
   Future<void> _loadSnapshots() async {
@@ -164,6 +184,13 @@ class _EvidenceStepState extends State<EvidenceStep> {
     });
   }
 
+  Future<void> _setNote(CaseRequirement r, String note) => _run(() async {
+    await widget.store.updateRequirement(
+      widget.detail.row.id,
+      r.copyWith(note: note),
+    );
+  });
+
   Future<void> _setStatus(CaseRequirement r, String status) => _run(() async {
     await widget.store.updateRequirement(
       widget.detail.row.id,
@@ -213,9 +240,89 @@ class _EvidenceStepState extends State<EvidenceStep> {
     return AbsorbPointer(
       absorbing: _busy,
       child: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
         children: [
           if (_busy) const LinearProgressIndicator(),
+          CnCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l.cnWhyRecords,
+                  style: const TextStyle(fontSize: 15, height: 1.35),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.detail.requirements.isEmpty
+                      ? l.cnOptionalReference
+                      : l.cnLetterAskedRecords,
+                  style: const TextStyle(
+                    color: CnColors.muted,
+                    fontSize: 14,
+                    height: 1.35,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.detail.row.treatmentContext == TreatmentContext.asthma
+                      ? l.cnAsthmaContext
+                      : l.cnGeneralContext,
+                  style: const TextStyle(fontSize: 14, height: 1.35),
+                ),
+              ],
+            ),
+          ),
+          if (widget.detail.row.treatmentContext == null) ...[
+            const SizedBox(height: 8),
+            Text(l.cnTreatmentQuestion),
+            Wrap(
+              spacing: 8,
+              children: [
+                ActionChip(
+                  label: Text(l.cnTreatmentAsthma),
+                  onPressed: () => widget.store.setTreatmentContext(
+                    widget.detail.row.id,
+                    TreatmentContext.asthma,
+                  ).then((_) => widget.onChanged()),
+                ),
+                ActionChip(
+                  label: Text(l.cnTreatmentOther),
+                  onPressed: () => widget.store.setTreatmentContext(
+                    widget.detail.row.id,
+                    TreatmentContext.other,
+                  ).then((_) => widget.onChanged()),
+                ),
+                ActionChip(
+                  label: Text(l.cnTreatmentUnknown),
+                  onPressed: () => widget.store.setTreatmentContext(
+                    widget.detail.row.id,
+                    TreatmentContext.unknown,
+                  ).then((_) => widget.onChanged()),
+                ),
+              ],
+            ),
+          ],
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            children: [
+              ChoiceChip(
+                label: Text(l.cnToday),
+                selected: _preset == '1',
+                onSelected: (_) => _setPreset('1'),
+              ),
+              ChoiceChip(
+                label: Text(l.cnLast7),
+                selected: _preset == '7',
+                onSelected: (_) => _setPreset('7'),
+              ),
+              ChoiceChip(
+                label: Text(l.cnLast30),
+                selected: _preset == '30',
+                onSelected: (_) => _setPreset('30'),
+              ),
+            ],
+          ),
           SectionLabel(l.cnLetterAsksFor),
           if (reqs.isEmpty)
             Text(
@@ -227,11 +334,16 @@ class _EvidenceStepState extends State<EvidenceStep> {
               padding: const EdgeInsets.only(bottom: 8),
               child: _RequirementCard(
                 requirement: r,
+                keep: [
+                  if ((d.facts?.field('medication').value ?? '').trim().isNotEmpty)
+                    d.facts!.field('medication').value!,
+                ],
                 linked: d.evidence
                     .where((e) => e.id == r.linkedEvidenceId)
                     .firstOrNull,
                 onLink: () => _link(r),
                 onStatus: (s) => _setStatus(r, s),
+                onNote: (text) => _setNote(r, text),
                 onShowQuote: widget.onShowQuote,
               ),
             ),
@@ -326,18 +438,23 @@ class _RequirementCard extends StatelessWidget {
     required this.onLink,
     required this.onStatus,
     required this.onShowQuote,
+    required this.onNote,
+    this.keep = const [],
   });
 
   final CaseRequirement requirement;
+  final List<String> keep;
   final EvidenceItem? linked;
   final VoidCallback onLink;
   final ValueChanged<String> onStatus;
   final ShowQuote onShowQuote;
+  final ValueChanged<String> onNote;
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     final r = requirement;
+    final canLink = requirementLinksRecords(r.label);
     final tone = switch (r.status) {
       RequirementStatus.linked => ChipTone.good,
       RequirementStatus.needed => ChipTone.warn,
@@ -348,14 +465,16 @@ class _RequirementCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            r.label,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          if (needsTranslatedAid(context) && requirementHint(l, r.label) != null)
+          if (needsTranslatedAid(context))
+            TranslatedLine(
+              text: r.label,
+              keep: keep,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            )
+          else
             Text(
-              requirementHint(l, r.label)!,
-              style: const TextStyle(color: CnColors.muted),
+              r.label,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           const SizedBox(height: 6),
           Wrap(
@@ -390,7 +509,7 @@ class _RequirementCard extends StatelessWidget {
           Wrap(
             spacing: 4,
             children: [
-              if (r.status != RequirementStatus.linked)
+              if (canLink && r.status != RequirementStatus.linked)
                 FilledButton.tonalIcon(
                   onPressed: onLink,
                   icon: const Icon(Icons.link),
@@ -433,6 +552,67 @@ class _RequirementCard extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          if (!canLink)
+            _ItemNote(initial: r.note, onSave: onNote),
+        ],
+      ),
+    );
+  }
+}
+
+class _ItemNote extends StatefulWidget {
+  const _ItemNote({required this.initial, required this.onSave});
+
+  final String? initial;
+  final ValueChanged<String> onSave;
+
+  @override
+  State<_ItemNote> createState() => _ItemNoteState();
+}
+
+class _ItemNoteState extends State<_ItemNote> {
+  late final TextEditingController _text = TextEditingController(
+    text: widget.initial ?? '',
+  );
+
+  @override
+  void didUpdateWidget(_ItemNote old) {
+    super.didUpdateWidget(old);
+    if (old.initial != widget.initial && widget.initial != _text.text) {
+      _text.text = widget.initial ?? '';
+    }
+  }
+
+  @override
+  void dispose() {
+    _text.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, right: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            controller: _text,
+            minLines: 1,
+            maxLines: 4,
+            decoration: InputDecoration(
+              labelText: l.cnItemMemo,
+              border: const OutlineInputBorder(),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () => widget.onSave(_text.text.trim()),
+              child: Text(l.cnSaveNote),
+            ),
           ),
         ],
       ),

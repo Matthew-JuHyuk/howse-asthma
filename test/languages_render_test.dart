@@ -65,6 +65,11 @@ void main() {
         if (language.tag != 'en') {
           expect(l.cnLanguageChoose, isNot(english.cnLanguageChoose));
           expect(l.cnReasonStepTherapy, isNot(english.cnReasonStepTherapy));
+          expect(l.cnShareDocuments, isNot(english.cnShareDocuments));
+          expect(l.cnTabSettings, isNot(english.cnTabSettings));
+          expect(l.cnAirWeather, isNot(english.cnAirWeather));
+          expect(l.cnKeyDetails, isNot(english.cnKeyDetails));
+          expect(l.cnMyMedications, isNot(english.cnMyMedications));
         }
         expect(l.appTitle, 'CoverNote');
 

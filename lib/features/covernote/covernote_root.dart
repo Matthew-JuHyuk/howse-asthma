@@ -8,7 +8,9 @@ import 'auth/auth_screen.dart';
 import 'data/case_store.dart';
 import 'data/demo_case_store.dart';
 import 'presentation/account_tab.dart';
+import 'presentation/case_screen.dart';
 import 'presentation/cases_tab.dart';
+import 'presentation/covernote_nav.dart';
 import 'presentation/home_tab.dart';
 import 'presentation/records_tab.dart';
 
@@ -59,60 +61,105 @@ class _CoverNoteShellState extends State<CoverNoteShell> {
   int _tab = 0;
   final _casesKey = GlobalKey<CasesTabState>();
   final _homeKey = GlobalKey<HomeTabState>();
+  String? _caseId;
+  CaseStore? _caseStore;
 
   void _go(int i) {
-    setState(() => _tab = i);
+    setState(() {
+      _tab = i;
+      // Home and the cases tab both leave an open case. One tap shows
+      // Home, or the case list, instead of staying on the same case.
+      if (i == 0 || i == 1) {
+        _caseId = null;
+        _caseStore = null;
+      }
+    });
     if (i == 0) _homeKey.currentState?.refresh();
     if (i == 1) _casesKey.currentState?.refresh();
+  }
+
+  void _openCase(CaseStore store, String id) {
+    setState(() {
+      _tab = 1;
+      _caseId = id;
+      _caseStore = store;
+    });
+  }
+
+  void _closeCase() {
+    setState(() => _caseId = null);
+    _casesKey.currentState?.refresh();
   }
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
-    return PopScope(
-      canPop: _tab == 0,
-      onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) _go(0);
-      },
-      child: Scaffold(
-        body: IndexedStack(
-          index: _tab,
-          children: [
-            HomeTab(
-              key: _homeKey,
-              onOpenCases: () => _go(1),
-              onOpenAccount: () => _go(3),
-            ),
-            CasesTab(key: _casesKey),
-            const RecordsTab(),
-            const AccountTab(),
-          ],
-        ),
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: _tab,
-          onDestinationSelected: _go,
-          destinations: [
-            NavigationDestination(
-              icon: const Icon(Icons.home_outlined),
-              selectedIcon: const Icon(Icons.home),
-              label: l.cnTabHome,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.folder_outlined),
-              selectedIcon: const Icon(Icons.folder),
-              label: l.cnTabCases,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.fact_check_outlined),
-              selectedIcon: const Icon(Icons.fact_check),
-              label: l.cnTabRecords,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.person_outline),
-              selectedIcon: const Icon(Icons.person),
-              label: l.cnTabAccount,
-            ),
-          ],
+    final caseOpen = _caseId != null && _caseStore != null;
+    return CoverNoteNav(
+      openCase: _openCase,
+      closeCase: _closeCase,
+      goHome: () => _go(0),
+      goCases: () => _go(1),
+      goRecords: () => _go(2),
+      goSettings: () => _go(3),
+      openCaseId: _caseId,
+      child: PopScope(
+        canPop: _tab == 0 && !caseOpen,
+        onPopInvokedWithResult: (didPop, _) {
+          if (didPop) return;
+          if (caseOpen) {
+            _closeCase();
+            return;
+          }
+          _go(0);
+        },
+        child: Scaffold(
+          body: IndexedStack(
+            index: _tab,
+            children: [
+              HomeTab(
+                key: _homeKey,
+                onOpenCases: () => _go(1),
+                onOpenAccount: () => _go(3),
+              ),
+              caseOpen
+                  ? CaseScreen(
+                      key: ValueKey(_caseId),
+                      store: _caseStore!,
+                      caseId: _caseId!,
+                      embedded: true,
+                    )
+                  : CasesTab(key: _casesKey),
+              const RecordsTab(),
+              const AccountTab(),
+            ],
+          ),
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: _tab,
+            onDestinationSelected: _go,
+            destinations: [
+              NavigationDestination(
+                icon: const Icon(Icons.home_outlined),
+                selectedIcon: const Icon(Icons.home),
+                label: l.cnTabHome,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.folder_outlined),
+                selectedIcon: const Icon(Icons.folder),
+                label: l.cnTabCases,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.fact_check_outlined),
+                selectedIcon: const Icon(Icons.fact_check),
+                label: l.cnTabRecords,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.settings_outlined),
+                selectedIcon: const Icon(Icons.settings),
+                label: l.cnTabSettings,
+              ),
+            ],
+          ),
         ),
       ),
     );

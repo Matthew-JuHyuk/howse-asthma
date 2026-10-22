@@ -4393,7 +4393,7 @@ abstract class AppLocalizations {
   /// No description provided for @s6ReminderChannel.
   ///
   /// In en, this message translates to:
-  /// **'Reminders at the dose times you saved. Not a 30-minute alert.'**
+  /// **'Reminders at the dose times you saved. This is not the 30-minute air and weather alert.'**
   String get s6ReminderChannel;
 
   /// No description provided for @s6ReminderTitle.
@@ -5605,7 +5605,7 @@ abstract class AppLocalizations {
   /// No description provided for @cnRecLocalContext.
   ///
   /// In en, this message translates to:
-  /// **'Local context'**
+  /// **'Environmental factors'**
   String get cnRecLocalContext;
 
   /// No description provided for @cnRecPrn.
@@ -5751,6 +5751,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Photo'**
   String get cnAddPhoto;
+
+  /// No description provided for @cnPickGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from photos'**
+  String get cnPickGallery;
+
+  /// No description provided for @cnLabelForm.
+  ///
+  /// In en, this message translates to:
+  /// **'Form (as written)'**
+  String get cnLabelForm;
 
   /// No description provided for @cnAddPdf.
   ///
@@ -5911,7 +5923,7 @@ abstract class AppLocalizations {
   /// No description provided for @cnStepEvidence.
   ///
   /// In en, this message translates to:
-  /// **'Evidence'**
+  /// **'Records'**
   String get cnStepEvidence;
 
   /// No description provided for @cnStepPacket.
@@ -6349,7 +6361,7 @@ abstract class AppLocalizations {
   /// No description provided for @cnLocalContextNote.
   ///
   /// In en, this message translates to:
-  /// **'Optional context. Not a measurement at your home and not a cause of symptoms.'**
+  /// **'Optional. These are outdoor factors, not a measurement inside your home and not a cause of symptoms.'**
   String get cnLocalContextNote;
 
   /// No description provided for @cnContinueToPacket.
@@ -6757,13 +6769,13 @@ abstract class AppLocalizations {
   /// No description provided for @cnCtxPlace.
   ///
   /// In en, this message translates to:
-  /// **'Place (ZIP or town, optional)'**
+  /// **'Place (optional)'**
   String get cnCtxPlace;
 
   /// No description provided for @cnRecordsSignInBody.
   ///
   /// In en, this message translates to:
-  /// **'Sign in to keep medication, symptom and local context records.'**
+  /// **'Sign in to keep medication, symptom, and environmental-factor records.'**
   String get cnRecordsSignInBody;
 
   /// No description provided for @cnRecordsYourRecords.
@@ -7009,7 +7021,7 @@ abstract class AppLocalizations {
   /// No description provided for @cnLanguageNote.
   ///
   /// In en, this message translates to:
-  /// **'Some text was translated by software and may have mistakes. Medicine names, doses, dates and quotes from your letter are never translated.'**
+  /// **'Some text was translated by software and may have mistakes. Medicine names and doses stay as printed. The rest of the letter is translated for you.'**
   String get cnLanguageNote;
 
   /// No description provided for @cnLanguageButtonTooltip.
@@ -7089,6 +7101,834 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A statement from your doctor'**
   String get cnReqHintDoctorStatement;
+
+  /// No description provided for @cnTabSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get cnTabSettings;
+
+  /// No description provided for @cnCasesList.
+  ///
+  /// In en, this message translates to:
+  /// **'Case list'**
+  String get cnCasesList;
+
+  /// No description provided for @cnGoHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get cnGoHome;
+
+  /// No description provided for @cnAnalyzingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance letter · analyzing'**
+  String get cnAnalyzingTitle;
+
+  /// No description provided for @cnCaseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Case #{n}'**
+  String cnCaseNumber(String n);
+
+  /// No description provided for @cnAddedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Added {when}'**
+  String cnAddedAt(String when);
+
+  /// No description provided for @cnAliasHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Nickname (optional)'**
+  String get cnAliasHint;
+
+  /// No description provided for @cnShareDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Share documents'**
+  String get cnShareDocuments;
+
+  /// No description provided for @cnRecordDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Record delivery'**
+  String get cnRecordDelivery;
+
+  /// No description provided for @cnShareAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you send these documents?'**
+  String get cnShareAsk;
+
+  /// No description provided for @cnDeliveryRecipient.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent to'**
+  String get cnDeliveryRecipient;
+
+  /// No description provided for @cnRecipientClinic.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinic or clinician'**
+  String get cnRecipientClinic;
+
+  /// No description provided for @cnRecipientInsurer.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance plan'**
+  String get cnRecipientInsurer;
+
+  /// No description provided for @cnRecipientSelf.
+  ///
+  /// In en, this message translates to:
+  /// **'Kept for myself'**
+  String get cnRecipientSelf;
+
+  /// No description provided for @cnRecipientOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get cnRecipientOther;
+
+  /// No description provided for @cnDeliveryMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'How'**
+  String get cnDeliveryMethod;
+
+  /// No description provided for @cnMethodEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get cnMethodEmail;
+
+  /// No description provided for @cnMethodMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Text or messenger'**
+  String get cnMethodMessage;
+
+  /// No description provided for @cnMethodUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'I do not remember'**
+  String get cnMethodUnknown;
+
+  /// No description provided for @cnDeliveryUserReport.
+  ///
+  /// In en, this message translates to:
+  /// **'This is what you reported. The app cannot confirm that the other side received it.'**
+  String get cnDeliveryUserReport;
+
+  /// No description provided for @cnShareCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Share was cancelled. Nothing was marked as sent.'**
+  String get cnShareCancelled;
+
+  /// No description provided for @cnRecordsLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading records…'**
+  String get cnRecordsLoading;
+
+  /// No description provided for @cnRecordsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No records in this period'**
+  String get cnRecordsEmpty;
+
+  /// No description provided for @cnRecordsError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load records'**
+  String get cnRecordsError;
+
+  /// No description provided for @cnRecordsPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have access to these records'**
+  String get cnRecordsPermission;
+
+  /// No description provided for @cnRecordsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on this device · waiting to sync'**
+  String get cnRecordsPending;
+
+  /// No description provided for @cnRecordsFiltered.
+  ///
+  /// In en, this message translates to:
+  /// **'Some records are hidden by your filters'**
+  String get cnRecordsFiltered;
+
+  /// No description provided for @cnRecordsOutside.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} records outside this period'**
+  String cnRecordsOutside(int n);
+
+  /// No description provided for @cnWidenRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Show a longer period'**
+  String get cnWidenRange;
+
+  /// No description provided for @cnLinkedSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} day(s) · {med} medication uses · {sym} symptom entries'**
+  String cnLinkedSummary(int days, int med, int sym);
+
+  /// No description provided for @cnOneDayPacket.
+  ///
+  /// In en, this message translates to:
+  /// **'This packet covers one day.'**
+  String get cnOneDayPacket;
+
+  /// No description provided for @cnMyMedications.
+  ///
+  /// In en, this message translates to:
+  /// **'My medications'**
+  String get cnMyMedications;
+
+  /// No description provided for @cnScanLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan medication label'**
+  String get cnScanLabel;
+
+  /// No description provided for @cnMedManageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Register medicines you use. Change them when a prescription changes. Daily use is logged on Records.'**
+  String get cnMedManageHint;
+
+  /// No description provided for @cnLabelNeedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Photograph the pharmacy label or box text. The app does not identify a pill by its shape.'**
+  String get cnLabelNeedLabel;
+
+  /// No description provided for @cnLabelUnclear.
+  ///
+  /// In en, this message translates to:
+  /// **'This value was not clear. Check it before saving.'**
+  String get cnLabelUnclear;
+
+  /// No description provided for @cnConsentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow AI to read a medication label'**
+  String get cnConsentLabel;
+
+  /// No description provided for @cnManualMed.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter manually'**
+  String get cnManualMed;
+
+  /// No description provided for @cnAirWeather.
+  ///
+  /// In en, this message translates to:
+  /// **'Environmental factors near you'**
+  String get cnAirWeather;
+
+  /// No description provided for @cnAirAutoNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Air quality, traffic-related air, pollen, flood alerts, and outdoor humidity come from your current location. This phone does not measure the air. Outdoor humidity is not indoor mold.'**
+  String get cnAirAutoNote;
+
+  /// No description provided for @cnHomeRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'Related medication records'**
+  String get cnHomeRecords;
+
+  /// No description provided for @cnEnvTrap.
+  ///
+  /// In en, this message translates to:
+  /// **'Traffic-related air'**
+  String get cnEnvTrap;
+
+  /// No description provided for @cnItemMemo.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get cnItemMemo;
+
+  /// No description provided for @cnSaveNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Save note'**
+  String get cnSaveNote;
+
+  /// No description provided for @cnLocationNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow location to show environmental factors near you.'**
+  String get cnLocationNeed;
+
+  /// No description provided for @cnLocationOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Location services are off. Turn them on and try again.'**
+  String get cnLocationOff;
+
+  /// No description provided for @cnLocationBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is blocked. Allow it in settings.'**
+  String get cnLocationBlocked;
+
+  /// No description provided for @cnOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get cnOpenSettings;
+
+  /// No description provided for @cnAirNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No air or weather data'**
+  String get cnAirNone;
+
+  /// No description provided for @cnAirRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try air and weather again'**
+  String get cnAirRetry;
+
+  /// No description provided for @cnSetRegion.
+  ///
+  /// In en, this message translates to:
+  /// **'Set your area (ZIP or city)'**
+  String get cnSetRegion;
+
+  /// No description provided for @cnConfiguredArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Area you set'**
+  String get cnConfiguredArea;
+
+  /// No description provided for @cnRecordPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Place of this record'**
+  String get cnRecordPlace;
+
+  /// No description provided for @cnClosestObservation.
+  ///
+  /// In en, this message translates to:
+  /// **'Closest observation to the record time'**
+  String get cnClosestObservation;
+
+  /// No description provided for @cnEnvUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching observation for that time'**
+  String get cnEnvUnavailable;
+
+  /// No description provided for @cnLogMedication.
+  ///
+  /// In en, this message translates to:
+  /// **'Log {name}'**
+  String cnLogMedication(String name);
+
+  /// No description provided for @cnAsNeededUse.
+  ///
+  /// In en, this message translates to:
+  /// **'As-needed use'**
+  String get cnAsNeededUse;
+
+  /// No description provided for @cnAsNeededInhaler.
+  ///
+  /// In en, this message translates to:
+  /// **'As-needed inhaler use'**
+  String get cnAsNeededInhaler;
+
+  /// No description provided for @cnScheduledUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled use'**
+  String get cnScheduledUse;
+
+  /// No description provided for @cnExtraUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra use'**
+  String get cnExtraUse;
+
+  /// No description provided for @cnUndoUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get cnUndoUse;
+
+  /// No description provided for @cnLoggedLocal.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on this device'**
+  String get cnLoggedLocal;
+
+  /// No description provided for @cnLoggedPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting to sync'**
+  String get cnLoggedPending;
+
+  /// No description provided for @cnLoggedSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'Synced'**
+  String get cnLoggedSynced;
+
+  /// No description provided for @cnDaysLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged on {n} days this week'**
+  String cnDaysLogged(int n);
+
+  /// No description provided for @cnManageMedsLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage my medications'**
+  String get cnManageMedsLink;
+
+  /// No description provided for @cnViewAirWeather.
+  ///
+  /// In en, this message translates to:
+  /// **'View environmental factors near you'**
+  String get cnViewAirWeather;
+
+  /// No description provided for @cnConsentAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow AI document analysis'**
+  String get cnConsentAi;
+
+  /// No description provided for @cnConsentAiBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The letter image is sent to a reading service so CoverNote can show what it says. You can turn this off later in Settings.'**
+  String get cnConsentAiBody;
+
+  /// No description provided for @cnConsentAndAnalyze.
+  ///
+  /// In en, this message translates to:
+  /// **'Agree and analyze'**
+  String get cnConsentAndAnalyze;
+
+  /// No description provided for @cnConsentLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get cnConsentLater;
+
+  /// No description provided for @cnConsentViewLocal.
+  ///
+  /// In en, this message translates to:
+  /// **'View the original here'**
+  String get cnConsentViewLocal;
+
+  /// No description provided for @cnConsentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'More about data use'**
+  String get cnConsentDetails;
+
+  /// No description provided for @cnConsentLabelPurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Read a medication label'**
+  String get cnConsentLabelPurpose;
+
+  /// No description provided for @cnConsentLetterPurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Read an insurance letter'**
+  String get cnConsentLetterPurpose;
+
+  /// No description provided for @cnConsentTranslatePurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Translate a letter'**
+  String get cnConsentTranslatePurpose;
+
+  /// No description provided for @cnToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get cnToday;
+
+  /// No description provided for @cnLast7.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get cnLast7;
+
+  /// No description provided for @cnLast30.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 30 days'**
+  String get cnLast30;
+
+  /// No description provided for @cnCustomRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose dates'**
+  String get cnCustomRange;
+
+  /// No description provided for @cnRangeSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{from}–{to} · {days} day(s) · {count} records'**
+  String cnRangeSummary(String from, String to, int days, int count);
+
+  /// No description provided for @cnNoRecordThatDay.
+  ///
+  /// In en, this message translates to:
+  /// **'No record this day'**
+  String get cnNoRecordThatDay;
+
+  /// No description provided for @cnNotLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'Not logged'**
+  String get cnNotLogged;
+
+  /// No description provided for @cnNotTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked as not taken'**
+  String get cnNotTaken;
+
+  /// No description provided for @cnOriginalFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Original file'**
+  String get cnOriginalFile;
+
+  /// No description provided for @cnFullTranslation.
+  ///
+  /// In en, this message translates to:
+  /// **'Full translation'**
+  String get cnFullTranslation;
+
+  /// No description provided for @cnRecognizedText.
+  ///
+  /// In en, this message translates to:
+  /// **'Recognized text'**
+  String get cnRecognizedText;
+
+  /// No description provided for @cnSameLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Same language as the original'**
+  String get cnSameLanguage;
+
+  /// No description provided for @cnTranslationPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Some pages are not translated yet'**
+  String get cnTranslationPartial;
+
+  /// No description provided for @cnTranslationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'This page could not be translated'**
+  String get cnTranslationFailed;
+
+  /// No description provided for @cnOriginalMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'The original file could not be found. You can upload it again.'**
+  String get cnOriginalMissing;
+
+  /// No description provided for @cnTranslateRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue translation'**
+  String get cnTranslateRetry;
+
+  /// No description provided for @cnKeyDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Key details'**
+  String get cnKeyDetails;
+
+  /// No description provided for @cnWhatAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'What is this about?'**
+  String get cnWhatAbout;
+
+  /// No description provided for @cnWhatToDo.
+  ///
+  /// In en, this message translates to:
+  /// **'What to do now'**
+  String get cnWhatToDo;
+
+  /// No description provided for @cnByWhen.
+  ///
+  /// In en, this message translates to:
+  /// **'By when?'**
+  String get cnByWhen;
+
+  /// No description provided for @cnPreparePacket.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare documents'**
+  String get cnPreparePacket;
+
+  /// No description provided for @cnCorrectReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct a reading error'**
+  String get cnCorrectReading;
+
+  /// No description provided for @cnCorrectReadingNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The original letter does not change. Only the automatic reading is corrected.'**
+  String get cnCorrectReadingNote;
+
+  /// No description provided for @cnReviewImportant.
+  ///
+  /// In en, this message translates to:
+  /// **'Check these important values before creating documents'**
+  String get cnReviewImportant;
+
+  /// No description provided for @cnPacketReadyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your documents are ready'**
+  String get cnPacketReadyTitle;
+
+  /// No description provided for @cnNextSendClinic.
+  ///
+  /// In en, this message translates to:
+  /// **'Send the documents to your clinician and ask them to review'**
+  String get cnNextSendClinic;
+
+  /// No description provided for @cnNextWaitReply.
+  ///
+  /// In en, this message translates to:
+  /// **'When you get a reply, record the result'**
+  String get cnNextWaitReply;
+
+  /// No description provided for @cnExistingSentNewReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Earlier documents were sent · you can make a new set'**
+  String get cnExistingSentNewReady;
+
+  /// No description provided for @cnWhyRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'Medication and symptom records can help a clinician see how treatment is going. You can still make documents from the letter if you have no records yet.'**
+  String get cnWhyRecords;
+
+  /// No description provided for @cnLetterAskedRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'The letter asked for recent treatment records'**
+  String get cnLetterAskedRecords;
+
+  /// No description provided for @cnOptionalReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional reference'**
+  String get cnOptionalReference;
+
+  /// No description provided for @cnAsthmaContext.
+  ///
+  /// In en, this message translates to:
+  /// **'Asthma treatment records — scheduled use, as-needed use, and breathing symptoms.'**
+  String get cnAsthmaContext;
+
+  /// No description provided for @cnGeneralContext.
+  ///
+  /// In en, this message translates to:
+  /// **'Treatment records — medication use and symptoms or notes.'**
+  String get cnGeneralContext;
+
+  /// No description provided for @cnTreatmentQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What treatment is this letter about?'**
+  String get cnTreatmentQuestion;
+
+  /// No description provided for @cnTreatmentAsthma.
+  ///
+  /// In en, this message translates to:
+  /// **'Asthma'**
+  String get cnTreatmentAsthma;
+
+  /// No description provided for @cnTreatmentOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Another treatment'**
+  String get cnTreatmentOther;
+
+  /// No description provided for @cnTreatmentUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'I am not sure yet'**
+  String get cnTreatmentUnknown;
+
+  /// No description provided for @cnStatusWaitingClinic.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent to the clinic · waiting for review'**
+  String get cnStatusWaitingClinic;
+
+  /// No description provided for @cnStatusWaitingInsurer.
+  ///
+  /// In en, this message translates to:
+  /// **'Reported as submitted to the plan · waiting for a reply'**
+  String get cnStatusWaitingInsurer;
+
+  /// No description provided for @cnFollowUpNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow-up needed'**
+  String get cnFollowUpNeeded;
+
+  /// No description provided for @cnOutcomeRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Result recorded'**
+  String get cnOutcomeRecorded;
+
+  /// No description provided for @cnActiveCases.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get cnActiveCases;
+
+  /// No description provided for @cnCompletedArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed & archived'**
+  String get cnCompletedArchived;
+
+  /// No description provided for @cnCompleteCase.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete this case'**
+  String get cnCompleteCase;
+
+  /// No description provided for @cnArchiveCase.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get cnArchiveCase;
+
+  /// No description provided for @cnReopenCase.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get cnReopenCase;
+
+  /// No description provided for @cnOutcomeApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get cnOutcomeApproved;
+
+  /// No description provided for @cnOutcomeDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Denied'**
+  String get cnOutcomeDenied;
+
+  /// No description provided for @cnOutcomeStopped.
+  ///
+  /// In en, this message translates to:
+  /// **'Not continuing'**
+  String get cnOutcomeStopped;
+
+  /// No description provided for @cnOutcomeOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other / not recorded'**
+  String get cnOutcomeOther;
+
+  /// No description provided for @cnSentIsNotComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending is not the same as completing the case.'**
+  String get cnSentIsNotComplete;
+
+  /// No description provided for @cnArchivedCase.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get cnArchivedCase;
+
+  /// No description provided for @cnStepKeyDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Key details'**
+  String get cnStepKeyDetails;
+
+  /// No description provided for @cnStepAddRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'Add my records'**
+  String get cnStepAddRecords;
+
+  /// No description provided for @cnStepReviewPacket.
+  ///
+  /// In en, this message translates to:
+  /// **'Review packet'**
+  String get cnStepReviewPacket;
+
+  /// No description provided for @cnDataConsent.
+  ///
+  /// In en, this message translates to:
+  /// **'Data processing'**
+  String get cnDataConsent;
+
+  /// No description provided for @cnZipOrCity.
+  ///
+  /// In en, this message translates to:
+  /// **'ZIP or city'**
+  String get cnZipOrCity;
+
+  /// No description provided for @cnSaveArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Save area'**
+  String get cnSaveArea;
+
+  /// No description provided for @cnWeekCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get cnWeekCalendar;
+
+  /// No description provided for @cnMonthCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get cnMonthCalendar;
+
+  /// No description provided for @cnUsedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'I used it'**
+  String get cnUsedShort;
+
+  /// No description provided for @cnCalendarLegend.
+  ///
+  /// In en, this message translates to:
+  /// **'A dot means you logged something that day. An empty day is not a missed dose.'**
+  String get cnCalendarLegend;
 }
 
 class _AppLocalizationsDelegate

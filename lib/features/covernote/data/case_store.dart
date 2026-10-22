@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import '../domain/case_facts.dart';
 import '../domain/case_models.dart';
 import '../domain/record_snapshot.dart';
+import '../domain/s9_models.dart';
 
 /// Safe error with a short code the UI maps to a message and a next action.
 class CaseStoreException implements Exception {
@@ -58,6 +59,7 @@ abstract class CaseStore {
     required Map<String, Object?> snapshot,
     required DayRange range,
     required String sourceType,
+    List<String> eventIds = const [],
   });
 
   Future<void> removeEvidence(String caseId, String evidenceId);
@@ -89,4 +91,14 @@ abstract class CaseStore {
 
   /// True/false when the server answered; null when it could not be reached.
   Future<bool?> analysisAvailable();
+
+  Future<void> setLifecycle(
+    String caseId,
+    CaseLifecycle lifecycle, {
+    String? outcome,
+  });
+
+  Future<void> setTreatmentContext(String caseId, TreatmentContext context);
+
+  Future<void> setAlias(String caseId, String? alias);
 }

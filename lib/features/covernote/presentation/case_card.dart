@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
+import '../../../core/locale/app_languages.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/case_facts.dart';
+import '../domain/case_identity.dart';
 import '../domain/case_models.dart';
+import '../domain/s9_models.dart';
 import '../ui/brand.dart';
 import 'case_labels.dart';
 
-/// "Medication · Needs review" plus one next action and a confirmed date.
+/// Drug · kind, fixed number, added time, insurer, status, next action.
 class CaseCard extends StatelessWidget {
   const CaseCard({
     super.key,
@@ -14,19 +18,25 @@ class CaseCard extends StatelessWidget {
     required this.onTap,
     this.onDelete,
     this.today,
+    this.deliveries = const [],
   });
 
   final CaseSummary summary;
   final VoidCallback onTap;
   final VoidCallback? onDelete;
   final DateTime? today;
+  final List<DeliveryEvent> deliveries;
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
+    final locale = intlLocaleFor(Localizations.localeOf(context));
     final (status, tone) = caseStatus(l, summary.row);
     final d = summary.deadline;
     final now = today ?? DateTime.now();
+    final row = summary.row;
+    final added = row.createdAt?.toLocal();
+    final follow = caseFollowUp(l, row, deliveries);
     return CnCard(
       onTap: onTap,
       padding: const EdgeInsets.fromLTRB(16, 12, 4, 12),
@@ -43,7 +53,7 @@ class CaseCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  caseTitle(l, summary.row),
+                  caseDisplayTitle(l, row),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -52,6 +62,22 @@ class CaseCard extends StatelessWidget {
                     color: CnColors.ink,
                   ),
                 ),
+                const SizedBox(height: 4),
+                Text(
+                  [
+                    if (row.displayOrdinal != null) caseNumberLabel(l, row),
+                    if (added != null)
+                      l.cnAddedAt(DateFormat.MMMd(locale).add_jm().format(added)),
+                  ].where((s) => s.isNotEmpty).join(' · '),
+                  style: const TextStyle(fontSize: 13, color: CnColors.muted),
+                ),
+                if (row.planName != null && row.planName!.isNotEmpty) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    row.planName!,
+                    style: const TextStyle(fontSize: 14, color: CnColors.ink),
+                  ),
+                ],
                 const SizedBox(height: 6),
                 Wrap(
                   spacing: 8,
@@ -64,7 +90,7 @@ class CaseCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  caseNextAction(l, summary),
+                  follow.isNotEmpty ? follow : caseNextAction(l, summary),
                   style: const TextStyle(fontSize: 15, color: CnColors.ink),
                 ),
                 if (d != null &&

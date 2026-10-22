@@ -8,6 +8,9 @@ import '../../../core/supabase/supabase_service.dart';
 import '../../../l10n/app_localizations.dart';
 import '../auth/auth_screen.dart';
 import '../covernote_root.dart';
+import '../data/consent_repository.dart';
+import '../domain/s9_models.dart';
+import '../ui/app_chrome.dart';
 import '../ui/brand.dart';
 
 class AccountTab extends StatefulWidget {
@@ -21,6 +24,38 @@ class _AccountTabState extends State<AccountTab> {
   bool? _aiReady;
   bool _checking = false;
   bool _deleting = false;
+  bool _letterConsent = false;
+  bool _labelConsent = false;
+  bool _translateConsent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadConsent();
+  }
+
+  Future<void> _loadConsent() async {
+    final c = ConsentRepository();
+    final letter = await c.hasActive(ConsentPurpose.letter);
+    final label = await c.hasActive(ConsentPurpose.label);
+    final tr = await c.hasActive(ConsentPurpose.translate);
+    if (!mounted) return;
+    setState(() {
+      _letterConsent = letter;
+      _labelConsent = label;
+      _translateConsent = tr;
+    });
+  }
+
+  Future<void> _toggle(ConsentPurpose p, bool on) async {
+    final c = ConsentRepository();
+    if (on) {
+      await c.accept(p);
+    } else {
+      await c.revoke(p);
+    }
+    await _loadConsent();
+  }
 
   Future<void> _checkService() async {
     setState(() => _checking = true);
@@ -112,7 +147,7 @@ class _AccountTabState extends State<AccountTab> {
     final locale = AppLocaleScope.of(context);
     final email = session.user?.email;
     return Scaffold(
-      appBar: AppBar(title: Text(l.cnTabAccount)),
+      appBar: CoverNoteAppBar(title: Text(l.cnTabSettings)),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
@@ -170,6 +205,29 @@ class _AccountTabState extends State<AccountTab> {
               trailing: const Icon(Icons.chevron_right),
               onTap: () => showLanguagePicker(context),
             ),
+          ),
+          SectionLabel(l.cnDataConsent),
+          SwitchListTile(
+            title: Text(l.cnConsentAi),
+            subtitle: Text(l.cnConsentAiBody),
+            value: _letterConsent,
+            onChanged: session.isReady
+                ? (v) => _toggle(ConsentPurpose.letter, v)
+                : null,
+          ),
+          SwitchListTile(
+            title: Text(l.cnConsentLabelPurpose),
+            value: _labelConsent,
+            onChanged: session.isReady
+                ? (v) => _toggle(ConsentPurpose.label, v)
+                : null,
+          ),
+          SwitchListTile(
+            title: Text(l.cnConsentTranslatePurpose),
+            value: _translateConsent,
+            onChanged: session.isReady
+                ? (v) => _toggle(ConsentPurpose.translate, v)
+                : null,
           ),
           SectionLabel(l.cnServiceStatus),
           CnCard(

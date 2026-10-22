@@ -53,7 +53,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get medicationLogAddButton =>
-      'Anrejistre itilizasyon inalatè / medikaman';
+      'Anrejistre itilizasyon ponp / medikaman';
 
   @override
   String get medicationNameLabel => 'Medication Name';
@@ -219,7 +219,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get mockPdcHint => 'Swiv tretman ak yon sèl tap';
 
   @override
-  String get mockInhalerEvent => 'Inalatè anrejistre';
+  String get mockInhalerEvent => 'Ponp anrejistre';
 
   @override
   String get mockActIntro =>
@@ -232,7 +232,8 @@ class AppLocalizationsHt extends AppLocalizations {
   String get mockSubmit => 'Voye';
 
   @override
-  String get mockPdcPrompt => 'Èske ou te pran medikaman kontwòl ou jodi a?';
+  String get mockPdcPrompt =>
+      'Èske ou te pran medikaman ou pran chak jou a jodi a?';
 
   @override
   String get mockTakenYes => 'Wi, mwen te pran l';
@@ -337,7 +338,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get mockPanicStep1Body =>
-      'Etap 1 — Rete ak inalatè ou. Kontinye pou wè kontak ijans yo.';
+      'Etap 1 — Rete ak ponp ou. Kontinye pou wè kontak ijans yo.';
 
   @override
   String get mockPanicStep2Title => 'Rele pou jwenn èd';
@@ -814,37 +815,37 @@ class AppLocalizationsHt extends AppLocalizations {
   String get actTitle => 'Asthma Check';
 
   @override
-  String get actPast4Weeks => 'Pandan 4 dènye semèn yo';
+  String get actPast4Weeks => 'Nan 4 semèn ki sot pase yo';
 
   @override
   String get actQ1 =>
-      'Konbyen tan opresyon (asm) ou anpeche ou fè otan bagay nan travay, nan lekòl oswa lakay ou?';
+      'Konbyen nan tan an asm ou te anpeche ou fè otan bagay nan travay, nan lekòl, oswa lakay ou?';
 
   @override
   String get actQ2 => 'Konbyen fwa ou te gen souf kout?';
 
   @override
   String get actQ3 =>
-      'Konbyen fwa sentòm asm ou yo reveye ou lannwit oswa pi bonè pase dabitid?';
+      'Konbyen fwa sentòm asm ou yo te reveye ou lannwit, oswa fè ou leve pi bonè pase dabitid?';
 
   @override
   String get actQ4 =>
-      'Konbyen fwa ou te itilize inalatè sekou ou oswa medikaman nebilizatè ou?';
+      'Konbyen fwa ou te sèvi ak ponp ou pran lè ou bezwen an, oswa ak medikaman nan machin nebilizè a?';
 
   @override
-  String get actQ5 => 'Kijan ou ta evalye kontwòl asm ou?';
+  String get actQ5 => 'Kijan ou wè asm ou kontwole?';
 
   @override
-  String get actOpt1 => 'Tout tan';
+  String get actOpt1 => 'Tout tan an';
 
   @override
-  String get actOpt2 => 'Pifò tan';
+  String get actOpt2 => 'Pifò nan tan an';
 
   @override
   String get actOpt3 => 'Yon pati nan tan an';
 
   @override
-  String get actOpt4 => 'Yon ti tan';
+  String get actOpt4 => 'Yon ti jan nan tan an';
 
   @override
   String get actOpt5 => 'Pa janm';
@@ -990,20 +991,21 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get envTrapDetail =>
-      'Traffic-related air pollution proxy (sensors + optional NJ freight weight)';
+      'Endikatè lè ki gen rapò ak trafik (detektè, epi nan New Jersey yon pwa opsyonèl pou kago).';
 
   @override
   String get envTrapTip =>
       'Limit outdoor exertion when TRAP is HIGH or CRITICAL.';
 
   @override
-  String get envFloodDetail => 'NWS flash-flood / stream warnings near you';
+  String get envFloodDetail =>
+      'Alèt inondasyon toudenkou ak rivyè NWS toupre ou.';
 
   @override
   String get envFloodTipClear => 'No active flash-flood warning for this area.';
 
   @override
-  String get envPollenDetail => 'Google Pollen forecast';
+  String get envPollenDetail => 'Previzyon polèn Google.';
 
   @override
   String get envPollenTip =>
@@ -1016,7 +1018,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String envUpdatedAt(String when) {
-    return 'Updated: $when';
+    return 'Mizajou: $when';
   }
 
   @override
@@ -1412,22 +1414,22 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s5ActNotice =>
-      'Repons ou yo sove pou ou ka pataje yo ak pwofesyonèl sante ou. Vèsyon kesyonè sa a pa t verifye ak sistèm nòt ofisyèl la, kidonk aplikasyon an pa montre okenn nòt.';
+      'Repons ou yo sove pou ou ka pataje yo ak pwofesyonèl sante ou. Vèsyon kesyonè sa a pa t verifye ak fason ofisyèl yo konte pwen yo, kidonk aplikasyon an pa montre okenn pwen.';
 
   @override
   String get s5ActSaved => 'Repons ou yo sove.';
 
   @override
-  String get s5ActSubtitle => '5 kesyon sou 4 dènye semèn yo';
+  String get s5ActSubtitle => '5 kesyon sou 4 semèn ki sot pase yo';
 
   @override
-  String get s5ActTitle => 'Kesyonè kontwòl asm';
+  String get s5ActTitle => 'Kesyonè sou kontwòl asm';
 
   @override
   String get s5AddDetails => 'Ajoute detay';
 
   @override
-  String get s5AddRecord => 'Ajoute yon nòt';
+  String get s5AddRecord => 'Ajoute yon rejis';
 
   @override
   String get s5AlertArrive => 'When you arrive somewhere';
@@ -1455,22 +1457,22 @@ class AppLocalizationsHt extends AppLocalizations {
       'When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.';
 
   @override
-  String get s5AqiGood => 'Good';
+  String get s5AqiGood => 'Bon';
 
   @override
-  String get s5AqiModerate => 'Moderate';
+  String get s5AqiModerate => 'Modere';
 
   @override
-  String get s5AqiUsg => 'Unhealthy for sensitive groups';
+  String get s5AqiUsg => 'Pa bon pou moun ki sansib';
 
   @override
-  String get s5AqiUnhealthy => 'Unhealthy';
+  String get s5AqiUnhealthy => 'Pa bon';
 
   @override
-  String get s5AqiVeryUnhealthy => 'Very unhealthy';
+  String get s5AqiVeryUnhealthy => 'Trè pa bon';
 
   @override
-  String get s5AqiHazardous => 'Hazardous';
+  String get s5AqiHazardous => 'Danje';
 
   @override
   String s5AqiValue(String category, int aqi) {
@@ -1537,10 +1539,10 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s5EnvAirDetail =>
-      'U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.';
+      'Endis kalite lè EPA Etazini, soti nan estasyon piblik ak detektè toupre. Li dekri lè deyò nan zòn ou, pa lafimen trafik la pou kont li.';
 
   @override
-  String get s5EnvAirQuality => 'Air quality';
+  String get s5EnvAirQuality => 'Kalite lè';
 
   @override
   String get s5EnvAlertsHeading => 'Environment alerts';
@@ -1549,7 +1551,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5EnvCardTitle => 'Today\'s local environment';
 
   @override
-  String get s5EnvFlood => 'Flood alerts';
+  String get s5EnvFlood => 'Alèt inondasyon';
 
   @override
   String get s5EnvFloodDetail =>
@@ -1578,7 +1580,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5EnvOlderNotice => 'This is the last information we checked.';
 
   @override
-  String get s5EnvPollen => 'Pollen index';
+  String get s5EnvPollen => 'Endis polèn';
 
   @override
   String get s5EnvPollenDetail =>
@@ -1611,7 +1613,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5FieldNote => 'Nòt (opsyonèl)';
 
   @override
-  String get s5FieldPuffs => 'Kantite pouf (opsyonèl)';
+  String get s5FieldPuffs => 'Kantite puff (opsyonèl)';
 
   @override
   String get s5FieldReason => 'Rezon (opsyonèl)';
@@ -1623,7 +1625,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5FilterAll => 'Tout';
 
   @override
-  String get s5FilterInhaler => 'Inalatè';
+  String get s5FilterInhaler => 'Ponp';
 
   @override
   String get s5FilterMedCheck => 'Verifikasyon medikaman';
@@ -1632,10 +1634,10 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5FilterSymptoms => 'Sentòm';
 
   @override
-  String get s5FloodIssued => 'Flood warning issued';
+  String get s5FloodIssued => 'Gen yon alèt inondasyon';
 
   @override
-  String get s5FloodNone => 'No flood warnings issued';
+  String get s5FloodNone => 'Pa gen alèt inondasyon';
 
   @override
   String get s5FloodUnknown => 'Can\'t check alert information';
@@ -1692,17 +1694,17 @@ class AppLocalizationsHt extends AppLocalizations {
       'Adds today\'s air quality, pollen, and flood alerts. Your exact location is not included.';
 
   @override
-  String get s5InhalerEditTitle => 'Detay itilizasyon inalatè';
+  String get s5InhalerEditTitle => 'Detay itilizasyon ponp';
 
   @override
-  String get s5InhalerEntry => 'Itilizasyon inalatè';
+  String get s5InhalerEntry => 'Itilizasyon ponp';
 
   @override
-  String get s5InhalerLogged => 'Itilizasyon inalatè anrejistre.';
+  String get s5InhalerLogged => 'Itilizasyon ponp anrejistre.';
 
   @override
   String get s5InhalerOneEntryHint =>
-      'Chak fwa ou sove se yon antre itilizasyon inalatè. Yo pa konte l kòm yon pouf oswa yon jou.';
+      'Chak fwa ou sove, se yon sèl antre itilizasyon ponp. Li pa konte kòm yon sèl puff (yon fwa ou peze ponp la), ni kòm yon sèl jou.';
 
   @override
   String s5InhalerUnknownCount(int n) {
@@ -1750,7 +1752,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5Last7Days => '7 dènye jou yo';
 
   @override
-  String get s5LogInhaler => 'Anrejistre itilizasyon inalatè';
+  String get s5LogInhaler => 'Anrejistre itilizasyon ponp';
 
   @override
   String get s5LogLegend =>
@@ -1769,11 +1771,11 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s5MedCheckIntro =>
-      'Yon verifikasyon ou fè poukont ou pou wè si ou te itilize medikaman ou. Li pa baze sou dosye famasi.';
+      'Se ou menm ki di si ou te itilize medikaman ou. Li pa baze sou sa famasi a genyen.';
 
   @override
   String get s5MedCheckQuestion =>
-      'Èske ou te itilize medikaman ou jan sa te planifye?';
+      'Èske ou te pran medikaman ou jan ou te dwe a?';
 
   @override
   String get s5MedCheckTitle => 'Verifikasyon medikaman jodi a';
@@ -1790,11 +1792,11 @@ class AppLocalizationsHt extends AppLocalizations {
       'Montre “Verifikasyon medikaman jodi a” sou paj Akèy la. Aktive l sèlman si pwofesyonèl sante ou mande ou itilize medikaman sa a chak jou.';
 
   @override
-  String get s5MedDefault => 'Default pou anrejistreman rapid';
+  String get s5MedDefault => 'Pou anrejistre byen vit';
 
   @override
   String get s5MedDefaultHint =>
-      'Yo itilize l lè ou tape “Anrejistre itilizasyon inalatè” sou paj Akèy la.';
+      'Se medikaman sa a ki itilize lè ou tape “Anrejistre itilizasyon ponp” sou paj Akèy la.';
 
   @override
   String get s5MedEdit => 'Modifye medikaman';
@@ -1803,11 +1805,11 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5MedNameLabel => 'Non medikaman (jan li ekri sou etikèt ou)';
 
   @override
-  String get s5MedNotApplicable => 'Pa pwograme pou jodi a';
+  String get s5MedNotApplicable => 'Pa nan orè jodi a';
 
   @override
   String s5MedNotApplicableDays(int n) {
-    return 'Pa pwograme: $n jou';
+    return 'Pa nan orè a: $n jou';
   }
 
   @override
@@ -1857,13 +1859,13 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s5MyMedsHint =>
-      'Non ou te konfime yo, pou fè anrejistreman pi rapid. Sa pa se yon rekòmandasyon dòz.';
+      'Non ou te konfime yo, pou fè anrejistreman pi rapid. Sa pa yon konsèy sou ki dòz pou pran.';
 
   @override
   String get s5MyMedsOpen => 'Manage my medications';
 
   @override
-  String get s5MyMedsTitle => 'Medikaman mwen yo';
+  String get s5MyMedsTitle => 'My medications';
 
   @override
   String get s5NavEnvironment => 'Environment';
@@ -1878,7 +1880,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5NoAnswer => 'Mwen prefere pa reponn';
 
   @override
-  String get s5NoRecordsYet => 'Poko gen nòt';
+  String get s5NoRecordsYet => 'Poko gen rejis';
 
   @override
   String s5NoSymptomDays(int n) {
@@ -2041,7 +2043,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String s5PeriodAndRecordedDays(int days, int n) {
-    return 'Peryòd: $days jou · Jou ki gen nòt: $n';
+    return 'Peryòd: $days jou · Jou ki gen rejis: $n';
   }
 
   @override
@@ -2084,8 +2086,8 @@ class AppLocalizationsHt extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n pouf',
-      one: '1 pouf',
+      other: '$n puff',
+      one: '1 puff',
     );
     return '$_temp0';
   }
@@ -2111,7 +2113,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String s5RecentInhaler(int n) {
-    return 'Antre itilizasyon inalatè: $n';
+    return 'Antre itilizasyon ponp: $n';
   }
 
   @override
@@ -2124,7 +2126,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s5RecordsLoadFailed =>
-      'Pa t kapab chaje nòt ou yo. Tanpri eseye ankò.';
+      'Pa t kapab chaje rejis ou yo. Tanpri eseye ankò.';
 
   @override
   String get s5RecordsManageHint =>
@@ -2203,7 +2205,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5StatusUnavailable => 'Can\'t check right now';
 
   @override
-  String get s5SymActivityLimited => 'Aktivite limite';
+  String get s5SymActivityLimited => 'Aktivite mwen limite';
 
   @override
   String get s5SymCough => 'Tous';
@@ -2224,7 +2226,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s5SymShortBreath => 'Difikilte pou respire';
 
   @override
-  String get s5SymWheeze => 'Souf k ap sifle';
+  String get s5SymWheeze => 'Pwatrin ap sifle';
 
   @override
   String get s5SymptomEditTitle => 'Modifye sentòm';
@@ -2288,7 +2290,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s5UrgentActionPlan =>
-      'Si pwofesyonèl sante ou ban ou yon plan aksyon pou asm, swiv li.';
+      'Si pwofesyonèl sante ou te ba ou yon plan aksyon pou asm, swiv li.';
 
   @override
   String get s5UrgentCall911Locked => 'Urgent help: call 911';
@@ -2298,11 +2300,11 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s5UrgentIntro =>
-      'Si respire a two difisil oswa li pa amelyore, rele 911.';
+      'Si respire a difisil anpil, oswa li pa ale pi byen, rele 911.';
 
   @override
   String get s5UrgentLogHint =>
-      'Opsyonèl: sove yon nòt ki di ou te itilize inalatè ou.';
+      'Opsyonèl: sove nan rejis la ke ou te itilize ponp ou a.';
 
   @override
   String get s5UrgentNoContact =>
@@ -2414,7 +2416,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s6HomeWaterQuestion =>
-      'Èske te gen yon fwit dlo oswa inondasyon lakay ou?';
+      'Èske dlo te koule antre lakay ou, oswa te gen inondasyon?';
 
   @override
   String get s6HomeWaterYes => 'Wi';
@@ -2453,7 +2455,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get s6PdfEnvTitle => 'Environment reference (appendix)';
 
   @override
-  String get s6PuffsEach => 'Kantite pouf chak fwa';
+  String get s6PuffsEach => 'Kantite puff chak fwa';
 
   @override
   String s6ReminderBodyNamed(String name) {
@@ -2465,7 +2467,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get s6ReminderChannel =>
-      'Rapèl nan lè dòz ou te sove yo. Se pa yon alèt 30 minit.';
+      'Rapèl nan lè dòz ou te sove yo. Se pa alèt lè ak tan an ki vin chak 30 minit.';
 
   @override
   String get s6ReminderTitle => 'Verifikasyon medikaman';
@@ -2694,13 +2696,14 @@ class AppLocalizationsHt extends AppLocalizations {
       'A deadline was not found in the document. Ask the plan.';
 
   @override
-  String get cnTagline => 'Lèt asirans, pwochen etap yo klè';
+  String get cnTagline => 'Lèt asirans sante, pwochen etap yo klè';
 
   @override
   String get cnDemoBadge => 'Egzanp';
 
   @override
-  String get cnDemoBadgeLong => 'Egzanp ak done envante. Rezilta yo fiks.';
+  String get cnDemoBadgeLong =>
+      'Egzanp ak done envante. Rezilta yo deja fikse.';
 
   @override
   String get cnAuthSignInTitle => 'Konekte';
@@ -2709,7 +2712,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnAuthCreateTitle => 'Kreye yon kont';
 
   @override
-  String get cnAuthResetTitle => 'Reyinisyalize modpas';
+  String get cnAuthResetTitle => 'Remete modpas la';
 
   @override
   String get cnAuthSignIn => 'Konekte';
@@ -2718,7 +2721,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnAuthCreate => 'Kreye yon kont';
 
   @override
-  String get cnAuthSendReset => 'Voye lyen reyinisyalizasyon';
+  String get cnAuthSendReset => 'Voye lyen pou remete modpas la';
 
   @override
   String cnAuthProfileError(String code) {
@@ -2766,7 +2769,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String cnAuthResetSent(String email) {
-    return 'Si gen yon kont pou $email, yon lyen reyinisyalizasyon ap vini. Louvri l sou telefòn sa a.';
+    return 'Si gen yon kont pou $email, yon lyen pou remete modpas la ap vini. Louvri l sou telefòn sa a.';
   }
 
   @override
@@ -2796,7 +2799,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnAuthPrivacyLine =>
-      'Lèt ou yo ak nòt ou yo prive, se sèlman kont ou ki ka wè yo.';
+      'Lèt ou yo ak rejis ou yo prive. Se kont ou sèlman ki ka wè yo.';
 
   @override
   String get cnAuthPasswordUpdated => 'Modpas la mete ajou.';
@@ -2821,7 +2824,7 @@ class AppLocalizationsHt extends AppLocalizations {
       'Tanpri konfime imèl ou anvan. Gade nan bwat resepsyon ou oswa revoye lyen an.';
 
   @override
-  String get cnAuthErrExists => 'Gen yon kont ak imèl sa a deja. Konekte olye.';
+  String get cnAuthErrExists => 'Gen yon kont ak imèl sa a deja. Konekte pito.';
 
   @override
   String get cnAuthErrWeakPassword =>
@@ -2873,13 +2876,13 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnTabAccount => 'Kont';
 
   @override
-  String get cnHomeHeadline => 'Konprann lèt asirans ou a.';
+  String get cnHomeHeadline => 'Konprann lèt asirans sante ou a.';
 
   @override
   String get cnScanLetter => 'Eskane yon lèt';
 
   @override
-  String get cnUploadFile => 'Voye PDF / foto';
+  String get cnUploadFile => 'Monte PDF / foto';
 
   @override
   String get cnTryDemo => 'Eseye demo a';
@@ -2908,14 +2911,15 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnStep2Title => 'Rasanble rejis yo';
 
   @override
-  String get cnStep2Body => 'Konpare sa lèt la mande a ak pwòp rejis ou yo.';
+  String get cnStep2Body =>
+      'Mete sa lèt la mande a ansanm ak pwòp rejis ou yo.';
 
   @override
-  String get cnStep3Title => 'Kreye yon pakè';
+  String get cnStep3Title => 'Prepare dokiman yo';
 
   @override
   String get cnStep3Body =>
-      'Resevwa yon rezime yon paj pou doktè a ak yon bwouyon demann revizyon.';
+      'Jwenn yon rezime yon paj pou doktè a, ak yon bwouyon demann revizyon pou ekip swen ou konplete.';
 
   @override
   String get cnRecentCases => 'Lòt dosye';
@@ -2930,7 +2934,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnSeeAllCases => 'Wè tout dosye';
 
   @override
-  String get cnNoCasesBody => 'Eskane yon lèt asirans pou kòmanse.';
+  String get cnNoCasesBody => 'Eskane yon lèt asirans sante pou kòmanse.';
 
   @override
   String get cnCasesSignInTitle => 'Konekte pou wè dosye ou yo';
@@ -2942,7 +2946,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnCaseDeleted => 'Dosye a efase.';
 
   @override
-  String get cnCaseUntitled => 'Lèt asirans';
+  String get cnCaseUntitled => 'Lèt asirans sante';
 
   @override
   String get cnStatusReading => 'Ap li lèt la';
@@ -2954,7 +2958,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnStatusGatherRecords => 'Rasanble rejis yo';
 
   @override
-  String get cnStatusPacketReady => 'Pakè a pare';
+  String get cnStatusPacketReady => 'Dokiman yo pare';
 
   @override
   String get cnStatusNeedsAttention => 'Bezwen atansyon';
@@ -2986,10 +2990,10 @@ class AppLocalizationsHt extends AppLocalizations {
   }
 
   @override
-  String get cnNextSharePacket => 'Pakè a pare pou pataje';
+  String get cnNextSharePacket => 'Dokiman pare pou voye';
 
   @override
-  String get cnNextCreatePacket => 'Pwochen: kreye pakè a';
+  String get cnNextCreatePacket => 'Apre sa: prepare dokiman yo';
 
   @override
   String cnDateToCheckShort(String date) {
@@ -3026,20 +3030,21 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnKindInitialDenial =>
-      'Refi kouvèti medikaman (Drug coverage denial)';
+      'Refi pou peye medikaman (Drug coverage denial)';
 
   @override
-  String get cnKindInfoRequest => 'Demann pou plis enfòmasyon';
+  String get cnKindInfoRequest => 'Yo mande plis enfòmasyon';
 
   @override
-  String get cnKindReauth => 'Avi renouvèlman (reauthorization)';
+  String get cnKindReauth => 'Avi pou pèmisyon ankò (Reauthorization)';
 
   @override
-  String get cnKindFinalDenial => 'Desizyon final apèl (Final appeal decision)';
+  String get cnKindFinalDenial =>
+      'Desizyon final sou apèl la (Final appeal decision)';
 
   @override
   String get cnKindEob =>
-      'Faktirasyon oswa eksplikasyon avantaj (Explanation of Benefits)';
+      'Bòdwo oswa eksplikasyon benefis (Explanation of Benefits)';
 
   @override
   String get cnKindOther => 'Lòt lèt';
@@ -3051,13 +3056,13 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnFieldPatientName => 'Non pasyan';
 
   @override
-  String get cnFieldPlanName => 'Plan';
+  String get cnFieldPlanName => 'Plan (asirans sante)';
 
   @override
-  String get cnFieldMemberId => 'ID manm';
+  String get cnFieldMemberId => 'Nimewo manm (Member ID)';
 
   @override
-  String get cnFieldCaseReference => 'Nimewo dosye oswa referans';
+  String get cnFieldCaseReference => 'Nimewo dosye (Case) oswa referans';
 
   @override
   String get cnFieldMedication => 'Medikaman (jan li ekri)';
@@ -3096,7 +3101,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnWhoCareTeam => 'Ekip swen';
 
   @override
-  String get cnWhoPlan => 'Plan';
+  String get cnWhoPlan => 'Asirans sante';
 
   @override
   String get cnWhoUnknown => 'Pa sèten';
@@ -3126,23 +3131,23 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnRecSymptoms => 'Jounal sentòm';
 
   @override
-  String get cnRecLocalContext => 'Kontèks lokal';
+  String get cnRecLocalContext => 'Faktè anviwònman';
 
   @override
-  String get cnRecPrn => 'Inalatè lè bezwen';
+  String get cnRecPrn => 'Ponp lè bezwen';
 
   @override
   String get cnDemoTitle => 'Demo';
 
   @override
-  String get cnDemoReset => 'Reyinisyalize demo a';
+  String get cnDemoReset => 'Remete demo a';
 
   @override
-  String get cnDemoResetDone => 'Demo a reyinisyalize.';
+  String get cnDemoResetDone => 'Demo a remete.';
 
   @override
   String get cnDemoIntro =>
-      'Twa lèt envante ak rezilta fiks, pou ou ka wè chak etap. Anyen pa voye.';
+      'Twa lèt envante ak rezilta fiks, pou ou ka wè chak etap. Yo pa monte anyen.';
 
   @override
   String get cnUpEmpty => 'Fichye sa a vid.';
@@ -3176,11 +3181,11 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnCameraUnavailable =>
-      'Kamera a pa disponib. Ou ka voye yon foto oswa yon PDF olye.';
+      'Kamera a pa disponib. Ou ka monte yon foto oswa yon PDF pito.';
 
   @override
   String get cnPhotosUnavailable =>
-      'Pa ka louvri foto yo. Pèmèt aksè nan foto nan paramèt yo, oswa voye yon PDF.';
+      'Pa ka louvri foto yo. Pèmèt aksè foto yo nan paramèt yo, oswa monte yon PDF.';
 
   @override
   String get cnFilesUnavailable =>
@@ -3188,7 +3193,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnUploadFailed =>
-      'Voye a pa fini. Paj ou yo toujou la. Eseye ankò.';
+      'Monte a pa fini. Paj ou yo toujou la. Eseye ankò.';
 
   @override
   String get cnCaptureTitle => 'Ajoute paj lèt la';
@@ -3216,6 +3221,12 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnAddPhoto => 'Foto';
 
   @override
+  String get cnPickGallery => 'Chwazi nan foto yo';
+
+  @override
+  String get cnLabelForm => 'Fòm (jan li ekri)';
+
+  @override
   String get cnAddPdf => 'PDF';
 
   @override
@@ -3231,13 +3242,13 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnUploadConsent =>
-      'Lè w voye paj sa yo, yo ale sou sèvè CoverNote, kote yon sèvis AI li yo pou ou. Ou ka efase dosye a nenpòt ki lè.';
+      'Lè w monte paj sa yo, yo voye sou sèvè CoverNote, kote yon sèvis AI li yo pou ou. Ou ka efase dosye a nenpòt ki lè.';
 
   @override
-  String get cnStageUploading => 'Ap voye';
+  String get cnStageUploading => 'Ap monte';
 
   @override
-  String get cnUploadAndRead => 'Voye epi li';
+  String get cnUploadAndRead => 'Monte epi li';
 
   @override
   String cnPageN(int n) {
@@ -3274,11 +3285,11 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnServiceUnavailableBody =>
-      'Lektè lèt la pa disponib kounye a. Paj ou yo sove; eseye ankò pita.';
+      'Lektè lèt la pa pare kounye a. Paj ou yo sove; eseye ankò pita.';
 
   @override
   String get cnNeedNewPagesBody =>
-      'Pran foto ki pi klè oswa itilize mwens paj, epi voye yo ankò.';
+      'Pran foto ki pi klè oswa itilize mwens paj, epi monte yo ankò.';
 
   @override
   String get cnPagesKept => 'Paj ou yo sove. Anyen pa chanje.';
@@ -3303,7 +3314,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnReadingBody =>
-      'Lè sa a fini, ou verifye sa nou jwenn yo ak lèt la.';
+      'Lè li fini, ou konpare sa nou jwenn nan ak lèt la.';
 
   @override
   String get cnReadingLeaveOk =>
@@ -3319,10 +3330,10 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnStepReview => 'Verifikasyon';
 
   @override
-  String get cnStepEvidence => 'Prèv';
+  String get cnStepEvidence => 'Rejis';
 
   @override
-  String get cnStepPacket => 'Pakè';
+  String get cnStepPacket => 'Dokiman';
 
   @override
   String cnStepOf(int n, int total, String name) {
@@ -3377,7 +3388,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnCheckDetailsHint =>
-      'Konpare chak valè ak lèt ou a. Tape sou yon sitasyon pou wè kote li soti.';
+      'Konpare chak valè ak lèt ou a. Tape sou yon fraz nan lèt la pou wè ki kote li soti.';
 
   @override
   String cnItemsLeftToCheck(int count) {
@@ -3391,7 +3402,7 @@ class AppLocalizationsHt extends AppLocalizations {
   }
 
   @override
-  String get cnContinueToEvidence => 'Kontinye nan prèv';
+  String get cnContinueToEvidence => 'Kontinye nan rejis';
 
   @override
   String cnSeePage(int n) {
@@ -3408,7 +3419,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnChange => 'Chanje';
 
   @override
-  String get cnCardWhyDenied => 'Poukisa yo refize l (Denial)';
+  String get cnCardWhyDenied => 'Poukisa yo refize l';
 
   @override
   String get cnCardWhatTheyNeed => 'Sa yo mande';
@@ -3442,24 +3453,26 @@ class AppLocalizationsHt extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Voye $count atik plan an mande yo anvan dat ki anba a.',
-      one: 'Voye 1 atik plan an mande anvan dat ki anba a.',
-      zero: 'Voye enfòmasyon plan an mande yo anvan dat ki anba a.',
+      other:
+          'Voye $count atik asirans sante a mande yo, pa pita pase dat ki anba a.',
+      one: 'Voye 1 atik asirans sante a mande a, pa pita pase dat ki anba a.',
+      zero:
+          'Voye enfòmasyon asirans sante a mande a, pa pita pase dat ki anba a.',
     );
     return '$_temp0';
   }
 
   @override
   String get cnNextReauth =>
-      'Note ki lè apwobasyon aktyèl la fini epi mande ekip swen ou pou kòmanse renouvèlman an.';
+      'Ekri ki jou apwobasyon aktyèl la fini, epi mande ekip swen ou kòmanse renouvèlman an.';
 
   @override
   String get cnNextFinal =>
-      'Sa a se yon desizyon final. CoverNote pa ekri yon premye demann revizyon pou li. Mande plan an oswa ekip swen ou sou opsyon lèt la site yo.';
+      'Sa a se yon desizyon final. CoverNote pa prepare yon bwouyon premye demann revizyon pou li. Mande asirans sante a oswa ekip swen ou sou opsyon lèt la site yo.';
 
   @override
   String get cnNextEob =>
-      'Sa sanble yon faktirasyon oswa yon relve avantaj, se pa yon refi. Verifye l ak sèvis manm plan an.';
+      'Sa sanble yon bòdwo oswa yon papye sou benefis, se pa yon refi. Verifye l ak sèvis manm asirans sante a.';
 
   @override
   String get cnNextUncertain =>
@@ -3493,7 +3506,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnDateEnteredByYou => 'Ou antre l';
 
   @override
-  String get cnDateFromLetter => 'Endike nan lèt la';
+  String get cnDateFromLetter => 'Ekri nan lèt la';
 
   @override
   String cnReceivedOn(String date) {
@@ -3502,11 +3515,11 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnDatePassed =>
-      'Dat sa a pase. Rele plan an pou mande kisa ou ka toujou fè.';
+      'Dat sa a deja pase. Rele asirans sante a pou mande kisa ou ka toujou fè.';
 
   @override
   String cnNeedReceivedDate(int days) {
-    return 'Lèt la bay $days jou kalandriye apati jou ou resevwa l. Ki lè li rive?';
+    return 'Lèt la bay $days jou kalandriye apati jou ou resevwa l. Ki jou li te rive?';
   }
 
   @override
@@ -3514,7 +3527,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnDateConflict =>
-      'Lèt la bay plizyè dat diferan. Mande plan an kilès ki aplike, epi chwazi l.';
+      'Lèt la bay dat ki pa menm. Mande asirans sante a kilès ki aplike, epi chwazi l.';
 
   @override
   String cnUseThisDate(String date) {
@@ -3523,15 +3536,15 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnDateUnclear =>
-      'Fason li ekri a pa klè oswa li konte jou ouvrab, kidonk CoverNote pa kalkile l. Mande plan an dat egzak la.';
+      'Mo yo pa klè, oswa li konte jou ouvrab, pa jou kalandriye. Se poutèt sa CoverNote pa kalkile dat la. Mande asirans sante a dat egzak la.';
 
   @override
   String get cnNoDeadline =>
-      'Pa gen dat limit pou revizyon ki jwenn nan lèt la.';
+      'Nou pa jwenn okenn dat limit pou revizyon nan lèt la.';
 
   @override
   String cnReplyBy(String date) {
-    return 'Reponn a demann enfòmasyon an anvan $date (dapre lèt la)';
+    return 'Reponn demann enfòmasyon an pa pita pase $date (dapre lèt la)';
   }
 
   @override
@@ -3544,7 +3557,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnLeaveUnknown => 'Kite l enkonu pou kounye a';
 
   @override
-  String get cnDateUnknownChecked => 'Enkonu, nòte';
+  String get cnDateUnknownChecked => 'Enkonu, li make';
 
   @override
   String get cnTypeAsWritten => 'Tape l egzakteman jan lèt la montre l.';
@@ -3581,7 +3594,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String cnPrnLine(int uses, int puffs) {
-    return 'Lè bezwen: $uses itilizasyon, $puffs pouf';
+    return 'Lè bezwen: $uses itilizasyon, $puffs puff';
   }
 
   @override
@@ -3609,7 +3622,7 @@ class AppLocalizationsHt extends AppLocalizations {
   }
 
   @override
-  String get cnSyntheticData => 'Done sentetik';
+  String get cnSyntheticData => 'Done envante';
 
   @override
   String get cnLetterAsksFor => 'Sa lèt la mande';
@@ -3628,10 +3641,10 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnLocalContextNote =>
-      'Kontèks opsyonèl. Se pa yon mezi lakay ou epi se pa yon kòz sentòm yo.';
+      'Opsyonèl. Se faktè deyò, pa yon mezi andedan kay la ni kòz sentòm yo.';
 
   @override
-  String get cnContinueToPacket => 'Kontinye nan pakè a';
+  String get cnContinueToPacket => 'Kontinye nan dokiman yo';
 
   @override
   String get cnAddedByYou => 'Ou ajoute l';
@@ -3683,7 +3696,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnBeforeSharingBody =>
-      'Fichye sa a gen non ou ak detay sante ou. Pataje l sèlman ak ekip swen ou oswa plan ou. Pataje a pa voye anyen pou ou.';
+      'Fichye sa a gen non ou ak detay sante ou. Pataje l sèlman ak ekip swen ou oswa asirans sante ou. Pataje l pa voye anyen nan plas ou.';
 
   @override
   String get cnShare => 'Pataje';
@@ -3708,15 +3721,15 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnPacketNoDraftFinal =>
-      'Pou yon desizyon final, pakè a gen sèlman rezime pou doktè a. Pa gen bwouyon revizyon premye nivo ki fèt.';
+      'Pou yon desizyon final, pakè a gen sèlman rezime pou doktè a. Li pa gen bwouyon premye demann revizyon.';
 
   @override
   String get cnPacketNoDraftEob =>
-      'Pou yon faktirasyon oswa yon relve avantaj, pakè a gen sèlman rezime pou doktè a.';
+      'Pou yon bòdwo oswa yon papye sou benefis, pakè a gen sèlman rezime pou doktè a.';
 
   @override
   String get cnPacketNoDraftReauth =>
-      'Pou yon avi renouvèlman, pakè a gen sèlman rezime pou doktè a, pou ede ekip swen ou fè renouvèlman an.';
+      'Pou yon avi pou pèmisyon ankò, pakè a gen sèlman rezime pou doktè a, pou ede ekip swen ou fè renouvèlman an.';
 
   @override
   String get cnPacketNoDraftOther =>
@@ -3733,7 +3746,7 @@ class AppLocalizationsHt extends AppLocalizations {
       'Bwouyon demann revizyon (pou ekip swen ou konplete)';
 
   @override
-  String get cnPartLetterText => 'Anèks: tèks lèt la';
+  String get cnPartLetterText => 'Paj anplis: tèks lèt la';
 
   @override
   String cnPacketEvidenceCount(int count) {
@@ -3748,7 +3761,7 @@ class AppLocalizationsHt extends AppLocalizations {
   }
 
   @override
-  String get cnIncludeLetterText => 'Ajoute tèks lèt la kòm anèks';
+  String get cnIncludeLetterText => 'Ajoute tèks lèt la kòm paj anplis';
 
   @override
   String get cnPacketStale =>
@@ -3758,7 +3771,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnGenerating => 'Ap kreye…';
 
   @override
-  String get cnGeneratePacket => 'Kreye pakè revizyon';
+  String get cnGeneratePacket => 'Kreye dokiman yo';
 
   @override
   String get cnSaveOrPrint => 'Sove oswa enprime';
@@ -3784,7 +3797,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnSentExplain =>
-      'Note ki lè ak kijan ou voye l. CoverNote pa voye l epi li pa swiv okenn desizyon.';
+      'Ekri ki lè ak kijan li te voye. CoverNote pa voye l, epi li pa swiv okenn desizyon.';
 
   @override
   String get cnSave => 'Sove';
@@ -3833,7 +3846,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnReportWater => 'Dlo antre lakay';
 
   @override
-  String get cnReportDamp => 'Yon kote anndan ki mouye oswa ki santi moufin';
+  String get cnReportDamp => 'Yon kote anndan ki mouye oswa ki santi mwazi';
 
   @override
   String cnOnDate(String date) {
@@ -3848,7 +3861,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnCtxHumidityNote =>
-      'Imidite deyò se done move tan. Li pa montre imidite oswa mwazi anndan kay ou.';
+      'Imidite deyò se done sou tan an. Li pa montre si kay la mouye, ni si gen mwazi anndan.';
 
   @override
   String get cnCtxValue => 'Valè';
@@ -3861,17 +3874,17 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnCtxSourceHelp =>
-      'Kote nimewo a soti, pa egzanp AirNow oswa yon moniteur lokal';
+      'Kote nimewo a soti, pa egzanp AirNow oswa yon aparèy lokal';
 
   @override
   String get cnCtxSourceRequired => 'Ajoute sous la.';
 
   @override
-  String get cnCtxPlace => 'Kote (kòd postal oswa vil, opsyonèl)';
+  String get cnCtxPlace => 'Kote (opsyonèl)';
 
   @override
   String get cnRecordsSignInBody =>
-      'Konekte pou kenbe rejis medikaman, sentòm ak kontèks lokal.';
+      'Konekte pou w kenbe dosye medikaman, sentòm, ak faktè anviwònman.';
 
   @override
   String get cnRecordsYourRecords => 'Rejis ou yo';
@@ -3883,7 +3896,7 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnRecDailyLog => 'Jounal chak jou';
 
   @override
-  String get cnRecDailyLogSub => 'Sentòm ak itilizasyon inalatè';
+  String get cnRecDailyLogSub => 'Sentòm ak itilizasyon ponp';
 
   @override
   String get cnRecLocalContextSub => 'Mezi lè ak sa ou remake';
@@ -3895,11 +3908,12 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnUrgentHelp => 'Èd ijan';
 
   @override
-  String get cnUrgentHelpSub => 'Etap pou yon ijans respiratwa ak pou rele 911';
+  String get cnUrgentHelpSub =>
+      'Etap pou yon ijans pou respire, ak pou rele 911';
 
   @override
   String cnLast30Days(String from, String to) {
-    return '30 dènye jou yo ($from – $to)';
+    return 'Last 30 days ($from – $to)';
   }
 
   @override
@@ -3914,7 +3928,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnDeleteAccountBody =>
-      'Sa efase kont ou, dosye ou yo, lèt ou te voye yo, pakè yo ak rejis yo pou toutan. Pa gen mwayen pou defèt sa.';
+      'Sa efase kont ou, dosye ou yo, lèt ou te monte yo, pakè yo ak rejis yo pou toutan. Ou pa ka defèt sa.';
 
   @override
   String get cnTypeDelete => 'Tape DELETE pou konfime';
@@ -3958,7 +3972,7 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnAboutBody =>
-      'CoverNote ede ou li lèt asirans sou medikaman epi prepare dokiman pou ekip swen ou. Li pa voye anyen bay plan ou, li pa deside si yo kouvri l, epi li pa konsèy medikal.';
+      'CoverNote ede ou li lèt asirans sante sou medikaman, epi prepare papye pou ekip swen ou. Li pa voye anyen bay asirans sante a, li pa deside kouvèti a, epi se pa konsèy medikal.';
 
   @override
   String get cnDangerZone => 'Efase kont';
@@ -3977,11 +3991,11 @@ class AppLocalizationsHt extends AppLocalizations {
       'Pa t kapab li paj yo. Refè foto yo nan pi bon limyè.';
 
   @override
-  String get cnErrTooManyPages => 'Twòp paj. Voye jiska 10.';
+  String get cnErrTooManyPages => 'Twòp paj. Monte jiska 10.';
 
   @override
   String get cnErrTooLarge =>
-      'Fichye yo two gwo. Itilize mwens paj oswa paj ki pi piti.';
+      'Fichye yo twò gwo. Itilize mwens paj oswa paj ki pi piti.';
 
   @override
   String get cnErrStale =>
@@ -4008,42 +4022,42 @@ class AppLocalizationsHt extends AppLocalizations {
 
   @override
   String get cnLanguageNote =>
-      'Yon lojisyèl te tradui kèk tèks, kidonk yo ka gen erè. Non medikaman, dòz, dat ak sitasyon ki soti nan lèt ou yo pa janm tradui.';
+      'Yon pwogram tradui kèk tèks, epi li ka gen erè. Non ak dòz medikaman an rete jan yo ekri. Rès lèt la tradui pou ou.';
 
   @override
   String get cnLanguageButtonTooltip => 'Chanje lang';
 
   @override
   String get cnPacketEnglishNote =>
-      'Pakè a ekri an Anglè pou ekip swen ou ka li l.';
+      'Dokiman yo ekri an anglè pou ekip swen ou ka li yo.';
 
   @override
   String get cnReasonMissingInformation =>
-      'Plan an di li pa t resevwa tout enfòmasyon li te bezwen.';
+      'Asirans sante a di li pa t resevwa tout enfòmasyon li te bezwen.';
 
   @override
   String get cnReasonStepTherapy =>
-      'Plan an vle ou eseye lòt medikaman anvan (Step therapy).';
+      'Asirans sante a vle ou eseye lòt medikaman anvan. Yo rele sa tretman pa etap (Step therapy).';
 
   @override
   String get cnReasonMedicalNecessity =>
-      'Plan an di li pa t kapab konfime ke medikaman sa a nesesè pou rezon medikal.';
+      'Asirans sante a di li pa kapab konfime ou bezwen medikaman sa a pou sante ou. Yo rele sa nesesite medikal (Medical necessity).';
 
   @override
   String get cnReasonFormulary =>
-      'Plan an di medikaman sa a pa sou lis medikaman li kouvri yo (Formulary).';
+      'Asirans sante a di medikaman sa a pa sou lis medikaman li peye (Formulary).';
 
   @override
   String get cnReasonQuantityLimit =>
-      'Plan an di kantite yo mande a depase sa li kouvri.';
+      'Asirans sante a di kantite yo mande a pi plis pase sa li kouvri.';
 
   @override
   String get cnReasonEligibility =>
-      'Plan an di sa a pa kouvri dapre règ kouvèti li yo.';
+      'Asirans sante a di sa a pa kouvri, dapre règ li yo.';
 
   @override
   String get cnReasonOther =>
-      'Lèt la bay yon lòt rezon. Louvri sitasyon ki soti nan lèt la pou li l.';
+      'Lèt la bay yon lòt rezon. Louvri fraz ki soti nan lèt la pou li l.';
 
   @override
   String get cnReqHintMedHistory =>
@@ -4056,5 +4070,451 @@ class AppLocalizationsHt extends AppLocalizations {
   String get cnReqHintTestResults => 'Rezilta tès oswa laboratwa';
 
   @override
-  String get cnReqHintDoctorStatement => 'Yon deklarasyon ki soti nan doktè ou';
+  String get cnReqHintDoctorStatement => 'Yon papye doktè ou ekri';
+
+  @override
+  String get cnTabSettings => 'Paramèt';
+
+  @override
+  String get cnCasesList => 'Lis dosye yo';
+
+  @override
+  String get cnGoHome => 'Akèy';
+
+  @override
+  String get cnAnalyzingTitle => 'Lèt asirans · n ap li l';
+
+  @override
+  String cnCaseNumber(String n) {
+    return 'Dosye #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return 'Te ajoute $when';
+  }
+
+  @override
+  String get cnAliasHint => 'Ti non (opsyonèl)';
+
+  @override
+  String get cnShareDocuments => 'Voye dokiman yo';
+
+  @override
+  String get cnRecordDelivery => 'Note ou te voye yo';
+
+  @override
+  String get cnShareAsk => 'Èske ou te voye dokiman sa yo?';
+
+  @override
+  String get cnDeliveryRecipient => 'Voye bay';
+
+  @override
+  String get cnRecipientClinic => 'Klinik oswa doktè';
+
+  @override
+  String get cnRecipientInsurer => 'Asirans sante';
+
+  @override
+  String get cnRecipientSelf => 'Mwen kenbe yo pou tèt mwen';
+
+  @override
+  String get cnRecipientOther => 'Lòt';
+
+  @override
+  String get cnDeliveryMethod => 'Kijan';
+
+  @override
+  String get cnMethodEmail => 'Imèl';
+
+  @override
+  String get cnMethodMessage => 'Mesaj tèks oswa chat';
+
+  @override
+  String get cnMethodUnknown => 'Mwen pa sonje';
+
+  @override
+  String get cnDeliveryUserReport =>
+      'Sa a se sa ou te di. Aplikasyon an pa ka konfime lòt moun te resevwa yo.';
+
+  @override
+  String get cnShareCancelled => 'Voye a anile. Yo pa make anyen kòm voye.';
+
+  @override
+  String get cnRecordsLoading => 'N ap chaje rejis yo…';
+
+  @override
+  String get cnRecordsEmpty => 'Pa gen rejis nan peryòd sa a';
+
+  @override
+  String get cnRecordsError => 'Nou pa t ka chaje rejis yo';
+
+  @override
+  String get cnRecordsPermission => 'Ou pa gen aksè a rejis sa yo';
+
+  @override
+  String get cnRecordsPending =>
+      'Sove sou telefòn sa a · ap tann senkronizasyon';
+
+  @override
+  String get cnRecordsFiltered => 'Kèk rejis kache akòz filtè ou yo';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '$n rejis andeyò peryòd sa a';
+  }
+
+  @override
+  String get cnWidenRange => 'Montre yon peryòd pi long';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days jou · $med fwa medikaman · $sym nòt sentòm';
+  }
+
+  @override
+  String get cnOneDayPacket => 'Dokiman sa yo kouvri yon sèl jou.';
+
+  @override
+  String get cnMyMedications => 'Medikaman mwen';
+
+  @override
+  String get cnScanLabel => 'Eskane etikèt medikaman an';
+
+  @override
+  String get cnMedManageHint =>
+      'Anrejistre medikaman ou itilize. Chanje yo si preskripsyon an chanje. Itilizasyon chak jou note nan Rejis.';
+
+  @override
+  String get cnLabelNeedLabel =>
+      'Pran foto etikèt famasi a oswa tèks sou bwat la. Aplikasyon an pa idantifye grenn pa fòm li.';
+
+  @override
+  String get cnLabelUnclear => 'Valè sa a pa t klè. Tcheke li anvan ou sove.';
+
+  @override
+  String get cnConsentLabel => 'Pèmèt IA li yon etikèt medikaman';
+
+  @override
+  String get cnManualMed => 'Ekri nan men';
+
+  @override
+  String get cnAirWeather => 'Faktè anviwònman toupre ou';
+
+  @override
+  String get cnAirAutoNote =>
+      'Kalite lè, lè ki gen rapò ak trafik, polèn, alèt inondasyon, ak imidite deyò vin ak pozisyon ou. Telefòn nan pa mezire lè a. Imidite deyò a pa mwazi andedan kay la.';
+
+  @override
+  String get cnHomeRecords => 'Dosye medikaman ki gen rapò';
+
+  @override
+  String get cnEnvTrap => 'Lè ki gen rapò ak trafik';
+
+  @override
+  String get cnItemMemo => 'Nòt';
+
+  @override
+  String get cnSaveNote => 'Sove nòt la';
+
+  @override
+  String get cnLocationNeed =>
+      'Pèmèt pozisyon pou w wè faktè anviwònman toupre ou.';
+
+  @override
+  String get cnLocationOff =>
+      'Sèvis pozisyon an etenn. Limen l epi eseye ankò.';
+
+  @override
+  String get cnLocationBlocked => 'Pozisyon an bloke. Pèmèt li nan paramèt yo.';
+
+  @override
+  String get cnOpenSettings => 'Ouvri paramèt yo';
+
+  @override
+  String get cnAirNone => 'Pa gen done lè ni tan';
+
+  @override
+  String get cnAirRetry => 'Eseye lè ak tan ankò';
+
+  @override
+  String get cnSetRegion => 'Set your area (ZIP or city)';
+
+  @override
+  String get cnConfiguredArea => 'Area you set';
+
+  @override
+  String get cnRecordPlace => 'Kote rejis sa a';
+
+  @override
+  String get cnClosestObservation => 'Closest observation to the record time';
+
+  @override
+  String get cnEnvUnavailable => 'Pa gen mezi ki koresponn ak lè sa a';
+
+  @override
+  String cnLogMedication(String name) {
+    return 'Note $name';
+  }
+
+  @override
+  String get cnAsNeededUse => 'Itilizasyon lè ou bezwen';
+
+  @override
+  String get cnAsNeededInhaler => 'As-needed inhaler use';
+
+  @override
+  String get cnScheduledUse => 'Itilizasyon nan lè';
+
+  @override
+  String get cnExtraUse => 'Itilizasyon anplis';
+
+  @override
+  String get cnUndoUse => 'Anile';
+
+  @override
+  String get cnLoggedLocal => 'Sove sou telefòn sa a';
+
+  @override
+  String get cnLoggedPending => 'Ap tann senkronizasyon';
+
+  @override
+  String get cnLoggedSynced => 'Senkronize';
+
+  @override
+  String cnDaysLogged(int n) {
+    return 'Note $n jou semèn sa a';
+  }
+
+  @override
+  String get cnManageMedsLink => 'Jere medikaman mwen';
+
+  @override
+  String get cnViewAirWeather => 'View environmental factors near you';
+
+  @override
+  String get cnConsentAi => 'Pèmèt IA li dokiman';
+
+  @override
+  String get cnConsentAiBody =>
+      'Imaj lèt la ale nan yon sèvis lekti pou CoverNote ka montre ou sa li di. Ou ka fèmen sa pita nan Paramèt.';
+
+  @override
+  String get cnConsentAndAnalyze => 'Dakò epi li';
+
+  @override
+  String get cnConsentLater => 'Pa kounye a';
+
+  @override
+  String get cnConsentViewLocal => 'Gade orijinal la isit la';
+
+  @override
+  String get cnConsentDetails => 'Plis sou itilizasyon done';
+
+  @override
+  String get cnConsentLabelPurpose => 'Li yon etikèt medikaman';
+
+  @override
+  String get cnConsentLetterPurpose => 'Li yon lèt asirans';
+
+  @override
+  String get cnConsentTranslatePurpose => 'Tradui yon lèt';
+
+  @override
+  String get cnToday => 'Jodi a';
+
+  @override
+  String get cnLast7 => '7 dènye jou yo';
+
+  @override
+  String get cnLast30 => '30 dènye jou yo';
+
+  @override
+  String get cnCustomRange => 'Chwazi dat';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days jou · $count rejis';
+  }
+
+  @override
+  String get cnNoRecordThatDay => 'Pa gen rejis jou sa a';
+
+  @override
+  String get cnNotLogged => 'Pa note';
+
+  @override
+  String get cnNotTaken => 'Make kòm pa pran';
+
+  @override
+  String get cnOriginalFile => 'Fichye orijinal';
+
+  @override
+  String get cnFullTranslation => 'Tradiksyon konplè';
+
+  @override
+  String get cnRecognizedText => 'Tèks yo rekonèt';
+
+  @override
+  String get cnSameLanguage => 'Menm lang ak orijinal la';
+
+  @override
+  String get cnTranslationPartial => 'Gen paj ki poko tradui';
+
+  @override
+  String get cnTranslationFailed => 'Nou pa t ka tradui paj sa a';
+
+  @override
+  String get cnOriginalMissing =>
+      'Nou pa jwenn fichye orijinal la. Ou ka voye l ankò.';
+
+  @override
+  String get cnTranslateRetry => 'Kontinye tradiksyon an';
+
+  @override
+  String get cnKeyDetails => 'Sa ki pi enpòtan';
+
+  @override
+  String get cnWhatAbout => 'Sa a pale de kisa?';
+
+  @override
+  String get cnWhatToDo => 'Kisa pou w fè kounye a';
+
+  @override
+  String get cnByWhen => 'Rive ki lè?';
+
+  @override
+  String get cnPreparePacket => 'Prepare dokiman yo';
+
+  @override
+  String get cnCorrectReading => 'Korije yon erè lekti';
+
+  @override
+  String get cnCorrectReadingNote =>
+      'Lèt orijinal la pa chanje. Se lekti otomatik la sèlman ki korije.';
+
+  @override
+  String get cnReviewImportant =>
+      'Tcheke valè enpòtan sa yo anvan ou kreye dokiman yo';
+
+  @override
+  String get cnPacketReadyTitle => 'Dokiman ou yo pare';
+
+  @override
+  String get cnNextSendClinic =>
+      'Voye dokiman yo bay doktè ou epi mande l revize yo';
+
+  @override
+  String get cnNextWaitReply => 'Lè ou resevwa yon repons, note rezilta a';
+
+  @override
+  String get cnExistingSentNewReady =>
+      'Dokiman anvan yo te voye · ou ka fè yon nouvo seri';
+
+  @override
+  String get cnWhyRecords =>
+      'Rejis medikaman ak sentòm ka ede doktè w wè kijan tretman an ap mache. Menm si ou poko gen rejis, ou ka fè dokiman apati lèt la.';
+
+  @override
+  String get cnLetterAskedRecords => 'Lèt la te mande rejis tretman ki resan';
+
+  @override
+  String get cnOptionalReference => 'Referans opsyonèl';
+
+  @override
+  String get cnAsthmaContext =>
+      'Rejis tretman asm — itilizasyon nan lè, itilizasyon lè ou bezwen, ak sentòm respirasyon.';
+
+  @override
+  String get cnGeneralContext =>
+      'Rejis tretman — itilizasyon medikaman ak sentòm oswa nòt.';
+
+  @override
+  String get cnTreatmentQuestion => 'Lèt sa a pale de ki tretman?';
+
+  @override
+  String get cnTreatmentAsthma => 'Asm';
+
+  @override
+  String get cnTreatmentOther => 'Yon lòt tretman';
+
+  @override
+  String get cnTreatmentUnknown => 'Mwen poko konnen';
+
+  @override
+  String get cnStatusWaitingClinic => 'Voye bay klinik la · ap tann revizyon';
+
+  @override
+  String get cnStatusWaitingInsurer =>
+      'Ou te di ou soumèt li bay asirans lan · ap tann repons';
+
+  @override
+  String get cnFollowUpNeeded => 'Bezwen swivi';
+
+  @override
+  String get cnOutcomeRecorded => 'Rezilta note';
+
+  @override
+  String get cnActiveCases => 'Ann kou';
+
+  @override
+  String get cnCompletedArchived => 'Fini epi achive';
+
+  @override
+  String get cnCompleteCase => 'Fini dosye sa a';
+
+  @override
+  String get cnArchiveCase => 'Achive';
+
+  @override
+  String get cnReopenCase => 'Rekòmanse';
+
+  @override
+  String get cnOutcomeApproved => 'Aksepte';
+
+  @override
+  String get cnOutcomeDenied => 'Refize';
+
+  @override
+  String get cnOutcomeStopped => 'Pa kontinye';
+
+  @override
+  String get cnOutcomeOther => 'Lòt / pa note';
+
+  @override
+  String get cnSentIsNotComplete => 'Voye pa vle di dosye a fini.';
+
+  @override
+  String get cnArchivedCase => 'Achive';
+
+  @override
+  String get cnStepKeyDetails => 'Sa ki pi enpòtan';
+
+  @override
+  String get cnStepAddRecords => 'Ajoute rejis mwen';
+
+  @override
+  String get cnStepReviewPacket => 'Revize dokiman yo';
+
+  @override
+  String get cnDataConsent => 'Itilizasyon done';
+
+  @override
+  String get cnZipOrCity => 'ZIP or city';
+
+  @override
+  String get cnSaveArea => 'Save area';
+
+  @override
+  String get cnWeekCalendar => 'Semèn sa a';
+
+  @override
+  String get cnMonthCalendar => 'Mwa sa a';
+
+  @override
+  String get cnUsedShort => 'Mwen itilize l';
+
+  @override
+  String get cnCalendarLegend =>
+      'Yon pwen vle di ou te note yon bagay jou sa a. Yon jou vid pa vle di ou rate yon dòz.';
 }

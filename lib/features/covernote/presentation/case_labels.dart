@@ -5,6 +5,7 @@ import '../../../core/locale/app_languages.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/case_facts.dart';
 import '../domain/case_models.dart';
+import '../domain/s9_models.dart';
 import '../ui/brand.dart';
 
 String formatDay(BuildContext context, DateTime d) =>
@@ -21,6 +22,9 @@ String caseTitle(AppLocalizations l, CaseRow row) {
 }
 
 (String, ChipTone) caseStatus(AppLocalizations l, CaseRow row, {CaseJob? job}) {
+  if (row.lifecycle == CaseLifecycle.completed) {
+    return (l.cnOutcomeRecorded, ChipTone.good);
+  }
   if (job != null && job.failed) {
     return (l.cnStatusNeedsAttention, ChipTone.bad);
   }
@@ -119,6 +123,15 @@ bool needsTranslatedAid(BuildContext context) =>
 /// A short translated hint under an English requirement label such as
 /// "Medication history". The label itself stays as the letter words it.
 /// Returns `null` when the label is not one of the common kinds.
+/// Medication or symptom history can be linked to the patient's own log.
+/// Other letter items are a choice or a note.
+bool requirementLinksRecords(String label) {
+  final s = label.toLowerCase();
+  return RegExp(
+    r'medication history|pharmacy|prior medication|medicines? (tried|history)|drug history|symptom|inhaler',
+  ).hasMatch(s);
+}
+
 String? requirementHint(AppLocalizations l, String label) {
   final s = label.toLowerCase();
   if (RegExp(r'letter of medical|doctor.s statement|prescriber statement|statement (from|by) (the )?(doctor|physician|prescriber)').hasMatch(s)) {

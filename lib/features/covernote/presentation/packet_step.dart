@@ -1,18 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:printing/printing.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../records/domain/record_models.dart' show isoDate;
 import '../data/case_store.dart';
+import '../data/delivery_repository.dart';
 import '../data/demo_case_store.dart';
 import '../domain/case_facts.dart';
 import '../domain/case_models.dart';
+import '../domain/s9_models.dart';
 import '../pdf/packet_pdf.dart';
 import '../ui/brand.dart';
 import 'case_labels.dart';
-
 Future<PacketResult> _buildInIsolate((PacketInput, ByteData, ByteData) args) =>
     buildPacketPdf(args.$1, PacketFonts.fromBytes(args.$2, args.$3));
 
@@ -27,6 +31,7 @@ class PacketStep extends StatefulWidget {
     required this.flush,
     required this.onReload,
     required this.onGoReview,
+    required this.onComplete,
   });
 
   final CaseStore store;
@@ -36,6 +41,7 @@ class PacketStep extends StatefulWidget {
   final Future<bool> Function() flush;
   final Future<void> Function() onReload;
   final VoidCallback onGoReview;
+  final VoidCallback onComplete;
 
   @override
   State<PacketStep> createState() => _PacketStepState();
@@ -195,8 +201,145 @@ class _PacketStepState extends State<PacketStep> {
       ),
     );
     if (ok != true || _bytes == null) return;
-    final shared = await Printing.sharePdf(bytes: _bytes!, filename: _fileName);
-    if (shared) await _markExported();
+    try {
+      final file = File('${Directory.systemTemp.path}/$_fileName');
+      await file.writeAsBytes(_bytes!, flush: true);
+      final result = await SharePlus.instance.share(
+        ShareParams(files: [XFile(file.path, mimeType: 'application/pdf')]),
+      );
+      if (result.status == ShareResultStatus.success) {
+        await _markExported();
+        if (mounted) {
+          final record = await showDialog<bool>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: Text(l.cnShareAsk),
+              content: Text(l.cnDeliveryUserReport),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx, false),
+                  child: Text(l.cnConsentLater),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.pop(ctx, true),
+                  child: Text(l.cnRecordDelivery),
+                ),
+              ],
+            ),
+          );
+          if (record == true && mounted) await _recordDelivery();
+        }
+      } else if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l.cnShareCancelled)));
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l.cnErrNetwork)));
+      }
+    }
+  }
+
+  Future<void> _recordDelivery() async {
+    final l = AppLocalizations.of(context)!;
+    DeliveryRecipient recipient = DeliveryRecipient.clinic;
+    DeliveryMethod method = DeliveryMethod.email;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setLocal) => AlertDialog(
+        title: Text(l.cnRecordDelivery),
+        content: SingleChildScrollView(
+          child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(l.cnDeliveryUserReport),
+            const SizedBox(height: 12),
+            Text(l.cnDeliveryRecipient, style: const TextStyle(fontWeight: FontWeight.w600)),
+            DropdownButton<DeliveryRecipient>(
+              value: recipient,
+              isExpanded: true,
+              items: [
+                DropdownMenuItem(
+                  value: DeliveryRecipient.clinic,
+                  child: Text(l.cnRecipientClinic),
+                ),
+                DropdownMenuItem(
+                  value: DeliveryRecipient.insurer,
+                  child: Text(l.cnRecipientInsurer),
+                ),
+                DropdownMenuItem(
+                  value: DeliveryRecipient.self,
+                  child: Text(l.cnRecipientSelf),
+                ),
+                DropdownMenuItem(
+                  value: DeliveryRecipient.other,
+                  child: Text(l.cnRecipientOther),
+                ),
+              ],
+              onChanged: (v) => setLocal(() => recipient = v ?? recipient),
+            ),
+            const SizedBox(height: 8),
+            Text(l.cnDeliveryMethod, style: const TextStyle(fontWeight: FontWeight.w600)),
+            DropdownButton<DeliveryMethod>(
+              value: method,
+              isExpanded: true,
+              items: [
+                for (final m in DeliveryMethod.values)
+                  DropdownMenuItem(
+                    value: m,
+                    child: Text(switch (m) {
+                      DeliveryMethod.email => l.cnMethodEmail,
+                      DeliveryMethod.message => l.cnMethodMessage,
+                      DeliveryMethod.portal => l.cnMethodPortal,
+                      DeliveryMethod.fax => l.cnMethodFax,
+                      DeliveryMethod.mail => l.cnMethodMail,
+                      DeliveryMethod.inPerson => l.cnMethodInPerson,
+                      DeliveryMethod.other => l.cnMethodOther,
+                      DeliveryMethod.unknown => l.cnMethodUnknown,
+                    }),
+                  ),
+              ],
+              onChanged: (v) => setLocal(() => method = v ?? method),
+            ),
+          ],
+        ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l.cnCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l.cnRecordDelivery),
+          ),
+        ],
+      ),
+      ),
+    );
+    if (ok != true || widget.store.isDemo) return;
+    try {
+      await DeliveryRepository().record(
+        caseId: _row.id,
+        recipient: recipient,
+        method: method,
+        sentAt: DateTime.now(),
+        artifactId: widget.detail.latestPacket?.id,
+        artifactRevision: widget.detail.latestPacket?.factRevision,
+      );
+      await widget.onReload();
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l.cnErrNetwork)));
+      }
+    }
   }
 
   Future<void> _savePrint() async {
@@ -259,7 +402,7 @@ class _PacketStepState extends State<PacketStep> {
     final bytes = stale ? null : _bytes;
 
     return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
       children: [
         if (!draft)
           CnCard(
@@ -353,29 +496,74 @@ class _PacketStepState extends State<PacketStep> {
           ),
         if (bytes != null) ...[
           const SizedBox(height: 16),
+          CnCard(
+            color: CnColors.mint,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l.cnPacketReadyTitle,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: CnColors.navy,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  l.cnNextSendClinic,
+                  style: const TextStyle(fontSize: 15, height: 1.35),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
           _Preview(bytes: bytes, pages: _pages, hasDraft: draft),
           const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              FilledButton.icon(
-                onPressed: _share,
-                icon: const Icon(Icons.ios_share),
-                label: Text(l.cnShare),
-              ),
-              OutlinedButton.icon(
-                onPressed: _savePrint,
-                icon: const Icon(Icons.print_outlined),
-                label: Text(l.cnSaveOrPrint),
-              ),
-              if (!widget.store.isDemo)
-                OutlinedButton.icon(
-                  onPressed: _reportSent,
-                  icon: const Icon(Icons.outbox_outlined),
-                  label: Text(l.cnISentIt),
-                ),
-            ],
+          SizedBox(
+            height: 52,
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: _share,
+              icon: const Icon(Icons.ios_share),
+              label: Text(l.cnShareDocuments),
+            ),
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            height: 48,
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: _recordDelivery,
+              icon: const Icon(Icons.outbox_outlined),
+              label: Text(l.cnRecordDelivery),
+            ),
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            height: 48,
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: _savePrint,
+              icon: const Icon(Icons.print_outlined),
+              label: Text(l.cnSaveOrPrint),
+            ),
+          ),
+          if (!widget.store.isDemo)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(onPressed: _reportSent, child: Text(l.cnISentIt)),
+            ),
+        ],
+        if (widget.detail.row.lifecycle == CaseLifecycle.active) ...[
+          const SizedBox(height: 16),
+          SizedBox(
+            height: 52,
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: widget.onComplete,
+              child: Text(l.cnCompleteCase),
+            ),
           ),
         ],
         if (_row.lastExportedAt != null) ...[

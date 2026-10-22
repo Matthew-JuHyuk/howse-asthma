@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../core/push/medication_reminder.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../covernote/presentation/label_scan_screen.dart';
+import '../../covernote/ui/app_chrome.dart';
+import '../../covernote/ui/brand.dart';
 import '../data/medication_repository.dart';
 import '../data/regimen_repository.dart';
 import '../data/records_revision.dart';
@@ -237,7 +240,7 @@ class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
     final meds = _meds;
     return Scaffold(
       backgroundColor: AppTheme.defaultBackground,
-      appBar: AppBar(title: Text(l10n.s5MyMedsTitle)),
+      appBar: CoverNoteAppBar(title: Text(l10n.cnMyMedications)),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _edit(),
         icon: const Icon(Icons.add),
@@ -247,8 +250,26 @@ class _MyMedicationsScreenState extends State<MyMedicationsScreen> {
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 96),
         children: [
           Text(
+            l10n.cnMedManageHint,
+            style: const TextStyle(fontSize: 16, color: AppTheme.neutral700, height: 1.35),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 48,
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const LabelScanScreen()),
+              ).then((_) => _load()),
+              icon: const Icon(Icons.document_scanner_outlined),
+              label: Text(l10n.cnScanLabel),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
             l10n.s5MyMedsHint,
-            style: const TextStyle(fontSize: 16, color: AppTheme.neutral700),
+            style: const TextStyle(fontSize: 14, color: CnColors.muted),
           ),
           const SizedBox(height: 16),
           if (_failed)

@@ -1769,7 +1769,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get s5MyMedsOpen => '내 약 관리';
 
   @override
-  String get s5MyMedsTitle => '내 약 정보';
+  String get s5MyMedsTitle => '내 약 관리';
 
   @override
   String get s5NavEnvironment => '환경';
@@ -2329,7 +2329,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get s6ReminderBodyPrivate => '약 사용을 확인해 주세요';
 
   @override
-  String get s6ReminderChannel => '저장한 복용 시각의 알림입니다. 30분 반복 알림이 아닙니다.';
+  String get s6ReminderChannel => '저장한 복용 시각의 알림입니다. 30분마다 오는 대기·날씨 알림이 아닙니다.';
 
   @override
   String get s6ReminderTitle => '약 사용 확인';
@@ -2588,7 +2588,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnAuthNameLabel => '이름(선택)';
 
   @override
-  String get cnAuthNameHelper => '패킷에 표시됩니다. 나중에 바꿀 수 있습니다.';
+  String get cnAuthNameHelper => '제출 자료에 표시됩니다. 나중에 바꿀 수 있습니다.';
 
   @override
   String get cnAuthEmailLabel => '이메일';
@@ -2753,7 +2753,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnStep2Body => '편지가 요청한 자료를 내 기록과 연결합니다.';
 
   @override
-  String get cnStep3Title => '패킷 만들기';
+  String get cnStep3Title => '제출 자료 만들기';
 
   @override
   String get cnStep3Body => '의사용 1페이지 요약과 재검토 요청 초안을 받습니다.';
@@ -2795,7 +2795,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnStatusGatherRecords => '자료 모으기';
 
   @override
-  String get cnStatusPacketReady => '패킷 준비됨';
+  String get cnStatusPacketReady => '자료 준비됨';
 
   @override
   String get cnStatusNeedsAttention => '조치 필요';
@@ -2820,10 +2820,10 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get cnNextSharePacket => '공유할 패킷이 준비됨';
+  String get cnNextSharePacket => '보낼 자료가 준비됨';
 
   @override
-  String get cnNextCreatePacket => '다음: 패킷 만들기';
+  String get cnNextCreatePacket => '다음: 제출 자료 만들기';
 
   @override
   String cnDateToCheckShort(String date) {
@@ -2846,7 +2846,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get cnDeleteCaseBody =>
-      '편지 사진, 읽어낸 내용, 연결한 기록 요약, 패킷이 삭제됩니다. 복약·증상 기록은 그대로 남습니다.';
+      '편지 사진, 읽어낸 내용, 연결한 기록 요약, 제출 자료가 삭제됩니다. 복약·증상 기록은 그대로 남습니다.';
 
   @override
   String get cnCancel => '취소';
@@ -2870,7 +2870,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnKindFinalDenial => '최종 이의신청 결정';
 
   @override
-  String get cnKindEob => '청구서 또는 급여 설명서(EOB)';
+  String get cnKindEob => '청구서 또는 급여 설명서(Explanation of Benefits)';
 
   @override
   String get cnKindOther => '기타 편지';
@@ -2957,7 +2957,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnRecSymptoms => '증상 기록';
 
   @override
-  String get cnRecLocalContext => '지역 환경 맥락';
+  String get cnRecLocalContext => '환경 요인';
 
   @override
   String get cnRecPrn => '필요 시 흡입기';
@@ -3039,6 +3039,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get cnAddPhoto => '사진';
+
+  @override
+  String get cnPickGallery => '앨범에서 고르기';
+
+  @override
+  String get cnLabelForm => '제형(적힌 그대로)';
 
   @override
   String get cnAddPdf => 'PDF';
@@ -3132,7 +3138,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnStepEvidence => '자료';
 
   @override
-  String get cnStepPacket => '패킷';
+  String get cnStepPacket => '제출 자료';
 
   @override
   String cnStepOf(int n, int total, String name) {
@@ -3406,10 +3412,11 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get cnLocalContextNote => '선택 사항인 참고 맥락입니다. 우리 집 측정값이나 증상의 원인이 아닙니다.';
+  String get cnLocalContextNote =>
+      '선택 사항입니다. 실외 환경 요인이며, 집 안 측정값이나 증상의 원인은 아닙니다.';
 
   @override
-  String get cnContinueToPacket => '패킷 단계로';
+  String get cnContinueToPacket => '제출 자료로';
 
   @override
   String get cnAddedByYou => '직접 추가';
@@ -3437,22 +3444,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnOtherStatus => '다른 상태';
 
   @override
-  String get cnInPacket => '패킷에 포함';
+  String get cnInPacket => '자료에 포함';
 
   @override
-  String get cnRemoveFromPacket => '패킷에서 빼기';
+  String get cnRemoveFromPacket => '자료에서 빼기';
 
   @override
-  String get cnAddToPacket => '패킷에 추가';
+  String get cnAddToPacket => '자료에 넣기';
 
   @override
   String get cnErrNotSavedYet => '최근 변경 내용이 아직 저장되지 않았습니다. 연결을 확인하고 다시 시도하세요.';
 
   @override
-  String get cnPacketChangedMeanwhile => '패킷을 만드는 동안 내용이 바뀌었습니다. 다시 생성하세요.';
+  String get cnPacketChangedMeanwhile => '자료를 만드는 동안 내용이 바뀌었습니다. 다시 만들어 주세요.';
 
   @override
-  String get cnPacketFailed => '패킷을 만들지 못했습니다. 다시 시도하세요.';
+  String get cnPacketFailed => '자료를 만들지 못했습니다. 다시 시도하세요.';
 
   @override
   String get cnBeforeSharingTitle => '공유하기 전에';
@@ -3496,7 +3503,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnPacketNoDraftOther => '거부 통지나 추가 자료 요청이 아니면 의사용 요약만 만듭니다.';
 
   @override
-  String get cnPacketContains => '패킷 구성';
+  String get cnPacketContains => '자료 구성';
 
   @override
   String get cnPartSummary => '의사용 요약(1페이지)';
@@ -3522,13 +3529,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnIncludeLetterText => '편지 원문을 부록으로 추가';
 
   @override
-  String get cnPacketStale => '마지막 패킷 이후 내용이 바뀌었습니다. 다시 생성해 업데이트하세요.';
+  String get cnPacketStale => '마지막 자료 이후 내용이 바뀌었습니다. 다시 만들어 업데이트하세요.';
 
   @override
   String get cnGenerating => '생성 중…';
 
   @override
-  String get cnGeneratePacket => '검토 패킷 생성';
+  String get cnGeneratePacket => '제출 자료 만들기';
 
   @override
   String get cnSaveOrPrint => '저장·인쇄';
@@ -3635,10 +3642,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnCtxSourceRequired => '출처를 입력하세요.';
 
   @override
-  String get cnCtxPlace => '장소(우편번호 또는 동네, 선택)';
+  String get cnCtxPlace => '장소(선택)';
 
   @override
-  String get cnRecordsSignInBody => '로그인하면 복약·증상·지역 맥락 기록을 보관할 수 있습니다.';
+  String get cnRecordsSignInBody => '로그인하면 복약·증상·환경 요인 기록을 보관할 수 있습니다.';
 
   @override
   String get cnRecordsYourRecords => '내 기록';
@@ -3680,7 +3687,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get cnDeleteAccountBody =>
-      '계정, 케이스, 올린 편지, 패킷, 기록이 영구 삭제되며 되돌릴 수 없습니다.';
+      '계정, 케이스, 올린 편지, 제출 자료, 기록이 영구 삭제되며 되돌릴 수 없습니다.';
 
   @override
   String get cnTypeDelete => '확인하려면 DELETE 입력';
@@ -3768,13 +3775,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get cnLanguageNote =>
-      '일부 문구는 소프트웨어로 번역되어 오류가 있을 수 있습니다. 약 이름, 용량, 날짜, 편지 속 인용문은 번역하지 않습니다.';
+      '일부 문구는 소프트웨어로 번역되어 틀릴 수 있습니다. 약 이름과 용량은 적힌 그대로 둡니다. 그 외 편지 내용은 번역해서 보여 줍니다.';
 
   @override
   String get cnLanguageButtonTooltip => '언어 변경';
 
   @override
-  String get cnPacketEnglishNote => '의료진이 읽을 수 있도록 패킷은 영어로 작성됩니다.';
+  String get cnPacketEnglishNote => '의료진이 읽을 수 있도록 제출 자료는 영어로 작성됩니다.';
 
   @override
   String get cnReasonMissingInformation => '보험사는 필요한 정보를 모두 받지 못했다고 합니다.';
@@ -3796,7 +3803,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnReasonEligibility => '보험사는 보장 규정상 이 약이 보장되지 않는다고 합니다.';
 
   @override
-  String get cnReasonOther => '편지에 다른 이유가 적혀 있습니다. 편지 인용문을 열어 확인하세요.';
+  String get cnReasonOther => '편지에 다른 이유가 적혀 있습니다. 해당 부분을 눌러 확인하세요.';
 
   @override
   String get cnReqHintMedHistory => '지금까지 쓴 약과 현재 쓰는 약';
@@ -3808,5 +3815,436 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cnReqHintTestResults => '검사 결과';
 
   @override
-  String get cnReqHintDoctorStatement => '의사의 설명서';
+  String get cnReqHintDoctorStatement => '의사 소견서';
+
+  @override
+  String get cnTabSettings => '설정';
+
+  @override
+  String get cnCasesList => '케이스 목록';
+
+  @override
+  String get cnGoHome => '홈으로';
+
+  @override
+  String get cnAnalyzingTitle => '보험 편지 · 분석 중';
+
+  @override
+  String cnCaseNumber(String n) {
+    return '케이스 #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return '$when 추가';
+  }
+
+  @override
+  String get cnAliasHint => '부르는 이름 (선택)';
+
+  @override
+  String get cnShareDocuments => '자료 보내기';
+
+  @override
+  String get cnRecordDelivery => '보낸 내역 기록';
+
+  @override
+  String get cnShareAsk => '이 자료를 보내셨나요?';
+
+  @override
+  String get cnDeliveryRecipient => '받는 곳';
+
+  @override
+  String get cnRecipientClinic => '병원·의료진';
+
+  @override
+  String get cnRecipientInsurer => '보험사';
+
+  @override
+  String get cnRecipientSelf => '본인 보관';
+
+  @override
+  String get cnRecipientOther => '기타';
+
+  @override
+  String get cnDeliveryMethod => '방법';
+
+  @override
+  String get cnMethodEmail => '이메일';
+
+  @override
+  String get cnMethodMessage => '문자·메신저';
+
+  @override
+  String get cnMethodUnknown => '기억 안 남';
+
+  @override
+  String get cnDeliveryUserReport => '직접 남기신 내용입니다. 상대가 받았는지는 앱이 확인하지 않습니다.';
+
+  @override
+  String get cnShareCancelled => '공유가 취소되었습니다. 보낸 것으로 기록하지 않았습니다.';
+
+  @override
+  String get cnRecordsLoading => '기록을 불러오는 중…';
+
+  @override
+  String get cnRecordsEmpty => '이 기간에 기록이 없습니다';
+
+  @override
+  String get cnRecordsError => '기록을 불러오지 못했습니다';
+
+  @override
+  String get cnRecordsPermission => '이 기록에 접근할 수 없습니다';
+
+  @override
+  String get cnRecordsPending => '기기에 저장됨 · 동기화 대기';
+
+  @override
+  String get cnRecordsFiltered => '필터 때문에 일부 기록이 숨겨져 있습니다';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '이 기간 밖 기록 $n건';
+  }
+
+  @override
+  String get cnWidenRange => '기간을 더 넓히기';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days일 · 약 사용 $med건 · 증상 $sym건';
+  }
+
+  @override
+  String get cnOneDayPacket => '이 자료는 하루치입니다.';
+
+  @override
+  String get cnMyMedications => '내 약 관리';
+
+  @override
+  String get cnScanLabel => '약 라벨 찍어 등록';
+
+  @override
+  String get cnMedManageHint =>
+      '쓰는 약은 먼저 등록하고, 처방이 바뀌면 수정하세요. 매일 사용 여부는 기록에서 남깁니다.';
+
+  @override
+  String get cnLabelNeedLabel => '약국 라벨이나 상자 글자를 찍어 주세요. 알약 모양만으로는 식별하지 않습니다.';
+
+  @override
+  String get cnLabelUnclear => '이 값은 흐려서 확인이 필요합니다.';
+
+  @override
+  String get cnConsentLabel => '약 라벨을 AI가 읽도록 허용';
+
+  @override
+  String get cnManualMed => '직접 입력';
+
+  @override
+  String get cnAirWeather => '내 주변 환경 요인';
+
+  @override
+  String get cnAirAutoNote =>
+      '지금 위치의 대기질, 교통 관련 대기, 꽃가루, 홍수 알림, 실외 습도를 보여 줍니다. 휴대폰이 공기를 측정하지는 않습니다. 실외 습도는 실내 곰팡이가 아닙니다.';
+
+  @override
+  String get cnHomeRecords => '관련 복약 기록';
+
+  @override
+  String get cnEnvTrap => '교통 관련 대기';
+
+  @override
+  String get cnItemMemo => '메모';
+
+  @override
+  String get cnSaveNote => '메모 저장';
+
+  @override
+  String get cnLocationNeed => '지금 있는 곳의 환경 요인을 보려면 위치 권한을 허용해 주세요.';
+
+  @override
+  String get cnLocationOff => '위치 서비스가 꺼져 있습니다. 켠 다음 다시 시도해 주세요.';
+
+  @override
+  String get cnLocationBlocked => '위치 권한이 차단되어 있습니다. 설정에서 허용해 주세요.';
+
+  @override
+  String get cnOpenSettings => '설정 열기';
+
+  @override
+  String get cnAirNone => '환경정보 없음';
+
+  @override
+  String get cnAirRetry => '환경정보 다시 시도';
+
+  @override
+  String get cnSetRegion => '지역 설정 (우편번호 또는 도시)';
+
+  @override
+  String get cnConfiguredArea => '설정한 지역';
+
+  @override
+  String get cnRecordPlace => '기록 장소';
+
+  @override
+  String get cnClosestObservation => '기록 시각과 가장 가까운 관측';
+
+  @override
+  String get cnEnvUnavailable => '그 시각에 맞는 관측이 없습니다';
+
+  @override
+  String cnLogMedication(String name) {
+    return '$name 사용했어요';
+  }
+
+  @override
+  String get cnAsNeededUse => '필요할 때 사용한 약';
+
+  @override
+  String get cnAsNeededInhaler => '필요할 때 사용한 흡입기';
+
+  @override
+  String get cnScheduledUse => '정기 사용';
+
+  @override
+  String get cnExtraUse => '추가 사용';
+
+  @override
+  String get cnUndoUse => '되돌리기';
+
+  @override
+  String get cnLoggedLocal => '기기에 저장됨';
+
+  @override
+  String get cnLoggedPending => '동기화 대기';
+
+  @override
+  String get cnLoggedSynced => '동기화됨';
+
+  @override
+  String cnDaysLogged(int n) {
+    return '이번 주 $n일 기록함';
+  }
+
+  @override
+  String get cnManageMedsLink => '내 약 관리';
+
+  @override
+  String get cnViewAirWeather => '내 주변 환경 요인 보기';
+
+  @override
+  String get cnConsentAi => '문서의 AI 분석에 동의';
+
+  @override
+  String get cnConsentAiBody => '편지를 읽는 서비스로 이미지가 전송됩니다. 나중에 설정에서 끌 수 있습니다.';
+
+  @override
+  String get cnConsentAndAnalyze => '동의하고 분석하기';
+
+  @override
+  String get cnConsentLater => '지금은 안 함';
+
+  @override
+  String get cnConsentViewLocal => '원본만 보기';
+
+  @override
+  String get cnConsentDetails => '데이터 이용 자세히';
+
+  @override
+  String get cnConsentLabelPurpose => '약 라벨 읽기';
+
+  @override
+  String get cnConsentLetterPurpose => '보험 편지 읽기';
+
+  @override
+  String get cnConsentTranslatePurpose => '편지 번역';
+
+  @override
+  String get cnToday => '오늘';
+
+  @override
+  String get cnLast7 => '최근 7일';
+
+  @override
+  String get cnLast30 => '최근 30일';
+
+  @override
+  String get cnCustomRange => '날짜 직접 선택';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days일 · $count건';
+  }
+
+  @override
+  String get cnNoRecordThatDay => '이 날 기록 없음';
+
+  @override
+  String get cnNotLogged => '기록하지 않음';
+
+  @override
+  String get cnNotTaken => '안 썼다고 표시함';
+
+  @override
+  String get cnOriginalFile => '원본 파일';
+
+  @override
+  String get cnFullTranslation => '전체 번역';
+
+  @override
+  String get cnRecognizedText => '인식된 텍스트';
+
+  @override
+  String get cnSameLanguage => '원문과 같은 언어입니다';
+
+  @override
+  String get cnTranslationPartial => '아직 번역되지 않은 페이지가 있습니다';
+
+  @override
+  String get cnTranslationFailed => '이 페이지를 번역하지 못했습니다';
+
+  @override
+  String get cnOriginalMissing => '원본 파일을 찾을 수 없습니다. 다시 올릴 수 있습니다.';
+
+  @override
+  String get cnTranslateRetry => '이어서 번역';
+
+  @override
+  String get cnKeyDetails => '핵심 내용';
+
+  @override
+  String get cnWhatAbout => '무슨 내용인가요?';
+
+  @override
+  String get cnWhatToDo => '지금 할 일';
+
+  @override
+  String get cnByWhen => '언제까지인가요?';
+
+  @override
+  String get cnPreparePacket => '자료 준비하기';
+
+  @override
+  String get cnCorrectReading => '잘못 읽힌 내용 알리기';
+
+  @override
+  String get cnCorrectReadingNote => '원본 편지는 바뀌지 않습니다. 자동 인식 결과만 바로잡습니다.';
+
+  @override
+  String get cnReviewImportant => '자료를 만들기 전에 중요한 값만 확인하세요';
+
+  @override
+  String get cnPacketReadyTitle => '자료가 준비됐어요';
+
+  @override
+  String get cnNextSendClinic => '의료진에게 자료를 보내 검토를 요청하세요';
+
+  @override
+  String get cnNextWaitReply => '답변을 받으면 결과를 남겨 주세요';
+
+  @override
+  String get cnExistingSentNewReady => '기존 자료는 전달됨 · 새 자료를 만들 수 있습니다';
+
+  @override
+  String get cnWhyRecords =>
+      '약 사용과 증상 기록은 의료진이 치료 경과를 확인하는 데 참고할 수 있습니다. 기록이 없어도 편지 내용으로 자료를 만들 수 있어요.';
+
+  @override
+  String get cnLetterAskedRecords => '편지에서 최근 치료 기록을 요청했어요';
+
+  @override
+  String get cnOptionalReference => '선택 참고자료';
+
+  @override
+  String get cnAsthmaContext => '천식 치료 기록 — 정기 약 사용, 필요 시 사용, 호흡 증상을 남깁니다.';
+
+  @override
+  String get cnGeneralContext => '치료 기록 — 약 사용과 증상·메모를 남깁니다.';
+
+  @override
+  String get cnTreatmentQuestion => '어떤 치료와 관련된 편지인가요?';
+
+  @override
+  String get cnTreatmentAsthma => '천식';
+
+  @override
+  String get cnTreatmentOther => '다른 치료';
+
+  @override
+  String get cnTreatmentUnknown => '아직 모르겠어요';
+
+  @override
+  String get cnStatusWaitingClinic => '병원에 전달함 · 검토 기다리는 중';
+
+  @override
+  String get cnStatusWaitingInsurer => '보험사에 제출했다고 기록함 · 답변 대기';
+
+  @override
+  String get cnFollowUpNeeded => '후속 조치 필요';
+
+  @override
+  String get cnOutcomeRecorded => '결과를 기록함';
+
+  @override
+  String get cnActiveCases => '진행 중';
+
+  @override
+  String get cnCompletedArchived => '완료·보관';
+
+  @override
+  String get cnCompleteCase => '케이스 완료';
+
+  @override
+  String get cnArchiveCase => '보관';
+
+  @override
+  String get cnReopenCase => '다시 진행';
+
+  @override
+  String get cnOutcomeApproved => '승인';
+
+  @override
+  String get cnOutcomeDenied => '거부';
+
+  @override
+  String get cnOutcomeStopped => '더 진행하지 않음';
+
+  @override
+  String get cnOutcomeOther => '기타·미기록';
+
+  @override
+  String get cnSentIsNotComplete => '보냈다고 해서 완료가 아닙니다.';
+
+  @override
+  String get cnArchivedCase => '보관됨';
+
+  @override
+  String get cnStepKeyDetails => '핵심 내용';
+
+  @override
+  String get cnStepAddRecords => '기록 연결';
+
+  @override
+  String get cnStepReviewPacket => '제출 자료';
+
+  @override
+  String get cnDataConsent => '데이터 처리';
+
+  @override
+  String get cnZipOrCity => '우편번호 또는 도시';
+
+  @override
+  String get cnSaveArea => '지역 저장';
+
+  @override
+  String get cnWeekCalendar => '이번 주';
+
+  @override
+  String get cnMonthCalendar => '이번 달';
+
+  @override
+  String get cnUsedShort => '사용했어요';
+
+  @override
+  String get cnCalendarLegend => '점이 있으면 그날에 기록을 남긴 것입니다. 빈 날은 약을 안 쓴 날이 아닙니다.';
 }

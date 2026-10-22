@@ -421,20 +421,8 @@ class CaseFacts {
     return n;
   }
 
-  bool get readyForEvidence {
-    for (final k in keyFieldKeys) {
-      final f = field(k);
-      if (!f.confirmed && (f.hasValue || f.status == FactStatus.ambiguous)) {
-        return false;
-      }
-    }
-    if (!documentKind.confirmed) return false;
-    final d = resolveDeadline(this);
-    if (d.state != DeadlineResolution.none && !deadlineState.confirmed) {
-      return false;
-    }
-    return true;
-  }
+  /// Sprint 9: facts can be read without confirming every field.
+  bool get readyForEvidence => true;
 }
 
 enum DeadlineResolution {

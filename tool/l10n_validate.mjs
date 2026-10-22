@@ -117,7 +117,13 @@ function check(tag, { quiet = false } = {}) {
     const bare = en.replace(/\{[^}]*\}/g, '').replace(/[^A-Za-z]/g, '');
     if (v === en && bare.length > 12) same++;
     if (script && bare.length > 25) {
-      const letters = [...v.replace(/\{[^}]*\}/g, '')].filter((c) => /\p{L}/u.test(c));
+      // Ignore parenthesised English glosses: they are deliberate, so a user
+      // can match the app's words to the English letter (e.g. EOB).
+      const ownText = v
+        .replace(/\{[^}]*\}/g, '')
+        .replace(/\([^()]*\)/g, '')
+        .replace(/（[^（）]*）/g, '');
+      const letters = [...ownText].filter((c) => /\p{L}/u.test(c));
       const inScript = letters.filter((c) => script.test(c)).length;
       if (tag !== 'es' && tag !== 'pt' && tag !== 'ht' && letters.length && inScript / letters.length < 0.5) {
         problems.push(`mostly not in the expected script: ${k}`);

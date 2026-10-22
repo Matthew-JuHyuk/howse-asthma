@@ -52,8 +52,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get medicationLogTitle => 'Medication Log';
 
   @override
-  String get medicationLogAddButton =>
-      'Registrar uso de bombinha / medicamento';
+  String get medicationLogAddButton => 'Registrar uso de bombinha / remédio';
 
   @override
   String get medicationNameLabel => 'Medication Name';
@@ -216,7 +215,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mockPdcCheck => 'Verificação diária PDC';
 
   @override
-  String get mockPdcHint => 'Adesão com um toque';
+  String get mockPdcHint => 'Confirmar o uso com um toque';
 
   @override
   String get mockInhalerEvent => 'Bombinha registrada';
@@ -820,7 +819,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get actQ1 =>
-      'Por quanto tempo a asma impediu você de fazer o que queria no trabalho, na escola ou em casa?';
+      'Por quanto tempo a asma impediu você de fazer o que precisava no trabalho, na escola ou em casa?';
 
   @override
   String get actQ2 => 'Com que frequência você sentiu falta de ar?';
@@ -831,7 +830,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get actQ4 =>
-      'Com que frequência você usou a bombinha de resgate ou o remédio de nebulização?';
+      'Com que frequência você usou a bombinha de emergência ou o remédio de nebulização?';
 
   @override
   String get actQ5 => 'Como você avalia o controle da sua asma?';
@@ -840,7 +839,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get actOpt1 => 'O tempo todo';
 
   @override
-  String get actOpt2 => 'Quase o tempo todo';
+  String get actOpt2 => 'A maior parte do tempo';
 
   @override
   String get actOpt3 => 'Parte do tempo';
@@ -849,10 +848,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get actOpt4 => 'Pouco do tempo';
 
   @override
-  String get actOpt5 => 'Nunca';
+  String get actOpt5 => 'Nada do tempo';
 
   @override
-  String get actQ5Opt1 => 'Nada controlada';
+  String get actQ5Opt1 => 'Sem controle nenhum';
 
   @override
   String get actQ5Opt2 => 'Mal controlada';
@@ -992,20 +991,21 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get envTrapDetail =>
-      'Traffic-related air pollution proxy (sensors + optional NJ freight weight)';
+      'Indicador de ar ligado ao trânsito (sensores e, em Nova Jersey, um peso opcional do tráfego de carga).';
 
   @override
   String get envTrapTip =>
       'Limit outdoor exertion when TRAP is HIGH or CRITICAL.';
 
   @override
-  String get envFloodDetail => 'NWS flash-flood / stream warnings near you';
+  String get envFloodDetail =>
+      'Alertas de enchente repentina e de rios do NWS perto de você.';
 
   @override
   String get envFloodTipClear => 'No active flash-flood warning for this area.';
 
   @override
-  String get envPollenDetail => 'Google Pollen forecast';
+  String get envPollenDetail => 'Previsão de pólen do Google.';
 
   @override
   String get envPollenTip =>
@@ -1018,7 +1018,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String envUpdatedAt(String when) {
-    return 'Updated: $when';
+    return 'Atualizado: $when';
   }
 
   @override
@@ -1457,22 +1457,22 @@ class AppLocalizationsPt extends AppLocalizations {
       'When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.';
 
   @override
-  String get s5AqiGood => 'Good';
+  String get s5AqiGood => 'Boa';
 
   @override
-  String get s5AqiModerate => 'Moderate';
+  String get s5AqiModerate => 'Moderada';
 
   @override
-  String get s5AqiUsg => 'Unhealthy for sensitive groups';
+  String get s5AqiUsg => 'Insalubre para grupos sensíveis';
 
   @override
-  String get s5AqiUnhealthy => 'Unhealthy';
+  String get s5AqiUnhealthy => 'Insalubre';
 
   @override
-  String get s5AqiVeryUnhealthy => 'Very unhealthy';
+  String get s5AqiVeryUnhealthy => 'Muito insalubre';
 
   @override
-  String get s5AqiHazardous => 'Hazardous';
+  String get s5AqiHazardous => 'Perigosa';
 
   @override
   String s5AqiValue(String category, int aqi) {
@@ -1539,10 +1539,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get s5EnvAirDetail =>
-      'U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.';
+      'Índice de qualidade do ar da EPA dos EUA, de monitores públicos e sensores próximos. Descreve o ar externo da sua região, não a fumaça do trânsito separadamente.';
 
   @override
-  String get s5EnvAirQuality => 'Air quality';
+  String get s5EnvAirQuality => 'Qualidade do ar';
 
   @override
   String get s5EnvAlertsHeading => 'Environment alerts';
@@ -1551,7 +1551,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5EnvCardTitle => 'Today\'s local environment';
 
   @override
-  String get s5EnvFlood => 'Flood alerts';
+  String get s5EnvFlood => 'Alertas de enchente';
 
   @override
   String get s5EnvFloodDetail =>
@@ -1580,7 +1580,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5EnvOlderNotice => 'This is the last information we checked.';
 
   @override
-  String get s5EnvPollen => 'Pollen index';
+  String get s5EnvPollen => 'Índice de pólen';
 
   @override
   String get s5EnvPollenDetail =>
@@ -1607,7 +1607,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5FieldDate => 'Data';
 
   @override
-  String get s5FieldMedication => 'Medicamento';
+  String get s5FieldMedication => 'Remédio';
 
   @override
   String get s5FieldNote => 'Observação (opcional)';
@@ -1628,16 +1628,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5FilterInhaler => 'Bombinha';
 
   @override
-  String get s5FilterMedCheck => 'Verificação do medicamento';
+  String get s5FilterMedCheck => 'Verificação do remédio';
 
   @override
   String get s5FilterSymptoms => 'Sintomas';
 
   @override
-  String get s5FloodIssued => 'Flood warning issued';
+  String get s5FloodIssued => 'Há um alerta de enchente';
 
   @override
-  String get s5FloodNone => 'No flood warnings issued';
+  String get s5FloodNone => 'Não há alerta de enchente';
 
   @override
   String get s5FloodUnknown => 'Can\'t check alert information';
@@ -1708,7 +1708,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String s5InhalerUnknownCount(int n) {
-    return 'Medicamento não identificado: $n';
+    return 'Remédio não identificado: $n';
   }
 
   @override
@@ -1762,7 +1762,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5LogSymptoms => 'Registrar sintomas';
 
   @override
-  String get s5MedAdd => 'Adicionar medicamento';
+  String get s5MedAdd => 'Adicionar remédio';
 
   @override
   String s5MedCheckCounts(int a, int b, int c, int d) {
@@ -1771,24 +1771,24 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get s5MedCheckIntro =>
-      'Uma verificação feita por você mesmo para saber se usou o seu remédio. Não se baseia em registros da farmácia.';
+      'Uma verificação feita por você para saber se usou o seu remédio. Não se baseia em registros da farmácia.';
 
   @override
   String get s5MedCheckQuestion => 'Você usou o seu remédio como planejado?';
 
   @override
-  String get s5MedCheckTitle => 'Verificação do medicamento de hoje';
+  String get s5MedCheckTitle => 'Verificação do remédio de hoje';
 
   @override
   String get s5MedChooseHint =>
-      'Escolha um medicamento ou “Não sei o nome do medicamento”.';
+      'Escolha um remédio ou “Não sei o nome do remédio”.';
 
   @override
   String get s5MedDailyCheck => 'Verificação diária';
 
   @override
   String get s5MedDailyCheckHint =>
-      'Mostrar “Verificação do medicamento de hoje” no Início. Ative só se o seu profissional de saúde pediu para você usar este remédio todos os dias.';
+      'Mostrar “Verificação do remédio de hoje” no Início. Ative só se o seu profissional de saúde pediu para você usar este remédio todos os dias.';
 
   @override
   String get s5MedDefault => 'Padrão para registro rápido';
@@ -1798,10 +1798,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'Usado quando você toca em “Registrar uso da bombinha” no Início.';
 
   @override
-  String get s5MedEdit => 'Editar medicamento';
+  String get s5MedEdit => 'Editar remédio';
 
   @override
-  String get s5MedNameLabel => 'Nome do medicamento (como está no rótulo)';
+  String get s5MedNameLabel => 'Nome do remédio (como está no rótulo)';
 
   @override
   String get s5MedNotApplicable => 'Sem horário previsto para hoje';
@@ -1812,7 +1812,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get s5MedNotRecorded => 'Medicamento não registrado';
+  String get s5MedNotRecorded => 'Remédio não registrado';
 
   @override
   String get s5MedNotSure => 'Não lembro';
@@ -1824,7 +1824,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5MedOther => 'Outro nome';
 
   @override
-  String get s5MedOtherHint => 'Digite o nome do medicamento';
+  String get s5MedOtherHint => 'Digite o nome do remédio';
 
   @override
   String get s5MedReasonCost => 'Custo';
@@ -1839,10 +1839,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5MedReasonQuestion => 'Motivo (opcional)';
 
   @override
-  String get s5MedUnknown => 'Não sei o nome do medicamento';
+  String get s5MedUnknown => 'Não sei o nome do remédio';
 
   @override
-  String get s5MedUnknownShort => 'Medicamento não identificado';
+  String get s5MedUnknownShort => 'Remédio não identificado';
 
   @override
   String get s5MedUsed => 'Usei';
@@ -1854,7 +1854,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5MyLogTitle => 'Meu registro';
 
   @override
-  String get s5MyMedsEmpty => 'Nenhum medicamento salvo ainda.';
+  String get s5MyMedsEmpty => 'Nenhum remédio salvo ainda.';
 
   @override
   String get s5MyMedsHint =>
@@ -1864,7 +1864,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5MyMedsOpen => 'Manage my medications';
 
   @override
-  String get s5MyMedsTitle => 'Meus medicamentos';
+  String get s5MyMedsTitle => 'My medications';
 
   @override
   String get s5NavEnvironment => 'Environment';
@@ -2148,7 +2148,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get s5SaveFailed =>
-      'Não foi possível salvar. Suas anotações continuam aqui.';
+      'Não foi possível salvar. Seus registros continuam aqui.';
 
   @override
   String get s5SavePdf => 'Save PDF';
@@ -2223,7 +2223,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get s5SymOtherHint => 'Descreva com as suas palavras';
 
   @override
-  String get s5SymShortBreath => 'Dificuldade para respirar';
+  String get s5SymShortBreath => 'Falta de ar';
 
   @override
   String get s5SymWheeze => 'Chiado no peito';
@@ -2290,7 +2290,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get s5UrgentActionPlan =>
-      'Se o seu profissional de saúde deu a você um plano de ação para asma, siga o plano.';
+      'Se o seu profissional de saúde deu a você um plano de ação para asma, siga esse plano.';
 
   @override
   String get s5UrgentCall911Locked => 'Urgent help: call 911';
@@ -2466,7 +2466,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get s6ReminderChannel =>
-      'Lembretes nos horários de dose que você salvou. Não é um alerta de 30 minutos.';
+      'Lembretes nos horários de dose que você salvou. Não é o alerta de ar e clima a cada 30 minutos.';
 
   @override
   String get s6ReminderTitle => 'Verificação do remédio';
@@ -2798,7 +2798,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnAuthPrivacyLine =>
-      'Suas cartas e registros são privados da sua conta.';
+      'Suas cartas e registros ficam só na sua conta.';
 
   @override
   String get cnAuthPasswordUpdated => 'Senha atualizada.';
@@ -2824,7 +2824,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnAuthErrExists =>
-      'Já existe uma conta com este e-mail. Entre nela.';
+      'Já existe uma conta com este e-mail. Entre nessa conta.';
 
   @override
   String get cnAuthErrWeakPassword =>
@@ -2916,7 +2916,7 @@ class AppLocalizationsPt extends AppLocalizations {
       'Compare o que a carta pede com os seus próprios registros.';
 
   @override
-  String get cnStep3Title => 'Criar um pacote';
+  String get cnStep3Title => 'Preparar documentos';
 
   @override
   String get cnStep3Body =>
@@ -2955,13 +2955,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnStatusReading => 'Lendo a carta';
 
   @override
-  String get cnStatusNeedsReview => 'Precisa de revisão';
+  String get cnStatusNeedsReview => 'Precisa conferir';
 
   @override
   String get cnStatusGatherRecords => 'Reunir registros';
 
   @override
-  String get cnStatusPacketReady => 'Pacote pronto';
+  String get cnStatusPacketReady => 'Documentos prontos';
 
   @override
   String get cnStatusNeedsAttention => 'Precisa de atenção';
@@ -2989,14 +2989,14 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String cnNextItemsAttached(int done, int total) {
-    return '$done de $total itens pedidos resolvidos';
+    return '$done de $total itens pedidos atendidos';
   }
 
   @override
-  String get cnNextSharePacket => 'Pacote pronto para compartilhar';
+  String get cnNextSharePacket => 'Documentos prontos para enviar';
 
   @override
-  String get cnNextCreatePacket => 'Próximo: criar o pacote';
+  String get cnNextCreatePacket => 'Próximo: preparar documentos';
 
   @override
   String cnDateToCheckShort(String date) {
@@ -3019,7 +3019,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnDeleteCaseBody =>
-      'Isso remove as páginas da carta, as informações lidas nelas, os resumos de registros vinculados e os pacotes. Seus registros de medicamentos e sintomas continuam.';
+      'Isso remove as páginas da carta, as informações lidas nelas, os resumos de registros vinculados e os pacotes. Seus registros de remédios e sintomas continuam.';
 
   @override
   String get cnCancel => 'Cancelar';
@@ -3039,7 +3039,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnKindInfoRequest => 'Pedido de mais informações';
 
   @override
-  String get cnKindReauth => 'Aviso de renovação (reautorização)';
+  String get cnKindReauth => 'Aviso de renovação (Reauthorization)';
 
   @override
   String get cnKindFinalDenial =>
@@ -3059,10 +3059,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnFieldPatientName => 'Nome do paciente';
 
   @override
-  String get cnFieldPlanName => 'Plano';
+  String get cnFieldPlanName => 'Plano de saúde';
 
   @override
-  String get cnFieldMemberId => 'ID de membro';
+  String get cnFieldMemberId => 'Número do associado (Member ID)';
 
   @override
   String get cnFieldCaseReference => 'Número do caso ou de referência';
@@ -3101,10 +3101,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnWhoYou => 'Você';
 
   @override
-  String get cnWhoCareTeam => 'Equipe de saúde';
+  String get cnWhoCareTeam => 'Equipe de cuidados';
 
   @override
-  String get cnWhoPlan => 'Plano';
+  String get cnWhoPlan => 'Plano de saúde';
 
   @override
   String get cnWhoUnknown => 'Não tenho certeza';
@@ -3113,7 +3113,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnReqLinked => 'Vinculado';
 
   @override
-  String get cnReqAskedCareTeam => 'Pedido à equipe de saúde';
+  String get cnReqAskedCareTeam => 'Pedido à equipe de cuidados';
 
   @override
   String get cnReqNotAvailable => 'Indisponível';
@@ -3134,7 +3134,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnRecSymptoms => 'Registro de sintomas';
 
   @override
-  String get cnRecLocalContext => 'Contexto local';
+  String get cnRecLocalContext => 'Fatores do ambiente';
 
   @override
   String get cnRecPrn => 'Bombinha usada quando precisa';
@@ -3222,6 +3222,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnAddPhoto => 'Foto';
+
+  @override
+  String get cnPickGallery => 'Escolher das fotos';
+
+  @override
+  String get cnLabelForm => 'Forma (como está escrita)';
 
   @override
   String get cnAddPdf => 'PDF';
@@ -3327,10 +3333,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnStepReview => 'Revisão';
 
   @override
-  String get cnStepEvidence => 'Evidências';
+  String get cnStepEvidence => 'Registros';
 
   @override
-  String get cnStepPacket => 'Pacote';
+  String get cnStepPacket => 'Documentos';
 
   @override
   String cnStepOf(int n, int total, String name) {
@@ -3399,7 +3405,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get cnContinueToEvidence => 'Continuar para as evidências';
+  String get cnContinueToEvidence => 'Continuar para os registros';
 
   @override
   String cnSeePage(int n) {
@@ -3436,11 +3442,11 @@ class AppLocalizationsPt extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'Peça à sua equipe de saúde para solicitar uma revisão. A carta lista $count itens para enviar.',
+          'Peça à sua equipe de cuidados para fazer um pedido de revisão. A carta lista $count itens para enviar.',
       one:
-          'Peça à sua equipe de saúde para solicitar uma revisão. A carta lista 1 item para enviar.',
+          'Peça à sua equipe de cuidados para fazer um pedido de revisão. A carta lista 1 item para enviar.',
       zero:
-          'Peça à sua equipe de saúde para solicitar uma revisão. A carta não lista itens específicos.',
+          'Peça à sua equipe de cuidados para fazer um pedido de revisão. A carta não lista itens específicos.',
     );
     return '$_temp0';
   }
@@ -3450,24 +3456,26 @@ class AppLocalizationsPt extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Envie os $count itens que o plano pediu até a data abaixo.',
-      one: 'Envie o 1 item que o plano pediu até a data abaixo.',
-      zero: 'Envie as informações que o plano pediu até a data abaixo.',
+      other:
+          'Envie os $count itens que o plano de saúde pediu até a data abaixo.',
+      one: 'Envie o 1 item que o plano de saúde pediu até a data abaixo.',
+      zero:
+          'Envie as informações que o plano de saúde pediu até a data abaixo.',
     );
     return '$_temp0';
   }
 
   @override
   String get cnNextReauth =>
-      'Anote quando a aprovação atual termina e peça à sua equipe de saúde para iniciar a renovação.';
+      'Anote quando a aprovação atual termina e peça à sua equipe de cuidados para iniciar a renovação.';
 
   @override
   String get cnNextFinal =>
-      'Esta é uma decisão final. O CoverNote não prepara um primeiro pedido de revisão para ela. Pergunte ao plano ou à sua equipe de saúde sobre as opções que a carta lista.';
+      'Esta é uma decisão final. O CoverNote não faz um rascunho do primeiro pedido de revisão para ela. Pergunte ao plano de saúde ou à sua equipe de cuidados sobre as opções que a carta lista.';
 
   @override
   String get cnNextEob =>
-      'Isto parece uma cobrança ou um extrato de benefícios, não uma negativa. Confira com o atendimento ao associado do plano.';
+      'Isto parece uma cobrança ou uma explicação de benefícios, não uma negativa (Denial). Confira com o atendimento ao associado do plano de saúde.';
 
   @override
   String get cnNextUncertain =>
@@ -3510,7 +3518,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnDatePassed =>
-      'Esta data já passou. Ligue para o plano e pergunte o que ainda é possível fazer.';
+      'Esta data já passou. Ligue para o plano de saúde e pergunte o que ainda é possível fazer.';
 
   @override
   String cnNeedReceivedDate(int days) {
@@ -3522,7 +3530,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnDateConflict =>
-      'A carta traz datas diferentes. Pergunte ao plano qual vale e depois escolha essa.';
+      'A carta traz datas diferentes. Pergunte ao plano de saúde qual vale e depois escolha essa.';
 
   @override
   String cnUseThisDate(String date) {
@@ -3531,7 +3539,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnDateUnclear =>
-      'O texto não está claro ou conta dias úteis, por isso o CoverNote não calcula a data. Peça ao plano a data exata.';
+      'O texto não está claro ou conta dias úteis, por isso o CoverNote não calcula a data. Peça ao plano de saúde a data exata.';
 
   @override
   String get cnNoDeadline =>
@@ -3552,7 +3560,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnLeaveUnknown => 'Deixar como desconhecida por enquanto';
 
   @override
-  String get cnDateUnknownChecked => 'Desconhecida, anotado';
+  String get cnDateUnknownChecked => 'Desconhecida, anotada';
 
   @override
   String get cnTypeAsWritten => 'Digite exatamente como aparece na carta.';
@@ -3598,7 +3606,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String cnSymptomLine(int days, int night, int entries, int total) {
-    return 'Sintomas em $days dias, despertar à noite em $night dias ($entries de $total dias registrados)';
+    return 'Sintomas em $days dias, acordar à noite em $night dias ($entries de $total dias registrados)';
   }
 
   @override
@@ -3637,10 +3645,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnLocalContextNote =>
-      'Contexto opcional. Não é uma medição na sua casa nem a causa dos sintomas.';
+      'Opcional. São fatores ao ar livre, não uma medição dentro de casa nem a causa dos sintomas.';
 
   @override
-  String get cnContinueToPacket => 'Continuar para o pacote';
+  String get cnContinueToPacket => 'Continuar para os documentos';
 
   @override
   String get cnAddedByYou => 'Adicionado por você';
@@ -3693,7 +3701,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnBeforeSharingBody =>
-      'Este arquivo tem o seu nome e dados de saúde. Compartilhe só com a sua equipe de saúde ou com o seu plano. Compartilhar não envia nada por você.';
+      'Este arquivo tem o seu nome e dados de saúde. Compartilhe só com a sua equipe de cuidados ou com o seu plano de saúde. Compartilhar não envia nada por você.';
 
   @override
   String get cnShare => 'Compartilhar';
@@ -3711,7 +3719,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnMethodInPerson => 'Pessoalmente';
 
   @override
-  String get cnMethodCareTeam => 'A equipe de saúde enviou';
+  String get cnMethodCareTeam => 'A equipe de cuidados enviou';
 
   @override
   String get cnMethodOther => 'Outro';
@@ -3722,11 +3730,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnPacketNoDraftEob =>
-      'Para uma cobrança ou um extrato de benefícios, o pacote tem só o resumo para o médico.';
+      'Para uma cobrança ou uma explicação de benefícios, o pacote tem só o resumo para o médico.';
 
   @override
   String get cnPacketNoDraftReauth =>
-      'Para um aviso de renovação, o pacote tem só o resumo para o médico, para ajudar a sua equipe de saúde a renovar.';
+      'Para um aviso de renovação, o pacote tem só o resumo para o médico, para ajudar a sua equipe de cuidados a renovar.';
 
   @override
   String get cnPacketNoDraftOther =>
@@ -3740,7 +3748,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnPartDraft =>
-      'Rascunho do pedido de revisão (para a sua equipe de saúde completar)';
+      'Rascunho do pedido de revisão (para a sua equipe de cuidados completar)';
 
   @override
   String get cnPartLetterText => 'Anexo: o texto da carta';
@@ -3768,7 +3776,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnGenerating => 'Gerando…';
 
   @override
-  String get cnGeneratePacket => 'Gerar pacote de revisão';
+  String get cnGeneratePacket => 'Criar documentos';
 
   @override
   String get cnSaveOrPrint => 'Salvar ou imprimir';
@@ -3794,7 +3802,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnSentExplain =>
-      'Anote quando e como foi enviado. O CoverNote não envia nada nem acompanha decisões.';
+      'Anote quando e como foi enviado. O CoverNote não envia o pacote nem acompanha a decisão.';
 
   @override
   String get cnSave => 'Salvar';
@@ -3877,11 +3885,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cnCtxSourceRequired => 'Informe a fonte.';
 
   @override
-  String get cnCtxPlace => 'Local (ZIP code ou cidade, opcional)';
+  String get cnCtxPlace => 'Local (opcional)';
 
   @override
   String get cnRecordsSignInBody =>
-      'Entre para guardar registros de medicamentos, sintomas e contexto local.';
+      'Entre para guardar registros de medicamentos, sintomas e fatores do ambiente.';
 
   @override
   String get cnRecordsYourRecords => 'Seus registros';
@@ -3910,7 +3918,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String cnLast30Days(String from, String to) {
-    return 'Últimos 30 dias ($from – $to)';
+    return 'Last 30 days ($from – $to)';
   }
 
   @override
@@ -3925,7 +3933,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnDeleteAccountBody =>
-      'Isso exclui para sempre a sua conta, casos, cartas enviadas, pacotes e registros. Não é possível desfazer.';
+      'Isso exclui para sempre a sua conta, casos, cartas enviadas para o CoverNote, pacotes e registros. Não é possível desfazer.';
 
   @override
   String get cnTypeDelete => 'Digite DELETE para confirmar';
@@ -3969,7 +3977,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnAboutBody =>
-      'O CoverNote ajuda você a ler cartas do plano de saúde sobre remédios e a preparar papéis para a sua equipe de saúde. Ele não envia nada ao seu plano, não decide cobertura e não é aconselhamento médico.';
+      'O CoverNote ajuda você a ler cartas do plano de saúde sobre remédios e a preparar papéis para a sua equipe de cuidados. Ele não envia nada ao seu plano de saúde, não decide a cobertura e não é aconselhamento médico.';
 
   @override
   String get cnDangerZone => 'Excluir conta';
@@ -4021,38 +4029,38 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnLanguageNote =>
-      'Parte do texto foi traduzida por software e pode ter erros. Nomes de remédios, doses, datas e citações da sua carta nunca são traduzidos.';
+      'Parte do texto foi traduzida por um programa e pode ter erros. O nome e a dose do medicamento ficam como estão escritos. O restante da carta é traduzido.';
 
   @override
   String get cnLanguageButtonTooltip => 'Mudar idioma';
 
   @override
   String get cnPacketEnglishNote =>
-      'O pacote é escrito em inglês para que a sua equipe de saúde possa ler.';
+      'Os documentos estão em inglês para que a sua equipe de cuidados possa ler.';
 
   @override
   String get cnReasonMissingInformation =>
-      'O plano diz que não recebeu todas as informações de que precisava.';
+      'O plano de saúde diz que não recebeu todas as informações de que precisava.';
 
   @override
   String get cnReasonStepTherapy =>
-      'O plano quer que você tente outros remédios primeiro.';
+      'O plano de saúde quer que você tente outros remédios primeiro (Step therapy).';
 
   @override
   String get cnReasonMedicalNecessity =>
-      'O plano diz que não conseguiu confirmar que este remédio é necessário do ponto de vista médico.';
+      'O plano de saúde diz que não conseguiu confirmar a necessidade médica deste remédio (Medical necessity).';
 
   @override
   String get cnReasonFormulary =>
-      'O plano diz que este remédio não está na lista de remédios cobertos.';
+      'O plano de saúde diz que este remédio não está na lista de medicamentos cobertos (Formulary).';
 
   @override
   String get cnReasonQuantityLimit =>
-      'O plano diz que a quantidade pedida é maior do que ele cobre.';
+      'O plano de saúde diz que a quantidade pedida é maior do que ele cobre.';
 
   @override
   String get cnReasonEligibility =>
-      'O plano diz que isto não é coberto pelas regras de cobertura dele.';
+      'O plano de saúde diz que isto não é coberto pelas regras de cobertura dele.';
 
   @override
   String get cnReasonOther =>
@@ -4069,4 +4077,457 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cnReqHintDoctorStatement => 'Uma declaração do seu médico';
+
+  @override
+  String get cnTabSettings => 'Configurações';
+
+  @override
+  String get cnCasesList => 'Lista de casos';
+
+  @override
+  String get cnGoHome => 'Início';
+
+  @override
+  String get cnAnalyzingTitle => 'Carta do plano · lendo';
+
+  @override
+  String cnCaseNumber(String n) {
+    return 'Caso #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return 'Adicionado $when';
+  }
+
+  @override
+  String get cnAliasHint => 'Apelido (opcional)';
+
+  @override
+  String get cnShareDocuments => 'Enviar documentos';
+
+  @override
+  String get cnRecordDelivery => 'Anotar o envio';
+
+  @override
+  String get cnShareAsk => 'Você enviou estes documentos?';
+
+  @override
+  String get cnDeliveryRecipient => 'Enviado para';
+
+  @override
+  String get cnRecipientClinic => 'Clínica ou profissional de saúde';
+
+  @override
+  String get cnRecipientInsurer => 'Plano de saúde';
+
+  @override
+  String get cnRecipientSelf => 'Guardei para mim';
+
+  @override
+  String get cnRecipientOther => 'Outro';
+
+  @override
+  String get cnDeliveryMethod => 'Como';
+
+  @override
+  String get cnMethodEmail => 'E-mail';
+
+  @override
+  String get cnMethodMessage => 'SMS ou mensagem';
+
+  @override
+  String get cnMethodUnknown => 'Não lembro';
+
+  @override
+  String get cnDeliveryUserReport =>
+      'Isto é o que você informou. O aplicativo não confirma se a outra parte recebeu.';
+
+  @override
+  String get cnShareCancelled =>
+      'O envio foi cancelado. Nada foi marcado como enviado.';
+
+  @override
+  String get cnRecordsLoading => 'Carregando registros…';
+
+  @override
+  String get cnRecordsEmpty => 'Nenhum registro neste período';
+
+  @override
+  String get cnRecordsError => 'Não foi possível carregar os registros';
+
+  @override
+  String get cnRecordsPermission => 'Você não tem acesso a estes registros';
+
+  @override
+  String get cnRecordsPending => 'Salvo neste celular · esperando sincronizar';
+
+  @override
+  String get cnRecordsFiltered =>
+      'Alguns registros estão ocultos pelos seus filtros';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '$n registros fora deste período';
+  }
+
+  @override
+  String get cnWidenRange => 'Ver um período maior';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days dias · $med usos de remédio · $sym registros de sintomas';
+  }
+
+  @override
+  String get cnOneDayPacket => 'Estes documentos cobrem um único dia.';
+
+  @override
+  String get cnMyMedications => 'Meus medicamentos';
+
+  @override
+  String get cnScanLabel => 'Escanear o rótulo do remédio';
+
+  @override
+  String get cnMedManageHint =>
+      'Cadastre os remédios que você usa. Altere se a receita mudar. O uso diário é anotado em Registros.';
+
+  @override
+  String get cnLabelNeedLabel =>
+      'Fotografe o rótulo da farmácia ou o texto da caixa. O aplicativo não identifica um comprimido pelo formato.';
+
+  @override
+  String get cnLabelUnclear =>
+      'Este dado não ficou nítido. Confira antes de salvar.';
+
+  @override
+  String get cnConsentLabel => 'Permitir que a IA leia o rótulo de um remédio';
+
+  @override
+  String get cnManualMed => 'Digitar na mão';
+
+  @override
+  String get cnAirWeather => 'Fatores do ambiente perto de você';
+
+  @override
+  String get cnAirAutoNote =>
+      'A qualidade do ar, o ar ligado ao trânsito, o pólen, os alertas de enchente e a umidade externa vêm da sua localização. O telefone não mede o ar. A umidade externa não é mofo dentro de casa.';
+
+  @override
+  String get cnHomeRecords => 'Registros de medicamentos relacionados';
+
+  @override
+  String get cnEnvTrap => 'Ar ligado ao trânsito';
+
+  @override
+  String get cnItemMemo => 'Nota';
+
+  @override
+  String get cnSaveNote => 'Salvar nota';
+
+  @override
+  String get cnLocationNeed =>
+      'Permita a localização para ver os fatores do ambiente perto de você.';
+
+  @override
+  String get cnLocationOff =>
+      'A localização está desligada. Ligue e tente de novo.';
+
+  @override
+  String get cnLocationBlocked =>
+      'A localização está bloqueada. Permita nos ajustes.';
+
+  @override
+  String get cnOpenSettings => 'Abrir ajustes';
+
+  @override
+  String get cnAirNone => 'Sem dados de ar ou clima';
+
+  @override
+  String get cnAirRetry => 'Tentar ar e clima de novo';
+
+  @override
+  String get cnSetRegion => 'Set your area (ZIP or city)';
+
+  @override
+  String get cnConfiguredArea => 'Area you set';
+
+  @override
+  String get cnRecordPlace => 'Local deste registro';
+
+  @override
+  String get cnClosestObservation => 'Closest observation to the record time';
+
+  @override
+  String get cnEnvUnavailable => 'Não há dado correspondente a esse horário';
+
+  @override
+  String cnLogMedication(String name) {
+    return 'Registrar $name';
+  }
+
+  @override
+  String get cnAsNeededUse => 'Uso quando precisar';
+
+  @override
+  String get cnAsNeededInhaler => 'As-needed inhaler use';
+
+  @override
+  String get cnScheduledUse => 'Uso no horário';
+
+  @override
+  String get cnExtraUse => 'Uso extra';
+
+  @override
+  String get cnUndoUse => 'Desfazer';
+
+  @override
+  String get cnLoggedLocal => 'Salvo neste celular';
+
+  @override
+  String get cnLoggedPending => 'Esperando sincronizar';
+
+  @override
+  String get cnLoggedSynced => 'Sincronizado';
+
+  @override
+  String cnDaysLogged(int n) {
+    return 'Anotado em $n dias nesta semana';
+  }
+
+  @override
+  String get cnManageMedsLink => 'Gerenciar meus medicamentos';
+
+  @override
+  String get cnViewAirWeather => 'View environmental factors near you';
+
+  @override
+  String get cnConsentAi => 'Permitir que a IA leia documentos';
+
+  @override
+  String get cnConsentAiBody =>
+      'A imagem da carta é enviada a um serviço de leitura para o CoverNote mostrar o que ela diz. Você pode desligar isso depois em Configurações.';
+
+  @override
+  String get cnConsentAndAnalyze => 'Concordar e ler';
+
+  @override
+  String get cnConsentLater => 'Agora não';
+
+  @override
+  String get cnConsentViewLocal => 'Ver o original aqui';
+
+  @override
+  String get cnConsentDetails => 'Mais sobre o uso dos dados';
+
+  @override
+  String get cnConsentLabelPurpose => 'Ler o rótulo de um remédio';
+
+  @override
+  String get cnConsentLetterPurpose => 'Ler uma carta do plano';
+
+  @override
+  String get cnConsentTranslatePurpose => 'Traduzir uma carta';
+
+  @override
+  String get cnToday => 'Hoje';
+
+  @override
+  String get cnLast7 => 'Últimos 7 dias';
+
+  @override
+  String get cnLast30 => 'Últimos 30 dias';
+
+  @override
+  String get cnCustomRange => 'Escolher datas';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days dias · $count registros';
+  }
+
+  @override
+  String get cnNoRecordThatDay => 'Nenhum registro neste dia';
+
+  @override
+  String get cnNotLogged => 'Não anotado';
+
+  @override
+  String get cnNotTaken => 'Marcado como não tomado';
+
+  @override
+  String get cnOriginalFile => 'Arquivo original';
+
+  @override
+  String get cnFullTranslation => 'Tradução completa';
+
+  @override
+  String get cnRecognizedText => 'Texto reconhecido';
+
+  @override
+  String get cnSameLanguage => 'O mesmo idioma do original';
+
+  @override
+  String get cnTranslationPartial =>
+      'Algumas páginas ainda não foram traduzidas';
+
+  @override
+  String get cnTranslationFailed => 'Não foi possível traduzir esta página';
+
+  @override
+  String get cnOriginalMissing =>
+      'O arquivo original não foi encontrado. Você pode enviá-lo de novo.';
+
+  @override
+  String get cnTranslateRetry => 'Continuar a tradução';
+
+  @override
+  String get cnKeyDetails => 'O mais importante';
+
+  @override
+  String get cnWhatAbout => 'Do que se trata?';
+
+  @override
+  String get cnWhatToDo => 'O que fazer agora';
+
+  @override
+  String get cnByWhen => 'Até quando?';
+
+  @override
+  String get cnPreparePacket => 'Preparar documentos';
+
+  @override
+  String get cnCorrectReading => 'Corrigir um erro de leitura';
+
+  @override
+  String get cnCorrectReadingNote =>
+      'A carta original não muda. Só a leitura automática é corrigida.';
+
+  @override
+  String get cnReviewImportant =>
+      'Confira estes dados importantes antes de criar os documentos';
+
+  @override
+  String get cnPacketReadyTitle => 'Seus documentos estão prontos';
+
+  @override
+  String get cnNextSendClinic =>
+      'Envie os documentos ao seu profissional de saúde e peça que revise';
+
+  @override
+  String get cnNextWaitReply =>
+      'Quando receber uma resposta, anote o resultado';
+
+  @override
+  String get cnExistingSentNewReady =>
+      'Documentos anteriores já foram enviados · você pode criar um conjunto novo';
+
+  @override
+  String get cnWhyRecords =>
+      'Registros de remédio e de sintomas ajudam o profissional de saúde a ver como o tratamento vai. Mesmo sem registros, você pode criar documentos a partir da carta.';
+
+  @override
+  String get cnLetterAskedRecords =>
+      'A carta pediu registros recentes do tratamento';
+
+  @override
+  String get cnOptionalReference => 'Referência opcional';
+
+  @override
+  String get cnAsthmaContext =>
+      'Registros do tratamento da asma: uso no horário, uso da bombinha quando precisar e sintomas ao respirar.';
+
+  @override
+  String get cnGeneralContext =>
+      'Registros do tratamento: uso de remédio e sintomas ou anotações.';
+
+  @override
+  String get cnTreatmentQuestion => 'Esta carta é sobre qual tratamento?';
+
+  @override
+  String get cnTreatmentAsthma => 'Asma';
+
+  @override
+  String get cnTreatmentOther => 'Outro tratamento';
+
+  @override
+  String get cnTreatmentUnknown => 'Ainda não sei';
+
+  @override
+  String get cnStatusWaitingClinic => 'Enviado à clínica · esperando revisão';
+
+  @override
+  String get cnStatusWaitingInsurer =>
+      'Você informou que enviou ao plano · esperando resposta';
+
+  @override
+  String get cnFollowUpNeeded => 'Precisa de acompanhamento';
+
+  @override
+  String get cnOutcomeRecorded => 'Resultado anotado';
+
+  @override
+  String get cnActiveCases => 'Em andamento';
+
+  @override
+  String get cnCompletedArchived => 'Concluídos e arquivados';
+
+  @override
+  String get cnCompleteCase => 'Concluir este caso';
+
+  @override
+  String get cnArchiveCase => 'Arquivar';
+
+  @override
+  String get cnReopenCase => 'Retomar';
+
+  @override
+  String get cnOutcomeApproved => 'Aprovado';
+
+  @override
+  String get cnOutcomeDenied => 'Negado';
+
+  @override
+  String get cnOutcomeStopped => 'Não vou continuar';
+
+  @override
+  String get cnOutcomeOther => 'Outro / não anotado';
+
+  @override
+  String get cnSentIsNotComplete =>
+      'Enviar não é a mesma coisa que concluir o caso.';
+
+  @override
+  String get cnArchivedCase => 'Arquivado';
+
+  @override
+  String get cnStepKeyDetails => 'O mais importante';
+
+  @override
+  String get cnStepAddRecords => 'Incluir meus registros';
+
+  @override
+  String get cnStepReviewPacket => 'Revisar documentos';
+
+  @override
+  String get cnDataConsent => 'Uso dos dados';
+
+  @override
+  String get cnZipOrCity => 'ZIP or city';
+
+  @override
+  String get cnSaveArea => 'Save area';
+
+  @override
+  String get cnWeekCalendar => 'Esta semana';
+
+  @override
+  String get cnMonthCalendar => 'Este mês';
+
+  @override
+  String get cnUsedShort => 'Usei';
+
+  @override
+  String get cnCalendarLegend =>
+      'Um ponto significa que você anotou algo nesse dia. Um dia vazio não é uma dose que você pulou.';
 }

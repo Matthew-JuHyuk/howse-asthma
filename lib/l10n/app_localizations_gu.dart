@@ -826,7 +826,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get actQ4 =>
-      'તમે કેટલી વાર તમારું રેસ્ક્યૂ ઇન્હેલર અથવા નેબ્યુલાઇઝરની દવા વાપરી છે?';
+      'તમે કેટલી વાર તમારું જરૂર પડે ત્યારે વાપરવાનું ઇન્હેલર (rescue inhaler) અથવા નેબ્યુલાઇઝરની દવા વાપરી છે?';
 
   @override
   String get actQ5 => 'તમે તમારા અસ્થમાના નિયંત્રણને કેવું ગણશો?';
@@ -841,7 +841,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get actOpt3 => 'અમુક સમયે';
 
   @override
-  String get actOpt4 => 'થોડા સમય';
+  String get actOpt4 => 'થોડા સમયે';
 
   @override
   String get actOpt5 => 'એક પણ સમયે નહીં';
@@ -850,7 +850,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get actQ5Opt1 => 'બિલકુલ નિયંત્રણમાં નથી';
 
   @override
-  String get actQ5Opt2 => 'ઓછું નિયંત્રણમાં';
+  String get actQ5Opt2 => 'નબળા નિયંત્રણમાં';
 
   @override
   String get actQ5Opt3 => 'થોડું નિયંત્રણમાં';
@@ -986,20 +986,20 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get envTrapDetail =>
-      'Traffic-related air pollution proxy (sensors + optional NJ freight weight)';
+      'ટ્રાફિક સાથે જોડાયેલી હવાનો સૂચક (સેન્સર અને, ન્યૂ જર્સીમાં, માલવાહકનું વૈકલ્પિક વજન).';
 
   @override
   String get envTrapTip =>
       'Limit outdoor exertion when TRAP is HIGH or CRITICAL.';
 
   @override
-  String get envFloodDetail => 'NWS flash-flood / stream warnings near you';
+  String get envFloodDetail => 'તમારી નજીક NWSના અચાનક પૂર અને નદીના એલર્ટ.';
 
   @override
   String get envFloodTipClear => 'No active flash-flood warning for this area.';
 
   @override
-  String get envPollenDetail => 'Google Pollen forecast';
+  String get envPollenDetail => 'Googleનો પરાગ અંદાજ.';
 
   @override
   String get envPollenTip =>
@@ -1012,7 +1012,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String envUpdatedAt(String when) {
-    return 'Updated: $when';
+    return 'અપડેટ: $when';
   }
 
   @override
@@ -1408,7 +1408,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get s5ActNotice =>
-      'તમારા જવાબો સાચવવામાં આવ્યા છે, જેથી તમે તેને તમારા ડૉક્ટર સાથે શેર કરી શકો. પ્રશ્નાવલીના આ વર્ઝનને સત્તાવાર સ્કોરિંગ સાથે તપાસવામાં આવ્યું નથી, તેથી ઍપ સ્કોર બતાવતી નથી.';
+      'તમારા જવાબો સાચવવામાં આવ્યા છે, જેથી તમે તેને તમારા ડૉક્ટર અથવા સારવાર આપનાર સાથે શેર કરી શકો. પ્રશ્નાવલીના આ વર્ઝનને સત્તાવાર ગણતરી સાથે તપાસવામાં આવ્યું નથી, તેથી ઍપ સ્કોર બતાવતી નથી.';
 
   @override
   String get s5ActSaved => 'તમારા જવાબો સાચવાયા.';
@@ -1451,22 +1451,22 @@ class AppLocalizationsGu extends AppLocalizations {
       'When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.';
 
   @override
-  String get s5AqiGood => 'Good';
+  String get s5AqiGood => 'સારી';
 
   @override
-  String get s5AqiModerate => 'Moderate';
+  String get s5AqiModerate => 'મધ્યમ';
 
   @override
-  String get s5AqiUsg => 'Unhealthy for sensitive groups';
+  String get s5AqiUsg => 'સંવેદનશીલ જૂથો માટે અસ્વસ્થ';
 
   @override
-  String get s5AqiUnhealthy => 'Unhealthy';
+  String get s5AqiUnhealthy => 'અસ્વસ્થ';
 
   @override
-  String get s5AqiVeryUnhealthy => 'Very unhealthy';
+  String get s5AqiVeryUnhealthy => 'ખૂબ અસ્વસ્થ';
 
   @override
-  String get s5AqiHazardous => 'Hazardous';
+  String get s5AqiHazardous => 'જોખમી';
 
   @override
   String s5AqiValue(String category, int aqi) {
@@ -1533,10 +1533,10 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get s5EnvAirDetail =>
-      'U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.';
+      'જાહેર મોનિટર અને નજીકના સેન્સરમાંથી યુ.એસ. EPA હવા ગુણવત્તા સૂચક. તે વિસ્તારની બહારની હવા બતાવે છે, અલગ ટ્રાફિક ધુમાડો નહીં.';
 
   @override
-  String get s5EnvAirQuality => 'Air quality';
+  String get s5EnvAirQuality => 'હવાની ગુણવત્તા';
 
   @override
   String get s5EnvAlertsHeading => 'Environment alerts';
@@ -1545,7 +1545,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5EnvCardTitle => 'Today\'s local environment';
 
   @override
-  String get s5EnvFlood => 'Flood alerts';
+  String get s5EnvFlood => 'પૂરની ચેતવણી';
 
   @override
   String get s5EnvFloodDetail =>
@@ -1574,7 +1574,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5EnvOlderNotice => 'This is the last information we checked.';
 
   @override
-  String get s5EnvPollen => 'Pollen index';
+  String get s5EnvPollen => 'પરાગ સૂચક';
 
   @override
   String get s5EnvPollenDetail =>
@@ -1607,7 +1607,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5FieldNote => 'નોંધ (વૈકલ્પિક)';
 
   @override
-  String get s5FieldPuffs => 'પફની સંખ્યા (વૈકલ્પિક)';
+  String get s5FieldPuffs => 'પફ (puff)ની સંખ્યા (વૈકલ્પિક)';
 
   @override
   String get s5FieldReason => 'કારણ (વૈકલ્પિક)';
@@ -1622,16 +1622,16 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5FilterInhaler => 'ઇન્હેલર';
 
   @override
-  String get s5FilterMedCheck => 'દવાની તપાસ';
+  String get s5FilterMedCheck => 'દવાની પુષ્ટિ';
 
   @override
   String get s5FilterSymptoms => 'લક્ષણો';
 
   @override
-  String get s5FloodIssued => 'Flood warning issued';
+  String get s5FloodIssued => 'પૂરની ચેતવણી બહાર પડી છે';
 
   @override
-  String get s5FloodNone => 'No flood warnings issued';
+  String get s5FloodNone => 'પૂરની ચેતવણી નથી';
 
   @override
   String get s5FloodUnknown => 'Can\'t check alert information';
@@ -1698,7 +1698,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get s5InhalerOneEntryHint =>
-      'દરેક સેવ એક ઇન્હેલર-ઉપયોગની નોંધ છે. તેને એક પફ કે એક દિવસ ગણવામાં આવતો નથી.';
+      'દરેક વાર સાચવો ત્યારે એક ઇન્હેલર-ઉપયોગની નોંધ થાય છે. તેને એક પફ (puff) કે એક દિવસ ગણવામાં આવતો નથી.';
 
   @override
   String s5InhalerUnknownCount(int n) {
@@ -1765,24 +1765,24 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get s5MedCheckIntro =>
-      'તમે તમારી દવા વાપરી કે નહીં તેની આ જાતે જણાવેલી તપાસ છે. તે ફાર્મસીના રેકોર્ડ પર આધારિત નથી.';
+      'તમે તમારી દવા વાપરી કે નહીં તેની આ જાતે જણાવેલી પુષ્ટિ છે. તે દવાની દુકાનના રેકોર્ડ પર આધારિત નથી.';
 
   @override
   String get s5MedCheckQuestion => 'શું તમે તમારી દવા નક્કી કર્યા મુજબ વાપરી?';
 
   @override
-  String get s5MedCheckTitle => 'આજની દવાની તપાસ';
+  String get s5MedCheckTitle => 'આજની દવાની પુષ્ટિ';
 
   @override
   String get s5MedChooseHint =>
       'દવા પસંદ કરો, અથવા “મને દવાનું નામ ખબર નથી” પસંદ કરો.';
 
   @override
-  String get s5MedDailyCheck => 'રોજની તપાસ';
+  String get s5MedDailyCheck => 'રોજની પુષ્ટિ';
 
   @override
   String get s5MedDailyCheckHint =>
-      'હોમ પર “આજની દવાની તપાસ” બતાવો. તમારા ડૉક્ટરે આ દવા દરરોજ વાપરવાનું કહ્યું હોય તો જ ચાલુ કરો.';
+      'હોમ પર “આજની દવાની પુષ્ટિ” બતાવો. તમારા ડૉક્ટર અથવા સારવાર આપનારે આ દવા દરરોજ વાપરવાનું કહ્યું હોય તો જ ચાલુ કરો.';
 
   @override
   String get s5MedDefault => 'ઝડપી નોંધ માટે ડિફૉલ્ટ';
@@ -1812,7 +1812,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5MedNotSure => 'મને યાદ નથી';
 
   @override
-  String get s5MedNotUsed => 'મેં વાપરી નથી';
+  String get s5MedNotUsed => 'મેં ઉપયોગ કર્યો નથી';
 
   @override
   String get s5MedOther => 'બીજું નામ';
@@ -1824,7 +1824,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5MedReasonCost => 'ખર્ચ';
 
   @override
-  String get s5MedReasonForgot => 'ભૂલી ગયા';
+  String get s5MedReasonForgot => 'ભૂલાઈ ગયું';
 
   @override
   String get s5MedReasonNoMedicine => 'દવા પાસે નહોતી';
@@ -1839,7 +1839,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5MedUnknownShort => 'દવા ઓળખાઈ નથી';
 
   @override
-  String get s5MedUsed => 'મેં વાપરી';
+  String get s5MedUsed => 'મેં ઉપયોગ કર્યો';
 
   @override
   String get s5MyLanguage => 'My language';
@@ -1858,7 +1858,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5MyMedsOpen => 'Manage my medications';
 
   @override
-  String get s5MyMedsTitle => 'મારી દવાઓ';
+  String get s5MyMedsTitle => 'My medications';
 
   @override
   String get s5NavEnvironment => 'Environment';
@@ -1870,7 +1870,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5NavVisitPrep => 'Visit prep';
 
   @override
-  String get s5NoAnswer => 'જવાબ આપવા માંગતા નથી';
+  String get s5NoAnswer => 'જવાબ આપવો નથી';
 
   @override
   String get s5NoRecordsYet => 'હજી કોઈ રેકોર્ડ નથી';
@@ -2132,16 +2132,16 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5Reload => 'Load again';
 
   @override
-  String get s5Save => 'સેવ કરો';
+  String get s5Save => 'સાચવો';
 
   @override
-  String get s5Saved => 'સેવ થયું.';
+  String get s5Saved => 'સાચવ્યું.';
 
   @override
   String get s5SavedPlacesHint => 'Saved places such as home, school, or work';
 
   @override
-  String get s5SaveFailed => 'સેવ થઈ શક્યું નથી. તમારી નોંધો હજી અહીં જ છે.';
+  String get s5SaveFailed => 'સાચવી શકાયું નથી. તમારી નોંધો હજી અહીં જ છે.';
 
   @override
   String get s5SavePdf => 'Save PDF';
@@ -2219,7 +2219,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s5SymShortBreath => 'શ્વાસ લેવામાં તકલીફ';
 
   @override
-  String get s5SymWheeze => 'સીટી જેવો અવાજ (વ્હીઝિંગ)';
+  String get s5SymWheeze => 'સીટી જેવો શ્વાસ (wheezing)';
 
   @override
   String get s5SymptomEditTitle => 'લક્ષણોમાં ફેરફાર કરો';
@@ -2283,7 +2283,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get s5UrgentActionPlan =>
-      'જો તમારા ડૉક્ટરે તમને અસ્થમા ઍક્શન પ્લાન આપ્યો હોય, તો તેને અનુસરો.';
+      'જો તમારા ડૉક્ટર અથવા સારવાર આપનારે તમને અસ્થમા ઍક્શન પ્લાન (asthma action plan) આપ્યો હોય, તો તેને અનુસરો.';
 
   @override
   String get s5UrgentCall911Locked => 'Urgent help: call 911';
@@ -2371,13 +2371,13 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s6DoseLater => 'પછી તપાસો';
 
   @override
-  String get s6DoseNotUsed => 'વાપરી શકાઈ નહીં';
+  String get s6DoseNotUsed => 'મેં ઉપયોગ કરી શક્યું નથી';
 
   @override
   String get s6DoseUnconfirmed => 'No answer yet';
 
   @override
-  String get s6DoseUsed => 'મેં વાપરી';
+  String get s6DoseUsed => 'મેં ઉપયોગ કર્યો';
 
   @override
   String get s6EnvLinked => 'Environment linked';
@@ -2408,7 +2408,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s6HomeWaterNo => 'ના';
 
   @override
-  String get s6HomeWaterQuestion => 'ઘરમાં પાણી લીક થયું કે પૂર આવ્યું હતું?';
+  String get s6HomeWaterQuestion => 'ઘરમાં પાણી ચૂયું કે પૂર આવ્યું હતું?';
 
   @override
   String get s6HomeWaterYes => 'હા';
@@ -2447,7 +2447,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get s6PdfEnvTitle => 'Environment reference (appendix)';
 
   @override
-  String get s6PuffsEach => 'દર વખતે પફ';
+  String get s6PuffsEach => 'દર વખતે પફ (puff)';
 
   @override
   String s6ReminderBodyNamed(String name) {
@@ -2459,10 +2459,10 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get s6ReminderChannel =>
-      'તમે સાચવેલા ડોઝના સમયે રીમાઇન્ડર. 30 મિનિટનું ઍલર્ટ નથી.';
+      'તમે સાચવેલા દવાના સમયે યાદ અપાવે છે. આ દર 30 મિનિટે આવતી હવા-હવામાનની ચેતવણી નથી.';
 
   @override
-  String get s6ReminderTitle => 'દવાની તપાસ';
+  String get s6ReminderTitle => 'દવાની પુષ્ટિ';
 
   @override
   String get s6RoleBoth => 'રોજની અને જરૂર પડે ત્યારે';
@@ -2734,7 +2734,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnAuthNameHelper =>
-      'તમારા પેકેટ પર દેખાશે. તમે તેને પછી બદલી શકો છો.';
+      'તમારા કાગળોના સેટ પર દેખાશે. તમે તેને પછી બદલી શકો છો.';
 
   @override
   String get cnAuthEmailLabel => 'ઇમેઇલ';
@@ -2803,7 +2803,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnAuthNewPasswordLabel => 'નવો પાસવર્ડ';
 
   @override
-  String get cnAuthSavePassword => 'પાસવર્ડ સેવ કરો';
+  String get cnAuthSavePassword => 'પાસવર્ડ સાચવો';
 
   @override
   String get cnLater => 'પછી';
@@ -2858,7 +2858,7 @@ class AppLocalizationsGu extends AppLocalizations {
       'સેવા જવાબ આપતી નથી. થોડી મિનિટ પછી ફરી પ્રયાસ કરો.';
 
   @override
-  String get cnTabHome => 'હોમ';
+  String get cnTabHome => 'મુખ્ય';
 
   @override
   String get cnTabCases => 'કેસ';
@@ -2909,11 +2909,11 @@ class AppLocalizationsGu extends AppLocalizations {
       'પત્રમાં જે માગ્યું છે તેને તમારા પોતાના રેકોર્ડ સાથે મેળવો.';
 
   @override
-  String get cnStep3Title => 'પેકેટ બનાવો';
+  String get cnStep3Title => 'કાગળોનું સેટ બનાવો';
 
   @override
   String get cnStep3Body =>
-      'ડૉક્ટર માટે એક પાનાનો સારાંશ અને સમીક્ષા માટેની વિનંતીનો ડ્રાફ્ટ મેળવો.';
+      'ડૉક્ટર માટે એક પાનાનો સારાંશ અને સમીક્ષા વિનંતીનો અધૂરો લખાણ મેળવો.';
 
   @override
   String get cnRecentCases => 'અન્ય કેસ';
@@ -2953,7 +2953,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnStatusGatherRecords => 'રેકોર્ડ ભેગા કરો';
 
   @override
-  String get cnStatusPacketReady => 'પેકેટ તૈયાર';
+  String get cnStatusPacketReady => 'કાગળોનું સેટ તૈયાર';
 
   @override
   String get cnStatusNeedsAttention => 'ધ્યાન જરૂરી';
@@ -2980,14 +2980,14 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String cnNextItemsAttached(int done, int total) {
-    return 'માગેલી $total વસ્તુઓમાંથી $done પૂરી થઈ';
+    return 'માગેલી $total વસ્તુઓમાંથી $done સંભાળી';
   }
 
   @override
-  String get cnNextSharePacket => 'પેકેટ શેર કરવા તૈયાર';
+  String get cnNextSharePacket => 'કાગળોનું સેટ શેર કરવા તૈયાર';
 
   @override
-  String get cnNextCreatePacket => 'આગળ: પેકેટ બનાવો';
+  String get cnNextCreatePacket => 'આગળ: કાગળોનું સેટ બનાવો';
 
   @override
   String cnDateToCheckShort(String date) {
@@ -3010,7 +3010,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnDeleteCaseBody =>
-      'આનાથી પત્રના પાના, તેમાંથી વાંચેલી વિગતો, જોડેલા રેકોર્ડના સારાંશ અને પેકેટ કાઢી નંખાશે. તમારી દવા અને લક્ષણોના રેકોર્ડ રહેશે.';
+      'આનાથી પત્રના પાના, તેમાંથી વાંચેલી વિગતો, જોડેલા રેકોર્ડના સારાંશ અને કાગળોના સેટ કાઢી નંખાશે. તમારી દવા અને લક્ષણોના રેકોર્ડ રહેશે.';
 
   @override
   String get cnCancel => 'રદ કરો';
@@ -3023,19 +3023,20 @@ class AppLocalizationsGu extends AppLocalizations {
       'કાઢી શકાયું નથી. તમારું કનેક્શન તપાસો અને ફરી પ્રયાસ કરો.';
 
   @override
-  String get cnKindInitialDenial => 'દવાના કવરેજની નામંજૂરી (Denial)';
+  String get cnKindInitialDenial => 'દવાના કવરેજ પર ના (Drug coverage denial)';
 
   @override
   String get cnKindInfoRequest => 'વધુ માહિતી માટેની વિનંતી';
 
   @override
-  String get cnKindReauth => 'નવીકરણ (ફરીથી મંજૂરી) નોટિસ';
+  String get cnKindReauth => 'ફરી મંજૂરીની નોટિસ (Reauthorization)';
 
   @override
-  String get cnKindFinalDenial => 'અપીલનો અંતિમ નિર્ણય (Appeal)';
+  String get cnKindFinalDenial =>
+      'ફરી અરજીનો અંતિમ નિર્ણય (Final appeal decision)';
 
   @override
-  String get cnKindEob => 'બિલ અથવા ઇન્સ્યોરન્સ લાભોનું વિવરણ (EOB)';
+  String get cnKindEob => 'બિલ અથવા લાભોની સમજૂતી (Explanation of Benefits)';
 
   @override
   String get cnKindOther => 'અન્ય પત્ર';
@@ -3050,7 +3051,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnFieldPlanName => 'પ્લાન';
 
   @override
-  String get cnFieldMemberId => 'મેમ્બર ID';
+  String get cnFieldMemberId => 'સભ્ય ID (Member ID)';
 
   @override
   String get cnFieldCaseReference => 'કેસ અથવા સંદર્ભ નંબર';
@@ -3089,7 +3090,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnWhoYou => 'તમે';
 
   @override
-  String get cnWhoCareTeam => 'સારવાર ટીમ';
+  String get cnWhoCareTeam => 'સારવાર કરનાર ટીમ';
 
   @override
   String get cnWhoPlan => 'પ્લાન';
@@ -3101,7 +3102,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnReqLinked => 'જોડ્યું';
 
   @override
-  String get cnReqAskedCareTeam => 'સારવાર ટીમને પૂછ્યું';
+  String get cnReqAskedCareTeam => 'સારવાર કરનાર ટીમને પૂછ્યું';
 
   @override
   String get cnReqNotAvailable => 'ઉપલબ્ધ નથી';
@@ -3122,7 +3123,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnRecSymptoms => 'લક્ષણોની નોંધ';
 
   @override
-  String get cnRecLocalContext => 'સ્થાનિક સંદર્ભ';
+  String get cnRecLocalContext => 'પર્યાવરણના પરિબળો';
 
   @override
   String get cnRecPrn => 'જરૂર પડે ત્યારે વાપરવાનું ઇન્હેલર';
@@ -3168,7 +3169,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnUpEncrypted =>
-      'આ PDF પાસવર્ડથી સુરક્ષિત છે. અનલૉક કરેલી કૉપિ સેવ કરો અથવા ફોટા લો.';
+      'આ PDF પાસવર્ડથી સુરક્ષિત છે. અનલૉક કરેલી કૉપિ સાચવો અથવા ફોટા લો.';
 
   @override
   String get cnCameraUnavailable =>
@@ -3210,6 +3211,12 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnAddPhoto => 'ફોટો';
+
+  @override
+  String get cnPickGallery => 'ફોટામાંથી પસંદ કરો';
+
+  @override
+  String get cnLabelForm => 'સ્વરૂપ (લખ્યું હોય તેમ)';
 
   @override
   String get cnAddPdf => 'PDF';
@@ -3270,14 +3277,14 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnServiceUnavailableBody =>
-      'પત્ર વાંચવાની સેવા હમણાં તૈયાર નથી. તમારા પાના સેવ છે; પછી ફરી પ્રયાસ કરો.';
+      'પત્ર વાંચવાની સેવા હમણાં તૈયાર નથી. તમારા પાના સાચવ્યા છે; પછી ફરી પ્રયાસ કરો.';
 
   @override
   String get cnNeedNewPagesBody =>
       'વધુ સ્પષ્ટ ફોટા લો અથવા ઓછા પાના વાપરો, પછી ફરી અપલોડ કરો.';
 
   @override
-  String get cnPagesKept => 'તમારા પાના સેવ છે. કશું બદલાયું નથી.';
+  String get cnPagesKept => 'તમારા પાના સાચવ્યા છે. કશું બદલાયું નથી.';
 
   @override
   String get cnReplacePages => 'પાના બદલો';
@@ -3303,7 +3310,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnReadingLeaveOk =>
-      'તમે આ સ્ક્રીન છોડી શકો છો. વાંચવાનું ચાલુ રહેશે અને તમારો કેસ સેવ છે.';
+      'તમે આ સ્ક્રીન છોડી શકો છો. વાંચવાનું ચાલુ રહેશે અને તમારો કેસ સાચવ્યો છે.';
 
   @override
   String get cnStartReading => 'વાંચવાનું શરૂ કરો';
@@ -3315,24 +3322,24 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnStepReview => 'તપાસ';
 
   @override
-  String get cnStepEvidence => 'પુરાવા';
+  String get cnStepEvidence => 'રેકોર્ડ';
 
   @override
-  String get cnStepPacket => 'પેકેટ';
+  String get cnStepPacket => 'કાગળોનું સેટ';
 
   @override
   String cnStepOf(int n, int total, String name) {
-    return '$total માંથી સ્ટેપ $n: $name';
+    return '$total માંથી પગલું $n: $name';
   }
 
   @override
-  String get cnSaving => 'સેવ થઈ રહ્યું છે…';
+  String get cnSaving => 'સાચવી રહ્યા છીએ…';
 
   @override
-  String get cnSaved => 'સેવ થયું';
+  String get cnSaved => 'સાચવ્યું';
 
   @override
-  String get cnNotSavedRetry => 'સેવ નથી થયું · ફરી પ્રયાસ';
+  String get cnNotSavedRetry => 'સાચવ્યું નથી · ફરી પ્રયાસ';
 
   @override
   String get cnViewOriginal => 'મૂળ પાના જુઓ';
@@ -3387,7 +3394,7 @@ class AppLocalizationsGu extends AppLocalizations {
   }
 
   @override
-  String get cnContinueToEvidence => 'પુરાવા પર આગળ વધો';
+  String get cnContinueToEvidence => 'રેકોર્ડ તરફ આગળ વધો';
 
   @override
   String cnSeePage(int n) {
@@ -3398,7 +3405,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnWhatLetterIs => 'આ પત્ર શું છે';
 
   @override
-  String get cnLooksRight => 'બરાબર છે';
+  String get cnLooksRight => 'બરાબર લાગે છે';
 
   @override
   String get cnChange => 'બદલો';
@@ -3424,11 +3431,11 @@ class AppLocalizationsGu extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'તમારી સારવાર ટીમને સમીક્ષા માટે વિનંતી કરવા કહો. પત્રમાં મોકલવાની $count વસ્તુઓ જણાવી છે.',
+          'તમારી સારવાર કરનાર ટીમને સમીક્ષા માટે વિનંતી કરવા કહો. પત્રમાં મોકલવાની $count વસ્તુઓ જણાવી છે.',
       one:
-          'તમારી સારવાર ટીમને સમીક્ષા માટે વિનંતી કરવા કહો. પત્રમાં મોકલવાની 1 વસ્તુ જણાવી છે.',
+          'તમારી સારવાર કરનાર ટીમને સમીક્ષા માટે વિનંતી કરવા કહો. પત્રમાં મોકલવાની 1 વસ્તુ જણાવી છે.',
       zero:
-          'તમારી સારવાર ટીમને સમીક્ષા માટે વિનંતી કરવા કહો. પત્રમાં ચોક્કસ વસ્તુઓની યાદી નથી.',
+          'તમારી સારવાર કરનાર ટીમને સમીક્ષા માટે વિનંતી કરવા કહો. પત્રમાં ચોક્કસ વસ્તુઓની યાદી નથી.',
     );
     return '$_temp0';
   }
@@ -3447,15 +3454,15 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnNextReauth =>
-      'હાલની મંજૂરી ક્યારે પૂરી થાય છે તે નોંધો અને તમારી સારવાર ટીમને નવીકરણ શરૂ કરવા કહો.';
+      'હાલની મંજૂરી ક્યારે પૂરી થાય છે તે નોંધો અને તમારી સારવાર કરનાર ટીમને ફરી મંજૂરી (Reauthorization) શરૂ કરવા કહો.';
 
   @override
   String get cnNextFinal =>
-      'આ અંતિમ નિર્ણય છે. CoverNote તેના માટે પહેલી સમીક્ષા વિનંતીનો ડ્રાફ્ટ બનાવતું નથી. પત્રમાં જણાવેલા વિકલ્પો વિશે પ્લાન અથવા તમારી સારવાર ટીમને પૂછો.';
+      'આ અંતિમ નિર્ણય છે. CoverNote તેના માટે પહેલી સમીક્ષા વિનંતીનો અધૂરો લખાણ બનાવતું નથી. પત્રમાં જણાવેલા વિકલ્પો વિશે પ્લાન અથવા તમારી સારવાર કરનાર ટીમને પૂછો.';
 
   @override
   String get cnNextEob =>
-      'આ બિલ અથવા લાભોનું સ્ટેટમેન્ટ લાગે છે, નામંજૂરી નહીં. તેને પ્લાનની મેમ્બર સર્વિસ સાથે તપાસો.';
+      'આ બિલ અથવા લાભોની વિગત લાગે છે, નામંજૂરી (Denial) નહીં. તેને પ્લાનની સભ્ય સેવા (member services) સાથે તપાસો.';
 
   @override
   String get cnNextUncertain =>
@@ -3476,7 +3483,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String cnDateCalculated(String anchor, int days) {
-    return 'ગણતરી: $anchor + $days કૅલેન્ડર દિવસ';
+    return 'ગણતરી: $anchor + $days કૅલેન્ડર દિવસ (calendar days)';
   }
 
   @override
@@ -3486,7 +3493,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnNoticeDateWord => 'નોટિસની તારીખ';
 
   @override
-  String get cnDateEnteredByYou => 'તમે દાખલ કરી';
+  String get cnDateEnteredByYou => 'તમે દાખલ કર્યું';
 
   @override
   String get cnDateFromLetter => 'પત્રમાં જણાવેલ';
@@ -3502,7 +3509,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String cnNeedReceivedDate(int days) {
-    return 'પત્રમાં તમને મળ્યાના દિવસથી $days કૅલેન્ડર દિવસ આપ્યા છે. તે ક્યારે આવ્યો હતો?';
+    return 'પત્રમાં તમને મળ્યાના દિવસથી $days કૅલેન્ડર દિવસ (calendar days) આપ્યા છે. તે ક્યારે આવ્યો હતો?';
   }
 
   @override
@@ -3519,10 +3526,11 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnDateUnclear =>
-      'શબ્દો સ્પષ્ટ નથી અથવા કામકાજના દિવસ ગણે છે, તેથી CoverNote તેની ગણતરી કરતું નથી. ચોક્કસ તારીખ માટે પ્લાનને પૂછો.';
+      'શબ્દો સ્પષ્ટ નથી અથવા કામના દિવસ (business days) ગણે છે, તેથી CoverNote તેની ગણતરી કરતું નથી. ચોક્કસ તારીખ માટે પ્લાનને પૂછો.';
 
   @override
-  String get cnNoDeadline => 'પત્રમાં સમીક્ષા માટેની કોઈ છેલ્લી તારીખ મળી નથી.';
+  String get cnNoDeadline =>
+      'પત્રમાં સમીક્ષાની કોઈ છેલ્લી તારીખ (deadline) મળી નથી.';
 
   @override
   String cnReplyBy(String date) {
@@ -3568,7 +3576,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnLinkNote =>
-      'તમારા પોતાના રેકોર્ડ વિનંતીને ટેકો આપે છે. તે ક્લિનિકની નોંધો કે ટેસ્ટના પરિણામોની જગ્યા લેતા નથી.';
+      'તમારા પોતાના રેકોર્ડ વિનંતીને ટેકો આપે છે. તે દવાખાનાની નોંધો કે ટેસ્ટના પરિણામોની જગ્યા લેતા નથી.';
 
   @override
   String cnMedLine(int taken, int notTaken, int unknown, int scheduled) {
@@ -3577,7 +3585,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String cnPrnLine(int uses, int puffs) {
-    return 'જરૂર પડે ત્યારે: $uses ઉપયોગ, $puffs પફ';
+    return 'જરૂર પડે ત્યારે: $uses ઉપયોગ, $puffs પફ (puff)';
   }
 
   @override
@@ -3590,7 +3598,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String cnPmLine(int days, int total, int high) {
-    return '$total માંથી $days દિવસનો PM2.5 ડેટા; $high દિવસ AQI 100 થી વધુ';
+    return '$total માંથી $days દિવસના PM2.5 આંકડા; $high દિવસ AQI 100 થી વધુ';
   }
 
   @override
@@ -3605,7 +3613,7 @@ class AppLocalizationsGu extends AppLocalizations {
   }
 
   @override
-  String get cnSyntheticData => 'બનાવટી ડેટા';
+  String get cnSyntheticData => 'બનાવટી માહિતી';
 
   @override
   String get cnLetterAsksFor => 'પત્રમાં શું માગ્યું છે';
@@ -3624,10 +3632,10 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnLocalContextNote =>
-      'વૈકલ્પિક સંદર્ભ. તમારા ઘરની માપણી નથી અને લક્ષણોનું કારણ નથી.';
+      'વૈકલ્પિક. આ બહારના પરિબળો છે. ઘરની અંદરનું માપ કે લક્ષણોનું કારણ નથી.';
 
   @override
-  String get cnContinueToPacket => 'પેકેટ પર આગળ વધો';
+  String get cnContinueToPacket => 'કાગળોના સેટ પર આગળ વધો';
 
   @override
   String get cnAddedByYou => 'તમે ઉમેર્યું';
@@ -3655,31 +3663,31 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnOtherStatus => 'અન્ય સ્થિતિ';
 
   @override
-  String get cnInPacket => 'પેકેટમાં';
+  String get cnInPacket => 'કાગળોના સેટમાં';
 
   @override
-  String get cnRemoveFromPacket => 'પેકેટમાંથી કાઢો';
+  String get cnRemoveFromPacket => 'કાગળોના સેટમાંથી કાઢો';
 
   @override
-  String get cnAddToPacket => 'પેકેટમાં ઉમેરો';
+  String get cnAddToPacket => 'કાગળોના સેટમાં ઉમેરો';
 
   @override
   String get cnErrNotSavedYet =>
-      'તમારા તાજેતરના ફેરફાર હજી સેવ થયા નથી. તમારું કનેક્શન તપાસો અને ફરી પ્રયાસ કરો.';
+      'તમારા તાજેતરના ફેરફાર હજી સાચવ્યા નથી. તમારું કનેક્શન તપાસો અને ફરી પ્રયાસ કરો.';
 
   @override
   String get cnPacketChangedMeanwhile =>
-      'પેકેટ બનતું હતું ત્યારે વિગતો અથવા રેકોર્ડ બદલાયા. તેને ફરી બનાવો.';
+      'કાગળોનું સેટ બનતું હતું ત્યારે વિગતો અથવા રેકોર્ડ બદલાયા. તેને ફરી બનાવો.';
 
   @override
-  String get cnPacketFailed => 'પેકેટ બનાવી શકાયું નથી. ફરી પ્રયાસ કરો.';
+  String get cnPacketFailed => 'કાગળોનું સેટ બનાવી શકાયું નથી. ફરી પ્રયાસ કરો.';
 
   @override
   String get cnBeforeSharingTitle => 'શેર કરતા પહેલાં';
 
   @override
   String get cnBeforeSharingBody =>
-      'આ ફાઇલમાં તમારું નામ અને સ્વાસ્થ્યની વિગતો છે. તેને ફક્ત તમારી સારવાર ટીમ અથવા તમારા પ્લાન સાથે જ શેર કરો. શેર કરવાથી તમારા માટે કશું સબમિટ થતું નથી.';
+      'આ ફાઇલમાં તમારું નામ અને સ્વાસ્થ્યની વિગતો છે. તેને ફક્ત તમારી સારવાર કરનાર ટીમ અથવા તમારા પ્લાન સાથે જ શેર કરો. શેર કરવાથી તમારા વતી કશું જમા થતું નથી.';
 
   @override
   String get cnShare => 'શેર કરો';
@@ -3697,36 +3705,36 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnMethodInPerson => 'રૂબરૂ';
 
   @override
-  String get cnMethodCareTeam => 'સારવાર ટીમે મોકલ્યું';
+  String get cnMethodCareTeam => 'સારવાર કરનાર ટીમે મોકલ્યું';
 
   @override
   String get cnMethodOther => 'અન્ય';
 
   @override
   String get cnPacketNoDraftFinal =>
-      'અંતિમ નિર્ણય માટે, પેકેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે. પહેલા સ્તરની સમીક્ષાનો ડ્રાફ્ટ બનતો નથી.';
+      'અંતિમ નિર્ણય માટે, કાગળોના સેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે. પહેલા સ્તરની સમીક્ષાનો અધૂરો લખાણ બનતો નથી.';
 
   @override
   String get cnPacketNoDraftEob =>
-      'બિલ અથવા લાભોના સ્ટેટમેન્ટ માટે, પેકેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે.';
+      'બિલ અથવા લાભોની વિગત (Explanation of Benefits) માટે, કાગળોના સેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે.';
 
   @override
   String get cnPacketNoDraftReauth =>
-      'નવીકરણની નોટિસ માટે, પેકેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે, જે તમારી સારવાર ટીમને નવીકરણમાં મદદ કરે.';
+      'ફરી મંજૂરીની નોટિસ (Reauthorization) માટે, કાગળોના સેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે, જે તમારી સારવાર કરનાર ટીમને ફરી મંજૂરીમાં મદદ કરે.';
 
   @override
   String get cnPacketNoDraftOther =>
-      'જ્યાં સુધી પત્ર નામંજૂરી અથવા માહિતીની વિનંતી ન હોય, ત્યાં સુધી પેકેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે.';
+      'જ્યાં સુધી પત્ર નામંજૂરી (Denial) અથવા માહિતીની વિનંતી ન હોય, ત્યાં સુધી કાગળોના સેટમાં ફક્ત ડૉક્ટર માટેનો સારાંશ હોય છે.';
 
   @override
-  String get cnPacketContains => 'આ પેકેટમાં શામેલ હશે';
+  String get cnPacketContains => 'આ કાગળોના સેટમાં શામેલ હશે';
 
   @override
   String get cnPartSummary => 'ડૉક્ટર માટે સારાંશ (1 પાનું)';
 
   @override
   String get cnPartDraft =>
-      'સમીક્ષા વિનંતીનો ડ્રાફ્ટ (તમારી સારવાર ટીમ પૂરો કરશે)';
+      'સમીક્ષા વિનંતીનો ડ્રાફ્ટ (તમારી સારવાર કરનાર ટીમ પૂરો કરશે)';
 
   @override
   String get cnPartLetterText => 'પરિશિષ્ટ: પત્રનું લખાણ';
@@ -3748,16 +3756,16 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnPacketStale =>
-      'છેલ્લા પેકેટ પછી વિગતો અથવા રેકોર્ડ બદલાયા. અપડેટ કરવા તેને ફરી બનાવો.';
+      'છેલ્લા કાગળોના સેટ પછી વિગતો અથવા રેકોર્ડ બદલાયા. અપડેટ કરવા તેને ફરી બનાવો.';
 
   @override
   String get cnGenerating => 'બનાવી રહ્યા છીએ…';
 
   @override
-  String get cnGeneratePacket => 'સમીક્ષા પેકેટ બનાવો';
+  String get cnGeneratePacket => 'સમીક્ષા માટે કાગળોનું સેટ બનાવો';
 
   @override
-  String get cnSaveOrPrint => 'સેવ કરો અથવા પ્રિન્ટ કરો';
+  String get cnSaveOrPrint => 'સાચવો અથવા પ્રિન્ટ કરો';
 
   @override
   String get cnISentIt => 'મેં મોકલ્યું';
@@ -3776,14 +3784,14 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnTabDoctorSummary => 'ડૉક્ટર માટે સારાંશ';
 
   @override
-  String get cnTabReviewDraft => 'સમીક્ષા વિનંતીનો ડ્રાફ્ટ';
+  String get cnTabReviewDraft => 'સમીક્ષા વિનંતીનો અધૂરો લખાણ';
 
   @override
   String get cnSentExplain =>
-      'ક્યારે અને કેવી રીતે મોકલ્યું તે નોંધો. CoverNote તેને મોકલતું નથી અને નિર્ણય ટ્રૅક કરતું નથી.';
+      'ક્યારે અને કેવી રીતે મોકલ્યું તે નોંધો. CoverNote તેને મોકલતું નથી અને નિર્ણય શું થયો તે જોતું નથી.';
 
   @override
-  String get cnSave => 'સેવ કરો';
+  String get cnSave => 'સાચવો';
 
   @override
   String get cnCtxPm25 => 'PM2.5 (AQI)';
@@ -3801,17 +3809,17 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnCtxIntro =>
-      'કોઈ નામવાળા સ્ત્રોતના હવાના રીડિંગ અને તમે જે નોંધ્યું તે, અલગ રાખેલા. તે તમારા રેકોર્ડ સમજાવવામાં મદદ કરે તો જ કેસમાં ઉમેરો.';
+      'કોઈ નામવાળા સ્ત્રોતના હવાના માપ અને તમે જે નોંધ્યું તે, અલગ રાખેલા. તે તમારા રેકોર્ડ સમજાવવામાં મદદ કરે તો જ કેસમાં ઉમેરો.';
 
   @override
-  String get cnCtxReadings => 'હવાના રીડિંગ';
+  String get cnCtxReadings => 'હવાના માપ';
 
   @override
   String get cnCtxReadingsNote =>
-      'જે દિવસે નોંધાયા તે દિવસના પ્રાદેશિક રીડિંગ. તે તમારા ઘરે વાહનોના ધુમાડાનું માપ નથી.';
+      'જે દિવસે નોંધાયા તે દિવસના પ્રાદેશિક માપ. તે તમારા ઘરે વાહનોના ધુમાડાનું માપ નથી.';
 
   @override
-  String get cnCtxAddReading => 'રીડિંગ ઉમેરો';
+  String get cnCtxAddReading => 'માપ ઉમેરો';
 
   @override
   String get cnCtxReports => 'તમે જે નોંધ્યું';
@@ -3823,7 +3831,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnCtxAddReport => 'તમે જે નોંધ્યું તે ઉમેરો';
 
   @override
-  String get cnReportExhaust => 'નજીકમાં ધુમાડો ખૂબ વધારે';
+  String get cnReportExhaust => 'નજીકમાં વાહનોનો ધુમાડો ખૂબ';
 
   @override
   String get cnReportWater => 'ઘરમાં પાણી ઘૂસ્યું';
@@ -3840,7 +3848,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnNoteOptional => 'નોંધ (વૈકલ્પિક)';
 
   @override
-  String get cnCtxWhat => 'રીડિંગ';
+  String get cnCtxWhat => 'માપ';
 
   @override
   String get cnCtxHumidityNote =>
@@ -3863,11 +3871,11 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnCtxSourceRequired => 'સ્ત્રોત ઉમેરો.';
 
   @override
-  String get cnCtxPlace => 'જગ્યા (ZIP અથવા શહેર, વૈકલ્પિક)';
+  String get cnCtxPlace => 'જગ્યા (વૈકલ્પિક)';
 
   @override
   String get cnRecordsSignInBody =>
-      'દવા, લક્ષણો અને સ્થાનિક સંદર્ભના રેકોર્ડ રાખવા માટે સાઇન ઇન કરો.';
+      'દવા, લક્ષણો અને પર્યાવરણના પરિબળોની નોંધ રાખવા સાઇન ઇન કરો.';
 
   @override
   String get cnRecordsYourRecords => 'તમારા રેકોર્ડ';
@@ -3882,7 +3890,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get cnRecDailyLogSub => 'લક્ષણો અને ઇન્હેલરનો ઉપયોગ';
 
   @override
-  String get cnRecLocalContextSub => 'હવાના રીડિંગ અને તમે જે નોંધ્યું';
+  String get cnRecLocalContextSub => 'હવાના માપ અને તમે જે નોંધ્યું';
 
   @override
   String get cnHelp => 'મદદ';
@@ -3895,7 +3903,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String cnLast30Days(String from, String to) {
-    return 'છેલ્લા 30 દિવસ ($from – $to)';
+    return 'Last 30 days ($from – $to)';
   }
 
   @override
@@ -3910,7 +3918,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnDeleteAccountBody =>
-      'આનાથી તમારું એકાઉન્ટ, કેસ, અપલોડ કરેલા પત્રો, પેકેટ અને રેકોર્ડ કાયમ માટે કાઢી નંખાશે. તેને પાછું લાવી શકાતું નથી.';
+      'આનાથી તમારું એકાઉન્ટ, કેસ, અપલોડ કરેલા પત્રો, કાગળોના સેટ અને રેકોર્ડ કાયમ માટે કાઢી નંખાશે. તેને પાછું લાવી શકાતું નથી.';
 
   @override
   String get cnTypeDelete => 'પુષ્ટિ માટે DELETE લખો';
@@ -3954,7 +3962,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnAboutBody =>
-      'CoverNote તમને દવાઓ વિશેના ઇન્સ્યોરન્સના પત્રો વાંચવામાં અને તમારી સારવાર ટીમ માટે કાગળો તૈયાર કરવામાં મદદ કરે છે. તે તમારા પ્લાનને કશું સબમિટ કરતું નથી, કવરેજનો નિર્ણય કરતું નથી, અને તબીબી સલાહ નથી.';
+      'CoverNote તમને દવાઓ વિશેના ઇન્સ્યોરન્સના પત્રો વાંચવામાં અને તમારી સારવાર કરનાર ટીમ માટે કાગળો તૈયાર કરવામાં મદદ કરે છે. તે તમારા પ્લાન પાસે કશું જમા કરતું નથી, કવરેજનો નિર્ણય કરતું નથી, અને તબીબી સલાહ નથી.';
 
   @override
   String get cnDangerZone => 'એકાઉન્ટ કાઢી નાખો';
@@ -4004,14 +4012,14 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnLanguageNote =>
-      'કેટલુંક લખાણ સૉફ્ટવેરથી અનુવાદિત છે અને તેમાં ભૂલો હોઈ શકે. દવાનાં નામ, ડોઝ, તારીખો અને તમારા પત્રમાંથી લીધેલા અવતરણોનો ક્યારેય અનુવાદ થતો નથી.';
+      'કેટલાક શબ્દો સોફ્ટવેરે અનુવાદ કર્યા છે અને તેમાં ભૂલ હોઈ શકે છે. દવાનું નામ અને ડોઝ લખ્યા મુજબ રહે છે. પત્રની બાકીની વિગતો અનુવાદમાં બતાવાય છે.';
 
   @override
   String get cnLanguageButtonTooltip => 'ભાષા બદલો';
 
   @override
   String get cnPacketEnglishNote =>
-      'પેકેટ અંગ્રેજીમાં લખેલું છે, જેથી તમારી સારવાર ટીમ તેને વાંચી શકે.';
+      'કાગળોનું સેટ અંગ્રેજીમાં લખેલું છે, જેથી તમારી સારવાર કરનાર ટીમ તેને વાંચી શકે.';
 
   @override
   String get cnReasonMissingInformation =>
@@ -4023,19 +4031,19 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnReasonMedicalNecessity =>
-      'પ્લાન કહે છે કે આ દવા તબીબી રીતે જરૂરી છે તેની ખાતરી તે કરી શક્યો નથી.';
+      'પ્લાન કહે છે કે આ દવા તબીબી રીતે જરૂરી છે, એવી પુષ્ટિ તે કરી શક્યું નથી (Medical necessity).';
 
   @override
   String get cnReasonFormulary =>
-      'પ્લાન કહે છે કે આ દવા તેની કવર થતી દવાઓની યાદીમાં નથી (Formulary).';
+      'પ્લાન કહે છે કે આ દવા, જે દવાઓ કવર થાય છે તે યાદીમાં નથી (Formulary).';
 
   @override
   String get cnReasonQuantityLimit =>
-      'પ્લાન કહે છે કે માગેલી માત્રા તે જેટલું કવર કરે છે તેનાથી વધુ છે.';
+      'પ્લાન કહે છે કે જેટલી દવા માગી છે તે, પ્લાન જેટલું કવર કરે છે તેનાથી વધુ છે.';
 
   @override
   String get cnReasonEligibility =>
-      'પ્લાન કહે છે કે તેના કવરેજના નિયમો હેઠળ આ કવર થતું નથી.';
+      'પ્લાન કહે છે કે તેના કવરેજના નિયમો પ્રમાણે આ કવર થતું નથી.';
 
   @override
   String get cnReasonOther =>
@@ -4052,4 +4060,448 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get cnReqHintDoctorStatement => 'તમારા ડૉક્ટરનું નિવેદન';
+
+  @override
+  String get cnTabSettings => 'ગોઠવણીઓ';
+
+  @override
+  String get cnCasesList => 'કેસની યાદી';
+
+  @override
+  String get cnGoHome => 'મુખ્ય';
+
+  @override
+  String get cnAnalyzingTitle => 'વીમાનો પત્ર · વાંચી રહ્યા છીએ';
+
+  @override
+  String cnCaseNumber(String n) {
+    return 'કેસ #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return '$when ઉમેર્યું';
+  }
+
+  @override
+  String get cnAliasHint => 'ટૂંકું નામ (વૈકલ્પિક)';
+
+  @override
+  String get cnShareDocuments => 'કાગળો મોકલો';
+
+  @override
+  String get cnRecordDelivery => 'મોકલ્યાની નોંધ કરો';
+
+  @override
+  String get cnShareAsk => 'શું તમે આ કાગળો મોકલ્યા?';
+
+  @override
+  String get cnDeliveryRecipient => 'કોને મોકલ્યા';
+
+  @override
+  String get cnRecipientClinic => 'ક્લિનિક અથવા ડૉક્ટર';
+
+  @override
+  String get cnRecipientInsurer => 'વીમા પ્લાન';
+
+  @override
+  String get cnRecipientSelf => 'મારી પાસે રાખ્યા';
+
+  @override
+  String get cnRecipientOther => 'અન્ય';
+
+  @override
+  String get cnDeliveryMethod => 'કેવી રીતે';
+
+  @override
+  String get cnMethodEmail => 'ઈમેઇલ';
+
+  @override
+  String get cnMethodMessage => 'મેસેજ અથવા ચેટ';
+
+  @override
+  String get cnMethodUnknown => 'યાદ નથી';
+
+  @override
+  String get cnDeliveryUserReport =>
+      'આ તમે જણાવ્યું તે છે. બીજી બાજુએ મળ્યું કે નહીં, એ એપ ચકાસી શકતી નથી.';
+
+  @override
+  String get cnShareCancelled =>
+      'મોકલવાનું રદ થયું. મોકલ્યું તેમ નોંધાયું નથી.';
+
+  @override
+  String get cnRecordsLoading => 'રેકોર્ડ લાવી રહ્યા છીએ…';
+
+  @override
+  String get cnRecordsEmpty => 'આ સમયગાળામાં રેકોર્ડ નથી';
+
+  @override
+  String get cnRecordsError => 'રેકોર્ડ લાવી શક્યા નહીં';
+
+  @override
+  String get cnRecordsPermission => 'આ રેકોર્ડ જોવાની તમને પરવાનગી નથી';
+
+  @override
+  String get cnRecordsPending => 'આ ફોનમાં સેવ થયું · સિંકની રાહ';
+
+  @override
+  String get cnRecordsFiltered =>
+      'તમારા ફિલ્ટરને કારણે કેટલાક રેકોર્ડ છુપાયેલા છે';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return 'આ સમયગાળા બહારના $n રેકોર્ડ';
+  }
+
+  @override
+  String get cnWidenRange => 'વધુ લાંબો સમય બતાવો';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days દિવસ · દવા $med વાર · લક્ષણ $sym નોંધ';
+  }
+
+  @override
+  String get cnOneDayPacket => 'આ કાગળો એક જ દિવસના છે.';
+
+  @override
+  String get cnMyMedications => 'મારી દવાઓ';
+
+  @override
+  String get cnScanLabel => 'દવાનું લેબલ સ્કૅન કરો';
+
+  @override
+  String get cnMedManageHint =>
+      'તમે વાપરો છો તે દવાઓ નોંધાવો. પ્રિસ્ક્રિપ્શન બદલાય તો સુધારો. રોજની વપરાશ રેકોર્ડમાં લખાય છે.';
+
+  @override
+  String get cnLabelNeedLabel =>
+      'ફાર્મસીના લેબલ અથવા ડબ્બા પરનું લખાણ ફોટો કરો. ગોળીના આકારથી એપ દવા ઓળખતી નથી.';
+
+  @override
+  String get cnLabelUnclear => 'આ વિગત સ્પષ્ટ ન હતી. સેવ કરતાં પહેલાં તપાસો.';
+
+  @override
+  String get cnConsentLabel => 'દવાનું લેબલ AI વાંચે તેની મંજૂરી આપો';
+
+  @override
+  String get cnManualMed => 'જાતે લખો';
+
+  @override
+  String get cnAirWeather => 'તમારી આસપાસના પર્યાવરણના પરિબળો';
+
+  @override
+  String get cnAirAutoNote =>
+      'હવાની ગુણવત્તા, ટ્રાફિક સાથે જોડાયેલી હવા, પરાગ, પૂરની ચેતવણી અને બહારની ભેજ તમારા સ્થાન પરથી આવે છે. ફોન હવા માપતો નથી. બહારની ભેજ ઘરની અંદરનો ફૂગ નથી.';
+
+  @override
+  String get cnHomeRecords => 'સંબંધિત દવાની નોંધ';
+
+  @override
+  String get cnEnvTrap => 'ટ્રાફિક સાથે જોડાયેલી હવા';
+
+  @override
+  String get cnItemMemo => 'નોંધ';
+
+  @override
+  String get cnSaveNote => 'નોંધ સાચવો';
+
+  @override
+  String get cnLocationNeed =>
+      'આસપાસના પર્યાવરણના પરિબળો જોવા સ્થાનની પરવાનગી આપો.';
+
+  @override
+  String get cnLocationOff => 'સ્થાન સેવા બંધ છે. ચાલુ કરીને ફરી પ્રયાસ કરો.';
+
+  @override
+  String get cnLocationBlocked => 'સ્થાન અટકાવેલું છે. સેટિંગમાં પરવાનગી આપો.';
+
+  @override
+  String get cnOpenSettings => 'સેટિંગ ખોલો';
+
+  @override
+  String get cnAirNone => 'હવા કે હવામાનની માહિતી નથી';
+
+  @override
+  String get cnAirRetry => 'હવા અને હવામાન ફરી અજમાવો';
+
+  @override
+  String get cnSetRegion => 'Set your area (ZIP or city)';
+
+  @override
+  String get cnConfiguredArea => 'Area you set';
+
+  @override
+  String get cnRecordPlace => 'આ રેકોર્ડનું સ્થળ';
+
+  @override
+  String get cnClosestObservation => 'Closest observation to the record time';
+
+  @override
+  String get cnEnvUnavailable => 'એ સમયે મળતું માપ નથી';
+
+  @override
+  String cnLogMedication(String name) {
+    return '$name નોંધો';
+  }
+
+  @override
+  String get cnAsNeededUse => 'જરૂર પડે ત્યારે';
+
+  @override
+  String get cnAsNeededInhaler => 'As-needed inhaler use';
+
+  @override
+  String get cnScheduledUse => 'નિયમિત સમયે';
+
+  @override
+  String get cnExtraUse => 'વધારાનો ઉપયોગ';
+
+  @override
+  String get cnUndoUse => 'પાછું લો';
+
+  @override
+  String get cnLoggedLocal => 'આ ફોનમાં સેવ થયું';
+
+  @override
+  String get cnLoggedPending => 'સિંકની રાહ';
+
+  @override
+  String get cnLoggedSynced => 'સિંક થયું';
+
+  @override
+  String cnDaysLogged(int n) {
+    return 'આ અઠવાડિયે $n દિવસ નોંધાયું';
+  }
+
+  @override
+  String get cnManageMedsLink => 'મારી દવાઓ સંભાળો';
+
+  @override
+  String get cnViewAirWeather => 'View environmental factors near you';
+
+  @override
+  String get cnConsentAi => 'દસ્તાવેજ AI વાંચે તેની મંજૂરી આપો';
+
+  @override
+  String get cnConsentAiBody =>
+      'પત્રની છબી વાંચવાની સેવા પર જાય છે, જેથી CoverNote તમને લખાણ બતાવી શકે. પછીથી ગોઠવણીઓમાં બંધ કરી શકો છો.';
+
+  @override
+  String get cnConsentAndAnalyze => 'સંમત થાઓ અને વાંચો';
+
+  @override
+  String get cnConsentLater => 'હમણાં નહીં';
+
+  @override
+  String get cnConsentViewLocal => 'મૂળ અહીં જુઓ';
+
+  @override
+  String get cnConsentDetails => 'ડેટાના ઉપયોગ વિશે વધુ';
+
+  @override
+  String get cnConsentLabelPurpose => 'દવાનું લેબલ વાંચવું';
+
+  @override
+  String get cnConsentLetterPurpose => 'વીમાનો પત્ર વાંચવો';
+
+  @override
+  String get cnConsentTranslatePurpose => 'પત્રનો અનુવાદ';
+
+  @override
+  String get cnToday => 'આજે';
+
+  @override
+  String get cnLast7 => 'છેલ્લા 7 દિવસ';
+
+  @override
+  String get cnLast30 => 'છેલ્લા 30 દિવસ';
+
+  @override
+  String get cnCustomRange => 'તારીખ પસંદ કરો';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days દિવસ · $count રેકોર્ડ';
+  }
+
+  @override
+  String get cnNoRecordThatDay => 'આ દિવસે રેકોર્ડ નથી';
+
+  @override
+  String get cnNotLogged => 'નોંધાયું નથી';
+
+  @override
+  String get cnNotTaken => 'લીધી નહીં તેમ નોંધ્યું';
+
+  @override
+  String get cnOriginalFile => 'મૂળ ફાઇલ';
+
+  @override
+  String get cnFullTranslation => 'આખો અનુવાદ';
+
+  @override
+  String get cnRecognizedText => 'ઓળખાયેલું લખાણ';
+
+  @override
+  String get cnSameLanguage => 'મૂળ જેવી જ ભાષા';
+
+  @override
+  String get cnTranslationPartial => 'કેટલાક પાનાં હજુ અનુવાદિત નથી';
+
+  @override
+  String get cnTranslationFailed => 'આ પાનું અનુવાદ થઈ શક્યું નહીં';
+
+  @override
+  String get cnOriginalMissing => 'મૂળ ફાઇલ મળી નથી. તમે ફરી અપલોડ કરી શકો છો.';
+
+  @override
+  String get cnTranslateRetry => 'અનુવાદ ચાલુ રાખો';
+
+  @override
+  String get cnKeyDetails => 'મુખ્ય વિગતો';
+
+  @override
+  String get cnWhatAbout => 'આ શેના વિશે છે?';
+
+  @override
+  String get cnWhatToDo => 'હવે શું કરવું';
+
+  @override
+  String get cnByWhen => 'ક્યાં સુધીમાં?';
+
+  @override
+  String get cnPreparePacket => 'કાગળો તૈયાર કરો';
+
+  @override
+  String get cnCorrectReading => 'વાંચવામાં ભૂલ સુધારો';
+
+  @override
+  String get cnCorrectReadingNote =>
+      'મૂળ પત્ર બદલાતો નથી. ફક્ત આપમેળે વંચાયેલું સુધરે છે.';
+
+  @override
+  String get cnReviewImportant =>
+      'કાગળો બનાવતાં પહેલાં આ મહત્ત્વની વિગતો તપાસો';
+
+  @override
+  String get cnPacketReadyTitle => 'તમારા કાગળો તૈયાર છે';
+
+  @override
+  String get cnNextSendClinic => 'કાગળો તમારા ડૉક્ટરને મોકલીને તપાસવા કહો';
+
+  @override
+  String get cnNextWaitReply => 'જવાબ આવે ત્યારે પરિણામ નોંધો';
+
+  @override
+  String get cnExistingSentNewReady =>
+      'પહેલાંના કાગળો મોકલાયા · નવું સેટ બનાવી શકો છો';
+
+  @override
+  String get cnWhyRecords =>
+      'દવા અને લક્ષણની નોંધ ડૉક્ટરને સારવાર કેવી ચાલે છે તે જોવામાં મદદ કરે. રેકોર્ડ ન હોય તો પણ પત્ર પરથી કાગળો બનાવી શકો છો.';
+
+  @override
+  String get cnLetterAskedRecords => 'પત્રમાં તાજેતરની સારવારની નોંધ માગી છે';
+
+  @override
+  String get cnOptionalReference => 'વૈકલ્પિક સંદર્ભ';
+
+  @override
+  String get cnAsthmaContext =>
+      'અસ્થમાની સારવારની નોંધ — નિયમિત વખતે, જરૂર પડે ત્યારે, અને શ્વાસના લક્ષણો.';
+
+  @override
+  String get cnGeneralContext =>
+      'સારવારની નોંધ — દવાનો ઉપયોગ અને લક્ષણો અથવા નોંધ.';
+
+  @override
+  String get cnTreatmentQuestion => 'આ પત્ર કઈ સારવાર વિશે છે?';
+
+  @override
+  String get cnTreatmentAsthma => 'અસ્થમા';
+
+  @override
+  String get cnTreatmentOther => 'બીજી સારવાર';
+
+  @override
+  String get cnTreatmentUnknown => 'હજુ ખબર નથી';
+
+  @override
+  String get cnStatusWaitingClinic => 'ક્લિનિકને મોકલ્યું · તપાસની રાહ';
+
+  @override
+  String get cnStatusWaitingInsurer =>
+      'પ્લાનને આપ્યું તેમ નોંધ્યું · જવાબની રાહ';
+
+  @override
+  String get cnFollowUpNeeded => 'આગળની કામગીરી બાકી';
+
+  @override
+  String get cnOutcomeRecorded => 'પરિણામ નોંધાયું';
+
+  @override
+  String get cnActiveCases => 'ચાલુ છે';
+
+  @override
+  String get cnCompletedArchived => 'પૂરા અને સંગ્રહિત';
+
+  @override
+  String get cnCompleteCase => 'આ કેસ પૂરો કરો';
+
+  @override
+  String get cnArchiveCase => 'સંગ્રહ કરો';
+
+  @override
+  String get cnReopenCase => 'ફરી ચાલુ કરો';
+
+  @override
+  String get cnOutcomeApproved => 'મંજૂર';
+
+  @override
+  String get cnOutcomeDenied => 'નામંજૂર';
+
+  @override
+  String get cnOutcomeStopped => 'આગળ નહીં';
+
+  @override
+  String get cnOutcomeOther => 'અન્ય / નોંધાયું નથી';
+
+  @override
+  String get cnSentIsNotComplete => 'મોકલવું એ કેસ પૂરો થવું નથી.';
+
+  @override
+  String get cnArchivedCase => 'સંગ્રહિત';
+
+  @override
+  String get cnStepKeyDetails => 'મુખ્ય વિગતો';
+
+  @override
+  String get cnStepAddRecords => 'મારા રેકોર્ડ ઉમેરો';
+
+  @override
+  String get cnStepReviewPacket => 'કાગળો તપાસો';
+
+  @override
+  String get cnDataConsent => 'ડેટાની પ્રક્રિયા';
+
+  @override
+  String get cnZipOrCity => 'ZIP or city';
+
+  @override
+  String get cnSaveArea => 'Save area';
+
+  @override
+  String get cnWeekCalendar => 'આ અઠવાડિયું';
+
+  @override
+  String get cnMonthCalendar => 'આ મહિનો';
+
+  @override
+  String get cnUsedShort => 'વાપર્યું';
+
+  @override
+  String get cnCalendarLegend =>
+      'બિંદુ એટલે એ દિવસે નોંધ છે. ખાલી દિવસ એ ચૂકી ગયેલી દવા નથી.';
 }

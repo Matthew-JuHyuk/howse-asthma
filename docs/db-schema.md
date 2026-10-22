@@ -541,6 +541,24 @@ The packet's local context counts only days with an observation inside the recor
 
 ---
 
+## 2.z3 CoverNote Sprint 9 (2026-10-21)
+
+Migration: [`supabase/migrations/20261022090000_s9_covernote.sql`](../supabase/migrations/20261022090000_s9_covernote.sql). Additive. Applied remotely (2026-10-21). Follow-up [`20261022233000_s9_ordinal_counter_rls.sql`](../supabase/migrations/20261022233000_s9_ordinal_counter_rls.sql) (applied remotely 2026-10-21) makes `next_case_ordinal` security definer so a new case can take the next number while `case_ordinal_counters` stays closed to clients.
+
+| Table | Change | RLS |
+| --- | --- | --- |
+| `profiles` | + `home_zip`, `home_city`, `home_lat`, `home_lon` | Unchanged |
+| `appeal_cases` | + `display_ordinal` (trigger, unique per owner), `display_alias`, `treatment_context`, `lifecycle` (`active` · `completed` · `archived`), completion/archive timestamps, `plan_name_cache`. Workflow `status` is unchanged | Unchanged |
+| `case_ordinal_counters` | Next number per owner. Clients have no policy. `next_case_ordinal` (security definer, caller must be that owner) writes the row during case insert | Enabled, no client policy |
+| `delivery_events` | User-reported send; share-sheet open is not a row | Owner + parent-owner trigger |
+| `document_translations` | Per page + language + document revision | Owner |
+| `medication_use_events` | Unified use write; old inhaler/PDC/occasion rows stay | Owner (`patient_id`) |
+| `environment_snapshots` / `environment_event_links` | Event-time AQI/RH; current cache is a different row | Owner |
+| `consent_events` | + `locale`, `purpose_detail`. Existing `letter_processing` rows stay valid | Unchanged |
+| `case_evidence` | + `source_event_ids` | Unchanged |
+
+---
+
 ## 3. RLS policy outline
 
 > Implemented in [`supabase/migrations/20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql).  

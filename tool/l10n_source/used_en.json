@@ -491,6 +491,21 @@
   "panicDialFailed": {
     "en": "Could not open the phone dialer on this device."
   },
+  "envTrapDetail": {
+    "en": "Traffic-related air pollution proxy (sensors + optional NJ freight weight)"
+  },
+  "envFloodDetail": {
+    "en": "NWS flash-flood / stream warnings near you"
+  },
+  "envPollenDetail": {
+    "en": "Google Pollen forecast"
+  },
+  "envUpdatedAt": {
+    "en": "Updated: {when}",
+    "placeholders": [
+      "when"
+    ]
+  },
   "s5ActNotice": {
     "en": "Your answers are saved so you can share them with your clinician. This version of the questionnaire has not been checked against the official scoring, so the app does not show a score."
   },
@@ -508,6 +523,31 @@
   },
   "s5AddRecord": {
     "en": "Add record"
+  },
+  "s5AqiGood": {
+    "en": "Good"
+  },
+  "s5AqiModerate": {
+    "en": "Moderate"
+  },
+  "s5AqiUsg": {
+    "en": "Unhealthy for sensitive groups"
+  },
+  "s5AqiUnhealthy": {
+    "en": "Unhealthy"
+  },
+  "s5AqiVeryUnhealthy": {
+    "en": "Very unhealthy"
+  },
+  "s5AqiHazardous": {
+    "en": "Hazardous"
+  },
+  "s5AqiValue": {
+    "en": "{category} (AQI {aqi})",
+    "placeholders": [
+      "category",
+      "aqi"
+    ]
   },
   "s5Back": {
     "en": "Back"
@@ -532,6 +572,18 @@
   },
   "s5EntryRemoved": {
     "en": "Entry removed."
+  },
+  "s5EnvAirDetail": {
+    "en": "U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically."
+  },
+  "s5EnvAirQuality": {
+    "en": "Air quality"
+  },
+  "s5EnvFlood": {
+    "en": "Flood alerts"
+  },
+  "s5EnvPollen": {
+    "en": "Pollen index"
   },
   "s5FieldDate": {
     "en": "Date"
@@ -562,6 +614,12 @@
   },
   "s5FilterSymptoms": {
     "en": "Symptoms"
+  },
+  "s5FloodIssued": {
+    "en": "Flood warning issued"
+  },
+  "s5FloodNone": {
+    "en": "No flood warnings issued"
   },
   "s5FromUrgentHelp": {
     "en": "Logged from Urgent help"
@@ -694,9 +752,6 @@
   },
   "s5MyMedsHint": {
     "en": "Names you confirmed, to make logging faster. This is not a dosing recommendation."
-  },
-  "s5MyMedsTitle": {
-    "en": "My medications"
   },
   "s5NoAnswer": {
     "en": "Prefer not to answer"
@@ -860,7 +915,7 @@
     "en": "Time to confirm your medicine"
   },
   "s6ReminderChannel": {
-    "en": "Reminders at the dose times you saved. Not a 30-minute alert."
+    "en": "Reminders at the dose times you saved. This is not the 30-minute air and weather alert."
   },
   "s6ReminderTitle": {
     "en": "Medicine check"
@@ -1296,7 +1351,7 @@
     "en": "Symptom log"
   },
   "cnRecLocalContext": {
-    "en": "Local context"
+    "en": "Environmental factors"
   },
   "cnRecPrn": {
     "en": "As-needed inhaler"
@@ -1378,6 +1433,12 @@
   },
   "cnAddPhoto": {
     "en": "Photo"
+  },
+  "cnPickGallery": {
+    "en": "Choose from photos"
+  },
+  "cnLabelForm": {
+    "en": "Form (as written)"
   },
   "cnAddPdf": {
     "en": "PDF"
@@ -1472,7 +1533,7 @@
     "en": "Review"
   },
   "cnStepEvidence": {
-    "en": "Evidence"
+    "en": "Records"
   },
   "cnStepPacket": {
     "en": "Packet"
@@ -1767,7 +1828,7 @@
     ]
   },
   "cnLocalContextNote": {
-    "en": "Optional context. Not a measurement at your home and not a cause of symptoms."
+    "en": "Optional. These are outdoor factors, not a measurement inside your home and not a cause of symptoms."
   },
   "cnContinueToPacket": {
     "en": "Continue to packet"
@@ -1993,10 +2054,10 @@
     "en": "Add the source."
   },
   "cnCtxPlace": {
-    "en": "Place (ZIP or town, optional)"
+    "en": "Place (optional)"
   },
   "cnRecordsSignInBody": {
-    "en": "Sign in to keep medication, symptom and local context records."
+    "en": "Sign in to keep medication, symptom, and environmental-factor records."
   },
   "cnRecordsYourRecords": {
     "en": "Your records"
@@ -2021,13 +2082,6 @@
   },
   "cnUrgentHelpSub": {
     "en": "Steps for a breathing emergency and calling 911"
-  },
-  "cnLast30Days": {
-    "en": "Last 30 days ({from} – {to})",
-    "placeholders": [
-      "from",
-      "to"
-    ]
   },
   "cnNoSchedule": {
     "en": "No regular schedule set"
@@ -2126,7 +2180,7 @@
     "en": "Choose your language"
   },
   "cnLanguageNote": {
-    "en": "Some text was translated by software and may have mistakes. Medicine names, doses, dates and quotes from your letter are never translated."
+    "en": "Some text was translated by software and may have mistakes. Medicine names and doses stay as printed. The rest of the letter is translated for you."
   },
   "cnLanguageButtonTooltip": {
     "en": "Change language"
@@ -2166,5 +2220,424 @@
   },
   "cnReqHintDoctorStatement": {
     "en": "A statement from your doctor"
+  },
+  "cnTabSettings": {
+    "en": "Settings"
+  },
+  "cnCasesList": {
+    "en": "Case list"
+  },
+  "cnGoHome": {
+    "en": "Home"
+  },
+  "cnAnalyzingTitle": {
+    "en": "Insurance letter · analyzing"
+  },
+  "cnCaseNumber": {
+    "en": "Case #{n}",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "cnAddedAt": {
+    "en": "Added {when}",
+    "placeholders": [
+      "when"
+    ]
+  },
+  "cnAliasHint": {
+    "en": "Nickname (optional)"
+  },
+  "cnShareDocuments": {
+    "en": "Share documents"
+  },
+  "cnRecordDelivery": {
+    "en": "Record delivery"
+  },
+  "cnShareAsk": {
+    "en": "Did you send these documents?"
+  },
+  "cnDeliveryRecipient": {
+    "en": "Sent to"
+  },
+  "cnRecipientClinic": {
+    "en": "Clinic or clinician"
+  },
+  "cnRecipientInsurer": {
+    "en": "Insurance plan"
+  },
+  "cnRecipientSelf": {
+    "en": "Kept for myself"
+  },
+  "cnRecipientOther": {
+    "en": "Other"
+  },
+  "cnDeliveryMethod": {
+    "en": "How"
+  },
+  "cnMethodEmail": {
+    "en": "Email"
+  },
+  "cnMethodMessage": {
+    "en": "Text or messenger"
+  },
+  "cnMethodUnknown": {
+    "en": "I do not remember"
+  },
+  "cnDeliveryUserReport": {
+    "en": "This is what you reported. The app cannot confirm that the other side received it."
+  },
+  "cnShareCancelled": {
+    "en": "Share was cancelled. Nothing was marked as sent."
+  },
+  "cnRecordsLoading": {
+    "en": "Loading records…"
+  },
+  "cnRecordsEmpty": {
+    "en": "No records in this period"
+  },
+  "cnRecordsError": {
+    "en": "Could not load records"
+  },
+  "cnRecordsPermission": {
+    "en": "You do not have access to these records"
+  },
+  "cnRecordsPending": {
+    "en": "Saved on this device · waiting to sync"
+  },
+  "cnRecordsFiltered": {
+    "en": "Some records are hidden by your filters"
+  },
+  "cnRecordsOutside": {
+    "en": "{n} records outside this period",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "cnWidenRange": {
+    "en": "Show a longer period"
+  },
+  "cnLinkedSummary": {
+    "en": "{days} day(s) · {med} medication uses · {sym} symptom entries",
+    "placeholders": [
+      "days",
+      "med",
+      "sym"
+    ]
+  },
+  "cnOneDayPacket": {
+    "en": "This packet covers one day."
+  },
+  "cnMyMedications": {
+    "en": "My medications"
+  },
+  "cnScanLabel": {
+    "en": "Scan medication label"
+  },
+  "cnMedManageHint": {
+    "en": "Register medicines you use. Change them when a prescription changes. Daily use is logged on Records."
+  },
+  "cnLabelNeedLabel": {
+    "en": "Photograph the pharmacy label or box text. The app does not identify a pill by its shape."
+  },
+  "cnLabelUnclear": {
+    "en": "This value was not clear. Check it before saving."
+  },
+  "cnConsentLabel": {
+    "en": "Allow AI to read a medication label"
+  },
+  "cnManualMed": {
+    "en": "Enter manually"
+  },
+  "cnAirWeather": {
+    "en": "Environmental factors near you"
+  },
+  "cnAirAutoNote": {
+    "en": "Air quality, traffic-related air, pollen, flood alerts, and outdoor humidity come from your current location. This phone does not measure the air. Outdoor humidity is not indoor mold."
+  },
+  "cnHomeRecords": {
+    "en": "Related medication records"
+  },
+  "cnEnvTrap": {
+    "en": "Traffic-related air"
+  },
+  "cnItemMemo": {
+    "en": "Note"
+  },
+  "cnSaveNote": {
+    "en": "Save note"
+  },
+  "cnLocationNeed": {
+    "en": "Allow location to show environmental factors near you."
+  },
+  "cnLocationOff": {
+    "en": "Location services are off. Turn them on and try again."
+  },
+  "cnLocationBlocked": {
+    "en": "Location is blocked. Allow it in settings."
+  },
+  "cnOpenSettings": {
+    "en": "Open settings"
+  },
+  "cnAirNone": {
+    "en": "No air or weather data"
+  },
+  "cnAirRetry": {
+    "en": "Try air and weather again"
+  },
+  "cnRecordPlace": {
+    "en": "Place of this record"
+  },
+  "cnEnvUnavailable": {
+    "en": "No matching observation for that time"
+  },
+  "cnLogMedication": {
+    "en": "Log {name}",
+    "placeholders": [
+      "name"
+    ]
+  },
+  "cnAsNeededUse": {
+    "en": "As-needed use"
+  },
+  "cnScheduledUse": {
+    "en": "Scheduled use"
+  },
+  "cnExtraUse": {
+    "en": "Extra use"
+  },
+  "cnUndoUse": {
+    "en": "Undo"
+  },
+  "cnLoggedLocal": {
+    "en": "Saved on this device"
+  },
+  "cnLoggedPending": {
+    "en": "Waiting to sync"
+  },
+  "cnLoggedSynced": {
+    "en": "Synced"
+  },
+  "cnDaysLogged": {
+    "en": "Logged on {n} days this week",
+    "placeholders": [
+      "n"
+    ]
+  },
+  "cnManageMedsLink": {
+    "en": "Manage my medications"
+  },
+  "cnConsentAi": {
+    "en": "Allow AI document analysis"
+  },
+  "cnConsentAiBody": {
+    "en": "The letter image is sent to a reading service so CoverNote can show what it says. You can turn this off later in Settings."
+  },
+  "cnConsentAndAnalyze": {
+    "en": "Agree and analyze"
+  },
+  "cnConsentLater": {
+    "en": "Not now"
+  },
+  "cnConsentViewLocal": {
+    "en": "View the original here"
+  },
+  "cnConsentDetails": {
+    "en": "More about data use"
+  },
+  "cnConsentLabelPurpose": {
+    "en": "Read a medication label"
+  },
+  "cnConsentLetterPurpose": {
+    "en": "Read an insurance letter"
+  },
+  "cnConsentTranslatePurpose": {
+    "en": "Translate a letter"
+  },
+  "cnToday": {
+    "en": "Today"
+  },
+  "cnLast7": {
+    "en": "Last 7 days"
+  },
+  "cnLast30": {
+    "en": "Last 30 days"
+  },
+  "cnCustomRange": {
+    "en": "Choose dates"
+  },
+  "cnRangeSummary": {
+    "en": "{from}–{to} · {days} day(s) · {count} records",
+    "placeholders": [
+      "from",
+      "to",
+      "days",
+      "count"
+    ]
+  },
+  "cnNoRecordThatDay": {
+    "en": "No record this day"
+  },
+  "cnNotLogged": {
+    "en": "Not logged"
+  },
+  "cnNotTaken": {
+    "en": "Marked as not taken"
+  },
+  "cnOriginalFile": {
+    "en": "Original file"
+  },
+  "cnFullTranslation": {
+    "en": "Full translation"
+  },
+  "cnRecognizedText": {
+    "en": "Recognized text"
+  },
+  "cnSameLanguage": {
+    "en": "Same language as the original"
+  },
+  "cnTranslationPartial": {
+    "en": "Some pages are not translated yet"
+  },
+  "cnTranslationFailed": {
+    "en": "This page could not be translated"
+  },
+  "cnOriginalMissing": {
+    "en": "The original file could not be found. You can upload it again."
+  },
+  "cnTranslateRetry": {
+    "en": "Continue translation"
+  },
+  "cnKeyDetails": {
+    "en": "Key details"
+  },
+  "cnWhatAbout": {
+    "en": "What is this about?"
+  },
+  "cnWhatToDo": {
+    "en": "What to do now"
+  },
+  "cnByWhen": {
+    "en": "By when?"
+  },
+  "cnPreparePacket": {
+    "en": "Prepare documents"
+  },
+  "cnCorrectReading": {
+    "en": "Correct a reading error"
+  },
+  "cnCorrectReadingNote": {
+    "en": "The original letter does not change. Only the automatic reading is corrected."
+  },
+  "cnReviewImportant": {
+    "en": "Check these important values before creating documents"
+  },
+  "cnPacketReadyTitle": {
+    "en": "Your documents are ready"
+  },
+  "cnNextSendClinic": {
+    "en": "Send the documents to your clinician and ask them to review"
+  },
+  "cnNextWaitReply": {
+    "en": "When you get a reply, record the result"
+  },
+  "cnExistingSentNewReady": {
+    "en": "Earlier documents were sent · you can make a new set"
+  },
+  "cnWhyRecords": {
+    "en": "Medication and symptom records can help a clinician see how treatment is going. You can still make documents from the letter if you have no records yet."
+  },
+  "cnLetterAskedRecords": {
+    "en": "The letter asked for recent treatment records"
+  },
+  "cnOptionalReference": {
+    "en": "Optional reference"
+  },
+  "cnAsthmaContext": {
+    "en": "Asthma treatment records — scheduled use, as-needed use, and breathing symptoms."
+  },
+  "cnGeneralContext": {
+    "en": "Treatment records — medication use and symptoms or notes."
+  },
+  "cnTreatmentQuestion": {
+    "en": "What treatment is this letter about?"
+  },
+  "cnTreatmentAsthma": {
+    "en": "Asthma"
+  },
+  "cnTreatmentOther": {
+    "en": "Another treatment"
+  },
+  "cnTreatmentUnknown": {
+    "en": "I am not sure yet"
+  },
+  "cnStatusWaitingClinic": {
+    "en": "Sent to the clinic · waiting for review"
+  },
+  "cnStatusWaitingInsurer": {
+    "en": "Reported as submitted to the plan · waiting for a reply"
+  },
+  "cnFollowUpNeeded": {
+    "en": "Follow-up needed"
+  },
+  "cnOutcomeRecorded": {
+    "en": "Result recorded"
+  },
+  "cnActiveCases": {
+    "en": "In progress"
+  },
+  "cnCompletedArchived": {
+    "en": "Completed & archived"
+  },
+  "cnCompleteCase": {
+    "en": "Complete this case"
+  },
+  "cnArchiveCase": {
+    "en": "Archive"
+  },
+  "cnReopenCase": {
+    "en": "Resume"
+  },
+  "cnOutcomeApproved": {
+    "en": "Approved"
+  },
+  "cnOutcomeDenied": {
+    "en": "Denied"
+  },
+  "cnOutcomeStopped": {
+    "en": "Not continuing"
+  },
+  "cnOutcomeOther": {
+    "en": "Other / not recorded"
+  },
+  "cnSentIsNotComplete": {
+    "en": "Sending is not the same as completing the case."
+  },
+  "cnArchivedCase": {
+    "en": "Archived"
+  },
+  "cnStepKeyDetails": {
+    "en": "Key details"
+  },
+  "cnStepAddRecords": {
+    "en": "Add my records"
+  },
+  "cnStepReviewPacket": {
+    "en": "Review packet"
+  },
+  "cnDataConsent": {
+    "en": "Data processing"
+  },
+  "cnWeekCalendar": {
+    "en": "This week"
+  },
+  "cnMonthCalendar": {
+    "en": "This month"
+  },
+  "cnUsedShort": {
+    "en": "I used it"
+  },
+  "cnCalendarLegend": {
+    "en": "A dot means you logged something that day. An empty day is not a missed dose."
   }
 }

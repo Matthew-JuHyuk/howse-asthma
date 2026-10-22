@@ -5,10 +5,16 @@ import '../../records/domain/regimen_math.dart';
 class DayRange {
   const DayRange(this.from, this.to);
 
-  /// The [days] full days that end yesterday (today is still in progress).
+  /// The last [days] local calendar days **including today**.
   factory DayRange.lastDays(DateTime today, int days) {
-    final end = DateTime(today.year, today.month, today.day - 1);
-    return DayRange(DateTime(end.year, end.month, end.day - (days - 1)), end);
+    final end = DateTime(today.year, today.month, today.day);
+    final start = end.subtract(Duration(days: days - 1));
+    return DayRange(DateTime(start.year, start.month, start.day), end);
+  }
+
+  factory DayRange.today(DateTime today) {
+    final d = DateTime(today.year, today.month, today.day);
+    return DayRange(d, d);
   }
 
   final DateTime from;

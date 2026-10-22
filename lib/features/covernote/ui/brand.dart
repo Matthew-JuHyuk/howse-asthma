@@ -281,6 +281,8 @@ String caseErrorText(AppLocalizations l, String code) {
       return l.cnErrStale;
     case 'case_not_found':
       return l.cnErrCaseGone;
+    case 'consent_required':
+      return l.cnConsentAiBody;
     case 'attempts_exhausted':
       return l.cnErrAttempts;
     case 'demo_no_upload':

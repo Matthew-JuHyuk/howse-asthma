@@ -9,6 +9,8 @@
 | [`20261018120000_v2_appeal_cases.sql`](../supabase/migrations/20261018120000_v2_appeal_cases.sql) | Appeal-prep cases, facts, jobs, private `appeal-documents` bucket | Applied remotely |
 | [`20261021120000_s8_covernote_mvp1.sql`](../supabase/migrations/20261021120000_s8_covernote_mvp1.sql) | CoverNote: document kind, upload sets, job metadata, `case_requirements`, `local_context_entries`, tighter evidence/artifact policies. Additive | Applied remotely (2026-10-21). See [`db-schema.md`](./db-schema.md) §2.z2 |
 | [`20261021200000_s8_profile_languages.sql`](../supabase/migrations/20261021200000_s8_profile_languages.sql) | Widens the `profiles.language_code` CHECK to `en es pt ko gu zh-Hans zh-Hant ht ar` (keeps `fr ja zh`). Additive | Applied remotely (2026-10-21). See [`sprint8/languages.md`](./sprint8/languages.md) |
+| [`20261022090000_s9_covernote.sql`](../supabase/migrations/20261022090000_s9_covernote.sql) | Sprint 9: ordinals, lifecycle, delivery, translations, medication_use_events, environment snapshots. Additive | Applied remotely (2026-10-21). See [`sprint9/setup_runbook.md`](./sprint9/setup_runbook.md) |
+| [`20261022233000_s9_ordinal_counter_rls.sql`](../supabase/migrations/20261022233000_s9_ordinal_counter_rls.sql) | `next_case_ordinal` runs as definer so letter upload can assign a case number. Counter table stays closed to clients | Applied remotely (2026-10-21) |
 
 Schema: [`db-schema.md`](./db-schema.md).  
 RLS detail: [`rls-policies.md`](./rls-policies.md).

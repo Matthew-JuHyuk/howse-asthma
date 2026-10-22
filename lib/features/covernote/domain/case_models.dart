@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'case_facts.dart';
+import 's9_models.dart';
 
 DateTime? _ts(Object? v) => v is String ? DateTime.tryParse(v) : null;
 int _int(Object? v, [int d = 0]) => v is num ? v.toInt() : d;
@@ -21,6 +22,14 @@ class CaseRow {
     this.lastExportedAt,
     this.createdAt,
     this.updatedAt,
+    this.displayOrdinal,
+    this.displayAlias,
+    this.treatmentContext,
+    this.lifecycle = CaseLifecycle.active,
+    this.completedAt,
+    this.completedOutcome,
+    this.archivedAt,
+    this.planName,
   });
 
   final String id;
@@ -40,11 +49,21 @@ class CaseRow {
   final DateTime? lastExportedAt;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final int? displayOrdinal;
+  final String? displayAlias;
+  final TreatmentContext? treatmentContext;
+  final CaseLifecycle lifecycle;
+  final DateTime? completedAt;
+  final String? completedOutcome;
+  final DateTime? archivedAt;
+  final String? planName;
 
   static const columns =
       'id, title, status, demo_mode, current_document_revision, current_fact_revision, '
       'current_evidence_revision, document_kind, reviewed_fact_revision, '
-      'user_reported_submitted_on, user_reported_submit_method, last_exported_at, created_at, updated_at';
+      'user_reported_submitted_on, user_reported_submit_method, last_exported_at, created_at, updated_at, '
+      'display_ordinal, display_alias, treatment_context, lifecycle, completed_at, '
+      'completed_outcome, archived_at, plan_name_cache';
 
   factory CaseRow.fromRow(Map row) => CaseRow(
     id: row['id'] as String,
@@ -61,6 +80,14 @@ class CaseRow {
     lastExportedAt: _ts(row['last_exported_at']),
     createdAt: _ts(row['created_at']),
     updatedAt: _ts(row['updated_at']),
+    displayOrdinal: (row['display_ordinal'] as num?)?.toInt(),
+    displayAlias: row['display_alias'] as String?,
+    treatmentContext: parseTreatment(row['treatment_context'] as String?),
+    lifecycle: parseLifecycle(row['lifecycle'] as String?),
+    completedAt: _ts(row['completed_at']),
+    completedOutcome: row['completed_outcome'] as String?,
+    archivedAt: _ts(row['archived_at']),
+    planName: row['plan_name_cache'] as String?,
   );
 
   CaseRow copyWith({
@@ -73,6 +100,14 @@ class CaseRow {
     String? submittedOn,
     String? submitMethod,
     DateTime? lastExportedAt,
+    int? displayOrdinal,
+    String? displayAlias,
+    TreatmentContext? treatmentContext,
+    CaseLifecycle? lifecycle,
+    DateTime? completedAt,
+    String? completedOutcome,
+    DateTime? archivedAt,
+    String? planName,
   }) => CaseRow(
     id: id,
     title: title ?? this.title,
@@ -88,6 +123,14 @@ class CaseRow {
     lastExportedAt: lastExportedAt ?? this.lastExportedAt,
     createdAt: createdAt,
     updatedAt: DateTime.now().toUtc(),
+    displayOrdinal: displayOrdinal ?? this.displayOrdinal,
+    displayAlias: displayAlias ?? this.displayAlias,
+    treatmentContext: treatmentContext ?? this.treatmentContext,
+    lifecycle: lifecycle ?? this.lifecycle,
+    completedAt: completedAt ?? this.completedAt,
+    completedOutcome: completedOutcome ?? this.completedOutcome,
+    archivedAt: archivedAt ?? this.archivedAt,
+    planName: planName ?? this.planName,
   );
 }
 

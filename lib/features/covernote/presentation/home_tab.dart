@@ -9,7 +9,9 @@ import '../domain/case_models.dart';
 import '../ui/brand.dart';
 import 'capture_screen.dart';
 import 'case_card.dart';
+import 'quick_log.dart';
 import 'routes.dart';
+import '../domain/s9_models.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({
@@ -68,7 +70,16 @@ class HomeTabState extends State<HomeTab> {
     final session = SessionScope.of(context);
     final signedIn = session.isReady;
     final cases = _cases ?? const <CaseSummary>[];
-    final active = cases.where((c) => c.row.status != 'deleting').toList();
+    final active = cases
+        .where(
+          (c) =>
+              c.row.status != 'deleting' &&
+              c.row.lifecycle == CaseLifecycle.active,
+        )
+        .toList();
+    final done = cases
+        .where((c) => c.row.lifecycle != CaseLifecycle.active)
+        .toList();
     final current = active.isEmpty ? null : active.first;
 
     return SafeArea(
@@ -158,6 +169,10 @@ class HomeTabState extends State<HomeTab> {
                 style: const TextStyle(color: CnColors.warn),
               ),
             ],
+            if (signedIn) ...[
+              SectionLabel(l.cnHomeRecords),
+              const QuickLogPanel(),
+            ],
             if (signedIn && current != null) ...[
               SectionLabel(l.cnContinueCase),
               CaseCard(
@@ -215,6 +230,21 @@ class HomeTabState extends State<HomeTab> {
                       onPressed: widget.onOpenCases,
                       child: Text(l.cnSeeAllCases),
                     ),
+                  ),
+              ],
+              if (done.isNotEmpty) ...[
+                SectionLabel(l.cnCompletedArchived),
+                for (final c in done.take(2))
+                  CaseCard(
+                    summary: c,
+                    onTap: () async {
+                      await openCase(
+                        context,
+                        CoverNoteServices.of(context).live,
+                        c.row.id,
+                      );
+                      if (mounted) await refresh();
+                    },
                   ),
               ],
             ],

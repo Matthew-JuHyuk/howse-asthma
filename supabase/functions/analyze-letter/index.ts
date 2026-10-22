@@ -25,6 +25,7 @@ import {
   TRANSCRIBE_SYSTEM,
 } from "./prompts.ts";
 import { callModel, ProviderError, readProviderConfig, type InputFile, type ProviderConfig } from "./providers.ts";
+import { handleReadLabel, handleTranslate, handleTranslateFields } from "./extra.ts";
 import {
   FACTS_SCHEMA_VERSION,
   responsibleFor,
@@ -85,6 +86,24 @@ Deno.serve(async (req) => {
       missing: "missing" in cfg ? cfg.missing : null,
       prompt_version: PROMPT_VERSION,
     });
+  }
+  if (body.action === "translate") {
+    if ("missing" in cfg) return jsonResponse({ error: "ai_not_configured" }, 503);
+    const out = await handleTranslate(userClient, user.id, cfg, body);
+    if (out.error) return jsonResponse({ error: out.error }, out.error === "consent_required" ? 403 : 400);
+    return jsonResponse({ pages: out.pages });
+  }
+  if (body.action === "translate_fields") {
+    if ("missing" in cfg) return jsonResponse({ error: "ai_not_configured" }, 503);
+    const out = await handleTranslateFields(userClient, user.id, cfg, body);
+    if (out.error) return jsonResponse({ error: out.error }, out.error === "consent_required" ? 403 : 400);
+    return jsonResponse({ items: out.items });
+  }
+  if (body.action === "read_label") {
+    if ("missing" in cfg) return jsonResponse({ error: "ai_not_configured" }, 503);
+    const out = await handleReadLabel(userClient, user.id, cfg, body);
+    if (out.error) return jsonResponse({ error: out.error }, out.error === "consent_required" ? 403 : 400);
+    return jsonResponse(out);
   }
   if (body.action !== "start") return jsonResponse({ error: "unknown_action" }, 400);
 

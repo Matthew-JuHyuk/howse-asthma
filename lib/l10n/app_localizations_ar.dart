@@ -814,7 +814,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get actQ1 =>
-      'ما مقدار الوقت الذي منعك فيه الربو من إنجاز ما تريد في العمل أو المدرسة أو المنزل؟';
+      'ما مقدار الوقت الذي منعك فيه الربو من إنجاز أعمالك في العمل أو المدرسة أو المنزل؟';
 
   @override
   String get actQ2 => 'كم مرة شعرت بضيق في التنفس؟';
@@ -824,7 +824,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'كم مرة أيقظتك أعراض الربو في الليل أو في وقت أبكر من المعتاد؟';
 
   @override
-  String get actQ4 => 'كم مرة استخدمت بخاخ الإنقاذ أو دواء جهاز النيبولايزر؟';
+  String get actQ4 => 'كم مرة استخدمت بخاخ الإنقاذ أو دواء جهاز الرذاذ؟';
 
   @override
   String get actQ5 => 'كيف تقيّم سيطرتك على الربو؟';
@@ -851,7 +851,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get actQ5Opt2 => 'السيطرة ضعيفة';
 
   @override
-  String get actQ5Opt3 => 'السيطرة جيدة إلى حد ما';
+  String get actQ5Opt3 => 'السيطرة متوسطة';
 
   @override
   String get actQ5Opt4 => 'السيطرة جيدة';
@@ -984,20 +984,21 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get envTrapDetail =>
-      'Traffic-related air pollution proxy (sensors + optional NJ freight weight)';
+      'مؤشر الهواء المرتبط بالمرور (أجهزة استشعار، وفي نيوجيرسي وزن اختياري لحركة الشحن).';
 
   @override
   String get envTrapTip =>
       'Limit outdoor exertion when TRAP is HIGH or CRITICAL.';
 
   @override
-  String get envFloodDetail => 'NWS flash-flood / stream warnings near you';
+  String get envFloodDetail =>
+      'تنبيهات الفيضان المفاجئ والمجاري من NWS بالقرب منك.';
 
   @override
   String get envFloodTipClear => 'No active flash-flood warning for this area.';
 
   @override
-  String get envPollenDetail => 'Google Pollen forecast';
+  String get envPollenDetail => 'توقعات حبوب اللقاح من Google.';
 
   @override
   String get envPollenTip =>
@@ -1010,7 +1011,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String envUpdatedAt(String when) {
-    return 'Updated: $when';
+    return 'آخر تحديث: $when';
   }
 
   @override
@@ -1406,7 +1407,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get s5ActNotice =>
-      'تم حفظ إجاباتك حتى تتمكن من مشاركتها مع مقدم الرعاية الصحية. لم يتم التحقق من هذه النسخة من الاستبيان وفق التصحيح الرسمي، لذلك لا يعرض التطبيق نتيجة.';
+      'نحفظ إجاباتك حتى تتمكن من مشاركتها مع مقدم الرعاية الصحية. لم نطابق هذه النسخة من الأسئلة مع طريقة الحساب الرسمية، لذلك لا يعرض التطبيق نتيجة.';
 
   @override
   String get s5ActSaved => 'تم حفظ إجاباتك.';
@@ -1449,22 +1450,22 @@ class AppLocalizationsAr extends AppLocalizations {
       'When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.';
 
   @override
-  String get s5AqiGood => 'Good';
+  String get s5AqiGood => 'جيد';
 
   @override
-  String get s5AqiModerate => 'Moderate';
+  String get s5AqiModerate => 'متوسط';
 
   @override
-  String get s5AqiUsg => 'Unhealthy for sensitive groups';
+  String get s5AqiUsg => 'غير صحي للفئات الحساسة';
 
   @override
-  String get s5AqiUnhealthy => 'Unhealthy';
+  String get s5AqiUnhealthy => 'غير صحي';
 
   @override
-  String get s5AqiVeryUnhealthy => 'Very unhealthy';
+  String get s5AqiVeryUnhealthy => 'غير صحي جدًا';
 
   @override
-  String get s5AqiHazardous => 'Hazardous';
+  String get s5AqiHazardous => 'خطر';
 
   @override
   String s5AqiValue(String category, int aqi) {
@@ -1531,10 +1532,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get s5EnvAirDetail =>
-      'U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.';
+      'مؤشر جودة الهواء من وكالة حماية البيئة الأمريكية، من محطات عامة وأجهزة قريبة. يصف الهواء الخارجي في منطقتك، وليس عادم المرور وحده.';
 
   @override
-  String get s5EnvAirQuality => 'Air quality';
+  String get s5EnvAirQuality => 'جودة الهواء';
 
   @override
   String get s5EnvAlertsHeading => 'Environment alerts';
@@ -1543,7 +1544,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get s5EnvCardTitle => 'Today\'s local environment';
 
   @override
-  String get s5EnvFlood => 'Flood alerts';
+  String get s5EnvFlood => 'تنبيهات الفيضان';
 
   @override
   String get s5EnvFloodDetail =>
@@ -1572,7 +1573,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get s5EnvOlderNotice => 'This is the last information we checked.';
 
   @override
-  String get s5EnvPollen => 'Pollen index';
+  String get s5EnvPollen => 'مؤشر حبوب اللقاح';
 
   @override
   String get s5EnvPollenDetail =>
@@ -1626,10 +1627,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get s5FilterSymptoms => 'الأعراض';
 
   @override
-  String get s5FloodIssued => 'Flood warning issued';
+  String get s5FloodIssued => 'صدر تنبيه فيضان';
 
   @override
-  String get s5FloodNone => 'No flood warnings issued';
+  String get s5FloodNone => 'لا يوجد تنبيه فيضان';
 
   @override
   String get s5FloodUnknown => 'Can\'t check alert information';
@@ -1763,7 +1764,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get s5MedCheckIntro =>
-      'فحص ذاتي لمعرفة هل استخدمت دواءك. وهو لا يعتمد على سجلات الصيدلية.';
+      'تسجيل تكتبه أنت: هل استخدمت دواءك. لا يعتمد على سجلات الصيدلية.';
 
   @override
   String get s5MedCheckQuestion => 'هل استخدمت دواءك كما هو مخطط؟';
@@ -1855,7 +1856,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get s5MyMedsOpen => 'Manage my medications';
 
   @override
-  String get s5MyMedsTitle => 'أدويتي';
+  String get s5MyMedsTitle => 'My medications';
 
   @override
   String get s5NavEnvironment => 'Environment';
@@ -2081,6 +2082,7 @@ class AppLocalizationsAr extends AppLocalizations {
       few: '$n بخات',
       two: 'بختان',
       one: 'بخة واحدة',
+      zero: '$n بخات',
     );
     return '$_temp0';
   }
@@ -2292,7 +2294,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get s5UrgentIntro =>
-      'إذا كان التنفس صعبا جدا أو لا يتحسن، اتصل بـ 911.';
+      'إذا كان التنفس صعبا جدا أو لا يتحسن، اتصل بالرقم 911.';
 
   @override
   String get s5UrgentLogHint => 'اختياري: احفظ سجلا بأنك استخدمت بخاخك.';
@@ -2457,7 +2459,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get s6ReminderChannel =>
-      'تذكيرات في أوقات الجرعات التي حفظتها. وليست تنبيه 30 دقيقة.';
+      'تذكيرات في أوقات الجرعات التي حفظتها. هذا ليس تنبيه الهواء والطقس كل 30 دقيقة.';
 
   @override
   String get s6ReminderTitle => 'متابعة الدواء';
@@ -2730,7 +2732,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnAuthNameLabel => 'الاسم (اختياري)';
 
   @override
-  String get cnAuthNameHelper => 'يظهر على ملفاتك. يمكنك تغييره لاحقا.';
+  String get cnAuthNameHelper => 'يظهر على حزم مستنداتك. يمكنك تغييره لاحقا.';
 
   @override
   String get cnAuthEmailLabel => 'البريد الإلكتروني';
@@ -2855,7 +2857,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnTabHome => 'الرئيسية';
 
   @override
-  String get cnTabCases => 'الحالات';
+  String get cnTabCases => 'الملفات';
 
   @override
   String get cnTabRecords => 'السجلات';
@@ -2864,7 +2866,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnTabAccount => 'الحساب';
 
   @override
-  String get cnHomeHeadline => 'افهم رسالة التأمين الصحي الخاصة بك.';
+  String get cnHomeHeadline => 'افهم رسالة التأمين الخاصة بك.';
 
   @override
   String get cnScanLetter => 'امسح رسالة ضوئيا';
@@ -2876,14 +2878,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnTryDemo => 'جرّب العرض التجريبي';
 
   @override
-  String get cnHomeSignInLine => 'حفظ حالاتك يتطلب حسابا.';
+  String get cnHomeSignInLine => 'حفظ ملفاتك يحتاج إلى حساب.';
 
   @override
   String get cnServiceNotConfigured =>
       'هذه النسخة غير متصلة بالخادم. يعمل العرض التجريبي فقط.';
 
   @override
-  String get cnContinueCase => 'تابع حالتك';
+  String get cnContinueCase => 'تابع ملفك';
 
   @override
   String get cnHowItWorks => 'كيف يعمل';
@@ -2901,35 +2903,35 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnStep2Body => 'طابق ما تطلبه الرسالة مع سجلاتك الخاصة.';
 
   @override
-  String get cnStep3Title => 'إنشاء الحزمة';
+  String get cnStep3Title => 'إنشاء حزمة المستندات';
 
   @override
   String get cnStep3Body =>
       'احصل على ملخص من صفحة واحدة للطبيب ومسودة طلب مراجعة.';
 
   @override
-  String get cnRecentCases => 'حالات أخرى';
+  String get cnRecentCases => 'ملفات أخرى';
 
   @override
-  String get cnNoCasesYet => 'لا توجد حالات بعد';
+  String get cnNoCasesYet => 'لا توجد ملفات بعد';
 
   @override
-  String get cnNoOtherCases => 'لا توجد حالات أخرى.';
+  String get cnNoOtherCases => 'لا توجد ملفات أخرى.';
 
   @override
-  String get cnSeeAllCases => 'عرض كل الحالات';
+  String get cnSeeAllCases => 'عرض كل الملفات';
 
   @override
   String get cnNoCasesBody => 'امسح رسالة تأمين ضوئيا للبدء.';
 
   @override
-  String get cnCasesSignInTitle => 'سجل الدخول لرؤية حالاتك';
+  String get cnCasesSignInTitle => 'سجل الدخول لرؤية ملفاتك';
 
   @override
   String get cnCasesSignInBody => 'أو افتح العرض التجريبي لترى كيف يعمل.';
 
   @override
-  String get cnCaseDeleted => 'تم حذف الحالة.';
+  String get cnCaseDeleted => 'تم حذف الملف.';
 
   @override
   String get cnCaseUntitled => 'رسالة تأمين';
@@ -2938,25 +2940,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnStatusReading => 'جارٍ قراءة الرسالة';
 
   @override
-  String get cnStatusNeedsReview => 'تحتاج إلى مراجعة';
+  String get cnStatusNeedsReview => 'يحتاج إلى مراجعة';
 
   @override
   String get cnStatusGatherRecords => 'جمع السجلات';
 
   @override
-  String get cnStatusPacketReady => 'الحزمة جاهزة';
+  String get cnStatusPacketReady => 'حزمة المستندات جاهزة';
 
   @override
-  String get cnStatusNeedsAttention => 'تحتاج إلى انتباه';
+  String get cnStatusNeedsAttention => 'يحتاج إلى انتباه';
 
   @override
-  String get cnStatusNotStarted => 'لم تبدأ';
+  String get cnStatusNotStarted => 'لم يبدأ';
 
   @override
   String get cnNextWaitReading => 'نحن نقرأ الرسالة.';
 
   @override
-  String get cnNextTryAgain => 'توقفت القراءة. افتح الحالة لإعادة المحاولة.';
+  String get cnNextTryAgain => 'توقفت القراءة. افتح الملف لإعادة المحاولة.';
 
   @override
   String cnNextFactsToConfirm(int count) {
@@ -2968,20 +2970,21 @@ class AppLocalizationsAr extends AppLocalizations {
       few: '$count معلومات للتأكد منها',
       two: 'معلومتان للتأكد منهما',
       one: 'معلومة واحدة للتأكد منها',
+      zero: '$count معلومات للتأكد منها',
     );
     return '$_temp0';
   }
 
   @override
   String cnNextItemsAttached(int done, int total) {
-    return 'تمت معالجة $done من $total من العناصر المطلوبة';
+    return 'تم التعامل مع $done من $total من العناصر المطلوبة';
   }
 
   @override
-  String get cnNextSharePacket => 'الحزمة جاهزة للمشاركة';
+  String get cnNextSharePacket => 'حزمة المستندات جاهزة للمشاركة';
 
   @override
-  String get cnNextCreatePacket => 'التالي: إنشاء الحزمة';
+  String get cnNextCreatePacket => 'التالي: إنشاء حزمة المستندات';
 
   @override
   String cnDateToCheckShort(String date) {
@@ -2997,14 +3000,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnMoreActions => 'مزيد من الإجراءات';
 
   @override
-  String get cnDeleteCase => 'حذف الحالة';
+  String get cnDeleteCase => 'حذف الملف';
 
   @override
-  String get cnDeleteCaseTitle => 'هل تريد حذف هذه الحالة؟';
+  String get cnDeleteCaseTitle => 'هل تريد حذف هذا الملف؟';
 
   @override
   String get cnDeleteCaseBody =>
-      'سيؤدي هذا إلى إزالة صفحات الرسالة، والمعلومات المقروءة منها، وملخصات السجلات المرتبطة، والحزم. وتبقى سجلات أدويتك وأعراضك.';
+      'يحذف هذا صفحات الرسالة، والمعلومات التي قُرئت منها، وملخصات السجلات المرتبطة، وحزم المستندات. سجلات أدويتك وأعراضك تبقى.';
 
   @override
   String get cnCancel => 'إلغاء';
@@ -3016,20 +3019,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnDeleteFailed => 'تعذر الحذف. تحقق من اتصالك وحاول مرة أخرى.';
 
   @override
-  String get cnKindInitialDenial => 'رفض تغطية دواء (Denial)';
+  String get cnKindInitialDenial => 'رفض تغطية الدواء (Denial)';
 
   @override
   String get cnKindInfoRequest => 'طلب معلومات إضافية';
 
   @override
-  String get cnKindReauth => 'إشعار تجديد - إعادة التفويض (Reauthorization)';
+  String get cnKindReauth => 'إشعار تجديد الموافقة (Reauthorization)';
 
   @override
-  String get cnKindFinalDenial => 'القرار النهائي بشأن الاستئناف (Appeal)';
+  String get cnKindFinalDenial =>
+      'القرار النهائي للاستئناف (Final appeal decision)';
 
   @override
-  String get cnKindEob =>
-      'فاتورة أو بيان بالمزايا من التأمين (Explanation of Benefits)';
+  String get cnKindEob => 'فاتورة أو شرح المزايا (Explanation of Benefits)';
 
   @override
   String get cnKindOther => 'رسالة أخرى';
@@ -3047,7 +3050,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnFieldMemberId => 'رقم العضوية';
 
   @override
-  String get cnFieldCaseReference => 'رقم الحالة أو المرجع';
+  String get cnFieldCaseReference => 'رقم الملف أو المرجع';
 
   @override
   String get cnFieldMedication => 'الدواء (كما هو مكتوب)';
@@ -3107,7 +3110,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnReqNeeded => 'مطلوب';
 
   @override
-  String get cnReqReset => 'علّمه كمطلوب';
+  String get cnReqReset => 'ضع علامة مطلوب';
 
   @override
   String get cnRecMedication => 'سجل الأدوية';
@@ -3116,7 +3119,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnRecSymptoms => 'سجل الأعراض';
 
   @override
-  String get cnRecLocalContext => 'السياق المحلي';
+  String get cnRecLocalContext => 'عوامل البيئة';
 
   @override
   String get cnRecPrn => 'بخاخ عند الحاجة';
@@ -3157,7 +3160,8 @@ class AppLocalizationsAr extends AppLocalizations {
       'استخدم JPG أو PNG أو PDF. لصور HEIC، التقط صورة جديدة من هنا.';
 
   @override
-  String get cnUpBadFile => 'تعذرت قراءة هذا الملف. جرّب صورة أو ملف PDF آخر.';
+  String get cnUpBadFile =>
+      'تعذرت قراءة هذا الملف. جرّب صورة أخرى أو ملف PDF آخر.';
 
   @override
   String get cnUpEncrypted =>
@@ -3204,6 +3208,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnAddPhoto => 'صورة';
 
   @override
+  String get cnPickGallery => 'اختيار من الصور';
+
+  @override
+  String get cnLabelForm => 'الشكل (كما هو مكتوب)';
+
+  @override
   String get cnAddPdf => 'PDF';
 
   @override
@@ -3216,13 +3226,14 @@ class AppLocalizationsAr extends AppLocalizations {
       few: '$pages صفحات',
       two: 'صفحتان',
       one: 'صفحة واحدة',
+      zero: '$pages صفحات',
     );
     return '$_temp0 · $size MB';
   }
 
   @override
   String get cnUploadConsent =>
-      'يرسل الرفع هذه الصفحات إلى خادم CoverNote، حيث تقرؤها خدمة ذكاء اصطناعي لأجلك. يمكنك حذف الحالة في أي وقت.';
+      'يرسل الرفع هذه الصفحات إلى خادم CoverNote، حيث تقرؤها خدمة ذكاء اصطناعي لأجلك. يمكنك حذف الملف في أي وقت.';
 
   @override
   String get cnStageUploading => 'جارٍ الرفع';
@@ -3245,6 +3256,7 @@ class AppLocalizationsAr extends AppLocalizations {
       few: '$count صفحات',
       two: 'صفحتان',
       one: 'صفحة واحدة',
+      zero: '$count صفحات',
     );
     return 'المستند $n · PDF، $_temp0';
   }
@@ -3300,7 +3312,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnReadingLeaveOk =>
-      'يمكنك مغادرة هذه الشاشة. تستمر القراءة وتُحفظ حالتك.';
+      'يمكنك مغادرة هذه الشاشة. تستمر القراءة ويُحفظ ملفك.';
 
   @override
   String get cnStartReading => 'ابدأ القراءة';
@@ -3312,10 +3324,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnStepReview => 'المراجعة';
 
   @override
-  String get cnStepEvidence => 'الأدلة';
+  String get cnStepEvidence => 'السجلات';
 
   @override
-  String get cnStepPacket => 'الحزمة';
+  String get cnStepPacket => 'حزمة المستندات';
 
   @override
   String cnStepOf(int n, int total, String name) {
@@ -3344,6 +3356,7 @@ class AppLocalizationsAr extends AppLocalizations {
       few: 'تمت قراءة $count صفحات',
       two: 'تمت قراءة صفحتين',
       one: 'تمت قراءة صفحة واحدة',
+      zero: 'تمت قراءة $count صفحات',
     );
     return '$_temp0';
   }
@@ -3385,12 +3398,13 @@ class AppLocalizationsAr extends AppLocalizations {
       few: 'تحقق من $count عناصر أخرى للمتابعة',
       two: 'تحقق من عنصرين آخرين للمتابعة',
       one: 'تحقق من عنصر واحد آخر للمتابعة',
+      zero: 'تحقق من $count عناصر أخرى للمتابعة',
     );
     return '$_temp0';
   }
 
   @override
-  String get cnContinueToEvidence => 'المتابعة إلى الأدلة';
+  String get cnContinueToEvidence => 'المتابعة إلى السجلات';
 
   @override
   String cnSeePage(int n) {
@@ -3401,7 +3415,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnWhatLetterIs => 'نوع هذه الرسالة';
 
   @override
-  String get cnLooksRight => 'تبدو صحيحة';
+  String get cnLooksRight => 'يبدو صحيحا';
 
   @override
   String get cnChange => 'تغيير';
@@ -3427,9 +3441,9 @@ class AppLocalizationsAr extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'اطلب من فريق الرعاية أن يطلب مراجعة. تذكر الرسالة $count عنصر لإرسالها.',
+          'اطلب من فريق الرعاية أن يطلب مراجعة. تذكر الرسالة $count عنصر لإرساله.',
       many:
-          'اطلب من فريق الرعاية أن يطلب مراجعة. تذكر الرسالة $count عنصرا لإرسالها.',
+          'اطلب من فريق الرعاية أن يطلب مراجعة. تذكر الرسالة $count عنصرا لإرساله.',
       few:
           'اطلب من فريق الرعاية أن يطلب مراجعة. تذكر الرسالة $count عناصر لإرسالها.',
       two:
@@ -3446,15 +3460,12 @@ class AppLocalizationsAr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other:
-          'أرسل العناصر الـ $count التي طلبتها خطة التأمين قبل التاريخ الموضح أدناه.',
-      many:
-          'أرسل العناصر الـ $count التي طلبتها خطة التأمين قبل التاريخ الموضح أدناه.',
-      few:
-          'أرسل العناصر الـ $count التي طلبتها خطة التأمين قبل التاريخ الموضح أدناه.',
-      two: 'أرسل العنصرين اللذين طلبتهما خطة التأمين قبل التاريخ الموضح أدناه.',
-      one: 'أرسل العنصر الذي طلبته خطة التأمين قبل التاريخ الموضح أدناه.',
-      zero: 'أرسل المعلومات التي طلبتها خطة التأمين قبل التاريخ الموضح أدناه.',
+      other: 'أرسل $count عنصر طلبته خطة التأمين بحلول التاريخ أدناه.',
+      many: 'أرسل $count عنصرا طلبته خطة التأمين بحلول التاريخ أدناه.',
+      few: 'أرسل $count عناصر طلبتها خطة التأمين بحلول التاريخ أدناه.',
+      two: 'أرسل العنصرين اللذين طلبتهما خطة التأمين بحلول التاريخ أدناه.',
+      one: 'أرسل العنصر الواحد الذي طلبته خطة التأمين بحلول التاريخ أدناه.',
+      zero: 'أرسل المعلومات التي طلبتها خطة التأمين بحلول التاريخ أدناه.',
     );
     return '$_temp0';
   }
@@ -3465,11 +3476,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnNextFinal =>
-      'هذا قرار نهائي. لا يعدّ CoverNote مسودة طلب مراجعة أولى له. اسأل خطة التأمين أو فريق الرعاية عن الخيارات المذكورة في الرسالة.';
+      'هذا قرار نهائي. لا يكتب CoverNote مسودة طلب مراجعة أول له. اسأل خطة التأمين أو فريق الرعاية عن الخيارات المذكورة في الرسالة.';
 
   @override
   String get cnNextEob =>
-      'تبدو هذه فاتورة أو بيان مزايا، وليست رفضا. راجعها مع خدمة الأعضاء في خطة التأمين.';
+      'تبدو هذه فاتورة أو شرح للمزايا، وليست رفض تغطية. راجعها مع خدمة الأعضاء في خطة التأمين.';
 
   @override
   String get cnNextUncertain => 'أولا، أكّد نوع هذه الرسالة في الأعلى.';
@@ -3511,7 +3522,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnDatePassed =>
-      'انقضى هذا التاريخ. اتصل بخطة التأمين واسأل عما يمكنك فعله.';
+      'انقضى هذا التاريخ. اتصل بخطة التأمين واسأل ما الذي ما زال بإمكانك فعله.';
 
   @override
   String cnNeedReceivedDate(int days) {
@@ -3523,7 +3534,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnDateConflict =>
-      'تذكر الرسالة تواريخ مختلفة. اسأل خطة التأمين أي تاريخ ينطبق، ثم اخترْه.';
+      'تذكر الرسالة تواريخ مختلفة. اسأل خطة التأمين أي تاريخ ينطبق، ثم اختره.';
 
   @override
   String cnUseThisDate(String date) {
@@ -3610,17 +3621,18 @@ class AppLocalizationsAr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count تقرير ذاتي',
-      many: '$count تقريرا ذاتيا',
-      few: '$count تقارير ذاتية',
-      two: 'تقريران ذاتيان',
-      one: 'تقرير ذاتي واحد',
+      other: '$count ملاحظة منك',
+      many: '$count ملاحظة منك',
+      few: '$count ملاحظات منك',
+      two: 'ملاحظتان منك',
+      one: 'ملاحظة واحدة منك',
+      zero: '$count ملاحظات منك',
     );
     return '$_temp0';
   }
 
   @override
-  String get cnSyntheticData => 'بيانات اصطناعية';
+  String get cnSyntheticData => 'بيانات وهمية';
 
   @override
   String get cnLetterAsksFor => 'ما تطلبه الرسالة';
@@ -3639,10 +3651,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnLocalContextNote =>
-      'سياق اختياري. وليس قياسا في منزلك، وليس سببا للأعراض.';
+      'اختياري. هذه عوامل خارجية، وليست قياسًا داخل المنزل ولا سبب الأعراض.';
 
   @override
-  String get cnContinueToPacket => 'المتابعة إلى الحزمة';
+  String get cnContinueToPacket => 'المتابعة إلى حزمة المستندات';
 
   @override
   String get cnAddedByYou => 'أضفته أنت';
@@ -3670,13 +3682,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnOtherStatus => 'حالة أخرى';
 
   @override
-  String get cnInPacket => 'في الحزمة';
+  String get cnInPacket => 'في حزمة المستندات';
 
   @override
-  String get cnRemoveFromPacket => 'إزالة من الحزمة';
+  String get cnRemoveFromPacket => 'إزالة من حزمة المستندات';
 
   @override
-  String get cnAddToPacket => 'إضافة إلى الحزمة';
+  String get cnAddToPacket => 'إضافة إلى حزمة المستندات';
 
   @override
   String get cnErrNotSavedYet =>
@@ -3684,10 +3696,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnPacketChangedMeanwhile =>
-      'تغيرت المعلومات أو السجلات أثناء إنشاء الحزمة. أنشئها مرة أخرى.';
+      'تغيرت المعلومات أو السجلات أثناء إنشاء حزمة المستندات. أنشئها مرة أخرى.';
 
   @override
-  String get cnPacketFailed => 'تعذر إنشاء الحزمة. حاول مرة أخرى.';
+  String get cnPacketFailed => 'تعذر إنشاء حزمة المستندات. حاول مرة أخرى.';
 
   @override
   String get cnBeforeSharingTitle => 'قبل أن تشارك';
@@ -3703,7 +3715,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnMethodFax => 'فاكس';
 
   @override
-  String get cnMethodMail => 'بريد';
+  String get cnMethodMail => 'بريد عادي';
 
   @override
   String get cnMethodPortal => 'بوابة إلكترونية';
@@ -3719,22 +3731,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnPacketNoDraftFinal =>
-      'في القرار النهائي، تحتوي الحزمة على ملخص الطبيب فقط. لا تُنشأ مسودة مراجعة من المستوى الأول.';
+      'للقرار النهائي، تحتوي حزمة المستندات على ملخص الطبيب فقط. لا تُنشأ مسودة للمراجعة من المستوى الأول.';
 
   @override
   String get cnPacketNoDraftEob =>
-      'في الفاتورة أو بيان المزايا، تحتوي الحزمة على ملخص الطبيب فقط.';
+      'لفاتورة أو شرح المزايا، تحتوي حزمة المستندات على ملخص الطبيب فقط.';
 
   @override
   String get cnPacketNoDraftReauth =>
-      'في إشعار التجديد، تحتوي الحزمة على ملخص الطبيب فقط، لمساعدة فريق الرعاية في التجديد.';
+      'لإشعار التجديد، تحتوي حزمة المستندات على ملخص الطبيب فقط، لمساعدة فريق الرعاية في التجديد.';
 
   @override
   String get cnPacketNoDraftOther =>
-      'ما لم تكن الرسالة رفضا أو طلب معلومات، تحتوي الحزمة على ملخص الطبيب فقط.';
+      'ما لم تكن الرسالة رفضا أو طلب معلومات، تحتوي حزمة المستندات على ملخص الطبيب فقط.';
 
   @override
-  String get cnPacketContains => 'ستتضمن هذه الحزمة';
+  String get cnPacketContains => 'ستتضمن حزمة المستندات هذه';
 
   @override
   String get cnPartSummary => 'ملخص الطبيب (صفحة واحدة)';
@@ -3750,12 +3762,12 @@ class AppLocalizationsAr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'تمت إضافة $count ملخص سجلات',
-      many: 'تمت إضافة $count ملخص سجلات',
-      few: 'تمت إضافة $count ملخصات سجلات',
-      two: 'تمت إضافة ملخصي سجلات',
-      one: 'تمت إضافة ملخص سجلات واحد',
-      zero: 'لم تتم إضافة ملخصات سجلات',
+      other: 'أُضيف $count ملخص للسجلات',
+      many: 'أُضيف $count ملخصا للسجلات',
+      few: 'أُضيف $count ملخصات للسجلات',
+      two: 'أُضيف ملخصان للسجلات',
+      one: 'أُضيف ملخص واحد للسجلات',
+      zero: 'لم تُضف ملخصات للسجلات',
     );
     return '$_temp0';
   }
@@ -3765,13 +3777,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnPacketStale =>
-      'تغيرت المعلومات أو السجلات منذ آخر حزمة. أنشئها مرة أخرى للتحديث.';
+      'تغيرت المعلومات أو السجلات منذ آخر حزمة مستندات. أنشئها مرة أخرى للتحديث.';
 
   @override
   String get cnGenerating => 'جارٍ الإنشاء…';
 
   @override
-  String get cnGeneratePacket => 'إنشاء حزمة المراجعة';
+  String get cnGeneratePacket => 'إنشاء حزمة المستندات للمراجعة';
 
   @override
   String get cnSaveOrPrint => 'حفظ أو طباعة';
@@ -3786,7 +3798,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String cnUserReportedSent(String date, String method) {
-    return 'أفدت بأنك أرسلتها في $date ($method)';
+    return 'قلت إنك أرسلتها في $date ($method)';
   }
 
   @override
@@ -3818,7 +3830,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnCtxIntro =>
-      'قراءات هواء من مصدر مسمى، وأشياء لاحظتها، كل منهما منفصل عن الآخر. أضفها إلى حالة فقط إذا ساعدت في شرح سجلاتك.';
+      'قراءات هواء من مصدر مسمى، وأشياء لاحظتها، كل منهما منفصل عن الآخر. أضفها إلى ملف فقط إذا ساعدت في شرح سجلاتك.';
 
   @override
   String get cnCtxReadings => 'قراءات الهواء';
@@ -3834,7 +3846,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnCtxReports => 'ما لاحظته';
 
   @override
-  String get cnCtxReportsNote => 'هذه تقاريرك الخاصة. وهي ليست قياسات.';
+  String get cnCtxReportsNote => 'ملاحظات كتبتها أنت. ليست قياسات.';
 
   @override
   String get cnCtxAddReport => 'أضف ما لاحظته';
@@ -3879,11 +3891,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnCtxSourceRequired => 'أضف المصدر.';
 
   @override
-  String get cnCtxPlace => 'المكان (الرمز البريدي أو البلدة، اختياري)';
+  String get cnCtxPlace => 'المكان (اختياري)';
 
   @override
   String get cnRecordsSignInBody =>
-      'سجل الدخول لحفظ سجلات الأدوية والأعراض والسياق المحلي.';
+      'سجّل الدخول للاحتفاظ بسجلات الدواء والأعراض وعوامل البيئة.';
 
   @override
   String get cnRecordsYourRecords => 'سجلاتك';
@@ -3907,11 +3919,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnUrgentHelp => 'مساعدة عاجلة';
 
   @override
-  String get cnUrgentHelpSub => 'خطوات لحالة طوارئ في التنفس والاتصال بـ 911';
+  String get cnUrgentHelpSub =>
+      'خطوات لحالة طوارئ في التنفس والاتصال بالرقم 911';
 
   @override
   String cnLast30Days(String from, String to) {
-    return 'آخر 30 يوما ($from – $to)';
+    return 'Last 30 days ($from – $to)';
   }
 
   @override
@@ -3926,7 +3939,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnDeleteAccountBody =>
-      'سيؤدي هذا إلى حذف حسابك وحالاتك والرسائل المرفوعة والحزم والسجلات نهائيا. لا يمكن التراجع عن ذلك.';
+      'يحذف هذا حسابك وملفاتك والرسائل المرفوعة وحزم المستندات والسجلات نهائيا. لا يمكن التراجع عن ذلك.';
 
   @override
   String get cnTypeDelete => 'اكتب DELETE للتأكيد';
@@ -3969,7 +3982,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnAboutBody =>
-      'يساعدك CoverNote على قراءة رسائل التأمين المتعلقة بالأدوية وتجهيز الأوراق لفريق الرعاية. وهو لا يرسل أي شيء إلى خطة التأمين، ولا يقرر التغطية، وليس نصيحة طبية.';
+      'يساعدك CoverNote على قراءة رسائل التأمين عن الأدوية وتجهيز أوراق لفريق الرعاية. لا يرسل أي شيء إلى خطة التأمين، ولا يقرر التغطية، وليس نصيحة طبية.';
 
   @override
   String get cnDangerZone => 'حذف الحساب';
@@ -3995,10 +4008,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cnErrTooLarge => 'الملفات كبيرة جدا. استخدم صفحات أقل أو أصغر.';
 
   @override
-  String get cnErrStale => 'تغيرت هذه الحالة على جهاز آخر. يتم عرض أحدث نسخة.';
+  String get cnErrStale => 'تغير هذا الملف على جهاز آخر. نعرض أحدث نسخة.';
 
   @override
-  String get cnErrCaseGone => 'هذه الحالة لم تعد موجودة.';
+  String get cnErrCaseGone => 'هذا الملف لم يعد موجودا.';
 
   @override
   String get cnErrAttempts =>
@@ -4018,14 +4031,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnLanguageNote =>
-      'تمت ترجمة بعض النصوص بواسطة برنامج وقد تحتوي على أخطاء. أسماء الأدوية والجرعات والتواريخ واقتباسات رسالتك لا تُترجم أبدا.';
+      'ترجم برنامج بعض النص وقد يحتوي على أخطاء. يبقى اسم الدواء والجرعة كما هو مكتوب. يُترجم باقي الخطاب لك.';
 
   @override
   String get cnLanguageButtonTooltip => 'تغيير اللغة';
 
   @override
   String get cnPacketEnglishNote =>
-      'الحزمة مكتوبة بالإنجليزية ليتمكن فريق الرعاية من قراءتها.';
+      'حزمة المستندات مكتوبة بالإنجليزية حتى يقرأها فريق الرعاية.';
 
   @override
   String get cnReasonMissingInformation =>
@@ -4037,11 +4050,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnReasonMedicalNecessity =>
-      'تقول خطة التأمين إنها لم تتمكن من التأكد من أن هذا الدواء ضروري طبيا.';
+      'تقول خطة التأمين إنها لم تتمكن من التأكد من أن هذا الدواء ضروري طبيا (Medical necessity).';
 
   @override
   String get cnReasonFormulary =>
-      'تقول خطة التأمين إن هذا الدواء ليس في قائمتها للأدوية المغطاة (Formulary).';
+      'تقول خطة التأمين إن هذا الدواء ليس على قائمة الأدوية التي تغطيها (Formulary).';
 
   @override
   String get cnReasonQuantityLimit =>
@@ -4049,7 +4062,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnReasonEligibility =>
-      'تقول خطة التأمين إن هذا غير مغطى بموجب قواعد التغطية الخاصة بها.';
+      'تقول خطة التأمين إن هذا غير مغطى حسب قواعد التغطية لديها.';
 
   @override
   String get cnReasonOther =>
@@ -4066,4 +4079,445 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cnReqHintDoctorStatement => 'إفادة من طبيبك';
+
+  @override
+  String get cnTabSettings => 'الإعدادات';
+
+  @override
+  String get cnCasesList => 'قائمة الملفات';
+
+  @override
+  String get cnGoHome => 'الرئيسية';
+
+  @override
+  String get cnAnalyzingTitle => 'رسالة التأمين · جارٍ القراءة';
+
+  @override
+  String cnCaseNumber(String n) {
+    return 'ملف #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return 'أُضيف $when';
+  }
+
+  @override
+  String get cnAliasHint => 'اسم مختصر (اختياري)';
+
+  @override
+  String get cnShareDocuments => 'إرسال المستندات';
+
+  @override
+  String get cnRecordDelivery => 'تسجيل الإرسال';
+
+  @override
+  String get cnShareAsk => 'هل أرسلت هذه المستندات؟';
+
+  @override
+  String get cnDeliveryRecipient => 'أُرسلت إلى';
+
+  @override
+  String get cnRecipientClinic => 'العيادة أو الطبيب';
+
+  @override
+  String get cnRecipientInsurer => 'خطة التأمين';
+
+  @override
+  String get cnRecipientSelf => 'احتفظت بها لنفسي';
+
+  @override
+  String get cnRecipientOther => 'أخرى';
+
+  @override
+  String get cnDeliveryMethod => 'كيف';
+
+  @override
+  String get cnMethodEmail => 'البريد الإلكتروني';
+
+  @override
+  String get cnMethodMessage => 'رسالة نصية أو محادثة';
+
+  @override
+  String get cnMethodUnknown => 'لا أتذكر';
+
+  @override
+  String get cnDeliveryUserReport =>
+      'هذا ما ذكرته. لا يستطيع التطبيق تأكيد أن الطرف الآخر استلمها.';
+
+  @override
+  String get cnShareCancelled => 'أُلغي الإرسال. لم يُسجَّل أي شيء كمرسل.';
+
+  @override
+  String get cnRecordsLoading => 'جارٍ تحميل السجلات…';
+
+  @override
+  String get cnRecordsEmpty => 'لا سجلات في هذه الفترة';
+
+  @override
+  String get cnRecordsError => 'تعذر تحميل السجلات';
+
+  @override
+  String get cnRecordsPermission => 'ليست لديك صلاحية الوصول إلى هذه السجلات';
+
+  @override
+  String get cnRecordsPending => 'محفوظ على هذا الهاتف · بانتظار المزامنة';
+
+  @override
+  String get cnRecordsFiltered => 'بعض السجلات مخفية بسبب عوامل التصفية';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '$n سجلات خارج هذه الفترة';
+  }
+
+  @override
+  String get cnWidenRange => 'عرض فترة أطول';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days أيام · $med استخدامات للدواء · $sym تسجيلات للأعراض';
+  }
+
+  @override
+  String get cnOneDayPacket => 'تغطي هذه المستندات يوما واحدا.';
+
+  @override
+  String get cnMyMedications => 'أدويتي';
+
+  @override
+  String get cnScanLabel => 'مسح ملصق الدواء';
+
+  @override
+  String get cnMedManageHint =>
+      'سجّل الأدوية التي تستخدمها. غيّرها إذا تغيّرت الوصفة. الاستخدام اليومي يُسجَّل في السجلات.';
+
+  @override
+  String get cnLabelNeedLabel =>
+      'صوّر ملصق الصيدلية أو النص على العلبة. التطبيق لا يتعرف على الحبة من شكلها.';
+
+  @override
+  String get cnLabelUnclear => 'هذه القيمة غير واضحة. راجعها قبل الحفظ.';
+
+  @override
+  String get cnConsentLabel => 'السماح للذكاء الاصطناعي بقراءة ملصق دواء';
+
+  @override
+  String get cnManualMed => 'إدخال يدوي';
+
+  @override
+  String get cnAirWeather => 'عوامل البيئة القريبة منك';
+
+  @override
+  String get cnAirAutoNote =>
+      'تُجلب جودة الهواء والهواء المرتبط بالمرور وحبوب اللقاح وتنبيهات الفيضان والرطوبة الخارجية من موقعك. الهاتف لا يقيس الهواء. الرطوبة الخارجية ليست عفنًا داخل المنزل.';
+
+  @override
+  String get cnHomeRecords => 'سجلات الدواء ذات الصلة';
+
+  @override
+  String get cnEnvTrap => 'الهواء المرتبط بالمرور';
+
+  @override
+  String get cnItemMemo => 'ملاحظة';
+
+  @override
+  String get cnSaveNote => 'حفظ الملاحظة';
+
+  @override
+  String get cnLocationNeed => 'اسمح بالموقع لعرض عوامل البيئة القريبة منك.';
+
+  @override
+  String get cnLocationOff => 'خدمات الموقع متوقفة. شغّلها ثم أعد المحاولة.';
+
+  @override
+  String get cnLocationBlocked => 'الموقع محظور. اسمح به في الإعدادات.';
+
+  @override
+  String get cnOpenSettings => 'فتح الإعدادات';
+
+  @override
+  String get cnAirNone => 'لا بيانات للهواء أو الطقس';
+
+  @override
+  String get cnAirRetry => 'إعادة محاولة الهواء والطقس';
+
+  @override
+  String get cnSetRegion => 'Set your area (ZIP or city)';
+
+  @override
+  String get cnConfiguredArea => 'Area you set';
+
+  @override
+  String get cnRecordPlace => 'مكان هذا السجل';
+
+  @override
+  String get cnClosestObservation => 'Closest observation to the record time';
+
+  @override
+  String get cnEnvUnavailable => 'لا يوجد قياس مطابق لذلك الوقت';
+
+  @override
+  String cnLogMedication(String name) {
+    return 'تسجيل $name';
+  }
+
+  @override
+  String get cnAsNeededUse => 'استخدام عند الحاجة';
+
+  @override
+  String get cnAsNeededInhaler => 'As-needed inhaler use';
+
+  @override
+  String get cnScheduledUse => 'استخدام في موعده';
+
+  @override
+  String get cnExtraUse => 'استخدام إضافي';
+
+  @override
+  String get cnUndoUse => 'تراجع';
+
+  @override
+  String get cnLoggedLocal => 'محفوظ على هذا الهاتف';
+
+  @override
+  String get cnLoggedPending => 'بانتظار المزامنة';
+
+  @override
+  String get cnLoggedSynced => 'تمت المزامنة';
+
+  @override
+  String cnDaysLogged(int n) {
+    return 'سُجِّل في $n أيام هذا الأسبوع';
+  }
+
+  @override
+  String get cnManageMedsLink => 'إدارة أدويتي';
+
+  @override
+  String get cnViewAirWeather => 'View environmental factors near you';
+
+  @override
+  String get cnConsentAi => 'السماح للذكاء الاصطناعي بقراءة المستندات';
+
+  @override
+  String get cnConsentAiBody =>
+      'تُرسل صورة الرسالة إلى خدمة قراءة حتى يعرض CoverNote ما فيها. يمكنك إيقاف ذلك لاحقا في الإعدادات.';
+
+  @override
+  String get cnConsentAndAnalyze => 'موافقة وقراءة';
+
+  @override
+  String get cnConsentLater => 'ليس الآن';
+
+  @override
+  String get cnConsentViewLocal => 'عرض الأصل هنا';
+
+  @override
+  String get cnConsentDetails => 'المزيد عن استخدام البيانات';
+
+  @override
+  String get cnConsentLabelPurpose => 'قراءة ملصق دواء';
+
+  @override
+  String get cnConsentLetterPurpose => 'قراءة رسالة تأمين';
+
+  @override
+  String get cnConsentTranslatePurpose => 'ترجمة رسالة';
+
+  @override
+  String get cnToday => 'اليوم';
+
+  @override
+  String get cnLast7 => 'آخر 7 أيام';
+
+  @override
+  String get cnLast30 => 'آخر 30 يوما';
+
+  @override
+  String get cnCustomRange => 'اختيار التواريخ';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days أيام · $count سجلات';
+  }
+
+  @override
+  String get cnNoRecordThatDay => 'لا سجل في هذا اليوم';
+
+  @override
+  String get cnNotLogged => 'غير مسجَّل';
+
+  @override
+  String get cnNotTaken => 'معلَّم بأنه لم يُؤخذ';
+
+  @override
+  String get cnOriginalFile => 'الملف الأصلي';
+
+  @override
+  String get cnFullTranslation => 'الترجمة الكاملة';
+
+  @override
+  String get cnRecognizedText => 'النص المتعرَّف عليه';
+
+  @override
+  String get cnSameLanguage => 'نفس لغة الأصل';
+
+  @override
+  String get cnTranslationPartial => 'بعض الصفحات لم تُترجم بعد';
+
+  @override
+  String get cnTranslationFailed => 'تعذر ترجمة هذه الصفحة';
+
+  @override
+  String get cnOriginalMissing =>
+      'تعذر العثور على الملف الأصلي. يمكنك رفعه مرة أخرى.';
+
+  @override
+  String get cnTranslateRetry => 'متابعة الترجمة';
+
+  @override
+  String get cnKeyDetails => 'التفاصيل المهمة';
+
+  @override
+  String get cnWhatAbout => 'عمّ تتحدث هذه الرسالة؟';
+
+  @override
+  String get cnWhatToDo => 'ماذا تفعل الآن';
+
+  @override
+  String get cnByWhen => 'حتى متى؟';
+
+  @override
+  String get cnPreparePacket => 'تجهيز المستندات';
+
+  @override
+  String get cnCorrectReading => 'تصحيح خطأ في القراءة';
+
+  @override
+  String get cnCorrectReadingNote =>
+      'الرسالة الأصلية لا تتغير. تُصحَّح القراءة التلقائية فقط.';
+
+  @override
+  String get cnReviewImportant => 'راجع هذه القيم المهمة قبل إنشاء المستندات';
+
+  @override
+  String get cnPacketReadyTitle => 'مستنداتك جاهزة';
+
+  @override
+  String get cnNextSendClinic => 'أرسل المستندات إلى طبيبك واطلب منه مراجعتها';
+
+  @override
+  String get cnNextWaitReply => 'عندما يصلك رد، سجّل النتيجة';
+
+  @override
+  String get cnExistingSentNewReady =>
+      'أُرسلت مستندات سابقة · يمكنك إعداد مجموعة جديدة';
+
+  @override
+  String get cnWhyRecords =>
+      'سجلات الدواء والأعراض تساعد الطبيب على متابعة العلاج. يمكنك إعداد مستندات من الرسالة حتى إن لم تكن لديك سجلات بعد.';
+
+  @override
+  String get cnLetterAskedRecords => 'طلبت الرسالة سجلات علاج حديثة';
+
+  @override
+  String get cnOptionalReference => 'مرجع اختياري';
+
+  @override
+  String get cnAsthmaContext =>
+      'سجلات علاج الربو — الاستخدام في موعده، والاستخدام عند الحاجة، وأعراض التنفس.';
+
+  @override
+  String get cnGeneralContext =>
+      'سجلات العلاج — استخدام الدواء والأعراض أو الملاحظات.';
+
+  @override
+  String get cnTreatmentQuestion => 'عن أي علاج تتحدث هذه الرسالة؟';
+
+  @override
+  String get cnTreatmentAsthma => 'الربو';
+
+  @override
+  String get cnTreatmentOther => 'علاج آخر';
+
+  @override
+  String get cnTreatmentUnknown => 'لست متأكدا بعد';
+
+  @override
+  String get cnStatusWaitingClinic => 'أُرسل إلى العيادة · بانتظار المراجعة';
+
+  @override
+  String get cnStatusWaitingInsurer =>
+      'سُجِّل أنه قُدِّم إلى الخطة · بانتظار الرد';
+
+  @override
+  String get cnFollowUpNeeded => 'يلزم متابعة';
+
+  @override
+  String get cnOutcomeRecorded => 'سُجِّلت النتيجة';
+
+  @override
+  String get cnActiveCases => 'قيد المتابعة';
+
+  @override
+  String get cnCompletedArchived => 'مكتمل ومؤرشف';
+
+  @override
+  String get cnCompleteCase => 'إكمال هذا الملف';
+
+  @override
+  String get cnArchiveCase => 'أرشفة';
+
+  @override
+  String get cnReopenCase => 'استئناف';
+
+  @override
+  String get cnOutcomeApproved => 'موافقة';
+
+  @override
+  String get cnOutcomeDenied => 'رفض';
+
+  @override
+  String get cnOutcomeStopped => 'لن أتابع';
+
+  @override
+  String get cnOutcomeOther => 'أخرى / غير مسجَّل';
+
+  @override
+  String get cnSentIsNotComplete => 'الإرسال ليس إكمالا للملف.';
+
+  @override
+  String get cnArchivedCase => 'مؤرشف';
+
+  @override
+  String get cnStepKeyDetails => 'التفاصيل المهمة';
+
+  @override
+  String get cnStepAddRecords => 'إضافة سجلاتي';
+
+  @override
+  String get cnStepReviewPacket => 'مراجعة المستندات';
+
+  @override
+  String get cnDataConsent => 'معالجة البيانات';
+
+  @override
+  String get cnZipOrCity => 'ZIP or city';
+
+  @override
+  String get cnSaveArea => 'Save area';
+
+  @override
+  String get cnWeekCalendar => 'هذا الأسبوع';
+
+  @override
+  String get cnMonthCalendar => 'هذا الشهر';
+
+  @override
+  String get cnUsedShort => 'استخدمته';
+
+  @override
+  String get cnCalendarLegend =>
+      'النقطة تعني أنك سجّلت شيئا في ذلك اليوم. اليوم الفارغ ليس جرعة فائتة.';
 }

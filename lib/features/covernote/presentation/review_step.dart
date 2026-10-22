@@ -5,6 +5,7 @@ import '../../records/domain/record_models.dart' show isoDate;
 import '../domain/case_facts.dart';
 import '../ui/brand.dart';
 import 'case_labels.dart';
+import 'translated_text.dart';
 
 typedef FactsChanged = void Function(CaseFacts facts, {bool immediate});
 typedef ShowQuote = void Function(int? page, String? quote);
@@ -31,69 +32,141 @@ class ReviewStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
-    final remaining = facts.factsToConfirm;
+    final kind = documentKindLabel(l, facts.kind);
+    final med = facts.field('medication').value;
+    final keep = [if (med != null && med.isNotEmpty) med];
+    final translate = needsTranslatedAid(context);
+    final deadline = resolveDeadline(facts);
+    const bodyStyle = TextStyle(fontSize: 16, height: 1.35, color: CnColors.ink);
     return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
       children: [
-        _KindCard(
-          facts: facts,
-          original: original,
-          onChanged: onChanged,
-          onShowQuote: onShowQuote,
+        _ReadCard(
+          title: l.cnWhatAbout,
+          lines: [
+            Text(kind, style: bodyStyle),
+            if (med != null && med.isNotEmpty) Text(med, style: bodyStyle),
+            if (facts.reasons.isEmpty)
+              Text(l.cnReasonOther, style: bodyStyle)
+            else if (translate && facts.reasons.first.text.trim().isNotEmpty)
+              TranslatedLine(text: facts.reasons.first.text, keep: keep, style: bodyStyle)
+            else
+              Text(
+                facts.reasons.first.text.trim().isEmpty
+                    ? reasonExplanation(l, facts.reasons.first.code)
+                    : facts.reasons.first.text,
+                style: bodyStyle,
+              ),
+          ],
         ),
         const SizedBox(height: 12),
-        _WhyCard(facts: facts, onShowQuote: onShowQuote),
-        const SizedBox(height: 12),
-        _NextCard(facts: facts),
-        const SizedBox(height: 12),
-        _DateCard(
-          facts: facts,
-          today: today,
-          onChanged: onChanged,
-          onShowQuote: onShowQuote,
+        _ReadCard(
+          title: l.cnWhatToDo,
+          lines: [
+            if (facts.requestedItems.isEmpty)
+              Text(l.cnPreparePacket, style: bodyStyle)
+            else
+              for (final item in facts.requestedItems)
+                translate
+                    ? TranslatedLine(text: item.label, keep: keep, style: bodyStyle)
+                    : Text(item.label, style: bodyStyle),
+          ],
         ),
-        SectionLabel(l.cnCheckDetails),
-        Text(
-          l.cnCheckDetailsHint,
-          style: const TextStyle(color: CnColors.muted, fontSize: 14),
+        const SizedBox(height: 12),
+        _ReadCard(
+          title: l.cnByWhen,
+          body: deadline.date != null
+              ? formatDay(context, deadline.date!)
+              : l.cnDateUnknownChecked,
         ),
-        const SizedBox(height: 8),
-        for (final k in [
-          ...keyFieldKeys,
-          ...fieldKeys.where((k) => !keyFieldKeys.contains(k)),
-        ])
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: _FactTile(
-              key: ValueKey('fact-$k'),
-              fieldKey: k,
-              fact: facts.field(k),
-              original: original.field(k),
-              isKey: keyFieldKeys.contains(k),
-              onChanged: (f, {bool immediate = false}) =>
-                  onChanged(facts.withField(k, f), immediate: immediate),
-              onShowQuote: onShowQuote,
-            ),
-          ),
         const SizedBox(height: 16),
-        if (remaining > 0)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              l.cnItemsLeftToCheck(remaining),
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: CnColors.warn),
-            ),
-          ),
+        if (med != null && med.isNotEmpty)
+          Text(med, style: const TextStyle(fontSize: 16)),
+        const SizedBox(height: 16),
         SizedBox(
           height: 52,
           child: FilledButton.icon(
-            onPressed: facts.readyForEvidence ? onContinue : null,
+            onPressed: onContinue,
             icon: const Icon(Icons.arrow_forward),
-            label: Text(l.cnContinueToEvidence),
+            label: Text(l.cnPreparePacket),
           ),
         ),
+        const SizedBox(height: 8),
+        ExpansionTile(
+          title: Text(l.cnCorrectReading),
+          subtitle: Text(
+            l.cnCorrectReadingNote,
+            style: const TextStyle(fontSize: 13, color: CnColors.muted),
+          ),
+          children: [
+            _KindCard(
+              facts: facts,
+              original: original,
+              onChanged: onChanged,
+              onShowQuote: onShowQuote,
+            ),
+            const SizedBox(height: 12),
+            _WhyCard(facts: facts, onShowQuote: onShowQuote),
+            const SizedBox(height: 12),
+            _NextCard(facts: facts),
+            const SizedBox(height: 12),
+            _DateCard(
+              facts: facts,
+              today: today,
+              onChanged: onChanged,
+              onShowQuote: onShowQuote,
+            ),
+            for (final k in [
+              ...keyFieldKeys,
+              ...fieldKeys.where((k) => !keyFieldKeys.contains(k)),
+            ])
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: _FactTile(
+                  key: ValueKey('fact-$k'),
+                  fieldKey: k,
+                  fact: facts.field(k),
+                  original: original.field(k),
+                  isKey: keyFieldKeys.contains(k),
+                  onChanged: (f, {bool immediate = false}) =>
+                      onChanged(facts.withField(k, f), immediate: immediate),
+                  onShowQuote: onShowQuote,
+                ),
+              ),
+          ],
+        ),
       ],
+    );
+  }
+}
+
+class _ReadCard extends StatelessWidget {
+  const _ReadCard({required this.title, this.body, this.lines});
+
+  final String title;
+  final String? body;
+  final List<Widget>? lines;
+
+  @override
+  Widget build(BuildContext context) {
+    return CnCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: CnColors.navy,
+            ),
+          ),
+          const SizedBox(height: 8),
+          ...?lines,
+          if (body case final text?)
+            Text(text, style: const TextStyle(fontSize: 16, height: 1.35)),
+        ],
+      ),
     );
   }
 }

@@ -3,13 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../data/ai_extra_client.dart';
 import '../data/case_store.dart';
+import '../data/consent_repository.dart';
 import '../domain/case_facts.dart';
+import '../domain/case_identity.dart';
 import '../domain/case_models.dart';
+import '../domain/s9_models.dart';
+import '../ui/app_chrome.dart';
 import '../ui/brand.dart';
 import 'capture_screen.dart';
 import 'case_card.dart';
-import 'case_labels.dart';
+import 'covernote_nav.dart';
 import 'evidence_step.dart';
 import 'letter_view.dart';
 import 'packet_step.dart';
@@ -19,10 +24,16 @@ enum SaveState { idle, saving, saved, failed }
 
 /// One case in four steps: Letter / Review / Evidence / Packet.
 class CaseScreen extends StatefulWidget {
-  const CaseScreen({super.key, required this.store, required this.caseId});
+  const CaseScreen({
+    super.key,
+    required this.store,
+    required this.caseId,
+    this.embedded = false,
+  });
 
   final CaseStore store;
   final String caseId;
+  final bool embedded;
 
   @override
   State<CaseScreen> createState() => _CaseScreenState();
@@ -73,6 +84,24 @@ class _CaseScreenState extends State<CaseScreen> {
     super.dispose();
   }
 
+  void _startTranslation(CaseDetail d) {
+    final lang = Localizations.localeOf(context).toLanguageTag();
+    if (lang.toLowerCase().startsWith('en') || d.pages.isEmpty) return;
+    unawaited(() async {
+      final consent = ConsentRepository();
+      final allowed = await consent.hasActive(ConsentPurpose.translate) ||
+          await consent.hasActive(ConsentPurpose.letter);
+      if (!allowed) return;
+      try {
+        await AiExtraClient().ensureFullTranslation(
+          caseId: d.row.id,
+          language: lang,
+          documentRevision: d.row.documentRevision,
+        );
+      } catch (_) {}
+    }());
+  }
+
   bool _needsAnalysis(CaseDetail d) =>
       d.facts == null ||
       d.row.status == 'uploaded' ||
@@ -98,6 +127,7 @@ class _CaseScreenState extends State<CaseScreen> {
         }
       });
       if (_needsAnalysis(d)) _driveAnalysis();
+      _startTranslation(d);
     } on CaseStoreException catch (e) {
       if (mounted) setState(() => _loadError = e.code);
     } catch (_) {
@@ -140,6 +170,32 @@ class _CaseScreenState extends State<CaseScreen> {
   Future<void> _start({bool retry = false}) async {
     final d = _d;
     if (d == null || _starting) return;
+    if (!_store.isDemo) {
+      final consent = ConsentRepository();
+      if (!await consent.hasActive(ConsentPurpose.letter)) {
+        if (!mounted) return;
+        final l = AppLocalizations.of(context)!;
+        final ok = await showDialog<bool>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text(l.cnConsentAi),
+            content: Text(l.cnConsentAiBody),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: Text(l.cnConsentLater),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: Text(l.cnConsentAndAnalyze),
+              ),
+            ],
+          ),
+        );
+        if (ok != true) return;
+        await consent.accept(ConsentPurpose.letter);
+      }
+    }
     setState(() {
       _starting = true;
       _jobError = null;
@@ -321,12 +377,63 @@ class _CaseScreenState extends State<CaseScreen> {
     if (mounted) setState(() => _step = i);
   }
 
+  Future<void> _askComplete() async {
+    final l = AppLocalizations.of(context)!;
+    final outcome = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                l.cnCompleteCase,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: CnColors.navy,
+                ),
+              ),
+            ),
+            for (final item in [
+              ('approved', l.cnOutcomeApproved),
+              ('denied', l.cnOutcomeDenied),
+              ('stopped', l.cnOutcomeStopped),
+              ('other', l.cnOutcomeOther),
+            ])
+              ListTile(
+                title: Text(item.$2),
+                onTap: () => Navigator.pop(ctx, item.$1),
+              ),
+          ],
+        ),
+      ),
+    );
+    if (outcome == null || !mounted) return;
+    await _store.setLifecycle(
+      widget.caseId,
+      CaseLifecycle.completed,
+      outcome: outcome,
+    );
+    await _load();
+  }
+
   Future<void> _delete() async {
     final deleted = await confirmDeleteCase(
       context,
       () => _store.deleteCase(widget.caseId),
     );
-    if (deleted && mounted) Navigator.pop(context);
+    if (deleted && mounted) {
+      final nav = CoverNoteNav.maybeOf(context);
+      if (nav != null) {
+        nav.closeCase();
+      } else {
+        Navigator.pop(context);
+      }
+    }
   }
 
   // ---------------- Build ----------------
@@ -335,15 +442,26 @@ class _CaseScreenState extends State<CaseScreen> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     final d = _d;
+    final nav = CoverNoteNav.maybeOf(context);
     return PopScope(
-      canPop: _step == 0 || d == null || _needsAnalysis(d),
+      canPop: !widget.embedded,
       onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) setState(() => _step = _step - 1);
+        if (didPop) return;
+        nav?.closeCase();
       },
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CoverNoteAppBar(
+          leading: CasesListButton(
+            onPressed: () {
+              if (nav != null) {
+                nav.closeCase();
+              } else {
+                Navigator.maybePop(context);
+              }
+            },
+          ),
           title: Text(
-            d == null ? l.cnCaseUntitled : caseTitle(l, d.row),
+            d == null ? l.cnCaseUntitled : caseDisplayTitle(l, d.row, facts: _facts),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -357,8 +475,17 @@ class _CaseScreenState extends State<CaseScreen> {
                   if (v == 'replace') _replacePages();
                   if (v == 'delete') _delete();
                   if (v == 'original') openOriginalPages(context, _store, d);
+                  if (v == 'home') nav?.goHome();
+                  if (v == 'complete') _askComplete();
+                  if (v == 'archive') {
+                    _store.setLifecycle(widget.caseId, CaseLifecycle.archived);
+                  }
+                  if (v == 'reopen') {
+                    _store.setLifecycle(widget.caseId, CaseLifecycle.active);
+                  }
                 },
                 itemBuilder: (_) => [
+                  PopupMenuItem(value: 'home', child: Text(l.cnGoHome)),
                   PopupMenuItem(
                     value: 'original',
                     child: Text(l.cnViewOriginal),
@@ -368,6 +495,17 @@ class _CaseScreenState extends State<CaseScreen> {
                       value: 'replace',
                       child: Text(l.cnReplacePages),
                     ),
+                  if (d.row.lifecycle == CaseLifecycle.active) ...[
+                    PopupMenuItem(
+                      value: 'complete',
+                      child: Text(l.cnCompleteCase),
+                    ),
+                    PopupMenuItem(
+                      value: 'archive',
+                      child: Text(l.cnArchiveCase),
+                    ),
+                  ] else
+                    PopupMenuItem(value: 'reopen', child: Text(l.cnReopenCase)),
                   if (!_store.isDemo)
                     PopupMenuItem(value: 'delete', child: Text(l.cnDeleteCase)),
                 ],
@@ -376,14 +514,14 @@ class _CaseScreenState extends State<CaseScreen> {
           bottom: d == null
               ? null
               : PreferredSize(
-                  preferredSize: const Size.fromHeight(56),
+                  preferredSize: const Size.fromHeight(64),
                   child: _StepBar(
                     step: _step,
                     enabled: [
                       true,
                       _facts != null && !_needsAnalysis(d),
-                      _facts?.readyForEvidence == true && !_needsAnalysis(d),
-                      _facts?.readyForEvidence == true && !_needsAnalysis(d),
+                      _facts != null && !_needsAnalysis(d),
+                      _facts != null && !_needsAnalysis(d),
                     ],
                     onTap: _goStep,
                   ),
@@ -442,6 +580,7 @@ class _CaseScreenState extends State<CaseScreen> {
         flush: _flushNow,
         onReload: _load,
         onGoReview: () => setState(() => _step = 1),
+        onComplete: _askComplete,
       ),
       _ => LetterView(
         store: _store,
@@ -591,57 +730,69 @@ class _StepBar extends StatelessWidget {
     final l = AppLocalizations.of(context)!;
     final names = [
       l.cnStepLetter,
-      l.cnStepReview,
-      l.cnStepEvidence,
-      l.cnStepPacket,
+      l.cnStepKeyDetails,
+      l.cnStepAddRecords,
+      l.cnStepReviewPacket,
     ];
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-      child: Row(
+      padding: const EdgeInsets.fromLTRB(12, 0, 12, 6),
+      child: Column(
         children: [
-          for (var i = 0; i < names.length; i++)
-            Expanded(
-              child: Semantics(
-                selected: i == step,
-                button: true,
-                enabled: enabled[i],
-                label: l.cnStepOf(i + 1, names.length, names[i]),
-                excludeSemantics: true,
-                child: InkWell(
-                  onTap: enabled[i] ? () => onTap(i) : null,
-                  borderRadius: BorderRadius.circular(8),
-                  child: Container(
-                    constraints: const BoxConstraints(minHeight: 48),
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    decoration: BoxDecoration(
-                      color: i == step ? CnColors.teal : Colors.transparent,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: i == step ? CnColors.teal : CnColors.line,
-                      ),
+          Row(
+            children: [
+              for (var i = 0; i < names.length; i++) ...[
+                if (i > 0)
+                  Expanded(
+                    child: Container(
+                      height: 2,
+                      color: i <= step ? CnColors.teal : CnColors.line,
                     ),
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: Text(
-                          '${i + 1}. ${names[i]}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: i == step
-                                ? Colors.white
-                                : (enabled[i]
-                                      ? CnColors.navy
-                                      : CnColors.muted.withValues(alpha: 0.5)),
-                          ),
+                  ),
+                Semantics(
+                  selected: i == step,
+                  button: true,
+                  enabled: enabled[i],
+                  label: l.cnStepOf(i + 1, names.length, names[i]),
+                  child: InkWell(
+                    onTap: enabled[i] ? () => onTap(i) : null,
+                    customBorder: const CircleBorder(),
+                    child: Container(
+                      width: 36,
+                      height: 36,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: i == step
+                            ? CnColors.teal
+                            : (i < step ? CnColors.mint : Colors.white),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: i <= step ? CnColors.teal : CnColors.line,
+                        ),
+                      ),
+                      child: Text(
+                        '${i + 1}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: i == step ? Colors.white : CnColors.navy,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
+              ],
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            names[step],
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: CnColors.navy,
             ),
+          ),
         ],
       ),
     );

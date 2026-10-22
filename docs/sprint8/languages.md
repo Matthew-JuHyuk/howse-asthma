@@ -25,23 +25,26 @@ in public-facing services (see P.L. 2023, c.263), plus English.
 * The choice is stored on the device (`app_locale_code`) and, for new accounts,
   in `profiles.language_code`.
 * The note in the picker says that some text was translated by software and
-  that medicine names, doses, dates and quotes from the letter are never
-  translated.
+  may have mistakes. Medicine names and doses stay as printed. The rest of
+  the letter is translated for the reader.
 
 ## What is translated
 
-* Every string the screens read (657 keys): sign-in, Home, cases, review,
-  evidence, packet, records, account, errors.
-* **Reasons from a letter.** The AI's own wording is English. In any other
-  language the review screen shows a fixed explanation for
-  each reason code (`missing_information`, `step_therapy`, `medical_necessity`,
-  `formulary`, `quantity_limit`, `eligibility_or_benefit`, `other`) and keeps the
-  link to the quote from the letter. The model text is not shown, so nothing
-  the model invented is presented in another language.
-* **Requested items.** The label stays in the letter's words. A short
-  translated hint is added under common kinds (medication history, visit notes,
-  test results, doctor's statement). Unknown labels get no hint.
-* Medicine names, doses, dates and quotes are never translated.
+* Every string the screens read (786 keys): sign-in, Home, cases, review,
+  records, packet, Settings, medications, air and weather, errors.
+* **Reasons from a letter.** When the letter has a reason sentence, that
+  sentence is translated for display. If the sentence is empty, the review
+  screen uses the fixed explanation for the reason code
+  (`missing_information`, `step_therapy`, `medical_necessity`, `formulary`,
+  `quantity_limit`, `eligibility_or_benefit`, `other`).
+* **Requested items.** The wording on each item is translated for display.
+  Medicine names inside that wording stay as printed.
+* **Full pages.** After a letter is photographed or uploaded, a non-English
+  UI starts a full-page translation. The stored quote and the original page
+  text stay in the letter's language and can still be opened.
+* Medicine names and doses stay as printed. Dates, amounts, phone numbers,
+  member IDs and plan names stay as printed. A translation is not saved back
+  as the corrected fact.
 * Dates use the matching `intl` locale (`zh-Hans`→`zh_CN`, `zh-Hant`→`zh_TW`,
   `pt`→`pt_BR`, `ht`→`fr`; Arabic keeps Western digits).
 
@@ -65,19 +68,47 @@ They have **not** been read by native speakers. Before wide release, ask a
 native reader of each language to check, in this order: the reason explanations
 (`cnReason*`), the deadline and sharing wording, and the insurance terms.
 
-### Open questions the translators flagged
+### Settled from a second pass against the screens (2026-10-21)
 
-These are word choices, not errors the checks can find. A native reader should settle them.
+* **Evidence step** is the patient's own records (home copy: "Gather records"), not court proof. The English step label is now **Records**, matching the other languages (Korean 자료).
+* **Dose reminders** (`s6ReminderChannel`) are the times on the saved prescription. They are not the 30-minute air/weather push (`medication_reminder.dart`).
+* **Appeal vs review request** stays two words: Chinese 申诉/申訴 vs 复核申请/覆核申請; Arabic استئناف vs طلب مراجعة; Portuguese recurso vs pedido de revisão.
+* **`cnKindEob`** now keeps the full English "Explanation of Benefits", not only "EOB".
+* **Arabic case/packet** is ملف / حزمة المستندات (not حالة / a parcel حزمة).
+* **`cnTypeDelete`** still uses the English word DELETE, because the app compares the typed text to that word.
 
-* **Inhaler "puffs".** Spanish uses "inhalaciones", Portuguese "jatos", Haitian Creole "pouf". Portuguese also uses "bombinha" for the inhaler.
-* **Insurance terms with the English in brackets** (`cnKindInitialDenial`, `cnKindReauth`, `cnKindFinalDenial`, `cnReason*`). Check the local term and whether the extra English helps or clutters.
-* **`cnKindEob`.** Chinese, Gujarati and Arabic show "EOB" rather than the full English name, because the full name failed the script check.
-* **"Care team", "packet" and "case".** Spanish "equipo de atención", Gujarati "સારવાર ટીમ", Arabic "حزمة" and "حالة". Check they are clear to people with limited literacy.
-* **Haitian Creole.** "Medical necessity" and the medical words for asthma and inhaler are the translator's best guess.
-* **Arabic.** `s6ReminderChannel` is a literal rendering of "Not a 30-minute alert" and may be unclear.
-* **Chinese.** "Appeal" appears as 申诉 or 申訴 in some strings and as 复核 or 覆核 (review) in others. Pick one.
-* **`cnTypeDelete`.** "DELETE" stays in English in every language because the app compares the typed word.
-* **"Howse Asthma"** stays in English in the biometric prompt and one preview string; confirm that is wanted.
+### Open questions for a native reader
+
+* **Inhaler "puffs".** Spanish "inhalaciones", Portuguese "jatos", Haitian Creole "puff", Gujarati "પફ". Portuguese "bombinha" for the inhaler.
+* **Insurance terms with the English in brackets** on kind labels and reason explainers. Check length on a small phone.
+* **Haitian Creole clinic words** (`asm`, `ponp`, `puff`, `pèmisyon ankò`) still need a community ear.
+* **"Howse Asthma"** stays in English in the biometric prompt and one preview string.
+
+### Location and letter-translation pass (2026-10-21)
+
+Air and weather no longer ask for a ZIP or city. New strings
+(`cnLocationNeed`, `cnLocationOff`, `cnLocationBlocked`, `cnOpenSettings`)
+and the updated language note and air note are in all nine languages.
+Korean `cnDeliveryUserReport` and `cnReasonOther` were tightened so they
+read as ordinary speech. This pass was checked by script only. It is not a
+native-speaker review.
+
+### Sprint 9 copy pass (2026-10-21)
+
+New Home/Cases/Records/Settings strings (share vs delivery, my medications,
+label scan, local air and weather, AI consent, key details, case outcome) are
+in all nine languages. Overlay check: placeholders, `CoverNote`/`PDF`/`911`,
+and script match English. They have **not** been marked reviewed.
+
+UX paraphrases (not word-for-word):
+
+* Share CTAs say *send documents*, not only “share”, so they are not confused
+  with social posting. Recording a send is not the same as finishing a case.
+* The packet step is documents for the care team: Spanish/Portuguese/Haitian
+  Creole *Documentos/Dokiman*, Korean 제출 자료, Arabic حزمة المستندات.
+* Settings, not Account, on the fourth tab. Gujarati home tab is મુખ્ય, not
+  the English loan હોમ. Traditional Chinese uses 氣喘 and 封存; Simplified
+  uses 哮喘 and 归档.
 
 ## Database
 

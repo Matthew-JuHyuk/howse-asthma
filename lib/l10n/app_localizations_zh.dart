@@ -395,7 +395,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authNpiLabel => 'NPI 号码';
 
   @override
-  String get authNpiHelper => '10 位国家医疗服务提供者标识码';
+  String get authNpiHelper => '10 位编号（National Provider Identifier）';
 
   @override
   String get authOrContinueWith => '或使用以下方式继续';
@@ -804,13 +804,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get actPast4Weeks => '过去 4 周内';
 
   @override
-  String get actQ1 => '您的哮喘在多长时间里妨碍了您在工作、学校或家里做事？';
+  String get actQ1 => '有多少时候，哮喘让您在工作、学校或家里做不了那么多事？';
 
   @override
   String get actQ2 => '您多久出现一次气短？';
 
   @override
-  String get actQ3 => '哮喘症状多久会让您夜里醒来，或比平时早醒一次？';
+  String get actQ3 => '您的哮喘症状有多常让您半夜醒来，或比平时早醒？';
 
   @override
   String get actQ4 => '您多久使用一次急救吸入器或雾化药物？';
@@ -846,7 +846,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get actQ5Opt4 => '控制得很好';
 
   @override
-  String get actQ5Opt5 => '完全控制';
+  String get actQ5Opt5 => '完全控制住了';
 
   @override
   String actSaved(int score) {
@@ -971,21 +971,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get envThreeAxis => 'Three risk axes';
 
   @override
-  String get envTrapDetail =>
-      'Traffic-related air pollution proxy (sensors + optional NJ freight weight)';
+  String get envTrapDetail => '交通相关空气指标（传感器，新泽西还可选用货运权重）。';
 
   @override
   String get envTrapTip =>
       'Limit outdoor exertion when TRAP is HIGH or CRITICAL.';
 
   @override
-  String get envFloodDetail => 'NWS flash-flood / stream warnings near you';
+  String get envFloodDetail => '您附近的美国国家气象局突发洪水和河流警报。';
 
   @override
   String get envFloodTipClear => 'No active flash-flood warning for this area.';
 
   @override
-  String get envPollenDetail => 'Google Pollen forecast';
+  String get envPollenDetail => 'Google 花粉预报。';
 
   @override
   String get envPollenTip =>
@@ -998,7 +997,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String envUpdatedAt(String when) {
-    return 'Updated: $when';
+    return '更新时间：$when';
   }
 
   @override
@@ -1393,7 +1392,7 @@ class AppLocalizationsZh extends AppLocalizations {
       'Howse Asthma helps you keep a record of symptoms and inhaler use and prepare a summary for your clinician. It does not diagnose or give treatment advice.';
 
   @override
-  String get s5ActNotice => '您的回答已保存，可以分享给您的医生。这份问卷的版本尚未按官方评分方法核对，所以应用不显示分数。';
+  String get s5ActNotice => '您的回答已保存，可以分享给您的医生。这个版本还没有对照官方的评分方法核对过，所以本应用不显示分数。';
 
   @override
   String get s5ActSaved => '您的回答已保存。';
@@ -1436,26 +1435,26 @@ class AppLocalizationsZh extends AppLocalizations {
       'When air quality, pollen, or flood information near you gets worse. The same alert is not repeated within an hour.';
 
   @override
-  String get s5AqiGood => 'Good';
+  String get s5AqiGood => '良';
 
   @override
-  String get s5AqiModerate => 'Moderate';
+  String get s5AqiModerate => '中等';
 
   @override
-  String get s5AqiUsg => 'Unhealthy for sensitive groups';
+  String get s5AqiUsg => '对敏感人群不健康';
 
   @override
-  String get s5AqiUnhealthy => 'Unhealthy';
+  String get s5AqiUnhealthy => '不健康';
 
   @override
-  String get s5AqiVeryUnhealthy => 'Very unhealthy';
+  String get s5AqiVeryUnhealthy => '非常不健康';
 
   @override
-  String get s5AqiHazardous => 'Hazardous';
+  String get s5AqiHazardous => '危害';
 
   @override
   String s5AqiValue(String category, int aqi) {
-    return '$category (AQI $aqi)';
+    return '$category（AQI $aqi）';
   }
 
   @override
@@ -1518,10 +1517,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get s5EnvAirDetail =>
-      'U.S. EPA Air Quality Index from public monitors and nearby sensors. It describes outdoor air in your area, not traffic exhaust specifically.';
+      '来自公共监测站和附近传感器的美国 EPA 空气质量指数。它表示当地的室外空气，不是单独的交通尾气。';
 
   @override
-  String get s5EnvAirQuality => 'Air quality';
+  String get s5EnvAirQuality => '空气质量';
 
   @override
   String get s5EnvAlertsHeading => 'Environment alerts';
@@ -1530,7 +1529,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get s5EnvCardTitle => 'Today\'s local environment';
 
   @override
-  String get s5EnvFlood => 'Flood alerts';
+  String get s5EnvFlood => '洪水警报';
 
   @override
   String get s5EnvFloodDetail =>
@@ -1559,7 +1558,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get s5EnvOlderNotice => 'This is the last information we checked.';
 
   @override
-  String get s5EnvPollen => 'Pollen index';
+  String get s5EnvPollen => '花粉指数';
 
   @override
   String get s5EnvPollenDetail =>
@@ -1613,10 +1612,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get s5FilterSymptoms => '症状';
 
   @override
-  String get s5FloodIssued => 'Flood warning issued';
+  String get s5FloodIssued => '已发布洪水警报';
 
   @override
-  String get s5FloodNone => 'No flood warnings issued';
+  String get s5FloodNone => '没有洪水警报';
 
   @override
   String get s5FloodUnknown => 'Can\'t check alert information';
@@ -1632,7 +1631,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get s5FromUrgentHelp => '从“紧急求助”记录';
+  String get s5FromUrgentHelp => '从“紧急求助”记下的';
 
   @override
   String get s5HomeStateEmpty =>
@@ -1743,7 +1742,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String s5MedCheckCounts(int a, int b, int c, int d) {
-    return '已用药天数：$a · 未用药：$b · 不记得：$c · 未记录：$d';
+    return '已用药天数：$a · 未用药天数：$b · 不记得的天数：$c · 未记录的天数：$d';
   }
 
   @override
@@ -1836,7 +1835,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get s5MyMedsOpen => 'Manage my medications';
 
   @override
-  String get s5MyMedsTitle => '我的药物';
+  String get s5MyMedsTitle => 'My medications';
 
   @override
   String get s5NavEnvironment => 'Environment';
@@ -2193,10 +2192,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get s5SymOtherHint => '用您自己的话描述';
 
   @override
-  String get s5SymShortBreath => '呼吸困难';
+  String get s5SymShortBreath => '呼吸费劲';
 
   @override
-  String get s5SymWheeze => '喘鸣';
+  String get s5SymWheeze => '呼吸时有喘息声';
 
   @override
   String get s5SymptomEditTitle => '编辑症状';
@@ -2380,7 +2379,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get s6HomeWaterNo => '没有';
 
   @override
-  String get s6HomeWaterQuestion => '家里有漏水或进水吗？';
+  String get s6HomeWaterQuestion => '家里有漏水或被水淹吗？';
 
   @override
   String get s6HomeWaterYes => '有';
@@ -2430,7 +2429,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get s6ReminderBodyPrivate => '该确认您的药了';
 
   @override
-  String get s6ReminderChannel => '在您保存的用药时间提醒。不是 30 分钟提醒。';
+  String get s6ReminderChannel => '会在您保存的用药时间提醒您。这不是每 30 分钟一次的空气和天气提醒。';
 
   @override
   String get s6ReminderTitle => '用药确认';
@@ -2665,7 +2664,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnDemoBadge => '示例';
 
   @override
-  String get cnDemoBadgeLong => '示例使用虚构数据，结果是固定的。';
+  String get cnDemoBadgeLong => '示例里的数据不是真的，结果是固定的。';
 
   @override
   String get cnAuthSignInTitle => '登录';
@@ -2844,7 +2843,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnHomeSignInLine => '保存您的案件需要账号。';
 
   @override
-  String get cnServiceNotConfigured => '此版本未连接到服务器，只能使用示例。';
+  String get cnServiceNotConfigured => '这个版本没有连上服务器，只能使用示例。';
 
   @override
   String get cnContinueCase => '继续处理您的案件';
@@ -2975,19 +2974,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnDeleteFailed => '无法删除。请检查网络后再试。';
 
   @override
-  String get cnKindInitialDenial => '药物承保拒绝（Denial）';
+  String get cnKindInitialDenial => '药物拒付（Denial）';
 
   @override
   String get cnKindInfoRequest => '要求补充信息';
 
   @override
-  String get cnKindReauth => '续期（重新授权）通知';
+  String get cnKindReauth => '续期通知（Reauthorization）';
 
   @override
-  String get cnKindFinalDenial => '最终申诉决定（Appeal）';
+  String get cnKindFinalDenial => '申诉的最终决定（Final appeal decision）';
 
   @override
-  String get cnKindEob => '账单或福利说明（EOB）';
+  String get cnKindEob => '账单或福利说明（Explanation of Benefits）';
 
   @override
   String get cnKindOther => '其他信件';
@@ -3020,7 +3019,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnFieldContact => '联系方式';
 
   @override
-  String get cnFieldSubmissionRoute => '寄送方式';
+  String get cnFieldSubmissionRoute => '要送到哪里';
 
   @override
   String get cnFactEdited => '您已修改';
@@ -3053,10 +3052,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnReqLinked => '已关联';
 
   @override
-  String get cnReqAskedCareTeam => '已询问医疗团队';
+  String get cnReqAskedCareTeam => '已问过医疗团队';
 
   @override
-  String get cnReqNotAvailable => '没有';
+  String get cnReqNotAvailable => '没有这项';
 
   @override
   String get cnReqNotNeeded => '不需要';
@@ -3074,7 +3073,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnRecSymptoms => '症状记录';
 
   @override
-  String get cnRecLocalContext => '当地情况';
+  String get cnRecLocalContext => '环境因素';
 
   @override
   String get cnRecPrn => '按需使用的吸入器';
@@ -3089,7 +3088,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnDemoResetDone => '示例已重置。';
 
   @override
-  String get cnDemoIntro => '三封虚构的信件，结果是固定的，方便您看清每一步。不会上传任何内容。';
+  String get cnDemoIntro => '这里有三封编出来的信，结果是固定的。您可以用它们看清每一步。不会上传任何内容。';
 
   @override
   String get cnUpEmpty => '这个文件是空的。';
@@ -3153,6 +3152,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get cnAddPhoto => '照片';
+
+  @override
+  String get cnPickGallery => '从相册选择';
+
+  @override
+  String get cnLabelForm => '剂型（按原文）';
 
   @override
   String get cnAddPdf => 'PDF';
@@ -3254,7 +3259,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnStepReview => '核对';
 
   @override
-  String get cnStepEvidence => '佐证记录';
+  String get cnStepEvidence => '相关记录';
 
   @override
   String get cnStepPacket => '资料包';
@@ -3325,7 +3330,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get cnContinueToEvidence => '继续整理佐证记录';
+  String get cnContinueToEvidence => '继续整理相关记录';
 
   @override
   String cnSeePage(int n) {
@@ -3342,10 +3347,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnChange => '更改';
 
   @override
-  String get cnCardWhyDenied => '被拒绝的原因';
+  String get cnCardWhyDenied => '被拒付的原因';
 
   @override
-  String get cnCardWhatTheyNeed => '对方要求的内容';
+  String get cnCardWhatTheyNeed => '保险计划要的内容';
 
   @override
   String get cnCardWhatItSays => '信里写了什么';
@@ -3361,9 +3366,9 @@ class AppLocalizationsZh extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '请医疗团队申请复核。信中列出了 $count 项需要寄送的内容。',
-      one: '请医疗团队申请复核。信中列出了 1 项需要寄送的内容。',
-      zero: '请医疗团队申请复核。信中没有列出具体项目。',
+      other: '请您的医疗团队向保险计划提出复核申请。信里列出了 $count 项要送去的东西。',
+      one: '请您的医疗团队向保险计划提出复核申请。信里列出了 1 项要送去的东西。',
+      zero: '请您的医疗团队向保险计划提出复核申请。信里没有列出具体要交的东西。',
     );
     return '$_temp0';
   }
@@ -3373,29 +3378,29 @@ class AppLocalizationsZh extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '请在下面的日期前，把保险计划要求的 $count 项内容寄给对方。',
-      one: '请在下面的日期前，把保险计划要求的 1 项内容寄给对方。',
-      zero: '请在下面的日期前，把保险计划要求的信息寄给对方。',
+      other: '请在下面的日期前，把保险计划要的 $count 项内容都送回去。',
+      one: '请在下面的日期前，把保险计划要的那 1 项送回去。',
+      zero: '请在下面的日期前，把保险计划要的信息送回去。',
     );
     return '$_temp0';
   }
 
   @override
-  String get cnNextReauth => '请记下现有批准何时结束，并请医疗团队开始办理续期。';
+  String get cnNextReauth => '请记下现在的批准什么时候结束，并请医疗团队开始办续期。';
 
   @override
   String get cnNextFinal =>
-      '这是最终决定。CoverNote 不会为它起草首次复核申请。请向保险计划或您的医疗团队询问信中列出的其他选择。';
+      '这是最终决定。CoverNote 不会为它起草首次复核申请。请向保险计划或您的医疗团队询问信里列出的办法。';
 
   @override
-  String get cnNextEob => '这看起来是账单或福利说明，不是拒绝信。请向保险计划的会员服务部门核实。';
+  String get cnNextEob => '这看起来是账单或福利说明，不是拒付（Denial）。请向保险计划的会员服务问一下。';
 
   @override
   String get cnNextUncertain => '请先在上方确认这是一封什么类型的信。';
 
   @override
   String cnWhereToSend(String route) {
-    return '寄送方式：$route';
+    return '送到哪里：$route';
   }
 
   @override
@@ -3408,7 +3413,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String cnDateCalculated(String anchor, int days) {
-    return '计算方式：$anchor + $days 个日历日';
+    return '计算方式：$anchor + $days 个日历日（按每一天算，不是只算工作日）';
   }
 
   @override
@@ -3425,22 +3430,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String cnReceivedOn(String date) {
-    return '您在 $date 收到';
+    return '您在 $date 收到这封信';
   }
 
   @override
-  String get cnDatePassed => '这个日期已经过了。请致电保险计划，询问您还能怎么做。';
+  String get cnDatePassed => '这个日期已经过了。请打电话给保险计划，问您现在还能做什么。';
 
   @override
   String cnNeedReceivedDate(int days) {
-    return '信中写的是从您收到信的那天起 $days 个日历日。您是哪天收到的？';
+    return '信里写的是：从您收到信那天起 $days 个日历日（按每一天算，不是只算工作日）。您是哪天收到的？';
   }
 
   @override
   String get cnEnterReceivedDate => '输入收到日期';
 
   @override
-  String get cnDateConflict => '信中给出了不同的日期。请向保险计划询问以哪个为准，然后选择它。';
+  String get cnDateConflict => '信里写了不同的日期。请问保险计划用哪一个，然后选它。';
 
   @override
   String cnUseThisDate(String date) {
@@ -3449,7 +3454,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get cnDateUnclear =>
-      '信中的说法不清楚，或按工作日计算，所以 CoverNote 不做计算。请向保险计划询问确切日期。';
+      '信里的说法不清楚，或者是按工作日算的，所以 CoverNote 不算这个日期。请问保险计划具体是哪一天。';
 
   @override
   String get cnNoDeadline => '信中没有找到复核期限。';
@@ -3495,11 +3500,11 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get cnLinkNote => '您自己的记录可以支持这份申请，但不能代替诊所病历或检查结果。';
+  String get cnLinkNote => '您自己的记录可以附在信里要求的材料上，但不能代替诊所病历或检查结果。';
 
   @override
   String cnMedLine(int taken, int notTaken, int unknown, int scheduled) {
-    return '计划用药 $scheduled 次：已用 $taken 次 / 未用 $notTaken 次 / 不确定 $unknown 次';
+    return '计划的 $scheduled 次：用了 $taken 次 / 没有用 $notTaken 次 / 未知 $unknown 次';
   }
 
   @override
@@ -3512,7 +3517,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String cnSymptomLine(int days, int night, int entries, int total) {
-    return '$days 天有症状，$night 天夜里醒来（已记录的 $total 天中有 $entries 天有记录）';
+    return '$days 天有症状，$night 天夜里醒来（$total 天里记下了 $entries 天）';
   }
 
   @override
@@ -3532,7 +3537,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get cnSyntheticData => '模拟数据';
+  String get cnSyntheticData => '虚构数据';
 
   @override
   String get cnLetterAsksFor => '信里要求的内容';
@@ -3549,7 +3554,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get cnLocalContextNote => '仅供参考。这不是在您家中测得的数据，也不是症状的原因。';
+  String get cnLocalContextNote => '可选项。这些是室外因素，不是家里的测量值，也不是症状的原因。';
 
   @override
   String get cnContinueToPacket => '继续生成资料包';
@@ -3614,7 +3619,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnMethodMail => '邮寄';
 
   @override
-  String get cnMethodPortal => '在线门户网站';
+  String get cnMethodPortal => '网上入口';
 
   @override
   String get cnMethodInPerson => '当面递交';
@@ -3626,19 +3631,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnMethodOther => '其他';
 
   @override
-  String get cnPacketNoDraftFinal => '对于最终决定，资料包只包含医生摘要，不会生成第一级复核申请草稿。';
+  String get cnPacketNoDraftFinal => '如果是最终决定，资料包里只有医生摘要，不会生成第一级复核申请的草稿。';
 
   @override
-  String get cnPacketNoDraftEob => '对于账单或福利说明，资料包只包含医生摘要。';
+  String get cnPacketNoDraftEob => '如果是账单或福利说明，资料包里只有医生摘要。';
 
   @override
-  String get cnPacketNoDraftReauth => '对于续期通知，资料包只包含医生摘要，以帮助您的医疗团队办理续期。';
+  String get cnPacketNoDraftReauth => '如果是续期通知，资料包里只有医生摘要，用来帮您的医疗团队办续期。';
 
   @override
-  String get cnPacketNoDraftOther => '除非信件是拒绝信或信息要求，否则资料包只包含医生摘要。';
+  String get cnPacketNoDraftOther => '如果这封信不是拒付（Denial），也不是要求补充信息，资料包里只有医生摘要。';
 
   @override
-  String get cnPacketContains => '此资料包将包含';
+  String get cnPacketContains => '这个资料包会包含';
 
   @override
   String get cnPartSummary => '医生摘要（1 页）';
@@ -3677,7 +3682,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnSaveOrPrint => '保存或打印';
 
   @override
-  String get cnISentIt => '我已寄出';
+  String get cnISentIt => '我已发出';
 
   @override
   String cnSharedOn(String date) {
@@ -3686,7 +3691,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String cnUserReportedSent(String date, String method) {
-    return '您报告已于 $date 寄出（$method）';
+    return '您报告已于 $date 发出（$method）';
   }
 
   @override
@@ -3696,7 +3701,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnTabReviewDraft => '复核申请草稿';
 
   @override
-  String get cnSentExplain => '请记录寄出的时间和方式。CoverNote 不会代您寄出，也不会跟踪结果。';
+  String get cnSentExplain => '请记下发出的时间和方式。CoverNote 不会替您发出，也不会跟踪决定。';
 
   @override
   String get cnSave => '保存';
@@ -3716,14 +3721,13 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get cnCtxIntro =>
-      '来自明确来源的空气读数，和您自己注意到的情况，分开记录。只有在有助于说明您的记录时，才把它们加入案件。';
+  String get cnCtxIntro => '写明来源的空气读数，和您自己注意到的事，要分开记。只有在能帮您把记录说清楚时，才加到案件里。';
 
   @override
   String get cnCtxReadings => '空气读数';
 
   @override
-  String get cnCtxReadingsNote => '这是观测当天的地区读数，不能反映您家附近的车辆尾气。';
+  String get cnCtxReadingsNote => '这是观测当天这一地区的读数。不是在您家里测的，也不能说明您家附近有没有汽车尾气。';
 
   @override
   String get cnCtxAddReading => '添加读数';
@@ -3732,7 +3736,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnCtxReports => '您注意到的情况';
 
   @override
-  String get cnCtxReportsNote => '这是您自己的报告，不是测量数据。';
+  String get cnCtxReportsNote => '这是您自己记下的，不是测量结果。';
 
   @override
   String get cnCtxAddReport => '添加您注意到的情况';
@@ -3758,7 +3762,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnCtxWhat => '读数类型';
 
   @override
-  String get cnCtxHumidityNote => '室外湿度是天气数据，不能说明您家里是否潮湿或有霉菌。';
+  String get cnCtxHumidityNote => '室外湿度是天气数据。它看不出您家里潮不潮，也看不出家里有没有霉。';
 
   @override
   String get cnCtxValue => '数值';
@@ -3776,10 +3780,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnCtxSourceRequired => '请填写来源。';
 
   @override
-  String get cnCtxPlace => '地点（邮编或城镇，可选）';
+  String get cnCtxPlace => '地点（选填）';
 
   @override
-  String get cnRecordsSignInBody => '登录后可保存用药、症状和当地情况记录。';
+  String get cnRecordsSignInBody => '登录后可以保存用药、症状和环境因素记录。';
 
   @override
   String get cnRecordsYourRecords => '您的记录';
@@ -3803,11 +3807,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnUrgentHelp => '紧急求助';
 
   @override
-  String get cnUrgentHelpSub => '呼吸紧急情况的处理步骤和拨打 911';
+  String get cnUrgentHelpSub => '呼吸紧急时怎么做，以及如何拨打 911';
 
   @override
   String cnLast30Days(String from, String to) {
-    return '最近 30 天（$from – $to）';
+    return 'Last 30 days ($from – $to)';
   }
 
   @override
@@ -3907,7 +3911,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnLanguageChoose => '选择您的语言';
 
   @override
-  String get cnLanguageNote => '部分文字由软件翻译，可能有错误。药物名称、剂量、日期和信中的引文都不会被翻译。';
+  String get cnLanguageNote => '部分文字由软件翻译，可能有错误。药品名称和剂量保持原文。信件的其余内容会为您翻译。';
 
   @override
   String get cnLanguageButtonTooltip => '更改语言';
@@ -3919,19 +3923,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cnReasonMissingInformation => '保险计划说它没有收到所需的全部信息。';
 
   @override
-  String get cnReasonStepTherapy => '保险计划要求您先试用其他药物。';
+  String get cnReasonStepTherapy => '保险计划要您先试用别的药。信上把这叫做阶梯治疗（Step therapy）。';
 
   @override
-  String get cnReasonMedicalNecessity => '保险计划说无法确认这种药在医学上是必需的。';
+  String get cnReasonMedicalNecessity =>
+      '保险计划说，还不能确认这种药有医疗必要性（Medical necessity）。';
 
   @override
-  String get cnReasonFormulary => '保险计划说这种药不在它的承保药物清单上。';
+  String get cnReasonFormulary => '保险计划说这种药不在它的承保药品目录（Formulary）上。';
 
   @override
-  String get cnReasonQuantityLimit => '保险计划说您申请的数量超出了它承保的范围。';
+  String get cnReasonQuantityLimit => '保险计划说，要的数量比它承保的多。';
 
   @override
-  String get cnReasonEligibility => '保险计划说按其承保规则，这项不在承保范围内。';
+  String get cnReasonEligibility => '保险计划说，按它的承保规则，这项不在承保范围内。';
 
   @override
   String get cnReasonOther => '信中给出了其他原因。请打开信件引文阅读。';
@@ -3947,6 +3952,435 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get cnReqHintDoctorStatement => '医生出具的说明';
+
+  @override
+  String get cnTabSettings => '设置';
+
+  @override
+  String get cnCasesList => '案件列表';
+
+  @override
+  String get cnGoHome => '首页';
+
+  @override
+  String get cnAnalyzingTitle => '保险来信 · 正在读取';
+
+  @override
+  String cnCaseNumber(String n) {
+    return '案件 #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return '$when 添加';
+  }
+
+  @override
+  String get cnAliasHint => '简称（可选）';
+
+  @override
+  String get cnShareDocuments => '发送文件';
+
+  @override
+  String get cnRecordDelivery => '记下发送情况';
+
+  @override
+  String get cnShareAsk => '您把这些文件发出去了吗？';
+
+  @override
+  String get cnDeliveryRecipient => '发给';
+
+  @override
+  String get cnRecipientClinic => '诊所或医生';
+
+  @override
+  String get cnRecipientInsurer => '保险计划';
+
+  @override
+  String get cnRecipientSelf => '自己留着';
+
+  @override
+  String get cnRecipientOther => '其他';
+
+  @override
+  String get cnDeliveryMethod => '怎么发的';
+
+  @override
+  String get cnMethodEmail => '电子邮件';
+
+  @override
+  String get cnMethodMessage => '短信或聊天软件';
+
+  @override
+  String get cnMethodUnknown => '记不清了';
+
+  @override
+  String get cnDeliveryUserReport => '这是您自己填写的。应用无法确认对方是否收到。';
+
+  @override
+  String get cnShareCancelled => '已取消发送。没有标记为已发出。';
+
+  @override
+  String get cnRecordsLoading => '正在载入记录…';
+
+  @override
+  String get cnRecordsEmpty => '这段时间没有记录';
+
+  @override
+  String get cnRecordsError => '无法载入记录';
+
+  @override
+  String get cnRecordsPermission => '您无权查看这些记录';
+
+  @override
+  String get cnRecordsPending => '已保存在本机 · 等待同步';
+
+  @override
+  String get cnRecordsFiltered => '筛选条件隐藏了部分记录';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '不在这段时间内的记录 $n 条';
+  }
+
+  @override
+  String get cnWidenRange => '查看更长的时间';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days 天 · 用药 $med 次 · 症状 $sym 条';
+  }
+
+  @override
+  String get cnOneDayPacket => '这套文件只包含一天。';
+
+  @override
+  String get cnMyMedications => '我的药物';
+
+  @override
+  String get cnScanLabel => '扫描药品标签';
+
+  @override
+  String get cnMedManageHint => '先登记您在用的药。处方有变就改一下。每天用没用，在“记录”里登记。';
+
+  @override
+  String get cnLabelNeedLabel => '请拍摄药房标签或药盒上的文字。应用不会凭药片形状辨认药品。';
+
+  @override
+  String get cnLabelUnclear => '这项看不清楚。保存前请核对。';
+
+  @override
+  String get cnConsentLabel => '允许 AI 读取药品标签';
+
+  @override
+  String get cnManualMed => '手动输入';
+
+  @override
+  String get cnAirWeather => '您附近的环境因素';
+
+  @override
+  String get cnAirAutoNote =>
+      '根据您现在的位置显示空气质量、交通相关空气、花粉、洪水警报和室外湿度。手机本身不测量空气。室外湿度不是室内霉菌。';
+
+  @override
+  String get cnHomeRecords => '相关用药记录';
+
+  @override
+  String get cnEnvTrap => '交通相关空气';
+
+  @override
+  String get cnItemMemo => '备注';
+
+  @override
+  String get cnSaveNote => '保存备注';
+
+  @override
+  String get cnLocationNeed => '要查看您附近的环境因素，请允许使用位置。';
+
+  @override
+  String get cnLocationOff => '定位服务已关闭。请打开后再试。';
+
+  @override
+  String get cnLocationBlocked => '位置权限已被阻止。请在设置中允许。';
+
+  @override
+  String get cnOpenSettings => '打开设置';
+
+  @override
+  String get cnAirNone => '没有空气或天气数据';
+
+  @override
+  String get cnAirRetry => '再试一次空气和天气';
+
+  @override
+  String get cnSetRegion => 'Set your area (ZIP or city)';
+
+  @override
+  String get cnConfiguredArea => 'Area you set';
+
+  @override
+  String get cnRecordPlace => '这条记录的地点';
+
+  @override
+  String get cnClosestObservation => 'Closest observation to the record time';
+
+  @override
+  String get cnEnvUnavailable => '没有与该时间匹配的观测';
+
+  @override
+  String cnLogMedication(String name) {
+    return '登记 $name';
+  }
+
+  @override
+  String get cnAsNeededUse => '需要时使用';
+
+  @override
+  String get cnAsNeededInhaler => 'As-needed inhaler use';
+
+  @override
+  String get cnScheduledUse => '按时间使用';
+
+  @override
+  String get cnExtraUse => '额外使用';
+
+  @override
+  String get cnUndoUse => '撤销';
+
+  @override
+  String get cnLoggedLocal => '已保存在本机';
+
+  @override
+  String get cnLoggedPending => '等待同步';
+
+  @override
+  String get cnLoggedSynced => '已同步';
+
+  @override
+  String cnDaysLogged(int n) {
+    return '本周已登记 $n 天';
+  }
+
+  @override
+  String get cnManageMedsLink => '管理我的药物';
+
+  @override
+  String get cnViewAirWeather => 'View environmental factors near you';
+
+  @override
+  String get cnConsentAi => '允许用 AI 阅读文件';
+
+  @override
+  String get cnConsentAiBody => '信件图片会发到阅读服务，好让 CoverNote 显示信上写了什么。以后可在设置里关闭。';
+
+  @override
+  String get cnConsentAndAnalyze => '同意并阅读';
+
+  @override
+  String get cnConsentLater => '现在不要';
+
+  @override
+  String get cnConsentViewLocal => '在这里看原件';
+
+  @override
+  String get cnConsentDetails => '了解数据如何使用';
+
+  @override
+  String get cnConsentLabelPurpose => '读取药品标签';
+
+  @override
+  String get cnConsentLetterPurpose => '读取保险来信';
+
+  @override
+  String get cnConsentTranslatePurpose => '翻译信件';
+
+  @override
+  String get cnToday => '今天';
+
+  @override
+  String get cnLast7 => '最近 7 天';
+
+  @override
+  String get cnLast30 => '最近 30 天';
+
+  @override
+  String get cnCustomRange => '自选日期';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days 天 · $count 条记录';
+  }
+
+  @override
+  String get cnNoRecordThatDay => '这一天没有记录';
+
+  @override
+  String get cnNotLogged => '未登记';
+
+  @override
+  String get cnNotTaken => '已标为未服用';
+
+  @override
+  String get cnOriginalFile => '原始文件';
+
+  @override
+  String get cnFullTranslation => '全文翻译';
+
+  @override
+  String get cnRecognizedText => '识别出的文字';
+
+  @override
+  String get cnSameLanguage => '与原文相同的语言';
+
+  @override
+  String get cnTranslationPartial => '还有页面尚未翻译';
+
+  @override
+  String get cnTranslationFailed => '这一页无法翻译';
+
+  @override
+  String get cnOriginalMissing => '找不到原始文件。您可以重新上传。';
+
+  @override
+  String get cnTranslateRetry => '继续翻译';
+
+  @override
+  String get cnKeyDetails => '关键信息';
+
+  @override
+  String get cnWhatAbout => '这是关于什么的？';
+
+  @override
+  String get cnWhatToDo => '现在要做什么';
+
+  @override
+  String get cnByWhen => '截止到什么时候？';
+
+  @override
+  String get cnPreparePacket => '准备文件';
+
+  @override
+  String get cnCorrectReading => '更正读取错误';
+
+  @override
+  String get cnCorrectReadingNote => '原始信件不会改动。只更正自动读取的结果。';
+
+  @override
+  String get cnReviewImportant => '生成文件前，请先核对这些重要信息';
+
+  @override
+  String get cnPacketReadyTitle => '您的文件已准备好';
+
+  @override
+  String get cnNextSendClinic => '把文件发给医生，请他们审阅';
+
+  @override
+  String get cnNextWaitReply => '收到回复后，记下结果';
+
+  @override
+  String get cnExistingSentNewReady => '之前的文件已发出 · 您可以再做一套';
+
+  @override
+  String get cnWhyRecords => '用药和症状记录能帮助医生了解治疗进展。即使还没有记录，也可以根据来信准备文件。';
+
+  @override
+  String get cnLetterAskedRecords => '来信要求提供近期治疗记录';
+
+  @override
+  String get cnOptionalReference => '可选参考';
+
+  @override
+  String get cnAsthmaContext => '哮喘治疗记录 — 按时间用药、需要时用药，以及呼吸症状。';
+
+  @override
+  String get cnGeneralContext => '治疗记录 — 用药以及症状或备注。';
+
+  @override
+  String get cnTreatmentQuestion => '这封信是关于哪种治疗？';
+
+  @override
+  String get cnTreatmentAsthma => '哮喘';
+
+  @override
+  String get cnTreatmentOther => '其他治疗';
+
+  @override
+  String get cnTreatmentUnknown => '我还不确定';
+
+  @override
+  String get cnStatusWaitingClinic => '已发给诊所 · 等待审阅';
+
+  @override
+  String get cnStatusWaitingInsurer => '已记录为提交给保险计划 · 等待回复';
+
+  @override
+  String get cnFollowUpNeeded => '需要跟进';
+
+  @override
+  String get cnOutcomeRecorded => '已记下结果';
+
+  @override
+  String get cnActiveCases => '进行中';
+
+  @override
+  String get cnCompletedArchived => '已完成并归档';
+
+  @override
+  String get cnCompleteCase => '完成此案件';
+
+  @override
+  String get cnArchiveCase => '归档';
+
+  @override
+  String get cnReopenCase => '重新办理';
+
+  @override
+  String get cnOutcomeApproved => '已批准';
+
+  @override
+  String get cnOutcomeDenied => '已拒绝';
+
+  @override
+  String get cnOutcomeStopped => '不再继续';
+
+  @override
+  String get cnOutcomeOther => '其他 / 未记录';
+
+  @override
+  String get cnSentIsNotComplete => '发出去并不等于办完这个案件。';
+
+  @override
+  String get cnArchivedCase => '已归档';
+
+  @override
+  String get cnStepKeyDetails => '关键信息';
+
+  @override
+  String get cnStepAddRecords => '添加我的记录';
+
+  @override
+  String get cnStepReviewPacket => '核对文件';
+
+  @override
+  String get cnDataConsent => '数据处理';
+
+  @override
+  String get cnZipOrCity => 'ZIP or city';
+
+  @override
+  String get cnSaveArea => 'Save area';
+
+  @override
+  String get cnWeekCalendar => '本周';
+
+  @override
+  String get cnMonthCalendar => '本月';
+
+  @override
+  String get cnUsedShort => '我用了';
+
+  @override
+  String get cnCalendarLegend => '有圆点表示当天留下了记录。空白的一天不是漏服药。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).
@@ -4175,7 +4609,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get authNpiLabel => 'NPI 号码';
 
   @override
-  String get authNpiHelper => '10 位国家医疗服务提供者标识码';
+  String get authNpiHelper => '10 位编号（National Provider Identifier）';
 
   @override
   String get authOrContinueWith => '或使用以下方式继续';
@@ -4389,13 +4823,13 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get actPast4Weeks => '过去 4 周内';
 
   @override
-  String get actQ1 => '您的哮喘在多长时间里妨碍了您在工作、学校或家里做事？';
+  String get actQ1 => '有多少时候，哮喘让您在工作、学校或家里做不了那么多事？';
 
   @override
   String get actQ2 => '您多久出现一次气短？';
 
   @override
-  String get actQ3 => '哮喘症状多久会让您夜里醒来，或比平时早醒一次？';
+  String get actQ3 => '您的哮喘症状有多常让您半夜醒来，或比平时早醒？';
 
   @override
   String get actQ4 => '您多久使用一次急救吸入器或雾化药物？';
@@ -4431,7 +4865,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get actQ5Opt4 => '控制得很好';
 
   @override
-  String get actQ5Opt5 => '完全控制';
+  String get actQ5Opt5 => '完全控制住了';
 
   @override
   String get panicNoAutoDial => '按钮会打开手机拨号界面。不会自动拨出电话。';
@@ -4445,7 +4879,21 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get panicDialFailed => '无法在此设备上打开拨号界面。';
 
   @override
-  String get s5ActNotice => '您的回答已保存，可以分享给您的医生。这份问卷的版本尚未按官方评分方法核对，所以应用不显示分数。';
+  String get envTrapDetail => '交通相关空气指标（传感器，新泽西还可选用货运权重）。';
+
+  @override
+  String get envFloodDetail => '您附近的美国国家气象局突发洪水和河流警报。';
+
+  @override
+  String get envPollenDetail => 'Google 花粉预报。';
+
+  @override
+  String envUpdatedAt(String when) {
+    return '更新时间：$when';
+  }
+
+  @override
+  String get s5ActNotice => '您的回答已保存，可以分享给您的医生。这个版本还没有对照官方的评分方法核对过，所以本应用不显示分数。';
 
   @override
   String get s5ActSaved => '您的回答已保存。';
@@ -4461,6 +4909,29 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get s5AddRecord => '添加记录';
+
+  @override
+  String get s5AqiGood => '良';
+
+  @override
+  String get s5AqiModerate => '中等';
+
+  @override
+  String get s5AqiUsg => '对敏感人群不健康';
+
+  @override
+  String get s5AqiUnhealthy => '不健康';
+
+  @override
+  String get s5AqiVeryUnhealthy => '非常不健康';
+
+  @override
+  String get s5AqiHazardous => '危害';
+
+  @override
+  String s5AqiValue(String category, int aqi) {
+    return '$category（AQI $aqi）';
+  }
 
   @override
   String get s5Back => '返回';
@@ -4485,6 +4956,19 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get s5EntryRemoved => '记录已删除。';
+
+  @override
+  String get s5EnvAirDetail =>
+      '来自公共监测站和附近传感器的美国 EPA 空气质量指数。它表示当地的室外空气，不是单独的交通尾气。';
+
+  @override
+  String get s5EnvAirQuality => '空气质量';
+
+  @override
+  String get s5EnvFlood => '洪水警报';
+
+  @override
+  String get s5EnvPollen => '花粉指数';
 
   @override
   String get s5FieldDate => '日期';
@@ -4517,7 +5001,13 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get s5FilterSymptoms => '症状';
 
   @override
-  String get s5FromUrgentHelp => '从“紧急求助”记录';
+  String get s5FloodIssued => '已发布洪水警报';
+
+  @override
+  String get s5FloodNone => '没有洪水警报';
+
+  @override
+  String get s5FromUrgentHelp => '从“紧急求助”记下的';
 
   @override
   String get s5InhalerEditTitle => '吸入器使用详情';
@@ -4556,7 +5046,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String s5MedCheckCounts(int a, int b, int c, int d) {
-    return '已用药天数：$a · 未用药：$b · 不记得：$c · 未记录：$d';
+    return '已用药天数：$a · 未用药天数：$b · 不记得的天数：$c · 未记录的天数：$d';
   }
 
   @override
@@ -4643,9 +5133,6 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get s5MyMedsHint => '这里是您确认过的药物名称，方便更快地记录。这不是用药剂量建议。';
 
   @override
-  String get s5MyMedsTitle => '我的药物';
-
-  @override
   String get s5NoAnswer => '不想回答';
 
   @override
@@ -4730,10 +5217,10 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get s5SymOtherHint => '用您自己的话描述';
 
   @override
-  String get s5SymShortBreath => '呼吸困难';
+  String get s5SymShortBreath => '呼吸费劲';
 
   @override
-  String get s5SymWheeze => '喘鸣';
+  String get s5SymWheeze => '呼吸时有喘息声';
 
   @override
   String get s5SymptomEditTitle => '编辑症状';
@@ -4784,7 +5271,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get s6HomeWaterNo => '没有';
 
   @override
-  String get s6HomeWaterQuestion => '家里有漏水或进水吗？';
+  String get s6HomeWaterQuestion => '家里有漏水或被水淹吗？';
 
   @override
   String get s6HomeWaterYes => '有';
@@ -4804,7 +5291,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get s6ReminderBodyPrivate => '该确认您的药了';
 
   @override
-  String get s6ReminderChannel => '在您保存的用药时间提醒。不是 30 分钟提醒。';
+  String get s6ReminderChannel => '会在您保存的用药时间提醒您。这不是每 30 分钟一次的空气和天气提醒。';
 
   @override
   String get s6ReminderTitle => '用药确认';
@@ -4828,7 +5315,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnDemoBadge => '示例';
 
   @override
-  String get cnDemoBadgeLong => '示例使用虚构数据，结果是固定的。';
+  String get cnDemoBadgeLong => '示例里的数据不是真的，结果是固定的。';
 
   @override
   String get cnAuthSignInTitle => '登录';
@@ -5007,7 +5494,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnHomeSignInLine => '保存您的案件需要账号。';
 
   @override
-  String get cnServiceNotConfigured => '此版本未连接到服务器，只能使用示例。';
+  String get cnServiceNotConfigured => '这个版本没有连上服务器，只能使用示例。';
 
   @override
   String get cnContinueCase => '继续处理您的案件';
@@ -5138,19 +5625,19 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnDeleteFailed => '无法删除。请检查网络后再试。';
 
   @override
-  String get cnKindInitialDenial => '药物承保拒绝（Denial）';
+  String get cnKindInitialDenial => '药物拒付（Denial）';
 
   @override
   String get cnKindInfoRequest => '要求补充信息';
 
   @override
-  String get cnKindReauth => '续期（重新授权）通知';
+  String get cnKindReauth => '续期通知（Reauthorization）';
 
   @override
-  String get cnKindFinalDenial => '最终申诉决定（Appeal）';
+  String get cnKindFinalDenial => '申诉的最终决定（Final appeal decision）';
 
   @override
-  String get cnKindEob => '账单或福利说明（EOB）';
+  String get cnKindEob => '账单或福利说明（Explanation of Benefits）';
 
   @override
   String get cnKindOther => '其他信件';
@@ -5183,7 +5670,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnFieldContact => '联系方式';
 
   @override
-  String get cnFieldSubmissionRoute => '寄送方式';
+  String get cnFieldSubmissionRoute => '要送到哪里';
 
   @override
   String get cnFactEdited => '您已修改';
@@ -5216,10 +5703,10 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnReqLinked => '已关联';
 
   @override
-  String get cnReqAskedCareTeam => '已询问医疗团队';
+  String get cnReqAskedCareTeam => '已问过医疗团队';
 
   @override
-  String get cnReqNotAvailable => '没有';
+  String get cnReqNotAvailable => '没有这项';
 
   @override
   String get cnReqNotNeeded => '不需要';
@@ -5237,7 +5724,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnRecSymptoms => '症状记录';
 
   @override
-  String get cnRecLocalContext => '当地情况';
+  String get cnRecLocalContext => '环境因素';
 
   @override
   String get cnRecPrn => '按需使用的吸入器';
@@ -5252,7 +5739,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnDemoResetDone => '示例已重置。';
 
   @override
-  String get cnDemoIntro => '三封虚构的信件，结果是固定的，方便您看清每一步。不会上传任何内容。';
+  String get cnDemoIntro => '这里有三封编出来的信，结果是固定的。您可以用它们看清每一步。不会上传任何内容。';
 
   @override
   String get cnUpEmpty => '这个文件是空的。';
@@ -5316,6 +5803,12 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get cnAddPhoto => '照片';
+
+  @override
+  String get cnPickGallery => '从相册选择';
+
+  @override
+  String get cnLabelForm => '剂型（按原文）';
 
   @override
   String get cnAddPdf => 'PDF';
@@ -5417,7 +5910,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnStepReview => '核对';
 
   @override
-  String get cnStepEvidence => '佐证记录';
+  String get cnStepEvidence => '相关记录';
 
   @override
   String get cnStepPacket => '资料包';
@@ -5488,7 +5981,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get cnContinueToEvidence => '继续整理佐证记录';
+  String get cnContinueToEvidence => '继续整理相关记录';
 
   @override
   String cnSeePage(int n) {
@@ -5505,10 +5998,10 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnChange => '更改';
 
   @override
-  String get cnCardWhyDenied => '被拒绝的原因';
+  String get cnCardWhyDenied => '被拒付的原因';
 
   @override
-  String get cnCardWhatTheyNeed => '对方要求的内容';
+  String get cnCardWhatTheyNeed => '保险计划要的内容';
 
   @override
   String get cnCardWhatItSays => '信里写了什么';
@@ -5524,9 +6017,9 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '请医疗团队申请复核。信中列出了 $count 项需要寄送的内容。',
-      one: '请医疗团队申请复核。信中列出了 1 项需要寄送的内容。',
-      zero: '请医疗团队申请复核。信中没有列出具体项目。',
+      other: '请您的医疗团队向保险计划提出复核申请。信里列出了 $count 项要送去的东西。',
+      one: '请您的医疗团队向保险计划提出复核申请。信里列出了 1 项要送去的东西。',
+      zero: '请您的医疗团队向保险计划提出复核申请。信里没有列出具体要交的东西。',
     );
     return '$_temp0';
   }
@@ -5536,29 +6029,29 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '请在下面的日期前，把保险计划要求的 $count 项内容寄给对方。',
-      one: '请在下面的日期前，把保险计划要求的 1 项内容寄给对方。',
-      zero: '请在下面的日期前，把保险计划要求的信息寄给对方。',
+      other: '请在下面的日期前，把保险计划要的 $count 项内容都送回去。',
+      one: '请在下面的日期前，把保险计划要的那 1 项送回去。',
+      zero: '请在下面的日期前，把保险计划要的信息送回去。',
     );
     return '$_temp0';
   }
 
   @override
-  String get cnNextReauth => '请记下现有批准何时结束，并请医疗团队开始办理续期。';
+  String get cnNextReauth => '请记下现在的批准什么时候结束，并请医疗团队开始办续期。';
 
   @override
   String get cnNextFinal =>
-      '这是最终决定。CoverNote 不会为它起草首次复核申请。请向保险计划或您的医疗团队询问信中列出的其他选择。';
+      '这是最终决定。CoverNote 不会为它起草首次复核申请。请向保险计划或您的医疗团队询问信里列出的办法。';
 
   @override
-  String get cnNextEob => '这看起来是账单或福利说明，不是拒绝信。请向保险计划的会员服务部门核实。';
+  String get cnNextEob => '这看起来是账单或福利说明，不是拒付（Denial）。请向保险计划的会员服务问一下。';
 
   @override
   String get cnNextUncertain => '请先在上方确认这是一封什么类型的信。';
 
   @override
   String cnWhereToSend(String route) {
-    return '寄送方式：$route';
+    return '送到哪里：$route';
   }
 
   @override
@@ -5571,7 +6064,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String cnDateCalculated(String anchor, int days) {
-    return '计算方式：$anchor + $days 个日历日';
+    return '计算方式：$anchor + $days 个日历日（按每一天算，不是只算工作日）';
   }
 
   @override
@@ -5588,22 +6081,22 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String cnReceivedOn(String date) {
-    return '您在 $date 收到';
+    return '您在 $date 收到这封信';
   }
 
   @override
-  String get cnDatePassed => '这个日期已经过了。请致电保险计划，询问您还能怎么做。';
+  String get cnDatePassed => '这个日期已经过了。请打电话给保险计划，问您现在还能做什么。';
 
   @override
   String cnNeedReceivedDate(int days) {
-    return '信中写的是从您收到信的那天起 $days 个日历日。您是哪天收到的？';
+    return '信里写的是：从您收到信那天起 $days 个日历日（按每一天算，不是只算工作日）。您是哪天收到的？';
   }
 
   @override
   String get cnEnterReceivedDate => '输入收到日期';
 
   @override
-  String get cnDateConflict => '信中给出了不同的日期。请向保险计划询问以哪个为准，然后选择它。';
+  String get cnDateConflict => '信里写了不同的日期。请问保险计划用哪一个，然后选它。';
 
   @override
   String cnUseThisDate(String date) {
@@ -5612,7 +6105,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get cnDateUnclear =>
-      '信中的说法不清楚，或按工作日计算，所以 CoverNote 不做计算。请向保险计划询问确切日期。';
+      '信里的说法不清楚，或者是按工作日算的，所以 CoverNote 不算这个日期。请问保险计划具体是哪一天。';
 
   @override
   String get cnNoDeadline => '信中没有找到复核期限。';
@@ -5658,11 +6151,11 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get cnLinkNote => '您自己的记录可以支持这份申请，但不能代替诊所病历或检查结果。';
+  String get cnLinkNote => '您自己的记录可以附在信里要求的材料上，但不能代替诊所病历或检查结果。';
 
   @override
   String cnMedLine(int taken, int notTaken, int unknown, int scheduled) {
-    return '计划用药 $scheduled 次：已用 $taken 次 / 未用 $notTaken 次 / 不确定 $unknown 次';
+    return '计划的 $scheduled 次：用了 $taken 次 / 没有用 $notTaken 次 / 未知 $unknown 次';
   }
 
   @override
@@ -5675,7 +6168,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String cnSymptomLine(int days, int night, int entries, int total) {
-    return '$days 天有症状，$night 天夜里醒来（已记录的 $total 天中有 $entries 天有记录）';
+    return '$days 天有症状，$night 天夜里醒来（$total 天里记下了 $entries 天）';
   }
 
   @override
@@ -5695,7 +6188,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get cnSyntheticData => '模拟数据';
+  String get cnSyntheticData => '虚构数据';
 
   @override
   String get cnLetterAsksFor => '信里要求的内容';
@@ -5712,7 +6205,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get cnLocalContextNote => '仅供参考。这不是在您家中测得的数据，也不是症状的原因。';
+  String get cnLocalContextNote => '可选项。这些是室外因素，不是家里的测量值，也不是症状的原因。';
 
   @override
   String get cnContinueToPacket => '继续生成资料包';
@@ -5777,7 +6270,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnMethodMail => '邮寄';
 
   @override
-  String get cnMethodPortal => '在线门户网站';
+  String get cnMethodPortal => '网上入口';
 
   @override
   String get cnMethodInPerson => '当面递交';
@@ -5789,19 +6282,19 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnMethodOther => '其他';
 
   @override
-  String get cnPacketNoDraftFinal => '对于最终决定，资料包只包含医生摘要，不会生成第一级复核申请草稿。';
+  String get cnPacketNoDraftFinal => '如果是最终决定，资料包里只有医生摘要，不会生成第一级复核申请的草稿。';
 
   @override
-  String get cnPacketNoDraftEob => '对于账单或福利说明，资料包只包含医生摘要。';
+  String get cnPacketNoDraftEob => '如果是账单或福利说明，资料包里只有医生摘要。';
 
   @override
-  String get cnPacketNoDraftReauth => '对于续期通知，资料包只包含医生摘要，以帮助您的医疗团队办理续期。';
+  String get cnPacketNoDraftReauth => '如果是续期通知，资料包里只有医生摘要，用来帮您的医疗团队办续期。';
 
   @override
-  String get cnPacketNoDraftOther => '除非信件是拒绝信或信息要求，否则资料包只包含医生摘要。';
+  String get cnPacketNoDraftOther => '如果这封信不是拒付（Denial），也不是要求补充信息，资料包里只有医生摘要。';
 
   @override
-  String get cnPacketContains => '此资料包将包含';
+  String get cnPacketContains => '这个资料包会包含';
 
   @override
   String get cnPartSummary => '医生摘要（1 页）';
@@ -5840,7 +6333,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnSaveOrPrint => '保存或打印';
 
   @override
-  String get cnISentIt => '我已寄出';
+  String get cnISentIt => '我已发出';
 
   @override
   String cnSharedOn(String date) {
@@ -5849,7 +6342,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String cnUserReportedSent(String date, String method) {
-    return '您报告已于 $date 寄出（$method）';
+    return '您报告已于 $date 发出（$method）';
   }
 
   @override
@@ -5859,7 +6352,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnTabReviewDraft => '复核申请草稿';
 
   @override
-  String get cnSentExplain => '请记录寄出的时间和方式。CoverNote 不会代您寄出，也不会跟踪结果。';
+  String get cnSentExplain => '请记下发出的时间和方式。CoverNote 不会替您发出，也不会跟踪决定。';
 
   @override
   String get cnSave => '保存';
@@ -5879,14 +6372,13 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get cnCtxIntro =>
-      '来自明确来源的空气读数，和您自己注意到的情况，分开记录。只有在有助于说明您的记录时，才把它们加入案件。';
+  String get cnCtxIntro => '写明来源的空气读数，和您自己注意到的事，要分开记。只有在能帮您把记录说清楚时，才加到案件里。';
 
   @override
   String get cnCtxReadings => '空气读数';
 
   @override
-  String get cnCtxReadingsNote => '这是观测当天的地区读数，不能反映您家附近的车辆尾气。';
+  String get cnCtxReadingsNote => '这是观测当天这一地区的读数。不是在您家里测的，也不能说明您家附近有没有汽车尾气。';
 
   @override
   String get cnCtxAddReading => '添加读数';
@@ -5895,7 +6387,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnCtxReports => '您注意到的情况';
 
   @override
-  String get cnCtxReportsNote => '这是您自己的报告，不是测量数据。';
+  String get cnCtxReportsNote => '这是您自己记下的，不是测量结果。';
 
   @override
   String get cnCtxAddReport => '添加您注意到的情况';
@@ -5921,7 +6413,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnCtxWhat => '读数类型';
 
   @override
-  String get cnCtxHumidityNote => '室外湿度是天气数据，不能说明您家里是否潮湿或有霉菌。';
+  String get cnCtxHumidityNote => '室外湿度是天气数据。它看不出您家里潮不潮，也看不出家里有没有霉。';
 
   @override
   String get cnCtxValue => '数值';
@@ -5939,10 +6431,10 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnCtxSourceRequired => '请填写来源。';
 
   @override
-  String get cnCtxPlace => '地点（邮编或城镇，可选）';
+  String get cnCtxPlace => '地点（选填）';
 
   @override
-  String get cnRecordsSignInBody => '登录后可保存用药、症状和当地情况记录。';
+  String get cnRecordsSignInBody => '登录后可以保存用药、症状和环境因素记录。';
 
   @override
   String get cnRecordsYourRecords => '您的记录';
@@ -5966,12 +6458,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnUrgentHelp => '紧急求助';
 
   @override
-  String get cnUrgentHelpSub => '呼吸紧急情况的处理步骤和拨打 911';
-
-  @override
-  String cnLast30Days(String from, String to) {
-    return '最近 30 天（$from – $to）';
-  }
+  String get cnUrgentHelpSub => '呼吸紧急时怎么做，以及如何拨打 911';
 
   @override
   String get cnNoSchedule => '未设置固定用药时间';
@@ -6070,7 +6557,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnLanguageChoose => '选择您的语言';
 
   @override
-  String get cnLanguageNote => '部分文字由软件翻译，可能有错误。药物名称、剂量、日期和信中的引文都不会被翻译。';
+  String get cnLanguageNote => '部分文字由软件翻译，可能有错误。药品名称和剂量保持原文。信件的其余内容会为您翻译。';
 
   @override
   String get cnLanguageButtonTooltip => '更改语言';
@@ -6082,19 +6569,20 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get cnReasonMissingInformation => '保险计划说它没有收到所需的全部信息。';
 
   @override
-  String get cnReasonStepTherapy => '保险计划要求您先试用其他药物。';
+  String get cnReasonStepTherapy => '保险计划要您先试用别的药。信上把这叫做阶梯治疗（Step therapy）。';
 
   @override
-  String get cnReasonMedicalNecessity => '保险计划说无法确认这种药在医学上是必需的。';
+  String get cnReasonMedicalNecessity =>
+      '保险计划说，还不能确认这种药有医疗必要性（Medical necessity）。';
 
   @override
-  String get cnReasonFormulary => '保险计划说这种药不在它的承保药物清单上。';
+  String get cnReasonFormulary => '保险计划说这种药不在它的承保药品目录（Formulary）上。';
 
   @override
-  String get cnReasonQuantityLimit => '保险计划说您申请的数量超出了它承保的范围。';
+  String get cnReasonQuantityLimit => '保险计划说，要的数量比它承保的多。';
 
   @override
-  String get cnReasonEligibility => '保险计划说按其承保规则，这项不在承保范围内。';
+  String get cnReasonEligibility => '保险计划说，按它的承保规则，这项不在承保范围内。';
 
   @override
   String get cnReasonOther => '信中给出了其他原因。请打开信件引文阅读。';
@@ -6110,6 +6598,414 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get cnReqHintDoctorStatement => '医生出具的说明';
+
+  @override
+  String get cnTabSettings => '设置';
+
+  @override
+  String get cnCasesList => '案件列表';
+
+  @override
+  String get cnGoHome => '首页';
+
+  @override
+  String get cnAnalyzingTitle => '保险来信 · 正在读取';
+
+  @override
+  String cnCaseNumber(String n) {
+    return '案件 #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return '$when 添加';
+  }
+
+  @override
+  String get cnAliasHint => '简称（可选）';
+
+  @override
+  String get cnShareDocuments => '发送文件';
+
+  @override
+  String get cnRecordDelivery => '记下发送情况';
+
+  @override
+  String get cnShareAsk => '您把这些文件发出去了吗？';
+
+  @override
+  String get cnDeliveryRecipient => '发给';
+
+  @override
+  String get cnRecipientClinic => '诊所或医生';
+
+  @override
+  String get cnRecipientInsurer => '保险计划';
+
+  @override
+  String get cnRecipientSelf => '自己留着';
+
+  @override
+  String get cnRecipientOther => '其他';
+
+  @override
+  String get cnDeliveryMethod => '怎么发的';
+
+  @override
+  String get cnMethodEmail => '电子邮件';
+
+  @override
+  String get cnMethodMessage => '短信或聊天软件';
+
+  @override
+  String get cnMethodUnknown => '记不清了';
+
+  @override
+  String get cnDeliveryUserReport => '这是您自己填写的。应用无法确认对方是否收到。';
+
+  @override
+  String get cnShareCancelled => '已取消发送。没有标记为已发出。';
+
+  @override
+  String get cnRecordsLoading => '正在载入记录…';
+
+  @override
+  String get cnRecordsEmpty => '这段时间没有记录';
+
+  @override
+  String get cnRecordsError => '无法载入记录';
+
+  @override
+  String get cnRecordsPermission => '您无权查看这些记录';
+
+  @override
+  String get cnRecordsPending => '已保存在本机 · 等待同步';
+
+  @override
+  String get cnRecordsFiltered => '筛选条件隐藏了部分记录';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '不在这段时间内的记录 $n 条';
+  }
+
+  @override
+  String get cnWidenRange => '查看更长的时间';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days 天 · 用药 $med 次 · 症状 $sym 条';
+  }
+
+  @override
+  String get cnOneDayPacket => '这套文件只包含一天。';
+
+  @override
+  String get cnMyMedications => '我的药物';
+
+  @override
+  String get cnScanLabel => '扫描药品标签';
+
+  @override
+  String get cnMedManageHint => '先登记您在用的药。处方有变就改一下。每天用没用，在“记录”里登记。';
+
+  @override
+  String get cnLabelNeedLabel => '请拍摄药房标签或药盒上的文字。应用不会凭药片形状辨认药品。';
+
+  @override
+  String get cnLabelUnclear => '这项看不清楚。保存前请核对。';
+
+  @override
+  String get cnConsentLabel => '允许 AI 读取药品标签';
+
+  @override
+  String get cnManualMed => '手动输入';
+
+  @override
+  String get cnAirWeather => '您附近的环境因素';
+
+  @override
+  String get cnAirAutoNote =>
+      '根据您现在的位置显示空气质量、交通相关空气、花粉、洪水警报和室外湿度。手机本身不测量空气。室外湿度不是室内霉菌。';
+
+  @override
+  String get cnHomeRecords => '相关用药记录';
+
+  @override
+  String get cnEnvTrap => '交通相关空气';
+
+  @override
+  String get cnItemMemo => '备注';
+
+  @override
+  String get cnSaveNote => '保存备注';
+
+  @override
+  String get cnLocationNeed => '要查看您附近的环境因素，请允许使用位置。';
+
+  @override
+  String get cnLocationOff => '定位服务已关闭。请打开后再试。';
+
+  @override
+  String get cnLocationBlocked => '位置权限已被阻止。请在设置中允许。';
+
+  @override
+  String get cnOpenSettings => '打开设置';
+
+  @override
+  String get cnAirNone => '没有空气或天气数据';
+
+  @override
+  String get cnAirRetry => '再试一次空气和天气';
+
+  @override
+  String get cnRecordPlace => '这条记录的地点';
+
+  @override
+  String get cnEnvUnavailable => '没有与该时间匹配的观测';
+
+  @override
+  String cnLogMedication(String name) {
+    return '登记 $name';
+  }
+
+  @override
+  String get cnAsNeededUse => '需要时使用';
+
+  @override
+  String get cnScheduledUse => '按时间使用';
+
+  @override
+  String get cnExtraUse => '额外使用';
+
+  @override
+  String get cnUndoUse => '撤销';
+
+  @override
+  String get cnLoggedLocal => '已保存在本机';
+
+  @override
+  String get cnLoggedPending => '等待同步';
+
+  @override
+  String get cnLoggedSynced => '已同步';
+
+  @override
+  String cnDaysLogged(int n) {
+    return '本周已登记 $n 天';
+  }
+
+  @override
+  String get cnManageMedsLink => '管理我的药物';
+
+  @override
+  String get cnConsentAi => '允许用 AI 阅读文件';
+
+  @override
+  String get cnConsentAiBody => '信件图片会发到阅读服务，好让 CoverNote 显示信上写了什么。以后可在设置里关闭。';
+
+  @override
+  String get cnConsentAndAnalyze => '同意并阅读';
+
+  @override
+  String get cnConsentLater => '现在不要';
+
+  @override
+  String get cnConsentViewLocal => '在这里看原件';
+
+  @override
+  String get cnConsentDetails => '了解数据如何使用';
+
+  @override
+  String get cnConsentLabelPurpose => '读取药品标签';
+
+  @override
+  String get cnConsentLetterPurpose => '读取保险来信';
+
+  @override
+  String get cnConsentTranslatePurpose => '翻译信件';
+
+  @override
+  String get cnToday => '今天';
+
+  @override
+  String get cnLast7 => '最近 7 天';
+
+  @override
+  String get cnLast30 => '最近 30 天';
+
+  @override
+  String get cnCustomRange => '自选日期';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days 天 · $count 条记录';
+  }
+
+  @override
+  String get cnNoRecordThatDay => '这一天没有记录';
+
+  @override
+  String get cnNotLogged => '未登记';
+
+  @override
+  String get cnNotTaken => '已标为未服用';
+
+  @override
+  String get cnOriginalFile => '原始文件';
+
+  @override
+  String get cnFullTranslation => '全文翻译';
+
+  @override
+  String get cnRecognizedText => '识别出的文字';
+
+  @override
+  String get cnSameLanguage => '与原文相同的语言';
+
+  @override
+  String get cnTranslationPartial => '还有页面尚未翻译';
+
+  @override
+  String get cnTranslationFailed => '这一页无法翻译';
+
+  @override
+  String get cnOriginalMissing => '找不到原始文件。您可以重新上传。';
+
+  @override
+  String get cnTranslateRetry => '继续翻译';
+
+  @override
+  String get cnKeyDetails => '关键信息';
+
+  @override
+  String get cnWhatAbout => '这是关于什么的？';
+
+  @override
+  String get cnWhatToDo => '现在要做什么';
+
+  @override
+  String get cnByWhen => '截止到什么时候？';
+
+  @override
+  String get cnPreparePacket => '准备文件';
+
+  @override
+  String get cnCorrectReading => '更正读取错误';
+
+  @override
+  String get cnCorrectReadingNote => '原始信件不会改动。只更正自动读取的结果。';
+
+  @override
+  String get cnReviewImportant => '生成文件前，请先核对这些重要信息';
+
+  @override
+  String get cnPacketReadyTitle => '您的文件已准备好';
+
+  @override
+  String get cnNextSendClinic => '把文件发给医生，请他们审阅';
+
+  @override
+  String get cnNextWaitReply => '收到回复后，记下结果';
+
+  @override
+  String get cnExistingSentNewReady => '之前的文件已发出 · 您可以再做一套';
+
+  @override
+  String get cnWhyRecords => '用药和症状记录能帮助医生了解治疗进展。即使还没有记录，也可以根据来信准备文件。';
+
+  @override
+  String get cnLetterAskedRecords => '来信要求提供近期治疗记录';
+
+  @override
+  String get cnOptionalReference => '可选参考';
+
+  @override
+  String get cnAsthmaContext => '哮喘治疗记录 — 按时间用药、需要时用药，以及呼吸症状。';
+
+  @override
+  String get cnGeneralContext => '治疗记录 — 用药以及症状或备注。';
+
+  @override
+  String get cnTreatmentQuestion => '这封信是关于哪种治疗？';
+
+  @override
+  String get cnTreatmentAsthma => '哮喘';
+
+  @override
+  String get cnTreatmentOther => '其他治疗';
+
+  @override
+  String get cnTreatmentUnknown => '我还不确定';
+
+  @override
+  String get cnStatusWaitingClinic => '已发给诊所 · 等待审阅';
+
+  @override
+  String get cnStatusWaitingInsurer => '已记录为提交给保险计划 · 等待回复';
+
+  @override
+  String get cnFollowUpNeeded => '需要跟进';
+
+  @override
+  String get cnOutcomeRecorded => '已记下结果';
+
+  @override
+  String get cnActiveCases => '进行中';
+
+  @override
+  String get cnCompletedArchived => '已完成并归档';
+
+  @override
+  String get cnCompleteCase => '完成此案件';
+
+  @override
+  String get cnArchiveCase => '归档';
+
+  @override
+  String get cnReopenCase => '重新办理';
+
+  @override
+  String get cnOutcomeApproved => '已批准';
+
+  @override
+  String get cnOutcomeDenied => '已拒绝';
+
+  @override
+  String get cnOutcomeStopped => '不再继续';
+
+  @override
+  String get cnOutcomeOther => '其他 / 未记录';
+
+  @override
+  String get cnSentIsNotComplete => '发出去并不等于办完这个案件。';
+
+  @override
+  String get cnArchivedCase => '已归档';
+
+  @override
+  String get cnStepKeyDetails => '关键信息';
+
+  @override
+  String get cnStepAddRecords => '添加我的记录';
+
+  @override
+  String get cnStepReviewPacket => '核对文件';
+
+  @override
+  String get cnDataConsent => '数据处理';
+
+  @override
+  String get cnWeekCalendar => '本周';
+
+  @override
+  String get cnMonthCalendar => '本月';
+
+  @override
+  String get cnUsedShort => '我用了';
+
+  @override
+  String get cnCalendarLegend => '有圆点表示当天留下了记录。空白的一天不是漏服药。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -6337,7 +7233,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get authNpiLabel => 'NPI 號碼';
 
   @override
-  String get authNpiHelper => '10 位數的全國醫療人員識別碼';
+  String get authNpiHelper => '10 位數的全國醫療人員識別碼（National Provider Identifier）';
 
   @override
   String get authOrContinueWith => '或使用以下方式繼續';
@@ -6551,19 +7447,19 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get actPast4Weeks => '過去 4 週';
 
   @override
-  String get actQ1 => '您的氣喘在多少時間內，讓您無法在工作、學校或家中完成平常的事情？';
+  String get actQ1 => '您的氣喘有多少時候，讓您沒辦法在工作、學校或家裡把事情做完？';
 
   @override
   String get actQ2 => '您多常感到呼吸急促？';
 
   @override
-  String get actQ3 => '您的氣喘症狀多常讓您在夜間或比平常更早醒來？';
+  String get actQ3 => '氣喘症狀有多少時候讓您夜裡醒來，或比平常更早醒？';
 
   @override
-  String get actQ4 => '您多常使用急救吸入器或噴霧治療藥物？';
+  String get actQ4 => '您多常使用急救吸入器或噴霧藥？';
 
   @override
-  String get actQ5 => '您會如何評價自己的氣喘控制情況？';
+  String get actQ5 => '您覺得自己的氣喘控制得怎麼樣？';
 
   @override
   String get actOpt1 => '所有時間';
@@ -6578,7 +7474,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get actOpt4 => '少部分時間';
 
   @override
-  String get actOpt5 => '完全沒有';
+  String get actOpt5 => '從來沒有';
 
   @override
   String get actQ5Opt1 => '完全沒有控制';
@@ -6607,8 +7503,21 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get panicDialFailed => '無法在此裝置上開啟撥號畫面。';
 
   @override
-  String get s5ActNotice =>
-      '您的答案會被儲存，方便您與臨床醫師分享。此版本的問卷尚未對照官方計分方式檢查，因此應用程式不會顯示分數。';
+  String get envTrapDetail => '交通相關空氣指標（感測器，新澤西還可選用貨運權重）。';
+
+  @override
+  String get envFloodDetail => '您附近的美國國家氣象局暴洪和河川警報。';
+
+  @override
+  String get envPollenDetail => 'Google 花粉預報。';
+
+  @override
+  String envUpdatedAt(String when) {
+    return '更新時間：$when';
+  }
+
+  @override
+  String get s5ActNotice => '您的答案會儲存下來，方便您和醫師分享。這份問卷還沒有對過官方的計分方式，所以這個程式不會顯示分數。';
 
   @override
   String get s5ActSaved => '您的答案已儲存。';
@@ -6624,6 +7533,29 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get s5AddRecord => '新增記錄';
+
+  @override
+  String get s5AqiGood => '良';
+
+  @override
+  String get s5AqiModerate => '中等';
+
+  @override
+  String get s5AqiUsg => '對敏感族群不健康';
+
+  @override
+  String get s5AqiUnhealthy => '不健康';
+
+  @override
+  String get s5AqiVeryUnhealthy => '非常不健康';
+
+  @override
+  String get s5AqiHazardous => '危害';
+
+  @override
+  String s5AqiValue(String category, int aqi) {
+    return '$category（AQI $aqi）';
+  }
 
   @override
   String get s5Back => '返回';
@@ -6650,6 +7582,19 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5EntryRemoved => '記錄已移除。';
 
   @override
+  String get s5EnvAirDetail =>
+      '來自公共監測站和附近感測器的美國 EPA 空氣品質指數。它表示當地的室外空氣，不是單獨的交通廢氣。';
+
+  @override
+  String get s5EnvAirQuality => '空氣品質';
+
+  @override
+  String get s5EnvFlood => '洪水警報';
+
+  @override
+  String get s5EnvPollen => '花粉指數';
+
+  @override
   String get s5FieldDate => '日期';
 
   @override
@@ -6659,7 +7604,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5FieldNote => '備註（選填）';
 
   @override
-  String get s5FieldPuffs => '噴吸次數（選填）';
+  String get s5FieldPuffs => '噴藥次數（選填）';
 
   @override
   String get s5FieldReason => '原因（選填）';
@@ -6680,7 +7625,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5FilterSymptoms => '症狀';
 
   @override
-  String get s5FromUrgentHelp => '從「緊急求助」記錄';
+  String get s5FloodIssued => '已發布洪水警報';
+
+  @override
+  String get s5FloodNone => '沒有洪水警報';
+
+  @override
+  String get s5FromUrgentHelp => '從「緊急求助」記下';
 
   @override
   String get s5InhalerEditTitle => '吸入器使用詳細資料';
@@ -6692,7 +7643,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5InhalerLogged => '已記錄吸入器使用。';
 
   @override
-  String get s5InhalerOneEntryHint => '每次儲存都是一筆吸入器使用記錄，不會被算作一次噴吸或一天。';
+  String get s5InhalerOneEntryHint => '每次儲存只是一筆吸入器使用記錄。不會把它算成噴一次，也不會算成一天。';
 
   @override
   String s5InhalerUnknownCount(int n) {
@@ -6709,7 +7660,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5LogInhaler => '記錄吸入器使用';
 
   @override
-  String get s5LogLegend => '每一行是一筆已儲存的記錄。沒有記錄的日子會顯示為“未記錄”，這與零不同。';
+  String get s5LogLegend => '每一行是一筆已儲存的記錄。沒有記錄的日子會顯示為“未記錄”，這和零不一樣。';
 
   @override
   String get s5LogSymptoms => '記錄症狀';
@@ -6723,10 +7674,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get s5MedCheckIntro => '由您自行回報是否有使用藥物的確認。並非根據藥局紀錄。';
+  String get s5MedCheckIntro => '這是您自己填的：有沒有用藥。不是根據藥局記錄。';
 
   @override
-  String get s5MedCheckQuestion => '您有依計畫使用藥物嗎？';
+  String get s5MedCheckQuestion => '您有照計畫用藥嗎？';
 
   @override
   String get s5MedCheckTitle => '今日用藥確認';
@@ -6738,7 +7689,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5MedDailyCheck => '每日確認';
 
   @override
-  String get s5MedDailyCheckHint => '在首頁顯示“今日用藥確認”。只有在臨床醫師要求您每天使用這種藥物時才開啟。';
+  String get s5MedDailyCheckHint => '在首頁顯示“今日用藥確認”。只有醫師要求您每天用這種藥時，才打開。';
 
   @override
   String get s5MedDefault => '快速記錄的預設值';
@@ -6753,11 +7704,11 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5MedNameLabel => '藥物名稱（照藥品標籤上所寫）';
 
   @override
-  String get s5MedNotApplicable => '今天不需要使用';
+  String get s5MedNotApplicable => '今天沒有排定';
 
   @override
   String s5MedNotApplicableDays(int n) {
-    return '不需要使用：$n 天';
+    return '沒有排定：$n 天';
   }
 
   @override
@@ -6803,10 +7754,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5MyMedsEmpty => '尚未儲存任何藥物。';
 
   @override
-  String get s5MyMedsHint => '您確認過的名稱，可讓記錄更快速。這不是用藥劑量建議。';
-
-  @override
-  String get s5MyMedsTitle => '我的藥物';
+  String get s5MyMedsHint => '您確認過的藥名，讓記錄更快。這不是劑量建議。';
 
   @override
   String get s5NoAnswer => '不想回答';
@@ -6875,7 +7823,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5SaveFailed => '無法儲存。您輸入的內容仍保留在這裡。';
 
   @override
-  String get s5SymActivityLimited => '活動受限';
+  String get s5SymActivityLimited => '平常活動做不了';
 
   @override
   String get s5SymCough => '咳嗽';
@@ -6893,7 +7841,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5SymOtherHint => '請用您自己的話描述';
 
   @override
-  String get s5SymShortBreath => '呼吸困難';
+  String get s5SymShortBreath => '喘不過氣';
 
   @override
   String get s5SymWheeze => '喘鳴聲';
@@ -6917,7 +7865,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s5Undo => '復原';
 
   @override
-  String get s5UrgentActionPlan => '如果臨床醫師給過您氣喘行動計畫，請依照計畫行動。';
+  String get s5UrgentActionPlan => '如果醫師給過您氣喘行動計畫，請照那個計畫做。';
 
   @override
   String get s5UrgentHelp => '緊急求助';
@@ -6956,7 +7904,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s6OccurredLabel => '發生時間';
 
   @override
-  String get s6PuffsEach => '每次噴吸次數';
+  String get s6PuffsEach => '每次噴幾下';
 
   @override
   String s6ReminderBodyNamed(String name) {
@@ -6967,19 +7915,19 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get s6ReminderBodyPrivate => '該確認您的藥物了';
 
   @override
-  String get s6ReminderChannel => '在您儲存的用藥時間提醒。不是 30 分鐘提醒。';
+  String get s6ReminderChannel => '會在您存好的用藥時間提醒您。這不是每 30 分鐘一次的空氣和天氣提醒。';
 
   @override
   String get s6ReminderTitle => '用藥確認';
 
   @override
-  String get s6RoleBoth => '每日使用及視需要使用';
+  String get s6RoleBoth => '每天用，需要時也用';
 
   @override
-  String get s6RoleController => '每日使用的藥物';
+  String get s6RoleController => '每天用的藥';
 
   @override
-  String get s6RoleRescue => '視需要使用';
+  String get s6RoleRescue => '需要時用';
 
   @override
   String get s6ScheduleTimes => '您的用藥時間';
@@ -7137,7 +8085,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnErrNetwork => '沒有網路連線。請檢查網際網路後再試一次。';
+  String get cnErrNetwork => '沒有網路連線。請檢查網路後再試一次。';
 
   @override
   String get cnErrServiceDown => '服務沒有回應。請幾分鐘後再試。';
@@ -7170,7 +8118,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnHomeSignInLine => '要儲存您的案件，需要有帳號。';
 
   @override
-  String get cnServiceNotConfigured => '此版本尚未連接伺服器。只能使用範例。';
+  String get cnServiceNotConfigured => '這個版本沒有連到伺服器。只能用範例。';
 
   @override
   String get cnContinueCase => '繼續處理您的案件';
@@ -7307,13 +8255,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnKindInfoRequest => '要求提供更多資料';
 
   @override
-  String get cnKindReauth => '續期（重新授權）通知';
+  String get cnKindReauth => '續期通知（Reauthorization）';
 
   @override
-  String get cnKindFinalDenial => '最終申訴（Appeal）決定';
+  String get cnKindFinalDenial => '最終申訴決定（Final appeal decision）';
 
   @override
-  String get cnKindEob => '帳單或給付說明（EOB）';
+  String get cnKindEob => '帳單或給付說明（Explanation of Benefits）';
 
   @override
   String get cnKindOther => '其他信件';
@@ -7394,16 +8342,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnReqReset => '標記為需要';
 
   @override
-  String get cnRecMedication => '用藥史';
+  String get cnRecMedication => '用藥記錄';
 
   @override
   String get cnRecSymptoms => '症狀記錄';
 
   @override
-  String get cnRecLocalContext => '當地環境資料';
+  String get cnRecLocalContext => '環境因素';
 
   @override
-  String get cnRecPrn => '視需要使用的吸入器';
+  String get cnRecPrn => '需要時用的吸入器';
 
   @override
   String get cnDemoTitle => '範例';
@@ -7481,6 +8429,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnAddPhoto => '照片';
 
   @override
+  String get cnPickGallery => '從相簿選擇';
+
+  @override
+  String get cnLabelForm => '劑型（按原文）';
+
+  @override
   String get cnAddPdf => 'PDF';
 
   @override
@@ -7496,7 +8450,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get cnUploadConsent =>
-      '上傳會將這些頁面傳送到 CoverNote 伺服器，由人工智慧服務為您讀取。您隨時可以刪除案件。';
+      '上傳會把這些頁面送到 CoverNote 伺服器，由人工智慧幫您讀。您隨時可以刪除這個案件。';
 
   @override
   String get cnStageUploading => '上傳中';
@@ -7580,7 +8534,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnStepReview => '檢查';
 
   @override
-  String get cnStepEvidence => '佐證資料';
+  String get cnStepEvidence => '要附的資料';
 
   @override
   String get cnStepPacket => '文件包';
@@ -7637,7 +8591,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnCheckDetails => '檢查詳細資料';
 
   @override
-  String get cnCheckDetailsHint => '請把每個數值與您的信件對照。點選引文可看到它出自哪裡。';
+  String get cnCheckDetailsHint => '請把每一項和您的信件對一下。點一下引文，可以看到它從哪裡來。';
 
   @override
   String cnItemsLeftToCheck(int count) {
@@ -7651,7 +8605,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnContinueToEvidence => '繼續到佐證資料';
+  String get cnContinueToEvidence => '繼續到要附的資料';
 
   @override
   String cnSeePage(int n) {
@@ -7687,9 +8641,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '請您的醫療團隊申請覆核。信件列出 $count 項需要寄送的資料。',
-      one: '請您的醫療團隊申請覆核。信件列出 1 項需要寄送的資料。',
-      zero: '請您的醫療團隊申請覆核。信件沒有列出具體項目。',
+      other: '請您的醫療團隊向保險公司提出覆核申請。信件列出 $count 項需要寄送的資料。',
+      one: '請您的醫療團隊向保險公司提出覆核申請。信件列出 1 項需要寄送的資料。',
+      zero: '請您的醫療團隊向保險公司提出覆核申請。信件沒有列出具體項目。',
     );
     return '$_temp0';
   }
@@ -7711,7 +8665,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get cnNextFinal =>
-      '這是最終決定。CoverNote 不會為此起草第一次覆核申請。請向保險計畫或您的醫療團隊詢問信件所列的選項。';
+      '這是最終決定。CoverNote 不會為它起草第一次覆核申請。請問保險計畫或您的醫療團隊，信件列出了哪些做法。';
 
   @override
   String get cnNextEob => '這看起來是帳單或給付說明，不是拒絕給付通知。請向保險計畫的會員服務確認。';
@@ -7747,7 +8701,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnDateEnteredByYou => '由您輸入';
 
   @override
-  String get cnDateFromLetter => '信件中載明';
+  String get cnDateFromLetter => '信件上寫的';
 
   @override
   String cnReceivedOn(String date) {
@@ -7755,18 +8709,18 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnDatePassed => '這個日期已經過了。請致電保險計畫，詢問您還可以怎麼做。';
+  String get cnDatePassed => '這個日期已經過了。請打電話給保險計畫，問您還可以做什麼。';
 
   @override
   String cnNeedReceivedDate(int days) {
-    return '信件載明，從您收到信件當天起算 $days 個日曆天。信件是哪一天送達的？';
+    return '信件上寫著，從您收到那天起算 $days 個日曆天。是哪一天收到的？';
   }
 
   @override
   String get cnEnterReceivedDate => '輸入收到日期';
 
   @override
-  String get cnDateConflict => '信件中出現不同的日期。請向保險計畫詢問適用哪一個，然後選擇該日期。';
+  String get cnDateConflict => '信件裡有不同的日期。請向保險計畫問哪一個算數，然後選那個日期。';
 
   @override
   String cnUseThisDate(String date) {
@@ -7774,7 +8728,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnDateUnclear => '文字說明不清楚，或以工作日計算，因此 CoverNote 不會計算。請向保險計畫詢問確切日期。';
+  String get cnDateUnclear => '寫法不清楚，或是用工作日計算，所以 CoverNote 不會計算。請向保險計畫問確切日期。';
 
   @override
   String get cnNoDeadline => '在信件中找不到覆核期限。';
@@ -7800,7 +8754,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnTypeAsWritten => '請照信件上的寫法原樣輸入。';
 
   @override
-  String get cnCheckThisValue => '這個數值看起來不尋常。請與信件對照。';
+  String get cnCheckThisValue => '這一項看起來不尋常。請和信件對一下。';
 
   @override
   String get cnDone => '完成';
@@ -7820,7 +8774,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnLinkNote => '您自己的記錄可以支持這項申請，但不能取代診所的紀錄或檢驗結果。';
+  String get cnLinkNote => '您自己的記錄可以補充這項申請，但不能取代診所的記錄或檢驗結果。';
 
   @override
   String cnMedLine(int taken, int notTaken, int unknown, int scheduled) {
@@ -7829,7 +8783,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String cnPrnLine(int uses, int puffs) {
-    return '視需要使用：$uses 次，$puffs 噴';
+    return '需要時用：$uses 次，$puffs 噴';
   }
 
   @override
@@ -7857,7 +8811,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnSyntheticData => '合成資料';
+  String get cnSyntheticData => '模擬資料';
 
   @override
   String get cnLetterAsksFor => '信件要求的資料';
@@ -7874,7 +8828,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnLocalContextNote => '選用的背景資料。這不是在您家中測得的數值，也不是症狀的原因。';
+  String get cnLocalContextNote => '可選。這些是室外因素，不是家中的測量值，也不是症狀的原因。';
 
   @override
   String get cnContinueToPacket => '繼續到文件包';
@@ -7927,7 +8881,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get cnBeforeSharingBody =>
-      '這個檔案包含您的姓名和健康資料。請只分享給您的醫療團隊或保險計畫。分享並不會為您提交任何東西。';
+      '這個檔案有您的姓名和健康資料。請只分享給您的醫療團隊或保險計畫。分享並不會替您提交任何東西。';
 
   @override
   String get cnShare => '分享';
@@ -7939,7 +8893,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnMethodMail => '郵寄';
 
   @override
-  String get cnMethodPortal => '線上入口網站';
+  String get cnMethodPortal => '線上入口';
 
   @override
   String get cnMethodInPerson => '親自送達';
@@ -7951,7 +8905,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnMethodOther => '其他';
 
   @override
-  String get cnPacketNoDraftFinal => '最終決定的文件包只有醫師摘要，不會製作第一階段覆核申請草稿。';
+  String get cnPacketNoDraftFinal => '最終決定的文件包只有醫師摘要。不會製作第一級覆核申請草稿。';
 
   @override
   String get cnPacketNoDraftEob => '帳單或給付說明的文件包只有醫師摘要。';
@@ -7969,7 +8923,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnPartSummary => '醫師摘要（1 頁）';
 
   @override
-  String get cnPartDraft => '覆核申請草稿（由您的醫療團隊完成）';
+  String get cnPartDraft => '覆核申請草稿（給您的醫療團隊填寫）';
 
   @override
   String get cnPartLetterText => '附錄：信件文字';
@@ -8021,7 +8975,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnTabReviewDraft => '覆核申請草稿';
 
   @override
-  String get cnSentExplain => '請記錄寄出的時間和方式。CoverNote 不會代為寄出，也不會追蹤決定結果。';
+  String get cnSentExplain => '請記下何時、用什麼方式寄出。CoverNote 不會替您寄出，也不會追蹤決定。';
 
   @override
   String get cnSave => '儲存';
@@ -8041,17 +8995,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get cnCtxIntro =>
-      '空氣監測數值來自有名稱的來源，與您注意到的情況分開記錄。只有在有助於說明您的記錄時，才將它們加入案件。';
+  String get cnCtxIntro => '空氣數值來自寫明的來源，和您注意到的事分開放。只有在能幫助說明您的記錄時，才加到案件裡。';
 
   @override
-  String get cnCtxReadings => '空氣監測數值';
+  String get cnCtxReadings => '空氣數值';
 
   @override
-  String get cnCtxReadingsNote => '觀測當天的區域性數值。它們並不是測量您家中的交通廢氣。';
+  String get cnCtxReadingsNote => '這是觀測當天的地區數值，不是在您家裡量到的交通廢氣。';
 
   @override
-  String get cnCtxAddReading => '新增監測數值';
+  String get cnCtxAddReading => '新增空氣數值';
 
   @override
   String get cnCtxReports => '您注意到的情況';
@@ -8063,13 +9016,13 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnCtxAddReport => '新增您注意到的情況';
 
   @override
-  String get cnReportExhaust => '附近有濃烈的廢氣';
+  String get cnReportExhaust => '附近有很重的廢氣';
 
   @override
-  String get cnReportWater => '家中有水滲入';
+  String get cnReportWater => '家裡有水滲進來';
 
   @override
-  String get cnReportDamp => '室內有潮濕或霉味的區域';
+  String get cnReportDamp => '家裡有潮濕或黴味的地方';
 
   @override
   String cnOnDate(String date) {
@@ -8080,10 +9033,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnNoteOptional => '備註（選填）';
 
   @override
-  String get cnCtxWhat => '監測項目';
+  String get cnCtxWhat => '項目';
 
   @override
-  String get cnCtxHumidityNote => '戶外濕度是天氣資料。它不能顯示您家中是否潮濕或有黴菌。';
+  String get cnCtxHumidityNote => '戶外濕度是天氣資料。看不出您家裡是否潮濕，也看不出有沒有黴菌。';
 
   @override
   String get cnCtxValue => '數值';
@@ -8101,16 +9054,16 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnCtxSourceRequired => '請填寫來源。';
 
   @override
-  String get cnCtxPlace => '地點（郵遞區號或城鎮，選填）';
+  String get cnCtxPlace => '地點（選填）';
 
   @override
-  String get cnRecordsSignInBody => '請登入，以保存用藥、症狀和當地環境記錄。';
+  String get cnRecordsSignInBody => '登入後可以保存用藥、症狀和環境因素紀錄。';
 
   @override
   String get cnRecordsYourRecords => '您的記錄';
 
   @override
-  String get cnRecMedicationSub => '您使用的藥物和劑量';
+  String get cnRecMedicationSub => '您在用的藥和劑量';
 
   @override
   String get cnRecDailyLog => '每日記錄';
@@ -8119,7 +9072,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnRecDailyLogSub => '症狀和吸入器使用';
 
   @override
-  String get cnRecLocalContextSub => '空氣監測數值和您注意到的情況';
+  String get cnRecLocalContextSub => '空氣數值和您注意到的事';
 
   @override
   String get cnHelp => '協助';
@@ -8131,11 +9084,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnUrgentHelpSub => '呼吸緊急狀況的處理步驟和撥打 911';
 
   @override
-  String cnLast30Days(String from, String to) {
-    return '最近 30 天（$from – $to）';
-  }
-
-  @override
   String get cnNoSchedule => '未設定固定時間表';
 
   @override
@@ -8145,7 +9093,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnDeleteAccountTitle => '要刪除您的帳號嗎？';
 
   @override
-  String get cnDeleteAccountBody => '這會永久刪除您的帳號、案件、已上傳的信件、文件包和記錄。此操作無法復原。';
+  String get cnDeleteAccountBody => '這會永久刪除您的帳號、案件、已上傳的信件、文件包和記錄。不能恢復。';
 
   @override
   String get cnTypeDelete => '請輸入 DELETE 以確認';
@@ -8188,7 +9136,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get cnAboutBody =>
-      'CoverNote 協助您讀懂關於藥物的保險信件，並為您的醫療團隊準備文件。它不會向您的保險計畫提交任何東西，不會決定是否給付，也不是醫療建議。';
+      'CoverNote 幫您看懂關於藥物的保險信件，也幫您準備給您的醫療團隊的文件。它不會向您的保險計畫提交任何東西，不會決定是否給付，也不是醫療建議。';
 
   @override
   String get cnDangerZone => '刪除帳號';
@@ -8232,7 +9180,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnLanguageChoose => '選擇您的語言';
 
   @override
-  String get cnLanguageNote => '部分文字由軟體翻譯，可能有錯誤。藥物名稱、劑量、日期和信件中的引文絕不會被翻譯。';
+  String get cnLanguageNote => '部分文字由軟體翻譯，可能有錯誤。藥品名稱和劑量保持原文。信件的其餘內容會為您翻譯。';
 
   @override
   String get cnLanguageButtonTooltip => '更改語言';
@@ -8241,35 +9189,444 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get cnPacketEnglishNote => '文件包以英文撰寫，方便您的醫療團隊閱讀。';
 
   @override
-  String get cnReasonMissingInformation => '保險計畫表示沒有收到所需的全部資料。';
+  String get cnReasonMissingInformation => '保險計畫說，沒有收到需要的全部資料。';
 
   @override
-  String get cnReasonStepTherapy => '保險計畫希望您先嘗試其他藥物。';
+  String get cnReasonStepTherapy => '保險計畫要您先試其他藥。這是階梯治療（Step therapy）。';
 
   @override
-  String get cnReasonMedicalNecessity => '保險計畫表示無法確認這種藥物在醫療上有其必要。';
+  String get cnReasonMedicalNecessity =>
+      '保險計畫說，無法確認這種藥有醫療必要性（Medical necessity）。';
 
   @override
-  String get cnReasonFormulary => '保險計畫表示這種藥物不在其承保藥物清單上。';
+  String get cnReasonFormulary => '保險計畫說，這種藥不在承保藥品清單（Formulary）上。';
 
   @override
-  String get cnReasonQuantityLimit => '保險計畫表示申請的數量超過其承保範圍。';
+  String get cnReasonQuantityLimit => '保險計畫說，要求的數量比它給付的數量多。';
 
   @override
-  String get cnReasonEligibility => '保險計畫表示依其承保規則，這項不在承保範圍內。';
+  String get cnReasonEligibility => '保險計畫說，按照它的承保規則，這項不在承保範圍內。';
 
   @override
-  String get cnReasonOther => '信件列出了其他原因。請開啟信件中的引文閱讀。';
+  String get cnReasonOther => '信件寫了別的原因。請打開信件裡的引文來看。';
 
   @override
-  String get cnReqHintMedHistory => '您過去和目前使用的藥物';
+  String get cnReqHintMedHistory => '您過去和現在用的藥';
 
   @override
-  String get cnReqHintVisitNotes => '您看診時的醫師紀錄';
+  String get cnReqHintVisitNotes => '看診時醫師寫下的記錄';
 
   @override
   String get cnReqHintTestResults => '檢查或檢驗結果';
 
   @override
-  String get cnReqHintDoctorStatement => '醫師的聲明書';
+  String get cnReqHintDoctorStatement => '醫師寫的說明';
+
+  @override
+  String get cnTabSettings => '設定';
+
+  @override
+  String get cnCasesList => '案件列表';
+
+  @override
+  String get cnGoHome => '首頁';
+
+  @override
+  String get cnAnalyzingTitle => '保險來信 · 正在讀取';
+
+  @override
+  String cnCaseNumber(String n) {
+    return '案件 #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return '$when 新增';
+  }
+
+  @override
+  String get cnAliasHint => '簡稱（選填）';
+
+  @override
+  String get cnShareDocuments => '傳送文件';
+
+  @override
+  String get cnRecordDelivery => '記下寄出情形';
+
+  @override
+  String get cnShareAsk => '您把這些文件寄出去了嗎？';
+
+  @override
+  String get cnDeliveryRecipient => '寄給';
+
+  @override
+  String get cnRecipientClinic => '診所或醫師';
+
+  @override
+  String get cnRecipientInsurer => '保險計畫';
+
+  @override
+  String get cnRecipientSelf => '自己留著';
+
+  @override
+  String get cnRecipientOther => '其他';
+
+  @override
+  String get cnDeliveryMethod => '怎麼寄的';
+
+  @override
+  String get cnMethodEmail => '電子郵件';
+
+  @override
+  String get cnMethodMessage => '簡訊或通訊軟體';
+
+  @override
+  String get cnMethodUnknown => '記不得了';
+
+  @override
+  String get cnDeliveryUserReport => '這是您自己填的。應用程式無法確認對方是否收到。';
+
+  @override
+  String get cnShareCancelled => '已取消傳送。沒有標記為已寄出。';
+
+  @override
+  String get cnRecordsLoading => '正在載入記錄…';
+
+  @override
+  String get cnRecordsEmpty => '這段期間沒有記錄';
+
+  @override
+  String get cnRecordsError => '無法載入記錄';
+
+  @override
+  String get cnRecordsPermission => '您無權查看這些記錄';
+
+  @override
+  String get cnRecordsPending => '已存在這支手機 · 等待同步';
+
+  @override
+  String get cnRecordsFiltered => '篩選條件隱藏了部分記錄';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '不在這段期間內的記錄 $n 筆';
+  }
+
+  @override
+  String get cnWidenRange => '查看更長的期間';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days 天 · 用藥 $med 次 · 症狀 $sym 筆';
+  }
+
+  @override
+  String get cnOneDayPacket => '這套文件只包含一天。';
+
+  @override
+  String get cnMyMedications => '我的藥物';
+
+  @override
+  String get cnScanLabel => '掃描藥品標籤';
+
+  @override
+  String get cnMedManageHint => '先登錄您在用的藥。處方有變就改一下。每天有沒有用，在「記錄」裡登記。';
+
+  @override
+  String get cnLabelNeedLabel => '請拍攝藥局標籤或藥盒上的文字。應用程式不會憑藥丸形狀辨認藥品。';
+
+  @override
+  String get cnLabelUnclear => '這項看不清楚。儲存前請核對。';
+
+  @override
+  String get cnConsentLabel => '允許 AI 讀取藥品標籤';
+
+  @override
+  String get cnManualMed => '手動輸入';
+
+  @override
+  String get cnAirWeather => '您附近的環境因素';
+
+  @override
+  String get cnAirAutoNote =>
+      '依照您現在的位置顯示空氣品質、交通相關空氣、花粉、洪水警報和室外濕度。手機本身不測量空氣。室外濕度不是室內黴菌。';
+
+  @override
+  String get cnHomeRecords => '相關用藥紀錄';
+
+  @override
+  String get cnEnvTrap => '交通相關空氣';
+
+  @override
+  String get cnItemMemo => '備註';
+
+  @override
+  String get cnSaveNote => '儲存備註';
+
+  @override
+  String get cnLocationNeed => '要查看您附近的環境因素，請允許使用位置。';
+
+  @override
+  String get cnLocationOff => '定位服務已關閉。請開啟後再試。';
+
+  @override
+  String get cnLocationBlocked => '位置權限已被阻擋。請在設定中允許。';
+
+  @override
+  String get cnOpenSettings => '開啟設定';
+
+  @override
+  String get cnAirNone => '沒有空氣或天氣資料';
+
+  @override
+  String get cnAirRetry => '再試一次空氣與天氣';
+
+  @override
+  String get cnRecordPlace => '這筆記錄的地點';
+
+  @override
+  String get cnEnvUnavailable => '沒有與該時間相符的觀測';
+
+  @override
+  String cnLogMedication(String name) {
+    return '登記 $name';
+  }
+
+  @override
+  String get cnAsNeededUse => '需要時使用';
+
+  @override
+  String get cnScheduledUse => '按時間使用';
+
+  @override
+  String get cnExtraUse => '額外使用';
+
+  @override
+  String get cnUndoUse => '復原';
+
+  @override
+  String get cnLoggedLocal => '已存在這支手機';
+
+  @override
+  String get cnLoggedPending => '等待同步';
+
+  @override
+  String get cnLoggedSynced => '已同步';
+
+  @override
+  String cnDaysLogged(int n) {
+    return '本週已登記 $n 天';
+  }
+
+  @override
+  String get cnManageMedsLink => '管理我的藥物';
+
+  @override
+  String get cnConsentAi => '允許用 AI 閱讀文件';
+
+  @override
+  String get cnConsentAiBody => '信件圖片會送到閱讀服務，好讓 CoverNote 顯示信上寫了什麼。之後可在設定裡關閉。';
+
+  @override
+  String get cnConsentAndAnalyze => '同意並閱讀';
+
+  @override
+  String get cnConsentLater => '現在不要';
+
+  @override
+  String get cnConsentViewLocal => '在這裡看原件';
+
+  @override
+  String get cnConsentDetails => '了解資料如何使用';
+
+  @override
+  String get cnConsentLabelPurpose => '讀取藥品標籤';
+
+  @override
+  String get cnConsentLetterPurpose => '讀取保險來信';
+
+  @override
+  String get cnConsentTranslatePurpose => '翻譯信件';
+
+  @override
+  String get cnToday => '今天';
+
+  @override
+  String get cnLast7 => '最近 7 天';
+
+  @override
+  String get cnLast30 => '最近 30 天';
+
+  @override
+  String get cnCustomRange => '自選日期';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days 天 · $count 筆記錄';
+  }
+
+  @override
+  String get cnNoRecordThatDay => '這一天沒有記錄';
+
+  @override
+  String get cnNotLogged => '未登記';
+
+  @override
+  String get cnNotTaken => '已標為未服用';
+
+  @override
+  String get cnOriginalFile => '原始檔案';
+
+  @override
+  String get cnFullTranslation => '全文翻譯';
+
+  @override
+  String get cnRecognizedText => '辨識出的文字';
+
+  @override
+  String get cnSameLanguage => '與原文相同的語言';
+
+  @override
+  String get cnTranslationPartial => '還有頁面尚未翻譯';
+
+  @override
+  String get cnTranslationFailed => '這一頁無法翻譯';
+
+  @override
+  String get cnOriginalMissing => '找不到原始檔案。您可以重新上傳。';
+
+  @override
+  String get cnTranslateRetry => '繼續翻譯';
+
+  @override
+  String get cnKeyDetails => '關鍵資訊';
+
+  @override
+  String get cnWhatAbout => '這是關於什麼的？';
+
+  @override
+  String get cnWhatToDo => '現在要做什麼';
+
+  @override
+  String get cnByWhen => '截止到什麼時候？';
+
+  @override
+  String get cnPreparePacket => '準備文件';
+
+  @override
+  String get cnCorrectReading => '更正讀取錯誤';
+
+  @override
+  String get cnCorrectReadingNote => '原始信件不會改動。只更正自動讀取的結果。';
+
+  @override
+  String get cnReviewImportant => '產生文件前，請先核對這些重要資訊';
+
+  @override
+  String get cnPacketReadyTitle => '您的文件已準備好';
+
+  @override
+  String get cnNextSendClinic => '把文件寄給醫師，請他們審閱';
+
+  @override
+  String get cnNextWaitReply => '收到回覆後，記下結果';
+
+  @override
+  String get cnExistingSentNewReady => '先前的文件已寄出 · 您可以再做一套';
+
+  @override
+  String get cnWhyRecords => '用藥和症狀記錄能幫助醫師了解治療進展。即使還沒有記錄，也可以根據來信準備文件。';
+
+  @override
+  String get cnLetterAskedRecords => '來信要求提供近期治療記錄';
+
+  @override
+  String get cnOptionalReference => '選填參考';
+
+  @override
+  String get cnAsthmaContext => '氣喘治療記錄 — 按時間用藥、需要時用藥，以及呼吸症狀。';
+
+  @override
+  String get cnGeneralContext => '治療記錄 — 用藥以及症狀或備註。';
+
+  @override
+  String get cnTreatmentQuestion => '這封信是關於哪種治療？';
+
+  @override
+  String get cnTreatmentAsthma => '氣喘';
+
+  @override
+  String get cnTreatmentOther => '其他治療';
+
+  @override
+  String get cnTreatmentUnknown => '我還不確定';
+
+  @override
+  String get cnStatusWaitingClinic => '已寄給診所 · 等待審閱';
+
+  @override
+  String get cnStatusWaitingInsurer => '已記錄為提交給保險計畫 · 等待回覆';
+
+  @override
+  String get cnFollowUpNeeded => '需要後續處理';
+
+  @override
+  String get cnOutcomeRecorded => '已記下結果';
+
+  @override
+  String get cnActiveCases => '進行中';
+
+  @override
+  String get cnCompletedArchived => '已完成並封存';
+
+  @override
+  String get cnCompleteCase => '完成此案件';
+
+  @override
+  String get cnArchiveCase => '封存';
+
+  @override
+  String get cnReopenCase => '重新辦理';
+
+  @override
+  String get cnOutcomeApproved => '已核准';
+
+  @override
+  String get cnOutcomeDenied => '已拒絕';
+
+  @override
+  String get cnOutcomeStopped => '不再繼續';
+
+  @override
+  String get cnOutcomeOther => '其他 / 未記錄';
+
+  @override
+  String get cnSentIsNotComplete => '寄出去並不等於辦完這個案件。';
+
+  @override
+  String get cnArchivedCase => '已封存';
+
+  @override
+  String get cnStepKeyDetails => '關鍵資訊';
+
+  @override
+  String get cnStepAddRecords => '新增我的記錄';
+
+  @override
+  String get cnStepReviewPacket => '核對文件';
+
+  @override
+  String get cnDataConsent => '資料處理';
+
+  @override
+  String get cnWeekCalendar => '本週';
+
+  @override
+  String get cnMonthCalendar => '本月';
+
+  @override
+  String get cnUsedShort => '我用了';
+
+  @override
+  String get cnCalendarLegend => '有圓點表示當天留下了記錄。空白的一天不是漏服藥。';
 }

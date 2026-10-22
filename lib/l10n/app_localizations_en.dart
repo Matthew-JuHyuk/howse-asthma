@@ -2459,7 +2459,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get s6ReminderChannel =>
-      'Reminders at the dose times you saved. Not a 30-minute alert.';
+      'Reminders at the dose times you saved. This is not the 30-minute air and weather alert.';
 
   @override
   String get s6ReminderTitle => 'Medicine check';
@@ -3121,7 +3121,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cnRecSymptoms => 'Symptom log';
 
   @override
-  String get cnRecLocalContext => 'Local context';
+  String get cnRecLocalContext => 'Environmental factors';
 
   @override
   String get cnRecPrn => 'As-needed inhaler';
@@ -3209,6 +3209,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cnAddPhoto => 'Photo';
+
+  @override
+  String get cnPickGallery => 'Choose from photos';
+
+  @override
+  String get cnLabelForm => 'Form (as written)';
 
   @override
   String get cnAddPdf => 'PDF';
@@ -3314,7 +3320,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cnStepReview => 'Review';
 
   @override
-  String get cnStepEvidence => 'Evidence';
+  String get cnStepEvidence => 'Records';
 
   @override
   String get cnStepPacket => 'Packet';
@@ -3623,7 +3629,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cnLocalContextNote =>
-      'Optional context. Not a measurement at your home and not a cause of symptoms.';
+      'Optional. These are outdoor factors, not a measurement inside your home and not a cause of symptoms.';
 
   @override
   String get cnContinueToPacket => 'Continue to packet';
@@ -3862,11 +3868,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cnCtxSourceRequired => 'Add the source.';
 
   @override
-  String get cnCtxPlace => 'Place (ZIP or town, optional)';
+  String get cnCtxPlace => 'Place (optional)';
 
   @override
   String get cnRecordsSignInBody =>
-      'Sign in to keep medication, symptom and local context records.';
+      'Sign in to keep medication, symptom, and environmental-factor records.';
 
   @override
   String get cnRecordsYourRecords => 'Your records';
@@ -4005,7 +4011,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cnLanguageNote =>
-      'Some text was translated by software and may have mistakes. Medicine names, doses, dates and quotes from your letter are never translated.';
+      'Some text was translated by software and may have mistakes. Medicine names and doses stay as printed. The rest of the letter is translated for you.';
 
   @override
   String get cnLanguageButtonTooltip => 'Change language';
@@ -4053,4 +4059,453 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cnReqHintDoctorStatement => 'A statement from your doctor';
+
+  @override
+  String get cnTabSettings => 'Settings';
+
+  @override
+  String get cnCasesList => 'Case list';
+
+  @override
+  String get cnGoHome => 'Home';
+
+  @override
+  String get cnAnalyzingTitle => 'Insurance letter · analyzing';
+
+  @override
+  String cnCaseNumber(String n) {
+    return 'Case #$n';
+  }
+
+  @override
+  String cnAddedAt(String when) {
+    return 'Added $when';
+  }
+
+  @override
+  String get cnAliasHint => 'Nickname (optional)';
+
+  @override
+  String get cnShareDocuments => 'Share documents';
+
+  @override
+  String get cnRecordDelivery => 'Record delivery';
+
+  @override
+  String get cnShareAsk => 'Did you send these documents?';
+
+  @override
+  String get cnDeliveryRecipient => 'Sent to';
+
+  @override
+  String get cnRecipientClinic => 'Clinic or clinician';
+
+  @override
+  String get cnRecipientInsurer => 'Insurance plan';
+
+  @override
+  String get cnRecipientSelf => 'Kept for myself';
+
+  @override
+  String get cnRecipientOther => 'Other';
+
+  @override
+  String get cnDeliveryMethod => 'How';
+
+  @override
+  String get cnMethodEmail => 'Email';
+
+  @override
+  String get cnMethodMessage => 'Text or messenger';
+
+  @override
+  String get cnMethodUnknown => 'I do not remember';
+
+  @override
+  String get cnDeliveryUserReport =>
+      'This is what you reported. The app cannot confirm that the other side received it.';
+
+  @override
+  String get cnShareCancelled =>
+      'Share was cancelled. Nothing was marked as sent.';
+
+  @override
+  String get cnRecordsLoading => 'Loading records…';
+
+  @override
+  String get cnRecordsEmpty => 'No records in this period';
+
+  @override
+  String get cnRecordsError => 'Could not load records';
+
+  @override
+  String get cnRecordsPermission => 'You do not have access to these records';
+
+  @override
+  String get cnRecordsPending => 'Saved on this device · waiting to sync';
+
+  @override
+  String get cnRecordsFiltered => 'Some records are hidden by your filters';
+
+  @override
+  String cnRecordsOutside(int n) {
+    return '$n records outside this period';
+  }
+
+  @override
+  String get cnWidenRange => 'Show a longer period';
+
+  @override
+  String cnLinkedSummary(int days, int med, int sym) {
+    return '$days day(s) · $med medication uses · $sym symptom entries';
+  }
+
+  @override
+  String get cnOneDayPacket => 'This packet covers one day.';
+
+  @override
+  String get cnMyMedications => 'My medications';
+
+  @override
+  String get cnScanLabel => 'Scan medication label';
+
+  @override
+  String get cnMedManageHint =>
+      'Register medicines you use. Change them when a prescription changes. Daily use is logged on Records.';
+
+  @override
+  String get cnLabelNeedLabel =>
+      'Photograph the pharmacy label or box text. The app does not identify a pill by its shape.';
+
+  @override
+  String get cnLabelUnclear =>
+      'This value was not clear. Check it before saving.';
+
+  @override
+  String get cnConsentLabel => 'Allow AI to read a medication label';
+
+  @override
+  String get cnManualMed => 'Enter manually';
+
+  @override
+  String get cnAirWeather => 'Environmental factors near you';
+
+  @override
+  String get cnAirAutoNote =>
+      'Air quality, traffic-related air, pollen, flood alerts, and outdoor humidity come from your current location. This phone does not measure the air. Outdoor humidity is not indoor mold.';
+
+  @override
+  String get cnHomeRecords => 'Related medication records';
+
+  @override
+  String get cnEnvTrap => 'Traffic-related air';
+
+  @override
+  String get cnItemMemo => 'Note';
+
+  @override
+  String get cnSaveNote => 'Save note';
+
+  @override
+  String get cnLocationNeed =>
+      'Allow location to show environmental factors near you.';
+
+  @override
+  String get cnLocationOff =>
+      'Location services are off. Turn them on and try again.';
+
+  @override
+  String get cnLocationBlocked => 'Location is blocked. Allow it in settings.';
+
+  @override
+  String get cnOpenSettings => 'Open settings';
+
+  @override
+  String get cnAirNone => 'No air or weather data';
+
+  @override
+  String get cnAirRetry => 'Try air and weather again';
+
+  @override
+  String get cnSetRegion => 'Set your area (ZIP or city)';
+
+  @override
+  String get cnConfiguredArea => 'Area you set';
+
+  @override
+  String get cnRecordPlace => 'Place of this record';
+
+  @override
+  String get cnClosestObservation => 'Closest observation to the record time';
+
+  @override
+  String get cnEnvUnavailable => 'No matching observation for that time';
+
+  @override
+  String cnLogMedication(String name) {
+    return 'Log $name';
+  }
+
+  @override
+  String get cnAsNeededUse => 'As-needed use';
+
+  @override
+  String get cnAsNeededInhaler => 'As-needed inhaler use';
+
+  @override
+  String get cnScheduledUse => 'Scheduled use';
+
+  @override
+  String get cnExtraUse => 'Extra use';
+
+  @override
+  String get cnUndoUse => 'Undo';
+
+  @override
+  String get cnLoggedLocal => 'Saved on this device';
+
+  @override
+  String get cnLoggedPending => 'Waiting to sync';
+
+  @override
+  String get cnLoggedSynced => 'Synced';
+
+  @override
+  String cnDaysLogged(int n) {
+    return 'Logged on $n days this week';
+  }
+
+  @override
+  String get cnManageMedsLink => 'Manage my medications';
+
+  @override
+  String get cnViewAirWeather => 'View environmental factors near you';
+
+  @override
+  String get cnConsentAi => 'Allow AI document analysis';
+
+  @override
+  String get cnConsentAiBody =>
+      'The letter image is sent to a reading service so CoverNote can show what it says. You can turn this off later in Settings.';
+
+  @override
+  String get cnConsentAndAnalyze => 'Agree and analyze';
+
+  @override
+  String get cnConsentLater => 'Not now';
+
+  @override
+  String get cnConsentViewLocal => 'View the original here';
+
+  @override
+  String get cnConsentDetails => 'More about data use';
+
+  @override
+  String get cnConsentLabelPurpose => 'Read a medication label';
+
+  @override
+  String get cnConsentLetterPurpose => 'Read an insurance letter';
+
+  @override
+  String get cnConsentTranslatePurpose => 'Translate a letter';
+
+  @override
+  String get cnToday => 'Today';
+
+  @override
+  String get cnLast7 => 'Last 7 days';
+
+  @override
+  String get cnLast30 => 'Last 30 days';
+
+  @override
+  String get cnCustomRange => 'Choose dates';
+
+  @override
+  String cnRangeSummary(String from, String to, int days, int count) {
+    return '$from–$to · $days day(s) · $count records';
+  }
+
+  @override
+  String get cnNoRecordThatDay => 'No record this day';
+
+  @override
+  String get cnNotLogged => 'Not logged';
+
+  @override
+  String get cnNotTaken => 'Marked as not taken';
+
+  @override
+  String get cnOriginalFile => 'Original file';
+
+  @override
+  String get cnFullTranslation => 'Full translation';
+
+  @override
+  String get cnRecognizedText => 'Recognized text';
+
+  @override
+  String get cnSameLanguage => 'Same language as the original';
+
+  @override
+  String get cnTranslationPartial => 'Some pages are not translated yet';
+
+  @override
+  String get cnTranslationFailed => 'This page could not be translated';
+
+  @override
+  String get cnOriginalMissing =>
+      'The original file could not be found. You can upload it again.';
+
+  @override
+  String get cnTranslateRetry => 'Continue translation';
+
+  @override
+  String get cnKeyDetails => 'Key details';
+
+  @override
+  String get cnWhatAbout => 'What is this about?';
+
+  @override
+  String get cnWhatToDo => 'What to do now';
+
+  @override
+  String get cnByWhen => 'By when?';
+
+  @override
+  String get cnPreparePacket => 'Prepare documents';
+
+  @override
+  String get cnCorrectReading => 'Correct a reading error';
+
+  @override
+  String get cnCorrectReadingNote =>
+      'The original letter does not change. Only the automatic reading is corrected.';
+
+  @override
+  String get cnReviewImportant =>
+      'Check these important values before creating documents';
+
+  @override
+  String get cnPacketReadyTitle => 'Your documents are ready';
+
+  @override
+  String get cnNextSendClinic =>
+      'Send the documents to your clinician and ask them to review';
+
+  @override
+  String get cnNextWaitReply => 'When you get a reply, record the result';
+
+  @override
+  String get cnExistingSentNewReady =>
+      'Earlier documents were sent · you can make a new set';
+
+  @override
+  String get cnWhyRecords =>
+      'Medication and symptom records can help a clinician see how treatment is going. You can still make documents from the letter if you have no records yet.';
+
+  @override
+  String get cnLetterAskedRecords =>
+      'The letter asked for recent treatment records';
+
+  @override
+  String get cnOptionalReference => 'Optional reference';
+
+  @override
+  String get cnAsthmaContext =>
+      'Asthma treatment records — scheduled use, as-needed use, and breathing symptoms.';
+
+  @override
+  String get cnGeneralContext =>
+      'Treatment records — medication use and symptoms or notes.';
+
+  @override
+  String get cnTreatmentQuestion => 'What treatment is this letter about?';
+
+  @override
+  String get cnTreatmentAsthma => 'Asthma';
+
+  @override
+  String get cnTreatmentOther => 'Another treatment';
+
+  @override
+  String get cnTreatmentUnknown => 'I am not sure yet';
+
+  @override
+  String get cnStatusWaitingClinic => 'Sent to the clinic · waiting for review';
+
+  @override
+  String get cnStatusWaitingInsurer =>
+      'Reported as submitted to the plan · waiting for a reply';
+
+  @override
+  String get cnFollowUpNeeded => 'Follow-up needed';
+
+  @override
+  String get cnOutcomeRecorded => 'Result recorded';
+
+  @override
+  String get cnActiveCases => 'In progress';
+
+  @override
+  String get cnCompletedArchived => 'Completed & archived';
+
+  @override
+  String get cnCompleteCase => 'Complete this case';
+
+  @override
+  String get cnArchiveCase => 'Archive';
+
+  @override
+  String get cnReopenCase => 'Resume';
+
+  @override
+  String get cnOutcomeApproved => 'Approved';
+
+  @override
+  String get cnOutcomeDenied => 'Denied';
+
+  @override
+  String get cnOutcomeStopped => 'Not continuing';
+
+  @override
+  String get cnOutcomeOther => 'Other / not recorded';
+
+  @override
+  String get cnSentIsNotComplete =>
+      'Sending is not the same as completing the case.';
+
+  @override
+  String get cnArchivedCase => 'Archived';
+
+  @override
+  String get cnStepKeyDetails => 'Key details';
+
+  @override
+  String get cnStepAddRecords => 'Add my records';
+
+  @override
+  String get cnStepReviewPacket => 'Review packet';
+
+  @override
+  String get cnDataConsent => 'Data processing';
+
+  @override
+  String get cnZipOrCity => 'ZIP or city';
+
+  @override
+  String get cnSaveArea => 'Save area';
+
+  @override
+  String get cnWeekCalendar => 'This week';
+
+  @override
+  String get cnMonthCalendar => 'This month';
+
+  @override
+  String get cnUsedShort => 'I used it';
+
+  @override
+  String get cnCalendarLegend =>
+      'A dot means you logged something that day. An empty day is not a missed dose.';
 }

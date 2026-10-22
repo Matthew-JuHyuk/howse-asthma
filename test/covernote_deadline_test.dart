@@ -197,7 +197,7 @@ void main() {
           },
         ],
       });
-      expect(f.readyForEvidence, isFalse);
+      expect(f.readyForEvidence, isTrue);
       expect(f.factsToConfirm, 3);
 
       f = f

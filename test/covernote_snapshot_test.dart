@@ -6,9 +6,9 @@ import 'package:howse_asthma/features/records/domain/record_models.dart';
 void main() {
   final range = DayRange.lastDays(DemoCaseStore.demoToday, 30);
 
-  test('the window is the 30 full days before today', () {
-    expect(range.from, DateTime(2026, 9, 20));
-    expect(range.to, DateTime(2026, 10, 19));
+  test('the window is the last 30 local days including today', () {
+    expect(range.from, DateTime(2026, 9, 21));
+    expect(range.to, DateTime(2026, 10, 20));
     expect(range.dayCount, 30);
   });
 

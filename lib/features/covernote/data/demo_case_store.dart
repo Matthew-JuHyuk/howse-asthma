@@ -5,6 +5,7 @@ import '../../records/domain/record_models.dart';
 import '../domain/case_facts.dart';
 import '../domain/case_models.dart';
 import '../domain/record_snapshot.dart';
+import '../domain/s9_models.dart';
 import 'case_store.dart';
 
 /// Public demo: three synthetic letters with fixed, pre-checked results and
@@ -31,6 +32,7 @@ class DemoCaseStore implements CaseStore {
 
   void _reset() {
     _cases.clear();
+    var ordinal = 1;
     for (final l in demoLetters) {
       final id = 'demo-${l.key}';
       _cases[id] = _DemoCase(
@@ -45,6 +47,9 @@ class DemoCaseStore implements CaseStore {
           documentKind: l.facts.kind,
           createdAt: demoToday,
           updatedAt: demoToday,
+          displayOrdinal: ordinal++,
+          planName: l.facts.field('plan_name').value,
+          treatmentContext: TreatmentContext.unknown,
         ),
         facts: l.facts,
         requirements: [
@@ -212,6 +217,7 @@ class DemoCaseStore implements CaseStore {
     required Map<String, Object?> snapshot,
     required DayRange range,
     required String sourceType,
+    List<String> eventIds = const [],
   }) async {
     final c = _get(caseId);
     final e = EvidenceItem(
@@ -308,6 +314,38 @@ class DemoCaseStore implements CaseStore {
 
   @override
   Future<bool?> analysisAvailable() async => false;
+
+  @override
+  Future<void> setLifecycle(
+    String caseId,
+    CaseLifecycle lifecycle, {
+    String? outcome,
+  }) async {
+    final c = _get(caseId);
+    c.row = c.row.copyWith(
+      lifecycle: lifecycle,
+      completedOutcome: outcome,
+      completedAt: lifecycle == CaseLifecycle.completed
+          ? DateTime.now().toUtc()
+          : c.row.completedAt,
+      archivedAt: lifecycle == CaseLifecycle.archived
+          ? DateTime.now().toUtc()
+          : c.row.archivedAt,
+    );
+  }
+
+  @override
+  Future<void> setTreatmentContext(
+    String caseId,
+    TreatmentContext context,
+  ) async {
+    _get(caseId).row = _get(caseId).row.copyWith(treatmentContext: context);
+  }
+
+  @override
+  Future<void> setAlias(String caseId, String? alias) async {
+    _get(caseId).row = _get(caseId).row.copyWith(displayAlias: alias);
+  }
 }
 
 class _DemoCase {
@@ -330,7 +368,7 @@ class _DemoCase {
 /// Synthetic records for the demo window, computed with the same code the
 /// signed-in path uses. Pattern matches `tool/demo_accounts.mjs`.
 RecordSnapshots demoSnapshots(DayRange range) {
-  final start = DateTime(2026, 9, 20);
+  final start = DateTime(2026, 9, 21);
   DateTime day(int i) => DateTime(start.year, start.month, start.day + i);
   const notUsed = {9, 30, 47};
   const unanswered = {14, 15, 38, 52, 53, 59};

@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../data/ai_extra_client.dart';
 import '../data/case_store.dart';
+import '../data/consent_repository.dart';
 import '../domain/case_facts.dart';
 import '../domain/case_models.dart';
+import '../domain/s9_models.dart';
 import '../ui/brand.dart';
 import 'case_labels.dart';
 
@@ -38,11 +41,27 @@ class LetterView extends StatefulWidget {
 
 class _LetterViewState extends State<LetterView> {
   final _keys = <int, GlobalKey>{};
+  var _tab = 0;
+  List<PageTranslation> _tr = const [];
+  var _translating = false;
 
   @override
   void initState() {
     super.initState();
     _scrollToFocus();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeAutoTranslate());
+  }
+
+  Future<void> _maybeAutoTranslate() async {
+    if (!mounted || _tab == 1 || _translating) return;
+    final lang = Localizations.localeOf(context).toLanguageTag();
+    if (lang.toLowerCase().startsWith('en')) return;
+    final consent = ConsentRepository();
+    final allowed = await consent.hasActive(ConsentPurpose.translate) ||
+        await consent.hasActive(ConsentPurpose.letter);
+    if (!allowed || !mounted) return;
+    setState(() => _tab = 1);
+    await _translate();
   }
 
   @override
@@ -51,6 +70,78 @@ class _LetterViewState extends State<LetterView> {
     if (old.focusPage != widget.focusPage ||
         old.focusQuote != widget.focusQuote) {
       _scrollToFocus();
+    }
+    if (old.detail.row.status != widget.detail.row.status ||
+        old.detail.pages.length != widget.detail.pages.length) {
+      _maybeAutoTranslate();
+    }
+  }
+
+  Future<void> _translate() async {
+    final l = AppLocalizations.of(context)!;
+    final lang = Localizations.localeOf(context).toLanguageTag();
+    if (lang.toLowerCase().startsWith('en')) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l.cnSameLanguage)));
+      }
+      return;
+    }
+    final consent = ConsentRepository();
+    if (!await consent.hasActive(ConsentPurpose.translate) &&
+        !await consent.hasActive(ConsentPurpose.letter)) {
+      if (!mounted) return;
+      final ok = await showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(l.cnConsentTranslatePurpose),
+          content: Text(l.cnConsentAiBody),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(l.cnConsentLater),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(l.cnConsentAndAnalyze),
+            ),
+          ],
+        ),
+      );
+      if (ok != true) return;
+      await consent.accept(ConsentPurpose.translate);
+    }
+    setState(() => _translating = true);
+    try {
+      final cached = await AiExtraClient().loadCachedTranslation(
+        caseId: widget.detail.row.id,
+        language: lang,
+        documentRevision: widget.detail.row.documentRevision,
+      );
+      final ready = cached.where((p) => p.status == 'ready' && (p.text ?? '').isNotEmpty);
+      final pages = ready.length == cached.length && cached.isNotEmpty
+          ? cached
+          : await AiExtraClient().ensureFullTranslation(
+              caseId: widget.detail.row.id,
+              language: lang,
+              documentRevision: widget.detail.row.documentRevision,
+            );
+      if (mounted) setState(() => _tr = pages);
+    } on StateError catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(caseErrorText(l, e.message))),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l.cnTranslationFailed)),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _translating = false);
     }
   }
 
@@ -79,7 +170,7 @@ class _LetterViewState extends State<LetterView> {
         .map((p) => p.pageNumber)
         .toList();
     return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
       children: [
         CnCard(
           color: CnColors.mint.withValues(alpha: 0.4),
@@ -130,14 +221,51 @@ class _LetterViewState extends State<LetterView> {
           ),
         ],
         const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton.icon(
-            onPressed: () => openOriginalPages(context, widget.store, d),
-            icon: const Icon(Icons.image_outlined),
-            label: Text(l.cnViewOriginal),
-          ),
+        SegmentedButton<int>(
+          segments: [
+            ButtonSegment(value: 0, label: Text(l.cnOriginalFile)),
+            ButtonSegment(value: 1, label: Text(l.cnFullTranslation)),
+          ],
+          selected: {_tab},
+          onSelectionChanged: (s) async {
+            setState(() => _tab = s.first);
+            if (s.first == 1) await _translate();
+          },
         ),
+        if (_tab == 0)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () => openOriginalPages(context, widget.store, d),
+              icon: const Icon(Icons.image_outlined),
+              label: Text(l.cnOriginalFile),
+            ),
+          ),
+        if (_tab == 1) ...[
+          if (_translating) const LinearProgressIndicator(),
+          if (!_translating && _tr.isEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(l.cnTranslationPartial),
+            ),
+          for (final p in _tr)
+            CnCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(l.cnPageN(p.pageNumber)),
+                  Text(p.text ?? (p.status == 'failed' ? l.cnTranslationFailed : l.cnHardToRead)),
+                ],
+              ),
+            ),
+          TextButton(
+            onPressed: _translate,
+            child: Text(l.cnTranslateRetry),
+          ),
+        ],
+        ExpansionTile(
+          title: Text(l.cnRecognizedText),
+          children: [
         for (final p in d.pages)
           Padding(
             key: _keys.putIfAbsent(p.pageNumber, GlobalKey.new),
@@ -166,6 +294,8 @@ class _LetterViewState extends State<LetterView> {
               ),
             ),
           ),
+          ],
+        ),
         const SizedBox(height: 16),
         FilledButton(
           onPressed: widget.onContinue,

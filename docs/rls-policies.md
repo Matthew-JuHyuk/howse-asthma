@@ -23,6 +23,7 @@ Aligned with [`db-schema.md`](./db-schema.md) §3.
 | `appeal_cases` and child rows (`20261018120000_v2_appeal_cases.sql`) | Owner only. Hidden after `deleted_at` is set. Child writes must match the parent owner. Not applied remotely until `supabase db push` |
 | `evidence_catalog` | Authenticated **SELECT** of unexpired `approved` rows only. No client insert |
 | `appeal-documents` storage bucket | Private. Object path must start with the signed-in user id |
+| `case_ordinal_counters` (`20261022233000_s9_ordinal_counter_rls.sql`) | No client access. `next_case_ordinal` (security definer) writes the caller's row when a case is created |
 | Points / donations / alert dispatch writes | **No client INSERT** — Edge / `service_role` |
 | `outbound_transmissions` | Provider may INSERT `QUEUED` only; status updates via Edge |
 
