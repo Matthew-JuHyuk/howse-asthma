@@ -7,6 +7,7 @@ import '../provider/presentation/provider_home_shell.dart';
 import 'auth/auth_screen.dart';
 import 'data/case_store.dart';
 import 'data/demo_case_store.dart';
+import 'data/preparation_repository.dart';
 import 'presentation/account_tab.dart';
 import 'presentation/case_screen.dart';
 import 'presentation/cases_tab.dart';
@@ -57,7 +58,46 @@ class CoverNoteShell extends StatefulWidget {
   State<CoverNoteShell> createState() => _CoverNoteShellState();
 }
 
-class _CoverNoteShellState extends State<CoverNoteShell> {
+class _CoverNoteShellState extends State<CoverNoteShell>
+    with WidgetsBindingObserver {
+  String? _syncOwner;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final s = SessionScope.of(context);
+    if (s.isReady && s.user?.id != _syncOwner) {
+      _syncOwner = s.user?.id;
+      _syncDirect();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) _syncDirect();
+  }
+
+  Future<void> _syncDirect() async {
+    try {
+      final r = PreparationRepository();
+      await r.importDirectRecords();
+      await r.flush();
+    } catch (_) {
+      /* Owner-scoped queue persists for retry. */
+    }
+  }
+
   int _tab = 0;
   final _casesKey = GlobalKey<CasesTabState>();
   final _homeKey = GlobalKey<HomeTabState>();

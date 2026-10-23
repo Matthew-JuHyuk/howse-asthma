@@ -1,5 +1,13 @@
 # Howse Asthma — Database Schema (Supabase PostgreSQL)
 
+## Sprint10 additions
+
+`20261023090000_s10_preparation.sql` adds nullable `appeal_cases.case_start_reason` (`new_request` / `denied_request`). `case_preparations` has a case FK with cascade deletion, immutable owner scope, integer optimistic revision, JSON payload and update time. The payload separates patient key, pathway, lifecycle, source requirements, process reports, document references and versioned exports.
+
+`treatment_events` stores UUID event/source IDs, owner, explicit patient key, local date, event kind, source-preserving JSON, creation and undo times. Patient keys are the account UUID or an owner-prefixed care-subject ID. Sibling records are not combined. `create_preparation`, `save_preparation`, `save_treatment_batch`, and `undo_treatment_source` are caller-permission RPCs. The batch mirrors only the account subject into Sprint9 medication/symptom tables, atomically; caregiver subject data remains separate. Negated use does not become a use row.
+
+Clinical originals use private `<owner>/treatment/s10/` storage; case exports use `<owner>/<case>/s10/`. Case deletion removes nested case storage; shared treatment sources remain until patient/account deletion. Applied remotely on project `jnzdovjjahvtxbhacjuv` (`migration list` shows local = remote for `20261023090000`, verified 2026-10-23).
+
 > **Purpose**: Single source of truth for the **physical DB schema**. Prefer this
 > document when designing migrations, RLS, and Edge Functions. Keep it aligned with
 > product screen definitions and the UI inventory under `design/subframe/`.

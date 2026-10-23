@@ -37,7 +37,11 @@ class ReviewStep extends StatelessWidget {
     final keep = [if (med != null && med.isNotEmpty) med];
     final translate = needsTranslatedAid(context);
     final deadline = resolveDeadline(facts);
-    const bodyStyle = TextStyle(fontSize: 16, height: 1.35, color: CnColors.ink);
+    const bodyStyle = TextStyle(
+      fontSize: 16,
+      height: 1.35,
+      color: CnColors.ink,
+    );
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
       children: [
@@ -49,7 +53,11 @@ class ReviewStep extends StatelessWidget {
             if (facts.reasons.isEmpty)
               Text(l.cnReasonOther, style: bodyStyle)
             else if (translate && facts.reasons.first.text.trim().isNotEmpty)
-              TranslatedLine(text: facts.reasons.first.text, keep: keep, style: bodyStyle)
+              TranslatedLine(
+                text: facts.reasons.first.text,
+                keep: keep,
+                style: bodyStyle,
+              )
             else
               Text(
                 facts.reasons.first.text.trim().isEmpty
@@ -68,14 +76,23 @@ class ReviewStep extends StatelessWidget {
             else
               for (final item in facts.requestedItems)
                 translate
-                    ? TranslatedLine(text: item.label, keep: keep, style: bodyStyle)
+                    ? TranslatedLine(
+                        text: item.label,
+                        keep: keep,
+                        style: bodyStyle,
+                      )
                     : Text(item.label, style: bodyStyle),
           ],
         ),
         const SizedBox(height: 12),
         _ReadCard(
           title: l.cnByWhen,
-          body: deadline.date != null
+          body:
+              deadline.infoResponseDate != null &&
+                  (deadline.date == null ||
+                      deadline.infoResponseDate!.isBefore(deadline.date!))
+              ? l.cnReplyBy(formatDay(context, deadline.infoResponseDate!))
+              : deadline.date != null
               ? formatDay(context, deadline.date!)
               : l.cnDateUnknownChecked,
         ),

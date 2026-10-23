@@ -7,6 +7,8 @@ import 'capture_screen.dart';
 import 'case_screen.dart';
 import 'covernote_nav.dart';
 import 'demo_screen.dart';
+import '../data/preparation_repository.dart';
+import 'preparation_screen.dart';
 
 /// Sign in if needed, capture or pick pages, upload, then open the new case.
 Future<void> startNewCase(BuildContext context, CaptureSource source) async {
@@ -23,7 +25,29 @@ Future<void> startNewCase(BuildContext context, CaptureSource source) async {
   await openCase(context, store, caseId);
 }
 
-Future<void> openCase(BuildContext context, CaseStore store, String caseId) {
+Future<void> openCase(
+  BuildContext context,
+  CaseStore store,
+  String caseId,
+) async {
+  if (!store.isDemo) {
+    final repo = PreparationRepository();
+    try {
+      final p = await repo.load(caseId);
+      if (!context.mounted) return;
+      if (p != null) {
+        await Navigator.push<void>(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PreparationScreen(repository: repo, caseId: caseId),
+          ),
+        );
+        return;
+      }
+    } catch (_) {
+      /* Sprint9 backends can still open their original cases. */
+    }
+  }
   final nav = CoverNoteNav.maybeOf(context);
   if (nav != null) {
     nav.openCase(store, caseId);

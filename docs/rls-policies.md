@@ -1,5 +1,11 @@
 # Row Level Security (RLS)
 
+## Sprint10
+
+`case_preparations`: authenticated callers can access only their own rows, and writes must reference an `appeal_cases` row owned by the same caller. `treatment_events`: rows require the caller's owner UUID; writes require an account patient key or that owner's care-subject namespace. Both tables cascade from the owner profile.
+
+The four preparation RPCs are `SECURITY INVOKER`, fix `search_path`, revoke PUBLIC execution and grant authenticated execution. Creation and event batches are atomic; saving metadata compares the caller's base revision. Batch retries require the same event payload, and undo mirrors changes in the same transaction. No service-role credential is sent to Android. Actual two-owner/subject isolation and rollback tests are still runtime gates.
+
 | Migration | Purpose |
 | --- | --- |
 | [`20260725210000_rls_policies.sql`](../supabase/migrations/20260725210000_rls_policies.sql) | Policies + `is_active_provider_of()` helper |

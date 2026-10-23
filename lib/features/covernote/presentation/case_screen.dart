@@ -19,6 +19,9 @@ import 'evidence_step.dart';
 import 'letter_view.dart';
 import 'packet_step.dart';
 import 'review_step.dart';
+import '../data/preparation_repository.dart';
+import 'preparation_screen.dart';
+import 'preparation_strings.dart';
 
 enum SaveState { idle, saving, saved, failed }
 
@@ -89,7 +92,8 @@ class _CaseScreenState extends State<CaseScreen> {
     if (lang.toLowerCase().startsWith('en') || d.pages.isEmpty) return;
     unawaited(() async {
       final consent = ConsentRepository();
-      final allowed = await consent.hasActive(ConsentPurpose.translate) ||
+      final allowed =
+          await consent.hasActive(ConsentPurpose.translate) ||
           await consent.hasActive(ConsentPurpose.letter);
       if (!allowed) return;
       try {
@@ -140,7 +144,7 @@ class _CaseScreenState extends State<CaseScreen> {
     if (f == null || _needsAnalysis(d)) return 0;
     if (!f.readyForEvidence) return 1;
     if (d.latestPacket != null) return 3;
-    return 2;
+    return 1;
   }
 
   // ---------------- Analysis ----------------
@@ -461,11 +465,31 @@ class _CaseScreenState extends State<CaseScreen> {
             },
           ),
           title: Text(
-            d == null ? l.cnCaseUntitled : caseDisplayTitle(l, d.row, facts: _facts),
+            d == null
+                ? l.cnCaseUntitled
+                : caseDisplayTitle(l, d.row, facts: _facts),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           actions: [
+            if (d != null && d.facts != null)
+              IconButton(
+                tooltip: s10(context, 'overview'),
+                icon: const Icon(Icons.view_timeline_outlined),
+                onPressed: () async {
+                  if (!await _flushNow() || !context.mounted) return;
+                  await Navigator.push<void>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PreparationScreen(
+                        repository: PreparationRepository(demo: _store.isDemo),
+                        caseId: widget.caseId,
+                        letterStore: _store,
+                      ),
+                    ),
+                  );
+                },
+              ),
             if (_save != SaveState.idle)
               _SaveIndicator(state: _save, onRetry: _flush),
             if (d != null)

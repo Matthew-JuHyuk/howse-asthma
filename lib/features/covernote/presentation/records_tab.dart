@@ -19,6 +19,8 @@ import '../ui/brand.dart';
 import 'air_weather_screen.dart';
 import 'case_labels.dart';
 import 'quick_log.dart';
+import 'care_profile_records.dart';
+import 'preparation_strings.dart';
 
 String _symptomLine(AppLocalizations l, SymptomRecord s) {
   if (s.noSymptoms) return l.s5SymNone;
@@ -160,6 +162,14 @@ class _RecordsTabState extends State<RecordsTab> {
                 ),
               )
             else ...[
+              OutlinedButton.icon(
+                onPressed: () => Navigator.push<void>(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CareProfileRecords()),
+                ),
+                icon: const Icon(Icons.people_outline),
+                label: Text(s10(context, 'careRecords')),
+              ),
               QuickLogPanel(day: _selected),
               const SizedBox(height: 8),
               Wrap(

@@ -31,6 +31,8 @@ When you add or change something under `supabase/` (migrations, RLS SQL, Edge Fu
 | [`fcm-setup.md`](./fcm-setup.md) | Firebase / FCM client + Edge secret setup (WBS 4.6a) |
 | [`sprint2-test-review-backlog.md`](./sprint2-test-review-backlog.md) | Sprint 2 on-device test review backlog |
 | [`sprint8/handoff.md`](./sprint8/handoff.md) | **CoverNote MVP1** — current state, deliverables and owner actions |
+| [`sprint10/implementation_handoff.md`](./sprint10/implementation_handoff.md) | Sprint10 implementation and backend/runtime prerequisites |
+| [`sprint10/SYNC_STATUS.md`](./sprint10/SYNC_STATUS.md) | ChatGPT v1.5 planning artifact provenance and missing binary |
 | [`sprint8/audit.md`](./sprint8/audit.md) | Starting point and keep/remove decisions |
 | [`sprint8/wbs.md`](./sprint8/wbs.md) | Work breakdown with status and evidence |
 | [`sprint8/requirements_traceability.md`](./sprint8/requirements_traceability.md) | P0 requirement → code → result |

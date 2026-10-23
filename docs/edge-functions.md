@@ -1,5 +1,13 @@
 # Edge Functions
 
+## Sprint10 `analyze-letter` actions
+
+- `structure_record`: authenticated `{case_id, transcript, patient_name, today, timezone, language}`. Requires active `treatment_processing` consent and case ownership. Returns grounded source quotes, structured proposals, uncertainty, model/prompt version. It does not save patient events or infer clinical eligibility; the client confirms and writes an atomic batch.
+- `read_clinical_document`: authenticated `{case_id, object_path, mime}`. Same consent/ownership checks; only the caller's private case or treatment-library prefix, PDF/JPEG/PNG, at most 12 MB. Returns patient/type, page quotes, preserved dates/units and distinct deadline purposes. No signature, diagnosis, treatment decision or submission is generated.
+- `translate_preparation`: same consent/ownership boundary; translates bounded concern/current/proposed fields into English for review. The original remains preserved and the user confirms the translation.
+
+Secrets/provider adapters remain server-side. Inputs are untrusted data, not instructions. Source files and transcripts are not logged; CoverNote does not upload/store raw speech audio. OS speech recognition can use the device provider's servers, disclosed before processing. The migration is applied on `jnzdovjjahvtxbhacjuv`. `analyze-letter` is redeployed from this source.
+
 | Function | Path | Status |
 | --- | --- | --- |
 | `calculate-environment-risk` | [`supabase/functions/calculate-environment-risk/`](../supabase/functions/calculate-environment-risk/) | Live sources + Geohash cache + `forecast_points` |
@@ -9,7 +17,7 @@
 | `issue-invite-code` | [`supabase/functions/issue-invite-code/`](../supabase/functions/issue-invite-code/) | 8-char alphanumeric invite (TTL 24h) |
 | `redeem-invite-code` | [`supabase/functions/redeem-invite-code/`](../supabase/functions/redeem-invite-code/) | Atomic redeem RPC (8-char) |
 | `confirm-care-link` | [`supabase/functions/confirm-care-link/`](../supabase/functions/confirm-care-link/) | Deployed — dual confirm RPC |
-| `analyze-letter` | [`supabase/functions/analyze-letter/`](../supabase/functions/analyze-letter/) | Deployed (v2). Reads an uploaded letter with the configured model. Returns `503 ai_not_configured` until AI secrets are set |
+| `analyze-letter` | [`supabase/functions/analyze-letter/`](../supabase/functions/analyze-letter/) | Deployed (v8, 2026-10-23). Reads an uploaded letter and serves Sprint 10 `structure_record`, `read_clinical_document`, and `translate_preparation`. Returns `503 ai_not_configured` until AI secrets are set |
 | `delete-account` | [`supabase/functions/delete-account/`](../supabase/functions/delete-account/) | Deployed (v1). Removes the caller's files and auth user after `{ confirm: "DELETE" }` |
 
 Project: `jnzdovjjahvtxbhacjuv`  

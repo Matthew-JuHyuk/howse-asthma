@@ -18,7 +18,7 @@ enum DeliveryMethod {
   unknown,
 }
 
-enum ConsentPurpose { letter, label, translate }
+enum ConsentPurpose { letter, label, translate, treatment }
 
 enum RecordQueryState {
   loading,
@@ -58,15 +58,15 @@ class DeliveryEvent {
   final DateTime? revokedAt;
 
   bool get active => revokedAt == null;
-  bool get countsAsDelivery =>
-      active && recipient != DeliveryRecipient.self;
+  bool get countsAsDelivery => active && recipient != DeliveryRecipient.self;
 
   factory DeliveryEvent.fromRow(Map row) => DeliveryEvent(
     id: row['id'] as String,
     caseId: row['case_id'] as String,
     recipient: parseRecipient(row['recipient_type'] as String?),
     method: parseMethod(row['method'] as String?),
-    sentAt: DateTime.tryParse(row['sent_at'] as String? ?? '')?.toUtc() ??
+    sentAt:
+        DateTime.tryParse(row['sent_at'] as String? ?? '')?.toUtc() ??
         DateTime.now().toUtc(),
     artifactId: row['artifact_id'] as String?,
     artifactRevision: (row['artifact_revision'] as num?)?.toInt(),
@@ -207,6 +207,9 @@ class EnvironmentReading {
     'fetched_at': fetchedAt?.toUtc().toIso8601String(),
     'detail': detail,
     'status': status,
+    'location_label': locationLabel,
+    'location_precision': locationPrecision,
+    'source_kind': sourceKind,
   };
 
   factory EnvironmentReading.fromJson(Map raw) => EnvironmentReading(
@@ -222,6 +225,9 @@ class EnvironmentReading {
         : null,
     detail: raw['detail'] as String?,
     status: raw['status'] as String? ?? 'ready',
+    locationLabel: raw['location_label'] as String?,
+    locationPrecision: raw['location_precision'] as String?,
+    sourceKind: raw['source_kind'] as String?,
   );
 }
 
@@ -303,6 +309,7 @@ String consentPurposeSql(ConsentPurpose p) => switch (p) {
   ConsentPurpose.letter => 'letter_processing',
   ConsentPurpose.label => 'medication_label',
   ConsentPurpose.translate => 'document_translation',
+  ConsentPurpose.treatment => 'treatment_processing',
 };
 
 /// Letter consent written by Sprint 8 still counts.

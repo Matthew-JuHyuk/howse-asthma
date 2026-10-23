@@ -1,0 +1,82 @@
+{
+  "sync_date": "2026-10-22",
+  "timezone": "America/New_York",
+  "planning_revision": "1.5",
+  "source_chat_title": "Sprint 8 프롬프트 작성",
+  "source_chat_id": "6ad82d4d-b148-83ea-9baf-e3208a13c496",
+  "source_execution_id": "01a15c71-01d8-7150-83e2-610653e7d01d",
+  "method": "Reconstructed from recorded document creation/update commands; original archive identity not verified.",
+  "local_annotations": [
+    "START_HERE_Sprint10.md"
+  ],
+  "missing": [
+    {
+      "name": "references/Dupixent_Official_NJ.pdf",
+      "reason": "Original remote binary unavailable; official CDN returned 403.",
+      "reported_bytes": 289867,
+      "reported_sha256": "7f8cb604f95511aea4597fd2d82cb552da319238f0f1c3844ddeed0868141f21"
+    }
+  ],
+  "files": [
+    {
+      "name": "CoverNote_Sprint10_Integrated_Requirements.md",
+      "bytes": 56458,
+      "sha256": "41fb2c522af408f897fa3544d38e7126e82364651aa3bdc10f7bcdfdbe1884bb"
+    },
+    {
+      "name": "Cursor_Sprint10_Prompt.txt",
+      "bytes": 11137,
+      "sha256": "ac06bb2f8331f581f18c691887e0c84346d707798c24dcabc50a03567caff32f"
+    },
+    {
+      "name": "CoverNote_Sprint10_Demo_Outline.md",
+      "bytes": 9307,
+      "sha256": "7de18e35656e0f99b91d7dba61910324c4c05d81e417e3182311bc1b20e3b88b"
+    },
+    {
+      "name": "START_HERE_Sprint10.md",
+      "bytes": 2468,
+      "sha256": "e4362b48256ed9d9c86af2729fa2a93739db8e7b07bb72394ca039f95858e471"
+    },
+    {
+      "name": "Sprint10_All_Prompts.md",
+      "bytes": 12043,
+      "sha256": "2443ef73899cade594f6a5d6b9f0fe99a652dc999b76b4b56d5798f406e3e073"
+    },
+    {
+      "name": "Sprint10_Model_and_Usage_Plan.md",
+      "bytes": 3160,
+      "sha256": "17bceaf0a4a58642f67e1137e3fff4942b09d0ce581d8acf348abf47de4ab993"
+    },
+    {
+      "name": "Sprint10_Request_Coverage_Audit.md",
+      "bytes": 8180,
+      "sha256": "f7aa5c9d7d206d458e06fe217783fa678f75d0bb5ed66b64957914028084d8af"
+    },
+    {
+      "name": "CoverNote_Filming_Reference_Guide.md",
+      "bytes": 7151,
+      "sha256": "5f4e5460715cf030cd87a966623a51957e48a4a77558dd2a5b2f60e81a49ddcf"
+    },
+    {
+      "name": "CAC_Video_Sources_and_Access_Log.md",
+      "bytes": 3790,
+      "sha256": "f5a6d3d6ad4449ec05f78b095f56e8df13064848d400703054cd5f05c1c67e47"
+    },
+    {
+      "name": "Sprint10_Verified_Policy_Mapping.md",
+      "bytes": 5935,
+      "sha256": "03d4dc592bd80e649d42dc2dcbc1b1840b2333b9e654b37946ef508d9fb57969"
+    },
+    {
+      "name": "Sprint10_Research_Closure.md",
+      "bytes": 7950,
+      "sha256": "dc2975f50b14529b467a614300659947b5eee07911cff10f385dc499123577f7"
+    },
+    {
+      "name": "Sprint10_Validation_Gates.md",
+      "bytes": 5958,
+      "sha256": "ac13f41dbb12e79bd75fc9139f62a92a15eb58d7645180c8c3ab3cbd31370ac8"
+    }
+  ]
+}

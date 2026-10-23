@@ -6,6 +6,8 @@ import '../domain/case_models.dart';
 import '../ui/brand.dart';
 import 'case_card.dart';
 import 'routes.dart';
+import 'preparation_screen.dart';
+import 'preparation_strings.dart';
 
 /// Public demo: fixed synthetic letters, no account, nothing uploaded.
 class DemoScreen extends StatefulWidget {
@@ -67,6 +69,14 @@ class _DemoScreenState extends State<DemoScreen> {
                   style: const TextStyle(fontSize: 16, color: CnColors.muted),
                 ),
                 const SizedBox(height: 16),
+                FilledButton(
+                  onPressed: () => openPreparationDemo(context, false),
+                  child: Text(s10(context, 'demoA')),
+                ),
+                OutlinedButton(
+                  onPressed: () => openPreparationDemo(context, true),
+                  child: Text(s10(context, 'demoB')),
+                ),
                 for (final c in cases) ...[
                   CaseCard(
                     summary: c,

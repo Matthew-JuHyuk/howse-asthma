@@ -28,5 +28,5 @@ class SupabaseService {
   static Stream<AuthState> get authStateChanges =>
       client.auth.onAuthStateChange;
 
-  static User? get currentUser => client.auth.currentUser;
+  static User? get currentUser => AppConfig.isSupabaseConfigured ? client.auth.currentUser : null;
 }

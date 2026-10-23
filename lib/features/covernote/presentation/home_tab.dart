@@ -11,6 +11,11 @@ import 'capture_screen.dart';
 import 'case_card.dart';
 import 'quick_log.dart';
 import 'routes.dart';
+import 'preparation_screen.dart';
+import 'preparation_strings.dart';
+import '../data/preparation_repository.dart';
+import '../domain/preparation.dart';
+import 'home_preparation_log.dart';
 import '../domain/s9_models.dart';
 
 class HomeTab extends StatefulWidget {
@@ -31,6 +36,7 @@ class HomeTabState extends State<HomeTab> {
   List<CaseSummary>? _cases;
   String? _error;
   String? _loadedFor;
+  Preparation? _preparation;
 
   @override
   void didChangeDependencies() {
@@ -40,17 +46,31 @@ class HomeTabState extends State<HomeTab> {
     if (uid != _loadedFor) {
       _loadedFor = uid;
       _cases = null;
+      _preparation = null;
       if (uid != null) refresh();
     }
   }
 
   Future<void> refresh() async {
     if (_loadedFor == null) return;
+    final owner = _loadedFor;
     try {
       final list = await CoverNoteServices.of(context).live.listCases();
-      if (!mounted) return;
+      final active = list
+          .where((c) => c.row.lifecycle == CaseLifecycle.active)
+          .firstOrNull;
+      Preparation? preparation;
+      if (active != null) {
+        try {
+          preparation = await PreparationRepository().load(active.row.id);
+        } catch (_) {
+          /* Legacy case retains its existing records entry. */
+        }
+      }
+      if (!mounted || _loadedFor != owner) return;
       setState(() {
         _cases = list;
+        _preparation = preparation;
         _error = null;
       });
     } catch (e) {
@@ -101,7 +121,7 @@ class HomeTabState extends State<HomeTab> {
             ),
             const SizedBox(height: 24),
             Text(
-              l.cnHomeHeadline,
+              s10(context, 'intro'),
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
@@ -110,13 +130,16 @@ class HomeTabState extends State<HomeTab> {
               ),
             ),
             const SizedBox(height: 16),
-            SizedBox(
-              height: 64,
+            ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 64),
               child: FilledButton.icon(
-                onPressed: () => _start(CaptureSource.camera),
+                onPressed: () async {
+                  await startPreparation(context);
+                  if (mounted) await refresh();
+                },
                 icon: const Icon(Icons.document_scanner_outlined, size: 28),
                 label: Text(
-                  l.cnScanLetter,
+                  s10(context, 'start'),
                   style: const TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.w600,
@@ -125,13 +148,13 @@ class HomeTabState extends State<HomeTab> {
               ),
             ),
             const SizedBox(height: 12),
-            SizedBox(
-              height: 52,
+            ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 52),
               child: OutlinedButton.icon(
                 onPressed: () => _start(CaptureSource.files),
                 icon: const Icon(Icons.upload_file_outlined),
                 label: Text(
-                  l.cnUploadFile,
+                  s10(context, 'denied'),
                   style: const TextStyle(fontSize: 16),
                 ),
               ),
@@ -171,7 +194,22 @@ class HomeTabState extends State<HomeTab> {
             ],
             if (signedIn) ...[
               SectionLabel(l.cnHomeRecords),
-              const QuickLogPanel(),
+              if (_preparation case final p?)
+                HomePreparationLog(
+                  preparation: p,
+                  onVoice: () => Navigator.push<void>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PreparationScreen(
+                        repository: PreparationRepository(),
+                        caseId: p.id,
+                        voiceOnOpen: true,
+                      ),
+                    ),
+                  ),
+                )
+              else
+                const QuickLogPanel(),
             ],
             if (signedIn && current != null) ...[
               SectionLabel(l.cnContinueCase),

@@ -17,7 +17,8 @@ class EnvironmentCollector {
 
   static const maxCurrentSkew = Duration(hours: 2);
   static const freshFor = Duration(hours: 1);
-  static const _cacheKey = 'cn_env_factors_v1';
+  String get _cacheKey =>
+      'cn_env_factors_v2_${SupabaseService.currentUser?.id ?? 'signed_out'}';
 
   /// Last factors saved on this phone. Empty when nothing has been loaded.
   Future<List<EnvironmentReading>> loadCached() async {
@@ -96,6 +97,7 @@ class EnvironmentCollector {
           'home_lon': lon,
         })
         .eq('id', uid);
+    await (await SharedPreferences.getInstance()).remove(_cacheKey);
   }
 
   /// Resolve ZIP → lat/lon via Zippopotam (no key). City via Open-Meteo geocoding.
@@ -153,8 +155,17 @@ class EnvironmentCollector {
   /// Current location only. A denied permission is not replaced with a ZIP.
   Future<({double lat, double lon, String label, String precision})?>
   _coords() async {
+    final area = await loadArea();
+    if (area?.lat != null && area?.lon != null) {
+      return (
+        lat: area!.lat!,
+        lon: area.lon!,
+        label: area.city ?? area.zip ?? '',
+        precision: 'selected_area',
+      );
+    }
     final loc = await const LocationService().getCurrentPosition(
-      requestIfDenied: true,
+      requestIfDenied: false,
     );
     if (loc.position == null) return null;
     return (
@@ -167,6 +178,8 @@ class EnvironmentCollector {
 
   /// Current regional observation. Real providers only.
   Future<List<EnvironmentReading>> fetchCurrent() async {
+    final cached = await loadCached();
+    if (cached.isNotEmpty && isFresh(cached)) return cached;
     final c = await _coords();
     if (c == null) return const [];
     final fromEdge = await _fromEdge(c.lat, c.lon, c.label, c.precision);
@@ -401,7 +414,9 @@ class EnvironmentCollector {
             metric: 'pollen',
             value: pollen,
             unit: 'UPI',
-            detail: kind is String && kind.trim().isNotEmpty ? kind.trim() : null,
+            detail: kind is String && kind.trim().isNotEmpty
+                ? kind.trim()
+                : null,
             provider: 'Google Pollen',
             fetchedAt: fetched,
             locationLabel: label.isEmpty ? null : label,

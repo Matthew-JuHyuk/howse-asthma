@@ -12,6 +12,8 @@ import '../data/consent_repository.dart';
 import '../domain/s9_models.dart';
 import '../ui/app_chrome.dart';
 import '../ui/brand.dart';
+import '../data/preparation_repository.dart';
+import 'preparation_strings.dart';
 
 class AccountTab extends StatefulWidget {
   const AccountTab({super.key});
@@ -27,6 +29,7 @@ class _AccountTabState extends State<AccountTab> {
   bool _letterConsent = false;
   bool _labelConsent = false;
   bool _translateConsent = false;
+  bool _treatmentConsent = false;
 
   @override
   void initState() {
@@ -39,11 +42,13 @@ class _AccountTabState extends State<AccountTab> {
     final letter = await c.hasActive(ConsentPurpose.letter);
     final label = await c.hasActive(ConsentPurpose.label);
     final tr = await c.hasActive(ConsentPurpose.translate);
+    final treatment = await c.hasActive(ConsentPurpose.treatment);
     if (!mounted) return;
     setState(() {
       _letterConsent = letter;
       _labelConsent = label;
       _translateConsent = tr;
+      _treatmentConsent = treatment;
     });
   }
 
@@ -116,6 +121,9 @@ class _AccountTabState extends State<AccountTab> {
         'delete-account',
         body: {'confirm': 'DELETE'},
       );
+      if (!mounted) return;
+      final owner = SupabaseService.currentUser?.id;
+      if (owner != null) await PreparationRepository.clearLocal(owner);
       if (!mounted) return;
       await SessionScope.read(context).signOut();
       if (mounted) {
@@ -199,7 +207,10 @@ class _AccountTabState extends State<AccountTab> {
               leading: const Icon(Icons.language),
               title: Text(
                 nativeNameOf(locale.value),
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               subtitle: Text(l.cnLanguageNote),
               trailing: const Icon(Icons.chevron_right),
@@ -227,6 +238,14 @@ class _AccountTabState extends State<AccountTab> {
             value: _translateConsent,
             onChanged: session.isReady
                 ? (v) => _toggle(ConsentPurpose.translate, v)
+                : null,
+          ),
+          SwitchListTile(
+            title: Text(s10(context, 'voice')),
+            subtitle: Text(s10(context, 'consent')),
+            value: _treatmentConsent,
+            onChanged: session.isReady
+                ? (v) => _toggle(ConsentPurpose.treatment, v)
                 : null,
           ),
           SectionLabel(l.cnServiceStatus),

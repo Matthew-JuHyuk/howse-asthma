@@ -30,6 +30,7 @@ class CaseRow {
     this.completedOutcome,
     this.archivedAt,
     this.planName,
+    this.startReason,
   });
 
   final String id;
@@ -57,13 +58,14 @@ class CaseRow {
   final String? completedOutcome;
   final DateTime? archivedAt;
   final String? planName;
+  final String? startReason;
 
   static const columns =
       'id, title, status, demo_mode, current_document_revision, current_fact_revision, '
       'current_evidence_revision, document_kind, reviewed_fact_revision, '
       'user_reported_submitted_on, user_reported_submit_method, last_exported_at, created_at, updated_at, '
       'display_ordinal, display_alias, treatment_context, lifecycle, completed_at, '
-      'completed_outcome, archived_at, plan_name_cache';
+      'completed_outcome, archived_at, plan_name_cache, case_start_reason';
 
   factory CaseRow.fromRow(Map row) => CaseRow(
     id: row['id'] as String,
@@ -88,6 +90,7 @@ class CaseRow {
     completedOutcome: row['completed_outcome'] as String?,
     archivedAt: _ts(row['archived_at']),
     planName: row['plan_name_cache'] as String?,
+    startReason: row['case_start_reason'] as String?,
   );
 
   CaseRow copyWith({
@@ -131,6 +134,7 @@ class CaseRow {
     completedOutcome: completedOutcome ?? this.completedOutcome,
     archivedAt: archivedAt ?? this.archivedAt,
     planName: planName ?? this.planName,
+    startReason: startReason,
   );
 }
 

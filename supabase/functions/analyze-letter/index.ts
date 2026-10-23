@@ -26,6 +26,7 @@ import {
 } from "./prompts.ts";
 import { callModel, ProviderError, readProviderConfig, type InputFile, type ProviderConfig } from "./providers.ts";
 import { handleReadLabel, handleTranslate, handleTranslateFields } from "./extra.ts";
+import { handlePreparation } from "./preparation.ts";
 import {
   FACTS_SCHEMA_VERSION,
   responsibleFor,
@@ -104,6 +105,11 @@ Deno.serve(async (req) => {
     const out = await handleReadLabel(userClient, user.id, cfg, body);
     if (out.error) return jsonResponse({ error: out.error }, out.error === "consent_required" ? 403 : 400);
     return jsonResponse(out);
+  }
+  if (body.action === 'structure_record' || body.action === 'read_clinical_document' || body.action === 'translate_preparation') {
+    if ('missing' in cfg) return jsonResponse({ error: 'ai_not_configured' }, 503);
+    const out = await handlePreparation(userClient, user.id, cfg, body);
+    return jsonResponse(out, 'error' in out ? (out.error === 'consent_required' ? 403 : 400) : 200);
   }
   if (body.action !== "start") return jsonResponse({ error: "unknown_action" }, 400);
 

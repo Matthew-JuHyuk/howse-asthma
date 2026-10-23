@@ -9,6 +9,7 @@ import '../domain/case_models.dart';
 import '../domain/s9_models.dart';
 import '../ui/brand.dart';
 import 'case_labels.dart';
+import 'preparation_strings.dart';
 
 /// Drug · kind, fixed number, added time, insurer, status, next action.
 class CaseCard extends StatelessWidget {
@@ -67,7 +68,9 @@ class CaseCard extends StatelessWidget {
                   [
                     if (row.displayOrdinal != null) caseNumberLabel(l, row),
                     if (added != null)
-                      l.cnAddedAt(DateFormat.MMMd(locale).add_jm().format(added)),
+                      l.cnAddedAt(
+                        DateFormat.MMMd(locale).add_jm().format(added),
+                      ),
                   ].where((s) => s.isNotEmpty).join(' · '),
                   style: const TextStyle(fontSize: 13, color: CnColors.muted),
                 ),
@@ -90,9 +93,20 @@ class CaseCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  follow.isNotEmpty ? follow : caseNextAction(l, summary),
+                  row.startReason == 'new_request'
+                      ? s10(context, 'missing')
+                      : follow.isNotEmpty
+                      ? follow
+                      : caseNextAction(l, summary),
                   style: const TextStyle(fontSize: 15, color: CnColors.ink),
                 ),
+                if (d != null && d.infoResponseDate != null) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    l.cnReplyBy(formatDay(context, d.infoResponseDate!)),
+                    style: const TextStyle(fontSize: 14, color: CnColors.warn),
+                  ),
+                ],
                 if (d != null &&
                     d.state == DeadlineResolution.date &&
                     d.date != null) ...[

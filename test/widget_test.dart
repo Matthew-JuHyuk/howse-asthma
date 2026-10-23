@@ -7,28 +7,27 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:howse_asthma/app.dart';
 import 'package:howse_asthma/l10n/app_localizations.dart';
+import 'package:howse_asthma/features/covernote/presentation/preparation_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  testWidgets(
-    'Home shows the brand, Scan a letter and the demo before sign-in',
-    (tester) async {
-      dotenv.loadFromString(isOptional: true);
-      SharedPreferences.setMockInitialValues({});
-      await tester.pumpWidget(const CoverNoteApp());
-      await tester.pump();
+  testWidgets('Home shows both preparation paths and the demo before sign-in', (
+    tester,
+  ) async {
+    dotenv.loadFromString(isOptional: true);
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(const CoverNoteApp());
+    await tester.pump();
 
-      final l = AppLocalizations.of(
-        tester.element(find.byType(Scaffold).first),
-      )!;
-      expect(find.text(l.appTitle), findsWidgets);
-      expect(find.text(l.cnScanLetter), findsOneWidget);
-      expect(find.text(l.cnUploadFile), findsOneWidget);
-      expect(find.text(l.cnTryDemo), findsOneWidget);
-      expect(find.text(l.cnTabCases), findsOneWidget);
-      expect(find.text(l.cnTabRecords), findsOneWidget);
-    },
-  );
+    final l = AppLocalizations.of(tester.element(find.byType(Scaffold).first))!;
+    expect(find.text(l.appTitle), findsWidgets);
+    final ctx = tester.element(find.byType(Scaffold).first);
+    expect(find.text(s10(ctx, 'start')), findsOneWidget);
+    expect(find.text(s10(ctx, 'denied')), findsOneWidget);
+    expect(find.text(l.cnTryDemo), findsOneWidget);
+    expect(find.text(l.cnTabCases), findsOneWidget);
+    expect(find.text(l.cnTabRecords), findsOneWidget);
+  });
 
   testWidgets('Korean home and tabs render on a small phone', (tester) async {
     dotenv.loadFromString(isOptional: true);
@@ -43,9 +42,10 @@ void main() {
     }
     final l = AppLocalizations.of(tester.element(find.byType(Scaffold).first))!;
     expect(l.localeName, 'ko');
-    expect(find.text(l.cnScanLetter), findsOneWidget);
-    expect(tester.getRect(find.text(l.cnScanLetter)).bottom, lessThan(560));
-    for (final tab in [l.cnTabCases, l.cnTabRecords, l.cnTabAccount]) {
+    final ctx = tester.element(find.byType(Scaffold).first);
+    expect(find.text(s10(ctx, 'start')), findsOneWidget);
+    expect(tester.getRect(find.text(s10(ctx, 'start'))).bottom, lessThan(560));
+    for (final tab in [l.cnTabCases, l.cnTabRecords, l.cnTabSettings]) {
       await tester.tap(find.text(tab));
       for (var i = 0; i < 5; i++) {
         await tester.pump(const Duration(milliseconds: 100));
@@ -100,7 +100,7 @@ void main() {
       expect(tester.takeException(), isNull);
       final list = find.byType(Scrollable).first;
       await tester.scrollUntilVisible(
-        find.text(l.cnScanLetter),
+        find.text(s10(tester.element(find.byType(Scaffold).first), 'start')),
         200,
         scrollable: list,
       );
@@ -117,9 +117,20 @@ void main() {
       await settle();
       expect(tester.takeException(), isNull);
 
-      await tester.ensureVisible(find.text('DemoController A 100 mcg'));
+      await tester.ensureVisible(
+        find.textContaining('DemoController A 100 mcg'),
+      );
       await settle(3);
-      await tester.tap(find.text('DemoController A 100 mcg'));
+      await tester.tap(find.textContaining('DemoController A 100 mcg'));
+      await settle();
+      await tester.scrollUntilVisible(
+        find.text(l.cnCorrectReading),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.ensureVisible(find.text(l.cnCorrectReading));
+      await settle(3);
+      await tester.tap(find.text(l.cnCorrectReading));
       await settle();
       // Longer languages push the card below the first screenful.
       await tester.scrollUntilVisible(

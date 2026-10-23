@@ -32,23 +32,15 @@ void main() {
     await tester.tap(find.text(l.cnTryDemo));
     await settle();
     expect(find.text(l.cnDemoTitle), findsOneWidget);
-    await tester.tap(find.text('DemoController A 100 mcg'));
+    await tester.tap(find.textContaining('DemoController A 100 mcg'));
     await settle();
 
-    // Opens on Review with the evidence step locked.
-    expect(find.text(l.cnCardWhyDenied), findsOneWidget);
-    final cont = find.widgetWithText(FilledButton, l.cnContinueToEvidence);
-    expect(tester.widget<FilledButton>(cont).onPressed, isNull);
+    // Review remains the landing view; incomplete facts do not lock records.
+    expect(find.text(l.cnWhatAbout), findsOneWidget);
+    final cont = find.widgetWithText(FilledButton, l.cnPreparePacket);
+    expect(tester.widget<FilledButton>(cont).onPressed, isNotNull);
 
-    // Confirm every fact the screen asks about.
-    for (var i = 0; i < 20; i++) {
-      final looksRight = find.text(l.cnLooksRight);
-      if (looksRight.evaluate().isEmpty) break;
-      await tester.tap(looksRight.first);
-      await settle(3);
-    }
-    expect(find.text(l.cnLooksRight), findsNothing);
-    expect(find.text(l.cnSaved), findsOneWidget);
+    // Facts can be corrected separately; linking records is not gated on it.
     expect(tester.widget<FilledButton>(cont).onPressed, isNotNull);
 
     // Evidence: link the medication summary to the first requested item.
@@ -80,6 +72,6 @@ void main() {
     expect(packet.isSample, isTrue);
     expect(packet.includes, contains('review_request_draft'));
     expect(after.row.status, 'draft_ready');
-    expect(find.text(l.cnShare), findsOneWidget);
+    expect(find.text(l.cnShareDocuments), findsOneWidget);
   });
 }
