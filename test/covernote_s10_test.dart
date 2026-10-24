@@ -83,7 +83,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
-      for (final key in ['evidence', 'timeline', 'share', 'overview']) {
+      for (final key in ['evidence', 'linkedHistory', 'share', 'overview']) {
         final ctx = tester.element(find.byType(Scaffold).first);
         final chip = find.widgetWithText(ChoiceChip, s10(ctx, key));
         await tester.ensureVisible(chip);

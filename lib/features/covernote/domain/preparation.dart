@@ -18,6 +18,7 @@ String preparationFingerprint(
       .convert(
         utf8.encode(
           jsonEncode({
+            'report_format': 's10-patient-log-v1',
             'window_end': dayKey(today ?? DateTime.now()),
             'preparation': fields,
             'events': ordered.map((e) => e.toJson()).toList(),

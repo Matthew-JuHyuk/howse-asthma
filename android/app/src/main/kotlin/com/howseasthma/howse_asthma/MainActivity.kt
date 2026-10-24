@@ -5,6 +5,10 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import android.Manifest
 import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
+import android.os.Handler
+import android.os.Looper
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +20,10 @@ class MainActivity : FlutterActivity() {
     private var speech: SpeechRecognizer? = null
     private var speechReply: MethodChannel.Result? = null
     private var speechLanguage = "en-US"
+    private var speechActivity = false
+    private var speechGeneration = 0
+    private val speechHandler = Handler(Looper.getMainLooper())
+    private val speechTimeout = Runnable { finishSpeech(error="recognition_6") }
     override fun configureFlutterEngine(engine: FlutterEngine) {
         super.configureFlutterEngine(engine)
         MethodChannel(engine.dartExecutor.binaryMessenger, "covernote/capture").setMethodCallHandler { call, result ->
@@ -29,6 +37,13 @@ class MainActivity : FlutterActivity() {
                     } else startSpeech()
                 }
                 "stop" -> { try { speech?.stopListening(); result.success(null) } catch(_:Exception) { finishSpeech(error="recognition_failed"); result.success(null) } }
+                "cancel" -> { finishSpeech(error="cancelled"); result.success(null) }
+                "speechSettings" -> {
+                    try {
+                        startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
+                        result.success(null)
+                    } catch(_:Exception) { result.error("settings_unavailable", "Settings unavailable", null) }
+                }
                 "configure" -> {
                     val enabled=call.argument<Boolean>("enabled") ?: false
                     val prefs=getSharedPreferences("cn_direct", MODE_PRIVATE)
@@ -83,14 +98,24 @@ class MainActivity : FlutterActivity() {
     }
     private fun finishSpeech(text:String?=null,error:String?=null) {
         val reply=speechReply; speechReply=null
+        speechHandler.removeCallbacks(speechTimeout)
+        speechGeneration++
+        if(speechActivity) {
+            speechActivity=false
+            try { finishActivity(303) } catch(_:Exception) {}
+        }
         try { speech?.destroy() } catch(_:Exception) {}
         speech=null
         if(error!=null)reply?.error(error,"Recognition unavailable; use text or buttons",null) else reply?.success(text ?: "")
     }
     private fun startSpeech() {
       try {
-        if(!SpeechRecognizer.isRecognitionAvailable(this)){finishSpeech(error="unsupported");return}
-        speech=if(Build.VERSION.SDK_INT>=31 && SpeechRecognizer.isOnDeviceRecognitionAvailable(this)) SpeechRecognizer.createOnDeviceSpeechRecognizer(this) else SpeechRecognizer.createSpeechRecognizer(this)
+        if(!SpeechRecognizer.isRecognitionAvailable(this)){startSpeechActivity();return}
+        // Availability of an on-device service does not imply that this language
+        // model is installed. Let the user's default service choose its engine.
+        speech=SpeechRecognizer.createSpeechRecognizer(this)
+        val generation=++speechGeneration
+        speechHandler.postDelayed(speechTimeout,60000)
         speech!!.setRecognitionListener(object:RecognitionListener {
             override fun onReadyForSpeech(params:Bundle?) {}
             override fun onBeginningOfSpeech() {}
@@ -99,15 +124,44 @@ class MainActivity : FlutterActivity() {
             override fun onEndOfSpeech() {}
             override fun onPartialResults(partialResults:Bundle?) {}
             override fun onEvent(eventType:Int,params:Bundle?) {}
-            override fun onError(error:Int) { finishSpeech(error="recognition_$error") }
-            override fun onResults(results:Bundle?) { finishSpeech(results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull()) }
+            override fun onError(error:Int) {
+                if(generation!=speechGeneration || speechReply==null)return
+                if(error in listOf(4,5,8,10,11,12,13,14))startSpeechActivity()
+                else finishSpeech(error="recognition_$error")
+            }
+            override fun onResults(results:Bundle?) {
+                if(generation==speechGeneration && speechReply!=null)
+                    finishSpeech(results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull())
+            }
         })
-        try { speech!!.startListening(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+        speech!!.startListening(speechIntent())
+      } catch(_:SecurityException) { finishSpeech(error="permission_denied")
+      } catch(_:Exception) { startSpeechActivity() }
+    }
+    private fun speechIntent() = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
             putExtra(RecognizerIntent.EXTRA_LANGUAGE,speechLanguage)
             putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,1)
-        }) } catch(_:Exception) {finishSpeech(error="recognition_failed")}
-      } catch(_:Exception) { finishSpeech(error="recognition_failed") }
+    }
+    private fun startSpeechActivity() {
+        if(speechReply==null)return
+        speechGeneration++
+        try { speech?.destroy() } catch(_:Exception) {}
+        speech=null
+        speechHandler.removeCallbacks(speechTimeout)
+        try {
+            speechActivity=true
+            startActivityForResult(speechIntent(),303)
+            speechHandler.postDelayed(speechTimeout,90000)
+        } catch(_:Exception) { speechActivity=false; finishSpeech(error="unsupported") }
+    }
+    override fun onActivityResult(requestCode:Int,resultCode:Int,data:Intent?) {
+        super.onActivityResult(requestCode,resultCode,data)
+        if(requestCode==303 && speechActivity) {
+            speechActivity=false
+            if(resultCode==RESULT_OK) finishSpeech(data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.firstOrNull())
+            else finishSpeech(error="cancelled")
+        }
     }
     override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<out String>,grantResults:IntArray) {
         super.onRequestPermissionsResult(requestCode,permissions,grantResults)

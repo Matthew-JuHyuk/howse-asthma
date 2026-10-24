@@ -267,7 +267,6 @@ class _PreparationScreenState extends State<PreparationScreen>
     }
   }
 
-  String _period = '30';
   PreparationRepository get repo => widget.repository;
   bool get _ownerMatches {
     final owner = SupabaseService.currentUser?.id;
@@ -521,86 +520,6 @@ class _PreparationScreenState extends State<PreparationScreen>
       }
     }
     return true;
-  }
-
-  Future<void> _quick(String kind) async {
-    final p = _p!;
-    if (kind == 'scheduled' &&
-        _events.any(
-          (e) =>
-              !e.undone &&
-              e.kind == 'medication_use' &&
-              e.day == dayKey(repo.today) &&
-              e.values['use_kind'] == 'scheduled' &&
-              e.values['medication'] == p.currentMedication,
-        )) {
-      final additional = await showDialog<bool>(
-        context: context,
-        builder: (c) => AlertDialog(
-          content: Text(s10(c, 'additional')),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(c, false),
-              child: Text(s10(c, 'cancel')),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.pop(c, true),
-              child: Text(s10(c, 'confirm')),
-            ),
-          ],
-        ),
-      );
-      if (additional != true) return;
-    }
-    if (!mounted) return;
-    String? symptom;
-    if (kind == 'symptom') {
-      symptom = await showModalBottomSheet<String>(
-        context: context,
-        builder: (c) => SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final item in ['cough', 'night'])
-                ListTile(
-                  title: Text(s10(c, item)),
-                  onTap: () => Navigator.pop(c, item),
-                ),
-            ],
-          ),
-        ),
-      );
-      if (symptom == null) return;
-    }
-    final source = preparationId();
-    await _run(
-      () => _record([
-        TreatmentEvent(
-          id: preparationId(),
-          patientKey: p.patientKey,
-          kind: kind == 'symptom' ? kind : 'medication_use',
-          day: dayKey(repo.today),
-          sourceId: source,
-          synthetic: repo.demo,
-          text: kind == 'symptom'
-              ? (symptom == 'night'
-                    ? 'Patient reported waking at night; count unknown.'
-                    : 'Patient reported cough.')
-              : 'Patient reported medicine use; quantity unknown.',
-          values: {
-            'input_path': 'quick',
-            'occurred_at': repo.today.toUtc().toIso8601String(),
-            'symptom': symptom == 'night' ? 'night_waking' : 'cough',
-            'medication': kind != 'scheduled' || p.currentMedication.isEmpty
-                ? null
-                : p.currentMedication,
-            'use_kind': kind == 'scheduled' ? 'scheduled' : 'as_needed',
-            'quantity': null,
-            'unit': null,
-          },
-        ),
-      ]),
-    );
   }
 
   Future<void> _voice({bool typed = false}) async {
@@ -1285,7 +1204,10 @@ class _PreparationScreenState extends State<PreparationScreen>
                     children: [
                       for (var i = 0; i < 4; i++)
                         Padding(
-                          padding: const EdgeInsets.all(4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 8,
+                          ),
                           child: ChoiceChip(
                             label: Text(
                               s10(
@@ -1293,7 +1215,7 @@ class _PreparationScreenState extends State<PreparationScreen>
                                 [
                                   'overview',
                                   'evidence',
-                                  'timeline',
+                                  'linkedHistory',
                                   'share',
                                 ][i],
                               ),
@@ -1308,9 +1230,9 @@ class _PreparationScreenState extends State<PreparationScreen>
                 Expanded(
                   child: ListView(
                     padding: EdgeInsets.fromLTRB(
-                      16,
-                      16,
-                      16,
+                      20,
+                      20,
+                      20,
                       24 + MediaQuery.paddingOf(context).bottom,
                     ),
                     children:
@@ -1325,7 +1247,7 @@ class _PreparationScreenState extends State<PreparationScreen>
                                   ? child
                                   : Padding(
                                       padding: const EdgeInsets.only(
-                                        bottom: 12,
+                                        bottom: 20,
                                       ),
                                       child: child,
                                     ),
@@ -1339,7 +1261,6 @@ class _PreparationScreenState extends State<PreparationScreen>
   }
 
   List<Widget> _overview(Preparation p) {
-    final summary = TreatmentSummary(p, _events, repo.today);
     final linked = p.needs
         .where(
           (n) => n.links.any(
@@ -1442,62 +1363,6 @@ class _PreparationScreenState extends State<PreparationScreen>
             ),
           ),
         ),
-      const SizedBox(height: 24),
-      CnCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.favorite_outline, color: CnColors.teal),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    s10(context, 'dailySupport'),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(s10(context, 'dailySupportBody')),
-            const SizedBox(height: 16),
-            Text(
-              '${s10(context, 'recentMonth')} · ${summary.observedDays} ${s10(context, 'recordedDays')}',
-            ),
-            const SizedBox(height: 16),
-            if (widget.mainNavigation != null)
-              Text(s10(context, 'centerHint'))
-            else
-              FilledButton.icon(
-                onPressed: _busy ? null : () => _voice(),
-                icon: const Icon(Icons.mic_none),
-                label: Text(s10(context, 'recordEntry')),
-              ),
-            ExpansionTile(
-              title: Text(s10(context, 'tapInstead')),
-              tilePadding: EdgeInsets.zero,
-              children: [
-                for (final pair in [
-                  ('symptom', 'symptom'),
-                  ('rescue', 'as_needed'),
-                  ('scheduled', 'scheduled'),
-                ])
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: _busy ? null : () => _quick(pair.$2),
-                        child: Text(s10(context, pair.$1)),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ],
-        ),
-      ),
       const SizedBox(height: 24),
       ExpansionTile(
         title: Text(s10(context, 'details')),
@@ -1641,46 +1506,26 @@ class _PreparationScreenState extends State<PreparationScreen>
       ),
   ];
   List<Widget> _timeline(Preparation p) {
-    final s = TreatmentSummary(
-      p,
-      _events,
-      repo.today,
-      days: _period == '365' ? 365 : 30,
-    );
+    final linkedIds = p.needs.expand((n) => n.links).toSet();
+    final linkedEvents =
+        _events
+            .where(
+              (e) =>
+                  !e.undone &&
+                  e.patientKey == p.patientKey &&
+                  linkedIds.contains(e.id),
+            )
+            .toList()
+          ..sort((a, b) => b.day.compareTo(a.day));
     return [
-      SegmentedButton<String>(
-        segments: [
-          ButtonSegment(value: '30', label: Text(s10(context, 'recentMonth'))),
-          ButtonSegment(value: '365', label: Text(s10(context, 'recentYear'))),
-        ],
-        selected: {_period},
-        onSelectionChanged: (v) => setState(() => _period = v.first),
-      ),
-      const SizedBox(height: 16),
-      Text(
-        '${s.observedDays} ${s10(context, 'recordedDays')} · ${s.symptomDays} ${s10(context, 'symptom')}',
-        style: Theme.of(context).textTheme.titleMedium,
-      ),
-      const SizedBox(height: 12),
-      if (s.events.isEmpty) Text(s10(context, 'empty')),
-      for (final e in s.events)
+      Text(s10(context, 'linkedHistoryHelp')),
+      if (linkedEvents.isEmpty) Text(s10(context, 'empty')),
+      for (final e in linkedEvents)
         ListTile(
           isThreeLine: true,
           title: Text('${e.day} · ${recordKindLabel(context, e.kind)}'),
           subtitle: Text(e.values['english_summary'] ?? e.text),
           onTap: () => _source(e),
-          trailing: e.values['legacy'] == true || e.kind == 'environment'
-              ? null
-              : IconButton(
-                  tooltip: s10(context, 'undo'),
-                  onPressed: _busy
-                      ? null
-                      : () => _run(() async {
-                          await repo.undo(e.sourceId);
-                          await _load();
-                        }),
-                  icon: const Icon(Icons.undo),
-                ),
         ),
     ];
   }

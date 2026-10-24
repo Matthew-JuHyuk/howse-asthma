@@ -1,5 +1,10 @@
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:howse_asthma/app.dart';
 import 'package:howse_asthma/features/covernote/presentation/guided_record_screen.dart';
+import 'package:howse_asthma/features/covernote/presentation/quick_treatment_actions.dart';
+import 'package:howse_asthma/features/covernote/presentation/demo_screen.dart';
+import 'package:howse_asthma/features/covernote/data/demo_case_store.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -124,6 +129,34 @@ void main() {
       );
       await tester.pumpAndSettle();
       await capture('ux-journey-record');
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpWidget(app(Scaffold(
+        appBar: AppBar(title: const Text('Records')),
+        body: SafeArea(child: SingleChildScrollView(padding: const EdgeInsets.all(20),
+          child: QuickTreatmentActions(repository: repo, patientKey: repo.uid, patientName: 'Diego'))),
+      )));
+      await tester.pumpAndSettle();
+      await capture('ux-record-quick-actions');
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpWidget(app(DemoScreen(store: DemoCaseStore())));
+      await tester.pumpAndSettle();
+      await capture('ux-demo-spacing');
+      await tester.pumpWidget(const SizedBox());
+      dotenv.loadFromString(isOptional: true);
+      await tester.pumpWidget(RepaintBoundary(key: boundary, child: const CoverNoteApp()));
+      await tester.pumpAndSettle();
+      final labels = AppLocalizations.of(tester.element(find.byType(Scaffold).first))!;
+      await tester.tap(find.text(labels.cnTabSettings));
+      await tester.pumpAndSettle();
+      await capture('ux-settings-spacing');
+      await tester.ensureVisible(find.text('Privacy and AI permissions'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Privacy and AI permissions'));
+      await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(find.byType(SwitchListTile).last, 180,
+        scrollable: find.byType(Scrollable).first);
+      await tester.pumpAndSettle();
+      await capture('ux-settings-consent-spacing');
     },
   );
 }

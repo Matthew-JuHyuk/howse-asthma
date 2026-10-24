@@ -157,7 +157,12 @@ class _AccountTabState extends State<AccountTab> {
     return Scaffold(
       appBar: CoverNoteAppBar(title: Text(l.cnTabSettings)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        padding: EdgeInsets.fromLTRB(
+          20,
+          20,
+          20,
+          32 + MediaQuery.paddingOf(context).bottom,
+        ),
         children: [
           CnCard(
             child: session.isReady
@@ -171,12 +176,13 @@ class _AccountTabState extends State<AccountTab> {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
+                      const SizedBox(height: 8),
                       if (email != null)
                         Text(
                           email,
                           style: const TextStyle(color: CnColors.muted),
                         ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 20),
                       OutlinedButton.icon(
                         onPressed: session.signOut,
                         icon: const Icon(Icons.logout),
@@ -191,7 +197,7 @@ class _AccountTabState extends State<AccountTab> {
                         l.cnAccountSignedOut,
                         style: const TextStyle(fontSize: 16),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 20),
                       FilledButton(
                         onPressed: () => requireSignIn(context),
                         child: Text(l.cnAuthSignIn),
@@ -226,6 +232,7 @@ class _AccountTabState extends State<AccountTab> {
               children: [
                 SectionLabel(l.cnDataConsent),
                 SwitchListTile(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
                   title: Text(l.cnConsentAi),
                   subtitle: Text(l.cnConsentAiBody),
                   value: _letterConsent,
@@ -234,6 +241,7 @@ class _AccountTabState extends State<AccountTab> {
                       : null,
                 ),
                 SwitchListTile(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
                   title: Text(l.cnConsentLabelPurpose),
                   value: _labelConsent,
                   onChanged: session.isReady
@@ -241,6 +249,7 @@ class _AccountTabState extends State<AccountTab> {
                       : null,
                 ),
                 SwitchListTile(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
                   title: Text(l.cnConsentTranslatePurpose),
                   value: _translateConsent,
                   onChanged: session.isReady
@@ -248,6 +257,7 @@ class _AccountTabState extends State<AccountTab> {
                       : null,
                 ),
                 SwitchListTile(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
                   title: Text(s10(context, 'voice')),
                   subtitle: Text(s10(context, 'consent')),
                   value: _treatmentConsent,
@@ -258,7 +268,7 @@ class _AccountTabState extends State<AccountTab> {
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           CnCard(
             child: ExpansionTile(
               leading: const Icon(Icons.settings_outlined),
@@ -276,6 +286,7 @@ class _AccountTabState extends State<AccountTab> {
                           null => _checking ? l.cnChecking : l.cnServiceUnknown,
                         }),
                       ),
+                      const SizedBox(width: 16),
                       TextButton(
                         onPressed: _checking ? null : _checkService,
                         child: Text(l.cnCheck),

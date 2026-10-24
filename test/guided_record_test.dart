@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:howse_asthma/core/theme/app_theme.dart';
@@ -111,7 +112,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(listens, 0);
       expect(
-        find.text('How did you feel? When did it happen?'),
+        find.text('How are you feeling? What medicine did you use?'),
         findsOneWidget,
       );
       await tester.ensureVisible(find.text('I prefer to type'));
@@ -167,6 +168,104 @@ void main() {
     expect(PreparationRepository.demoEvents, isEmpty);
     expect(tester.takeException(), isNull);
   });
+  testWidgets(
+    'speech uses a regional locale and fills editable text without topic selection',
+    (tester) async {
+      final repo = RecordTestRepository();
+      String? language;
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        PreparationRepository.native,
+        (call) async {
+          if (call.method == 'listen') {
+            language = call.arguments['language'];
+            return 'I used my inhaler and coughed.';
+          }
+          return null;
+        },
+      );
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          PreparationRepository.native,
+          null,
+        ),
+      );
+      await tester.pumpWidget(
+        app(
+          GuidedRecordScreen(repository: repo, profiles: {repo.uid: 'Diego'}),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(ChoiceChip), findsNothing);
+      await tester.ensureVisible(find.text('Start speaking'));
+      await tester.tap(find.text('Start speaking'));
+      await tester.pumpAndSettle();
+      expect(language, 'en-US');
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        'I used my inhaler and coughed.',
+      );
+      expect(PreparationRepository.demoEvents, isEmpty);
+    },
+  );
+  for (final code in [
+    'permission_denied',
+    'recognition_2',
+    'unsupported',
+    'cancelled',
+  ]) {
+    testWidgets('speech $code preserves text and offers a usable alternative', (
+      tester,
+    ) async {
+      final repo = RecordTestRepository();
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        PreparationRepository.native,
+        (call) async {
+          if (call.method == 'listen') throw PlatformException(code: code);
+          return null;
+        },
+      );
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          PreparationRepository.native,
+          null,
+        ),
+      );
+      await tester.pumpWidget(
+        app(
+          GuidedRecordScreen(
+            repository: repo,
+            profiles: {repo.uid: 'Diego'},
+            initiallyTyped: true,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField), 'Keep my words');
+      await tester.ensureVisible(find.text('Start speaking'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Start speaking'));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        'Keep my words',
+      );
+      expect(tester.widget<TextField>(find.byType(TextField)).enabled, isTrue);
+      if (code == 'permission_denied') {
+        expect(find.text('Open app settings'), findsOneWidget);
+      }
+      if (code == 'recognition_2') {
+        expect(find.textContaining('could not connect'), findsOneWidget);
+      }
+      if (code == 'unsupported') {
+        expect(
+          find.textContaining('unavailable on this device'),
+          findsOneWidget,
+        );
+      }
+      expect(PreparationRepository.demoEvents, isEmpty);
+      expect(tester.takeException(), isNull);
+    });
+  }
   for (final language in ['en', 'ko', 'es']) {
     testWidgets(
       'guided capture fits small screen with enlarged text ($language)',
@@ -202,7 +301,14 @@ void main() {
         await tester.pump();
         tester.view.viewInsets = const FakeViewPadding(bottom: 240);
         await tester.pumpAndSettle();
-        expect(tester.getBottomRight(find.widgetWithIcon(FilledButton, Icons.check_circle_outline)).dy, lessThanOrEqualTo(500));
+        expect(
+          tester
+              .getBottomRight(
+                find.widgetWithIcon(FilledButton, Icons.check_circle_outline),
+              )
+              .dy,
+          lessThanOrEqualTo(500),
+        );
         expect(tester.takeException(), isNull);
       },
     );

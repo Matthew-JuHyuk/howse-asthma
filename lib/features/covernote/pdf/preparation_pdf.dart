@@ -3,6 +3,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import '../domain/preparation.dart';
+import '../domain/patient_log_report.dart';
+import 'patient_log_pdf.dart';
 
 class OriginalAttachment {
   const OriginalAttachment(this.name, this.mime, this.bytes);
@@ -191,6 +193,17 @@ Future<Uint8List> buildPreparationPdf(
               : 'The original files follow as rendered pages. Source files remain separately available.',
         ),
       ],
+    ),
+  );
+  addPatientLogPages(
+    doc,
+    PatientLogReport(
+      patientKey: p.patientKey,
+      patientName: p.patientName,
+      end: today,
+      events: events,
+      controller: p.englishFields['current_medication'] ?? p.currentMedication,
+      sample: p.synthetic,
     ),
   );
   for (final a in originals) {

@@ -117,8 +117,10 @@ void main() {
       await settle();
       expect(tester.takeException(), isNull);
 
-      await tester.ensureVisible(
+      await tester.scrollUntilVisible(
         find.textContaining('DemoController A 100 mcg'),
+        200,
+        scrollable: find.byType(Scrollable).first,
       );
       await settle(3);
       await tester.tap(find.textContaining('DemoController A 100 mcg'));

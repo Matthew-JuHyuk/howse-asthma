@@ -57,26 +57,35 @@ class _DemoScreenState extends State<DemoScreen> {
       body: cases == null
           ? const Center(child: CircularProgressIndicator())
           : ListView(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.fromLTRB(
+                20,
+                20,
+                20,
+                32 + MediaQuery.paddingOf(context).bottom,
+              ),
               children: [
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: DemoBadge(),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 Text(
                   l.cnDemoIntro,
                   style: const TextStyle(fontSize: 16, color: CnColors.muted),
                 ),
-                const SizedBox(height: 16),
-                FilledButton(
+                const SizedBox(height: 24),
+                FilledButton.icon(
                   onPressed: () => openPreparationDemo(context, false),
-                  child: Text(s10(context, 'demoA')),
+                  icon: const Icon(Icons.folder_open_outlined),
+                  label: Text(s10(context, 'demoA')),
                 ),
-                OutlinedButton(
+                const SizedBox(height: 16),
+                OutlinedButton.icon(
                   onPressed: () => openPreparationDemo(context, true),
-                  child: Text(s10(context, 'demoB')),
+                  icon: const Icon(Icons.mark_email_read_outlined),
+                  label: Text(s10(context, 'demoB')),
                 ),
+                const SizedBox(height: 28),
                 for (final c in cases) ...[
                   CaseCard(
                     summary: c,
@@ -86,7 +95,7 @@ class _DemoScreenState extends State<DemoScreen> {
                       _load();
                     },
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 20),
                 ],
               ],
             ),

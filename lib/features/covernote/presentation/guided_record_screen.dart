@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../core/session/session_controller.dart';
 import '../data/preparation_repository.dart';
 import '../data/consent_repository.dart';
@@ -8,6 +9,18 @@ import '../ui/app_chrome.dart';
 import '../ui/brand.dart';
 import 'preparation_strings.dart';
 import 'record_review.dart';
+
+String speechLocale(Locale locale) => locale.countryCode != null
+    ? locale.toLanguageTag()
+    : switch (locale.languageCode) {
+        'en' => 'en-US',
+        'ko' => 'ko-KR',
+        'es' => 'es-US',
+        'zh' => 'zh-CN',
+        'vi' => 'vi-VN',
+        'ar' => 'ar-SA',
+        _ => locale.toLanguageTag(),
+      };
 
 /// One recording entry point. Opening this screen never starts the microphone.
 class GuidedRecordScreen extends StatefulWidget {
@@ -32,7 +45,7 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
   final _focus = FocusNode();
   Map<String, String>? _profiles;
   String? _patient, _error, _owner;
-  String _topic = 'feelPrompt';
+  bool _permissionError = false;
   bool _busy = false, _listening = false, _typed = false, _usedVoice = false;
   PreparationRepository get repo => widget.repository;
   @override
@@ -70,11 +83,12 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
     setState(() {
       _listening = true;
       _error = null;
+      _permissionError = false;
     });
     try {
       final words = await PreparationRepository.native.invokeMethod<String>(
         'listen',
-        {'language': Localizations.localeOf(context).toLanguageTag()},
+        {'language': speechLocale(Localizations.localeOf(context))},
       );
       if (!mounted || repo.uid != _owner) return;
       if (words != null && words.trim().isNotEmpty) {
@@ -87,8 +101,29 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
       } else {
         _error = s10(context, 'voiceFallback');
       }
+    } on PlatformException catch (e) {
+      if (mounted) {
+        _permissionError = [
+          'permission_denied',
+          'recognition_9',
+        ].contains(e.code);
+        _error = e.code == 'cancelled'
+            ? null
+            : s10(context, switch (e.code) {
+                'permission_denied' || 'recognition_9' => 'voicePermission',
+                'recognition_1' || 'recognition_2' => 'voiceNetwork',
+                'unsupported' ||
+                'recognition_12' ||
+                'recognition_13' => 'voiceUnavailable',
+                _ => 'voiceFallback',
+              });
+        _typed = true;
+      }
     } catch (_) {
-      if (mounted) _error = s10(context, 'voiceFallback');
+      if (mounted) {
+        _error = s10(context, 'voiceUnavailable');
+        _typed = true;
+      }
     } finally {
       if (mounted) setState(() => _listening = false);
     }
@@ -209,7 +244,7 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
   void dispose() {
     if (_listening) {
       PreparationRepository.native
-          .invokeMethod('stop')
+          .invokeMethod('cancel')
           .catchError((Object _) => null);
     }
     _text.dispose();
@@ -287,37 +322,17 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
                     const SizedBox(height: 8),
                     Text(s10(context, 'recordWelcomeBody')),
                     const SizedBox(height: 20),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final topic in [
-                          ('feelPrompt', Icons.favorite_outline),
-                          ('medicinePrompt', Icons.medication_outlined),
-                          ('dayPrompt', Icons.nights_stay_outlined),
-                        ])
-                          ChoiceChip(
-                            avatar: Icon(topic.$2, size: 18),
-                            label: Text(s10(context, topic.$1)),
-                            selected: _topic == topic.$1,
-                            onSelected: _busy
-                                ? null
-                                : (_) => setState(() => _topic = topic.$1),
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
                     CnCard(
                       color: CnColors.mint,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            s10(context, '${_topic}Question'),
+                            s10(context, 'autoRecordQuestion'),
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const SizedBox(height: 12),
-                          Text(s10(context, '${_topic}Example')),
+                          Text(s10(context, 'autoRecordExample')),
                         ],
                       ),
                     ),
@@ -338,7 +353,30 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
                         s10(context, _listening ? 'stop' : 'startSpeaking'),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
+                    if (_error != null) ...[
+                      Text(
+                        _error!,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                      if (_permissionError)
+                        TextButton.icon(
+                          onPressed: () async {
+                            try {
+                              await PreparationRepository.native.invokeMethod(
+                                'speechSettings',
+                              );
+                            } catch (_) {
+                              /* Keep the typing alternative visible. */
+                            }
+                          },
+                          icon: const Icon(Icons.settings_outlined),
+                          label: Text(s10(context, 'openSettings')),
+                        ),
+                      const SizedBox(height: 16),
+                    ],
                     if (!_typed)
                       TextButton.icon(
                         onPressed: _busy || _listening
@@ -370,16 +408,6 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
                       Text(s10(context, 'listening')),
                     ],
                     if (_busy) const LinearProgressIndicator(),
-                    if (_error != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Text(
-                          _error!,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                        ),
-                      ),
                   ],
                 ),
         ),

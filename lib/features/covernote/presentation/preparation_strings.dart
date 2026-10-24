@@ -11,6 +11,63 @@ String s10(BuildContext c, String key) {
 }
 
 const _words = <String, List<String>>{
+  'patientLogPdf': [
+    '30-day patient log PDF',
+    '최근 30일 기록 PDF',
+    'PDF del registro de 30 días',
+  ],
+  'autoRecordQuestion': [
+    'How are you feeling? What medicine did you use?',
+    '몸 상태나 사용한 약을 알려주세요',
+    '¿Cómo se siente? ¿Qué medicamento usó?',
+  ],
+  'autoRecordExample': [
+    'Example: I used my inhaler this morning. I coughed last night.\nAI sorts symptoms and medicine use for you.',
+    '예: 아침에 흡입기를 썼어요. 어젯밤에는 기침이 났어요.\nAI가 증상과 약 사용을 나누어 정리해요.',
+    'Ejemplo: Usé mi inhalador esta mañana. Anoche tuve tos.\nLa IA organiza los síntomas y el uso de medicamentos.',
+  ],
+  'voicePermission': [
+    'Allow microphone access in app settings, then try again. You can also type below.',
+    '앱 설정에서 마이크 권한을 허용한 뒤 다시 시도해 주세요. 아래에 직접 입력해도 돼요.',
+    'Permita el acceso al micrófono en ajustes y vuelva a intentarlo. También puede escribir abajo.',
+  ],
+  'voiceNetwork': [
+    'Voice recognition could not connect. Check your connection or type below.',
+    '음성 서비스에 연결하지 못했어요. 인터넷 연결을 확인하거나 아래에 직접 입력해 주세요.',
+    'No se pudo conectar al servicio de voz. Revise la conexión o escriba abajo.',
+  ],
+  'voiceUnavailable': [
+    'Voice recognition is unavailable on this device. Check your phone’s voice input service or type below.',
+    '휴대폰의 음성 서비스를 사용할 수 없어요. 휴대폰 음성 입력 설정을 확인하거나 아래에 직접 입력해 주세요.',
+    'El servicio de voz no está disponible. Revise la entrada de voz del teléfono o escriba abajo.',
+  ],
+  'openSettings': ['Open app settings', '앱 설정 열기', 'Abrir ajustes'],
+  'quickToday': [
+    'Record today’s medicine use',
+    '오늘 약 사용 기록',
+    'Registrar el uso de hoy',
+  ],
+  'quickUseHint': [
+    'Tap after using your medicine. You can undo a mistaken tap. Names and doses are not assumed.',
+    '약을 사용한 뒤 눌러 주세요. 잘못 누르면 취소할 수 있어요. 약 이름과 용량은 임의로 채우지 않아요.',
+    'Pulse después de usar su medicamento. Puede deshacerlo. No se suponen nombres ni dosis.',
+  ],
+  'scheduledReport': [
+    'I used my scheduled medicine. Name and dose not specified.',
+    '정기적으로 사용하는 약을 사용했어요. 이름과 용량은 입력하지 않았어요.',
+    'Usé mi medicamento habitual. No indiqué nombre ni dosis.',
+  ],
+  'rescueReport': [
+    'I used my as-needed medicine or inhaler. Name and dose not specified.',
+    '필요할 때 쓰는 약이나 흡입기를 사용했어요. 이름과 용량은 입력하지 않았어요.',
+    'Usé mi medicamento o inhalador de alivio. No indiqué nombre ni dosis.',
+  ],
+  'linkedHistory': ['Connected records', '연결한 기록', 'Registros vinculados'],
+  'linkedHistoryHelp': [
+    'Only records connected to this case appear here. Add daily records in Records.',
+    '이 케이스에 연결한 기록만 보여요. 매일의 기록은 하단 기록 메뉴에서 남겨 주세요.',
+    'Aquí solo aparecen registros vinculados a este caso. Añada sus registros diarios en Registros.',
+  ],
   "recordEntry": ["Record", "기록하기", "Registrar"],
   "recordWelcome": [
     "A few words are enough",

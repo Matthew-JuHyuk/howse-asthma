@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:printing/printing.dart';
+import '../../assessments/data/act_repository.dart';
+import '../domain/patient_log_report.dart';
+import '../pdf/patient_log_pdf.dart';
 import '../../../core/session/session_controller.dart';
 import '../data/preparation_repository.dart';
 import '../domain/preparation.dart';
@@ -9,6 +13,7 @@ import '../../../l10n/app_localizations.dart';
 import 'air_weather_screen.dart';
 import 'record_translation.dart';
 import 'treatment_calendar.dart';
+import 'quick_treatment_actions.dart';
 import '../../records/data/records_revision.dart';
 
 /// One owner, explicitly selected care subject. Never merges sibling records.
@@ -24,6 +29,52 @@ class _CareProfileRecordsState extends State<CareProfileRecords> {
   List<TreatmentEvent> _events = [];
   String? _selected, _error, _owner;
   DateTime _day = DateTime.now();
+  bool _exporting = false;
+  Future<void> _exportLog() async {
+    final patient = _selected;
+    if (_exporting || patient == null || _profiles == null) return;
+    final name = _profiles![patient]!;
+    final end = _repo.today;
+    setState(() => _exporting = true);
+    try {
+      final events = await _repo.events();
+      Map<String, dynamic>? act;
+      if (patient == _owner) {
+        try {
+          act = await ActRepository().latest();
+        } catch (_) {
+          /* Unavailable stays unknown. */
+        }
+      }
+      if (!mounted || _repo.uid != _owner) return;
+      final bytes = await buildPatientLogPdf(
+        PatientLogReport(
+          patientKey: patient,
+          patientName: name,
+          end: end,
+          events: events,
+          actScore: (act?['total_score'] as num?)?.toInt(),
+          actDay: act?['submitted_at'] == null
+              ? null
+              : dayKey(DateTime.parse(act!['submitted_at']).toLocal()),
+        ),
+      );
+      if (!mounted || _repo.uid != _owner) return;
+      await Printing.sharePdf(
+        bytes: bytes,
+        filename: 'covernote-patient-log-${dayKey(end)}.pdf',
+      );
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(s10(context, 'error'))));
+      }
+    } finally {
+      if (mounted) setState(() => _exporting = false);
+    }
+  }
+
   String _summary(TreatmentEvent e) {
     final l = AppLocalizations.of(context)!;
     if (e.kind == 'symptom') {
@@ -77,9 +128,9 @@ class _CareProfileRecordsState extends State<CareProfileRecords> {
       setState(() {
         _profiles = profiles;
         _events = events;
-        _selected ??=
-            profiles.keys.where((key) => key != _owner).firstOrNull ??
-            profiles.keys.firstOrNull;
+        _selected ??= profiles.containsKey(_owner)
+            ? _owner
+            : profiles.keys.firstOrNull;
         _error = null;
       });
     } catch (_) {
@@ -96,7 +147,22 @@ class _CareProfileRecordsState extends State<CareProfileRecords> {
     }
     final profiles = _profiles;
     return Scaffold(
-      appBar: CoverNoteAppBar(title: Text(s10(context, 'timeline'))),
+      appBar: CoverNoteAppBar(
+        title: Text(s10(context, 'timeline')),
+        actions: [
+          IconButton(
+            tooltip: s10(context, 'patientLogPdf'),
+            onPressed: _exporting || _selected == null ? null : _exportLog,
+            icon: _exporting
+                ? const SizedBox(
+                    width: 22,
+                    height: 22,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.picture_as_pdf_outlined),
+          ),
+        ],
+      ),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -122,7 +188,19 @@ class _CareProfileRecordsState extends State<CareProfileRecords> {
                 onChanged: (v) => setState(() => _selected = v),
               ),
             if (profiles != null) ...[
-              const SizedBox(height: 12),
+              const SizedBox(height: 20),
+              if (_selected != null)
+                QuickTreatmentActions(
+                  key: ValueKey(_selected),
+                  repository: _repo,
+                  patientKey: _selected!,
+                  patientName: profiles[_selected]!,
+                  onSaved: () {
+                    setState(() => _day = _repo.today);
+                    _load();
+                  },
+                ),
+              const SizedBox(height: 28),
               TreatmentCalendar(
                 day: _day,
                 events: _events,
@@ -150,7 +228,7 @@ class _CareProfileRecordsState extends State<CareProfileRecords> {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 20),
               Text(
                 MaterialLocalizations.of(context).formatFullDate(_day),
                 style: Theme.of(context).textTheme.titleMedium,
@@ -248,7 +326,9 @@ class _CareProfileRecordsState extends State<CareProfileRecords> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Text(s10(context, 'empty')),
                 ),
+              const SizedBox(height: 24),
               const AirWeatherLink(),
+              const SizedBox(height: 16),
               TextButton.icon(
                 onPressed: () => Navigator.push<void>(
                   context,
