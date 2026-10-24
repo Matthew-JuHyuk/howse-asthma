@@ -280,24 +280,30 @@ class _EvidenceStepState extends State<EvidenceStep> {
               children: [
                 ActionChip(
                   label: Text(l.cnTreatmentAsthma),
-                  onPressed: () => widget.store.setTreatmentContext(
-                    widget.detail.row.id,
-                    TreatmentContext.asthma,
-                  ).then((_) => widget.onChanged()),
+                  onPressed: () => widget.store
+                      .setTreatmentContext(
+                        widget.detail.row.id,
+                        TreatmentContext.asthma,
+                      )
+                      .then((_) => widget.onChanged()),
                 ),
                 ActionChip(
                   label: Text(l.cnTreatmentOther),
-                  onPressed: () => widget.store.setTreatmentContext(
-                    widget.detail.row.id,
-                    TreatmentContext.other,
-                  ).then((_) => widget.onChanged()),
+                  onPressed: () => widget.store
+                      .setTreatmentContext(
+                        widget.detail.row.id,
+                        TreatmentContext.other,
+                      )
+                      .then((_) => widget.onChanged()),
                 ),
                 ActionChip(
                   label: Text(l.cnTreatmentUnknown),
-                  onPressed: () => widget.store.setTreatmentContext(
-                    widget.detail.row.id,
-                    TreatmentContext.unknown,
-                  ).then((_) => widget.onChanged()),
+                  onPressed: () => widget.store
+                      .setTreatmentContext(
+                        widget.detail.row.id,
+                        TreatmentContext.unknown,
+                      )
+                      .then((_) => widget.onChanged()),
                 ),
               ],
             ),
@@ -335,7 +341,9 @@ class _EvidenceStepState extends State<EvidenceStep> {
               child: _RequirementCard(
                 requirement: r,
                 keep: [
-                  if ((d.facts?.field('medication').value ?? '').trim().isNotEmpty)
+                  if ((d.facts?.field('medication').value ?? '')
+                      .trim()
+                      .isNotEmpty)
                     d.facts!.field('medication').value!,
                 ],
                 linked: d.evidence
@@ -553,8 +561,7 @@ class _RequirementCard extends StatelessWidget {
               ),
             ],
           ),
-          if (!canLink)
-            _ItemNote(initial: r.note, onSave: onNote),
+          if (!canLink) _ItemNote(initial: r.note, onSave: onNote),
         ],
       ),
     );

@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
-
 import '../data/case_store.dart';
+
+ValueChanged<int>? mainTabNavigation(BuildContext context) {
+  final nav = CoverNoteNav.maybeOf(context);
+  if (nav == null) return null;
+  final navigator = Navigator.of(context);
+  return (index) {
+    if (!navigator.mounted) return;
+    navigator.popUntil((r) => r.isFirst);
+    [nav.goHome, nav.goCases, nav.goRecords, nav.goSettings][index]();
+  };
+}
 
 /// Lets any screen open a case inside the Cases tab (bottom nav stays).
 class CoverNoteNav extends InheritedWidget {

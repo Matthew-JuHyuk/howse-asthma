@@ -165,7 +165,6 @@ class _HomePreparationLogState extends State<HomePreparationLog> {
             !(p.patientKey == owner || p.patientKey.startsWith('$owner/')))) {
       return const SizedBox.shrink();
     }
-    final summary = TreatmentSummary(p, _events, _repo.today);
     return CnCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -174,30 +173,49 @@ class _HomePreparationLogState extends State<HomePreparationLog> {
             p.patientName,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          if (p.currentMedication.isNotEmpty) Text(p.currentMedication),
-          Text('${summary.observedDays}/30 · ${s10(context, 'timeline')}'),
-          FilledButton(
-            onPressed: _busy ? null : () => _log('scheduled'),
-            child: Text(s10(context, 'scheduled')),
+          const SizedBox(height: 12),
+          Text(
+            s10(context, 'voiceGuide'),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
+          const SizedBox(height: 8),
+          Text(
+            s10(context, 'voiceExample'),
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 12),
+          FilledButton.icon(
+            style: FilledButton.styleFrom(
+              minimumSize: const Size.fromHeight(64),
+            ),
+            onPressed: _busy ? null : widget.onVoice,
+            icon: const Icon(Icons.mic_rounded, size: 32),
+            label: Text(s10(context, 'voice')),
+          ),
+          const SizedBox(height: 8),
+          ExpansionTile(
+            tilePadding: EdgeInsets.zero,
+            title: Text(s10(context, 'tapInstead')),
             children: [
-              OutlinedButton(
-                onPressed: _busy ? null : () => _log('as_needed'),
-                child: Text(s10(context, 'rescue')),
-              ),
-              OutlinedButton(
-                onPressed: _busy ? null : () => _log('symptom'),
-                child: Text(s10(context, 'symptom')),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  OutlinedButton(
+                    onPressed: _busy ? null : () => _log('scheduled'),
+                    child: Text(s10(context, 'scheduled')),
+                  ),
+                  OutlinedButton(
+                    onPressed: _busy ? null : () => _log('as_needed'),
+                    child: Text(s10(context, 'rescue')),
+                  ),
+                  OutlinedButton(
+                    onPressed: _busy ? null : () => _log('symptom'),
+                    child: Text(s10(context, 'symptom')),
+                  ),
+                ],
               ),
             ],
-          ),
-          TextButton.icon(
-            onPressed: _busy ? null : widget.onVoice,
-            icon: const Icon(Icons.mic_outlined),
-            label: Text(s10(context, 'voice')),
           ),
           if (_message != null)
             Text(_message!, style: const TextStyle(color: CnColors.muted)),

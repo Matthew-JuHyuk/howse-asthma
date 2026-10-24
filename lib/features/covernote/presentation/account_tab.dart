@@ -217,51 +217,71 @@ class _AccountTabState extends State<AccountTab> {
               onTap: () => showLanguagePicker(context),
             ),
           ),
-          SectionLabel(l.cnDataConsent),
-          SwitchListTile(
-            title: Text(l.cnConsentAi),
-            subtitle: Text(l.cnConsentAiBody),
-            value: _letterConsent,
-            onChanged: session.isReady
-                ? (v) => _toggle(ConsentPurpose.letter, v)
-                : null,
-          ),
-          SwitchListTile(
-            title: Text(l.cnConsentLabelPurpose),
-            value: _labelConsent,
-            onChanged: session.isReady
-                ? (v) => _toggle(ConsentPurpose.label, v)
-                : null,
-          ),
-          SwitchListTile(
-            title: Text(l.cnConsentTranslatePurpose),
-            value: _translateConsent,
-            onChanged: session.isReady
-                ? (v) => _toggle(ConsentPurpose.translate, v)
-                : null,
-          ),
-          SwitchListTile(
-            title: Text(s10(context, 'voice')),
-            subtitle: Text(s10(context, 'consent')),
-            value: _treatmentConsent,
-            onChanged: session.isReady
-                ? (v) => _toggle(ConsentPurpose.treatment, v)
-                : null,
-          ),
-          SectionLabel(l.cnServiceStatus),
+          const SizedBox(height: 20),
           CnCard(
-            child: Row(
+            child: ExpansionTile(
+              leading: const Icon(Icons.privacy_tip_outlined),
+              tilePadding: EdgeInsets.zero,
+              title: Text(s10(context, 'privacySettings')),
               children: [
-                Expanded(
-                  child: Text(switch (_aiReady) {
-                    true => l.cnServiceReady,
-                    false => l.cnServiceUnavailableShort,
-                    null => _checking ? l.cnChecking : l.cnServiceUnknown,
-                  }),
+                SectionLabel(l.cnDataConsent),
+                SwitchListTile(
+                  title: Text(l.cnConsentAi),
+                  subtitle: Text(l.cnConsentAiBody),
+                  value: _letterConsent,
+                  onChanged: session.isReady
+                      ? (v) => _toggle(ConsentPurpose.letter, v)
+                      : null,
                 ),
-                TextButton(
-                  onPressed: _checking ? null : _checkService,
-                  child: Text(l.cnCheck),
+                SwitchListTile(
+                  title: Text(l.cnConsentLabelPurpose),
+                  value: _labelConsent,
+                  onChanged: session.isReady
+                      ? (v) => _toggle(ConsentPurpose.label, v)
+                      : null,
+                ),
+                SwitchListTile(
+                  title: Text(l.cnConsentTranslatePurpose),
+                  value: _translateConsent,
+                  onChanged: session.isReady
+                      ? (v) => _toggle(ConsentPurpose.translate, v)
+                      : null,
+                ),
+                SwitchListTile(
+                  title: Text(s10(context, 'voice')),
+                  subtitle: Text(s10(context, 'consent')),
+                  value: _treatmentConsent,
+                  onChanged: session.isReady
+                      ? (v) => _toggle(ConsentPurpose.treatment, v)
+                      : null,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          CnCard(
+            child: ExpansionTile(
+              leading: const Icon(Icons.settings_outlined),
+              tilePadding: EdgeInsets.zero,
+              title: Text(s10(context, 'advancedSettings')),
+              children: [
+                SectionLabel(l.cnServiceStatus),
+                CnCard(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(switch (_aiReady) {
+                          true => l.cnServiceReady,
+                          false => l.cnServiceUnavailableShort,
+                          null => _checking ? l.cnChecking : l.cnServiceUnknown,
+                        }),
+                      ),
+                      TextButton(
+                        onPressed: _checking ? null : _checkService,
+                        child: Text(l.cnCheck),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

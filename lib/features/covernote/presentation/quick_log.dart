@@ -98,9 +98,11 @@ class _QuickLogPanelState extends State<QuickLogPanel> {
     final day = widget.day;
     if (day == null) return false;
     final now = DateTime.now();
-    return DateTime(day.year, day.month, day.day).isAfter(
-      DateTime(now.year, now.month, now.day),
-    );
+    return DateTime(
+      day.year,
+      day.month,
+      day.day,
+    ).isAfter(DateTime(now.year, now.month, now.day));
   }
 
   @override

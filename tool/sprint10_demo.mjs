@@ -26,6 +26,10 @@ let login;try{login=await api('/auth/v1/token?grant_type=password','POST',{email
 }
 token=login.access_token;const uid=login.user.id;
 if(login.user.email!==cfg.S10_EMAIL||login.user.user_metadata.sprint10_demo!==true)throw Error('Dedicated demo account guard failed');
+if(command==='probe-environment'){
+ const response=await api('/functions/v1/calculate-environment-risk','POST',{latitude:40.8859,longitude:-74.0435});
+ console.log(JSON.stringify(response));process.exit(0);
+}
 const id=name=>{const h=createHash('sha256').update(uid+'/s10/'+name).digest('hex');return `${h.slice(0,8)}-${h.slice(8,12)}-4${h.slice(13,16)}-8${h.slice(17,20)}-${h.slice(20,32)}`};
 const now=new Date(); const today=process.argv.find(x=>x.startsWith('--today='))?.slice(8)??`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
 const day=n=>{const d=new Date(today+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
@@ -73,6 +77,20 @@ if(command==='seed'){
   await api('/rest/v1/case_preparations','POST',{case_id:cid,owner_id:uid,revision:1,payload:p});
  }
  console.log(JSON.stringify({seeded:true,events:events.length,cases:2,uploadedDocuments:3,liveUploadDocument:docs[3].file}));
+}
+if(command==='enrich-ux'){
+ const rows=[];
+ for(let n=-29;n<=0;n++){
+  const category=n<-20?'traffic_air':n<-11?'humid_after_rain':n<-3?'pollen':'calm';
+  const text={traffic_air:'SAMPLE · Hazy air near traffic. Regional context, not a measured exposure.',humid_after_rain:'SAMPLE · Several humid days after heavy rain. Indoor conditions are unknown.',pollen:'SAMPLE · Several days with high pollen in the fictional scenario.',calm:'SAMPLE · Mild outdoor conditions in the fictional scenario.'}[category];
+  const eid=id('ux-environment-'+n),source=id('ux-environment-source-'+n);
+  const payload={id:eid,patient_key:patient,kind:'environment',day:day(n),source_id:source,text,synthetic:true,undone:false,values:{category,source:'synthetic_scenario',fixture:'s10-ux-environment-v1',area:'Bergen County, NJ',english_summary:text}};
+  rows.push({id:eid,owner_id:uid,patient_key:patient,source_id:source,local_date:day(n),kind:'environment',payload});
+ }
+ await api('/rest/v1/treatment_events?on_conflict=id','POST',rows,{Prefer:'resolution=merge-duplicates'});
+ const check=await api(`/rest/v1/treatment_events?owner_id=eq.${uid}&kind=eq.environment&select=id,patient_key,payload`);
+ if(check.filter(x=>x.payload.values?.fixture==='s10-ux-environment-v1'&&x.patient_key===patient).length!==30)throw Error('Environment fixture verification failed');
+ console.log(JSON.stringify({syntheticEnvironmentDays:30,patientScoped:true,actualObservationsFabricated:false}));process.exit(0);
 }
 const cases=await api(`/rest/v1/case_preparations?owner_id=eq.${uid}&select=case_id,payload,revision`);
 if(command==='refresh-documents'){
@@ -132,7 +150,12 @@ if(!b.history.some(x=>x.purpose==='information_response'&&x.date===day(10))||!b.
 const stats={observedDays:new Set(child.filter(x=>!['clinical_document','environment'].includes(x.kind)).map(x=>x.day)).size,symptomDays:new Set(child.filter(x=>x.kind==='symptom'&&!x.values.negated).map(x=>x.day)).size,rescueUses:child.filter(x=>x.kind==='medication_use'&&x.values.use_kind==='as_needed').length,nightWakings:child.filter(x=>x.kind==='symptom').reduce((n,x)=>n+(x.values.night_wakings??0),0)};
 if(cases.length!==2||stats.symptomDays!==12||stats.rescueUses!==8||stats.nightWakings!==8)throw Error('Fixture verification failed');
 // Server invocation must require consent: do not fabricate the demo user's consent.
-const gate=await api('/functions/v1/analyze-letter','POST',{action:'structure_record',case_id:cases[0].case_id,transcript:'Ayer Diego tosió.',today,patient_name:'Diego Martinez',language:'es',timezone:'America/New_York'}).catch(x=>({transport_error:x.message}));
-if(!JSON.stringify(gate).includes('consent_required'))throw Error('Expected consent gate was not observed');
-const report={date:today,accountPasswordLogin:'passed',caseCount:cases.length,eventCount:rows.length,sourceFilesVerified,storedHashes,expected30DaySummary:stats,scenarioMapping:{sameChildAcrossCases:true,A_initialRequest:true,B_deniedWithSeparateDeadlines:true,priorYearVisit:true,labIntentionallyNotUploaded:true,missingTestsInBothCases:true,treatmentEvidenceStaged:true,sourceLinksMatchChild:true},aiConsentGate:'passed: consent_required',foreignOwnerQuery:'empty',errorFreeSeed:true,careSubjectIsolation:rows.filter(x=>x.payload.patient_key===uid).length===1};
+const consent=await api(`/rest/v1/consent_events?owner_id=eq.${uid}&purpose=eq.treatment_processing&revoked_at=is.null&select=id&limit=1`);
+let consentStatus='existing consent present; model call skipped';
+if(!consent.length){
+ const gate=await api('/functions/v1/analyze-letter','POST',{action:'structure_record',case_id:cases[0].case_id,transcript:'Ayer Diego tosió.',today,patient_name:'Diego Martinez',language:'es',timezone:'America/New_York'}).catch(x=>({transport_error:x.message}));
+ if(!JSON.stringify(gate).includes('consent_required'))throw Error(`Expected consent gate was not observed: ${gate.error??gate.transport_error??'unexpected_response'}`);
+ consentStatus='passed: consent_required';
+}
+const report={date:today,accountPasswordLogin:'passed',caseCount:cases.length,eventCount:rows.length,sourceFilesVerified,storedHashes,expected30DaySummary:stats,scenarioMapping:{sameChildAcrossCases:true,A_initialRequest:true,B_deniedWithSeparateDeadlines:true,priorYearVisit:true,labIntentionallyNotUploaded:true,missingTestsInBothCases:true,treatmentEvidenceStaged:true,sourceLinksMatchChild:true},aiConsentGate:consentStatus,foreignOwnerQuery:'empty',errorFreeSeed:true,careSubjectIsolation:rows.filter(x=>x.payload.patient_key===uid).length===1};
 writeFileSync('build/sprint10/demo-verification.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));

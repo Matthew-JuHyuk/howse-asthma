@@ -17,6 +17,7 @@ import '../domain/s9_models.dart';
 import '../pdf/packet_pdf.dart';
 import '../ui/brand.dart';
 import 'case_labels.dart';
+
 Future<PacketResult> _buildInIsolate((PacketInput, ByteData, ByteData) args) =>
     buildPacketPdf(args.$1, PacketFonts.fromBytes(args.$2, args.$3));
 
@@ -251,75 +252,81 @@ class _PacketStepState extends State<PacketStep> {
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setLocal) => AlertDialog(
-        title: Text(l.cnRecordDelivery),
-        content: SingleChildScrollView(
-          child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(l.cnDeliveryUserReport),
-            const SizedBox(height: 12),
-            Text(l.cnDeliveryRecipient, style: const TextStyle(fontWeight: FontWeight.w600)),
-            DropdownButton<DeliveryRecipient>(
-              value: recipient,
-              isExpanded: true,
-              items: [
-                DropdownMenuItem(
-                  value: DeliveryRecipient.clinic,
-                  child: Text(l.cnRecipientClinic),
+          title: Text(l.cnRecordDelivery),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(l.cnDeliveryUserReport),
+                const SizedBox(height: 12),
+                Text(
+                  l.cnDeliveryRecipient,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-                DropdownMenuItem(
-                  value: DeliveryRecipient.insurer,
-                  child: Text(l.cnRecipientInsurer),
+                DropdownButton<DeliveryRecipient>(
+                  value: recipient,
+                  isExpanded: true,
+                  items: [
+                    DropdownMenuItem(
+                      value: DeliveryRecipient.clinic,
+                      child: Text(l.cnRecipientClinic),
+                    ),
+                    DropdownMenuItem(
+                      value: DeliveryRecipient.insurer,
+                      child: Text(l.cnRecipientInsurer),
+                    ),
+                    DropdownMenuItem(
+                      value: DeliveryRecipient.self,
+                      child: Text(l.cnRecipientSelf),
+                    ),
+                    DropdownMenuItem(
+                      value: DeliveryRecipient.other,
+                      child: Text(l.cnRecipientOther),
+                    ),
+                  ],
+                  onChanged: (v) => setLocal(() => recipient = v ?? recipient),
                 ),
-                DropdownMenuItem(
-                  value: DeliveryRecipient.self,
-                  child: Text(l.cnRecipientSelf),
+                const SizedBox(height: 8),
+                Text(
+                  l.cnDeliveryMethod,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-                DropdownMenuItem(
-                  value: DeliveryRecipient.other,
-                  child: Text(l.cnRecipientOther),
+                DropdownButton<DeliveryMethod>(
+                  value: method,
+                  isExpanded: true,
+                  items: [
+                    for (final m in DeliveryMethod.values)
+                      DropdownMenuItem(
+                        value: m,
+                        child: Text(switch (m) {
+                          DeliveryMethod.email => l.cnMethodEmail,
+                          DeliveryMethod.message => l.cnMethodMessage,
+                          DeliveryMethod.portal => l.cnMethodPortal,
+                          DeliveryMethod.fax => l.cnMethodFax,
+                          DeliveryMethod.mail => l.cnMethodMail,
+                          DeliveryMethod.inPerson => l.cnMethodInPerson,
+                          DeliveryMethod.other => l.cnMethodOther,
+                          DeliveryMethod.unknown => l.cnMethodUnknown,
+                        }),
+                      ),
+                  ],
+                  onChanged: (v) => setLocal(() => method = v ?? method),
                 ),
               ],
-              onChanged: (v) => setLocal(() => recipient = v ?? recipient),
             ),
-            const SizedBox(height: 8),
-            Text(l.cnDeliveryMethod, style: const TextStyle(fontWeight: FontWeight.w600)),
-            DropdownButton<DeliveryMethod>(
-              value: method,
-              isExpanded: true,
-              items: [
-                for (final m in DeliveryMethod.values)
-                  DropdownMenuItem(
-                    value: m,
-                    child: Text(switch (m) {
-                      DeliveryMethod.email => l.cnMethodEmail,
-                      DeliveryMethod.message => l.cnMethodMessage,
-                      DeliveryMethod.portal => l.cnMethodPortal,
-                      DeliveryMethod.fax => l.cnMethodFax,
-                      DeliveryMethod.mail => l.cnMethodMail,
-                      DeliveryMethod.inPerson => l.cnMethodInPerson,
-                      DeliveryMethod.other => l.cnMethodOther,
-                      DeliveryMethod.unknown => l.cnMethodUnknown,
-                    }),
-                  ),
-              ],
-              onChanged: (v) => setLocal(() => method = v ?? method),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(l.cnCancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(l.cnRecordDelivery),
             ),
           ],
         ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: Text(l.cnCancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            child: Text(l.cnRecordDelivery),
-          ),
-        ],
-      ),
       ),
     );
     if (ok != true || widget.store.isDemo) return;
@@ -552,7 +559,10 @@ class _PacketStepState extends State<PacketStep> {
           if (!widget.store.isDemo)
             Align(
               alignment: Alignment.centerLeft,
-              child: TextButton(onPressed: _reportSent, child: Text(l.cnISentIt)),
+              child: TextButton(
+                onPressed: _reportSent,
+                child: Text(l.cnISentIt),
+              ),
             ),
         ],
         if (widget.detail.row.lifecycle == CaseLifecycle.active) ...[

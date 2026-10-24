@@ -22,7 +22,8 @@ class MedicationUseRepository {
     void add(MedicationUseEvent e) {
       if (e.undone) return;
       if (seen.contains(e.id)) return;
-      if (e.sourceId != null && seen.contains('${e.sourceTable}:${e.sourceId}')) {
+      if (e.sourceId != null &&
+          seen.contains('${e.sourceTable}:${e.sourceId}')) {
         return;
       }
       seen.add(e.id);
@@ -70,7 +71,10 @@ class MedicationUseRepository {
     } catch (_) {}
 
     try {
-      final checks = await RegimenRepository().listBetween(range.from, range.to);
+      final checks = await RegimenRepository().listBetween(
+        range.from,
+        range.to,
+      );
       for (final c in checks) {
         if (c.status != 'used') continue;
         add(
@@ -101,8 +105,12 @@ class MedicationUseRepository {
           MedicationUseEvent(
             id: 'pdc:${p.id}',
             useKind: UseKind.scheduled,
-            occurredAt: DateTime(p.date.year, p.date.month, p.date.day, 12)
-                .toUtc(),
+            occurredAt: DateTime(
+              p.date.year,
+              p.date.month,
+              p.date.day,
+              12,
+            ).toUtc(),
             localDate: p.date,
             inputPath: 'daily_check',
             sourceTable: 'pdc_daily_checks',

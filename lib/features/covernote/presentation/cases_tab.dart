@@ -12,6 +12,8 @@ import '../ui/brand.dart';
 import 'capture_screen.dart';
 import 'case_card.dart';
 import 'routes.dart';
+import 'preparation_screen.dart';
+import 'preparation_strings.dart';
 
 class CasesTab extends StatefulWidget {
   const CasesTab({super.key});
@@ -95,12 +97,60 @@ class CasesTabState extends State<CasesTab> {
     ];
   }
 
+  Future<void> _startRequest() async {
+    final l = AppLocalizations.of(context)!;
+    final choice = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (c) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.folder_open_outlined),
+                title: Text(s10(c, 'start')),
+                subtitle: Text(s10(c, 'newHelp')),
+                onTap: () => Navigator.pop(c, 'new'),
+              ),
+              const Divider(),
+              ListTile(
+                leading: const Icon(Icons.document_scanner_outlined),
+                title: Text(l.cnScanLetter),
+                subtitle: Text(s10(c, 'denialHelp')),
+                onTap: () => Navigator.pop(c, 'notice'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    if (!mounted || choice == null) return;
+    if (choice == 'new') {
+      await startPreparation(context);
+    } else {
+      await startNewCase(context, CaptureSource.camera);
+    }
+    if (mounted) await refresh();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     final session = SessionScope.of(context);
     return Scaffold(
-      appBar: CoverNoteAppBar(title: Text(l.cnTabCases)),
+      appBar: CoverNoteAppBar(
+        title: Text(l.cnTabCases),
+        actions: [
+          if (session.isReady)
+            IconButton(
+              tooltip: s10(context, 'otherCase'),
+              icon: const Icon(Icons.add),
+              onPressed: _startRequest,
+            ),
+        ],
+      ),
       body: SafeArea(
         child: Builder(
           builder: (context) {
@@ -138,10 +188,7 @@ class CasesTabState extends State<CasesTab> {
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                   child: SegmentedButton<bool>(
                     segments: [
-                      ButtonSegment(
-                        value: true,
-                        label: Text(l.cnActiveCases),
-                      ),
+                      ButtonSegment(value: true, label: Text(l.cnActiveCases)),
                       ButtonSegment(
                         value: false,
                         label: Text(l.cnCompletedArchived),
@@ -169,20 +216,14 @@ class CasesTabState extends State<CasesTab> {
                             icon: Icons.folder_open,
                             title: l.cnNoCasesYet,
                             body: l.cnNoCasesBody,
-                            actionLabel: l.cnScanLetter,
-                            onAction: () async {
-                              await startNewCase(
-                                context,
-                                CaptureSource.camera,
-                              );
-                              if (mounted) await refresh();
-                            },
+                            actionLabel: s10(context, 'otherCase'),
+                            onAction: _startRequest,
                           ),
                         )
                       : RefreshIndicator(
                           onRefresh: refresh,
                           child: ListView.separated(
-                            padding: const EdgeInsets.fromLTRB(16, 8, 16, 88),
+                            padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                             itemCount: visible.length,
                             separatorBuilder: (_, _) =>
                                 const SizedBox(height: 8),
@@ -201,16 +242,6 @@ class CasesTabState extends State<CasesTab> {
           },
         ),
       ),
-      floatingActionButton: session.isReady
-          ? FloatingActionButton.extended(
-              onPressed: () async {
-                await startNewCase(context, CaptureSource.camera);
-                if (mounted) await refresh();
-              },
-              icon: const Icon(Icons.document_scanner_outlined),
-              label: Text(l.cnScanLetter),
-            )
-          : null,
     );
   }
 }

@@ -204,7 +204,10 @@ class PreparationRepository {
 
   bool offline = false;
   Future<List<Map<String, dynamic>>> _readAll(
-    String table, String ownerColumn, String orderColumn, String owner,
+    String table,
+    String ownerColumn,
+    String orderColumn,
+    String owner,
   ) async {
     final rows = <Map<String, dynamic>>[];
     for (var offset = 0; ; offset += 500) {
@@ -221,13 +224,19 @@ class PreparationRepository {
     }
     return rows;
   }
+
   Future<List<TreatmentEvent>> events() async {
     if (demo) return List.of(demoEvents);
     final owner = uid;
     final prefs = await SharedPreferences.getInstance();
     List<TreatmentEvent> list;
     try {
-      final rows = await _readAll('treatment_events', 'owner_id', 'local_date', owner);
+      final rows = await _readAll(
+        'treatment_events',
+        'owner_id',
+        'local_date',
+        owner,
+      );
       list = [
         for (final r in rows)
           TreatmentEvent.fromJson({
@@ -235,8 +244,18 @@ class PreparationRepository {
             'undone': r['undone_at'] != null,
           }),
       ];
-      final env = await _readAll('environment_snapshots', 'patient_id', 'event_local_date', owner);
-      final links = await _readAll('environment_event_links', 'patient_id', 'created_at', owner);
+      final env = await _readAll(
+        'environment_snapshots',
+        'patient_id',
+        'event_local_date',
+        owner,
+      );
+      final links = await _readAll(
+        'environment_event_links',
+        'patient_id',
+        'created_at',
+        owner,
+      );
       for (final r in env) {
         if (r['event_local_date'] == null) continue;
         final linkedIds = {

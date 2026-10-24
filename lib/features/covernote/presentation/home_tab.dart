@@ -15,7 +15,7 @@ import 'preparation_screen.dart';
 import 'preparation_strings.dart';
 import '../data/preparation_repository.dart';
 import '../domain/preparation.dart';
-import 'home_preparation_log.dart';
+import 'covernote_nav.dart';
 import '../domain/s9_models.dart';
 
 class HomeTab extends StatefulWidget {
@@ -37,6 +37,7 @@ class HomeTabState extends State<HomeTab> {
   String? _error;
   String? _loadedFor;
   Preparation? _preparation;
+  List<TreatmentEvent> _records = [];
 
   @override
   void didChangeDependencies() {
@@ -60,9 +61,11 @@ class HomeTabState extends State<HomeTab> {
           .where((c) => c.row.lifecycle == CaseLifecycle.active)
           .firstOrNull;
       Preparation? preparation;
+      List<TreatmentEvent> records = [];
       if (active != null) {
         try {
           preparation = await PreparationRepository().load(active.row.id);
+          records = await PreparationRepository().events();
         } catch (_) {
           /* Legacy case retains its existing records entry. */
         }
@@ -71,6 +74,7 @@ class HomeTabState extends State<HomeTab> {
       setState(() {
         _cases = list;
         _preparation = preparation;
+        _records = records;
         _error = null;
       });
     } catch (e) {
@@ -97,9 +101,6 @@ class HomeTabState extends State<HomeTab> {
               c.row.lifecycle == CaseLifecycle.active,
         )
         .toList();
-    final done = cases
-        .where((c) => c.row.lifecycle != CaseLifecycle.active)
-        .toList();
     final current = active.isEmpty ? null : active.first;
 
     return SafeArea(
@@ -121,7 +122,7 @@ class HomeTabState extends State<HomeTab> {
             ),
             const SizedBox(height: 24),
             Text(
-              s10(context, 'intro'),
+              s10(context, 'purpose'),
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
@@ -130,43 +131,80 @@ class HomeTabState extends State<HomeTab> {
               ),
             ),
             const SizedBox(height: 16),
-            ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: 64),
-              child: FilledButton.icon(
-                onPressed: () async {
-                  await startPreparation(context);
-                  if (mounted) await refresh();
-                },
-                icon: const Icon(Icons.document_scanner_outlined, size: 28),
-                label: Text(
-                  s10(context, 'start'),
-                  style: const TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600,
+            if (_error != null)
+              TextButton.icon(
+                onPressed: refresh,
+                icon: const Icon(Icons.refresh),
+                label: Text(l.cnRetry),
+              ),
+            if (signedIn && current != null) ...[
+              SectionLabel(l.cnContinueCase),
+              if (_preparation case final p?)
+                CnCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        p.patientName,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        '${p.needs.where((n) => n.links.any((id) => _records.any((e) => e.id == id && !e.undone))).length} / ${p.needs.length} · ${s10(context, 'progress')}',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: 8),
+                      LinearProgressIndicator(
+                        value: p.needs.isEmpty
+                            ? 0
+                            : p.needs
+                                      .where(
+                                        (n) => n.links.any(
+                                          (id) => _records.any(
+                                            (e) => e.id == id && !e.undone,
+                                          ),
+                                        ),
+                                      )
+                                      .length /
+                                  p.needs.length,
+                        minHeight: 8,
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        '${TreatmentSummary(p, _records, DateTime.now()).observedDays} ${s10(context, 'recordedDays')}',
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton.icon(
+                          onPressed: () async {
+                            await openCase(
+                              context,
+                              CoverNoteServices.of(context).live,
+                              current.row.id,
+                            );
+                            if (mounted) await refresh();
+                          },
+                          icon: const Icon(Icons.arrow_forward),
+                          label: Text(s10(context, 'gatherStep')),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: 52),
-              child: OutlinedButton.icon(
-                onPressed: () => _start(CaptureSource.files),
-                icon: const Icon(Icons.upload_file_outlined),
-                label: Text(
-                  s10(context, 'denied'),
-                  style: const TextStyle(fontSize: 16),
+              if (_preparation == null)
+                CaseCard(
+                  summary: current,
+                  onTap: () async {
+                    await openCase(
+                      context,
+                      CoverNoteServices.of(context).live,
+                      current.row.id,
+                    );
+                    if (mounted) await refresh();
+                  },
                 ),
-              ),
-            ),
-            const SizedBox(height: 4),
-            Align(
-              child: TextButton.icon(
-                onPressed: () => openDemo(context),
-                icon: const Icon(Icons.play_circle_outline, size: 20),
-                label: Text(l.cnTryDemo),
-              ),
-            ),
+            ],
             if (!signedIn && session.status != SessionStatus.unconfigured) ...[
               const SizedBox(height: 4),
               Wrap(
@@ -192,100 +230,148 @@ class HomeTabState extends State<HomeTab> {
                 style: const TextStyle(color: CnColors.warn),
               ),
             ],
-            if (signedIn) ...[
+            if (signedIn && current != null) ...[
+              const SizedBox(height: 24),
               SectionLabel(l.cnHomeRecords),
               if (_preparation case final p?)
-                HomePreparationLog(
-                  preparation: p,
-                  onVoice: () => Navigator.push<void>(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => PreparationScreen(
-                        repository: PreparationRepository(),
-                        caseId: p.id,
-                        voiceOnOpen: true,
+                CnCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.calendar_month_outlined,
+                            color: CnColors.teal,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              '${TreatmentSummary(p, _records, DateTime.now()).observedDays} ${s10(context, 'recordedDays')}',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                      const SizedBox(height: 12),
+                      Text(s10(context, 'centerHint')),
+                      const SizedBox(height: 12),
+                      TextButton.icon(
+                        onPressed: CoverNoteNav.maybeOf(context)?.goRecords,
+                        icon: const Icon(Icons.arrow_forward),
+                        label: Text(s10(context, 'timeline')),
+                      ),
+                    ],
                   ),
                 )
               else
                 const QuickLogPanel(),
             ],
-            if (signedIn && current != null) ...[
-              SectionLabel(l.cnContinueCase),
-              CaseCard(
-                summary: current,
-                onTap: () async {
-                  await openCase(
-                    context,
-                    CoverNoteServices.of(context).live,
-                    current.row.id,
-                  );
-                  if (mounted) await refresh();
-                },
-              ),
-            ],
-            SectionLabel(l.cnHowItWorks),
-            _Steps(),
-            if (signedIn) ...[
-              SectionLabel(l.cnRecentCases),
-              if (_error != null)
-                ActionMessage(
-                  icon: Icons.cloud_off,
-                  title: l.cnErrNetwork,
-                  actionLabel: l.cnRetry,
-                  onAction: refresh,
-                )
-              else if (_cases == null)
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (active.length <= 1)
-                Text(
-                  active.isEmpty ? l.cnNoCasesYet : l.cnNoOtherCases,
-                  style: const TextStyle(color: CnColors.muted),
-                )
-              else ...[
-                for (final c in active.skip(1).take(3)) ...[
-                  CaseCard(
-                    summary: c,
-                    onTap: () async {
-                      await openCase(
-                        context,
-                        CoverNoteServices.of(context).live,
-                        c.row.id,
-                      );
-                      if (mounted) await refresh();
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                ],
-                if (active.length > 4)
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                      onPressed: widget.onOpenCases,
-                      child: Text(l.cnSeeAllCases),
+            const SizedBox(height: 24),
+            if (signedIn && current != null)
+              ExpansionTile(
+                title: Text(s10(context, 'otherCase')),
+                children: [
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 64),
+                    child: FilledButton.icon(
+                      onPressed: () async {
+                        await startPreparation(context);
+                        if (mounted) await refresh();
+                      },
+                      icon: const Icon(
+                        Icons.document_scanner_outlined,
+                        size: 28,
+                      ),
+                      label: Text(
+                        s10(context, 'start'),
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
-              ],
-              if (done.isNotEmpty) ...[
-                SectionLabel(l.cnCompletedArchived),
-                for (final c in done.take(2))
-                  CaseCard(
-                    summary: c,
-                    onTap: () async {
-                      await openCase(
-                        context,
-                        CoverNoteServices.of(context).live,
-                        c.row.id,
-                      );
-                      if (mounted) await refresh();
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 16),
+                    child: Text(s10(context, 'newHelp')),
                   ),
-              ],
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 52),
+                    child: OutlinedButton.icon(
+                      onPressed: () => _start(CaptureSource.files),
+                      icon: const Icon(Icons.upload_file_outlined),
+                      label: Text(
+                        s10(context, 'denied'),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 16),
+                    child: Text(s10(context, 'denialHelp')),
+                  ),
+                  Align(
+                    child: TextButton.icon(
+                      onPressed: () => openDemo(context),
+                      icon: const Icon(Icons.play_circle_outline, size: 20),
+                      label: Text(l.cnTryDemo),
+                    ),
+                  ),
+                ],
+              )
+            else ...[
+              ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 64),
+                child: FilledButton.icon(
+                  onPressed: () async {
+                    await startPreparation(context);
+                    if (mounted) await refresh();
+                  },
+                  icon: const Icon(Icons.document_scanner_outlined, size: 28),
+                  label: Text(
+                    s10(context, 'start'),
+                    style: const TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 16),
+                child: Text(s10(context, 'newHelp')),
+              ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 52),
+                child: OutlinedButton.icon(
+                  onPressed: () => _start(CaptureSource.files),
+                  icon: const Icon(Icons.upload_file_outlined),
+                  label: Text(
+                    s10(context, 'denied'),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 16),
+                child: Text(s10(context, 'denialHelp')),
+              ),
+              Align(
+                child: TextButton.icon(
+                  onPressed: () => openDemo(context),
+                  icon: const Icon(Icons.play_circle_outline, size: 20),
+                  label: Text(l.cnTryDemo),
+                ),
+              ),
             ],
+            if (!signedIn) ...[SectionLabel(l.cnHowItWorks), _Steps()],
+            if (signedIn)
+              TextButton.icon(
+                onPressed: widget.onOpenCases,
+                icon: const Icon(Icons.folder_outlined),
+                label: Text(l.cnSeeAllCases),
+              ),
           ],
         ),
       ),

@@ -39,7 +39,11 @@ Future<void> openCase(
         await Navigator.push<void>(
           context,
           MaterialPageRoute(
-            builder: (_) => PreparationScreen(repository: repo, caseId: caseId),
+            builder: (_) => PreparationScreen(
+              repository: repo,
+              caseId: caseId,
+              mainNavigation: mainTabNavigation(context),
+            ),
           ),
         );
         return;

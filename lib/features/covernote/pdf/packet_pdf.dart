@@ -600,9 +600,7 @@ List<pw.Widget> _recordsTable(PacketInput input) {
 
 /// Section D rows (header first) and the notes line, or null when the case
 /// has no medication or symptom record attached.
-({List<List<String>> rows, List<String> notes})? recordRows(
-  PacketInput input,
-) {
+({List<List<String>> rows, List<String> notes})? recordRows(PacketInput input) {
   final med = input.evidence
       .where((e) => e.recordType == 'medication_summary')
       .map((e) => MedicationSnapshot.fromJson(e.snapshot))

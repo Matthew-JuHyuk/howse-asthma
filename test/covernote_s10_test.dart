@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:howse_asthma/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:howse_asthma/features/covernote/data/preparation_repository.dart';
@@ -20,6 +21,7 @@ void main() {
       final p = await repo.seed(false);
       await tester.pumpWidget(
         MaterialApp(
+          theme: AppTheme.light,
           locale: const Locale('en'),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -34,6 +36,8 @@ void main() {
           ),
         ),
       );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Or tap to record'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Used scheduled medicine'));
       await tester.pumpAndSettle();
@@ -70,6 +74,7 @@ void main() {
       final p = await repo.seed(true);
       await tester.pumpWidget(
         MaterialApp(
+          theme: AppTheme.light,
           locale: Locale(language),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -387,6 +392,7 @@ void main() {
       final p = await r.seed(false);
       await tester.pumpWidget(
         MaterialApp(
+          theme: AppTheme.light,
           locale: const Locale('en'),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -395,12 +401,12 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.text('Prepare for a new treatment'), findsOneWidget);
-      await tester.tap(find.widgetWithText(ChoiceChip, 'Evidence to prepare'));
+      await tester.tap(find.widgetWithText(ChoiceChip, 'Your documents'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Choose existing records').first);
       await tester.pumpAndSettle();
-      await tester.tap(find.byType(CheckboxListTile).first);
-      await tester.tap(find.text('Save'));
+      expect(find.byType(CheckboxListTile), findsNothing);
+      await tester.tap(find.text('Connect these records (1)'));
       await tester.pumpAndSettle();
       expect((await r.load(p.id))!.needs.first.links, ['demo-rx']);
       expect(tester.takeException(), isNull);

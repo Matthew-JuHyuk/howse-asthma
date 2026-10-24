@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../core/session/session_controller.dart';
-import '../../l10n/app_localizations.dart';
 import '../auth/domain/user_profile.dart';
 import '../provider/presentation/provider_home_shell.dart';
 import 'auth/auth_screen.dart';
@@ -14,6 +13,8 @@ import 'presentation/cases_tab.dart';
 import 'presentation/covernote_nav.dart';
 import 'presentation/home_tab.dart';
 import 'presentation/records_tab.dart';
+import 'presentation/guided_record_screen.dart';
+import 'presentation/record_navigation_bar.dart';
 
 /// Stores shared by every screen. The demo store lives for the app session.
 class CoverNoteServices extends InheritedWidget {
@@ -98,6 +99,25 @@ class _CoverNoteShellState extends State<CoverNoteShell>
     }
   }
 
+  bool _recordOpen = false;
+  Future<void> _record() async {
+    if (_recordOpen) return;
+    _recordOpen = true;
+    try {
+      if (!await requireSignIn(context) || !mounted) return;
+      await Navigator.push<bool>(
+        context,
+        MaterialPageRoute(
+          builder: (_) =>
+              GuidedRecordScreen(repository: PreparationRepository()),
+        ),
+      );
+      if (mounted) _homeKey.currentState?.refresh();
+    } finally {
+      _recordOpen = false;
+    }
+  }
+
   int _tab = 0;
   final _casesKey = GlobalKey<CasesTabState>();
   final _homeKey = GlobalKey<HomeTabState>();
@@ -133,7 +153,6 @@ class _CoverNoteShellState extends State<CoverNoteShell>
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context)!;
     final caseOpen = _caseId != null && _caseStore != null;
     return CoverNoteNav(
       openCase: _openCase,
@@ -174,31 +193,10 @@ class _CoverNoteShellState extends State<CoverNoteShell>
               const AccountTab(),
             ],
           ),
-          bottomNavigationBar: NavigationBar(
+          bottomNavigationBar: RecordNavigationBar(
             selectedIndex: _tab,
-            onDestinationSelected: _go,
-            destinations: [
-              NavigationDestination(
-                icon: const Icon(Icons.home_outlined),
-                selectedIcon: const Icon(Icons.home),
-                label: l.cnTabHome,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.folder_outlined),
-                selectedIcon: const Icon(Icons.folder),
-                label: l.cnTabCases,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.fact_check_outlined),
-                selectedIcon: const Icon(Icons.fact_check),
-                label: l.cnTabRecords,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.settings_outlined),
-                selectedIcon: const Icon(Icons.settings),
-                label: l.cnTabSettings,
-              ),
-            ],
+            onDestination: _go,
+            onRecord: _record,
           ),
         ),
       ),

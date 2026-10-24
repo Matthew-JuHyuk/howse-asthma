@@ -156,6 +156,17 @@ class EnvironmentCollector {
   Future<({double lat, double lon, String label, String precision})?>
   _coords() async {
     final area = await loadArea();
+    if (area != null && (area.lat == null || area.lon == null)) {
+      final resolved = await resolveArea(zip: area.zip, city: area.city);
+      if (resolved?.lat != null && resolved?.lon != null) {
+        return (
+          lat: resolved!.lat!,
+          lon: resolved.lon!,
+          label: resolved.city ?? area.zip ?? '',
+          precision: 'selected_area',
+        );
+      }
+    }
     if (area?.lat != null && area?.lon != null) {
       return (
         lat: area!.lat!,
@@ -355,7 +366,9 @@ class EnvironmentCollector {
       final fetched = DateTime.now().toUtc();
       final out = <EnvironmentReading>[];
       final aqi =
-          (d['aqi'] as num?)?.toDouble() ?? (d['us_aqi'] as num?)?.toDouble();
+          (d['aqi_epa'] as num?)?.toDouble() ??
+          (d['aqi'] as num?)?.toDouble() ??
+          (d['us_aqi'] as num?)?.toDouble();
       final aqiSource =
           d['aqi_source'] as String? ??
           d['source'] as String? ??

@@ -22,19 +22,15 @@ class CoverNoteAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showLanguage;
 
   @override
-  Size get preferredSize => Size.fromHeight(
-    kToolbarHeight + (bottom?.preferredSize.height ?? 0),
-  );
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0));
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
       leading: leading,
-      actions: [
-        ...actions,
-        if (showLanguage) const LanguageButton(),
-      ],
+      actions: [...actions, if (showLanguage) const LanguageButton()],
       bottom: bottom,
     );
   }
@@ -56,13 +52,10 @@ class CoverNoteBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
-    final pad =
-        padding ??
-        EdgeInsets.fromLTRB(16, 8, 16, 16 + media.viewInsets.bottom);
+    final pad = padding ?? const EdgeInsets.fromLTRB(20, 16, 20, 24);
     final safe = SafeArea(
-      // Bottom nav already consumes the system gesture inset when present.
-      bottom: false,
+      // SafeArea consumes only the remaining inset, including on pushed routes.
+      bottom: true,
       child: scrollable
           ? SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

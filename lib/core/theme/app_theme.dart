@@ -70,6 +70,16 @@ class AppTheme {
       colorScheme: scheme,
       scaffoldBackgroundColor: defaultBackground,
       textTheme: const TextTheme(
+        titleLarge: TextStyle(
+          fontSize: 22,
+          height: 1.25,
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: TextStyle(
+          fontSize: 18,
+          height: 1.3,
+          fontWeight: FontWeight.w600,
+        ),
         bodyLarge: TextStyle(fontSize: 17, height: 1.4),
         bodyMedium: TextStyle(fontSize: 16, height: 1.4),
         bodySmall: TextStyle(fontSize: 14, height: 1.35),
@@ -97,7 +107,8 @@ class AppTheme {
         style: FilledButton.styleFrom(
           backgroundColor: brandPrimary,
           foregroundColor: neutral0,
-          minimumSize: const Size.fromHeight(52),
+          minimumSize: const Size(48, 52),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -107,7 +118,8 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: brand700,
-          minimumSize: const Size.fromHeight(52),
+          minimumSize: const Size(48, 52),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           side: const BorderSide(color: neutral300),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

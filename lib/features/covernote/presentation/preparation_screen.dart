@@ -19,12 +19,19 @@ import '../pdf/preparation_pdf.dart';
 import '../ui/app_chrome.dart';
 import '../ui/brand.dart';
 import 'preparation_strings.dart';
+import 'source_review_screen.dart';
+import 'guided_record_screen.dart';
+import 'record_navigation_bar.dart';
+import 'covernote_nav.dart';
 
 Future<void> startPreparation(BuildContext context) async {
   if (!await requireSignIn(context) || !context.mounted) return;
   await Navigator.push<void>(
     context,
-    MaterialPageRoute(builder: (_) => const NewPreparationScreen()),
+    MaterialPageRoute(
+      builder: (_) =>
+          NewPreparationScreen(mainNavigation: mainTabNavigation(context)),
+    ),
   );
 }
 
@@ -42,7 +49,8 @@ Future<void> openPreparationDemo(BuildContext context, bool denied) async {
 }
 
 class NewPreparationScreen extends StatefulWidget {
-  const NewPreparationScreen({super.key});
+  const NewPreparationScreen({super.key, this.mainNavigation});
+  final ValueChanged<int>? mainNavigation;
   @override
   State<NewPreparationScreen> createState() => _NewPreparationScreenState();
 }
@@ -101,7 +109,11 @@ class _NewPreparationScreenState extends State<NewPreparationScreen> {
         await Navigator.pushReplacement<void, void>(
           context,
           MaterialPageRoute(
-            builder: (_) => PreparationScreen(repository: repo, caseId: p.id),
+            builder: (_) => PreparationScreen(
+              repository: repo,
+              caseId: p.id,
+              mainNavigation: widget.mainNavigation,
+            ),
           ),
         );
       }
@@ -116,7 +128,12 @@ class _NewPreparationScreenState extends State<NewPreparationScreen> {
   Widget build(BuildContext context) => Scaffold(
     appBar: CoverNoteAppBar(title: Text(s10(context, 'start'))),
     body: ListView(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.fromLTRB(
+        20,
+        16,
+        20,
+        24 + MediaQuery.paddingOf(context).bottom,
+      ),
       children: [
         if (SessionScope.of(context).user?.id case final owner?)
           DropdownButtonFormField<String>(
@@ -203,11 +220,13 @@ class PreparationScreen extends StatefulWidget {
     required this.caseId,
     this.letterStore,
     this.voiceOnOpen = false,
+    this.mainNavigation,
   });
   final PreparationRepository repository;
   final String caseId;
   final CaseStore? letterStore;
   final bool voiceOnOpen;
+  final ValueChanged<int>? mainNavigation;
   @override
   State<PreparationScreen> createState() => _PreparationScreenState();
 }
@@ -217,12 +236,12 @@ class _PreparationScreenState extends State<PreparationScreen>
   Preparation? _p;
   List<TreatmentEvent> _events = [];
   String? _error;
-  bool _busy = false,
-      _includeOriginal = false,
-      _pending = false,
-      _listening = false;
+  bool _busy = false, _includeOriginal = false, _pending = false;
   int _tab = 0;
   bool _refreshingSources = false;
+  bool _linkOpen = false;
+  bool _recordOpen = false;
+  bool _loading = false;
   bool _voiceOpened = false;
   Future<void> _refreshSources() async {
     if (_busy || _refreshingSources || _p == null) return;
@@ -276,10 +295,12 @@ class _PreparationScreenState extends State<PreparationScreen>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed && !_busy) _load();
+    if (state == AppLifecycleState.resumed && !_busy && !_linkOpen) _load();
   }
 
   Future<void> _load() async {
+    if (_loading) return;
+    _loading = true;
     try {
       var p = await repo.load(widget.caseId);
       if (p == null && widget.letterStore != null) {
@@ -414,6 +435,8 @@ class _PreparationScreenState extends State<PreparationScreen>
       }
     } catch (_) {
       if (mounted) setState(() => _error = s10(context, 'error'));
+    } finally {
+      _loading = false;
     }
   }
 
@@ -581,320 +604,56 @@ class _PreparationScreenState extends State<PreparationScreen>
   }
 
   Future<void> _voice({bool typed = false}) async {
-    if (!await _consent() || !mounted) return;
-    var transcript = '';
-    if (!typed) {
-      try {
-        setState(() => _listening = true);
-        transcript =
-            await PreparationRepository.native.invokeMethod<String>('listen', {
-              'language': Localizations.localeOf(context).toLanguageTag(),
-            }) ??
-            '';
-      } catch (_) {
-        if (mounted) setState(() => _error = s10(context, 'unknown'));
-      } finally {
-        if (mounted) setState(() => _listening = false);
-      }
-    }
-    if (!mounted) return;
-    final controller = TextEditingController(text: transcript);
-    final text = await showDialog<String>(
-      context: context,
-      builder: (c) => AlertDialog(
-        title: Text(s10(c, 'text')),
-        content: TextField(
-          controller: controller,
-          maxLength: 1000,
-          maxLines: 5,
+    if (_busy || _recordOpen || _p == null) return;
+    _recordOpen = true;
+    final p = _p!;
+    try {
+      await Navigator.push<bool>(
+        context,
+        MaterialPageRoute(
+          builder: (_) => GuidedRecordScreen(
+            repository: repo,
+            profiles: {p.patientKey: p.patientName},
+            initialPatient: p.patientKey,
+            caseId: p.id,
+            initiallyTyped: typed,
+          ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(c),
-            child: Text(s10(c, 'cancel')),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(c, controller.text.trim()),
-            child: Text(s10(c, 'confirm')),
-          ),
-        ],
-      ),
-    );
-    if (text == null || text.isEmpty || !mounted) return;
-    await _run(() async {
-      final p = _p!;
-      final result = await repo.analyze(
-        action: 'structure_record',
-        input: {
-          'case_id': p.id,
-          'transcript': text,
-          'patient_name': p.patientName,
-          'today': dayKey(repo.today),
-          'timezone': repo.today.timeZoneOffset.inMinutes,
-          'language': Localizations.localeOf(context).toLanguageTag(),
-        },
       );
-      final proposals = validateVoiceProposal(result['events'], text);
-      if (!mounted) return;
-      final chosen = await _confirmProposals(proposals, text);
-      if (chosen == null || chosen.isEmpty) return;
-      final source = preparationId();
-      await _record([
-        for (final v in chosen)
-          TreatmentEvent(
-            id: preparationId(),
-            patientKey: p.patientKey,
-            kind: v['kind'],
-            day: v['day'],
-            sourceId: source,
-            text: text,
-            values: {
-              ...v,
-              'language': mounted
-                  ? Localizations.localeOf(context).toLanguageTag()
-                  : 'unknown',
-              'model': result['model'],
-              'prompt_version': result['prompt_version'],
-              'input_path': typed ? 'text' : 'voice',
-            },
-          ),
-      ]);
-    });
-  }
-
-  Future<Map<String, dynamic>?> _editProposal(Map<String, dynamic> v) async {
-    final day = TextEditingController(text: v['day'] ?? dayKey(repo.today));
-    final medication = TextEditingController(text: v['medication'] ?? '');
-    final quantity = TextEditingController(
-      text: v['quantity']?.toString() ?? '',
-    );
-    final night = TextEditingController(
-      text: v['night_wakings']?.toString() ?? '',
-    );
-    final summary = TextEditingController(text: v['english_summary'] ?? '');
-    return showDialog<Map<String, dynamic>>(
-      context: context,
-      builder: (c) => AlertDialog(
-        title: Text(s10(c, 'confirm')),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SelectableText(v['quote'] ?? ''),
-              TextField(
-                controller: day,
-                decoration: InputDecoration(labelText: s10(c, 'date')),
-              ),
-              TextField(
-                controller: medication,
-                decoration: InputDecoration(labelText: s10(c, 'current')),
-              ),
-              TextField(
-                controller: quantity,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: s10(c, 'quantity')),
-              ),
-              TextField(
-                controller: night,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: s10(c, 'nightCount')),
-              ),
-              TextField(
-                controller: summary,
-                maxLines: 3,
-                decoration: InputDecoration(
-                  labelText: s10(c, 'englishSummary'),
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(c),
-            child: Text(s10(c, 'cancel')),
-          ),
-          FilledButton(
-            onPressed: () {
-              final d = DateTime.tryParse(day.text);
-              final q = quantity.text.isEmpty
-                  ? null
-                  : double.tryParse(quantity.text);
-              final n = night.text.isEmpty ? null : int.tryParse(night.text);
-              if (d == null ||
-                  dayKey(d) != day.text ||
-                  d.isAfter(repo.today) ||
-                  (quantity.text.isNotEmpty &&
-                      (q == null || !q.isFinite || q <= 0)) ||
-                  (night.text.isNotEmpty && (n == null || n < 0 || n > 100))) {
-                return;
-              }
-              Navigator.pop(c, {
-                ...v,
-                'model_proposal':
-                    v['model_proposal'] ?? Map<String, dynamic>.from(v),
-                'day': day.text,
-                'medication': medication.text.trim().isEmpty
-                    ? null
-                    : medication.text.trim(),
-                'quantity': q,
-                'night_wakings': n,
-                'english_summary': summary.text,
-                'user_edited': true,
-              });
-            },
-            child: Text(s10(c, 'save')),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<List<Map<String, dynamic>>?> _confirmProposals(
-    List<Map<String, dynamic>> proposals,
-    String text,
-  ) async {
-    final chosen = <int>{};
-    final date = TextEditingController(text: dayKey(repo.today));
-    var subject = false;
-    return showDialog<List<Map<String, dynamic>>>(
-      context: context,
-      builder: (c) => StatefulBuilder(
-        builder: (c, change) => AlertDialog(
-          title: Text(s10(c, 'confirm')),
-          content: SizedBox(
-            width: 520,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('${_p!.patientName}\n$text'),
-                  TextField(
-                    controller: date,
-                    decoration: InputDecoration(labelText: s10(c, 'date')),
-                  ),
-                  CheckboxListTile(
-                    value: subject,
-                    onChanged: (v) => change(() => subject = v ?? false),
-                    title: Text(s10(c, 'patient')),
-                  ),
-                  for (var i = 0; i < proposals.length; i++)
-                    CheckboxListTile(
-                      secondary: IconButton(
-                        icon: const Icon(Icons.edit_outlined),
-                        tooltip: AppLocalizations.of(c)!.cnEdit,
-                        onPressed: () async {
-                          final edited = await _editProposal(proposals[i]);
-                          if (edited != null && c.mounted) {
-                            change(() => proposals[i] = edited);
-                          }
-                        },
-                      ),
-                      value: chosen.contains(i),
-                      onChanged: proposals[i]['omit'] == true
-                          ? null
-                          : (v) => change(
-                              () =>
-                                  v == true ? chosen.add(i) : chosen.remove(i),
-                            ),
-                      title: Text('${proposals[i]['english_summary']}'),
-                      subtitle: Text(
-                        '${proposals[i]['quote']}\n${proposals[i]['day'] ?? s10(c, 'unknown')} | ${proposals[i]['uncertainty'] ?? ''}\n${proposals[i]['subject']} | ${proposals[i]['medication'] ?? s10(c, 'unknown')} | ${proposals[i]['quantity'] ?? s10(c, 'unknown')}',
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(c),
-              child: Text(s10(c, 'cancel')),
-            ),
-            FilledButton(
-              onPressed: !subject || chosen.isEmpty
-                  ? null
-                  : () {
-                      final d = DateTime.tryParse(date.text);
-                      if (d == null ||
-                          dayKey(d) != date.text ||
-                          d.isAfter(repo.today)) {
-                        return;
-                      }
-                      if (chosen.any((i) {
-                        final day = DateTime.tryParse(
-                          proposals[i]['day'] ?? date.text,
-                        );
-                        return day == null || day.isAfter(repo.today);
-                      })) {
-                        return;
-                      }
-                      Navigator.pop(c, [
-                        for (final i in chosen)
-                          {
-                            ...proposals[i],
-                            'day': proposals[i]['day'] ?? date.text,
-                            'subject_confirmed': true,
-                          },
-                      ]);
-                    },
-              child: Text(s10(c, 'confirm')),
-            ),
-          ],
-        ),
-      ),
-    );
+    } finally {
+      _recordOpen = false;
+    }
+    if (mounted) await _load();
   }
 
   Future<void> _link(EvidenceNeed n) async {
-    final candidates = sourceCandidates(n, _p!, _events);
-    final ids = n.links.toSet();
-    final chosen = await showDialog<List<String>>(
-      context: context,
-      builder: (c) => StatefulBuilder(
-        builder: (c, change) => AlertDialog(
-          title: Text(n.label),
-          content: SizedBox(
-            width: 520,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(n.reason),
-                  if (candidates.isEmpty) Text(s10(c, 'missing')),
-                  for (final e in candidates)
-                    CheckboxListTile(
-                      value: ids.contains(e.id),
-                      onChanged: (v) => change(
-                        () => v == true ? ids.add(e.id) : ids.remove(e.id),
-                      ),
-                      title: Text('${e.day} · ${e.text}'),
-                      subtitle: Text('${e.kind} | ${e.id}'),
-                    ),
-                ],
-              ),
-            ),
+    if (_busy || _linkOpen) return;
+    _linkOpen = true;
+    List<String>? chosen;
+    try {
+      final candidates = sourceCandidates(n, _p!, _events);
+      chosen = await Navigator.push<List<String>>(
+        context,
+        MaterialPageRoute(
+          builder: (_) => SourceReviewScreen(
+            title: needLabel(context, n),
+            patient: _p!.patientName,
+            events: candidates,
+            linked: n.links,
+            suggestAll: ['treatment', 'burden', 'tests'].contains(n.id),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(c),
-              child: Text(s10(c, 'cancel')),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.pop(c, ids.toList()),
-              child: Text(s10(c, 'save')),
-            ),
-          ],
         ),
-      ),
-    );
-    if (chosen == null) return;
+      );
+    } finally {
+      _linkOpen = false;
+    }
+    if (!mounted || chosen == null) return;
     await _run(
       () => _save(
         _p!.update({
           'needs': [
             for (final x in _p!.needs)
-              (x.id == n.id ? x.link(chosen) : x).toJson(),
+              (x.id == n.id ? x.link(chosen!) : x).toJson(),
           ],
         }),
       ),
@@ -902,36 +661,31 @@ class _PreparationScreenState extends State<PreparationScreen>
   }
 
   Future<void> _source(TreatmentEvent e) async {
-    await showDialog<void>(
-      context: context,
-      builder: (c) => AlertDialog(
-        title: Text('${e.day} · ${e.kind}'),
-        content: SingleChildScrollView(
-          child: SelectableText(
-            [
-              e.text,
-              if (e.values['english_summary'] != null)
-                e.values['english_summary'] as String,
-              if (e.values['quote'] != null)
-                '${s10(c, 'source')}: ${e.values['quote']}',
-              if (e.values['page'] != null) 'Page ${e.values['page']}',
-              if (e.values['night_wakings'] != null)
-                '${s10(c, 'nightCount')}: ${e.values['night_wakings']}',
-              if (e.kind == 'medication_use')
-                '${e.values['medication'] ?? s10(c, 'unknown')} · ${e.values['quantity'] ?? s10(c, 'unknown')} ${e.values['unit'] ?? ''}',
-              if (e.values['uncertainty'] != null) '${e.values['uncertainty']}',
-              if (e.values['provider'] != null)
-                '${e.values['provider']} · ${e.values['observed_at'] ?? s10(c, 'unknown')}\n${e.values['location_label'] ?? ''} · ${e.values['source_kind'] ?? ''}',
-              '${s10(c, 'source')}: ${e.sourceId}\nEvent: ${e.id}',
-            ].join('\n\n'),
+    await Navigator.push<void>(
+      context,
+      MaterialPageRoute(
+        builder: (c) => Scaffold(
+          appBar: CoverNoteAppBar(title: Text(recordKindLabel(c, e.kind))),
+          body: CoverNoteBody(
+            scrollable: true,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(e.day, style: Theme.of(c).textTheme.titleMedium),
+                const SizedBox(height: 20),
+                SelectableText(e.text),
+                if (e.values['quote'] != null &&
+                    e.values['quote'] != e.text) ...[
+                  const SizedBox(height: 20),
+                  Text(s10(c, 'source')),
+                  SelectableText(e.values['quote'].toString()),
+                ],
+                if (e.values['page'] != null)
+                  Text('${s10(c, 'document')} · ${e.values['page']}'),
+              ],
+            ),
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(c),
-            child: Text(AppLocalizations.of(c)!.cnDone),
-          ),
-        ],
       ),
     );
   }
@@ -952,6 +706,9 @@ class _PreparationScreenState extends State<PreparationScreen>
     );
     if (files.isEmpty) return;
     final file = files.first;
+    if ((await file.length() ?? 0) > 12 * 1024 * 1024) {
+      throw StateError('too_large');
+    }
     final bytes = await file.readAsBytes();
     if (bytes.length > 12 * 1024 * 1024) {
       throw StateError('too_large');
@@ -999,25 +756,48 @@ class _PreparationScreenState extends State<PreparationScreen>
         input: {'case_id': p.id, 'object_path': path, 'mime': mime},
       );
       if (!mounted) return;
-      final ok = await showDialog<bool>(
-        context: context,
-        builder: (c) => AlertDialog(
-          title: Text(s10(c, 'confirm')),
-          content: SingleChildScrollView(
-            child: SelectableText(
-              '${s10(c, 'patient')}: ${p.patientName}\nDocument patient: ${result['patient_name'] ?? s10(c, 'unknown')}\n\n${result['summary']}\n\n${(result['items'] as List).map((x) => 'Page ${x['page']}: ${x['quote']}\n${x['date'] ?? 'Date unknown'} | ${x['value'] ?? ''} ${x['unit'] ?? ''}').join('\n\n')}',
+      final ok = await Navigator.push<bool>(
+        context,
+        MaterialPageRoute(
+          builder: (c) => ReviewPage(
+            title: s10(c, 'confirm'),
+            body: ListView(
+              padding: const EdgeInsets.all(20),
+              children: [
+                Text(p.patientName, style: Theme.of(c).textTheme.titleLarge),
+                const SizedBox(height: 12),
+                Text(
+                  '${s10(c, 'patient')}: ${result['patient_name'] ?? s10(c, 'unknown')}',
+                ),
+                const SizedBox(height: 20),
+                Text(result['summary'] ?? ''),
+                const SizedBox(height: 20),
+                for (final x in result['items'] as List)
+                  Card(
+                    child: ExpansionTile(
+                      title: Text(x['english_summary'] ?? s10(c, 'document')),
+                      subtitle: Text(x['date'] ?? s10(c, 'unknown')),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: SelectableText(x['quote'] ?? ''),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
             ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(c, false),
+                child: Text(s10(c, 'cancel')),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(c, true),
+                child: Text(s10(c, 'confirm')),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(c, false),
-              child: Text(s10(c, 'cancel')),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.pop(c, true),
-              child: Text(s10(c, 'confirm')),
-            ),
-          ],
         ),
       );
       if (ok != true) return;
@@ -1433,21 +1213,20 @@ class _PreparationScreenState extends State<PreparationScreen>
           overflow: TextOverflow.ellipsis,
         ),
         actions: [
-          IconButton(
-            onPressed: () => Navigator.of(context).popUntil((r) => r.isFirst),
-            icon: const Icon(Icons.home_outlined),
-            tooltip: AppLocalizations.of(context)!.cnGoHome,
-          ),
-          if (p != null)
-            IconButton(
-              onPressed: _busy ? null : _editPreparation,
-              icon: const Icon(Icons.edit_outlined),
-              tooltip: AppLocalizations.of(context)!.cnEdit,
-            ),
           if (p != null)
             PopupMenuButton<String>(
-              onSelected: (v) => _run(() => _save(p.update({'lifecycle': v}))),
+              onSelected: (v) {
+                if (v == 'edit') {
+                  _editPreparation();
+                } else {
+                  _run(() => _save(p.update({'lifecycle': v})));
+                }
+              },
               itemBuilder: (_) => [
+                PopupMenuItem(
+                  value: 'edit',
+                  child: Text(AppLocalizations.of(context)!.cnEdit),
+                ),
                 for (final entry in [
                   ('active', AppLocalizations.of(context)!.cnReopenCase),
                   ('completed', AppLocalizations.of(context)!.cnCompleteCase),
@@ -1458,6 +1237,13 @@ class _PreparationScreenState extends State<PreparationScreen>
             ),
         ],
       ),
+      bottomNavigationBar: widget.mainNavigation == null
+          ? null
+          : RecordNavigationBar(
+              selectedIndex: 1,
+              onDestination: widget.mainNavigation!,
+              onRecord: _busy || p == null ? null : () => _voice(),
+            ),
       body: p == null
           ? Center(
               child: _error != null
@@ -1521,13 +1307,30 @@ class _PreparationScreenState extends State<PreparationScreen>
                 ),
                 Expanded(
                   child: ListView(
-                    padding: const EdgeInsets.all(16),
-                    children: switch (_tab) {
-                      0 => _overview(p),
-                      1 => _evidence(p),
-                      2 => _timeline(p),
-                      _ => _share(p),
-                    },
+                    padding: EdgeInsets.fromLTRB(
+                      16,
+                      16,
+                      16,
+                      24 + MediaQuery.paddingOf(context).bottom,
+                    ),
+                    children:
+                        (switch (_tab) {
+                              0 => _overview(p),
+                              1 => _evidence(p),
+                              2 => _timeline(p),
+                              _ => _share(p),
+                            })
+                            .map(
+                              (child) => _tab == 0
+                                  ? child
+                                  : Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 12,
+                                      ),
+                                      child: child,
+                                    ),
+                            )
+                            .toList(),
                   ),
                 ),
               ],
@@ -1536,132 +1339,270 @@ class _PreparationScreenState extends State<PreparationScreen>
   }
 
   List<Widget> _overview(Preparation p) {
-    final s = TreatmentSummary(p, _events, repo.today);
+    final summary = TreatmentSummary(p, _events, repo.today);
+    final linked = p.needs
+        .where(
+          (n) => n.links.any(
+            (id) => _events.any(
+              (e) => e.id == id && !e.undone && e.patientKey == p.patientKey,
+            ),
+          ),
+        )
+        .length;
     final deadlines = p.history.where((h) => h['type'] == 'deadline').toList()
       ..sort((a, b) => (a['date'] ?? '9999').compareTo(b['date'] ?? '9999'));
     return [
-      for (final h in deadlines)
-        CnCard(
-          child: Text(
-            '${h['purpose']} · ${h['date'] ?? s10(context, 'unknown')}\n${h['text']}',
-          ),
-        ),
       Text(
         p.path == PreparationPath.deniedRequest
             ? s10(context, 'denied')
             : s10(context, 'start'),
-        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
-      Text(p.concern),
-      const SizedBox(height: 12),
+      const SizedBox(height: 8),
+      Text(s10(context, 'purposeBody')),
+      const SizedBox(height: 24),
       CnCard(
+        color: CnColors.mint,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(s10(context, 'review')),
-            Text(
-              '${s.observedDays}/30 recorded days · ${s.symptomDays} symptom days · ${s.nightWakings} reported night wakings',
+            Row(
+              children: [
+                const Icon(Icons.route_outlined, color: CnColors.teal),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    s10(context, 'nextStep'),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+              ],
             ),
+            const SizedBox(height: 16),
             Text(
-              '${p.needs.where((n) => n.links.any((id) => _events.any((e) => e.id == id && !e.undone))).length}/${p.needs.length} evidence items linked',
+              s10(
+                context,
+                linked < p.needs.length ? 'gatherStep' : 'reviewStep',
+              ),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-            Text(s10(context, 'missing')),
-            TextButton(
-              onPressed: () => setState(() => _tab = 1),
-              child: Text(s10(context, 'evidence')),
+            const SizedBox(height: 8),
+            Text('$linked / ${p.needs.length} · ${s10(context, 'progress')}'),
+            const SizedBox(height: 12),
+            LinearProgressIndicator(
+              value: p.needs.isEmpty ? 0 : linked / p.needs.length,
+              minHeight: 6,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            const SizedBox(height: 20),
+            FilledButton.icon(
+              onPressed: () =>
+                  setState(() => _tab = linked < p.needs.length ? 1 : 3),
+              icon: const Icon(Icons.arrow_forward),
+              label: Text(
+                s10(context, linked < p.needs.length ? 'evidence' : 'share'),
+              ),
             ),
           ],
         ),
       ),
-      const SizedBox(height: 16),
-      if (_listening)
-        FilledButton(
-          onPressed: () => PreparationRepository.native.invokeMethod('stop'),
-          child: Text(s10(context, 'stop')),
-        )
-      else
-        FilledButton.icon(
-          onPressed: _busy ? null : () => _voice(),
-          icon: const Icon(Icons.mic),
-          label: Text(s10(context, 'voice')),
-        ),
-      TextButton(
-        onPressed: _busy ? null : () => _voice(typed: true),
-        child: Text(s10(context, 'text')),
-      ),
-      Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: [
-          for (final pair in [
-            ('symptom', 'symptom'),
-            ('rescue', 'as_needed'),
-            ('scheduled', 'scheduled'),
-          ])
-            OutlinedButton(
-              onPressed: _busy ? null : () => _quick(pair.$2),
-              child: Text(s10(context, pair.$1)),
+      for (final h in deadlines)
+        Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: CnCard(
+            color: CnColors.warnBg,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.event_outlined, color: CnColors.warn),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        s10(
+                          context,
+                          h['purpose'] == 'information_response'
+                              ? 'information_response'
+                              : 'review_request',
+                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(h['date'] ?? s10(context, 'unknown')),
+                      ExpansionTile(
+                        tilePadding: EdgeInsets.zero,
+                        title: Text(s10(context, 'source')),
+                        children: [SelectableText(h['text'] ?? '')],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
+          ),
+        ),
+      const SizedBox(height: 24),
+      CnCard(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.favorite_outline, color: CnColors.teal),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    s10(context, 'dailySupport'),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(s10(context, 'dailySupportBody')),
+            const SizedBox(height: 16),
+            Text(
+              '${s10(context, 'recentMonth')} · ${summary.observedDays} ${s10(context, 'recordedDays')}',
+            ),
+            const SizedBox(height: 16),
+            if (widget.mainNavigation != null)
+              Text(s10(context, 'centerHint'))
+            else
+              FilledButton.icon(
+                onPressed: _busy ? null : () => _voice(),
+                icon: const Icon(Icons.mic_none),
+                label: Text(s10(context, 'recordEntry')),
+              ),
+            ExpansionTile(
+              title: Text(s10(context, 'tapInstead')),
+              tilePadding: EdgeInsets.zero,
+              children: [
+                for (final pair in [
+                  ('symptom', 'symptom'),
+                  ('rescue', 'as_needed'),
+                  ('scheduled', 'scheduled'),
+                ])
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: _busy ? null : () => _quick(pair.$2),
+                        child: Text(s10(context, pair.$1)),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 24),
+      ExpansionTile(
+        title: Text(s10(context, 'details')),
+        children: [
+          Padding(padding: const EdgeInsets.all(16), child: Text(p.concern)),
         ],
       ),
-      if (!repo.demo) ...[
-        TextButton(
-          onPressed: _busy ? null : () => _notification(true),
-          child: Text(s10(context, 'notification')),
+      if (!repo.demo)
+        ExpansionTile(
+          title: Text(s10(context, 'notification')),
+          children: [
+            TextButton(
+              onPressed: _busy ? null : () => _notification(true),
+              child: Text(s10(context, 'notification')),
+            ),
+            TextButton(
+              onPressed: _busy ? null : () => _notification(false),
+              child: Text(s10(context, 'pause')),
+            ),
+          ],
         ),
-        TextButton(
-          onPressed: _busy ? null : () => _notification(false),
-          child: Text(s10(context, 'pause')),
-        ),
-      ],
     ];
   }
 
   List<Widget> _evidence(Preparation p) => [
+    Text(
+      s10(context, 'gatherStep'),
+      style: Theme.of(context).textTheme.titleLarge,
+    ),
+    Text(s10(context, 'linkedHelp')),
+    const SizedBox(height: 8),
     for (final n in p.needs)
-      Padding(
-        padding: const EdgeInsets.only(bottom: 12),
-        child: CnCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                n.label,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+      CnCard(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Icon(switch (n.id) {
+                  'treatment' => Icons.medication_outlined,
+                  'tests' => Icons.science_outlined,
+                  _ => Icons.favorite_outline,
+                }, color: CnColors.teal),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    needLabel(context, n),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
-              ),
-              Text(n.reason),
-              Text(
-                '${s10(context, 'source')}: ${n.origin}${n.policyPage == null ? '' : ' · p${n.policyPage}'} · ${n.owner}',
-              ),
-              if (n.quote != null) SelectableText('“${n.quote}”'),
-              Text(
-                s10(
-                  context,
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
                   n.links.any(
                         (id) => _events.any((e) => e.id == id && !e.undone),
                       )
-                      ? 'linked'
-                      : 'missing',
+                      ? Icons.check_circle_outline
+                      : Icons.add_circle_outline,
+                  size: 20,
+                  color: n.links.isEmpty ? CnColors.warn : CnColors.teal,
                 ),
-              ),
-              for (final id in n.links)
-                if (_events.any((e) => e.id == id && !e.undone))
-                  TextButton(
-                    onPressed: () =>
-                        _source(_events.firstWhere((e) => e.id == id)),
-                    child: Text('${s10(context, 'source')} · $id'),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    s10(
+                      context,
+                      n.links.any(
+                            (id) => _events.any((e) => e.id == id && !e.undone),
+                          )
+                          ? 'linked'
+                          : 'missing',
+                    ),
                   ),
-              OutlinedButton(
-                onPressed: _busy ? null : () => _link(n),
-                child: Text(s10(context, 'candidate')),
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            OutlinedButton.icon(
+              onPressed: _busy || _linkOpen ? null : () => _link(n),
+              icon: const Icon(Icons.folder_open_outlined),
+              label: Text(s10(context, 'candidate')),
+            ),
+            ExpansionTile(
+              tilePadding: EdgeInsets.zero,
+              title: Text(s10(context, 'details')),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Text(n.reason),
+                ),
+                if (n.quote != null) SelectableText('“${n.quote}”'),
+              ],
+            ),
+          ],
         ),
       ),
+    FilledButton.icon(
+      onPressed: () => setState(() => _tab = 3),
+      icon: const Icon(Icons.arrow_forward),
+      label: Text(s10(context, 'reviewStep')),
+    ),
     if (p.applicablePolicy)
       TextButton(
         onPressed: () => launchUrl(
@@ -1681,7 +1622,7 @@ class _PreparationScreenState extends State<PreparationScreen>
     for (final d in p.documents)
       ListTile(
         title: Text(d['name'] ?? 'Document'),
-        subtitle: Text(d['status'] ?? d['kind'] ?? 'uploaded'),
+        subtitle: Text(s10(context, 'document')),
         onTap: () => _run(() async {
           final bytes = await repo.download(d['path']);
           if (d['mime'] == 'application/pdf') {
@@ -1689,8 +1630,11 @@ class _PreparationScreenState extends State<PreparationScreen>
           } else if (mounted) {
             await showDialog<void>(
               context: context,
-              builder: (c) =>
-                  Dialog(child: InteractiveViewer(child: Image.memory(bytes))),
+              builder: (c) => Dialog(
+                child: InteractiveViewer(
+                  child: Image.memory(bytes, cacheWidth: 1200),
+                ),
+              ),
             );
           }
         }),
@@ -1705,18 +1649,24 @@ class _PreparationScreenState extends State<PreparationScreen>
     );
     return [
       SegmentedButton<String>(
-        segments: const [
-          ButtonSegment(value: '30', label: Text('30 days')),
-          ButtonSegment(value: '365', label: Text('12 months')),
+        segments: [
+          ButtonSegment(value: '30', label: Text(s10(context, 'recentMonth'))),
+          ButtonSegment(value: '365', label: Text(s10(context, 'recentYear'))),
         ],
         selected: {_period},
         onSelectionChanged: (v) => setState(() => _period = v.first),
       ),
+      const SizedBox(height: 16),
+      Text(
+        '${s.observedDays} ${s10(context, 'recordedDays')} · ${s.symptomDays} ${s10(context, 'symptom')}',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      const SizedBox(height: 12),
       if (s.events.isEmpty) Text(s10(context, 'empty')),
       for (final e in s.events)
         ListTile(
           isThreeLine: true,
-          title: Text('${e.day} · ${e.kind}'),
+          title: Text('${e.day} · ${recordKindLabel(context, e.kind)}'),
           subtitle: Text(e.values['english_summary'] ?? e.text),
           onTap: () => _source(e),
           trailing: e.values['legacy'] == true || e.kind == 'environment'
@@ -1759,7 +1709,9 @@ class _PreparationScreenState extends State<PreparationScreen>
     Text(s10(context, 'receipt')),
     for (final h in p.history)
       ListTile(
-        title: Text('${h['date']} · ${h['type']}'),
+        title: Text(
+          '${h['date']} · ${s10(context, h['type'] == 'deadline' ? 'review_request' : 'details')}',
+        ),
         subtitle: Text(h['text'] ?? ''),
       ),
     for (final e in p.exports)

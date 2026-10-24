@@ -9,7 +9,9 @@ String caseDisplayTitle(AppLocalizations l, CaseRow row, {CaseFacts? facts}) {
   if (alias != null && alias.isNotEmpty) return alias;
   final drug = (facts?.field('medication').value ?? row.title)?.trim();
   final kind = row.documentKind ?? facts?.kind;
-  if(row.startReason!=null&&kind==null)return drug?.isNotEmpty==true?drug!:l.cnCaseUntitled;
+  if (row.startReason != null && kind == null) {
+    return drug?.isNotEmpty == true ? drug! : l.cnCaseUntitled;
+  }
   final kindLabel = _kindShort(l, kind);
   if (drug == null || drug.isEmpty) {
     if (row.status == 'uploaded' || row.status == 'processing') {

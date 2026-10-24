@@ -49,7 +49,8 @@ String _useLabel(AppLocalizations l, UseKind kind) => switch (kind) {
 
 /// One Records screen: today log + week/month calendar + day timeline.
 class RecordsTab extends StatefulWidget {
-  const RecordsTab({super.key});
+  const RecordsTab({super.key, this.showLegacy = false});
+  final bool showLegacy;
 
   @override
   State<RecordsTab> createState() => _RecordsTabState();
@@ -141,6 +142,9 @@ class _RecordsTabState extends State<RecordsTab> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     final session = SessionScope.of(context);
+    if (session.isReady && !widget.showLegacy) {
+      return CareProfileRecords(key: ValueKey(session.user?.id));
+    }
     return Scaffold(
       appBar: CoverNoteAppBar(title: Text(l.cnTabRecords)),
       body: RefreshIndicator(

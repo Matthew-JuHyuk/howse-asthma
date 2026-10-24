@@ -28,7 +28,7 @@ class MainActivity : FlutterActivity() {
                         requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 301)
                     } else startSpeech()
                 }
-                "stop" -> { speech?.stopListening(); result.success(null) }
+                "stop" -> { try { speech?.stopListening(); result.success(null) } catch(_:Exception) { finishSpeech(error="recognition_failed"); result.success(null) } }
                 "configure" -> {
                     val enabled=call.argument<Boolean>("enabled") ?: false
                     val prefs=getSharedPreferences("cn_direct", MODE_PRIVATE)
@@ -83,10 +83,12 @@ class MainActivity : FlutterActivity() {
     }
     private fun finishSpeech(text:String?=null,error:String?=null) {
         val reply=speechReply; speechReply=null
-        speech?.destroy();speech=null
+        try { speech?.destroy() } catch(_:Exception) {}
+        speech=null
         if(error!=null)reply?.error(error,"Recognition unavailable; use text or buttons",null) else reply?.success(text ?: "")
     }
     private fun startSpeech() {
+      try {
         if(!SpeechRecognizer.isRecognitionAvailable(this)){finishSpeech(error="unsupported");return}
         speech=if(Build.VERSION.SDK_INT>=31 && SpeechRecognizer.isOnDeviceRecognitionAvailable(this)) SpeechRecognizer.createOnDeviceSpeechRecognizer(this) else SpeechRecognizer.createSpeechRecognizer(this)
         speech!!.setRecognitionListener(object:RecognitionListener {
@@ -105,6 +107,7 @@ class MainActivity : FlutterActivity() {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE,speechLanguage)
             putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,1)
         }) } catch(_:Exception) {finishSpeech(error="recognition_failed")}
+      } catch(_:Exception) { finishSpeech(error="recognition_failed") }
     }
     override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<out String>,grantResults:IntArray) {
         super.onRequestPermissionsResult(requestCode,permissions,grantResults)

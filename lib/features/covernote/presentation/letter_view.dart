@@ -57,7 +57,8 @@ class _LetterViewState extends State<LetterView> {
     final lang = Localizations.localeOf(context).toLanguageTag();
     if (lang.toLowerCase().startsWith('en')) return;
     final consent = ConsentRepository();
-    final allowed = await consent.hasActive(ConsentPurpose.translate) ||
+    final allowed =
+        await consent.hasActive(ConsentPurpose.translate) ||
         await consent.hasActive(ConsentPurpose.letter);
     if (!allowed || !mounted) return;
     setState(() => _tab = 1);
@@ -119,7 +120,9 @@ class _LetterViewState extends State<LetterView> {
         language: lang,
         documentRevision: widget.detail.row.documentRevision,
       );
-      final ready = cached.where((p) => p.status == 'ready' && (p.text ?? '').isNotEmpty);
+      final ready = cached.where(
+        (p) => p.status == 'ready' && (p.text ?? '').isNotEmpty,
+      );
       final pages = ready.length == cached.length && cached.isNotEmpty
           ? cached
           : await AiExtraClient().ensureFullTranslation(
@@ -130,15 +133,15 @@ class _LetterViewState extends State<LetterView> {
       if (mounted) setState(() => _tr = pages);
     } on StateError catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(caseErrorText(l, e.message))),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(caseErrorText(l, e.message))));
       }
     } catch (_) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l.cnTranslationFailed)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l.cnTranslationFailed)));
       }
     } finally {
       if (mounted) setState(() => _translating = false);
@@ -254,46 +257,50 @@ class _LetterViewState extends State<LetterView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(l.cnPageN(p.pageNumber)),
-                  Text(p.text ?? (p.status == 'failed' ? l.cnTranslationFailed : l.cnHardToRead)),
+                  Text(
+                    p.text ??
+                        (p.status == 'failed'
+                            ? l.cnTranslationFailed
+                            : l.cnHardToRead),
+                  ),
                 ],
               ),
             ),
-          TextButton(
-            onPressed: _translate,
-            child: Text(l.cnTranslateRetry),
-          ),
+          TextButton(onPressed: _translate, child: Text(l.cnTranslateRetry)),
         ],
         ExpansionTile(
           title: Text(l.cnRecognizedText),
           children: [
-        for (final p in d.pages)
-          Padding(
-            key: _keys.putIfAbsent(p.pageNumber, GlobalKey.new),
-            padding: const EdgeInsets.only(top: 8),
-            child: CnCard(
-              color: p.pageNumber == widget.focusPage
-                  ? const Color(0xFFF2FBF8)
-                  : null,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            for (final p in d.pages)
+              Padding(
+                key: _keys.putIfAbsent(p.pageNumber, GlobalKey.new),
+                padding: const EdgeInsets.only(top: 8),
+                child: CnCard(
+                  color: p.pageNumber == widget.focusPage
+                      ? const Color(0xFFF2FBF8)
+                      : null,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: SectionLabel(l.cnPageN(p.pageNumber))),
-                      if (p.legibility != null && p.legibility != 'clear')
-                        StatusChip(l.cnHardToRead, tone: ChipTone.warn),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SectionLabel(l.cnPageN(p.pageNumber)),
+                          ),
+                          if (p.legibility != null && p.legibility != 'clear')
+                            StatusChip(l.cnHardToRead, tone: ChipTone.warn),
+                        ],
+                      ),
+                      _HighlightedText(
+                        text: p.text ?? '',
+                        quote: p.pageNumber == widget.focusPage
+                            ? widget.focusQuote
+                            : null,
+                      ),
                     ],
                   ),
-                  _HighlightedText(
-                    text: p.text ?? '',
-                    quote: p.pageNumber == widget.focusPage
-                        ? widget.focusQuote
-                        : null,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
           ],
         ),
         const SizedBox(height: 16),

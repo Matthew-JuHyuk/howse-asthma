@@ -134,16 +134,24 @@ bool requirementLinksRecords(String label) {
 
 String? requirementHint(AppLocalizations l, String label) {
   final s = label.toLowerCase();
-  if (RegExp(r'letter of medical|doctor.s statement|prescriber statement|statement (from|by) (the )?(doctor|physician|prescriber)').hasMatch(s)) {
+  if (RegExp(
+    r'letter of medical|doctor.s statement|prescriber statement|statement (from|by) (the )?(doctor|physician|prescriber)',
+  ).hasMatch(s)) {
     return l.cnReqHintDoctorStatement;
   }
-  if (RegExp(r'medication history|pharmacy|prior medication|medicines? (tried|history)|drug history').hasMatch(s)) {
+  if (RegExp(
+    r'medication history|pharmacy|prior medication|medicines? (tried|history)|drug history',
+  ).hasMatch(s)) {
     return l.cnReqHintMedHistory;
   }
-  if (RegExp(r'visit note|chart note|office note|clinical note|progress note|medical record|chart').hasMatch(s)) {
+  if (RegExp(
+    r'visit note|chart note|office note|clinical note|progress note|medical record|chart',
+  ).hasMatch(s)) {
     return l.cnReqHintVisitNotes;
   }
-  if (RegExp(r'test result|\blab(s|oratory)?\b|spirometr|pulmonary function|x-ray|imaging').hasMatch(s)) {
+  if (RegExp(
+    r'test result|\blab(s|oratory)?\b|spirometr|pulmonary function|x-ray|imaging',
+  ).hasMatch(s)) {
     return l.cnReqHintTestResults;
   }
   return null;
