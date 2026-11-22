@@ -1,6 +1,4 @@
-<a href="../README.md"><img src="../assets/branding/covernote_icon_1024.png" alt="CoverNote app logo" width="64" height="64"></a>
-
-# CoverNote source map
+<h1><img src="../assets/branding/covernote_icon_rounded.svg" alt="CoverNote app logo" width="48" height="48" align="absmiddle"> CoverNote source map</h1>
 
 - `lib/features/covernote/`: current CoverNote workflows, UI, records, and PDF generation.
 - `lib/core/`: shared configuration, authentication, and services.

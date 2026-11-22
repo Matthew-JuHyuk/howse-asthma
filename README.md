@@ -1,6 +1,4 @@
-<a href="https://covernote-cac.vercel.app/"><img src="assets/branding/covernote_icon_1024.png" alt="CoverNote app logo" width="120" height="120"></a>
-
-# CoverNote
+<h1><img src="assets/branding/covernote_icon_rounded.svg" alt="CoverNote app logo" width="48" height="48" align="absmiddle"> CoverNote</h1>
 
 **Understand insurance letters. Keep daily health records. Prepare for the doctor’s visit.**
 
