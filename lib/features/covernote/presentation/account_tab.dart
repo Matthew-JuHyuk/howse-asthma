@@ -11,7 +11,9 @@ import '../covernote_root.dart';
 import '../data/consent_repository.dart';
 import '../domain/s9_models.dart';
 import '../ui/app_chrome.dart';
+import '../domain/patient_label.dart';
 import '../ui/brand.dart';
+import '../ui/start_at_top.dart';
 import '../data/preparation_repository.dart';
 import 'preparation_strings.dart';
 
@@ -156,167 +158,221 @@ class _AccountTabState extends State<AccountTab> {
     final email = session.user?.email;
     return Scaffold(
       appBar: CoverNoteAppBar(title: Text(l.cnTabSettings)),
-      body: ListView(
-        padding: EdgeInsets.fromLTRB(
-          20,
-          20,
-          20,
-          32 + MediaQuery.paddingOf(context).bottom,
-        ),
-        children: [
-          CnCard(
-            child: session.isReady
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        session.profile!.fullName,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
+      body: StartAtTop(
+        builder: (scroll) => ListView(
+          controller: scroll,
+          primary: false,
+          padding: EdgeInsets.fromLTRB(
+            20,
+            20,
+            20,
+            32 + MediaQuery.paddingOf(context).bottom,
+          ),
+          children: [
+            CnCard(
+              child: session.isReady
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 26,
+                              backgroundColor: CnColors.mint,
+                              child: Text(
+                                (() {
+                                  final shown = patientLabel(
+                                    session.profile!.fullName,
+                                    fallback: '',
+                                  );
+                                  return shown.isEmpty
+                                      ? '?'
+                                      : shown.characters.first.toUpperCase();
+                                })(),
+                                style: const TextStyle(
+                                  color: CnColors.navy,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    patientLabel(
+                                      session.profile!.fullName,
+                                      fallback: '',
+                                    ),
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700,
+                                      color: CnColors.navy,
+                                    ),
+                                  ),
+                                  if (email != null) ...[
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      email,
+                                      style: const TextStyle(
+                                        color: CnColors.muted,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      if (email != null)
-                        Text(
-                          email,
-                          style: const TextStyle(color: CnColors.muted),
+                        const SizedBox(height: 20),
+                        OutlinedButton.icon(
+                          onPressed: session.signOut,
+                          icon: const Icon(Icons.logout),
+                          label: Text(l.cnSignOut),
                         ),
-                      const SizedBox(height: 20),
-                      OutlinedButton.icon(
-                        onPressed: session.signOut,
-                        icon: const Icon(Icons.logout),
-                        label: Text(l.cnSignOut),
-                      ),
-                    ],
-                  )
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l.cnAccountSignedOut,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 20),
-                      FilledButton(
-                        onPressed: () => requireSignIn(context),
-                        child: Text(l.cnAuthSignIn),
-                      ),
-                    ],
-                  ),
-          ),
-          SectionLabel(l.cnLanguage),
-          CnCard(
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
-              minVerticalPadding: 12,
-              leading: const Icon(Icons.language),
-              title: Text(
-                nativeNameOf(locale.value),
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              subtitle: Text(l.cnLanguageNote),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => showLanguagePicker(context),
-            ),
-          ),
-          const SizedBox(height: 20),
-          CnCard(
-            child: ExpansionTile(
-              leading: const Icon(Icons.privacy_tip_outlined),
-              tilePadding: EdgeInsets.zero,
-              title: Text(s10(context, 'privacySettings')),
-              children: [
-                SectionLabel(l.cnDataConsent),
-                SwitchListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                  title: Text(l.cnConsentAi),
-                  subtitle: Text(l.cnConsentAiBody),
-                  value: _letterConsent,
-                  onChanged: session.isReady
-                      ? (v) => _toggle(ConsentPurpose.letter, v)
-                      : null,
-                ),
-                SwitchListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                  title: Text(l.cnConsentLabelPurpose),
-                  value: _labelConsent,
-                  onChanged: session.isReady
-                      ? (v) => _toggle(ConsentPurpose.label, v)
-                      : null,
-                ),
-                SwitchListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                  title: Text(l.cnConsentTranslatePurpose),
-                  value: _translateConsent,
-                  onChanged: session.isReady
-                      ? (v) => _toggle(ConsentPurpose.translate, v)
-                      : null,
-                ),
-                SwitchListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                  title: Text(s10(context, 'voice')),
-                  subtitle: Text(s10(context, 'consent')),
-                  value: _treatmentConsent,
-                  onChanged: session.isReady
-                      ? (v) => _toggle(ConsentPurpose.treatment, v)
-                      : null,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          CnCard(
-            child: ExpansionTile(
-              leading: const Icon(Icons.settings_outlined),
-              tilePadding: EdgeInsets.zero,
-              title: Text(s10(context, 'advancedSettings')),
-              children: [
-                SectionLabel(l.cnServiceStatus),
-                CnCard(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(switch (_aiReady) {
-                          true => l.cnServiceReady,
-                          false => l.cnServiceUnavailableShort,
-                          null => _checking ? l.cnChecking : l.cnServiceUnknown,
-                        }),
-                      ),
-                      const SizedBox(width: 16),
-                      TextButton(
-                        onPressed: _checking ? null : _checkService,
-                        child: Text(l.cnCheck),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SectionLabel(l.cnAbout),
-          Text(l.cnAboutBody, style: const TextStyle(color: CnColors.muted)),
-          if (session.isReady) ...[
-            SectionLabel(l.cnDangerZone),
-            OutlinedButton.icon(
-              style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFFA11D1D),
-              ),
-              onPressed: _deleting ? null : _deleteAccount,
-              icon: _deleting
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
+                      ],
                     )
-                  : const Icon(Icons.delete_forever_outlined),
-              label: Text(l.cnDeleteAccount),
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CnIconWell(Icons.person_outline),
+                        const SizedBox(height: 14),
+                        Text(
+                          l.cnAccountSignedOut,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            height: 1.4,
+                            color: CnColors.ink,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        FilledButton(
+                          onPressed: () => requireSignIn(context),
+                          child: Text(l.cnAuthSignIn),
+                        ),
+                      ],
+                    ),
             ),
+            SectionLabel(l.cnLanguage),
+            CnCard(
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                minVerticalPadding: 12,
+                leading: const CnIconWell(
+                  Icons.language,
+                  size: 40,
+                  iconSize: 20,
+                ),
+                title: Text(
+                  nativeNameOf(locale.value),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                subtitle: Text(l.cnLanguageNote),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => showLanguagePicker(context),
+              ),
+            ),
+            const SizedBox(height: 20),
+            CnCard(
+              child: ExpansionTile(
+                leading: const Icon(Icons.privacy_tip_outlined),
+                tilePadding: EdgeInsets.zero,
+                title: Text(s10(context, 'privacySettings')),
+                children: [
+                  SectionLabel(l.cnDataConsent),
+                  SwitchListTile(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                    title: Text(l.cnConsentAi),
+                    subtitle: Text(l.cnConsentAiBody),
+                    value: _letterConsent,
+                    onChanged: session.isReady
+                        ? (v) => _toggle(ConsentPurpose.letter, v)
+                        : null,
+                  ),
+                  SwitchListTile(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                    title: Text(l.cnConsentLabelPurpose),
+                    value: _labelConsent,
+                    onChanged: session.isReady
+                        ? (v) => _toggle(ConsentPurpose.label, v)
+                        : null,
+                  ),
+                  SwitchListTile(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                    title: Text(l.cnConsentTranslatePurpose),
+                    value: _translateConsent,
+                    onChanged: session.isReady
+                        ? (v) => _toggle(ConsentPurpose.translate, v)
+                        : null,
+                  ),
+                  SwitchListTile(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                    title: Text(s10(context, 'voice')),
+                    subtitle: Text(s10(context, 'consent')),
+                    value: _treatmentConsent,
+                    onChanged: session.isReady
+                        ? (v) => _toggle(ConsentPurpose.treatment, v)
+                        : null,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            CnCard(
+              child: ExpansionTile(
+                leading: const Icon(Icons.settings_outlined),
+                tilePadding: EdgeInsets.zero,
+                title: Text(s10(context, 'advancedSettings')),
+                children: [
+                  SectionLabel(l.cnServiceStatus),
+                  CnCard(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(switch (_aiReady) {
+                            true => l.cnServiceReady,
+                            false => l.cnServiceUnavailableShort,
+                            null =>
+                              _checking ? l.cnChecking : l.cnServiceUnknown,
+                          }),
+                        ),
+                        const SizedBox(width: 16),
+                        TextButton(
+                          onPressed: _checking ? null : _checkService,
+                          child: Text(l.cnCheck),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SectionLabel(l.cnAbout),
+            Text(l.cnAboutBody, style: const TextStyle(color: CnColors.muted)),
+            if (session.isReady) ...[
+              SectionLabel(l.cnDangerZone),
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: const Color(0xFFA11D1D),
+                ),
+                onPressed: _deleting ? null : _deleteAccount,
+                icon: _deleting
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.delete_forever_outlined),
+                label: Text(l.cnDeleteAccount),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'dart:async';
+import '../../records/data/medication_repository.dart';
+import '../../records/data/regimen_repository.dart';
+import '../domain/quick_medication.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -95,6 +98,32 @@ class PreparationRepository {
           r['payload']['patient_key'] as String:
               r['payload']['patient_name'] as String,
     };
+  }
+
+  Future<List<QuickMedication>> quickMedications(String patient) async {
+    final owner = uid;
+    if (patient != owner && !patient.startsWith('$owner/')) {
+      throw StateError('wrong_patient');
+    }
+    if (demo) return const [];
+    final meds = await MedicationRepository().list();
+    final regimens = await RegimenRepository().listAll();
+    if (uid != owner) throw StateError('account_changed');
+    return [
+      for (final med in meds)
+        (() {
+          final active = regimens
+              .where((r) => r.medicationId == med.id && r.covers(today))
+              .firstOrNull;
+          return QuickMedication(
+            id: med.id,
+            name: med.displayName,
+            role: active?.role,
+            puffs: active?.puffsPerOccasion,
+            regimenId: active?.id,
+          );
+        })(),
+    ];
   }
 
   Future<Preparation> create({

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../domain/patient_label.dart';
 import '../domain/preparation.dart';
 import '../ui/app_chrome.dart';
 import 'preparation_strings.dart';
 
 /// A task with a persistent action, outside the scrollable content and OS inset.
-class ReviewPage extends StatelessWidget {
+class ReviewPage extends StatefulWidget {
   const ReviewPage({
     super.key,
     required this.title,
@@ -14,10 +15,34 @@ class ReviewPage extends StatelessWidget {
   final String title;
   final Widget body;
   final List<Widget> actions;
+
+  @override
+  State<ReviewPage> createState() => _ReviewPageState();
+}
+
+class _ReviewPageState extends State<ReviewPage> {
+  final ScrollController _scroll = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scroll.hasClients && _scroll.offset > 0) _scroll.jumpTo(0);
+    });
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: CoverNoteAppBar(title: Text(title)),
-    body: SafeArea(child: body),
+    appBar: CoverNoteAppBar(title: Text(widget.title)),
+    body: SafeArea(
+      child: PrimaryScrollController(controller: _scroll, child: widget.body),
+    ),
     bottomNavigationBar: Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       child: SafeArea(
@@ -26,7 +51,7 @@ class ReviewPage extends StatelessWidget {
           alignment: WrapAlignment.end,
           spacing: 12,
           runSpacing: 12,
-          children: actions,
+          children: widget.actions,
         ),
       ),
     ),
@@ -184,7 +209,7 @@ class _SourceReviewScreenState extends State<SourceReviewScreen> {
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  e.text,
+                  patientText(e.text),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -198,7 +223,9 @@ class _SourceReviewScreenState extends State<SourceReviewScreen> {
                     ),
                     body: CoverNoteBody(
                       scrollable: true,
-                      child: SelectableText('${e.day}\n\n${e.text}'),
+                      child: SelectableText(
+                        patientText('${e.day}\n\n${e.text}'),
+                      ),
                     ),
                   ),
                 ),

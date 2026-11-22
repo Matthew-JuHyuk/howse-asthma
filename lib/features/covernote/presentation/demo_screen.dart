@@ -64,6 +64,8 @@ class _DemoScreenState extends State<DemoScreen> {
                 32 + MediaQuery.paddingOf(context).bottom,
               ),
               children: [
+                const BrandLockup(compact: true),
+                const SizedBox(height: 16),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: DemoBadge(),

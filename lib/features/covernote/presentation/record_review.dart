@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/preparation_repository.dart';
+import '../domain/patient_label.dart';
 import '../domain/preparation.dart';
+import '../ui/brand.dart';
 import 'preparation_strings.dart';
 import 'source_review_screen.dart';
 
@@ -117,12 +119,14 @@ class RecordReviewController {
             builder: (c, change) => ReviewPage(
               title: s10(c, 'confirm'),
               body: ListView(
+                primary: false,
                 padding: const EdgeInsets.all(20),
                 children: [
-                  Text(patientName, style: Theme.of(c).textTheme.titleLarge),
-                  const SizedBox(height: 12),
-                  Text(s10(c, 'checkPatient')),
-                  const SizedBox(height: 20),
+                  Text(
+                    patientLabel(patientName),
+                    style: const TextStyle(color: CnColors.muted),
+                  ),
+                  const SizedBox(height: 16),
                   if (proposals.any((v) => v['day'] == null))
                     TextField(
                       controller: date,
@@ -145,20 +149,13 @@ class RecordReviewController {
                               style: Theme.of(c).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 8),
-                            Text(proposals[i]['quote'] ?? ''),
+                            Text(patientText('${proposals[i]['quote'] ?? ''}')),
                             const SizedBox(height: 8),
                             Text(proposals[i]['day'] ?? s10(c, 'unknown')),
                             if ((proposals[i]['uncertainty'] ?? '')
                                 .toString()
                                 .isNotEmpty)
                               Text(proposals[i]['uncertainty']),
-                            if (proposals[i]['subject'] != 'selected_patient')
-                              Text(
-                                s10(c, 'checkPatient'),
-                                style: TextStyle(
-                                  color: Theme.of(c).colorScheme.error,
-                                ),
-                              ),
                             ExpansionTile(
                               tilePadding: EdgeInsets.zero,
                               title: Text(s10(c, 'changeSelection')),
@@ -194,7 +191,7 @@ class RecordReviewController {
                     ),
                   ExpansionTile(
                     title: Text(s10(c, 'originalWords')),
-                    children: [SelectableText(text)],
+                    children: [SelectableText(patientText(text))],
                   ),
                 ],
               ),

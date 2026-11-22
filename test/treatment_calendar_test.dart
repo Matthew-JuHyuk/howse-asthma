@@ -5,6 +5,57 @@ import 'package:howse_asthma/features/covernote/presentation/treatment_calendar.
 import 'package:howse_asthma/l10n/app_localizations.dart';
 
 void main() {
+  testWidgets(
+    'calendar selection and refresh preserve the outer scroll position',
+    (tester) async {
+      final scroll = ScrollController();
+      addTearDown(scroll.dispose);
+      var day = DateTime(2026, 2, 1);
+      late StateSetter rebuild;
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: StatefulBuilder(
+              builder: (context, setState) {
+                rebuild = setState;
+                return SingleChildScrollView(
+                  controller: scroll,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 350),
+                      TreatmentCalendar(
+                        day: day,
+                        events: const [],
+                        patientKey: 'p',
+                        onSelected: (v) => setState(() => day = v),
+                      ),
+                      const SizedBox(height: 600),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      scroll.jumpTo(320);
+      await tester.pumpAndSettle();
+      expect(find.byType(Scrollable), findsOneWidget);
+      final height = tester.getSize(find.byType(TreatmentCalendar)).height;
+      await tester.tap(find.text('2'));
+      await tester.pumpAndSettle();
+      expect(day.day, 2);
+      expect(scroll.offset, 320);
+      rebuild(() => day = DateTime(2026, 8, 1));
+      await tester.pumpAndSettle();
+      expect(tester.getSize(find.byType(TreatmentCalendar)).height, height);
+      expect(scroll.offset, 320);
+      expect(tester.takeException(), isNull);
+    },
+  );
   for (final language in ['en', 'ko', 'es']) {
     testWidgets(
       'calendar distinguishes records and patients at 320dp / 200% ($language)',

@@ -21,6 +21,11 @@ class PatientLogReport {
     this.scheduledDoses,
     this.loggedDoses,
     this.sample = false,
+    this.visitTitle,
+    this.concern,
+    this.plan,
+    this.proposed,
+    this.stillNeeded = const [],
   }) : range = DayRange.lastDays(end, 30),
        events = {
          for (final e in events)
@@ -33,6 +38,8 @@ class PatientLogReport {
   final String? dob, controller, actDay;
   final int? actScore, scheduledDoses, loggedDoses;
   final bool sample;
+  final String? visitTitle, concern, plan, proposed;
+  final List<String> stillNeeded;
   final DayRange range;
   final List<TreatmentEvent> events;
   bool get isSample => sample || events.any((e) => e.synthetic);
@@ -61,14 +68,14 @@ class PatientLogReport {
       ? '$actScore / 25 (recorded $actDay)'
       : 'Not recorded in this period';
   String get frequency {
-    final days = symptoms
+    final days = symptoms.map((e) => e.day).toSet();
+    if (days.isEmpty) return 'Not recorded';
+    final daytime = symptoms
         .where((e) => e.values['time_of_day'] == 'daytime')
         .map((e) => e.day)
         .toSet();
-    if (days.isEmpty) {
-      return 'Daytime not specified; ${symptoms.map((e) => e.day).toSet().length} symptom days logged';
-    }
-    return '${days.length} daytime symptom days / 30 days; ${(days.length * 7 / 30).toStringAsFixed(1)} days/week logged';
+    if (daytime.isEmpty) return '${days.length} symptom days logged / 30 days';
+    return '${daytime.length} daytime symptom days / 30 days';
   }
 
   String get night {
@@ -127,17 +134,30 @@ class PatientLogReport {
   Map<String, num> get aqi {
     final result = <String, num>{};
     for (final e in events.where((e) => e.kind == 'environment')) {
-      final v = e.values;
-      if (v['source_kind'] == 'forecast') continue;
-      final value = v['metric'] == 'aqi' ? v['value'] : v['aqi'];
-      if (value is num &&
-          value >= 0 &&
-          value <= 500 &&
-          (result[e.day] == null || result[e.day]! < value)) {
+      final value = _observationAqi(e.values);
+      if (value != null && (result[e.day] == null || result[e.day]! < value)) {
         result[e.day] = value;
       }
     }
     return result;
+  }
+
+  /// Stored observations use `metric: aqi`, an `aqi` field, or a numeric
+  /// value whose unit is AQI. Forecasts stay out of the measured count.
+  static num? _observationAqi(Map<String, dynamic> v) {
+    if (v['source_kind'] == 'forecast') return null;
+    num? value;
+    final metric = '${v['metric'] ?? ''}'.toLowerCase();
+    final unit = '${v['unit'] ?? ''}'.toLowerCase();
+    if ((metric == 'aqi' || metric == 'us_aqi') && v['value'] is num) {
+      value = v['value'] as num;
+    } else if (v['aqi'] is num) {
+      value = v['aqi'] as num;
+    } else if (v['value'] is num && unit.contains('aqi')) {
+      value = v['value'] as num;
+    }
+    if (value == null || value < 0 || value > 500) return null;
+    return value;
   }
 
   Map<String, String> get pollen {
@@ -145,7 +165,9 @@ class PatientLogReport {
     final result = <String, String>{};
     for (final e in events.where((e) => e.kind == 'environment')) {
       if (e.values['source_kind'] == 'forecast') continue;
-      final value = e.values['pollen_level'];
+      final value =
+          e.values['pollen_level'] ??
+          (e.values['metric'] == 'pollen' ? e.values['detail'] : null);
       if (value is String &&
           ranks.containsKey(value) &&
           (ranks[value]! > (ranks[result[e.day]] ?? 0))) {
@@ -205,14 +227,27 @@ class PatientLogReport {
     ];
   }
 
-  static String symptomLabel(TreatmentEvent e) => switch (e.values['symptom']) {
-    'cough' => 'Coughing',
-    'wheeze' => 'Wheezing',
-    'short_breath' => 'Shortness of breath',
-    'chest_tightness' => 'Chest tightness',
-    'night_waking' =>
-      'Night awakening${e.values['night_wakings'] is num ? ' (${e.values['night_wakings']})' : ''}',
-    'activity_limited' => 'Activity limited',
-    _ => 'Other symptom (see original record)',
-  };
+  static String symptomLabel(TreatmentEvent e) {
+    final raw = '${e.values['symptom'] ?? ''}'.trim();
+    final count = e.values['night_wakings'];
+    final labels = <String>[];
+    for (final part in raw.split(RegExp(r'[,;/]'))) {
+      final token = part.trim();
+      if (token.isEmpty) continue;
+      final named = switch (token) {
+        'cough' => 'Coughing',
+        'wheeze' => 'Wheezing',
+        'short_breath' => 'Shortness of breath',
+        'chest_tightness' => 'Chest tightness',
+        'night_waking' => 'Night awakening${count is num ? ' ($count)' : ''}',
+        'activity_limited' => 'Activity limited',
+        _ => token.length <= 48 ? token : null,
+      };
+      if (named != null && named.isNotEmpty) labels.add(named);
+    }
+    if (labels.isNotEmpty) return labels.toSet().join('; ');
+    final text = e.text.trim();
+    if (text.isEmpty) return 'Symptom recorded';
+    return text.length <= 80 ? text : '${text.substring(0, 79).trimRight()}…';
+  }
 }

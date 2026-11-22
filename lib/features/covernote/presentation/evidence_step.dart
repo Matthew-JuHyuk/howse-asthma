@@ -240,6 +240,7 @@ class _EvidenceStepState extends State<EvidenceStep> {
     return AbsorbPointer(
       absorbing: _busy,
       child: ListView(
+        primary: false,
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
         children: [
           if (_busy) const LinearProgressIndicator(),

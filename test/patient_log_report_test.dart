@@ -78,6 +78,42 @@ void main() {
       expect(r.sabaConfirmed, isFalse);
     },
   );
+  test('stored AQI observations are counted; forecasts stay out', () {
+    final r = PatientLogReport(
+      patientKey: 'p',
+      patientName: 'Patient',
+      end: DateTime(2026, 9, 2),
+      events: [
+        e(
+          'unit',
+          '2026-09-01',
+          kind: 'environment',
+          values: {'value': 112, 'unit': 'US AQI'},
+        ),
+        e(
+          'metric',
+          '2026-09-02',
+          kind: 'environment',
+          values: {'metric': 'aqi', 'value': 40, 'source_kind': 'observation'},
+        ),
+        e(
+          'later',
+          '2026-09-02',
+          kind: 'environment',
+          values: {'metric': 'aqi', 'value': 180, 'source_kind': 'forecast'},
+        ),
+        e(
+          'humid',
+          '2026-09-02',
+          kind: 'environment',
+          values: {'metric': 'outdoor_humidity', 'value': 80, 'unit': '%'},
+        ),
+      ],
+    );
+    expect(r.aqi['2026-09-01'], 112);
+    expect(r.aqi['2026-09-02'], 40);
+    expect(r.aqi.length, 2);
+  });
   test(
     'sample template renders real PDF with calculated summary and recent rows',
     () async {

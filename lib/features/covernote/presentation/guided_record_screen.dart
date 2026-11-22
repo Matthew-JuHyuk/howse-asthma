@@ -3,24 +3,32 @@ import 'package:flutter/services.dart';
 import '../../../core/session/session_controller.dart';
 import '../data/preparation_repository.dart';
 import '../data/consent_repository.dart';
+import '../domain/patient_label.dart';
 import '../domain/preparation.dart';
 import '../domain/s9_models.dart';
 import '../ui/app_chrome.dart';
 import '../ui/brand.dart';
+import '../ui/start_at_top.dart';
 import 'preparation_strings.dart';
+import 'quick_treatment_actions.dart';
 import 'record_review.dart';
 
-String speechLocale(Locale locale) => locale.countryCode != null
-    ? locale.toLanguageTag()
-    : switch (locale.languageCode) {
-        'en' => 'en-US',
-        'ko' => 'ko-KR',
-        'es' => 'es-US',
-        'zh' => 'zh-CN',
-        'vi' => 'vi-VN',
-        'ar' => 'ar-SA',
-        _ => locale.toLanguageTag(),
-      };
+/// BCP-47 tag for the language selected in the app, never the phone locale.
+String speechLocale(Locale locale) {
+  final country = locale.countryCode;
+  if (country != null && country.isNotEmpty) return locale.toLanguageTag();
+  return switch (locale.languageCode) {
+    'en' => 'en-US',
+    'ko' => 'ko-KR',
+    'es' => 'es-US',
+    'pt' => 'pt-BR',
+    'gu' => 'gu-IN',
+    'zh' => locale.scriptCode == 'Hant' ? 'zh-TW' : 'zh-CN',
+    'ht' => 'ht-HT',
+    'ar' => 'ar-SA',
+    _ => locale.toLanguageTag(),
+  };
+}
 
 /// One recording entry point. Opening this screen never starts the microphone.
 class GuidedRecordScreen extends StatefulWidget {
@@ -43,8 +51,9 @@ class GuidedRecordScreen extends StatefulWidget {
 class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
   final _text = TextEditingController();
   final _focus = FocusNode();
+  final _listeningAnchor = GlobalKey();
   Map<String, String>? _profiles;
-  String? _patient, _error, _owner;
+  String? _patient, _error, _owner, _spokenLanguage;
   bool _permissionError = false;
   bool _busy = false, _listening = false, _typed = false, _usedVoice = false;
   PreparationRepository get repo => widget.repository;
@@ -54,7 +63,7 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
     _owner = repo.uid;
     _typed = widget.initiallyTyped;
     _profiles = widget.profiles;
-    _patient = widget.initialPatient ?? widget.profiles?.keys.firstOrNull;
+    _patient = repo.uid;
     if (_profiles == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _load());
     }
@@ -62,13 +71,15 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
 
   Future<void> _load() async {
     try {
-      final ownName =
-          SessionScope.of(context).profile?.fullName ?? s10(context, 'patient');
+      final ownName = patientLabel(
+        SessionScope.of(context).profile?.fullName,
+        fallback: s10(context, 'patient'),
+      );
       final profiles = await repo.careProfiles();
       if (!mounted || repo.uid != _owner) return;
-      profiles.putIfAbsent(repo.uid, () => ownName);
+      profiles[repo.uid] = ownName;
       setState(() {
-        _profiles = profiles;
+        _profiles = {repo.uid: ownName};
         _patient = repo.uid;
         _error = null;
       });
@@ -77,32 +88,64 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
     }
   }
 
+  void _revealListening() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final target = _listeningAnchor.currentContext;
+      if (target == null || !target.mounted) return;
+      Scrollable.ensureVisible(
+        target,
+        alignment: 0.0,
+        duration: const Duration(milliseconds: 200),
+      );
+    });
+  }
+
+  ({String text, String? language}) _speechResult(Object? raw) {
+    if (raw is String) return (text: raw, language: null);
+    if (raw is Map) {
+      final language = raw['language'];
+      return (
+        text: '${raw['text'] ?? ''}',
+        language: language is String && language.trim().isNotEmpty
+            ? language.trim()
+            : null,
+      );
+    }
+    return (text: '', language: null);
+  }
+
   Future<void> _listen() async {
     if (_listening || _busy) return;
     _focus.unfocus();
+    final previous = _text.text;
+    _text.clear();
     setState(() {
       _listening = true;
       _error = null;
       _permissionError = false;
+      _spokenLanguage = null;
     });
+    _revealListening();
     try {
-      final words = await PreparationRepository.native.invokeMethod<String>(
+      final appLanguage = speechLocale(Localizations.localeOf(context));
+      final raw = await PreparationRepository.native.invokeMethod<Object>(
         'listen',
-        {'language': speechLocale(Localizations.localeOf(context))},
+        {'detectLanguage': true, 'appLanguage': appLanguage},
       );
       if (!mounted || repo.uid != _owner) return;
-      if (words != null && words.trim().isNotEmpty) {
-        _text.text = [
-          _text.text.trim(),
-          words.trim(),
-        ].where((v) => v.isNotEmpty).join('\n');
+      final heard = _speechResult(raw);
+      if (heard.text.trim().isNotEmpty) {
+        _text.text = heard.text.trim();
+        _spokenLanguage = heard.language;
         _usedVoice = true;
         _typed = true;
       } else {
+        _text.text = previous;
         _error = s10(context, 'voiceFallback');
       }
     } on PlatformException catch (e) {
       if (mounted) {
+        _text.text = previous;
         _permissionError = [
           'permission_denied',
           'recognition_9',
@@ -121,6 +164,7 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
       }
     } catch (_) {
       if (mounted) {
+        _text.text = previous;
         _error = s10(context, 'voiceUnavailable');
         _typed = true;
       }
@@ -185,11 +229,13 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
         input: {
           if (widget.caseId != null) 'case_id': widget.caseId,
           'patient_key': patient,
-          'patient_name': _profiles![patient],
+          'patient_name': patientLabel(_profiles?[patient]),
           'transcript': text,
           'today': dayKey(repo.today),
           'timezone': repo.today.timeZoneOffset.inMinutes,
-          'language': Localizations.localeOf(context).toLanguageTag(),
+          'language':
+              _spokenLanguage ??
+              Localizations.localeOf(context).toLanguageTag(),
         },
       );
       if (!mounted || repo.uid != _owner) return;
@@ -201,7 +247,7 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
       final selected = await RecordReviewController(
         context,
         repo,
-        _profiles![patient]!,
+        patientLabel(_profiles?[patient]),
       ).confirm(proposals, text);
       if (!mounted ||
           selected == null ||
@@ -222,7 +268,9 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
             values: {
               ...v,
               'input_path': _usedVoice ? 'voice' : 'text',
-              'language': Localizations.localeOf(context).toLanguageTag(),
+              'language':
+                  _spokenLanguage ??
+                  Localizations.localeOf(context).toLanguageTag(),
               'model': result['model'],
               'prompt_version': result['prompt_version'],
             },
@@ -285,130 +333,139 @@ class _GuidedRecordScreenState extends State<GuidedRecordScreen> {
                       ? const CircularProgressIndicator()
                       : TextButton(onPressed: _load, child: Text(_error!)),
                 )
-              : ListView(
-                  padding: const EdgeInsets.all(20),
-                  children: [
-                    if (profiles.length > 1)
-                      DropdownButtonFormField<String>(
-                        initialValue: _patient,
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          labelText: s10(context, 'careRecords'),
-                        ),
-                        items: [
-                          for (final p in profiles.entries)
-                            DropdownMenuItem(
-                              value: p.key,
-                              child: Text(
-                                p.value,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                        ],
-                        onChanged: _busy || _listening || _text.text.isNotEmpty
-                            ? null
-                            : (v) => setState(() => _patient = v),
-                      )
-                    else
+              : StartAtTop(
+                  builder: (scroll) => ListView(
+                    controller: scroll,
+                    primary: false,
+                    padding: const EdgeInsets.all(20),
+                    children: [
                       Text(
-                        profiles.values.first,
+                        s10(context, 'autoRecordQuestion'),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                    const SizedBox(height: 24),
-                    Text(
-                      s10(context, 'recordWelcome'),
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(s10(context, 'recordWelcomeBody')),
-                    const SizedBox(height: 20),
-                    CnCard(
-                      color: CnColors.mint,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(height: 4),
+                      Text(
+                        s10(context, 'voiceAnyLanguage'),
+                        style: const TextStyle(
+                          color: CnColors.muted,
+                          height: 1.3,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Column(
+                        key: _listeningAnchor,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(
-                            s10(context, 'autoRecordQuestion'),
-                            style: Theme.of(context).textTheme.titleMedium,
+                          CnCard(
+                            color: CnColors.mint,
+                            child: Text(
+                              s10(context, 'autoRecordExample'),
+                              style: const TextStyle(height: 1.5),
+                            ),
                           ),
-                          const SizedBox(height: 12),
-                          Text(s10(context, 'autoRecordExample')),
+                          const SizedBox(height: 16),
+                          OutlinedButton.icon(
+                            onPressed: _busy
+                                ? null
+                                : _listening
+                                ? _stop
+                                : _listen,
+                            icon: Icon(
+                              _listening
+                                  ? Icons.stop_circle_outlined
+                                  : Icons.mic_rounded,
+                              size: 28,
+                            ),
+                            label: Text(
+                              s10(
+                                context,
+                                _listening ? 'stop' : 'startSpeaking',
+                              ),
+                            ),
+                          ),
+                          if (_listening) ...[
+                            const SizedBox(height: 10),
+                            Text(s10(context, 'listening')),
+                            const SizedBox(height: 8),
+                            const LinearProgressIndicator(),
+                          ],
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                    OutlinedButton.icon(
-                      onPressed: _busy
-                          ? null
-                          : _listening
-                          ? _stop
-                          : _listen,
-                      icon: Icon(
-                        _listening
-                            ? Icons.stop_circle_outlined
-                            : Icons.mic_rounded,
-                        size: 28,
-                      ),
-                      label: Text(
-                        s10(context, _listening ? 'stop' : 'startSpeaking'),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    if (_error != null) ...[
-                      Text(
-                        _error!,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      ),
-                      if (_permissionError)
-                        TextButton.icon(
-                          onPressed: () async {
-                            try {
-                              await PreparationRepository.native.invokeMethod(
-                                'speechSettings',
-                              );
-                            } catch (_) {
-                              /* Keep the typing alternative visible. */
-                            }
-                          },
-                          icon: const Icon(Icons.settings_outlined),
-                          label: Text(s10(context, 'openSettings')),
-                        ),
-                      const SizedBox(height: 16),
-                    ],
-                    if (!_typed)
-                      TextButton.icon(
-                        onPressed: _busy || _listening
-                            ? null
-                            : () {
-                                setState(() => _typed = true);
-                                _focus.requestFocus();
-                              },
-                        icon: const Icon(Icons.keyboard_alt_outlined),
-                        label: Text(s10(context, 'preferTyping')),
-                      ),
-                    if (_typed)
-                      TextField(
-                        controller: _text,
-                        focusNode: _focus,
-                        enabled: !_busy && !_listening,
-                        minLines: 3,
-                        maxLines: 7,
-                        maxLength: 1000,
-                        decoration: InputDecoration(
-                          labelText: s10(context, 'yourWords'),
-                          hintText: s10(context, 'recordHint'),
-                        ),
-                        onChanged: (_) => setState(() {}),
-                      ),
-                    if (_listening) ...[
                       const SizedBox(height: 12),
-                      const LinearProgressIndicator(),
-                      Text(s10(context, 'listening')),
+                      if (_error != null) ...[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              size: 20,
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                _error!,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.error,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (_permissionError)
+                          TextButton.icon(
+                            onPressed: () async {
+                              try {
+                                await PreparationRepository.native.invokeMethod(
+                                  'speechSettings',
+                                );
+                              } catch (_) {
+                                /* Keep the typing alternative visible. */
+                              }
+                            },
+                            icon: const Icon(Icons.settings_outlined),
+                            label: Text(s10(context, 'openSettings')),
+                          ),
+                        const SizedBox(height: 16),
+                      ],
+                      if (!_typed)
+                        TextButton.icon(
+                          onPressed: _busy || _listening
+                              ? null
+                              : () {
+                                  setState(() => _typed = true);
+                                  _focus.requestFocus();
+                                },
+                          icon: const Icon(Icons.keyboard_alt_outlined),
+                          label: Text(s10(context, 'preferTyping')),
+                        ),
+                      if (_typed)
+                        TextField(
+                          controller: _text,
+                          focusNode: _focus,
+                          enabled: !_busy && !_listening,
+                          minLines: 2,
+                          maxLines: 4,
+                          maxLength: 1000,
+                          decoration: InputDecoration(
+                            labelText: s10(context, 'yourWords'),
+                            hintText: s10(context, 'recordHint'),
+                          ),
+                          onChanged: (_) => setState(() {}),
+                        ),
+                      if (_busy) const LinearProgressIndicator(),
+                      const SizedBox(height: 16),
+                      QuickTreatmentActions(
+                        repository: repo,
+                        patientKey: repo.uid,
+                        patientName: patientLabel(
+                          profiles[repo.uid] ?? profiles.values.first,
+                        ),
+                        compact: true,
+                      ),
                     ],
-                    if (_busy) const LinearProgressIndicator(),
-                  ],
+                  ),
                 ),
         ),
       ),

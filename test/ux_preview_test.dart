@@ -11,11 +11,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:howse_asthma/core/theme/app_theme.dart';
-import 'package:howse_asthma/features/covernote/data/preparation_repository.dart';
 import 'package:howse_asthma/features/covernote/presentation/preparation_screen.dart';
 import 'package:howse_asthma/features/covernote/presentation/source_review_screen.dart';
 import 'package:howse_asthma/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'quick_treatment_actions_test.dart' show RegisteredQuickRepository;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +37,7 @@ void main() {
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
       SharedPreferences.setMockInitialValues({});
-      final repo = PreparationRepository(demo: true);
+      final repo = RegisteredQuickRepository();
       final preparation = await repo.seed(false);
       final boundary = GlobalKey();
       Future<void> capture(String name) async {
@@ -59,6 +59,33 @@ void main() {
 
       Widget app(Widget screen) => MaterialApp(
         theme: AppTheme.light.copyWith(
+          appBarTheme: AppTheme.light.appBarTheme.copyWith(
+            titleTextStyle: AppTheme.light.appBarTheme.titleTextStyle!.copyWith(
+              fontFamily: 'Ahem',
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: AppTheme.light.outlinedButtonTheme.style!.copyWith(
+              textStyle: const WidgetStatePropertyAll(
+                TextStyle(
+                  fontFamily: 'Ahem',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: AppTheme.light.textButtonTheme.style!.copyWith(
+              textStyle: const WidgetStatePropertyAll(
+                TextStyle(
+                  fontFamily: 'Ahem',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
           filledButtonTheme: FilledButtonThemeData(
             style: AppTheme.light.filledButtonTheme.style!.copyWith(
               textStyle: const WidgetStatePropertyAll(
@@ -130,11 +157,23 @@ void main() {
       await tester.pumpAndSettle();
       await capture('ux-journey-record');
       await tester.pumpWidget(const SizedBox());
-      await tester.pumpWidget(app(Scaffold(
-        appBar: AppBar(title: const Text('Records')),
-        body: SafeArea(child: SingleChildScrollView(padding: const EdgeInsets.all(20),
-          child: QuickTreatmentActions(repository: repo, patientKey: repo.uid, patientName: 'Diego'))),
-      )));
+      await tester.pumpWidget(
+        app(
+          Scaffold(
+            appBar: AppBar(title: const Text('Records')),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: QuickTreatmentActions(
+                  repository: repo,
+                  patientKey: repo.uid,
+                  patientName: 'Diego',
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
       await tester.pumpAndSettle();
       await capture('ux-record-quick-actions');
       await tester.pumpWidget(const SizedBox());
@@ -143,9 +182,13 @@ void main() {
       await capture('ux-demo-spacing');
       await tester.pumpWidget(const SizedBox());
       dotenv.loadFromString(isOptional: true);
-      await tester.pumpWidget(RepaintBoundary(key: boundary, child: const CoverNoteApp()));
+      await tester.pumpWidget(
+        RepaintBoundary(key: boundary, child: const CoverNoteApp()),
+      );
       await tester.pumpAndSettle();
-      final labels = AppLocalizations.of(tester.element(find.byType(Scaffold).first))!;
+      final labels = AppLocalizations.of(
+        tester.element(find.byType(Scaffold).first),
+      )!;
       await tester.tap(find.text(labels.cnTabSettings));
       await tester.pumpAndSettle();
       await capture('ux-settings-spacing');
@@ -153,8 +196,11 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Privacy and AI permissions'));
       await tester.pumpAndSettle();
-      await tester.scrollUntilVisible(find.byType(SwitchListTile).last, 180,
-        scrollable: find.byType(Scrollable).first);
+      await tester.scrollUntilVisible(
+        find.byType(SwitchListTile).last,
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.pumpAndSettle();
       await capture('ux-settings-consent-spacing');
     },

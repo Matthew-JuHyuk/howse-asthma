@@ -41,6 +41,7 @@ class LetterView extends StatefulWidget {
 
 class _LetterViewState extends State<LetterView> {
   final _keys = <int, GlobalKey>{};
+  final _scroll = ScrollController();
   var _tab = 0;
   List<PageTranslation> _tr = const [];
   var _translating = false;
@@ -50,6 +51,12 @@ class _LetterViewState extends State<LetterView> {
     super.initState();
     _scrollToFocus();
     WidgetsBinding.instance.addPostFrameCallback((_) => _maybeAutoTranslate());
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
   }
 
   Future<void> _maybeAutoTranslate() async {
@@ -173,6 +180,8 @@ class _LetterViewState extends State<LetterView> {
         .map((p) => p.pageNumber)
         .toList();
     return ListView(
+      controller: _scroll,
+      primary: false,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
       children: [
         CnCard(
@@ -232,6 +241,9 @@ class _LetterViewState extends State<LetterView> {
           selected: {_tab},
           onSelectionChanged: (s) async {
             setState(() => _tab = s.first);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (_scroll.hasClients) _scroll.jumpTo(0);
+            });
             if (s.first == 1) await _translate();
           },
         ),

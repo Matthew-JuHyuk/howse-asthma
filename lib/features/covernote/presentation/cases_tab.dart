@@ -9,6 +9,7 @@ import '../domain/case_models.dart';
 import '../domain/s9_models.dart';
 import '../ui/app_chrome.dart';
 import '../ui/brand.dart';
+import '../ui/start_at_top.dart';
 import 'capture_screen.dart';
 import 'case_card.dart';
 import 'routes.dart';
@@ -130,7 +131,7 @@ class CasesTabState extends State<CasesTab> {
     if (choice == 'new') {
       await startPreparation(context);
     } else {
-      await startNewCase(context, CaptureSource.camera);
+      await startNewCase(context, CaptureSource.files, openPicker: false);
     }
     if (mounted) await refresh();
   }
@@ -185,7 +186,7 @@ class CasesTabState extends State<CasesTab> {
             return Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                   child: SegmentedButton<bool>(
                     segments: [
                       ButtonSegment(value: true, label: Text(l.cnActiveCases)),
@@ -200,7 +201,7 @@ class CasesTabState extends State<CasesTab> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
                   child: TextField(
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.search),
@@ -222,17 +223,26 @@ class CasesTabState extends State<CasesTab> {
                         )
                       : RefreshIndicator(
                           onRefresh: refresh,
-                          child: ListView.separated(
-                            padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-                            itemCount: visible.length,
-                            separatorBuilder: (_, _) =>
-                                const SizedBox(height: 8),
-                            itemBuilder: (_, i) => CaseCard(
-                              summary: visible[i],
-                              deliveries:
-                                  _deliveries[visible[i].row.id] ?? const [],
-                              onTap: () => _open(visible[i]),
-                              onDelete: () => _delete(visible[i]),
+                          child: StartAtTop(
+                            builder: (scroll) => ListView.separated(
+                              controller: scroll,
+                              primary: false,
+                              padding: const EdgeInsets.fromLTRB(
+                                20,
+                                16,
+                                20,
+                                24,
+                              ),
+                              itemCount: visible.length,
+                              separatorBuilder: (_, _) =>
+                                  const SizedBox(height: 8),
+                              itemBuilder: (_, i) => CaseCard(
+                                summary: visible[i],
+                                deliveries:
+                                    _deliveries[visible[i].row.id] ?? const [],
+                                onTap: () => _open(visible[i]),
+                                onDelete: () => _delete(visible[i]),
+                              ),
                             ),
                           ),
                         ),

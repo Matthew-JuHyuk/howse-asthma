@@ -285,7 +285,18 @@ class EnvironmentCollector {
       return;
     }
     for (final r in readings) {
-      if (r.value == null) continue;
+      // The snapshot schema stores numeric air/pollen metrics, not alerts.
+      // An unsupported alert must not abort attachment of valid readings.
+      if (r.value == null ||
+          !const {
+            'aqi',
+            'outdoor_humidity',
+            'pm25',
+            'no2',
+            'pollen',
+          }.contains(r.metric)) {
+        continue;
+      }
       final snap = await SupabaseService.client
           .from('environment_snapshots')
           .insert({
@@ -321,8 +332,13 @@ class EnvironmentCollector {
     DateTime day,
     EnvironmentReading r,
   ) async {
+    // This legacy table has no pollen or flood type. Never write those
+    // values as PM2.5; the original pollen reading stays in snapshots.
+    if (!const {'aqi', 'outdoor_humidity', 'pm25', 'no2'}.contains(r.metric)) {
+      return;
+    }
     try {
-      final kind = r.metric == 'outdoor_humidity' ? 'outdoor_humidity' : 'pm25';
+      final kind = r.metric == 'aqi' ? 'pm25' : r.metric;
       await SupabaseService.client.from('local_context_entries').insert({
         'patient_id': uid,
         'local_date': isoDate(day),

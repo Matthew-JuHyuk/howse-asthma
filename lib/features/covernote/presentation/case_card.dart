@@ -46,7 +46,11 @@ class CaseCard extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.only(top: 2),
-            child: Icon(Icons.description_outlined, color: CnColors.teal),
+            child: CnIconWell(
+              Icons.description_outlined,
+              size: 40,
+              iconSize: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(

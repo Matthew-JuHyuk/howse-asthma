@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../records/data/records_revision.dart';
 import '../data/preparation_repository.dart';
+import '../domain/patient_label.dart';
 import '../domain/preparation.dart';
 import '../ui/brand.dart';
 import 'preparation_strings.dart';
@@ -121,7 +122,7 @@ class _HomePreparationLogState extends State<HomePreparationLog> {
               ? 'Patient reported ${symptom == 'night' ? 'night waking, count unknown' : 'cough'}.'
               : 'Patient confirmed ${kind == 'scheduled' ? 'scheduled' : 'as-needed'} medicine use; quantity unknown.',
           values: {
-            'selected_patient_name': p.patientName,
+            'selected_patient_name': patientLabel(p.patientName),
             'input_path': 'home',
             'occurred_at': _repo.today.toUtc().toIso8601String(),
             'symptom': symptom == 'night' ? 'night_waking' : 'cough',
@@ -139,6 +140,8 @@ class _HomePreparationLogState extends State<HomePreparationLog> {
       setState(() => _message = s10(context, synced ? 'saved' : 'pending'));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          persist: false,
+          duration: const Duration(seconds: 4),
           content: Text(_message!),
           action: SnackBarAction(
             label: s10(context, 'undo'),
@@ -170,7 +173,7 @@ class _HomePreparationLogState extends State<HomePreparationLog> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            p.patientName,
+            patientLabel(p.patientName),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),

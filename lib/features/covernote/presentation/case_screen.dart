@@ -266,8 +266,9 @@ class _CaseScreenState extends State<CaseScreen> {
       MaterialPageRoute(
         builder: (_) => CaptureScreen(
           store: _store,
-          source: CaptureSource.camera,
+          source: CaptureSource.files,
           replaceCaseId: widget.caseId,
+          openPicker: false,
         ),
       ),
     );
@@ -378,7 +379,15 @@ class _CaseScreenState extends State<CaseScreen> {
   Future<void> _goStep(int i) async {
     if (i >= 2 && !(_facts?.readyForEvidence ?? false)) return;
     if (_dirty || _inFlight) await _flushNow();
-    if (mounted) setState(() => _step = i);
+    if (mounted) {
+      setState(() {
+        _step = i;
+        if (i != 0) {
+          _focusPage = null;
+          _focusQuote = null;
+        }
+      });
+    }
   }
 
   Future<void> _askComplete() async {
@@ -578,7 +587,10 @@ class _CaseScreenState extends State<CaseScreen> {
         : const SizedBox.shrink();
     final facts = _facts;
     if (facts == null || _needsAnalysis(d)) {
-      return ListView(children: [demoBanner, _processing(l, d)]);
+      return ListView(
+        primary: false,
+        children: [demoBanner, _processing(l, d)],
+      );
     }
     final child = switch (_step) {
       1 => ReviewStep(

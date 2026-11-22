@@ -4,6 +4,12 @@ import 'package:pdf/widgets.dart' as pw;
 import '../domain/patient_log_report.dart';
 import '../domain/preparation.dart';
 
+const _navy = PdfColor.fromInt(0xFF142D4E);
+const _teal = PdfColor.fromInt(0xFF167D8D);
+const _mint = PdfColor.fromInt(0xFFD8F2EC);
+const _grey = PdfColor.fromInt(0xFF5B6675);
+const _line = PdfColor.fromInt(0xFFC9D2DC);
+
 Future<Uint8List> buildPatientLogPdf(PatientLogReport report) async {
   final regular = pw.Font.ttf(
     await rootBundle.load('assets/fonts/NotoSans-Regular.ttf'),
@@ -12,159 +18,230 @@ Future<Uint8List> buildPatientLogPdf(PatientLogReport report) async {
     await rootBundle.load('assets/fonts/NotoSans-Bold.ttf'),
   );
   final doc = pw.Document(
-    title: 'CoverNote - 30-Day Patient Log Summary',
+    title: report.visitTitle ?? 'CoverNote - 30-day patient log',
+    author: 'Prepared by the patient with CoverNote',
+    creator: 'CoverNote',
     theme: pw.ThemeData.withFont(base: regular, bold: bold),
   );
   addPatientLogPages(doc, report);
   return doc.save();
 }
 
-/// The reviewed form is a patient log, separate from the coverage request brief.
+/// Clinician summary. Every number comes from [r]; missing stays unknown.
 void addPatientLogPages(pw.Document doc, PatientLogReport r) {
   pw.Widget section(String text) => pw.Padding(
-    padding: const pw.EdgeInsets.only(top: 15, bottom: 7),
+    padding: const pw.EdgeInsets.only(top: 12, bottom: 4),
     child: pw.Text(
       text,
-      style: pw.TextStyle(fontSize: 11, fontWeight: pw.FontWeight.bold),
+      style: pw.TextStyle(
+        fontWeight: pw.FontWeight.bold,
+        fontSize: 11,
+        color: _navy,
+      ),
     ),
   );
   pw.Widget line(String label, String value) => pw.Padding(
-    padding: const pw.EdgeInsets.only(bottom: 4),
+    padding: const pw.EdgeInsets.only(bottom: 3),
     child: pw.RichText(
       text: pw.TextSpan(
         children: [
           pw.TextSpan(
-            text: '$label: ',
-            style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            text: '$label  ',
+            style: pw.TextStyle(
+              fontWeight: pw.FontWeight.bold,
+              fontSize: 10,
+              color: _navy,
+            ),
           ),
-          pw.TextSpan(text: value),
+          pw.TextSpan(text: value, style: const pw.TextStyle(fontSize: 10)),
         ],
       ),
     ),
   );
-  pw.Widget table(
-    List<String> headers,
-    List<List<String>> rows,
-    List<double> widths,
-  ) => pw.TableHelper.fromTextArray(
-    headers: headers,
-    data: rows,
-    columnWidths: {
-      for (var i = 0; i < widths.length; i++) i: pw.FlexColumnWidth(widths[i]),
-    },
-    headerStyle: pw.TextStyle(fontSize: 9, fontWeight: pw.FontWeight.bold),
-    headerDecoration: const pw.BoxDecoration(
-      color: PdfColor.fromInt(0xfff0f2f4),
-    ),
-    cellStyle: const pw.TextStyle(fontSize: 9),
-    cellPadding: const pw.EdgeInsets.all(7),
-    cellAlignment: pw.Alignment.topLeft,
-    border: pw.TableBorder.all(color: PdfColors.grey400, width: .5),
-  );
+  pw.Widget table(List<String> headers, List<List<String>> rows) =>
+      pw.TableHelper.fromTextArray(
+        headers: headers,
+        data: rows,
+        headerStyle: pw.TextStyle(
+          fontWeight: pw.FontWeight.bold,
+          fontSize: 9,
+          color: _navy,
+        ),
+        headerDecoration: const pw.BoxDecoration(color: _mint),
+        cellStyle: const pw.TextStyle(fontSize: 9),
+        cellPadding: const pw.EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+        cellAlignment: pw.Alignment.topLeft,
+        border: const pw.TableBorder(
+          horizontalInside: pw.BorderSide(color: _line, width: 0.4),
+          top: pw.BorderSide(color: _line, width: 0.4),
+          bottom: pw.BorderSide(color: _line, width: 0.4),
+        ),
+      );
   final incidents = r.incidents;
+  final concern = r.concern?.trim() ?? '';
+  final proposed = r.proposed?.trim() ?? '';
+  final plan = r.plan?.trim() ?? '';
+  final needed = r.stillNeeded.where((s) => s.trim().isNotEmpty).toList();
   doc.addPage(
     pw.MultiPage(
       pageFormat: PdfPageFormat.letter,
-      margin: const pw.EdgeInsets.fromLTRB(38, 36, 38, 36),
-      theme: doc.theme!.copyWith(
-        defaultTextStyle: doc.theme!.defaultTextStyle.copyWith(
-          fontSize: 9.5,
-          lineSpacing: 1.5,
+      margin: const pw.EdgeInsets.fromLTRB(40, 36, 40, 40),
+      maxPages: 6,
+      header: (c) => pw.Container(
+        margin: const pw.EdgeInsets.only(bottom: 8),
+        padding: const pw.EdgeInsets.only(bottom: 4),
+        decoration: const pw.BoxDecoration(
+          border: pw.Border(bottom: pw.BorderSide(color: _navy, width: 1.2)),
+        ),
+        child: pw.Row(
+          crossAxisAlignment: pw.CrossAxisAlignment.end,
+          children: [
+            pw.Expanded(
+              child: pw.Text(
+                r.visitTitle ?? '30-day patient log',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 14,
+                  color: _navy,
+                ),
+              ),
+            ),
+            pw.Text(
+              'CoverNote',
+              style: pw.TextStyle(
+                fontWeight: pw.FontWeight.bold,
+                fontSize: 10,
+                color: _teal,
+              ),
+            ),
+          ],
         ),
       ),
-      maxPages: 10,
-      footer: (c) => pw.Padding(
-        padding: const pw.EdgeInsets.only(top: 10),
-        child: pw.Text(
-          '${r.isSample ? 'SAMPLE - fictional data | ' : ''}CoverNote patient log | ${c.pageNumber}',
-          style: const pw.TextStyle(fontSize: 8, color: PdfColors.grey700),
+      footer: (c) => pw.Container(
+        margin: const pw.EdgeInsets.only(top: 8),
+        padding: const pw.EdgeInsets.only(top: 4),
+        decoration: const pw.BoxDecoration(
+          border: pw.Border(top: pw.BorderSide(color: _line, width: 0.6)),
+        ),
+        child: pw.Row(
+          children: [
+            pw.Expanded(
+              child: pw.Text(
+                r.isSample
+                    ? 'Sample — fictional data. Clinician review required.'
+                    : 'Patient-reported log. Clinician review required.',
+                style: const pw.TextStyle(fontSize: 8, color: _grey),
+              ),
+            ),
+            pw.Text(
+              '${c.pageNumber} / ${c.pagesCount}',
+              style: const pw.TextStyle(fontSize: 8, color: _grey),
+            ),
+          ],
         ),
       ),
       build: (_) => [
         if (r.isSample)
-          pw.Text(
-            '*** [ SAMPLE REPORT ] ***',
-            style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 11),
+          pw.Padding(
+            padding: const pw.EdgeInsets.only(bottom: 6),
+            child: pw.Text(
+              'Sample — fictional patient. Not a real record.',
+              style: pw.TextStyle(
+                fontWeight: pw.FontWeight.bold,
+                fontSize: 10,
+                color: _teal,
+              ),
+            ),
           ),
-        pw.SizedBox(height: 5),
-        pw.Text(
-          'CoverNote - 30-DAY PATIENT LOG SUMMARY',
-          style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
-        ),
-        section('PATIENT INFORMATION (Self-Reported Data)'),
-        line('Patient Name', r.patientName),
-        line('DOB', r.dob ?? 'Not recorded'),
+        line('Patient', r.patientName),
+        if ((r.dob ?? '').isNotEmpty) line('Date of birth', r.dob!),
         line(
-          'Monitoring Period',
-          '${dayKey(r.range.from)} - ${dayKey(r.range.to)} (30 Days)',
+          'Period',
+          '${dayKey(r.range.from)} – ${dayKey(r.range.to)} (30 days)',
         ),
         line(
-          'Current Controller (Logged)',
+          'Controller logged',
           (r.controller?.trim().isNotEmpty ?? false)
-              ? r.controller!
+              ? r.controller!.trim()
               : 'Not recorded',
         ),
-        section('1. LOGGED ASTHMA METRICS (30-Day Totals)'),
+        if (plan.isNotEmpty) line('Plan', plan),
+        if (concern.isNotEmpty || proposed.isNotEmpty) ...[
+          section('Why this visit'),
+          if (concern.isNotEmpty) line('Patient concern', concern),
+          if (proposed.isNotEmpty) line('Asked about', proposed),
+        ],
+        section('Logged summary'),
         table(
-          ['Metric', 'Patient Logged Value'],
+          ['Item', 'From the patient’s log'],
           [
-            ['ACT Score (Self-Assessed)', r.act],
-            ['Daytime Symptom Frequency', r.frequency],
-            ['Nighttime Awakenings', r.night],
+            ['Symptom check (ACT), if recorded', r.act],
+            ['Symptom days', r.frequency],
+            ['Night waking', r.night],
             [
-              'Rescue Inhaler (SABA) Usage',
-              '${r.useText(r.rescue)}${r.sabaConfirmed ? '' : '\nAs-needed use; SABA type not confirmed'}',
+              r.sabaConfirmed ? 'Rescue inhaler (SABA)' : 'As-needed medicine',
+              r.useText(r.rescue),
             ],
-            ['Controller Medication Adherence', r.adherence],
+            ['Scheduled doses', r.adherence],
           ],
-          [1.05, 1.25],
         ),
-        pw.SizedBox(height: 5),
-        pw.Text(
-          'Records on ${r.observedDays.length} of 30 days. Missing entries are unknown, not symptom-free days or missed doses.',
-          style: const pw.TextStyle(fontSize: 8.5),
+        pw.Padding(
+          padding: const pw.EdgeInsets.only(top: 4),
+          child: pw.Text(
+            'Logged on ${r.observedDays.length} of 30 days. Days with no entry are unknown, not symptom-free days or missed doses.',
+            style: const pw.TextStyle(fontSize: 8, color: _grey),
+          ),
         ),
-        section('2. ENVIRONMENTAL EXPOSURE (Location-Matched)'),
+        section('Location-matched context'),
         line(
-          'Days with AQI > 100',
+          'Days with AQI above 100',
           r.aqi.isEmpty
               ? 'Not recorded'
-              : '${r.aqi.values.where((v) => v > 100).length} days (${r.aqi.length} days with data)',
+              : '${r.aqi.values.where((v) => v > 100).length} of ${r.aqi.length} days with an AQI reading',
         ),
         line(
-          'Days with High / Very High Pollen',
+          'Days with high or very high pollen',
           r.pollen.isEmpty
               ? 'Not recorded'
-              : '${r.pollen.values.where((v) => ['High', 'Very High'].contains(v)).length} days (${r.pollen.length} days with data)',
+              : '${r.pollen.values.where((v) => v == "High" || v == "Very High").length} of ${r.pollen.length} days with a pollen reading',
         ),
         line(
-          '${r.sabaConfirmed ? 'SABA' : 'As-needed'} Usage on High AQI or High Pollen Days',
+          '${r.sabaConfirmed ? 'Rescue' : 'As-needed'} use on those days',
           r.exposureUses,
         ),
-        section('3. RECENT LOGGED INCIDENTS (Past 14 Days)'),
-        if (incidents.isEmpty)
-          pw.Text('No incidents recorded in this period.')
-        else
-          table(
-            [
-              'Date',
-              r.sabaConfirmed ? 'SABA Usage' : 'As-needed Usage',
-              'AQI',
-              'Pollen Level',
-              'Patient Logged Symptoms',
-            ],
-            incidents,
-            [.95, 1.3, .6, .8, 1.45],
-          ),
-        pw.SizedBox(height: 12),
         pw.Text(
-          'Disclaimer: This document contains raw, patient-entered observational data and location-matched environmental statistics. It does not constitute a medical diagnosis or treatment recommendation.',
-          style: const pw.TextStyle(fontSize: 8.5),
+          'Regional context only. It is not a personal exposure measurement and does not show a cause. Forecasts are not counted.',
+          style: const pw.TextStyle(fontSize: 8, color: _grey),
         ),
-        pw.SizedBox(height: 4),
+        section('Recent log (14 days)'),
+        if (incidents.isEmpty)
+          pw.Text(
+            'No symptoms or as-needed use recorded in these 14 days.',
+            style: const pw.TextStyle(fontSize: 10),
+          )
+        else
+          table([
+            'Date',
+            r.sabaConfirmed ? 'Rescue use' : 'As-needed use',
+            'AQI',
+            'Pollen',
+            'Symptoms logged',
+          ], incidents),
+        if (needed.isNotEmpty) ...[
+          section('Still to confirm with the care team'),
+          for (final item in needed.take(6))
+            pw.Padding(
+              padding: const pw.EdgeInsets.only(bottom: 2),
+              child: pw.Text(
+                '• $item',
+                style: const pw.TextStyle(fontSize: 10),
+              ),
+            ),
+        ],
+        pw.SizedBox(height: 10),
         pw.Text(
-          'Environmental values are regional context, not personal exposure or proof of cause. The 30-day window is a reporting period, not an insurance requirement.',
-          style: const pw.TextStyle(fontSize: 8.5),
+          'This summary does not diagnose, recommend treatment, or confirm that a request was submitted.',
+          style: const pw.TextStyle(fontSize: 8, color: _grey),
         ),
       ],
     ),

@@ -24,6 +24,7 @@ void main() {
     final ctx = tester.element(find.byType(Scaffold).first);
     expect(find.text(s10(ctx, 'start')), findsOneWidget);
     expect(find.text(s10(ctx, 'denied')), findsOneWidget);
+    await tester.scrollUntilVisible(find.text(l.cnTryDemo), 200);
     expect(find.text(l.cnTryDemo), findsOneWidget);
     expect(find.text(l.cnTabCases), findsOneWidget);
     expect(find.text(l.cnTabRecords), findsOneWidget);

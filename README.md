@@ -1,45 +1,52 @@
-# Howse Asthma
+# CoverNote
 
-Flutter app for asthma patients: predicts attack risk from local weather and air-quality data and sends early warnings, while logging inhaler and medication use as evidence for insurance step-therapy approval. Multilingual (EN/ES/FR/KO/JA/ZH) to lower barriers for underserved, non-native-English patients and families. Android, iOS, and Supabase backend.
+**Understand insurance letters. Keep daily health records. Prepare for the doctor’s visit.**
 
-## Tech stack
+[See the app and demos](https://covernote-cac.vercel.app/) · [Download the Android demo APK](https://github.com/Matthew-JuHyuk/howse-asthma/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk)
 
-- [Flutter](https://flutter.dev/) (stable channel) — Android, iOS, and Windows (for early PC-based development)
-- [Supabase](https://supabase.com/) — authentication, database, and Edge Functions
-- `flutter_localizations` + ARB files for multilingual support (English, Spanish, French, Korean, Japanese, Chinese)
+CoverNote is an Android student project for the Congressional App Challenge by **Ju-hyuk Won and Carter Monllor**. It helps families organize information for their care team, especially when English is not their first language.
 
-## Getting started
+## Why this repository is called `howse-asthma`
 
-```powershell
-git clone https://github.com/Matthew-JuHyuk/howse-asthma.git
-cd howse-asthma
-flutter pub get
-Copy-Item .env.example .env   # then fill in your Supabase project URL/anon key
-flutter run -d windows        # or connect an Android device and run `flutter run`
+The project began as **Howse Asthma**, focused on asthma tracking and environmental information. During development, it pivoted toward helping families understand insurance letters and prepare supporting health records. The final app name is **CoverNote**. The repository name, Dart package `howse_asthma`, and existing Android identifiers remain for continuity; they refer to the same project.
+
+## What the app does
+
+- **Understand a letter:** photograph or upload an insurance document, review extracted requests and dates against the original, and see what to gather.
+- **Keep daily records:** speak or type symptoms and medicine use, review before saving, or confirm a registered medicine with a quick tap.
+- **Add local context:** associate available environmental information with the date of a record, distinguishing observations, forecasts, and missing data.
+- **Prepare an English summary:** organize records for the care team and identify missing supporting documents before a request or after a denial.
+
+The demonstration follows fictional Diego and his mother María, who is more comfortable in Spanish. The website includes actual app recordings using synthetic demo data.
+
+## Background and design
+
+Ju-hyuk’s exploratory AlphaFold and protein-binding research prompted a practical question: how can a family explain that treatment does not seem to be helping? Computational research inspired the project; it does not establish an individual’s medication response. A physician at Dr. Chung’s Medical Office provided feedback on the report’s content and organization. This was design feedback, not clinical certification.
+
+The team designed and tested the user journey, simplified navigation, reviewed translations, and refined the reporting format. AI assists with letter extraction, note organization, and translation; users review results. CoverNote does not diagnose, select treatment, or guarantee insurance approval.
+
+## Try the final demo
+
+[GitHub Release download](https://github.com/Matthew-JuHyuk/howse-asthma/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk) · [Website download mirror](https://covernote-cac.vercel.app/downloads/covernote-android.apk)
+
+The [Android APK](https://covernote-cac.vercel.app/downloads/covernote-android.apk) is the same build offered on the public website: **1.0.18 (18)**, 74,228,721 bytes. Android may ask permission to install an app downloaded through your browser. Existing app data may remain when updating an installation.
+
+SHA-256:
+```text
+cef87e582a6b6c37f434cd35921c153adb16ff26ded9c58b6d098aeecd5199c5
 ```
 
-## Documentation
+This is a demonstration build using the existing development signing configuration, not an app-store release. No shared account password is published here. iPhone support is a future goal; the presence of an iOS scaffold does not imply a released iOS app.
 
-Project documentation is under [`docs/`](docs/):
+## Technology and source
 
-- Schema and RLS: [`docs/db-schema.md`](docs/db-schema.md), [`docs/rls-policies.md`](docs/rls-policies.md)
-- Migrations: [`docs/migrations.md`](docs/migrations.md)
-- Auth / OAuth / pairing: [`docs/auth.md`](docs/auth.md)
-- Edge Functions: [`docs/edge-functions.md`](docs/edge-functions.md)
+- Flutter / Dart: application interface and workflows.
+- Kotlin: Android speech integration.
+- Supabase: authentication, PostgreSQL, storage, and TypeScript Edge Functions.
+- Server-side AI: document extraction, note organization, and translation.
 
-When you change `supabase/migrations` or `supabase/functions`, update the matching notes under `docs/` in the same change set. See [`docs/README.md`](docs/README.md).
-
-## Backend
-
-- SQL migrations live in `supabase/migrations/` (schema and RLS).
-- Edge Function `calculate-environment-risk` is deployed; environmental data source clients are still being completed.
-- Use `.env` / Edge secrets for API keys — never commit secrets. Template: `scripts/set-edge-secrets.example.ps1`.
-
-## Design references
-
-Patient UI layout references from Subframe are under [`design/subframe/`](design/subframe/).  
-Optional preview mode: set `DESIGN_PREVIEW=true` in `.env`, then `flutter run` to open the patient navigation mock under `lib/features/design_preview/`. Set `DESIGN_PREVIEW=false` for the normal auth entry path.
+See [developer setup](docs/setup.md) for configuring your own backend and building the app, and [source map](docs/README.md) for the main directories. Server credentials must never be bundled into the client.
 
 ## License
 
-Apache License 2.0 — see [LICENSE](LICENSE).
+[Apache License 2.0](LICENSE).

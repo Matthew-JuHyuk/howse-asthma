@@ -57,3 +57,27 @@ android/app/google-services.json
 
 /doc/
 /.cursor/
+
+# Local-only research, presentation assets, reports and tooling caches
+/doc/
+/output/
+/design/
+/tmp/
+/showcase/
+.env*
+!.env.example
+**/.env*
+!**/.env.example
+*.jks
+*.keystore
+**/key.properties
+**/*service-account*.json
+**/*service_account*.json
+**/GoogleService-Info.plist
+**/.vercel/
+**/node_modules/
+.vscode/
+# Public documentation is deliberately allowlisted.
+/docs/*
+!/docs/README.md
+!/docs/setup.md

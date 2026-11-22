@@ -409,6 +409,7 @@ class _PacketStepState extends State<PacketStep> {
     final bytes = stale ? null : _bytes;
 
     return ListView(
+      primary: false,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
       children: [
         if (!draft)

@@ -19,7 +19,8 @@ import android.speech.SpeechRecognizer
 class MainActivity : FlutterActivity() {
     private var speech: SpeechRecognizer? = null
     private var speechReply: MethodChannel.Result? = null
-    private var speechLanguage = "en-US"
+    private var appLanguage = "en-US"
+    private var detectedLanguage: String? = null
     private var speechActivity = false
     private var speechGeneration = 0
     private val speechHandler = Handler(Looper.getMainLooper())
@@ -31,7 +32,8 @@ class MainActivity : FlutterActivity() {
                 "listen" -> {
                     if(speechReply != null) { result.error("busy", "Already recording", null); return@setMethodCallHandler }
                     speechReply = result
-                    speechLanguage = call.argument<String>("language") ?: "en-US"
+                    appLanguage = call.argument<String>("appLanguage")?.takeIf { it.isNotBlank() } ?: "en-US"
+                    detectedLanguage = null
                     if(checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 301)
                     } else startSpeech()
@@ -106,13 +108,14 @@ class MainActivity : FlutterActivity() {
         }
         try { speech?.destroy() } catch(_:Exception) {}
         speech=null
-        if(error!=null)reply?.error(error,"Recognition unavailable; use text or buttons",null) else reply?.success(text ?: "")
+        if(error!=null)reply?.error(error,"Recognition unavailable; use text or buttons",null)
+        else reply?.success(hashMapOf("text" to (text ?: ""), "language" to (detectedLanguage ?: appLanguage)))
     }
     private fun startSpeech() {
       try {
         if(!SpeechRecognizer.isRecognitionAvailable(this)){startSpeechActivity();return}
-        // Availability of an on-device service does not imply that this language
-        // model is installed. Let the user's default service choose its engine.
+        // The default service, with the app language set on the intent. Forcing
+        // a vendor recognizer here follows the phone language instead.
         speech=SpeechRecognizer.createSpeechRecognizer(this)
         val generation=++speechGeneration
         speechHandler.postDelayed(speechTimeout,60000)
@@ -130,18 +133,39 @@ class MainActivity : FlutterActivity() {
                 else finishSpeech(error="recognition_$error")
             }
             override fun onResults(results:Bundle?) {
-                if(generation==speechGeneration && speechReply!=null)
+                if(generation==speechGeneration && speechReply!=null) {
+                    detectedLanguage = languageOf(results)
                     finishSpeech(results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull())
+                }
             }
         })
         speech!!.startListening(speechIntent())
       } catch(_:SecurityException) { finishSpeech(error="permission_denied")
       } catch(_:Exception) { startSpeechActivity() }
     }
+    // Omitting EXTRA_LANGUAGE makes Android use the phone locale. That locked
+    // recognition to Korean. The app language is the model, and language
+    // detection is requested for services that can switch away from it.
     private fun speechIntent() = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE,speechLanguage)
-            putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,1)
+            putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS,true)
+            putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,3)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, appLanguage)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, appLanguage)
+            if (Build.VERSION.SDK_INT >= 34) {
+                putExtra(RecognizerIntent.EXTRA_ENABLE_LANGUAGE_DETECTION, true)
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE_DETECTION_ALLOWED_LANGUAGES, arrayListOf(
+                    appLanguage,"en-US","es-US","es-ES","pt-BR","ko-KR","gu-IN","zh-CN","zh-TW","ht-HT","ar-SA"
+                ))
+            }
+    }
+    private fun languageOf(bundle: Bundle?): String? {
+        if(bundle==null) return null
+        val direct = bundle.getString("android.speech.extra.LANGUAGE")
+            ?: bundle.getString("android.speech.extra.DETECTED_LANGUAGE")
+        if(!direct.isNullOrBlank()) return direct
+        return bundle.getStringArrayList("android.speech.extra.LANGUAGE_DETECTION_RESULTS")
+            ?.firstOrNull { it.isNotBlank() }
     }
     private fun startSpeechActivity() {
         if(speechReply==null)return
@@ -159,7 +183,10 @@ class MainActivity : FlutterActivity() {
         super.onActivityResult(requestCode,resultCode,data)
         if(requestCode==303 && speechActivity) {
             speechActivity=false
-            if(resultCode==RESULT_OK) finishSpeech(data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.firstOrNull())
+            if(resultCode==RESULT_OK) {
+                detectedLanguage = languageOf(data?.extras)
+                finishSpeech(data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.firstOrNull())
+            }
             else finishSpeech(error="cancelled")
         }
     }

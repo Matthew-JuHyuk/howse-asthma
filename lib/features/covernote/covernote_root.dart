@@ -119,6 +119,7 @@ class _CoverNoteShellState extends State<CoverNoteShell>
   }
 
   int _tab = 0;
+  int _viewToken = 0;
   final _casesKey = GlobalKey<CasesTabState>();
   final _homeKey = GlobalKey<HomeTabState>();
   String? _caseId;
@@ -127,6 +128,7 @@ class _CoverNoteShellState extends State<CoverNoteShell>
   void _go(int i) {
     setState(() {
       _tab = i;
+      _viewToken++;
       // Home and the cases tab both leave an open case. One tap shows
       // Home, or the case list, instead of staying on the same case.
       if (i == 0 || i == 1) {
@@ -141,13 +143,17 @@ class _CoverNoteShellState extends State<CoverNoteShell>
   void _openCase(CaseStore store, String id) {
     setState(() {
       _tab = 1;
+      _viewToken++;
       _caseId = id;
       _caseStore = store;
     });
   }
 
   void _closeCase() {
-    setState(() => _caseId = null);
+    setState(() {
+      _viewToken++;
+      _caseId = null;
+    });
     _casesKey.currentState?.refresh();
   }
 
@@ -162,6 +168,7 @@ class _CoverNoteShellState extends State<CoverNoteShell>
       goRecords: () => _go(2),
       goSettings: () => _go(3),
       openCaseId: _caseId,
+      viewToken: _viewToken,
       child: PopScope(
         canPop: _tab == 0 && !caseOpen,
         onPopInvokedWithResult: (didPop, _) {

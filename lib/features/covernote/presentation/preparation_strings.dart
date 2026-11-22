@@ -11,6 +11,120 @@ String s10(BuildContext c, String key) {
 }
 
 const _words = <String, List<String>>{
+  'envUnavailable': [
+    'No interpretable reading available',
+    '해석할 수 있는 관측값이 없어요',
+    'No hay una lectura interpretable',
+  ],
+  'envAirGood': [
+    'Air quality was good',
+    '공기질이 좋았어요',
+    'La calidad del aire era buena',
+  ],
+  'envAirModerate': [
+    'Air quality was moderate',
+    '공기질이 보통이었어요',
+    'La calidad del aire era moderada',
+  ],
+  'envAirSensitive': [
+    'Air quality was unhealthy for sensitive groups',
+    '민감한 사람에게 좋지 않은 공기였어요',
+    'El aire era insalubre para grupos sensibles',
+  ],
+  'envAirUnhealthy': [
+    'Air quality was unhealthy',
+    '공기질이 나빴어요',
+    'La calidad del aire era insalubre',
+  ],
+  'envAirVeryUnhealthy': [
+    'Air quality was very unhealthy',
+    '공기질이 매우 나빴어요',
+    'La calidad del aire era muy insalubre',
+  ],
+  'envAirHazardous': [
+    'Air quality was hazardous',
+    '공기질이 위험 수준이었어요',
+    'La calidad del aire era peligrosa',
+  ],
+  'envDry': [
+    'Outdoor air was relatively dry',
+    '바깥 공기가 비교적 건조했어요',
+    'El aire exterior era relativamente seco',
+  ],
+  'envHumidityMid': [
+    'Outdoor humidity was in the middle range',
+    '바깥 습도가 중간 범위였어요',
+    'La humedad exterior estaba en el rango medio',
+  ],
+  'envHumid': [
+    'Outdoor air was humid',
+    '바깥 공기가 습했어요',
+    'El aire exterior era húmedo',
+  ],
+  'envPollenNone': [
+    'Pollen level: none',
+    '꽃가루 지수: 없음',
+    'Nivel de polen: ninguno',
+  ],
+  'envPollenVeryLow': [
+    'Pollen level: very low',
+    '꽃가루 지수: 매우 낮음',
+    'Nivel de polen: muy bajo',
+  ],
+  'envPollenLow': ['Pollen level: low', '꽃가루 지수: 낮음', 'Nivel de polen: bajo'],
+  'envPollenModerate': [
+    'Pollen level: moderate',
+    '꽃가루 지수: 보통',
+    'Nivel de polen: moderado',
+  ],
+  'envPollenHigh': ['Pollen level: high', '꽃가루 지수: 높음', 'Nivel de polen: alto'],
+  'envPollenVeryHigh': [
+    'Pollen level: very high',
+    '꽃가루 지수: 매우 높음',
+    'Nivel de polen: muy alto',
+  ],
+  'envFloodWarning': [
+    'A regional flash-flood warning was reported',
+    '지역 돌발홍수 경보가 있었어요',
+    'Se informó una alerta regional de inundación repentina',
+  ],
+  'envNoFloodWarning': [
+    'No regional flash-flood warning was reported',
+    '조회된 지역 돌발홍수 경보가 없었어요',
+    'No se informó una alerta regional de inundación repentina',
+  ],
+  'envForecast': ['Forecast', '예보', 'Pronóstico'],
+  'envSample': ['Demo example', '데모 예시', 'Ejemplo de demostración'],
+  'envReading': ['Saved reading', '저장된 수치', 'Lectura guardada'],
+  'envSource': ['Source', '출처', 'Fuente'],
+  'envArea': ['Area', '지역', 'Zona'],
+  'envTime': ['Observation time', '관측 시각', 'Hora de observación'],
+  'envFetched': ['Retrieved at', '조회 시각', 'Hora de consulta'],
+  'envContext': [
+    'Regional information, not a measurement of personal exposure. Missing readings stay unknown.',
+    '지역 정보이며 개인의 실제 노출량을 측정한 값은 아니에요. 없는 자료는 추정하지 않아요.',
+    'Información regional, no una medición de exposición personal. Los datos faltantes quedan desconocidos.',
+  ],
+  'envHumidityBands': [
+    'Humidity wording: below 40% relatively dry, 40–69% middle range, 70% or more humid. Descriptive ranges, not medical risk levels or evidence of flooding or indoor mold.',
+    '습도 표현: 40% 미만은 비교적 건조, 40~69%는 중간, 70% 이상은 습함. 설명용 구간이며 의료 위험도나 침수·실내 곰팡이를 뜻하지 않아요.',
+    'Humedad: menos del 40% relativamente seco, 40–69% rango medio, 70% o más húmedo. Rangos descriptivos, no riesgo médico ni evidencia de inundación o moho interior.',
+  ],
+  'puffUnit': ['puffs', '회 흡입', 'inhalaciones'],
+  'notUsed': ['Not used', '사용하지 않음', 'No utilizado'],
+  'recordSaved': ['Record saved', '기록을 남겼어요', 'Registro guardado'],
+  'humidity': ['Humidity', '습도', 'Humedad'],
+  'chooseMedicine': [
+    'Which medicine did you use?',
+    '사용한 약을 선택해 주세요',
+    '¿Qué medicamento usó?',
+  ],
+  'registerMedicine': ['Add my medicine', '내 약 등록', 'Añadir medicamento'],
+  'registerMedicineHint': [
+    'Add your medicine to record it with one tap.',
+    '약을 등록하면 버튼 한 번으로 기록할 수 있어요.',
+    'Añada su medicamento para registrarlo con un toque.',
+  ],
   'patientLogPdf': [
     '30-day patient log PDF',
     '최근 30일 기록 PDF',
@@ -48,9 +162,9 @@ const _words = <String, List<String>>{
     'Registrar el uso de hoy',
   ],
   'quickUseHint': [
-    'Tap after using your medicine. You can undo a mistaken tap. Names and doses are not assumed.',
-    '약을 사용한 뒤 눌러 주세요. 잘못 누르면 취소할 수 있어요. 약 이름과 용량은 임의로 채우지 않아요.',
-    'Pulse después de usar su medicamento. Puede deshacerlo. No se suponen nombres ni dosis.',
+    'Check the medicine and amount shown, then tap after use. Use voice or typing if you used a different amount.',
+    '표시된 약과 양을 확인하고 사용 후 눌러 주세요. 다른 양을 사용했다면 말하거나 직접 입력해 주세요.',
+    'Revise el medicamento y la cantidad antes de registrar su uso. Si usó otra cantidad, hable o escriba.',
   ],
   'scheduledReport': [
     'I used my scheduled medicine. Name and dose not specified.',
@@ -113,6 +227,11 @@ const _words = <String, List<String>>{
     "Ejemplo: Hoy me faltó el aire al caminar.",
   ],
   "startSpeaking": ["Start speaking", "말하기 시작", "Empezar a hablar"],
+  "voiceAnyLanguage": [
+    "Listens in the language selected in the app. A supported phone may detect another language.",
+    "앱에서 고른 언어로 듣습니다. 기기가 지원하면 다른 언어도 알아듣습니다.",
+    "Escucha el idioma elegido en la app. Si el teléfono lo permite, detecta otro.",
+  ],
   "preferTyping": ["I prefer to type", "직접 입력할게요", "Prefiero escribir"],
   "yourWords": ["Your record", "내가 남길 내용", "Su registro"],
   "recordHint": [
@@ -302,11 +421,15 @@ const _words = <String, List<String>>{
     'Aire brumoso cerca del tráfico',
   ],
   'humid_after_rain': [
-    'Humid days after rain',
-    '비가 온 뒤 이어진 습한 날',
-    'Días húmedos después de la lluvia',
+    'Humid conditions after rain',
+    '비가 온 뒤 습한 환경',
+    'Condiciones húmedas después de la lluvia',
   ],
-  'pollen': ['Several days with pollen', '꽃가루가 이어진 날', 'Varios días con polen'],
+  'pollen': [
+    'Pollen noted that day',
+    '이날 꽃가루가 있었다는 기록',
+    'Polen registrado ese día',
+  ],
   'calm': ['Mild outdoor conditions', '비교적 편안한 날씨', 'Condiciones suaves'],
   'details': ['See details', '자세히 보기', 'Ver detalles'],
   'tapInstead': ['Or tap to record', '버튼으로 기록하기', 'O registra con un botón'],
@@ -361,6 +484,31 @@ const _words = <String, List<String>>{
     'Empezar con una carta de denegación',
   ],
   'intro': ['How are you today?', '오늘은 어떠셨나요?', '¿Cómo se siente hoy?'],
+  'visitAsk': [
+    'What should we prepare for your clinician?',
+    '진료에서 무엇을 준비할까요?',
+    '¿Qué preparamos para su médico?',
+  ],
+  'visitBody': [
+    'These are already selected. Turn one off if it does not fit, then continue.',
+    '기본으로 선택해 두었습니다. 해당하지 않으면 끄고, 맞으면 바로 다음으로 가세요.',
+    'Ya están seleccionados. Desactive uno si no aplica y continúe.',
+  ],
+  'optBetterMed': [
+    'I want my clinician to consider a medicine that controls symptoms better.',
+    '증상이 더 잘 조절되는 약을 의료진이 검토해 주었으면 합니다.',
+    'Quiero que mi médico valore un medicamento que controle mejor los síntomas.',
+  ],
+  'optLog': [
+    'Include the symptom and medicine log already in this account.',
+    '이 계정에 있는 증상과 약 사용 기록을 포함합니다.',
+    'Incluir el registro de síntomas y medicamentos de esta cuenta.',
+  ],
+  'optReview': [
+    'I will check the summary before it is shared.',
+    '공유하기 전에 요약을 확인하겠습니다.',
+    'Revisaré el resumen antes de compartirlo.',
+  ],
   'overview': ['Overview', '개요', 'Resumen'],
   'evidence': ['Your documents', '내 자료', 'Sus documentos'],
   'timeline': ['Daily records', '하루 기록', 'Registro diario'],

@@ -11,14 +11,19 @@ import '../data/preparation_repository.dart';
 import 'preparation_screen.dart';
 
 /// Sign in if needed, capture or pick pages, upload, then open the new case.
-Future<void> startNewCase(BuildContext context, CaptureSource source) async {
+Future<void> startNewCase(
+  BuildContext context,
+  CaptureSource source, {
+  bool openPicker = true,
+}) async {
   if (!await requireSignIn(context)) return;
   if (!context.mounted) return;
   final store = CoverNoteServices.of(context).live;
   final caseId = await Navigator.push<String>(
     context,
     MaterialPageRoute(
-      builder: (_) => CaptureScreen(store: store, source: source),
+      builder: (_) =>
+          CaptureScreen(store: store, source: source, openPicker: openPicker),
     ),
   );
   if (caseId == null || !context.mounted) return;

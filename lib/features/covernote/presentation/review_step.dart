@@ -43,6 +43,7 @@ class ReviewStep extends StatelessWidget {
       color: CnColors.ink,
     );
     return ListView(
+      primary: false,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 88),
       children: [
         _ReadCard(

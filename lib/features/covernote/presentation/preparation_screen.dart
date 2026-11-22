@@ -1,24 +1,29 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/supabase/supabase_service.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../assessments/data/act_repository.dart';
 import '../../records/data/records_revision.dart';
 import '../../records/data/symptom_repository.dart';
 import '../auth/auth_screen.dart';
 import '../data/case_store.dart';
 import '../data/medication_use_repository.dart';
 import '../data/preparation_repository.dart';
+import '../domain/patient_label.dart';
 import '../domain/preparation.dart';
 import '../domain/record_snapshot.dart';
 import '../domain/s9_models.dart';
 import '../domain/upload_guard.dart';
 import '../pdf/preparation_pdf.dart';
 import '../ui/app_chrome.dart';
+import '../ui/start_at_top.dart';
 import '../ui/brand.dart';
 import 'preparation_strings.dart';
+import 'report_preview.dart';
 import 'source_review_screen.dart';
 import 'guided_record_screen.dart';
 import 'record_navigation_bar.dart';
@@ -56,54 +61,28 @@ class NewPreparationScreen extends StatefulWidget {
 }
 
 class _NewPreparationScreenState extends State<NewPreparationScreen> {
-  String? _patientKey;
-  Map<String, String> _profiles = {};
-  bool _newSubject = false, _profilesLoaded = false;
-  final _name = TextEditingController(),
-      _concern = TextEditingController(),
-      _current = TextEditingController(),
-      _proposed = TextEditingController(),
-      _plan = TextEditingController();
-  bool _checked = false, _busy = false;
+  static const _defaults = <String, String>{
+    'optBetterMed':
+        'I want my clinician to consider a medicine that controls symptoms better.',
+    'optLog': 'Include the symptom and medicine log already in this account.',
+    'optReview': 'I will check the summary before it is shared.',
+  };
+  final _selected = {'optBetterMed', 'optLog', 'optReview'};
+  bool _busy = false;
   String? _error;
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_profilesLoaded) {
-      _profilesLoaded = true;
-      PreparationRepository()
-          .careProfiles()
-          .then((v) {
-            if (mounted) setState(() => _profiles = v);
-          })
-          .catchError((Object _) {});
-    }
-    if (_name.text.isEmpty) {
-      _name.text = SessionScope.of(context).profile?.fullName ?? '';
-    }
-  }
-
-  @override
-  void dispose() {
-    for (final c in [_name, _concern, _current, _proposed, _plan]) {
-      c.dispose();
-    }
-    super.dispose();
-  }
 
   Future<void> _create() async {
-    if (_name.text.trim().isEmpty || _concern.text.trim().isEmpty) return;
+    if (_selected.isEmpty) return;
     setState(() => _busy = true);
     try {
       final repo = PreparationRepository();
+      final profileName = SessionScope.of(context).profile?.fullName;
       final p = await repo.create(
-        patientKey: _patientKey,
-        patientName: _name.text.trim(),
-        concern: _concern.text.trim(),
-        currentMedication: _current.text.trim(),
-        proposedMedication: _proposed.text.trim(),
-        plan: _plan.text.trim(),
-        policyConfirmed: _checked,
+        patientName: patientLabel(profileName, fallback: 'Diego'),
+        concern: [
+          for (final key in _defaults.keys)
+            if (_selected.contains(key)) _defaults[key]!,
+        ].join(' '),
       );
       if (mounted) {
         await Navigator.pushReplacement<void, void>(
@@ -127,88 +106,57 @@ class _NewPreparationScreenState extends State<NewPreparationScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: CoverNoteAppBar(title: Text(s10(context, 'start'))),
-    body: ListView(
-      padding: EdgeInsets.fromLTRB(
-        20,
-        16,
-        20,
-        24 + MediaQuery.paddingOf(context).bottom,
-      ),
-      children: [
-        if (SessionScope.of(context).user?.id case final owner?)
-          DropdownButtonFormField<String>(
-            initialValue: _patientKey ?? owner,
-            isExpanded: true,
-            items: [
-              DropdownMenuItem(
-                value: owner,
-                child: Text(
-                  SessionScope.of(context).profile?.fullName ??
-                      s10(context, 'patient'),
-                ),
-              ),
-              for (final entry in _profiles.entries)
-                if (entry.key != owner)
-                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
-            ],
-            onChanged: (v) => setState(() {
-              _patientKey = v;
-              _newSubject = false;
-              _name.text = v == owner
-                  ? SessionScope.of(context).profile?.fullName ?? ''
-                  : _profiles[v] ?? '';
-            }),
-          ),
-        TextButton(
-          onPressed: () {
-            final owner = SessionScope.of(context).user?.id;
-            if (owner == null) return;
-            setState(() {
-              _patientKey = '$owner/${preparationId()}';
-              _profiles[_patientKey!] = s10(context, 'newProfile');
-              _newSubject = true;
-              _name.clear();
-            });
-          },
-          child: Text(s10(context, 'newProfile')),
+    body: StartAtTop(
+      builder: (scroll) => ListView(
+        controller: scroll,
+        primary: false,
+        padding: EdgeInsets.fromLTRB(
+          20,
+          16,
+          20,
+          24 + MediaQuery.paddingOf(context).bottom,
         ),
-        Text(
-          s10(context, 'intro'),
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
-        for (final pair in [
-          ('patient', _name),
-          ('concern', _concern),
-          ('current', _current),
-          ('proposed', _proposed),
-          ('plan', _plan),
-        ])
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: TextField(
-              controller: pair.$2,
-              readOnly:
-                  pair.$1 == 'patient' && !_newSubject && _name.text.isNotEmpty,
-              maxLength: pair.$1 == 'concern' ? 500 : 160,
-              decoration: InputDecoration(
-                labelText: s10(context, pair.$1),
-                border: const OutlineInputBorder(),
-              ),
+        children: [
+          Text(
+            patientLabel(
+              SessionScope.of(context).profile?.fullName,
+              fallback: 'Diego',
             ),
+            style: const TextStyle(color: CnColors.muted),
           ),
-        CheckboxListTile(
-          value: _checked,
-          onChanged: (v) => setState(() => _checked = v ?? false),
-          title: Text(s10(context, 'policy')),
-        ),
-        Text(s10(context, 'review')),
-        if (_error != null)
-          Text(_error!, style: const TextStyle(color: Colors.red)),
-        FilledButton(
-          onPressed: _busy ? null : _create,
-          child: Text(s10(context, 'create')),
-        ),
-      ],
+          const SizedBox(height: 12),
+          Text(
+            s10(context, 'visitAsk'),
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Text(s10(context, 'visitBody')),
+          const SizedBox(height: 12),
+          for (final key in _defaults.keys)
+            CheckboxListTile(
+              contentPadding: EdgeInsets.zero,
+              value: _selected.contains(key),
+              onChanged: _busy
+                  ? null
+                  : (v) => setState(() {
+                      if (v ?? false) {
+                        _selected.add(key);
+                      } else {
+                        _selected.remove(key);
+                      }
+                    }),
+              title: Text(s10(context, key)),
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
+          if (_error != null)
+            Text(_error!, style: const TextStyle(color: Colors.red)),
+          const SizedBox(height: 8),
+          FilledButton(
+            onPressed: _busy || _selected.isEmpty ? null : _create,
+            child: Text(s10(context, 'create')),
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -236,8 +184,12 @@ class _PreparationScreenState extends State<PreparationScreen>
   Preparation? _p;
   List<TreatmentEvent> _events = [];
   String? _error;
-  bool _busy = false, _includeOriginal = false, _pending = false;
+  bool _busy = false, _pending = false;
   int _tab = 0;
+  final _scroll = ScrollController();
+  Uint8List? _pdf;
+  String? _pdfHash;
+  String? _pdfName;
   bool _refreshingSources = false;
   bool _linkOpen = false;
   bool _recordOpen = false;
@@ -287,9 +239,32 @@ class _PreparationScreenState extends State<PreparationScreen>
 
   @override
   void dispose() {
+    _scroll.dispose();
     WidgetsBinding.instance.removeObserver(this);
     RecordsRevision.instance.removeListener(_refreshSources);
     super.dispose();
+  }
+
+  List<TreatmentEvent> _forReport(Preparation p) => [
+    for (final e in _events)
+      if (sameAccount(e.patientKey, repo.uid) || e.patientKey == p.patientKey)
+        e.patientKey == p.patientKey
+            ? e
+            : TreatmentEvent.fromJson({
+                ...e.toJson(),
+                'patient_key': p.patientKey,
+              }),
+  ];
+
+  void _showTop() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scroll.hasClients) _scroll.jumpTo(0);
+    });
+  }
+
+  void _openTab(int i) {
+    setState(() => _tab = i);
+    _showTop();
   }
 
   @override
@@ -308,7 +283,10 @@ class _PreparationScreenState extends State<PreparationScreen>
         p = Preparation(
           id: widget.caseId,
           patientKey: repo.uid,
-          patientName: f?.field('patient_name').value ?? 'Patient',
+          patientName: patientLabel(
+            f?.field('patient_name').value,
+            fallback: 'Patient',
+          ),
           path: ['initial_drug_denial', 'final_appeal_denial'].contains(f?.kind)
               ? PreparationPath.deniedRequest
               : PreparationPath.newRequest,
@@ -471,6 +449,8 @@ class _PreparationScreenState extends State<PreparationScreen>
       setState(() => _pending = !synced);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          persist: false,
+          duration: const Duration(seconds: 4),
           content: Text(s10(context, synced ? 'saved' : 'pending')),
           action: SnackBarAction(
             label: s10(context, 'undo'),
@@ -532,8 +512,8 @@ class _PreparationScreenState extends State<PreparationScreen>
         MaterialPageRoute(
           builder: (_) => GuidedRecordScreen(
             repository: repo,
-            profiles: {p.patientKey: p.patientName},
-            initialPatient: p.patientKey,
+            profiles: {repo.uid: patientLabel(p.patientName)},
+            initialPatient: repo.uid,
             caseId: p.id,
             initiallyTyped: typed,
           ),
@@ -556,7 +536,7 @@ class _PreparationScreenState extends State<PreparationScreen>
         MaterialPageRoute(
           builder: (_) => SourceReviewScreen(
             title: needLabel(context, n),
-            patient: _p!.patientName,
+            patient: patientLabel(_p!.patientName),
             events: candidates,
             linked: n.links,
             suggestAll: ['treatment', 'burden', 'tests'].contains(n.id),
@@ -592,12 +572,12 @@ class _PreparationScreenState extends State<PreparationScreen>
               children: [
                 Text(e.day, style: Theme.of(c).textTheme.titleMedium),
                 const SizedBox(height: 20),
-                SelectableText(e.text),
+                SelectableText(patientText(e.text)),
                 if (e.values['quote'] != null &&
                     e.values['quote'] != e.text) ...[
                   const SizedBox(height: 20),
                   Text(s10(c, 'source')),
-                  SelectableText(e.values['quote'].toString()),
+                  SelectableText(patientText(e.values['quote'].toString())),
                 ],
                 if (e.values['page'] != null)
                   Text('${s10(c, 'document')} · ${e.values['page']}'),
@@ -681,12 +661,16 @@ class _PreparationScreenState extends State<PreparationScreen>
           builder: (c) => ReviewPage(
             title: s10(c, 'confirm'),
             body: ListView(
+              primary: false,
               padding: const EdgeInsets.all(20),
               children: [
-                Text(p.patientName, style: Theme.of(c).textTheme.titleLarge),
+                Text(
+                  patientLabel(p.patientName),
+                  style: Theme.of(c).textTheme.titleLarge,
+                ),
                 const SizedBox(height: 12),
                 Text(
-                  '${s10(c, 'patient')}: ${result['patient_name'] ?? s10(c, 'unknown')}',
+                  '${s10(c, 'patient')}: ${patientText('${result['patient_name'] ?? s10(c, 'unknown')}')}',
                 ),
                 const SizedBox(height: 20),
                 Text(result['summary'] ?? ''),
@@ -821,7 +805,7 @@ class _PreparationScreenState extends State<PreparationScreen>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(p.patientName),
+                  Text(patientLabel(p.patientName)),
                   for (final pair in [
                     ('concern', concern),
                     ('current', current),
@@ -926,39 +910,38 @@ class _PreparationScreenState extends State<PreparationScreen>
         await _save(p.update({'english_fields': fields}));
         p = _p!;
       }
-      final originals = <OriginalAttachment>[];
-      final originalFiles = {for (final d in p.documents) d['path']: d};
-      final linkedIds = p.needs.expand((n) => n.links).toSet();
-      for (final e in _events.where(
-        (e) =>
-            !e.undone &&
-            e.patientKey == p.patientKey &&
-            linkedIds.contains(e.id) &&
-            e.values['object_path'] != null,
-      )) {
-        originalFiles[e.values['object_path']] = {
-          'path': e.values['object_path'],
-          'name': e.values['name'] ?? 'Source document',
-          'mime': e.values['mime'] ?? 'application/pdf',
-        };
-      }
-      if (_includeOriginal && !repo.demo) {
-        for (final d in originalFiles.values) {
-          originals.add(
-            OriginalAttachment(
-              d['name'],
-              d['mime'],
-              await repo.download(d['path']),
-            ),
-          );
+      int? actScore;
+      String? actDay;
+      if (!repo.demo && p.patientKey == repo.uid) {
+        try {
+          final act = await ActRepository().latest();
+          actScore = (act?['total_score'] as num?)?.toInt();
+          final submitted = act?['submitted_at'];
+          if (submitted is String) {
+            final parsed = DateTime.tryParse(submitted);
+            if (parsed != null) actDay = dayKey(parsed.toLocal());
+          }
+        } catch (_) {
+          // A missing score stays "not recorded" on the summary.
         }
       }
+      if (!mounted) return;
+      final accountEvents = _forReport(p);
+      final hash = preparationFingerprint(p, accountEvents, repo.today);
       final bytes = await buildPreparationPdf(
         p,
-        _events,
+        accountEvents,
         repo.today,
-        originals: originals,
+        actScore: actScore,
+        actDay: actDay,
       );
+      if (!mounted) return;
+      setState(() {
+        _pdf = bytes;
+        _pdfHash = hash;
+        _pdfName = 'covernote-summary-r${p.revision}.pdf';
+      });
+      _showTop();
       String? path;
       if (!repo.demo) {
         path = await repo.upload(
@@ -974,17 +957,13 @@ class _PreparationScreenState extends State<PreparationScreen>
             ...p.exports,
             {
               'revision': p.revision,
-              'content_hash': preparationFingerprint(p, _events, repo.today),
+              'content_hash': hash,
               'generated_at': DateTime.now().toUtc().toIso8601String(),
               'path': path,
-              'originals': originals.map((a) => a.name).toList(),
+              'originals': const <String>[],
             },
           ],
         }),
-      );
-      await Printing.sharePdf(
-        bytes: bytes,
-        filename: 'covernote-${p.path.name}-r${p.revision}.pdf',
       );
     });
   }
@@ -1084,7 +1063,7 @@ class _PreparationScreenState extends State<PreparationScreen>
           context: context,
           builder: (c) => AlertDialog(
             content: Text(
-              '${_p!.patientName}\n${_p!.currentMedication}\n\n${s10(c, 'notificationHint')}',
+              '${patientLabel(_p!.patientName)}\n${patientText(_p!.currentMedication)}\n\n${s10(c, 'notificationHint')}',
             ),
             actions: [
               TextButton(
@@ -1127,7 +1106,7 @@ class _PreparationScreenState extends State<PreparationScreen>
     return Scaffold(
       appBar: CoverNoteAppBar(
         title: Text(
-          p?.patientName ?? s10(context, 'start'),
+          p == null ? s10(context, 'start') : patientLabel(p.patientName),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -1173,12 +1152,25 @@ class _PreparationScreenState extends State<PreparationScreen>
               children: [
                 if (p.synthetic)
                   Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(
-                      s10(context, 'demo'),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: CnColors.teal,
+                    padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: CnColors.mint,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Text(
+                          s10(context, 'demo'),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: CnColors.teal,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -1200,15 +1192,17 @@ class _PreparationScreenState extends State<PreparationScreen>
                   ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Row(
                     children: [
                       for (var i = 0; i < 4; i++)
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 8,
+                            horizontal: 4,
+                            vertical: 10,
                           ),
                           child: ChoiceChip(
+                            showCheckmark: false,
                             label: Text(
                               s10(
                                 context,
@@ -1221,7 +1215,7 @@ class _PreparationScreenState extends State<PreparationScreen>
                               ),
                             ),
                             selected: _tab == i,
-                            onSelected: (_) => setState(() => _tab = i),
+                            onSelected: (_) => _openTab(i),
                           ),
                         ),
                     ],
@@ -1229,6 +1223,8 @@ class _PreparationScreenState extends State<PreparationScreen>
                 ),
                 Expanded(
                   child: ListView(
+                    controller: _scroll,
+                    primary: false,
                     padding: EdgeInsets.fromLTRB(
                       20,
                       20,
@@ -1317,8 +1313,7 @@ class _PreparationScreenState extends State<PreparationScreen>
             ),
             const SizedBox(height: 20),
             FilledButton.icon(
-              onPressed: () =>
-                  setState(() => _tab = linked < p.needs.length ? 1 : 3),
+              onPressed: () => _openTab(linked < p.needs.length ? 1 : 3),
               icon: const Icon(Icons.arrow_forward),
               label: Text(
                 s10(context, linked < p.needs.length ? 'evidence' : 'share'),
@@ -1464,7 +1459,7 @@ class _PreparationScreenState extends State<PreparationScreen>
         ),
       ),
     FilledButton.icon(
-      onPressed: () => setState(() => _tab = 3),
+      onPressed: () => _openTab(3),
       icon: const Icon(Icons.arrow_forward),
       label: Text(s10(context, 'reviewStep')),
     ),
@@ -1524,47 +1519,53 @@ class _PreparationScreenState extends State<PreparationScreen>
         ListTile(
           isThreeLine: true,
           title: Text('${e.day} · ${recordKindLabel(context, e.kind)}'),
-          subtitle: Text(e.values['english_summary'] ?? e.text),
+          subtitle: Text(
+            patientText('${e.values['english_summary'] ?? e.text}'),
+          ),
           onTap: () => _source(e),
         ),
     ];
   }
 
-  List<Widget> _share(Preparation p) => [
-    Text(
-      p.englishTitle,
-      style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-    ),
-    Text(s10(context, 'review')),
-    if (!repo.demo)
-      CheckboxListTile(
-        value: _includeOriginal,
-        onChanged: (v) => setState(() => _includeOriginal = v ?? false),
-        title: Text(s10(context, 'original')),
+  List<Widget> _share(Preparation p) {
+    final fresh =
+        _pdf != null &&
+        _pdfHash == preparationFingerprint(p, _forReport(p), repo.today);
+    return [
+      Text(
+        p.englishTitle,
+        style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
       ),
-    FilledButton.icon(
-      onPressed: _busy ? null : _generate,
-      icon: const Icon(Icons.picture_as_pdf),
-      label: Text(s10(context, 'pdf')),
-    ),
-    OutlinedButton(
-      onPressed: _busy ? null : _handoff,
-      child: Text(s10(context, 'delivery')),
-    ),
-    Text(s10(context, 'receipt')),
-    for (final h in p.history)
-      ListTile(
-        title: Text(
-          '${h['date']} · ${s10(context, h['type'] == 'deadline' ? 'review_request' : 'details')}',
+      Text(s10(context, 'review')),
+      FilledButton.icon(
+        onPressed: _busy ? null : _generate,
+        icon: const Icon(Icons.picture_as_pdf),
+        label: Text(s10(context, 'pdf')),
+      ),
+      if (fresh)
+        ReportPreview(
+          bytes: _pdf!,
+          fileName: _pdfName ?? 'covernote-summary.pdf',
         ),
-        subtitle: Text(h['text'] ?? ''),
+      OutlinedButton(
+        onPressed: _busy ? null : _handoff,
+        child: Text(s10(context, 'delivery')),
       ),
-    for (final e in p.exports)
-      ListTile(
-        title: Text('PDF · revision ${e['revision']}'),
-        subtitle: Text(
-          '${e['generated_at'] ?? ''}\n${e['content_hash'] == preparationFingerprint(p, _events, repo.today) ? s10(context, 'currentBrief') : s10(context, 'staleBrief')}',
+      Text(s10(context, 'receipt')),
+      for (final h in p.history)
+        ListTile(
+          title: Text(
+            '${h['date']} · ${s10(context, h['type'] == 'deadline' ? 'review_request' : 'details')}',
+          ),
+          subtitle: Text(h['text'] ?? ''),
         ),
-      ),
-  ];
+      for (final e in p.exports)
+        ListTile(
+          title: Text('PDF · revision ${e['revision']}'),
+          subtitle: Text(
+            '${e['generated_at'] ?? ''}\n${e['content_hash'] == preparationFingerprint(p, _forReport(p), repo.today) ? s10(context, 'currentBrief') : s10(context, 'staleBrief')}',
+          ),
+        ),
+    ];
+  }
 }

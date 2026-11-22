@@ -115,7 +115,11 @@ void main() {
         find.text('How are you feeling? What medicine did you use?'),
         findsOneWidget,
       );
-      await tester.ensureVisible(find.text('I prefer to type'));
+      await tester.scrollUntilVisible(
+        find.text('I prefer to type'),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.pumpAndSettle();
       await tester.tap(find.text('I prefer to type'));
       await tester.pumpAndSettle();
@@ -169,7 +173,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
   testWidgets(
-    'speech uses a regional locale and fills editable text without topic selection',
+    'speech uses the app language, not the phone locale, and fills editable text',
     (tester) async {
       final repo = RecordTestRepository();
       String? language;
@@ -177,7 +181,8 @@ void main() {
         PreparationRepository.native,
         (call) async {
           if (call.method == 'listen') {
-            language = call.arguments['language'];
+            language = call.arguments['appLanguage'];
+            expect(call.arguments['detectLanguage'], isTrue);
             return 'I used my inhaler and coughed.';
           }
           return null;
@@ -207,6 +212,45 @@ void main() {
       expect(PreparationRepository.demoEvents, isEmpty);
     },
   );
+  testWidgets('starting to speak again clears the previous text', (
+    tester,
+  ) async {
+    final repo = RecordTestRepository();
+    var turn = 0;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      PreparationRepository.native,
+      (call) async {
+        if (call.method == 'listen') {
+          turn++;
+          return turn == 1 ? 'First words' : 'Second words';
+        }
+        return null;
+      },
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        PreparationRepository.native,
+        null,
+      ),
+    );
+    await tester.pumpWidget(
+      app(GuidedRecordScreen(repository: repo, profiles: {repo.uid: 'Diego'})),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Start speaking'));
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller!.text,
+      'First words',
+    );
+    await tester.tap(find.text('Start speaking'));
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).controller!.text,
+      'Second words',
+    );
+    expect(tester.takeException(), isNull);
+  });
   for (final code in [
     'permission_denied',
     'recognition_2',
@@ -240,7 +284,17 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(
+        find.byType(TextField),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.enterText(find.byType(TextField), 'Keep my words');
+      await tester.scrollUntilVisible(
+        find.text('Start speaking'),
+        -200,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.ensureVisible(find.text('Start speaking'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Start speaking'));

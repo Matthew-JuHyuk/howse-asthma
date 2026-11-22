@@ -58,6 +58,7 @@ class CoverNoteBody extends StatelessWidget {
       bottom: true,
       child: scrollable
           ? SingleChildScrollView(
+              primary: false,
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: pad,
               child: child,

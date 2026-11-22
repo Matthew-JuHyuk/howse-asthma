@@ -17,6 +17,7 @@ class RecordNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     return NavigationBar(
+      height: 84,
       selectedIndex: selectedIndex < 2 ? selectedIndex : selectedIndex + 1,
       onDestinationSelected: (i) {
         if (i == 2) {
@@ -39,22 +40,26 @@ class RecordNavigationBar extends StatelessWidget {
         NavigationDestination(
           enabled: onRecord != null,
           icon: Container(
-            width: 48,
-            height: 48,
+            width: 52,
+            height: 52,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
               shape: BoxShape.circle,
+              gradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF2AA3B5), Color(0xFF0E6674)],
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Theme.of(
                     context,
-                  ).colorScheme.primary.withValues(alpha: .18),
-                  blurRadius: 10,
-                  offset: const Offset(0, 3),
+                  ).colorScheme.primary.withValues(alpha: 0.32),
+                  blurRadius: 14,
+                  offset: const Offset(0, 5),
                 ),
               ],
             ),
-            child: const Icon(Icons.mic_rounded, color: Colors.white, size: 28),
+            child: const Icon(Icons.mic_rounded, color: Colors.white, size: 26),
           ),
           label: s10(context, 'recordEntry'),
         ),
