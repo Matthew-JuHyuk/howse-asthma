@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/auth/data/profile_repository.dart';
@@ -58,6 +59,9 @@ class SessionController extends ChangeNotifier {
     }
     final session = state.session;
     if (session == null) {
+      const MethodChannel(
+        'covernote/capture',
+      ).invokeMethod<void>('disable').catchError((Object _) {});
       _loadedFor = null;
       profile = null;
       profileErrorCode = null;

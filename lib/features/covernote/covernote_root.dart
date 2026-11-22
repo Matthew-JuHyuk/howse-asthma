@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../core/session/session_controller.dart';
-import '../../l10n/app_localizations.dart';
 import '../auth/domain/user_profile.dart';
 import '../provider/presentation/provider_home_shell.dart';
 import 'auth/auth_screen.dart';
 import 'data/case_store.dart';
 import 'data/demo_case_store.dart';
+import 'data/preparation_repository.dart';
 import 'presentation/account_tab.dart';
 import 'presentation/case_screen.dart';
 import 'presentation/cases_tab.dart';
 import 'presentation/covernote_nav.dart';
 import 'presentation/home_tab.dart';
 import 'presentation/records_tab.dart';
+import 'presentation/guided_record_screen.dart';
+import 'presentation/record_navigation_bar.dart';
 
 /// Stores shared by every screen. The demo store lives for the app session.
 class CoverNoteServices extends InheritedWidget {
@@ -57,8 +59,67 @@ class CoverNoteShell extends StatefulWidget {
   State<CoverNoteShell> createState() => _CoverNoteShellState();
 }
 
-class _CoverNoteShellState extends State<CoverNoteShell> {
+class _CoverNoteShellState extends State<CoverNoteShell>
+    with WidgetsBindingObserver {
+  String? _syncOwner;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final s = SessionScope.of(context);
+    if (s.isReady && s.user?.id != _syncOwner) {
+      _syncOwner = s.user?.id;
+      _syncDirect();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) _syncDirect();
+  }
+
+  Future<void> _syncDirect() async {
+    try {
+      final r = PreparationRepository();
+      await r.importDirectRecords();
+      await r.flush();
+    } catch (_) {
+      /* Owner-scoped queue persists for retry. */
+    }
+  }
+
+  bool _recordOpen = false;
+  Future<void> _record() async {
+    if (_recordOpen) return;
+    _recordOpen = true;
+    try {
+      if (!await requireSignIn(context) || !mounted) return;
+      await Navigator.push<bool>(
+        context,
+        MaterialPageRoute(
+          builder: (_) =>
+              GuidedRecordScreen(repository: PreparationRepository()),
+        ),
+      );
+      if (mounted) _homeKey.currentState?.refresh();
+    } finally {
+      _recordOpen = false;
+    }
+  }
+
   int _tab = 0;
+  int _viewToken = 0;
   final _casesKey = GlobalKey<CasesTabState>();
   final _homeKey = GlobalKey<HomeTabState>();
   String? _caseId;
@@ -67,6 +128,7 @@ class _CoverNoteShellState extends State<CoverNoteShell> {
   void _go(int i) {
     setState(() {
       _tab = i;
+      _viewToken++;
       // Home and the cases tab both leave an open case. One tap shows
       // Home, or the case list, instead of staying on the same case.
       if (i == 0 || i == 1) {
@@ -81,19 +143,22 @@ class _CoverNoteShellState extends State<CoverNoteShell> {
   void _openCase(CaseStore store, String id) {
     setState(() {
       _tab = 1;
+      _viewToken++;
       _caseId = id;
       _caseStore = store;
     });
   }
 
   void _closeCase() {
-    setState(() => _caseId = null);
+    setState(() {
+      _viewToken++;
+      _caseId = null;
+    });
     _casesKey.currentState?.refresh();
   }
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context)!;
     final caseOpen = _caseId != null && _caseStore != null;
     return CoverNoteNav(
       openCase: _openCase,
@@ -103,6 +168,7 @@ class _CoverNoteShellState extends State<CoverNoteShell> {
       goRecords: () => _go(2),
       goSettings: () => _go(3),
       openCaseId: _caseId,
+      viewToken: _viewToken,
       child: PopScope(
         canPop: _tab == 0 && !caseOpen,
         onPopInvokedWithResult: (didPop, _) {
@@ -134,31 +200,10 @@ class _CoverNoteShellState extends State<CoverNoteShell> {
               const AccountTab(),
             ],
           ),
-          bottomNavigationBar: NavigationBar(
+          bottomNavigationBar: RecordNavigationBar(
             selectedIndex: _tab,
-            onDestinationSelected: _go,
-            destinations: [
-              NavigationDestination(
-                icon: const Icon(Icons.home_outlined),
-                selectedIcon: const Icon(Icons.home),
-                label: l.cnTabHome,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.folder_outlined),
-                selectedIcon: const Icon(Icons.folder),
-                label: l.cnTabCases,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.fact_check_outlined),
-                selectedIcon: const Icon(Icons.fact_check),
-                label: l.cnTabRecords,
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.settings_outlined),
-                selectedIcon: const Icon(Icons.settings),
-                label: l.cnTabSettings,
-              ),
-            ],
+            onDestination: _go,
+            onRecord: _record,
           ),
         ),
       ),

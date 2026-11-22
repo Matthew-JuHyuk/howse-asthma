@@ -16,37 +16,14 @@ class AirWeatherLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
-    return CnCard(
-      onTap: () => Navigator.push(
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.air, color: CnColors.teal),
+      title: Text(l.cnAirWeather),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => Navigator.push<void>(
         context,
         MaterialPageRoute(builder: (_) => const AirWeatherScreen()),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.air, color: CnColors.teal),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l.cnAirWeather,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: CnColors.navy,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  l.cnAirAutoNote,
-                  style: const TextStyle(fontSize: 13, color: CnColors.muted),
-                ),
-              ],
-            ),
-          ),
-          const Icon(Icons.chevron_right, color: CnColors.muted),
-        ],
       ),
     );
   }
@@ -95,7 +72,12 @@ class _AirWeatherScreenState extends State<AirWeatherScreen> {
       requestIfDenied: true,
     );
     if (!mounted) return;
-    if (here.position == null) {
+    final area = await _env.loadArea();
+    if (!mounted) return;
+    if (here.position == null &&
+        area?.lat == null &&
+        area?.zip == null &&
+        area?.city == null) {
       setState(() {
         _loading = false;
         if (_now.isEmpty) {
@@ -146,10 +128,12 @@ class _AirWeatherScreenState extends State<AirWeatherScreen> {
                 icon: Icons.location_off_outlined,
                 title: switch (_location!) {
                   LocationFailure.serviceDisabled => l.cnLocationOff,
-                  LocationFailure.permissionDeniedForever => l.cnLocationBlocked,
+                  LocationFailure.permissionDeniedForever =>
+                    l.cnLocationBlocked,
                   _ => l.cnLocationNeed,
                 },
-                actionLabel: _location == LocationFailure.permissionDeniedForever
+                actionLabel:
+                    _location == LocationFailure.permissionDeniedForever
                     ? l.cnOpenSettings
                     : l.cnAirRetry,
                 onAction: _location == LocationFailure.permissionDeniedForever
@@ -191,11 +175,7 @@ class _AirWeatherScreenState extends State<AirWeatherScreen> {
         r.value == null ? l.cnEnvUnavailable : _aqiLine(l, r.value!),
         l.s5EnvAirDetail,
       ),
-      'trap' => (
-        l.cnEnvTrap,
-        _trapLine(l, r.detail),
-        l.envTrapDetail,
-      ),
+      'trap' => (l.cnEnvTrap, _trapLine(l, r.detail), l.envTrapDetail),
       'pollen' => (
         l.s5EnvPollen,
         r.value == null
@@ -237,7 +217,10 @@ class _AirWeatherScreenState extends State<AirWeatherScreen> {
               style: const TextStyle(fontSize: 13, color: CnColors.muted),
             ),
             const SizedBox(height: 2),
-            Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            Text(
+              value,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
             if (current && note.isNotEmpty) ...[
               const SizedBox(height: 4),
               Text(note, style: const TextStyle(fontSize: 13, height: 1.35)),
@@ -269,11 +252,12 @@ String _aqiLine(AppLocalizations l, double aqi) {
   return l.s5AqiValue(category, n);
 }
 
-String _trapLine(AppLocalizations l, String? level) => switch (level?.toUpperCase()) {
-  'LOW' => l.s5AqiGood,
-  'MODERATE' => l.s5AqiModerate,
-  'HIGH' => l.s5AqiUnhealthy,
-  'CRITICAL' => l.s5AqiVeryUnhealthy,
-  null || '' => l.cnEnvUnavailable,
-  _ => level!,
-};
+String _trapLine(AppLocalizations l, String? level) =>
+    switch (level?.toUpperCase()) {
+      'LOW' => l.s5AqiGood,
+      'MODERATE' => l.s5AqiModerate,
+      'HIGH' => l.s5AqiUnhealthy,
+      'CRITICAL' => l.s5AqiVeryUnhealthy,
+      null || '' => l.cnEnvUnavailable,
+      _ => level!,
+    };

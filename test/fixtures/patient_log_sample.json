@@ -1,0 +1,1731 @@
+{
+  "patient_key": "sample-maria",
+  "patient_name": "Maria Santos",
+  "dob": "1978-05-12",
+  "period_end": "2026-09-02",
+  "controller": "Fluticasone Propionate 110 mcg (2 puffs BID)",
+  "act_score": 14,
+  "act_day": "2026-09-02",
+  "scheduled_doses": 60,
+  "logged_doses": 51,
+  "synthetic": true,
+  "events": [
+    {
+      "id": "env-0",
+      "patient_key": "sample-maria",
+      "source_id": "env-0",
+      "kind": "environment",
+      "day": "2026-08-04",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-1",
+      "patient_key": "sample-maria",
+      "source_id": "env-1",
+      "kind": "environment",
+      "day": "2026-08-05",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-2",
+      "patient_key": "sample-maria",
+      "source_id": "env-2",
+      "kind": "environment",
+      "day": "2026-08-06",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-3",
+      "patient_key": "sample-maria",
+      "source_id": "env-3",
+      "kind": "environment",
+      "day": "2026-08-07",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-4",
+      "patient_key": "sample-maria",
+      "source_id": "env-4",
+      "kind": "environment",
+      "day": "2026-08-08",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 128,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-5",
+      "patient_key": "sample-maria",
+      "source_id": "env-5",
+      "kind": "environment",
+      "day": "2026-08-09",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-6",
+      "patient_key": "sample-maria",
+      "source_id": "env-6",
+      "kind": "environment",
+      "day": "2026-08-10",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 128,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-7",
+      "patient_key": "sample-maria",
+      "source_id": "env-7",
+      "kind": "environment",
+      "day": "2026-08-11",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-8",
+      "patient_key": "sample-maria",
+      "source_id": "env-8",
+      "kind": "environment",
+      "day": "2026-08-12",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 128,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-9",
+      "patient_key": "sample-maria",
+      "source_id": "env-9",
+      "kind": "environment",
+      "day": "2026-08-13",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-10",
+      "patient_key": "sample-maria",
+      "source_id": "env-10",
+      "kind": "environment",
+      "day": "2026-08-14",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 128,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-11",
+      "patient_key": "sample-maria",
+      "source_id": "env-11",
+      "kind": "environment",
+      "day": "2026-08-15",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "High",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-12",
+      "patient_key": "sample-maria",
+      "source_id": "env-12",
+      "kind": "environment",
+      "day": "2026-08-16",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 128,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-13",
+      "patient_key": "sample-maria",
+      "source_id": "env-13",
+      "kind": "environment",
+      "day": "2026-08-17",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-14",
+      "patient_key": "sample-maria",
+      "source_id": "env-14",
+      "kind": "environment",
+      "day": "2026-08-18",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 128,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-15",
+      "patient_key": "sample-maria",
+      "source_id": "env-15",
+      "kind": "environment",
+      "day": "2026-08-19",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-16",
+      "patient_key": "sample-maria",
+      "source_id": "env-16",
+      "kind": "environment",
+      "day": "2026-08-20",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 128,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-17",
+      "patient_key": "sample-maria",
+      "source_id": "env-17",
+      "kind": "environment",
+      "day": "2026-08-21",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-18",
+      "patient_key": "sample-maria",
+      "source_id": "env-18",
+      "kind": "environment",
+      "day": "2026-08-22",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-19",
+      "patient_key": "sample-maria",
+      "source_id": "env-19",
+      "kind": "environment",
+      "day": "2026-08-23",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-20",
+      "patient_key": "sample-maria",
+      "source_id": "env-20",
+      "kind": "environment",
+      "day": "2026-08-24",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-21",
+      "patient_key": "sample-maria",
+      "source_id": "env-21",
+      "kind": "environment",
+      "day": "2026-08-25",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-22",
+      "patient_key": "sample-maria",
+      "source_id": "env-22",
+      "kind": "environment",
+      "day": "2026-08-26",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-23",
+      "patient_key": "sample-maria",
+      "source_id": "env-23",
+      "kind": "environment",
+      "day": "2026-08-27",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-24",
+      "patient_key": "sample-maria",
+      "source_id": "env-24",
+      "kind": "environment",
+      "day": "2026-08-28",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-25",
+      "patient_key": "sample-maria",
+      "source_id": "env-25",
+      "kind": "environment",
+      "day": "2026-08-29",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-26",
+      "patient_key": "sample-maria",
+      "source_id": "env-26",
+      "kind": "environment",
+      "day": "2026-08-30",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-27",
+      "patient_key": "sample-maria",
+      "source_id": "env-27",
+      "kind": "environment",
+      "day": "2026-08-31",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-28",
+      "patient_key": "sample-maria",
+      "source_id": "env-28",
+      "kind": "environment",
+      "day": "2026-09-01",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "env-29",
+      "patient_key": "sample-maria",
+      "source_id": "env-29",
+      "kind": "environment",
+      "day": "2026-09-02",
+      "text": "",
+      "values": {
+        "metric": "aqi",
+        "value": 82,
+        "pollen_level": "Moderate",
+        "source_kind": "observation"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-4",
+      "patient_key": "sample-maria",
+      "source_id": "use-4",
+      "kind": "medication_use",
+      "day": "2026-08-08",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-6",
+      "patient_key": "sample-maria",
+      "source_id": "use-6",
+      "kind": "medication_use",
+      "day": "2026-08-10",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-8",
+      "patient_key": "sample-maria",
+      "source_id": "use-8",
+      "kind": "medication_use",
+      "day": "2026-08-12",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-10",
+      "patient_key": "sample-maria",
+      "source_id": "use-10",
+      "kind": "medication_use",
+      "day": "2026-08-14",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-12",
+      "patient_key": "sample-maria",
+      "source_id": "use-12",
+      "kind": "medication_use",
+      "day": "2026-08-16",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-14",
+      "patient_key": "sample-maria",
+      "source_id": "use-14",
+      "kind": "medication_use",
+      "day": "2026-08-18",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-22",
+      "patient_key": "sample-maria",
+      "source_id": "use-22",
+      "kind": "medication_use",
+      "day": "2026-08-26",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "use-26",
+      "patient_key": "sample-maria",
+      "source_id": "use-26",
+      "kind": "medication_use",
+      "day": "2026-08-30",
+      "text": "",
+      "values": {
+        "use_kind": "as_needed",
+        "medication": "Albuterol",
+        "medication_class": "SABA",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-0",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-0",
+      "kind": "symptom",
+      "day": "2026-08-04",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-1",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-1",
+      "kind": "symptom",
+      "day": "2026-08-05",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-2",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-2",
+      "kind": "symptom",
+      "day": "2026-08-06",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-3",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-3",
+      "kind": "symptom",
+      "day": "2026-08-07",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-4",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-4",
+      "kind": "symptom",
+      "day": "2026-08-08",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 2
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-5",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-5",
+      "kind": "symptom",
+      "day": "2026-08-09",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-6",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-6",
+      "kind": "symptom",
+      "day": "2026-08-10",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-7",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-7",
+      "kind": "symptom",
+      "day": "2026-08-11",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-8",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-8",
+      "kind": "symptom",
+      "day": "2026-08-12",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-9",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-9",
+      "kind": "symptom",
+      "day": "2026-08-13",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-10",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-10",
+      "kind": "symptom",
+      "day": "2026-08-14",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 2
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-11",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-11",
+      "kind": "symptom",
+      "day": "2026-08-15",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-12",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-12",
+      "kind": "symptom",
+      "day": "2026-08-16",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-13",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-13",
+      "kind": "symptom",
+      "day": "2026-08-17",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-14",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-14",
+      "kind": "symptom",
+      "day": "2026-08-18",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-15",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-15",
+      "kind": "symptom",
+      "day": "2026-08-19",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-16",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-16",
+      "kind": "symptom",
+      "day": "2026-08-20",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 2
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-17",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-17",
+      "kind": "symptom",
+      "day": "2026-08-21",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "symptom-18",
+      "patient_key": "sample-maria",
+      "source_id": "symptom-18",
+      "kind": "symptom",
+      "day": "2026-08-22",
+      "text": "",
+      "values": {
+        "symptom": "cough",
+        "time_of_day": "daytime",
+        "night_wakings": 0
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-0",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-0",
+      "kind": "medication_use",
+      "day": "2026-08-04",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-1",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-1",
+      "kind": "medication_use",
+      "day": "2026-08-04",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-2",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-2",
+      "kind": "medication_use",
+      "day": "2026-08-05",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-3",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-3",
+      "kind": "medication_use",
+      "day": "2026-08-05",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-4",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-4",
+      "kind": "medication_use",
+      "day": "2026-08-06",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-5",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-5",
+      "kind": "medication_use",
+      "day": "2026-08-06",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-6",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-6",
+      "kind": "medication_use",
+      "day": "2026-08-07",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-7",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-7",
+      "kind": "medication_use",
+      "day": "2026-08-07",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-8",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-8",
+      "kind": "medication_use",
+      "day": "2026-08-08",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-9",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-9",
+      "kind": "medication_use",
+      "day": "2026-08-08",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-10",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-10",
+      "kind": "medication_use",
+      "day": "2026-08-09",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-11",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-11",
+      "kind": "medication_use",
+      "day": "2026-08-09",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-12",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-12",
+      "kind": "medication_use",
+      "day": "2026-08-10",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-13",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-13",
+      "kind": "medication_use",
+      "day": "2026-08-10",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-14",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-14",
+      "kind": "medication_use",
+      "day": "2026-08-11",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-15",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-15",
+      "kind": "medication_use",
+      "day": "2026-08-11",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-16",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-16",
+      "kind": "medication_use",
+      "day": "2026-08-12",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-17",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-17",
+      "kind": "medication_use",
+      "day": "2026-08-12",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-18",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-18",
+      "kind": "medication_use",
+      "day": "2026-08-13",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-19",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-19",
+      "kind": "medication_use",
+      "day": "2026-08-13",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-20",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-20",
+      "kind": "medication_use",
+      "day": "2026-08-14",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-21",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-21",
+      "kind": "medication_use",
+      "day": "2026-08-14",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-22",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-22",
+      "kind": "medication_use",
+      "day": "2026-08-15",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-23",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-23",
+      "kind": "medication_use",
+      "day": "2026-08-15",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-24",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-24",
+      "kind": "medication_use",
+      "day": "2026-08-16",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-25",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-25",
+      "kind": "medication_use",
+      "day": "2026-08-16",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-26",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-26",
+      "kind": "medication_use",
+      "day": "2026-08-17",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-27",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-27",
+      "kind": "medication_use",
+      "day": "2026-08-17",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-28",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-28",
+      "kind": "medication_use",
+      "day": "2026-08-18",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-29",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-29",
+      "kind": "medication_use",
+      "day": "2026-08-18",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-30",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-30",
+      "kind": "medication_use",
+      "day": "2026-08-19",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-31",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-31",
+      "kind": "medication_use",
+      "day": "2026-08-19",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-32",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-32",
+      "kind": "medication_use",
+      "day": "2026-08-20",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-33",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-33",
+      "kind": "medication_use",
+      "day": "2026-08-20",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-34",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-34",
+      "kind": "medication_use",
+      "day": "2026-08-21",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-35",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-35",
+      "kind": "medication_use",
+      "day": "2026-08-21",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-36",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-36",
+      "kind": "medication_use",
+      "day": "2026-08-22",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-37",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-37",
+      "kind": "medication_use",
+      "day": "2026-08-22",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-38",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-38",
+      "kind": "medication_use",
+      "day": "2026-08-23",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-39",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-39",
+      "kind": "medication_use",
+      "day": "2026-08-23",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-40",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-40",
+      "kind": "medication_use",
+      "day": "2026-08-24",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-41",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-41",
+      "kind": "medication_use",
+      "day": "2026-08-24",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-42",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-42",
+      "kind": "medication_use",
+      "day": "2026-08-25",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-43",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-43",
+      "kind": "medication_use",
+      "day": "2026-08-25",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-44",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-44",
+      "kind": "medication_use",
+      "day": "2026-08-26",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-45",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-45",
+      "kind": "medication_use",
+      "day": "2026-08-26",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-46",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-46",
+      "kind": "medication_use",
+      "day": "2026-08-27",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-47",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-47",
+      "kind": "medication_use",
+      "day": "2026-08-27",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-48",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-48",
+      "kind": "medication_use",
+      "day": "2026-08-28",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-49",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-49",
+      "kind": "medication_use",
+      "day": "2026-08-28",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    },
+    {
+      "id": "scheduled-50",
+      "patient_key": "sample-maria",
+      "source_id": "scheduled-50",
+      "kind": "medication_use",
+      "day": "2026-08-29",
+      "text": "",
+      "values": {
+        "use_kind": "scheduled",
+        "medication": "Fluticasone Propionate 110 mcg",
+        "quantity": 2,
+        "unit": "puffs"
+      },
+      "synthetic": true,
+      "undone": false
+    }
+  ]
+}

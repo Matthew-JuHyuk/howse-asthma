@@ -39,6 +39,7 @@ class ConsentRepository {
       ConsentPurpose.letter => 'covernote-letter-2026-10-s9',
       ConsentPurpose.label => labelConsentVersion,
       ConsentPurpose.translate => translateConsentVersion,
+      ConsentPurpose.treatment => 's10-treatment-v1',
     };
     await SupabaseService.client.from('consent_events').insert({
       'owner_id': uid,

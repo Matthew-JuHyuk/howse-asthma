@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
-
 import '../data/case_store.dart';
+
+ValueChanged<int>? mainTabNavigation(BuildContext context) {
+  final nav = CoverNoteNav.maybeOf(context);
+  if (nav == null) return null;
+  final navigator = Navigator.of(context);
+  return (index) {
+    if (!navigator.mounted) return;
+    navigator.popUntil((r) => r.isFirst);
+    [nav.goHome, nav.goCases, nav.goRecords, nav.goSettings][index]();
+  };
+}
 
 /// Lets any screen open a case inside the Cases tab (bottom nav stays).
 class CoverNoteNav extends InheritedWidget {
@@ -14,6 +24,7 @@ class CoverNoteNav extends InheritedWidget {
     required this.goRecords,
     required this.goSettings,
     this.openCaseId,
+    this.viewToken = 0,
   });
 
   final void Function(CaseStore store, String caseId) openCase;
@@ -23,6 +34,9 @@ class CoverNoteNav extends InheritedWidget {
   final VoidCallback goRecords;
   final VoidCallback goSettings;
   final String? openCaseId;
+
+  /// Changes whenever the shell opens another screen, so lists return to the top.
+  final int viewToken;
 
   static CoverNoteNav? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<CoverNoteNav>();
@@ -35,5 +49,6 @@ class CoverNoteNav extends InheritedWidget {
 
   @override
   bool updateShouldNotify(CoverNoteNav oldWidget) =>
-      openCaseId != oldWidget.openCaseId;
+      openCaseId != oldWidget.openCaseId ||
+      viewToken != oldWidget.viewToken;
 }

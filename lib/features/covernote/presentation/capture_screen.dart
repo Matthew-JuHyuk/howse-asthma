@@ -38,6 +38,7 @@ class CaptureScreen extends StatefulWidget {
     required this.store,
     required this.source,
     this.replaceCaseId,
+    this.openPicker = true,
   });
 
   final CaseStore store;
@@ -45,6 +46,9 @@ class CaptureScreen extends StatefulWidget {
 
   /// Upload a new page set for this case instead of creating one.
   final String? replaceCaseId;
+
+  /// When false, the add-pages screen opens before the camera or album.
+  final bool openPicker;
 
   @override
   State<CaptureScreen> createState() => _CaptureScreenState();
@@ -63,6 +67,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
   @override
   void initState() {
     super.initState();
+    if (!widget.openPicker) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.source == CaptureSource.camera) {
         _camera();
@@ -330,6 +335,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
               Expanded(
                 child: _pages.isEmpty
                     ? SingleChildScrollView(
+                        primary: false,
                         child: ActionMessage(
                           icon: Icons.document_scanner_outlined,
                           title: _busy ? l.cnOpening : l.cnCaptureEmptyTitle,

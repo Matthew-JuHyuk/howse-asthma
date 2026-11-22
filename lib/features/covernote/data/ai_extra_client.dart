@@ -94,7 +94,9 @@ class AiExtraClient {
     if (items is! List) return texts;
     return [
       for (var i = 0; i < texts.length; i++)
-        i < items.length && items[i] is String && (items[i] as String).trim().isNotEmpty
+        i < items.length &&
+                items[i] is String &&
+                (items[i] as String).trim().isNotEmpty
             ? items[i] as String
             : texts[i],
     ];

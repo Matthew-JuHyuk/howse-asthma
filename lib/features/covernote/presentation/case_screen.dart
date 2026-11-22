@@ -19,6 +19,9 @@ import 'evidence_step.dart';
 import 'letter_view.dart';
 import 'packet_step.dart';
 import 'review_step.dart';
+import '../data/preparation_repository.dart';
+import 'preparation_screen.dart';
+import 'preparation_strings.dart';
 
 enum SaveState { idle, saving, saved, failed }
 
@@ -89,7 +92,8 @@ class _CaseScreenState extends State<CaseScreen> {
     if (lang.toLowerCase().startsWith('en') || d.pages.isEmpty) return;
     unawaited(() async {
       final consent = ConsentRepository();
-      final allowed = await consent.hasActive(ConsentPurpose.translate) ||
+      final allowed =
+          await consent.hasActive(ConsentPurpose.translate) ||
           await consent.hasActive(ConsentPurpose.letter);
       if (!allowed) return;
       try {
@@ -140,7 +144,7 @@ class _CaseScreenState extends State<CaseScreen> {
     if (f == null || _needsAnalysis(d)) return 0;
     if (!f.readyForEvidence) return 1;
     if (d.latestPacket != null) return 3;
-    return 2;
+    return 1;
   }
 
   // ---------------- Analysis ----------------
@@ -262,8 +266,9 @@ class _CaseScreenState extends State<CaseScreen> {
       MaterialPageRoute(
         builder: (_) => CaptureScreen(
           store: _store,
-          source: CaptureSource.camera,
+          source: CaptureSource.files,
           replaceCaseId: widget.caseId,
+          openPicker: false,
         ),
       ),
     );
@@ -374,7 +379,15 @@ class _CaseScreenState extends State<CaseScreen> {
   Future<void> _goStep(int i) async {
     if (i >= 2 && !(_facts?.readyForEvidence ?? false)) return;
     if (_dirty || _inFlight) await _flushNow();
-    if (mounted) setState(() => _step = i);
+    if (mounted) {
+      setState(() {
+        _step = i;
+        if (i != 0) {
+          _focusPage = null;
+          _focusQuote = null;
+        }
+      });
+    }
   }
 
   Future<void> _askComplete() async {
@@ -461,11 +474,31 @@ class _CaseScreenState extends State<CaseScreen> {
             },
           ),
           title: Text(
-            d == null ? l.cnCaseUntitled : caseDisplayTitle(l, d.row, facts: _facts),
+            d == null
+                ? l.cnCaseUntitled
+                : caseDisplayTitle(l, d.row, facts: _facts),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           actions: [
+            if (d != null && d.facts != null)
+              IconButton(
+                tooltip: s10(context, 'overview'),
+                icon: const Icon(Icons.view_timeline_outlined),
+                onPressed: () async {
+                  if (!await _flushNow() || !context.mounted) return;
+                  await Navigator.push<void>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PreparationScreen(
+                        repository: PreparationRepository(demo: _store.isDemo),
+                        caseId: widget.caseId,
+                        letterStore: _store,
+                      ),
+                    ),
+                  );
+                },
+              ),
             if (_save != SaveState.idle)
               _SaveIndicator(state: _save, onRetry: _flush),
             if (d != null)
@@ -554,7 +587,10 @@ class _CaseScreenState extends State<CaseScreen> {
         : const SizedBox.shrink();
     final facts = _facts;
     if (facts == null || _needsAnalysis(d)) {
-      return ListView(children: [demoBanner, _processing(l, d)]);
+      return ListView(
+        primary: false,
+        children: [demoBanner, _processing(l, d)],
+      );
     }
     final child = switch (_step) {
       1 => ReviewStep(

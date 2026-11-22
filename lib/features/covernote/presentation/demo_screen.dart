@@ -6,6 +6,8 @@ import '../domain/case_models.dart';
 import '../ui/brand.dart';
 import 'case_card.dart';
 import 'routes.dart';
+import 'preparation_screen.dart';
+import 'preparation_strings.dart';
 
 /// Public demo: fixed synthetic letters, no account, nothing uploaded.
 class DemoScreen extends StatefulWidget {
@@ -55,18 +57,37 @@ class _DemoScreenState extends State<DemoScreen> {
       body: cases == null
           ? const Center(child: CircularProgressIndicator())
           : ListView(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.fromLTRB(
+                20,
+                20,
+                20,
+                32 + MediaQuery.paddingOf(context).bottom,
+              ),
               children: [
+                const BrandLockup(compact: true),
+                const SizedBox(height: 16),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: DemoBadge(),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 Text(
                   l.cnDemoIntro,
                   style: const TextStyle(fontSize: 16, color: CnColors.muted),
                 ),
+                const SizedBox(height: 24),
+                FilledButton.icon(
+                  onPressed: () => openPreparationDemo(context, false),
+                  icon: const Icon(Icons.folder_open_outlined),
+                  label: Text(s10(context, 'demoA')),
+                ),
                 const SizedBox(height: 16),
+                OutlinedButton.icon(
+                  onPressed: () => openPreparationDemo(context, true),
+                  icon: const Icon(Icons.mark_email_read_outlined),
+                  label: Text(s10(context, 'demoB')),
+                ),
+                const SizedBox(height: 28),
                 for (final c in cases) ...[
                   CaseCard(
                     summary: c,
@@ -76,7 +97,7 @@ class _DemoScreenState extends State<DemoScreen> {
                       _load();
                     },
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 20),
                 ],
               ],
             ),

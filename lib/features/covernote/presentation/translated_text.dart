@@ -55,7 +55,9 @@ class _TranslatedLineState extends State<TranslatedLine> {
   Widget build(BuildContext context) {
     return Text(
       _shown ?? widget.text,
-      style: widget.style ?? const TextStyle(fontSize: 16, height: 1.35, color: CnColors.ink),
+      style:
+          widget.style ??
+          const TextStyle(fontSize: 16, height: 1.35, color: CnColors.ink),
     );
   }
 }
@@ -83,7 +85,9 @@ class FieldTranslations {
     if (hit != null) return Future.value(hit);
     final done = Completer<String>();
     _wait.putIfAbsent(key, () => []).add(done);
-    _keep.putIfAbsent(key, () => {}).addAll(keep.where((k) => k.trim().isNotEmpty));
+    _keep
+        .putIfAbsent(key, () => {})
+        .addAll(keep.where((k) => k.trim().isNotEmpty));
     _language = language;
     _timer ??= Timer(const Duration(milliseconds: 40), _flush);
     return done.future;
@@ -93,18 +97,14 @@ class FieldTranslations {
     _timer = null;
     final language = _language;
     final batch = Map<String, List<Completer<String>>>.from(_wait);
-    final keep = {
-      for (final e in _keep.entries) e.key: e.value,
-    };
+    final keep = {for (final e in _keep.entries) e.key: e.value};
     _wait.clear();
     _keep.clear();
     if (language == null || batch.isEmpty) return;
     final texts = [
       for (final key in batch.keys) key.split('\n').skip(1).join('\n'),
     ];
-    final tokens = {
-      for (final set in keep.values) ...set,
-    }.toList();
+    final tokens = {for (final set in keep.values) ...set}.toList();
     try {
       final out = await AiExtraClient().translateFields(
         language: language,

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/supabase/supabase_service.dart';
 import '../../assessments/data/pdc_repository.dart';
@@ -21,6 +22,7 @@ const _legacyCaseColumns =
     'id, title, status, demo_mode, current_document_revision, current_fact_revision, '
     'current_evidence_revision, document_kind, reviewed_fact_revision, '
     'user_reported_submitted_on, user_reported_submit_method, last_exported_at, created_at, updated_at';
+final _s9CaseColumns = CaseRow.columns.replaceAll(', case_start_reason', '');
 
 class SupabaseCaseStore implements CaseStore {
   SupabaseCaseStore();
@@ -72,21 +74,37 @@ class SupabaseCaseStore implements CaseStore {
   Future<List<CaseSummary>> listCases() => _guard(() async {
     List rows;
     try {
-      rows = await _db
-          .from('appeal_cases')
-          .select(CaseRow.columns)
-          .eq('owner_id', _uid)
-          .neq('status', 'deleting')
-          .order('updated_at', ascending: false)
-          .limit(80) as List;
+      rows =
+          await _db
+                  .from('appeal_cases')
+                  .select(CaseRow.columns)
+                  .eq('owner_id', _uid)
+                  .neq('status', 'deleting')
+                  .order('updated_at', ascending: false)
+                  .limit(80)
+              as List;
     } catch (_) {
-      rows = await _db
-          .from('appeal_cases')
-          .select(_legacyCaseColumns)
-          .eq('owner_id', _uid)
-          .neq('status', 'deleting')
-          .order('updated_at', ascending: false)
-          .limit(80) as List;
+      try {
+        rows =
+            await _db
+                    .from('appeal_cases')
+                    .select(_s9CaseColumns)
+                    .eq('owner_id', _uid)
+                    .neq('status', 'deleting')
+                    .order('updated_at', ascending: false)
+                    .limit(80)
+                as List;
+      } catch (_) {
+        rows =
+            await _db
+                    .from('appeal_cases')
+                    .select(_legacyCaseColumns)
+                    .eq('owner_id', _uid)
+                    .neq('status', 'deleting')
+                    .order('updated_at', ascending: false)
+                    .limit(80)
+                as List;
+      }
     }
     final cases = [for (final r in rows) CaseRow.fromRow(r as Map)];
     if (cases.isEmpty) return const <CaseSummary>[];
@@ -115,9 +133,7 @@ class SupabaseCaseStore implements CaseStore {
               .toList();
           final plan = c.planName ?? f?.field('plan_name').value;
           return CaseSummary(
-            row: plan == null || plan.isEmpty
-                ? c
-                : c.copyWith(planName: plan),
+            row: plan == null || plan.isEmpty ? c : c.copyWith(planName: plan),
             factsToConfirm: f?.factsToConfirm ?? 0,
             requirementsTotal: rs.length,
             requirementsSettled: rs
@@ -144,6 +160,16 @@ class SupabaseCaseStore implements CaseStore {
       return Map<String, dynamic>.from(row);
     } catch (e) {
       if (e is CaseStoreException) rethrow;
+      try {
+        final row = await _db
+            .from('appeal_cases')
+            .select(_s9CaseColumns)
+            .eq('id', caseId)
+            .maybeSingle();
+        if (row != null) return Map<String, dynamic>.from(row);
+      } catch (_) {
+        /* Sprint8 fallback below. */
+      }
       final row = await _db
           .from('appeal_cases')
           .select(_legacyCaseColumns)
@@ -631,20 +657,44 @@ class SupabaseCaseStore implements CaseStore {
         .from('appeal_cases')
         .update({'status': 'deleting', 'updated_at': _now()})
         .eq('id', caseId);
-    final folder = '$uid/$caseId';
-    while (true) {
-      final files = await _db.storage
+    final root = '$uid/$caseId';
+    final folders = [root];
+    final paths = <String>[];
+    while (folders.isNotEmpty) {
+      final folder = folders.removeLast();
+      if (folder != root && !folder.startsWith('$root/')) {
+        throw const CaseStoreException('invalid_path');
+      }
+      for (var offset = 0; ; offset += 100) {
+        final files = await _db.storage
+            .from(_bucket)
+            .list(
+              path: folder,
+              searchOptions: SearchOptions(limit: 100, offset: offset),
+            );
+        for (final file in files) {
+          if (file.name.contains('/') || file.name == '..') {
+            throw const CaseStoreException('invalid_path');
+          }
+          final path = '$folder/${file.name}';
+          if (file.id == null) {
+            folders.add(path);
+          } else {
+            paths.add(path);
+          }
+        }
+        if (files.length < 100) break;
+      }
+    }
+    for (var i = 0; i < paths.length; i += 100) {
+      await _db.storage
           .from(_bucket)
-          .list(path: folder, searchOptions: const SearchOptions(limit: 100));
-      final paths = [
-        for (final f in files)
-          if (f.id != null) '$folder/${f.name}',
-      ];
-      if (paths.isEmpty) break;
-      await _db.storage.from(_bucket).remove(paths);
-      if (files.length < 100) break;
+          .remove(paths.sublist(i, (i + 100).clamp(0, paths.length)));
     }
     await _db.from('appeal_cases').delete().eq('id', caseId);
+    await (await SharedPreferences.getInstance()).remove(
+      'cn_s10_case_${uid}_$caseId',
+    );
   }
 
   @override
@@ -753,9 +803,7 @@ class SupabaseCaseStore implements CaseStore {
         .from('appeal_cases')
         .update({
           'lifecycle': lifecycleSql(lifecycle),
-          'completed_at': lifecycle == CaseLifecycle.completed
-              ? _now()
-              : null,
+          'completed_at': lifecycle == CaseLifecycle.completed ? _now() : null,
           'completed_outcome': lifecycle == CaseLifecycle.completed
               ? outcome
               : null,
@@ -781,10 +829,7 @@ class SupabaseCaseStore implements CaseStore {
   Future<void> setAlias(String caseId, String? alias) => _guard(() async {
     await _db
         .from('appeal_cases')
-        .update({
-          'display_alias': alias,
-          'updated_at': _now(),
-        })
+        .update({'display_alias': alias, 'updated_at': _now()})
         .eq('id', caseId);
   });
 

@@ -28,12 +28,24 @@ class BrandLockup extends StatelessWidget {
       excludeSemantics: true,
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(size * 0.22),
-            child: Image.asset(
-              'assets/branding/covernote_mark.png',
-              width: size,
-              height: size,
+          DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(size * 0.28),
+              boxShadow: [
+                BoxShadow(
+                  color: CnColors.navy.withValues(alpha: 0.08),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(size * 0.24),
+              child: Image.asset(
+                'assets/branding/covernote_mark.png',
+                width: size,
+                height: size,
+              ),
             ),
           ),
           const SizedBox(width: 12),
@@ -71,11 +83,11 @@ class DemoBadge extends StatelessWidget {
     return Semantics(
       label: l.cnDemoBadgeLong,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: CnColors.warnBg,
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: CnColors.warn.withValues(alpha: 0.4)),
+          borderRadius: BorderRadius.circular(999),
+          border: Border.all(color: CnColors.warn.withValues(alpha: 0.35)),
         ),
         child: Text(
           l.cnDemoBadge,
@@ -107,16 +119,132 @@ class CnCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: color ?? Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(color: CnColors.line),
+    final fill = color ?? Colors.white;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: CnColors.navy.withValues(alpha: 0.06),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(padding: padding, child: child),
+      child: Material(
+        color: fill,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(
+            color: color == null
+                ? CnColors.line
+                : Colors.white.withValues(alpha: 0.8),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(padding: padding, child: child),
+        ),
+      ),
+    );
+  }
+}
+
+/// Soft tinted tile behind a single icon.
+class CnIconWell extends StatelessWidget {
+  const CnIconWell(
+    this.icon, {
+    super.key,
+    this.size = 44,
+    this.iconSize = 22,
+    this.background = CnColors.mint,
+    this.foreground = CnColors.teal,
+  });
+
+  final IconData icon;
+  final double size;
+  final double iconSize;
+  final Color background;
+  final Color foreground;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(size * 0.34),
+      ),
+      child: Icon(icon, size: iconSize, color: foreground),
+    );
+  }
+}
+
+/// Short statement on the navy-to-teal wash used at the top of Home.
+class CnHeroBanner extends StatelessWidget {
+  const CnHeroBanner({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: CnColors.navy.withValues(alpha: 0.18),
+            blurRadius: 22,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF10283F), Color(0xFF1B7C8E)],
+            ),
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                right: -28,
+                top: -36,
+                child: Container(
+                  width: 128,
+                  height: 128,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withValues(alpha: 0.08),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: -24,
+                bottom: -42,
+                child: Container(
+                  width: 96,
+                  height: 96,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withValues(alpha: 0.06),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 22, 20, 22),
+                child: child,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -129,16 +257,31 @@ class SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 16, bottom: 8),
+    padding: const EdgeInsets.only(top: 28, bottom: 12),
     child: Semantics(
       header: true,
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          color: CnColors.navy,
-        ),
+      child: Row(
+        children: [
+          Container(
+            width: 4,
+            height: 18,
+            decoration: BoxDecoration(
+              color: CnColors.teal,
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: CnColors.navy,
+              ),
+            ),
+          ),
+        ],
       ),
     ),
   );
@@ -166,10 +309,10 @@ class StatusChip extends StatelessWidget {
       ChipTone.neutral => (const Color(0xFFEFF3F6), CnColors.muted),
     };
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(999),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -224,8 +367,8 @@ class ActionMessage extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 40, color: CnColors.teal),
-          const SizedBox(height: 12),
+          CnIconWell(icon, size: 64, iconSize: 30),
+          const SizedBox(height: 16),
           Text(
             title,
             textAlign: TextAlign.center,
