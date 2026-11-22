@@ -17,7 +17,7 @@ flutter gen-l10n
 flutter run
 ```
 
-Configure a Firebase Android app for application ID `com.howseasthma.app`, then place its configuration at `android/app/google-services.json` (ignored by Git). The Android build currently applies the Google Services plugin. Do not use someone else’s backend or Firebase settings.
+Configure a Firebase Android app using the `applicationId` defined in `android/app/build.gradle.kts`, then place its configuration at `android/app/google-services.json` (ignored by Git). The Android build currently applies the Google Services plugin. Do not use someone else’s backend or Firebase settings.
 
 Only the Supabase URL, client anon/publishable key, and two UI flags enter `.env.client`. A client key is extractable from an APK and must be protected by backend row-level security. Never use a Supabase service-role key as the client key. AI/provider/service-account credentials belong only in backend secrets.
 

@@ -6,10 +6,6 @@
 
 CoverNote is an Android student project for the Congressional App Challenge by **Ju-hyuk Won and Carter Monllor**. It helps families organize information for their care team, especially when English is not their first language.
 
-## From Howse Asthma to CoverNote
-
-The project began as **Howse Asthma**, focused on asthma tracking and environmental information. During development, it pivoted toward helping families understand insurance letters and prepare supporting health records. The final app name is **CoverNote**. The repository has been renamed to `CoverNote`, preserving its development history. The Dart package `howse_asthma` and existing Android identifiers remain for installation and source compatibility; they refer to the same app.
-
 ## What the app does
 
 - **Understand a letter:** photograph or upload an insurance document, review extracted requests and dates against the original, and see what to gather.
