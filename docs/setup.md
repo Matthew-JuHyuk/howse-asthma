@@ -7,8 +7,8 @@ Use Flutter with Dart compatible with `pubspec.yaml` (currently Dart ^3.12.2), A
 ## Client
 
 ```powershell
-git clone https://github.com/Matthew-JuHyuk/howse-asthma.git
-cd howse-asthma
+git clone https://github.com/Matthew-JuHyuk/CoverNote.git
+cd CoverNote
 flutter pub get
 Copy-Item .env.example .env
 # Set your own SUPABASE_URL and SUPABASE_ANON_KEY in .env.

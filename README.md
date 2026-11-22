@@ -2,13 +2,13 @@
 
 **Understand insurance letters. Keep daily health records. Prepare for the doctor’s visit.**
 
-[See the app and demos](https://covernote-cac.vercel.app/) · [Download the Android demo APK](https://github.com/Matthew-JuHyuk/howse-asthma/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk)
+[See the app and demos](https://covernote-cac.vercel.app/) · [Download the Android demo APK](https://github.com/Matthew-JuHyuk/CoverNote/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk)
 
 CoverNote is an Android student project for the Congressional App Challenge by **Ju-hyuk Won and Carter Monllor**. It helps families organize information for their care team, especially when English is not their first language.
 
-## Why this repository is called `howse-asthma`
+## From Howse Asthma to CoverNote
 
-The project began as **Howse Asthma**, focused on asthma tracking and environmental information. During development, it pivoted toward helping families understand insurance letters and prepare supporting health records. The final app name is **CoverNote**. The repository name, Dart package `howse_asthma`, and existing Android identifiers remain for continuity; they refer to the same project.
+The project began as **Howse Asthma**, focused on asthma tracking and environmental information. During development, it pivoted toward helping families understand insurance letters and prepare supporting health records. The final app name is **CoverNote**. The repository has been renamed to `CoverNote`, preserving its development history. The Dart package `howse_asthma` and existing Android identifiers remain for installation and source compatibility; they refer to the same app.
 
 ## What the app does
 
@@ -27,7 +27,7 @@ The team designed and tested the user journey, simplified navigation, reviewed t
 
 ## Try the final demo
 
-[GitHub Release download](https://github.com/Matthew-JuHyuk/howse-asthma/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk) · [Website download mirror](https://covernote-cac.vercel.app/downloads/covernote-android.apk)
+[GitHub Release download](https://github.com/Matthew-JuHyuk/CoverNote/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk) · [Website download mirror](https://covernote-cac.vercel.app/downloads/covernote-android.apk)
 
 The [Android APK](https://covernote-cac.vercel.app/downloads/covernote-android.apk) is the same build offered on the public website: **1.0.18 (18)**, 74,228,721 bytes. Android may ask permission to install an app downloaded through your browser. Existing app data may remain when updating an installation.
 
