@@ -2,7 +2,7 @@
 
 **Understand insurance letters. Keep daily health records. Prepare for the doctor’s visit.**
 
-[See the app and demos](https://covernote-cac.vercel.app/) · [Download the Android demo APK](https://covernote-cac.vercel.app/downloads/covernote-android.apk)
+[See the app and demos](https://covernote-cac.vercel.app/) · [Download the Android demo APK](https://github.com/Matthew-JuHyuk/howse-asthma/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk)
 
 CoverNote is an Android student project for the Congressional App Challenge by **Ju-hyuk Won and Carter Monllor**. It helps families organize information for their care team, especially when English is not their first language.
 
@@ -26,6 +26,8 @@ Ju-hyuk’s exploratory AlphaFold and protein-binding research prompted a practi
 The team designed and tested the user journey, simplified navigation, reviewed translations, and refined the reporting format. AI assists with letter extraction, note organization, and translation; users review results. CoverNote does not diagnose, select treatment, or guarantee insurance approval.
 
 ## Try the final demo
+
+[GitHub Release download](https://github.com/Matthew-JuHyuk/howse-asthma/releases/download/covernote-demo-1.0.18/CoverNote-1.0.18-android.apk) · [Website download mirror](https://covernote-cac.vercel.app/downloads/covernote-android.apk)
 
 The [Android APK](https://covernote-cac.vercel.app/downloads/covernote-android.apk) is the same build offered on the public website: **1.0.18 (18)**, 74,228,721 bytes. Android may ask permission to install an app downloaded through your browser. Existing app data may remain when updating an installation.
 
